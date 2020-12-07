@@ -1,0 +1,39 @@
+{
+  "name": "@yellowgarbagebag/csms-utils",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Charge Station Management System - Utils",
+  "homepage": "https://gitlab.com/YellowGarbageBag/csms-utils",
+  "bugs": {
+    "url": "https://gitlab.com/YellowGarbageBag/csms-utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com:YellowGarbageBag/csms-utils.git"
+  },
+  "license": "UNLICENSED",
+  "author": "Steffen",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "build:watch": "nodemon -x npm run build --ignore dist -i *.spec.ts -e ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lbt": "npm run lint && npm run build && npm run test",
+    "lint": "eslint --ext .ts src/",
+    "lint:fix": "npm run lint -- --fix",
+    "pjs": "ts-node src/parse-json-schema/index.ts",
+    "test": "echo No tests available"
+  },
+  "prettier": "@hest-lab/eslint-config",
+  "dependencies": {},
+  "devDependencies": {
+    "@hest-lab/eslint-config": "^1.2.0",
+    "@types/node": "^14.14.7",
+    "eslint": "^7.13.0",
+    "prettier": "^2.1.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^4.0.5"
+  }
+}
