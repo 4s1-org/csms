@@ -1,2 +1,1 @@
-# CSMS - Utils
-
+# Charge Station Management System - Utils

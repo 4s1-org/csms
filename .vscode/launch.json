@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [    {
+      "name": "Debug parse-json-schema",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "args": ["${workspaceRoot}/src/parse-json-schema/index.ts"]
+    }  ]
+  }
