@@ -2,8 +2,8 @@
  * If provided the Charging Station shall return Display Messages with the given state only.
  */
 export enum MessageStateEnum {
-  Charging,
-  Faulted,
-  Idle,
-  Unavailable,
+  Charging = "Charging",
+  Faulted = "Faulted",
+  Idle = "Idle",
+  Unavailable = "Unavailable",
 }

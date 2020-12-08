@@ -5,9 +5,9 @@ Current charging state, is required when state
 has changed.
  */
 export enum ChargingStateEnum {
-  Charging,
-  EVConnected,
-  SuspendedEV,
-  SuspendedEVSE,
-  Idle,
+  Charging = "Charging",
+  EVConnected = "EVConnected",
+  SuspendedEV = "SuspendedEV",
+  SuspendedEVSE = "SuspendedEVSE",
+  Idle = "Idle",
 }

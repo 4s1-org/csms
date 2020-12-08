@@ -1,3 +1,5 @@
+import { ClassGenerator } from "./class-generator"
+
 export abstract class Validatable<T> {
   private mustProperties: string[]
   private couldProperties: string[]

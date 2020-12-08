@@ -2,8 +2,8 @@
  * Attribute type for which value is requested. When absent, default Actual is assumed.
  */
 export enum AttributeEnum {
-  Actual,
-  Target,
-  MinSet,
-  MaxSet,
+  Actual = "Actual",
+  Target = "Target",
+  MinSet = "MinSet",
+  MaxSet = "MaxSet",
 }

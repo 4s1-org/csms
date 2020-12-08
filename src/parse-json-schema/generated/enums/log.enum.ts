@@ -3,6 +3,6 @@
 should send.
  */
 export enum LogEnum {
-  DiagnosticsLog,
-  SecurityLog,
+  DiagnosticsLog = "DiagnosticsLog",
+  SecurityLog = "SecurityLog",
 }

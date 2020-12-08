@@ -2,6 +2,6 @@
  * This contains the type of reset that the Charging Station or EVSE should perform.
  */
 export enum ResetEnum {
-  Immediate,
-  OnIdle,
+  Immediate = "Immediate",
+  OnIdle = "OnIdle",
 }

@@ -1,6 +1,6 @@
 export enum ComponentCriterionEnum {
-  Active,
-  Available,
-  Enabled,
-  Problem,
+  Active = "Active",
+  Available = "Available",
+  Enabled = "Enabled",
+  Problem = "Problem",
 }

@@ -3,6 +3,6 @@
 able to process the request
  */
 export enum GenericStatusEnum {
-  Accepted,
-  Rejected,
+  Accepted = "Accepted",
+  Rejected = "Rejected",
 }

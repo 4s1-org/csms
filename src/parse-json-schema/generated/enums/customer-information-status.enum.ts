@@ -2,7 +2,7 @@
  * Indicates whether the request was accepted.
  */
 export enum CustomerInformationStatusEnum {
-  Accepted,
-  Rejected,
-  Invalid,
+  Accepted = "Accepted",
+  Rejected = "Rejected",
+  Invalid = "Invalid",
 }

@@ -2,12 +2,12 @@
  * Data type of this variable.
  */
 export enum DataEnum {
-  string,
-  decimal,
-  integer,
-  dateTime,
-  boolean,
-  OptionList,
-  SequenceList,
-  MemberList,
+  string = "string",
+  decimal = "decimal",
+  integer = "integer",
+  dateTime = "dateTime",
+  boolean = "boolean",
+  OptionList = "OptionList",
+  SequenceList = "SequenceList",
+  MemberList = "MemberList",
 }

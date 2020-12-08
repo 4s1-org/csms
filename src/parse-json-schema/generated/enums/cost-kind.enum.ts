@@ -4,7 +4,7 @@ urn:x-oca:ocpp:uid:1:569243
 The kind of cost referred to in the message element amount
  */
 export enum CostKindEnum {
-  CarbonDioxideEmission,
-  RelativePricePercentage,
-  RenewableGenerationPercentage,
+  CarbonDioxideEmission = "CarbonDioxideEmission",
+  RelativePricePercentage = "RelativePricePercentage",
+  RenewableGenerationPercentage = "RenewableGenerationPercentage",
 }
