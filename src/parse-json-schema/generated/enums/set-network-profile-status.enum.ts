@@ -2,7 +2,7 @@
  * Result of operation.
  */
 export enum SetNetworkProfileStatusEnum {
-  Accepted,
-  Rejected,
-  Failed,
+  Accepted = "Accepted",
+  Rejected = "Rejected",
+  Failed = "Failed",
 }

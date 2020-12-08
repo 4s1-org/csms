@@ -1,0 +1,36 @@
+import { IsOptional } from 'class-validator'
+import { ApiProperty } from '@nestjs/swagger'
+import { CustomDataDto } from './custom-data.dto'
+import { ACChargingParametersDto } from './ac-charging-parameters.dto'
+import { DCChargingParametersDto } from './dc-charging-parameters.dto'
+import { EnergyTransferModeEnumDto } from './energy-transfer-mode-enum.dto'
+
+/**
+ * Charging_ Needs
+urn:x-oca:ocpp:uid:2:233249
+ */
+export class ChargingNeedsDto {
+  @IsOptional()
+  @ApiProperty()
+  public customData: CustomDataDto
+
+  @IsOptional()
+  @ApiProperty()
+  public acChargingParameters: ACChargingParametersDto
+
+  @IsOptional()
+  @ApiProperty()
+  public dcChargingParameters: DCChargingParametersDto
+
+  @ApiProperty()
+  public requestedEnergyTransfer: EnergyTransferModeEnumDto
+
+  /**
+   * Charging_ Needs. Departure_ Time. Date_ Time
+urn:x-oca:ocpp:uid:1:569223
+Estimated departure time of the EV.
+   */
+  @IsOptional()
+  @ApiProperty()
+  public departureTime: string
+}

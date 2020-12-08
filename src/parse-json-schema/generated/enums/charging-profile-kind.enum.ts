@@ -4,7 +4,7 @@ urn:x-oca:ocpp:uid:1:569232
 Indicates the kind of schedule.
  */
 export enum ChargingProfileKindEnum {
-  Absolute,
-  Recurring,
-  Relative,
+  Absolute = "Absolute",
+  Recurring = "Recurring",
+  Relative = "Relative",
 }

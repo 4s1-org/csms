@@ -4,8 +4,8 @@ urn:x-oca:ocpp:uid:1:569355
 Defines the OCPP version used for this communication function.
  */
 export enum OCPPVersionEnum {
-  OCPP12,
-  OCPP15,
-  OCPP16,
-  OCPP20,
+  OCPP12 = "OCPP12",
+  OCPP15 = "OCPP15",
+  OCPP16 = "OCPP16",
+  OCPP20 = "OCPP20",
 }

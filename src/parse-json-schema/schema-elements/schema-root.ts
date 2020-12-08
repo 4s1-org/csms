@@ -1,3 +1,4 @@
+import { ClassGenerator } from "../class-generator"
 import { IKeyValue } from "../i-key-value"
 import { Validatable } from "../validatable"
 import { SchemaDefinition } from "./schema-definition"

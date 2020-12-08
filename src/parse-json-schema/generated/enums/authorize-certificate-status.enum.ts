@@ -4,11 +4,11 @@
 - if one of the certificates was revoked, return 'CertificateRevoked'.
  */
 export enum AuthorizeCertificateStatusEnum {
-  Accepted,
-  SignatureError,
-  CertificateExpired,
-  CertificateRevoked,
-  NoCertificateAvailable,
-  CertChainError,
-  ContractCancelled,
+  Accepted = "Accepted",
+  SignatureError = "SignatureError",
+  CertificateExpired = "CertificateExpired",
+  CertificateRevoked = "CertificateRevoked",
+  NoCertificateAvailable = "NoCertificateAvailable",
+  CertChainError = "CertChainError",
+  ContractCancelled = "ContractCancelled",
 }

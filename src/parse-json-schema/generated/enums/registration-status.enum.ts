@@ -3,7 +3,7 @@
 within the CSMS.
  */
 export enum RegistrationStatusEnum {
-  Accepted,
-  Pending,
-  Rejected,
+  Accepted = "Accepted",
+  Pending = "Pending",
+  Rejected = "Rejected",
 }

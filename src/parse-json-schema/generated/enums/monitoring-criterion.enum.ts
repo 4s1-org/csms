@@ -1,5 +1,5 @@
 export enum MonitoringCriterionEnum {
-  ThresholdMonitoring,
-  DeltaMonitoring,
-  PeriodicMonitoring,
+  ThresholdMonitoring = "ThresholdMonitoring",
+  DeltaMonitoring = "DeltaMonitoring",
+  PeriodicMonitoring = "PeriodicMonitoring",
 }

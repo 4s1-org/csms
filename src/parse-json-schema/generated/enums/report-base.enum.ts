@@ -2,7 +2,7 @@
  * This field specifies the report base.
  */
 export enum ReportBaseEnum {
-  ConfigurationInventory,
-  FullInventory,
-  SummaryInventory,
+  ConfigurationInventory = "ConfigurationInventory",
+  FullInventory = "FullInventory",
+  SummaryInventory = "SummaryInventory",
 }

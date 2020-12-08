@@ -4,8 +4,8 @@ urn:x-enexis:ecdm:uid:1:570848
 Format of the message.
  */
 export enum MessageFormatEnum {
-  ASCII,
-  HTML,
-  URI,
-  UTF8,
+  ASCII = "ASCII",
+  HTML = "HTML",
+  URI = "URI",
+  UTF8 = "UTF8",
 }

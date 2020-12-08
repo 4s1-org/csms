@@ -1,14 +1,56 @@
 import path from "path"
 import fs from "fs"
+import { SchemaDefinitionPropertyItem } from "./schema-elements/schema-definition-property"
+import { kMaxLength } from "buffer"
+
+type EnumsType = {
+  [name: string]: EnumItemType
+}
+
+type EnumItemType = {
+  description?: string
+  items: string[]
+}
+
+type DtosType = {
+  [name: string]: DtoItemType
+}
+
+type DtoItemType = {
+  description?: string
+  items: SchemaDefinitionPropertyItem[]
+}
 
 export class ClassGenerator {
-  private static enums: { [name: string]: { description?: string, items: string[] } } = {}
+  private enums: EnumsType = {}
+  private dtos: DtosType = {}
 
-  public static generateEnum(name: string, items: string[], description?: string): void {
-    if (!(name in ClassGenerator.enums)) {
-      ClassGenerator.enums[name] = { items, description }
+  private static instance: ClassGenerator
+
+  private constructor() {
+    // nothing to do
+  }
+
+  public static get Instance(): ClassGenerator {
+    if (!ClassGenerator.instance) {
+      ClassGenerator.instance = new ClassGenerator()
+    }
+    return ClassGenerator.instance
+  }
+
+  public addDto(name: string, description: string | undefined, items: SchemaDefinitionPropertyItem[]): void {
+    if (!(name in this.dtos)) {
+      this.dtos[name] = { description, items }
     } else {
-      const ele = ClassGenerator.enums[name]
+      const ele = this.dtos[name]
+    }
+  }
+
+  public addEnum(name: string, items: string[], description: string | undefined): void {
+    if (!(name in this.enums)) {
+      this.enums[name] = { items, description }
+    } else {
+      const ele = this.enums[name]
       for (let i = 0; i < ele.items.length; i++) {
         if (ele.items[i] !== items[i]) {
           throw new Error(`${name} Enum: Items are unequal`)
@@ -17,10 +59,83 @@ export class ClassGenerator {
     }
   }
 
-  public static generateFiles(): void {
-    for (const name in ClassGenerator.enums) {
-      const ele = ClassGenerator.enums[name]
-      const file = path.join(__dirname, "generated", "enums", `${ClassGenerator.filenameHandler(name)}.enum.ts`)
+  public generateFiles(): void {
+    this.generateEnumFiles()
+    this.generateDtosFiles()
+  }
+
+  private generateDtosFiles(): void {
+    for (const name in this.dtos) {
+      const ele = this.dtos[name]
+      const file = path.join(__dirname, "generated", "dtos", `${this.filenameHandler(name)}.dto.ts`)
+
+      const content: string[] = []
+      const classValidatorImports: string[] = []
+
+      if (ele.items.some(x => !x.isRequired)) {
+        classValidatorImports.push("IsOptional")
+      }
+      if (ele.items.some(x => x.maxLength !== undefined)) {
+        classValidatorImports.push("Length")
+      }
+      if (classValidatorImports.length !== 0) {
+        content.push(`import { ${classValidatorImports.join(", ")} } from 'class-validator'`)
+      }
+      content.push(`import { ApiProperty } from '@nestjs/swagger'`)
+      // DTOs importieren
+      for (const item of ele.items) {
+        if (item.type.endsWith("Type")) {
+          const type = item.type.substr(0, item.type.length - 4)
+          content.push(`import { ${type}Dto } from './${this.filenameHandler(type)}.dto'`)
+        }
+      }
+      content.push(``)
+
+      if (ele.description) {
+        content.push(`/**`)
+        content.push(` * ${ele.description.trim()}`)
+        content.push(` */`)
+      }
+      content.push(`export class ${name}Dto {`)
+      let isFirst = true
+      for (const item of ele.items) {
+        if (!isFirst) {
+          content.push(``)
+        }
+
+        if (item.description) {
+          content.push(`  /**`)
+          content.push(`   * ${item.description.trim()}`)
+          content.push(`   */`)
+        }
+        if (!item.isRequired) {
+          content.push(`  @IsOptional()`)
+        }
+        if (item.maxLength !== undefined) {
+          content.push(`  @Length(0, ${item.maxLength})`)
+        }
+        content.push(`  @ApiProperty()`)
+        if (item.type.endsWith("Type")) {
+          // DTO als Typ
+          const type = item.type.substr(0, item.type.length - 4)
+          content.push(`  public ${item.name}: ${type}Dto`)
+        } else {
+          // Einfacher Datentyp
+          content.push(`  public ${item.name}: ${item.type}`)
+        }
+        isFirst = false
+      }
+      content.push(`}`)
+      content.push(``)
+
+      fs.writeFileSync(file, content.join("\n"))
+    }
+  }
+
+  private generateEnumFiles(): void {
+    for (const name in this.enums) {
+      const ele = this.enums[name]
+      const file = path.join(__dirname, "generated", "enums", `${this.filenameHandler(name)}.enum.ts`)
 
       const content: string[] = []
       if (ele.description) {
@@ -30,20 +145,24 @@ export class ClassGenerator {
       }
       content.push(`export enum ${name}Enum {`)
       for (const item of ele.items) {
-        content.push(`  ${item},`)
+        content.push(`  ${item} = "${item}",`)
       }
       content.push(`}`)
-      content.push("")
+      content.push()
 
       fs.writeFileSync(file, content.join("\n"))
     }
   }
 
-  private static filenameHandler(name: string): string {
+  private filenameHandler(name: string): string {
     name = name.replace("OCPP", "Ocpp")
+    name = name.replace("OCSP", "Ocsp")
+    name = name.replace("EVSE", "Evse")
     name = name.replace("VPN", "Vpn")
     name = name.replace("APN", "Apn")
     name = name.replace("EV", "Ev")
+    name = name.replace("AC", "Ac")
+    name = name.replace("DC", "Dc")
 
     let result = name[0].toLocaleLowerCase()
     for (let i = 1; i < name.length; i++) {

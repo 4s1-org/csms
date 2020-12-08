@@ -1,0 +1,67 @@
+import { IsOptional, Length } from 'class-validator'
+import { ApiProperty } from '@nestjs/swagger'
+import { CustomDataDto } from './custom-data.dto'
+import { APNAuthenticationEnumDto } from './apn-authentication-enum.dto'
+
+/**
+ * APN
+urn:x-oca:ocpp:uid:2:233134
+Collection of configuration data needed to make a data-connection over a cellular network.
+
+NOTE: When asking a GSM modem to dial in, it is possible to specify which mobile operator should be used. This can be done with the mobile country code (MCC) in combination with a mobile network code (MNC). Example: If your preferred network is Vodafone Netherlands, the MCC=204 and the MNC=04 which means the key PreferredNetwork = 20404 Some modems allows to specify a preferred network, which means, if this network is not available, a different network is used. If you specify UseOnlyPreferredNetwork and this network is not available, the modem will not dial in.
+ */
+export class APNDto {
+  @IsOptional()
+  @ApiProperty()
+  public customData: CustomDataDto
+
+  /**
+   * APN. APN. URI
+urn:x-oca:ocpp:uid:1:568814
+The Access Point Name as an URL.
+   */
+  @Length(0, 512)
+  @ApiProperty()
+  public apn: string
+
+  /**
+   * APN. APN. User_ Name
+urn:x-oca:ocpp:uid:1:568818
+APN username.
+   */
+  @IsOptional()
+  @Length(0, 20)
+  @ApiProperty()
+  public apnUserName: string
+
+  /**
+   * APN. APN. Password
+urn:x-oca:ocpp:uid:1:568819
+APN Password.
+   */
+  @IsOptional()
+  @Length(0, 20)
+  @ApiProperty()
+  public apnPassword: string
+
+  @IsOptional()
+  @ApiProperty()
+  public simPin: number
+
+  /**
+   * APN. Preferred_ Network. Mobile_ Network_ ID
+urn:x-oca:ocpp:uid:1:568822
+Preferred network, written as MCC and MNC concatenated. See note.
+   */
+  @IsOptional()
+  @Length(0, 6)
+  @ApiProperty()
+  public preferredNetwork: string
+
+  @IsOptional()
+  @ApiProperty()
+  public useOnlyPreferredNetwork: boolean
+
+  @ApiProperty()
+  public apnAuthentication: APNAuthenticationEnumDto
+}

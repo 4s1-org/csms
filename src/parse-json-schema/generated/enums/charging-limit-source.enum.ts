@@ -2,8 +2,8 @@
  * Source of the charging limit.
  */
 export enum ChargingLimitSourceEnum {
-  EMS,
-  Other,
-  SO,
-  CSO,
+  EMS = "EMS",
+  Other = "Other",
+  SO = "SO",
+  CSO = "CSO",
 }

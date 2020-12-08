@@ -4,8 +4,8 @@ urn:x-oca:ocpp:uid:1:568828
 Authentication method.
  */
 export enum APNAuthenticationEnum {
-  CHAP,
-  NONE,
-  PAP,
-  AUTO,
+  CHAP = "CHAP",
+  NONE = "NONE",
+  PAP = "PAP",
+  AUTO = "AUTO",
 }
