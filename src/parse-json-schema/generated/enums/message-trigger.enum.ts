@@ -1,3 +1,6 @@
+/**
+ * Type of message to be triggered.
+ */
 export enum MessageTriggerEnum {
   BootNotification,
   LogStatusNotification,

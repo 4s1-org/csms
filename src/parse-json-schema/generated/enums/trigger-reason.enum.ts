@@ -1,3 +1,6 @@
+/**
+ * Reason the Charging Station sends this message to the CSMS
+ */
 export enum TriggerReasonEnum {
   Authorized,
   CablePluggedIn,

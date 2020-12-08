@@ -1,3 +1,6 @@
+/**
+ * This field specifies the connector type.
+ */
 export enum ConnectorEnum {
   cCCS1,
   cCCS2,
