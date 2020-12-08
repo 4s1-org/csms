@@ -8,13 +8,13 @@ export abstract class Validatable<T> {
 
     this.validateProperties()
 
-    this.handleContent()
+    this.handleData()
   }
 
   protected abstract getMustProperties(): string[]
   protected abstract getCouldProperties(): string[]
 
-  protected abstract handleContent(): void
+  protected abstract handleData(): void
 
   private validateProperties(): void {
     const keys = Object.keys(this.data)
