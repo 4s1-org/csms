@@ -1,22 +1,20 @@
-import { IKeyValue } from "./i-key-value"
-
-export abstract class Validatable {
+export abstract class Validatable<T> {
   private mustProperties: string[]
   private couldProperties: string[]
 
-  public constructor(private readonly data: IKeyValue) {
+  public constructor(protected readonly data: T) {
     this.mustProperties = this.getMustProperties()
     this.couldProperties = this.getCouldProperties()
 
     this.validateProperties()
 
-    this.handleContent(this.data)
+    this.handleContent()
   }
 
   protected abstract getMustProperties(): string[]
   protected abstract getCouldProperties(): string[]
 
-  protected abstract handleContent(data: IKeyValue): void
+  protected abstract handleContent(): void
 
   private validateProperties(): void {
     const keys = Object.keys(this.data)

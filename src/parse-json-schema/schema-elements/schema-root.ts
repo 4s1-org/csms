@@ -1,19 +1,26 @@
 import { IKeyValue } from "../i-key-value"
 import { Validatable } from "../validatable"
+import { SchemaDefinition } from "./schema-definition"
 
-export class SchemaRoot extends Validatable {
-  public constructor(data: IKeyValue) {
+interface Foo {
+  $schema: string
+  $id: string
+  comment: string
+  definitions: IKeyValue
+  type: string
+  additionalProperties: boolean
+  properties: IKeyValue
+
+  required?: string[]
+  description?: string
+}
+
+export class SchemaRoot extends Validatable<Foo> {
+  private requireFields: string[] = []
+
+  public constructor(data: Foo) {
     super(data)
   }
-
-  protected handleContent(data: IKeyValue): void {
-    let required = []
-    if (data["required"]) {
-      required = data["required"]
-    }
-    console.log(required)
-  }
-
 
   protected getMustProperties(): string[] {
     return ["$schema", "$id", "comment", "definitions", "type", "additionalProperties", "properties"]
@@ -23,5 +30,11 @@ export class SchemaRoot extends Validatable {
     return ["required", "description"]
   }
 
+  protected handleContent(): void {
+    this.requireFields = this.data.required ? this.data.required : []
 
+    for (const key in this.data.definitions) {
+      new SchemaDefinition(key, this.data.definitions[key])
+    }
+  }
 }
