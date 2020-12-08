@@ -26,7 +26,7 @@ export class SchemaDefinition extends Validatable<Foo> {
     return ["description", "properties", "required", "additionalProperties", "enum", "default"]
   }
 
-  protected handleContent(): void {
+  protected handleData(): void {
     //
   }
 }

@@ -30,7 +30,7 @@ export class SchemaRoot extends Validatable<Foo> {
     return ["required", "description"]
   }
 
-  protected handleContent(): void {
+  protected handleData(): void {
     this.requireFields = this.data.required ? this.data.required : []
 
     for (const key in this.data.definitions) {
