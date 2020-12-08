@@ -30,6 +30,13 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
   }
 
   protected handleData(): void {
-    //
+    if (this.data.$ref) {
+      if (Object.keys(this.data).length !== 1) {
+        throw new Error(`${this.key}: I though $ref is the only property`)
+      }
+      if (!this.data.$ref.startsWith("#/definitions/")) {
+        throw new Error(`${this.key}: I though $ref should start with definition`)
+      }
+    }
   }
 }

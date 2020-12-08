@@ -1,5 +1,6 @@
 import fs from "fs"
 import path from "path"
+import { ClassGenerator } from "./class-generator"
 import { SchemaRoot } from "./schema-elements/schema-root"
 
 async function main(): Promise<void> {
@@ -13,6 +14,8 @@ async function main(): Promise<void> {
     const item = new SchemaRoot(content)
     item.init()
   }
+
+  ClassGenerator.generateFiles()
 }
 
 
