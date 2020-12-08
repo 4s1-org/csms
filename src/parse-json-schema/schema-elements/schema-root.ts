@@ -34,7 +34,8 @@ export class SchemaRoot extends Validatable<Foo> {
     this.requireFields = this.data.required ? this.data.required : []
 
     for (const key in this.data.definitions) {
-      new SchemaDefinition(key, this.data.definitions[key])
+      const item = new SchemaDefinition(key, this.data.definitions[key])
+      item.init()
     }
   }
 }
