@@ -14,7 +14,7 @@ interface Foo {
 }
 
 export class SchemaDefinition extends Validatable<Foo> {
-  public constructor(private readonly key: string, data: Foo) {
+  public constructor(private key: string, data: Foo) {
     super(data)
   }
 
@@ -27,6 +27,15 @@ export class SchemaDefinition extends Validatable<Foo> {
   }
 
   protected handleData(): void {
-    //
+    if (this.data.type === "string") {
+      console.log(typeof this, this instanceof SchemaDefinition, this.key)
+      if (!this.data.enum || !this.key.endsWith("EnumType")) {
+        throw new Error("I thought it was a enum")
+      }
+    } else if (this.data.type === "object") {
+
+    } else {
+      throw new Error(`Unknown Type: ${this.data.type}`)
+    }
   }
 }
