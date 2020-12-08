@@ -1,3 +1,6 @@
+/**
+ * This contains the status of the log upload.
+ */
 export enum UploadLogStatusEnum {
   BadMessage,
   Idle,

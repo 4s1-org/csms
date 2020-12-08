@@ -1,3 +1,6 @@
+/**
+ * Applicable Network Interface.
+ */
 export enum OCPPInterfaceEnum {
   Wired0,
   Wired1,

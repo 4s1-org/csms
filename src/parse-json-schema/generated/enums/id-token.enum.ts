@@ -1,3 +1,6 @@
+/**
+ * Enumeration of possible idToken types.
+ */
 export enum IdTokenEnum {
   Central,
   eMAID,

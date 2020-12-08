@@ -1,3 +1,6 @@
+/**
+ * This contains the progress status of the firmware installation.
+ */
 export enum FirmwareStatusEnum {
   Downloaded,
   DownloadFailed,

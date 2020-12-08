@@ -36,7 +36,7 @@ export class SchemaDefinition extends Validatable<Foo> {
       if (this.data.additionalProperties) {
         throw new Error(`${this.key}: I thought enums can't have additional properties`)
       }
-      ClassGenerator.generateEnum(this.key.substr(0, this.key.length - 8), this.data.enum)
+      ClassGenerator.generateEnum(this.key.substr(0, this.key.length - 8), this.data.enum, this.data.description)
     } else if (this.data.type === "object") {
       if (!this.data.properties) {
         throw new Error(`${this.key}: I thought it was a custom type`)

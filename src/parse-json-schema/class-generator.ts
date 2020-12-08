@@ -2,15 +2,15 @@ import path from "path"
 import fs from "fs"
 
 export class ClassGenerator {
-  private static enums: { [name: string]: string[] } = {}
+  private static enums: { [name: string]: { description?: string, items: string[] } } = {}
 
-  public static generateEnum(name: string, items: string[]): void {
+  public static generateEnum(name: string, items: string[], description?: string): void {
     if (!(name in ClassGenerator.enums)) {
-      ClassGenerator.enums[name] = items
+      ClassGenerator.enums[name] = { items, description }
     } else {
-      const existingItems = ClassGenerator.enums[name]
-      for (let i = 0; i < existingItems.length; i++) {
-        if (existingItems[i] !== items[i]) {
+      const ele = ClassGenerator.enums[name]
+      for (let i = 0; i < ele.items.length; i++) {
+        if (ele.items[i] !== items[i]) {
           throw new Error(`${name} Enum: Items are unequal`)
         }
       }
@@ -19,12 +19,17 @@ export class ClassGenerator {
 
   public static generateFiles(): void {
     for (const name in ClassGenerator.enums) {
-      const items = ClassGenerator.enums[name]
+      const ele = ClassGenerator.enums[name]
       const file = path.join(__dirname, "generated", "enums", `${ClassGenerator.filenameHandler(name)}.enum.ts`)
 
       const content: string[] = []
+      if (ele.description) {
+        content.push(`/**`)
+        content.push(` * ${ele.description.trim()}`)
+        content.push(` */`)
+      }
       content.push(`export enum ${name}Enum {`)
-      for (const item of items) {
+      for (const item of ele.items) {
         content.push(`  ${item},`)
       }
       content.push(`}`)

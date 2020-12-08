@@ -1,3 +1,8 @@
+/**
+ * Sampled_ Value. Measurand. Measurand_ Code
+urn:x-oca:ocpp:uid:1:569263
+Type of measurement. Default = "Energy.Active.Import.Register"
+ */
 export enum MeasurandEnum {
   Current.Export,
   Current.Import,
