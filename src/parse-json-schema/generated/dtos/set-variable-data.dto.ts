@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { AttributeEnumDto } from './attribute-enum.dto'
+import { AttributeEnum } from '../enums/attribute.enum'
 import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
@@ -12,7 +14,7 @@ export class SetVariableDataDto {
 
   @IsOptional()
   @ApiProperty()
-  public attributeType: AttributeEnumDto
+  public attributeType: AttributeEnum
 
   /**
    * Value to be assigned to attribute of variable.

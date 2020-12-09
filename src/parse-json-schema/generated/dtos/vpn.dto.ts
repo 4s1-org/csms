@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { VPNEnumDto } from './vpn-enum.dto'
+import { VPNEnum } from '../enums/vpn.enum'
 
 /**
  * VPN
@@ -60,5 +62,5 @@ VPN shared secret.
   public key: string
 
   @ApiProperty()
-  public type: VPNEnumDto
+  public type: VPNEnum
 }

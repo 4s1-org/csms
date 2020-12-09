@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { MonitorEnumDto } from './monitor-enum.dto'
+import { MonitorEnum } from '../enums/monitor.enum'
 import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
@@ -25,7 +27,7 @@ export class SetMonitoringDataDto {
   public value: number
 
   @ApiProperty()
-  public type: MonitorEnumDto
+  public type: MonitorEnum
 
   @ApiProperty()
   public severity: number

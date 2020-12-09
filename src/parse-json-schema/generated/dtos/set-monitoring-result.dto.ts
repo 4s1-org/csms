@@ -1,9 +1,11 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
-import { SetMonitoringStatusEnumDto } from './set-monitoring-status-enum.dto'
-import { MonitorEnumDto } from './monitor-enum.dto'
+import { SetMonitoringStatusEnum } from '../enums/set-monitoring-status.enum'
+import { MonitorEnum } from '../enums/monitor.enum'
 import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
@@ -24,10 +26,10 @@ export class SetMonitoringResultDto {
   public statusInfo: StatusInfoDto
 
   @ApiProperty()
-  public status: SetMonitoringStatusEnumDto
+  public status: SetMonitoringStatusEnum
 
   @ApiProperty()
-  public type: MonitorEnumDto
+  public type: MonitorEnum
 
   @ApiProperty()
   public component: ComponentDto

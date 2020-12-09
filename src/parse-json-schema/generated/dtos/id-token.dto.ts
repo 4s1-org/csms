@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { IdTokenEnumDto } from './id-token-enum.dto'
+import { IdTokenEnum } from '../enums/id-token.enum'
 
 /**
  * Contains a case insensitive identifier to use for the authorization and the type of authorization to support multiple forms of identifiers.
@@ -23,5 +25,5 @@ export class IdTokenDto {
   public idToken: string
 
   @ApiProperty()
-  public type: IdTokenEnumDto
+  public type: IdTokenEnum
 }

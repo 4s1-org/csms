@@ -1,9 +1,11 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ComponentDto } from './component.dto'
-import { MessagePriorityEnumDto } from './message-priority-enum.dto'
-import { MessageStateEnumDto } from './message-state-enum.dto'
+import { MessagePriorityEnum } from '../enums/message-priority.enum'
+import { MessageStateEnum } from '../enums/message-state.enum'
 import { MessageContentDto } from './message-content.dto'
 
 /**
@@ -24,11 +26,11 @@ export class MessageInfoDto {
   public id: number
 
   @ApiProperty()
-  public priority: MessagePriorityEnumDto
+  public priority: MessagePriorityEnum
 
   @IsOptional()
   @ApiProperty()
-  public state: MessageStateEnumDto
+  public state: MessageStateEnum
 
   /**
    * Message_ Info. Start. Date_ Time

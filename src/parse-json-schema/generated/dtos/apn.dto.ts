@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { APNAuthenticationEnumDto } from './apn-authentication-enum.dto'
+import { APNAuthenticationEnum } from '../enums/apn-authentication.enum'
 
 /**
  * APN
@@ -63,5 +65,5 @@ Preferred network, written as MCC and MNC concatenated. See note.
   public useOnlyPreferredNetwork: boolean
 
   @ApiProperty()
-  public apnAuthentication: APNAuthenticationEnumDto
+  public apnAuthentication: APNAuthenticationEnum
 }

@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 

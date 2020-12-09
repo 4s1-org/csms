@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { HashAlgorithmEnumDto } from './hash-algorithm-enum.dto'
+import { HashAlgorithmEnum } from '../enums/hash-algorithm.enum'
 
 export class OCSPRequestDataDto {
   @IsOptional()
@@ -9,7 +11,7 @@ export class OCSPRequestDataDto {
   public customData: CustomDataDto
 
   @ApiProperty()
-  public hashAlgorithm: HashAlgorithmEnumDto
+  public hashAlgorithm: HashAlgorithmEnum
 
   /**
    * Hashed value of the Issuer DN (Distinguished Name).

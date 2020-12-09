@@ -1,8 +1,10 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { AttributeEnumDto } from './attribute-enum.dto'
-import { MutabilityEnumDto } from './mutability-enum.dto'
+import { AttributeEnum } from '../enums/attribute.enum'
+import { MutabilityEnum } from '../enums/mutability.enum'
 
 /**
  * Attribute data of a variable.
@@ -14,7 +16,7 @@ export class VariableAttributeDto {
 
   @IsOptional()
   @ApiProperty()
-  public type: AttributeEnumDto
+  public type: AttributeEnum
 
   /**
    * Value of the attribute. May only be omitted when mutability is set to 'WriteOnly'.
@@ -28,7 +30,7 @@ The Configuration Variable &lt;&lt;configkey-reporting-value-size,ReportingValue
 
   @IsOptional()
   @ApiProperty()
-  public mutability: MutabilityEnumDto
+  public mutability: MutabilityEnum
 
   @IsOptional()
   @ApiProperty()
