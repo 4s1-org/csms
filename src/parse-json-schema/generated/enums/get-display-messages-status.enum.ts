@@ -1,5 +1,5 @@
 /**
- * Indicates if the Charging Station has Display Messages that match the request criteria in the &lt;&lt;getdisplaymessagesrequest,GetDisplayMessagesRequest&gt;&gt;
+ * Indicates if the Charging Station has Display Messages that match the request criteria in the <<getdisplaymessagesrequest,GetDisplayMessagesRequest>>
  */
 export enum GetDisplayMessagesStatusEnum {
   Accepted = "Accepted",

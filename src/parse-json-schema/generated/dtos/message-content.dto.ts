@@ -21,7 +21,7 @@ export class MessageContentDto {
   /**
    * Message_ Content. Language. Language_ Code
 urn:x-enexis:ecdm:uid:1:570849
-Message language identifier. Contains a language code as defined in &lt;&lt;ref-RFC5646,[RFC5646]&gt;&gt;.
+Message language identifier. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
   @IsOptional()
   @Length(0, 8)

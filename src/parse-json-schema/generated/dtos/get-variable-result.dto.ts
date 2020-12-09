@@ -31,7 +31,7 @@ export class GetVariableResultDto {
   /**
    * Value of requested attribute type of component-variable. This field can only be empty when the given status is NOT accepted.
 
-The Configuration Variable &lt;&lt;configkey-reporting-value-size,ReportingValueSize&gt;&gt; can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
+The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
    */
   @IsOptional()
   @Length(0, 2500)
