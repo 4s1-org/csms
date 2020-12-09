@@ -21,7 +21,7 @@ export class VariableAttributeDto {
   /**
    * Value of the attribute. May only be omitted when mutability is set to 'WriteOnly'.
 
-The Configuration Variable &lt;&lt;configkey-reporting-value-size,ReportingValueSize&gt;&gt; can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
+The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
    */
   @IsOptional()
   @Length(0, 2500)

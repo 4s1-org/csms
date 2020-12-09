@@ -67,7 +67,7 @@ export class ClassGenerator {
   private generateDtosFiles(): void {
     for (const name in this.dtos) {
       const ele = this.dtos[name]
-      const file = path.join(__dirname, "generated", "dtos", `${this.filenameHandler(name)}.dto.ts`)
+      const file = path.join(__dirname, "generated", "dtos", `${this.filenameFormatter(name)}.dto.ts`)
 
       const content: string[] = []
       const classValidatorImports: string[] = []
@@ -89,17 +89,17 @@ export class ClassGenerator {
       for (const item of ele.items) {
         if (item.type.endsWith("EnumType")) {
           const type = item.type.substr(0, item.type.length - 8)
-          content.push(`import { ${type}Enum } from '../enums/${this.filenameHandler(type)}.enum'`)
+          content.push(`import { ${type}Enum } from '../enums/${this.filenameFormatter(type)}.enum'`)
         } else if (item.type.endsWith("Type")) {
           const type = item.type.substr(0, item.type.length - 4)
-          content.push(`import { ${type}Dto } from './${this.filenameHandler(type)}.dto'`)
+          content.push(`import { ${type}Dto } from './${this.filenameFormatter(type)}.dto'`)
         }
       }
       content.push(``)
 
       if (ele.description) {
         content.push(`/**`)
-        content.push(` * ${ele.description.trim()}`)
+        content.push(` * ${this.descriptionFormatter(ele.description)}`)
         content.push(` */`)
       }
       content.push(`export class ${name}Dto {`)
@@ -111,7 +111,7 @@ export class ClassGenerator {
 
         if (item.description) {
           content.push(`  /**`)
-          content.push(`   * ${item.description.trim()}`)
+          content.push(`   * ${this.descriptionFormatter(item.description)}`)
           content.push(`   */`)
         }
         if (!item.isRequired) {
@@ -145,12 +145,12 @@ export class ClassGenerator {
   private generateEnumFiles(): void {
     for (const name in this.enums) {
       const ele = this.enums[name]
-      const file = path.join(__dirname, "generated", "enums", `${this.filenameHandler(name)}.enum.ts`)
+      const file = path.join(__dirname, "generated", "enums", `${this.filenameFormatter(name)}.enum.ts`)
 
       const content: string[] = []
       if (ele.description) {
         content.push(`/**`)
-        content.push(` * ${ele.description.trim()}`)
+        content.push(` * ${this.descriptionFormatter(ele.description)}`)
         content.push(` */`)
       }
       content.push(`export enum ${name}Enum {`)
@@ -164,7 +164,16 @@ export class ClassGenerator {
     }
   }
 
-  private filenameHandler(name: string): string {
+  private descriptionFormatter(description: string): string {
+    // ToDo: Mit einem Befehl alle ersetzen. Aktuell wird nur das erste Ergebnis ersetzt.
+    description = description.replace("&lt;", "<")
+    description = description.replace("&lt;", "<")
+    description = description.replace("&gt;", ">")
+    description = description.replace("&gt;", ">")
+    return description.trim()
+  }
+
+  private filenameFormatter(name: string): string {
     name = name.replace("OCPP", "Ocpp")
     name = name.replace("OCSP", "Ocsp")
     name = name.replace("EVSE", "Evse")

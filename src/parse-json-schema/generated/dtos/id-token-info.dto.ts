@@ -37,7 +37,7 @@ Date and Time after which the token must be considered invalid.
   /**
    * ID_ Token. Language1. Language_ Code
 urn:x-oca:ocpp:uid:1:569374
-Preferred user interface language of identifier user. Contains a language code as defined in &lt;&lt;ref-RFC5646,[RFC5646]&gt;&gt;.
+Preferred user interface language of identifier user. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
   @IsOptional()
   @Length(0, 8)
@@ -55,7 +55,7 @@ Preferred user interface language of identifier user. Contains a language code a
   /**
    * ID_ Token. Language2. Language_ Code
 urn:x-oca:ocpp:uid:1:569375
-Second preferred user interface language of identifier user. Don’t use when language1 is omitted, has to be different from language1. Contains a language code as defined in &lt;&lt;ref-RFC5646,[RFC5646]&gt;&gt;.
+Second preferred user interface language of identifier user. Don’t use when language1 is omitted, has to be different from language1. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
   @IsOptional()
   @Length(0, 8)

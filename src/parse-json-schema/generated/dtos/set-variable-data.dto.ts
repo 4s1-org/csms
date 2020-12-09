@@ -19,7 +19,7 @@ export class SetVariableDataDto {
   /**
    * Value to be assigned to attribute of variable.
 
-The Configuration Variable &lt;&lt;configkey-configuration-value-size,ConfigurationValueSize&gt;&gt; can be used to limit SetVariableData.attributeValue and VariableCharacteristics.valueList. The max size of these values will always remain equal.
+The Configuration Variable <<configkey-configuration-value-size,ConfigurationValueSize>> can be used to limit SetVariableData.attributeValue and VariableCharacteristics.valueList. The max size of these values will always remain equal.
    */
   @Length(0, 1000)
   @ApiProperty()
