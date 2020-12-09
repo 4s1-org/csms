@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { ChargingRateUnitEnumDto } from './charging-rate-unit-enum.dto'
+import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
 import { SalesTariffDto } from './sales-tariff.dto'
 
 /**
@@ -31,7 +33,7 @@ Starting point of an absolute schedule. If absent the schedule will be relative 
   public duration: number
 
   @ApiProperty()
-  public chargingRateUnit: ChargingRateUnitEnumDto
+  public chargingRateUnit: ChargingRateUnitEnum
 
   @ApiProperty()
   public chargingSchedulePeriod: any

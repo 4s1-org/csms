@@ -72,6 +72,9 @@ export class ClassGenerator {
       const content: string[] = []
       const classValidatorImports: string[] = []
 
+      content.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+      content.push(``)
+
       if (ele.items.some(x => !x.isRequired)) {
         classValidatorImports.push("IsOptional")
       }
@@ -84,7 +87,10 @@ export class ClassGenerator {
       content.push(`import { ApiProperty } from '@nestjs/swagger'`)
       // DTOs importieren
       for (const item of ele.items) {
-        if (item.type.endsWith("Type")) {
+        if (item.type.endsWith("EnumType")) {
+          const type = item.type.substr(0, item.type.length - 8)
+          content.push(`import { ${type}Enum } from '../enums/${this.filenameHandler(type)}.enum'`)
+        } else if (item.type.endsWith("Type")) {
           const type = item.type.substr(0, item.type.length - 4)
           content.push(`import { ${type}Dto } from './${this.filenameHandler(type)}.dto'`)
         }
@@ -115,7 +121,11 @@ export class ClassGenerator {
           content.push(`  @Length(0, ${item.maxLength})`)
         }
         content.push(`  @ApiProperty()`)
-        if (item.type.endsWith("Type")) {
+        if (item.type.endsWith("EnumType")) {
+          // Enum als Typ
+          const type = item.type.substr(0, item.type.length - 8)
+          content.push(`  public ${item.name}: ${type}Enum`)
+        } else if (item.type.endsWith("Type")) {
           // DTO als Typ
           const type = item.type.substr(0, item.type.length - 4)
           content.push(`  public ${item.name}: ${type}Dto`)

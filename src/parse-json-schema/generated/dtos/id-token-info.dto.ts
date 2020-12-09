@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { AuthorizationStatusEnumDto } from './authorization-status-enum.dto'
+import { AuthorizationStatusEnum } from '../enums/authorization-status.enum'
 import { IdTokenDto } from './id-token.dto'
 import { MessageContentDto } from './message-content.dto'
 
@@ -17,7 +19,7 @@ export class IdTokenInfoDto {
   public customData: CustomDataDto
 
   @ApiProperty()
-  public status: AuthorizationStatusEnumDto
+  public status: AuthorizationStatusEnum
 
   /**
    * ID_ Token. Expiry. Date_ Time

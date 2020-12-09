@@ -1,9 +1,11 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
-import { GetVariableStatusEnumDto } from './get-variable-status-enum.dto'
-import { AttributeEnumDto } from './attribute-enum.dto'
+import { GetVariableStatusEnum } from '../enums/get-variable-status.enum'
+import { AttributeEnum } from '../enums/attribute.enum'
 import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
@@ -20,11 +22,11 @@ export class GetVariableResultDto {
   public attributeStatusInfo: StatusInfoDto
 
   @ApiProperty()
-  public attributeStatus: GetVariableStatusEnumDto
+  public attributeStatus: GetVariableStatusEnum
 
   @IsOptional()
   @ApiProperty()
-  public attributeType: AttributeEnumDto
+  public attributeType: AttributeEnum
 
   /**
    * Value of requested attribute type of component-variable. This field can only be empty when the given status is NOT accepted.

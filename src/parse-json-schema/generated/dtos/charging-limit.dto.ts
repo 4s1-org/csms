@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { ChargingLimitSourceEnumDto } from './charging-limit-source-enum.dto'
+import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 
 /**
  * Charging_ Limit
@@ -13,7 +15,7 @@ export class ChargingLimitDto {
   public customData: CustomDataDto
 
   @ApiProperty()
-  public chargingLimitSource: ChargingLimitSourceEnumDto
+  public chargingLimitSource: ChargingLimitSourceEnum
 
   @IsOptional()
   @ApiProperty()

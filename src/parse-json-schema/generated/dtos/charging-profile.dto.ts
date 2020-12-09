@@ -1,9 +1,11 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { ChargingProfilePurposeEnumDto } from './charging-profile-purpose-enum.dto'
-import { ChargingProfileKindEnumDto } from './charging-profile-kind-enum.dto'
-import { RecurrencyKindEnumDto } from './recurrency-kind-enum.dto'
+import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
+import { ChargingProfileKindEnum } from '../enums/charging-profile-kind.enum'
+import { RecurrencyKindEnum } from '../enums/recurrency-kind.enum'
 
 /**
  * Charging_ Profile
@@ -22,14 +24,14 @@ export class ChargingProfileDto {
   public stackLevel: number
 
   @ApiProperty()
-  public chargingProfilePurpose: ChargingProfilePurposeEnumDto
+  public chargingProfilePurpose: ChargingProfilePurposeEnum
 
   @ApiProperty()
-  public chargingProfileKind: ChargingProfileKindEnumDto
+  public chargingProfileKind: ChargingProfileKindEnum
 
   @IsOptional()
   @ApiProperty()
-  public recurrencyKind: RecurrencyKindEnumDto
+  public recurrencyKind: RecurrencyKindEnum
 
   /**
    * Charging_ Profile. Valid_ From. Date_ Time

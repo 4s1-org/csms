@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { MessageFormatEnumDto } from './message-format-enum.dto'
+import { MessageFormatEnum } from '../enums/message-format.enum'
 
 /**
  * Message_ Content
@@ -14,7 +16,7 @@ export class MessageContentDto {
   public customData: CustomDataDto
 
   @ApiProperty()
-  public format: MessageFormatEnumDto
+  public format: MessageFormatEnum
 
   /**
    * Message_ Content. Language. Language_ Code

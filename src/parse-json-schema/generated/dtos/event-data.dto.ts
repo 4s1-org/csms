@@ -1,9 +1,11 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { EventTriggerEnumDto } from './event-trigger-enum.dto'
+import { EventTriggerEnum } from '../enums/event-trigger.enum'
 import { ComponentDto } from './component.dto'
-import { EventNotificationEnumDto } from './event-notification-enum.dto'
+import { EventNotificationEnum } from '../enums/event-notification.enum'
 import { VariableDto } from './variable.dto'
 
 /**
@@ -24,7 +26,7 @@ export class EventDataDto {
   public timestamp: string
 
   @ApiProperty()
-  public trigger: EventTriggerEnumDto
+  public trigger: EventTriggerEnum
 
   @IsOptional()
   @ApiProperty()
@@ -75,7 +77,7 @@ The Configuration Variable &lt;&lt;configkey-reporting-value-size,ReportingValue
   public variableMonitoringId: number
 
   @ApiProperty()
-  public eventNotificationType: EventNotificationEnumDto
+  public eventNotificationType: EventNotificationEnum
 
   @ApiProperty()
   public variable: VariableDto

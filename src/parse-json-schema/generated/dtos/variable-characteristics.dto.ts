@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { DataEnumDto } from './data-enum.dto'
+import { DataEnum } from '../enums/data.enum'
 
 /**
  * Fixed read-only parameters of a variable.
@@ -20,7 +22,7 @@ export class VariableCharacteristicsDto {
   public unit: string
 
   @ApiProperty()
-  public dataType: DataEnumDto
+  public dataType: DataEnum
 
   @IsOptional()
   @ApiProperty()

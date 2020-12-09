@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
-import { CostKindEnumDto } from './cost-kind-enum.dto'
+import { CostKindEnum } from '../enums/cost-kind.enum'
 
 /**
  * Cost
@@ -13,7 +15,7 @@ export class CostDto {
   public customData: CustomDataDto
 
   @ApiProperty()
-  public costKind: CostKindEnumDto
+  public costKind: CostKindEnum
 
   @ApiProperty()
   public amount: number

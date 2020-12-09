@@ -1,10 +1,12 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 import { IsOptional, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { APNDto } from './apn.dto'
-import { OCPPVersionEnumDto } from './ocpp-version-enum.dto'
-import { OCPPTransportEnumDto } from './ocpp-transport-enum.dto'
-import { OCPPInterfaceEnumDto } from './ocpp-interface-enum.dto'
+import { OCPPVersionEnum } from '../enums/ocpp-version.enum'
+import { OCPPTransportEnum } from '../enums/ocpp-transport.enum'
+import { OCPPInterfaceEnum } from '../enums/ocpp-interface.enum'
 import { VPNDto } from './vpn.dto'
 
 /**
@@ -22,10 +24,10 @@ export class NetworkConnectionProfileDto {
   public apn: APNDto
 
   @ApiProperty()
-  public ocppVersion: OCPPVersionEnumDto
+  public ocppVersion: OCPPVersionEnum
 
   @ApiProperty()
-  public ocppTransport: OCPPTransportEnumDto
+  public ocppTransport: OCPPTransportEnum
 
   /**
    * Communication_ Function. OCPP_ Central_ System_ URL. URI
@@ -43,7 +45,7 @@ URL of the CSMS(s) that this Charging Station  communicates with.
   public securityProfile: number
 
   @ApiProperty()
-  public ocppInterface: OCPPInterfaceEnumDto
+  public ocppInterface: OCPPInterfaceEnum
 
   @IsOptional()
   @ApiProperty()
