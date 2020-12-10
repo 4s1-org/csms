@@ -78,6 +78,9 @@ export class ClassGenerator {
       if (ele.items.some(x => !x.isRequired)) {
         classValidatorImports.push("IsOptional")
       }
+      if (ele.items.some(x => x.isRequired)) {
+        classValidatorImports.push("IsNotEmpty")
+      }
       if (ele.items.some(x => x.maxLength !== undefined)) {
         classValidatorImports.push("Length")
       }
@@ -116,6 +119,8 @@ export class ClassGenerator {
         }
         if (!item.isRequired) {
           content.push(`  @IsOptional()`)
+        } else {
+          content.push(`  @IsNotEmpty()`)
         }
         if (item.maxLength !== undefined) {
           content.push(`  @Length(0, ${item.maxLength})`)
