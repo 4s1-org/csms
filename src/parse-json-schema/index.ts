@@ -11,7 +11,8 @@ async function main(): Promise<void> {
   for (const file of files) {
     console.log(`*** ${file} ***`)
     const content: any = JSON.parse(fs.readFileSync(path.join(dir, file)).toString())
-    const item = new SchemaRoot(content)
+    const filenameWithoutExt = file.substr(0, file.length - 5)
+    const item = new SchemaRoot(filenameWithoutExt, content)
     item.init()
   }
 

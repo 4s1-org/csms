@@ -41,8 +41,8 @@ export class SchemaDefinitionPropertyItem {
 export class SchemaDefinitionProperty extends Validatable<Foo> {
   private item: SchemaDefinitionPropertyItem | undefined
 
-  public constructor(private key: string, data: Foo) {
-    super(data)
+  public constructor(key: string, data: Foo) {
+    super(key, data)
   }
 
   protected getMustProperties(): string[] {
@@ -67,6 +67,13 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
         this.data.$ref.substr(14, this.data.$ref.length - 13),
         undefined,
         undefined)
+      return
+    }
+
+    // Special thing beim DataTransferRequest. Da gibt es ein "data" was alles möglich sein darf.
+    if (this.data.description && Object.keys(this.data).length === 1) {
+      // ToDo: Das muss any sein.
+      this.item = new SchemaDefinitionPropertyItem(this.key, "string", undefined, this.data.description)
       return
     }
 
