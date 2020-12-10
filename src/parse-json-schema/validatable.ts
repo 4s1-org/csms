@@ -1,10 +1,11 @@
-import { ClassGenerator } from "./class-generator"
-
 export abstract class Validatable<T> {
   private mustProperties: string[]
   private couldProperties: string[]
 
-  public constructor(protected readonly data: T) {
+  public constructor(
+    protected readonly key: string,
+    protected readonly data: T
+  ) {
     this.mustProperties = this.getMustProperties()
     this.couldProperties = this.getCouldProperties()
 

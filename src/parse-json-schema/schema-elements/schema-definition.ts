@@ -16,8 +16,8 @@ interface Foo {
 }
 
 export class SchemaDefinition extends Validatable<Foo> {
-  public constructor(private key: string, data: Foo) {
-    super(data)
+  public constructor(key: string, data: Foo) {
+    super(key, data)
   }
 
   protected getMustProperties(): string[] {
