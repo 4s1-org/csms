@@ -4,7 +4,7 @@ import { ClassGenerator } from "./class-generator"
 import { SchemaRoot } from "./schema-elements/schema-root"
 
 async function main(): Promise<void> {
-  const dir = path.join(__dirname, "..", "..", "..", "HochschuleTrier", "Masterthesis", "Dokumente", "Technisch", "OCPP_2.0.1", "OCPP-2.0.1_part3_JSON_schemas")
+  const dir = path.join(__dirname, "..", "..", "third-party", "ocpp", "2.0.1")
   const files = fs.readdirSync(dir)
   //const files2 = [files[2]]
 

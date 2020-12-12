@@ -160,7 +160,8 @@ export class ClassGenerator {
       }
       content.push(`export enum ${name}Enum {`)
       for (const item of ele.items) {
-        content.push(`  ${item} = "${item}",`)
+        const propName = item.includes("-") || item.includes(".") ? `"${item}"` : item
+        content.push(`  ${propName} = "${item}",`)
       }
       content.push(`}`)
       content.push()
