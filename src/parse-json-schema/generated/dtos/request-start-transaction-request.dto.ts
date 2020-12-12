@@ -4,7 +4,6 @@ import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
-import { IdTokenDto } from './id-token.dto'
 import { ChargingProfileDto } from './charging-profile.dto'
 
 export class RequestStartTransactionRequestDto {
