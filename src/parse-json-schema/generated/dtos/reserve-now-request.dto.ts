@@ -5,7 +5,6 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ConnectorEnum } from '../enums/connector.enum'
 import { IdTokenDto } from './id-token.dto'
-import { IdTokenDto } from './id-token.dto'
 
 export class ReserveNowRequestDto {
   @IsOptional()
