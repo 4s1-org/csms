@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -12,10 +12,11 @@ NOTE: This dataType is based on dataTypes from <<ref-ISOIEC15118-2,ISO 15118-2>>
 export class SalesTariffDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public id: number
+  public id!: number
 
   /**
    * Sales_ Tariff. Sales. Tariff_ Description
@@ -25,12 +26,13 @@ A human readable title/short description of the sales tariff e.g. for HMI displa
   @IsOptional()
   @Length(0, 32)
   @ApiProperty()
-  public salesTariffDescription: string
+  public salesTariffDescription!: string
 
   @IsOptional()
   @ApiProperty()
-  public numEPriceLevels: number
+  public numEPriceLevels!: number
 
+  @IsNotEmpty()
   @ApiProperty()
-  public salesTariffEntry: any
+  public salesTariffEntry!: any
 }

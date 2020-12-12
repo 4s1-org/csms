@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -11,12 +11,13 @@ urn:x-oca:ocpp:uid:2:233270
 export class RelativeTimeIntervalDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public start: number
+  public start!: number
 
   @IsOptional()
   @ApiProperty()
-  public duration: number
+  public duration!: number
 }

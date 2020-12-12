@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
@@ -15,18 +15,19 @@ import { VariableDto } from './variable.dto'
 export class GetVariableResultDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public attributeStatusInfo: StatusInfoDto
+  public attributeStatusInfo!: StatusInfoDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public attributeStatus: GetVariableStatusEnum
+  public attributeStatus!: GetVariableStatusEnum
 
   @IsOptional()
   @ApiProperty()
-  public attributeType: AttributeEnum
+  public attributeType!: AttributeEnum
 
   /**
    * Value of requested attribute type of component-variable. This field can only be empty when the given status is NOT accepted.
@@ -36,11 +37,13 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
   @IsOptional()
   @Length(0, 2500)
   @ApiProperty()
-  public attributeValue: string
+  public attributeValue!: string
 
+  @IsNotEmpty()
   @ApiProperty()
-  public component: ComponentDto
+  public component!: ComponentDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public variable: VariableDto
+  public variable!: VariableDto
 }

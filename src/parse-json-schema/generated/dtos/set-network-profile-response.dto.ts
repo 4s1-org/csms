@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { SetNetworkProfileStatusEnum } from '../enums/set-network-profile-status.enum'
@@ -9,12 +9,13 @@ import { StatusInfoDto } from './status-info.dto'
 export class SetNetworkProfileResponseDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public status: SetNetworkProfileStatusEnum
+  public status!: SetNetworkProfileStatusEnum
 
   @IsOptional()
   @ApiProperty()
-  public statusInfo: StatusInfoDto
+  public statusInfo!: StatusInfoDto
 }

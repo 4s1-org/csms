@@ -8,13 +8,13 @@ import { ClearChargingProfileDto } from './clear-charging-profile.dto'
 export class ClearChargingProfileRequestDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public chargingProfileId: number
+  public chargingProfileId!: number
 
   @IsOptional()
   @ApiProperty()
-  public chargingProfileCriteria: ClearChargingProfileDto
+  public chargingProfileCriteria!: ClearChargingProfileDto
 }

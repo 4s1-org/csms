@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ConnectorEnum } from '../enums/connector.enum'
@@ -10,29 +10,32 @@ import { IdTokenDto } from './id-token.dto'
 export class ReserveNowRequestDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public id: number
+  public id!: number
 
   /**
    * Date and time at which the reservation expires.
    */
+  @IsNotEmpty()
   @ApiProperty()
-  public expiryDateTime: string
+  public expiryDateTime!: string
 
   @IsOptional()
   @ApiProperty()
-  public connectorType: ConnectorEnum
+  public connectorType!: ConnectorEnum
 
+  @IsNotEmpty()
   @ApiProperty()
-  public idToken: IdTokenDto
-
-  @IsOptional()
-  @ApiProperty()
-  public evseId: number
+  public idToken!: IdTokenDto
 
   @IsOptional()
   @ApiProperty()
-  public groupIdToken: IdTokenDto
+  public evseId!: number
+
+  @IsOptional()
+  @ApiProperty()
+  public groupIdToken!: IdTokenDto
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -10,14 +10,15 @@ import { CustomDataDto } from './custom-data.dto'
 export class StatusInfoDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   /**
    * A predefined code for the reason why the status is returned in this response. The string is case-insensitive.
    */
+  @IsNotEmpty()
   @Length(0, 20)
   @ApiProperty()
-  public reasonCode: string
+  public reasonCode!: string
 
   /**
    * Additional text to provide detailed information.
@@ -25,5 +26,5 @@ export class StatusInfoDto {
   @IsOptional()
   @Length(0, 512)
   @ApiProperty()
-  public additionalInfo: string
+  public additionalInfo!: string
 }

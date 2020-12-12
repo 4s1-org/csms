@@ -1,27 +1,30 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyEventRequestDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   /**
    * Timestamp of the moment this message was generated at the Charging Station.
    */
+  @IsNotEmpty()
   @ApiProperty()
-  public generatedAt: string
+  public generatedAt!: string
 
   @IsOptional()
   @ApiProperty()
-  public tbc: boolean
+  public tbc!: boolean
 
+  @IsNotEmpty()
   @ApiProperty()
-  public seqNo: number
+  public seqNo!: number
 
+  @IsNotEmpty()
   @ApiProperty()
-  public eventData: any
+  public eventData!: any
 }

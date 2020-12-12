@@ -7,9 +7,9 @@ import { CustomDataDto } from './custom-data.dto'
 export class GetInstalledCertificateIdsRequestDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public certificateType: any
+  public certificateType!: any
 }

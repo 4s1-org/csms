@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { APNAuthenticationEnum } from '../enums/apn-authentication.enum'
@@ -15,16 +15,17 @@ NOTE: When asking a GSM modem to dial in, it is possible to specify which mobile
 export class APNDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   /**
    * APN. APN. URI
 urn:x-oca:ocpp:uid:1:568814
 The Access Point Name as an URL.
    */
+  @IsNotEmpty()
   @Length(0, 512)
   @ApiProperty()
-  public apn: string
+  public apn!: string
 
   /**
    * APN. APN. User_ Name
@@ -34,7 +35,7 @@ APN username.
   @IsOptional()
   @Length(0, 20)
   @ApiProperty()
-  public apnUserName: string
+  public apnUserName!: string
 
   /**
    * APN. APN. Password
@@ -44,11 +45,11 @@ APN Password.
   @IsOptional()
   @Length(0, 20)
   @ApiProperty()
-  public apnPassword: string
+  public apnPassword!: string
 
   @IsOptional()
   @ApiProperty()
-  public simPin: number
+  public simPin!: number
 
   /**
    * APN. Preferred_ Network. Mobile_ Network_ ID
@@ -58,12 +59,13 @@ Preferred network, written as MCC and MNC concatenated. See note.
   @IsOptional()
   @Length(0, 6)
   @ApiProperty()
-  public preferredNetwork: string
+  public preferredNetwork!: string
 
   @IsOptional()
   @ApiProperty()
-  public useOnlyPreferredNetwork: boolean
+  public useOnlyPreferredNetwork!: boolean
 
+  @IsNotEmpty()
   @ApiProperty()
-  public apnAuthentication: APNAuthenticationEnum
+  public apnAuthentication!: APNAuthenticationEnum
 }

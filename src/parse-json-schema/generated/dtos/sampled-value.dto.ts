@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ReadingContextEnum } from '../enums/reading-context.enum'
@@ -20,32 +20,33 @@ To save on mobile data usage, default values of all of the optional fields are s
 export class SampledValueDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public value: number
-
-  @IsOptional()
-  @ApiProperty()
-  public context: ReadingContextEnum
+  public value!: number
 
   @IsOptional()
   @ApiProperty()
-  public measurand: MeasurandEnum
+  public context!: ReadingContextEnum
 
   @IsOptional()
   @ApiProperty()
-  public phase: PhaseEnum
+  public measurand!: MeasurandEnum
 
   @IsOptional()
   @ApiProperty()
-  public location: LocationEnum
+  public phase!: PhaseEnum
 
   @IsOptional()
   @ApiProperty()
-  public signedMeterValue: SignedMeterValueDto
+  public location!: LocationEnum
 
   @IsOptional()
   @ApiProperty()
-  public unitOfMeasure: UnitOfMeasureDto
+  public signedMeterValue!: SignedMeterValueDto
+
+  @IsOptional()
+  @ApiProperty()
+  public unitOfMeasure!: UnitOfMeasureDto
 }

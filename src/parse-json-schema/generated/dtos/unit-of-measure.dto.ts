@@ -10,7 +10,7 @@ import { CustomDataDto } from './custom-data.dto'
 export class UnitOfMeasureDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   /**
    * Unit of the value. Default = "Wh" if the (default) measurand is an "Energy" type.
@@ -20,9 +20,9 @@ If an applicable unit is available in that list, otherwise a "custom" unit might
   @IsOptional()
   @Length(0, 20)
   @ApiProperty()
-  public unit: string
+  public unit!: string
 
   @IsOptional()
   @ApiProperty()
-  public multiplier: number
+  public multiplier!: number
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { AuthorizationStatusEnum } from '../enums/authorization-status.enum'
@@ -16,10 +16,11 @@ It is advised to not stop charging for a token that expires during charging, as 
 export class IdTokenInfoDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public status: AuthorizationStatusEnum
+  public status!: AuthorizationStatusEnum
 
   /**
    * ID_ Token. Expiry. Date_ Time
@@ -28,11 +29,11 @@ Date and Time after which the token must be considered invalid.
    */
   @IsOptional()
   @ApiProperty()
-  public cacheExpiryDateTime: string
+  public cacheExpiryDateTime!: string
 
   @IsOptional()
   @ApiProperty()
-  public chargingPriority: number
+  public chargingPriority!: number
 
   /**
    * ID_ Token. Language1. Language_ Code
@@ -42,15 +43,15 @@ Preferred user interface language of identifier user. Contains a language code a
   @IsOptional()
   @Length(0, 8)
   @ApiProperty()
-  public language1: string
+  public language1!: string
 
   @IsOptional()
   @ApiProperty()
-  public evseId: any
+  public evseId!: any
 
   @IsOptional()
   @ApiProperty()
-  public groupIdToken: IdTokenDto
+  public groupIdToken!: IdTokenDto
 
   /**
    * ID_ Token. Language2. Language_ Code
@@ -60,9 +61,9 @@ Second preferred user interface language of identifier user. Don’t use when la
   @IsOptional()
   @Length(0, 8)
   @ApiProperty()
-  public language2: string
+  public language2!: string
 
   @IsOptional()
   @ApiProperty()
-  public personalMessage: MessageContentDto
+  public personalMessage!: MessageContentDto
 }

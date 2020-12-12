@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingStateEnum } from '../enums/charging-state.enum'
@@ -13,28 +13,29 @@ urn:x-oca:ocpp:uid:2:233318
 export class TransactionDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   /**
    * This contains the Id of the transaction.
    */
+  @IsNotEmpty()
   @Length(0, 36)
   @ApiProperty()
-  public transactionId: string
+  public transactionId!: string
 
   @IsOptional()
   @ApiProperty()
-  public chargingState: ChargingStateEnum
+  public chargingState!: ChargingStateEnum
 
   @IsOptional()
   @ApiProperty()
-  public timeSpentCharging: number
+  public timeSpentCharging!: number
 
   @IsOptional()
   @ApiProperty()
-  public stoppedReason: ReasonEnum
+  public stoppedReason!: ReasonEnum
 
   @IsOptional()
   @ApiProperty()
-  public remoteStartId: number
+  public remoteStartId!: number
 }

@@ -9,21 +9,21 @@ import { MessageContentDto } from './message-content.dto'
 export class TransactionEventResponseDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public totalCost: number
+  public totalCost!: number
 
   @IsOptional()
   @ApiProperty()
-  public chargingPriority: number
+  public chargingPriority!: number
 
   @IsOptional()
   @ApiProperty()
-  public idTokenInfo: IdTokenInfoDto
+  public idTokenInfo!: IdTokenInfoDto
 
   @IsOptional()
   @ApiProperty()
-  public updatedPersonalMessage: MessageContentDto
+  public updatedPersonalMessage!: MessageContentDto
 }
