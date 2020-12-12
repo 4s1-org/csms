@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
@@ -15,28 +15,33 @@ import { VariableDto } from './variable.dto'
 export class SetMonitoringResultDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public id: number
+  public id!: number
 
   @IsOptional()
   @ApiProperty()
-  public statusInfo: StatusInfoDto
+  public statusInfo!: StatusInfoDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public status: SetMonitoringStatusEnum
+  public status!: SetMonitoringStatusEnum
 
+  @IsNotEmpty()
   @ApiProperty()
-  public type: MonitorEnum
+  public type!: MonitorEnum
 
+  @IsNotEmpty()
   @ApiProperty()
-  public component: ComponentDto
+  public component!: ComponentDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public variable: VariableDto
+  public variable!: VariableDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public severity: number
+  public severity!: number
 }

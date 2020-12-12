@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -12,35 +12,37 @@ EV DC charging parameters
 export class DCChargingParametersDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public evMaxCurrent: number
+  public evMaxCurrent!: number
 
+  @IsNotEmpty()
   @ApiProperty()
-  public evMaxVoltage: number
-
-  @IsOptional()
-  @ApiProperty()
-  public energyAmount: number
+  public evMaxVoltage!: number
 
   @IsOptional()
   @ApiProperty()
-  public evMaxPower: number
+  public energyAmount!: number
 
   @IsOptional()
   @ApiProperty()
-  public stateOfCharge: number
+  public evMaxPower!: number
 
   @IsOptional()
   @ApiProperty()
-  public evEnergyCapacity: number
+  public stateOfCharge!: number
 
   @IsOptional()
   @ApiProperty()
-  public fullSoC: number
+  public evEnergyCapacity!: number
 
   @IsOptional()
   @ApiProperty()
-  public bulkSoC: number
+  public fullSoC!: number
+
+  @IsOptional()
+  @ApiProperty()
+  public bulkSoC!: number
 }

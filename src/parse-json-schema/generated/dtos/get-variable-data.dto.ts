@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { AttributeEnum } from '../enums/attribute.enum'
@@ -13,15 +13,17 @@ import { VariableDto } from './variable.dto'
 export class GetVariableDataDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public attributeType: AttributeEnum
+  public attributeType!: AttributeEnum
 
+  @IsNotEmpty()
   @ApiProperty()
-  public component: ComponentDto
+  public component!: ComponentDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public variable: VariableDto
+  public variable!: VariableDto
 }

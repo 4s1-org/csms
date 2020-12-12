@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
@@ -14,10 +14,11 @@ Charging schedule structure defines a list of charging periods, as used in: GetC
 export class ChargingScheduleDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public id: number
+  public id!: number
 
   /**
    * Charging_ Schedule. Start_ Schedule. Date_ Time
@@ -26,23 +27,25 @@ Starting point of an absolute schedule. If absent the schedule will be relative 
    */
   @IsOptional()
   @ApiProperty()
-  public startSchedule: string
+  public startSchedule!: string
 
   @IsOptional()
   @ApiProperty()
-  public duration: number
+  public duration!: number
 
+  @IsNotEmpty()
   @ApiProperty()
-  public chargingRateUnit: ChargingRateUnitEnum
+  public chargingRateUnit!: ChargingRateUnitEnum
 
+  @IsNotEmpty()
   @ApiProperty()
-  public chargingSchedulePeriod: any
-
-  @IsOptional()
-  @ApiProperty()
-  public minChargingRate: number
+  public chargingSchedulePeriod!: any
 
   @IsOptional()
   @ApiProperty()
-  public salesTariff: SalesTariffDto
+  public minChargingRate!: number
+
+  @IsOptional()
+  @ApiProperty()
+  public salesTariff!: SalesTariffDto
 }

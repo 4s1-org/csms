@@ -7,5 +7,5 @@ import { CustomDataDto } from './custom-data.dto'
 export class FirmwareStatusNotificationResponseDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 }

@@ -7,7 +7,7 @@ import { CustomDataDto } from './custom-data.dto'
 export class GetTransactionStatusRequestDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   /**
    * The Id of the transaction for which the status is requested.
@@ -15,5 +15,5 @@ export class GetTransactionStatusRequestDto {
   @IsOptional()
   @Length(0, 36)
   @ApiProperty()
-  public transactionId: string
+  public transactionId!: string
 }

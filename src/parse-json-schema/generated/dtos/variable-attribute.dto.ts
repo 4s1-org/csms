@@ -12,11 +12,11 @@ import { MutabilityEnum } from '../enums/mutability.enum'
 export class VariableAttributeDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public type: AttributeEnum
+  public type!: AttributeEnum
 
   /**
    * Value of the attribute. May only be omitted when mutability is set to 'WriteOnly'.
@@ -26,17 +26,17 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
   @IsOptional()
   @Length(0, 2500)
   @ApiProperty()
-  public value: string
+  public value!: string
 
   @IsOptional()
   @ApiProperty()
-  public mutability: MutabilityEnum
+  public mutability!: MutabilityEnum
 
   @IsOptional()
   @ApiProperty()
-  public persistent: boolean
+  public persistent!: boolean
 
   @IsOptional()
   @ApiProperty()
-  public constant: boolean
+  public constant!: boolean
 }

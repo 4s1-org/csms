@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -10,14 +10,15 @@ import { CustomDataDto } from './custom-data.dto'
 export class VariableDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   /**
    * Name of the variable. Name should be taken from the list of standardized variable names whenever possible. Case Insensitive. strongly advised to use Camel Case.
    */
+  @IsNotEmpty()
   @Length(0, 50)
   @ApiProperty()
-  public name: string
+  public name!: string
 
   /**
    * Name of instance in case the variable exists as multiple instances. Case Insensitive. strongly advised to use Camel Case.
@@ -25,5 +26,5 @@ export class VariableDto {
   @IsOptional()
   @Length(0, 50)
   @ApiProperty()
-  public instance: string
+  public instance!: string
 }

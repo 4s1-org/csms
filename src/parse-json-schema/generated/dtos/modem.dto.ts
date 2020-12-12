@@ -12,7 +12,7 @@ Defines parameters required for initiating and maintaining wireless communicatio
 export class ModemDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   /**
    * Wireless_ Communication_ Module. ICCID. CI20_ Text
@@ -22,7 +22,7 @@ This contains the ICCID of the modem’s SIM card.
   @IsOptional()
   @Length(0, 20)
   @ApiProperty()
-  public iccid: string
+  public iccid!: string
 
   /**
    * Wireless_ Communication_ Module. IMSI. CI20_ Text
@@ -32,5 +32,5 @@ This contains the IMSI of the modem’s SIM card.
   @IsOptional()
   @Length(0, 20)
   @ApiProperty()
-  public imsi: string
+  public imsi!: string
 }

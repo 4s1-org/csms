@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ComponentDto } from './component.dto'
@@ -16,21 +16,23 @@ Contains message details, for a message to be displayed on a Charging Station.
 export class MessageInfoDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public display: ComponentDto
+  public display!: ComponentDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public id: number
+  public id!: number
 
+  @IsNotEmpty()
   @ApiProperty()
-  public priority: MessagePriorityEnum
+  public priority!: MessagePriorityEnum
 
   @IsOptional()
   @ApiProperty()
-  public state: MessageStateEnum
+  public state!: MessageStateEnum
 
   /**
    * Message_ Info. Start. Date_ Time
@@ -39,7 +41,7 @@ From what date-time should this message be shown. If omitted: directly.
    */
   @IsOptional()
   @ApiProperty()
-  public startDateTime: string
+  public startDateTime!: string
 
   /**
    * Message_ Info. End. Date_ Time
@@ -48,7 +50,7 @@ Until what date-time should this message be shown, after this date/time this mes
    */
   @IsOptional()
   @ApiProperty()
-  public endDateTime: string
+  public endDateTime!: string
 
   /**
    * During which transaction shall this message be shown.
@@ -58,8 +60,9 @@ ended.
   @IsOptional()
   @Length(0, 36)
   @ApiProperty()
-  public transactionId: string
+  public transactionId!: string
 
+  @IsNotEmpty()
   @ApiProperty()
-  public message: MessageContentDto
+  public message!: MessageContentDto
 }

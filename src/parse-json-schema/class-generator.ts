@@ -129,14 +129,14 @@ export class ClassGenerator {
         if (item.type.endsWith("EnumType")) {
           // Enum als Typ
           const type = item.type.substr(0, item.type.length - 8)
-          content.push(`  public ${item.name}: ${type}Enum`)
+          content.push(`  public ${item.name}!: ${type}Enum`)
         } else if (item.type.endsWith("Type")) {
           // DTO als Typ
           const type = item.type.substr(0, item.type.length - 4)
-          content.push(`  public ${item.name}: ${type}Dto`)
+          content.push(`  public ${item.name}!: ${type}Dto`)
         } else {
           // Einfacher Datentyp
-          content.push(`  public ${item.name}: ${item.type}`)
+          content.push(`  public ${item.name}!: ${item.type}`)
         }
         isFirst = false
       }

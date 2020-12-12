@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenEnum } from '../enums/id-token.enum'
@@ -11,19 +11,21 @@ import { IdTokenEnum } from '../enums/id-token.enum'
 export class IdTokenDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public additionalInfo: any
+  public additionalInfo!: any
 
   /**
    * IdToken is case insensitive. Might hold the hidden id of an RFID tag, but can for example also contain a UUID.
    */
+  @IsNotEmpty()
   @Length(0, 36)
   @ApiProperty()
-  public idToken: string
+  public idToken!: string
 
+  @IsNotEmpty()
   @ApiProperty()
-  public type: IdTokenEnum
+  public type!: IdTokenEnum
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { DataEnum } from '../enums/data.enum'
@@ -11,7 +11,7 @@ import { DataEnum } from '../enums/data.enum'
 export class VariableCharacteristicsDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   /**
    * Unit of the variable. When the transmitted value has a unit, this field SHALL be included.
@@ -19,18 +19,19 @@ export class VariableCharacteristicsDto {
   @IsOptional()
   @Length(0, 16)
   @ApiProperty()
-  public unit: string
+  public unit!: string
 
+  @IsNotEmpty()
   @ApiProperty()
-  public dataType: DataEnum
-
-  @IsOptional()
-  @ApiProperty()
-  public minLimit: number
+  public dataType!: DataEnum
 
   @IsOptional()
   @ApiProperty()
-  public maxLimit: number
+  public minLimit!: number
+
+  @IsOptional()
+  @ApiProperty()
+  public maxLimit!: number
 
   /**
    * Allowed values when variable is Option/Member/SequenceList. 
@@ -48,8 +49,9 @@ The Configuration Variable <<configkey-configuration-value-size,ConfigurationVal
   @IsOptional()
   @Length(0, 1000)
   @ApiProperty()
-  public valuesList: string
+  public valuesList!: string
 
+  @IsNotEmpty()
   @ApiProperty()
-  public supportsMonitoring: boolean
+  public supportsMonitoring!: boolean
 }

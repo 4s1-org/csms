@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
@@ -8,15 +8,17 @@ import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
 export class GetCompositeScheduleRequestDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public duration: number
+  public duration!: number
 
   @IsOptional()
   @ApiProperty()
-  public chargingRateUnit: ChargingRateUnitEnum
+  public chargingRateUnit!: ChargingRateUnitEnum
 
+  @IsNotEmpty()
   @ApiProperty()
-  public evseId: number
+  public evseId!: number
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
@@ -15,23 +15,27 @@ A ChargingProfile consists of ChargingSchedule, describing the amount of power o
 export class ChargingProfileDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
+  @IsNotEmpty()
   @ApiProperty()
-  public id: number
+  public id!: number
 
+  @IsNotEmpty()
   @ApiProperty()
-  public stackLevel: number
+  public stackLevel!: number
 
+  @IsNotEmpty()
   @ApiProperty()
-  public chargingProfilePurpose: ChargingProfilePurposeEnum
+  public chargingProfilePurpose!: ChargingProfilePurposeEnum
 
+  @IsNotEmpty()
   @ApiProperty()
-  public chargingProfileKind: ChargingProfileKindEnum
+  public chargingProfileKind!: ChargingProfileKindEnum
 
   @IsOptional()
   @ApiProperty()
-  public recurrencyKind: RecurrencyKindEnum
+  public recurrencyKind!: RecurrencyKindEnum
 
   /**
    * Charging_ Profile. Valid_ From. Date_ Time
@@ -40,7 +44,7 @@ Point in time at which the profile starts to be valid. If absent, the profile is
    */
   @IsOptional()
   @ApiProperty()
-  public validFrom: string
+  public validFrom!: string
 
   /**
    * Charging_ Profile. Valid_ To. Date_ Time
@@ -49,10 +53,11 @@ Point in time at which the profile stops to be valid. If absent, the profile is 
    */
   @IsOptional()
   @ApiProperty()
-  public validTo: string
+  public validTo!: string
 
+  @IsNotEmpty()
   @ApiProperty()
-  public chargingSchedule: any
+  public chargingSchedule!: any
 
   /**
    * SHALL only be included if ChargingProfilePurpose is set to TxProfile. The transactionId is used to match the profile to a specific transaction.
@@ -60,5 +65,5 @@ Point in time at which the profile stops to be valid. If absent, the profile is 
   @IsOptional()
   @Length(0, 36)
   @ApiProperty()
-  public transactionId: string
+  public transactionId!: string
 }

@@ -13,21 +13,21 @@ A ChargingProfile consists of ChargingSchedule, describing the amount of power o
 export class ChargingProfileCriterionDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 
   @IsOptional()
   @ApiProperty()
-  public chargingProfilePurpose: ChargingProfilePurposeEnum
+  public chargingProfilePurpose!: ChargingProfilePurposeEnum
 
   @IsOptional()
   @ApiProperty()
-  public stackLevel: number
+  public stackLevel!: number
 
   @IsOptional()
   @ApiProperty()
-  public chargingProfileId: any
+  public chargingProfileId!: any
 
   @IsOptional()
   @ApiProperty()
-  public chargingLimitSource: any
+  public chargingLimitSource!: any
 }

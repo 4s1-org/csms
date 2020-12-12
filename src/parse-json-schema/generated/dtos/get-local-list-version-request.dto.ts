@@ -7,5 +7,5 @@ import { CustomDataDto } from './custom-data.dto'
 export class GetLocalListVersionRequestDto {
   @IsOptional()
   @ApiProperty()
-  public customData: CustomDataDto
+  public customData!: CustomDataDto
 }
