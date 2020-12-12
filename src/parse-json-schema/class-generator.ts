@@ -88,14 +88,15 @@ export class ClassGenerator {
         content.push(`import { ${classValidatorImports.join(", ")} } from 'class-validator'`)
       }
       content.push(`import { ApiProperty } from '@nestjs/swagger'`)
+
       // DTOs importieren
       for (const item of ele.items) {
         if (item.type.endsWith("EnumType")) {
           const type = item.type.substr(0, item.type.length - 8)
-          content.push(`import { ${type}Enum } from '../enums/${this.filenameFormatter(type)}.enum'`)
+          this.pushIfNotExists(content, `import { ${type}Enum } from '../enums/${this.filenameFormatter(type)}.enum'`)
         } else if (item.type.endsWith("Type")) {
           const type = item.type.substr(0, item.type.length - 4)
-          content.push(`import { ${type}Dto } from './${this.filenameFormatter(type)}.dto'`)
+          this.pushIfNotExists(content, `import { ${type}Dto } from './${this.filenameFormatter(type)}.dto'`)
         }
       }
       content.push(``)
@@ -147,6 +148,12 @@ export class ClassGenerator {
     }
   }
 
+  private pushIfNotExists(content: string[], text: string): void {
+    if (content.indexOf(text) === -1) {
+      content.push(text)
+    }
+  }
+
   private generateEnumFiles(): void {
     for (const name in this.enums) {
       const ele = this.enums[name]
@@ -160,7 +167,8 @@ export class ClassGenerator {
       }
       content.push(`export enum ${name}Enum {`)
       for (const item of ele.items) {
-        content.push(`  ${item} = "${item}",`)
+        const propName = item.includes("-") || item.includes(".") ? `"${item}"` : item
+        content.push(`  ${propName} = "${item}",`)
       }
       content.push(`}`)
       content.push()
