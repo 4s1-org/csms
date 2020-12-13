@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ComponentDto } from './component.dto'
@@ -29,10 +29,12 @@ export class MessageInfoDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(MessagePriorityEnum)
   public priority!: MessagePriorityEnum
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(MessageStateEnum)
   public state!: MessageStateEnum
 
   /**

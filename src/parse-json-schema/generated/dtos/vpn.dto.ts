@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { VPNEnum } from '../enums/vpn.enum'
@@ -72,5 +72,6 @@ VPN shared secret.
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(VPNEnum)
   public type!: VPNEnum
 }

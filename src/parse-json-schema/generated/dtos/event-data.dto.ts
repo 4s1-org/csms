@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { EventTriggerEnum } from '../enums/event-trigger.enum'
@@ -31,6 +31,7 @@ export class EventDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(EventTriggerEnum)
   public trigger!: EventTriggerEnum
 
   @ApiProperty()
@@ -92,6 +93,7 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(EventNotificationEnum)
   public eventNotificationType!: EventNotificationEnum
 
   @ApiProperty()

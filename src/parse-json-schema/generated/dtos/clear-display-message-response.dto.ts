@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ClearMessageStatusEnum } from '../enums/clear-message-status.enum'
@@ -13,6 +13,7 @@ export class ClearDisplayMessageResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(ClearMessageStatusEnum)
   public status!: ClearMessageStatusEnum
 
   @ApiProperty()

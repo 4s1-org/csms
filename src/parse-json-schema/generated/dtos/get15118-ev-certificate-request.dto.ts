@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { CertificateActionEnum } from '../enums/certificate-action.enum'
@@ -21,6 +21,7 @@ export class Get15118EVCertificateRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(CertificateActionEnum)
   public action!: CertificateActionEnum
 
   /**

@@ -93,6 +93,9 @@ export class ClassGenerator {
       if (ele.items.some(x => x.type === "boolean")) {
         classValidatorImports.push("IsBoolean")
       }
+      if (ele.items.some(x => x.type.endsWith("EnumType"))) {
+        classValidatorImports.push("IsEnum")
+      }
       if (ele.items.some(x => x.maxLength !== undefined)) {
         classValidatorImports.push("Length")
       }
@@ -142,9 +145,11 @@ export class ClassGenerator {
         if (item.type.endsWith("EnumType")) {
           // Enum als Typ
           const type = item.type.substr(0, item.type.length - 8)
+          content.push(`  @IsEnum(${type}Enum)`)
           content.push(`  public ${item.name}!: ${type}Enum`)
         } else if (item.type.endsWith("Type")) {
           // DTO als Typ
+          // ToDo: Nested Validierung
           const type = item.type.substr(0, item.type.length - 4)
           content.push(`  public ${item.name}!: ${type}Dto`)
         } else {

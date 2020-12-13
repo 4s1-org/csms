@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsNumber } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsNumber, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ReadingContextEnum } from '../enums/reading-context.enum'
@@ -29,18 +29,22 @@ export class SampledValueDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(ReadingContextEnum)
   public context!: ReadingContextEnum
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(MeasurandEnum)
   public measurand!: MeasurandEnum
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(PhaseEnum)
   public phase!: PhaseEnum
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(LocationEnum)
   public location!: LocationEnum
 
   @ApiProperty()

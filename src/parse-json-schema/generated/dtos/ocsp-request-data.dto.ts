@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enums/hash-algorithm.enum'
@@ -12,6 +12,7 @@ export class OCSPRequestDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(HashAlgorithmEnum)
   public hashAlgorithm!: HashAlgorithmEnum
 
   /**

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsNumber, IsString } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsNumber, IsString, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
@@ -38,6 +38,7 @@ Starting point of an absolute schedule. If absent the schedule will be relative 
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(ChargingRateUnitEnum)
   public chargingRateUnit!: ChargingRateUnitEnum
 
   @ApiProperty()

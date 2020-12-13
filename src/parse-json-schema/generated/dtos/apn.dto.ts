@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { APNAuthenticationEnum } from '../enums/apn-authentication.enum'
@@ -73,5 +73,6 @@ Preferred network, written as MCC and MNC concatenated. See note.
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(APNAuthenticationEnum)
   public apnAuthentication!: APNAuthenticationEnum
 }

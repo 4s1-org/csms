@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingStateEnum } from '../enums/charging-state.enum'
@@ -26,6 +26,7 @@ export class TransactionDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(ChargingStateEnum)
   public chargingState!: ChargingStateEnum
 
   @ApiProperty()
@@ -35,6 +36,7 @@ export class TransactionDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(ReasonEnum)
   public stoppedReason!: ReasonEnum
 
   @ApiProperty()

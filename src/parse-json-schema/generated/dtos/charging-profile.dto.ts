@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
@@ -29,14 +29,17 @@ export class ChargingProfileDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(ChargingProfilePurposeEnum)
   public chargingProfilePurpose!: ChargingProfilePurposeEnum
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(ChargingProfileKindEnum)
   public chargingProfileKind!: ChargingProfileKindEnum
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(RecurrencyKindEnum)
   public recurrencyKind!: RecurrencyKindEnum
 
   /**

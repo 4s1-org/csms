@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsString, IsBoolean, Length } from 'class-validator'
+import { IsOptional, IsString, IsBoolean, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { AttributeEnum } from '../enums/attribute.enum'
@@ -16,6 +16,7 @@ export class VariableAttributeDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(AttributeEnum)
   public type!: AttributeEnum
 
   /**
@@ -31,6 +32,7 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(MutabilityEnum)
   public mutability!: MutabilityEnum
 
   @ApiProperty()

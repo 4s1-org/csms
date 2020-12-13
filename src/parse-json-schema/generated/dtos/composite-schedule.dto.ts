@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
@@ -40,5 +40,6 @@ Date and time at which the schedule becomes active. All time measurements within
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(ChargingRateUnitEnum)
   public chargingRateUnit!: ChargingRateUnitEnum
 }

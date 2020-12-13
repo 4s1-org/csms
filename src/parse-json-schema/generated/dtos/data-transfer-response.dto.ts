@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { DataTransferStatusEnum } from '../enums/data-transfer-status.enum'
@@ -13,6 +13,7 @@ export class DataTransferResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(DataTransferStatusEnum)
   public status!: DataTransferStatusEnum
 
   @ApiProperty()

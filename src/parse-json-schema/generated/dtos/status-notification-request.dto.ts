@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ConnectorStatusEnum } from '../enums/connector-status.enum'
@@ -20,6 +20,7 @@ export class StatusNotificationRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(ConnectorStatusEnum)
   public connectorStatus!: ConnectorStatusEnum
 
   @ApiProperty()

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenEnum } from '../enums/id-token.enum'
@@ -28,5 +28,6 @@ export class IdTokenDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(IdTokenEnum)
   public type!: IdTokenEnum
 }
