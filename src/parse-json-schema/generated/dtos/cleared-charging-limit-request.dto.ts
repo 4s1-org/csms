@@ -6,6 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 
 export class ClearedChargingLimitRequestDto {
+  public constructor (
+    chargingLimitSource: ChargingLimitSourceEnum
+  ) {
+    this.chargingLimitSource = chargingLimitSource
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,7 +19,7 @@ export class ClearedChargingLimitRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingLimitSourceEnum)
-  public chargingLimitSource!: ChargingLimitSourceEnum
+  public chargingLimitSource: ChargingLimitSourceEnum
 
   @ApiProperty()
   @IsOptional()

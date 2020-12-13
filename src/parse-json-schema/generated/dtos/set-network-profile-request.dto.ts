@@ -6,6 +6,14 @@ import { CustomDataDto } from './custom-data.dto'
 import { NetworkConnectionProfileDto } from './network-connection-profile.dto'
 
 export class SetNetworkProfileRequestDto {
+  public constructor (
+    configurationSlot: number,
+    connectionData: NetworkConnectionProfileDto
+  ) {
+    this.configurationSlot = configurationSlot
+    this.connectionData = connectionData
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,9 +21,9 @@ export class SetNetworkProfileRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public configurationSlot!: number
+  public configurationSlot: number
 
   @ApiProperty()
   @IsNotEmpty()
-  public connectionData!: NetworkConnectionProfileDto
+  public connectionData: NetworkConnectionProfileDto
 }

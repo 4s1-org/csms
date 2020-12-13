@@ -5,6 +5,12 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyDisplayMessagesRequestDto {
+  public constructor (
+    requestId: number
+  ) {
+    this.requestId = requestId
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -16,7 +22,7 @@ export class NotifyDisplayMessagesRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsOptional()

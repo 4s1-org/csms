@@ -5,6 +5,12 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class SetMonitoringLevelRequestDto {
+  public constructor (
+    severity: number
+  ) {
+    this.severity = severity
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -12,5 +18,5 @@ export class SetMonitoringLevelRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public severity!: number
+  public severity: number
 }

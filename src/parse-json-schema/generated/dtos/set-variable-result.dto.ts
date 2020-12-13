@@ -10,6 +10,16 @@ import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
 export class SetVariableResultDto {
+  public constructor (
+    attributeStatus: SetVariableStatusEnum,
+    component: ComponentDto,
+    variable: VariableDto
+  ) {
+    this.attributeStatus = attributeStatus
+    this.component = component
+    this.variable = variable
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -22,7 +32,7 @@ export class SetVariableResultDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(SetVariableStatusEnum)
-  public attributeStatus!: SetVariableStatusEnum
+  public attributeStatus: SetVariableStatusEnum
 
   @ApiProperty()
   @IsOptional()
@@ -30,9 +40,9 @@ export class SetVariableResultDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public component!: ComponentDto
+  public component: ComponentDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public variable!: VariableDto
+  public variable: VariableDto
 }

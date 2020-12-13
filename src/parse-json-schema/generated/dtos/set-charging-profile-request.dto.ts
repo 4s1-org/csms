@@ -6,6 +6,14 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfileDto } from './charging-profile.dto'
 
 export class SetChargingProfileRequestDto {
+  public constructor (
+    evseId: number,
+    chargingProfile: ChargingProfileDto
+  ) {
+    this.evseId = evseId
+    this.chargingProfile = chargingProfile
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,9 +21,9 @@ export class SetChargingProfileRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingProfile!: ChargingProfileDto
+  public chargingProfile: ChargingProfileDto
 }

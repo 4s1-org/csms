@@ -6,6 +6,14 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingNeedsDto } from './charging-needs.dto'
 
 export class NotifyEVChargingNeedsRequestDto {
+  public constructor (
+    chargingNeeds: ChargingNeedsDto,
+    evseId: number
+  ) {
+    this.chargingNeeds = chargingNeeds
+    this.evseId = evseId
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -17,10 +25,10 @@ export class NotifyEVChargingNeedsRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingNeeds!: ChargingNeedsDto
+  public chargingNeeds: ChargingNeedsDto
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 }

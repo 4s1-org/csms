@@ -7,9 +7,15 @@ import { ApiProperty } from '@nestjs/swagger'
  * This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
  */
 export class CustomDataDto {
+  public constructor (
+    vendorId: string
+  ) {
+    this.vendorId = vendorId
+  }
+
   @ApiProperty()
   @IsNotEmpty()
   @Length(0, 255)
   @IsString()
-  public vendorId!: string
+  public vendorId: string
 }

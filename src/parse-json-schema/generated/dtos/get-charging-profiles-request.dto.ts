@@ -6,6 +6,14 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfileCriterionDto } from './charging-profile-criterion.dto'
 
 export class GetChargingProfilesRequestDto {
+  public constructor (
+    requestId: number,
+    chargingProfile: ChargingProfileCriterionDto
+  ) {
+    this.requestId = requestId
+    this.chargingProfile = chargingProfile
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,7 +21,7 @@ export class GetChargingProfilesRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsOptional()
@@ -22,5 +30,5 @@ export class GetChargingProfilesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingProfile!: ChargingProfileCriterionDto
+  public chargingProfile: ChargingProfileCriterionDto
 }

@@ -11,6 +11,14 @@ import { VariableDto } from './variable.dto'
  * Class to hold parameters for GetVariables request.
  */
 export class GetVariableDataDto {
+  public constructor (
+    component: ComponentDto,
+    variable: VariableDto
+  ) {
+    this.component = component
+    this.variable = variable
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -22,9 +30,9 @@ export class GetVariableDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public component!: ComponentDto
+  public component: ComponentDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public variable!: VariableDto
+  public variable: VariableDto
 }

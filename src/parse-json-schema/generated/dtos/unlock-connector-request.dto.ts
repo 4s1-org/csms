@@ -5,6 +5,14 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class UnlockConnectorRequestDto {
+  public constructor (
+    evseId: number,
+    connectorId: number
+  ) {
+    this.evseId = evseId
+    this.connectorId = connectorId
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -12,10 +20,10 @@ export class UnlockConnectorRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public connectorId!: number
+  public connectorId: number
 }

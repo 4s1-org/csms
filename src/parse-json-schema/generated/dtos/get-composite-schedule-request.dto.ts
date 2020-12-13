@@ -6,6 +6,14 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
 
 export class GetCompositeScheduleRequestDto {
+  public constructor (
+    duration: number,
+    evseId: number
+  ) {
+    this.duration = duration
+    this.evseId = evseId
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,7 +21,7 @@ export class GetCompositeScheduleRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public duration!: number
+  public duration: number
 
   @ApiProperty()
   @IsOptional()
@@ -23,5 +31,5 @@ export class GetCompositeScheduleRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 }

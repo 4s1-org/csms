@@ -9,6 +9,12 @@ import { CustomDataDto } from './custom-data.dto'
 urn:x-oca:ocpp:uid:2:233270
  */
 export class RelativeTimeIntervalDto {
+  public constructor (
+    start: number
+  ) {
+    this.start = start
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -16,7 +22,7 @@ export class RelativeTimeIntervalDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public start!: number
+  public start: number
 
   @ApiProperty()
   @IsOptional()

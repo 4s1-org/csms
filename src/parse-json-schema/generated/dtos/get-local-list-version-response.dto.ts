@@ -5,6 +5,12 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetLocalListVersionResponseDto {
+  public constructor (
+    versionNumber: number
+  ) {
+    this.versionNumber = versionNumber
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -12,5 +18,5 @@ export class GetLocalListVersionResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public versionNumber!: number
+  public versionNumber: number
 }

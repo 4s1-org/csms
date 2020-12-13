@@ -6,6 +6,18 @@ import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enums/hash-algorithm.enum'
 
 export class CertificateHashDataDto {
+  public constructor (
+    hashAlgorithm: HashAlgorithmEnum,
+    issuerNameHash: string,
+    issuerKeyHash: string,
+    serialNumber: string
+  ) {
+    this.hashAlgorithm = hashAlgorithm
+    this.issuerNameHash = issuerNameHash
+    this.issuerKeyHash = issuerKeyHash
+    this.serialNumber = serialNumber
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,7 +25,7 @@ export class CertificateHashDataDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(HashAlgorithmEnum)
-  public hashAlgorithm!: HashAlgorithmEnum
+  public hashAlgorithm: HashAlgorithmEnum
 
   /**
    * Hashed value of the Issuer DN (Distinguished Name).
@@ -22,7 +34,7 @@ export class CertificateHashDataDto {
   @IsNotEmpty()
   @Length(0, 128)
   @IsString()
-  public issuerNameHash!: string
+  public issuerNameHash: string
 
   /**
    * Hashed value of the issuers public key
@@ -31,7 +43,7 @@ export class CertificateHashDataDto {
   @IsNotEmpty()
   @Length(0, 128)
   @IsString()
-  public issuerKeyHash!: string
+  public issuerKeyHash: string
 
   /**
    * The serial number of the certificate.
@@ -40,5 +52,5 @@ export class CertificateHashDataDto {
   @IsNotEmpty()
   @Length(0, 40)
   @IsString()
-  public serialNumber!: string
+  public serialNumber: string
 }

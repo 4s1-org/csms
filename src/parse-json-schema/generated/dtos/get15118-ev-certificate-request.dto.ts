@@ -6,6 +6,16 @@ import { CustomDataDto } from './custom-data.dto'
 import { CertificateActionEnum } from '../enums/certificate-action.enum'
 
 export class Get15118EVCertificateRequestDto {
+  public constructor (
+    iso15118SchemaVersion: string,
+    action: CertificateActionEnum,
+    exiRequest: string
+  ) {
+    this.iso15118SchemaVersion = iso15118SchemaVersion
+    this.action = action
+    this.exiRequest = exiRequest
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -17,12 +27,12 @@ export class Get15118EVCertificateRequestDto {
   @IsNotEmpty()
   @Length(0, 50)
   @IsString()
-  public iso15118SchemaVersion!: string
+  public iso15118SchemaVersion: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(CertificateActionEnum)
-  public action!: CertificateActionEnum
+  public action: CertificateActionEnum
 
   /**
    * Raw CertificateInstallationReq request from EV, Base64 encoded.
@@ -31,5 +41,5 @@ export class Get15118EVCertificateRequestDto {
   @IsNotEmpty()
   @Length(0, 5600)
   @IsString()
-  public exiRequest!: string
+  public exiRequest: string
 }

@@ -10,6 +10,12 @@ urn:x-oca:ocpp:uid:2:233123
 Electric Vehicle Supply Equipment
  */
 export class EVSEDto {
+  public constructor (
+    id: number
+  ) {
+    this.id = id
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -17,7 +23,7 @@ export class EVSEDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public id!: number
+  public id: number
 
   @ApiProperty()
   @IsOptional()

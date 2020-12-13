@@ -6,6 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { CertificateSigningUseEnum } from '../enums/certificate-signing-use.enum'
 
 export class CertificateSignedRequestDto {
+  public constructor (
+    certificateChain: string
+  ) {
+    this.certificateChain = certificateChain
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -19,7 +25,7 @@ The Configuration Variable <<configkey-max-certificate-chain-size,MaxCertificate
   @IsNotEmpty()
   @Length(0, 10000)
   @IsString()
-  public certificateChain!: string
+  public certificateChain: string
 
   @ApiProperty()
   @IsOptional()

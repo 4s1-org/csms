@@ -5,6 +5,12 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetTransactionStatusResponseDto {
+  public constructor (
+    messagesInQueue: boolean
+  ) {
+    this.messagesInQueue = messagesInQueue
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -17,5 +23,5 @@ export class GetTransactionStatusResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
-  public messagesInQueue!: boolean
+  public messagesInQueue: boolean
 }

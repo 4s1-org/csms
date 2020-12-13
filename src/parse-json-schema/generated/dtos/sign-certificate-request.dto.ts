@@ -6,6 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { CertificateSigningUseEnum } from '../enums/certificate-signing-use.enum'
 
 export class SignCertificateRequestDto {
+  public constructor (
+    csr: string
+  ) {
+    this.csr = csr
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -17,7 +23,7 @@ export class SignCertificateRequestDto {
   @IsNotEmpty()
   @Length(0, 5500)
   @IsString()
-  public csr!: string
+  public csr: string
 
   @ApiProperty()
   @IsOptional()

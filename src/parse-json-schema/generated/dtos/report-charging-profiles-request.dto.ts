@@ -6,6 +6,18 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 
 export class ReportChargingProfilesRequestDto {
+  public constructor (
+    requestId: number,
+    chargingLimitSource: ChargingLimitSourceEnum,
+    chargingProfile: any,
+    evseId: number
+  ) {
+    this.requestId = requestId
+    this.chargingLimitSource = chargingLimitSource
+    this.chargingProfile = chargingProfile
+    this.evseId = evseId
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,16 +25,16 @@ export class ReportChargingProfilesRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingLimitSourceEnum)
-  public chargingLimitSource!: ChargingLimitSourceEnum
+  public chargingLimitSource: ChargingLimitSourceEnum
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingProfile!: any
+  public chargingProfile: any
 
   @ApiProperty()
   @IsOptional()
@@ -32,5 +44,5 @@ export class ReportChargingProfilesRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 }

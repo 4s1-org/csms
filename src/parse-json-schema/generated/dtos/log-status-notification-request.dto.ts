@@ -6,6 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { UploadLogStatusEnum } from '../enums/upload-log-status.enum'
 
 export class LogStatusNotificationRequestDto {
+  public constructor (
+    status: UploadLogStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,7 +19,7 @@ export class LogStatusNotificationRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(UploadLogStatusEnum)
-  public status!: UploadLogStatusEnum
+  public status: UploadLogStatusEnum
 
   @ApiProperty()
   @IsOptional()

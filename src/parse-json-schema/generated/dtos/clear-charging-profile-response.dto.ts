@@ -7,6 +7,12 @@ import { ClearChargingProfileStatusEnum } from '../enums/clear-charging-profile-
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearChargingProfileResponseDto {
+  public constructor (
+    status: ClearChargingProfileStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -14,7 +20,7 @@ export class ClearChargingProfileResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ClearChargingProfileStatusEnum)
-  public status!: ClearChargingProfileStatusEnum
+  public status: ClearChargingProfileStatusEnum
 
   @ApiProperty()
   @IsOptional()

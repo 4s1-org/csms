@@ -10,13 +10,21 @@ urn:x-oca:ocpp:uid:2:233265
 Collection of one or more sampled values in MeterValuesRequest and TransactionEvent. All sampled values in a MeterValue are sampled at the same point in time.
  */
 export class MeterValueDto {
+  public constructor (
+    sampledValue: any,
+    timestamp: string
+  ) {
+    this.sampledValue = sampledValue
+    this.timestamp = timestamp
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public sampledValue!: any
+  public sampledValue: any
 
   /**
    * Meter_ Value. Timestamp. Date_ Time
@@ -26,5 +34,5 @@ Timestamp for measured value(s).
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public timestamp!: string
+  public timestamp: string
 }

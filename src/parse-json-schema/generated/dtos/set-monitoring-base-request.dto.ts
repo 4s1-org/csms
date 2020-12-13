@@ -6,6 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { MonitoringBaseEnum } from '../enums/monitoring-base.enum'
 
 export class SetMonitoringBaseRequestDto {
+  public constructor (
+    monitoringBase: MonitoringBaseEnum
+  ) {
+    this.monitoringBase = monitoringBase
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,5 +19,5 @@ export class SetMonitoringBaseRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(MonitoringBaseEnum)
-  public monitoringBase!: MonitoringBaseEnum
+  public monitoringBase: MonitoringBaseEnum
 }

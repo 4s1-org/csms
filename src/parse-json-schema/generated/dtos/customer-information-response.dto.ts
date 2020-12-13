@@ -7,6 +7,12 @@ import { CustomerInformationStatusEnum } from '../enums/customer-information-sta
 import { StatusInfoDto } from './status-info.dto'
 
 export class CustomerInformationResponseDto {
+  public constructor (
+    status: CustomerInformationStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -14,7 +20,7 @@ export class CustomerInformationResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(CustomerInformationStatusEnum)
-  public status!: CustomerInformationStatusEnum
+  public status: CustomerInformationStatusEnum
 
   @ApiProperty()
   @IsOptional()

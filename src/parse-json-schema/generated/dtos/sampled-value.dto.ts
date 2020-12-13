@@ -18,6 +18,12 @@ Single sampled value in MeterValues. Each value can be accompanied by optional f
 To save on mobile data usage, default values of all of the optional fields are such that. The value without any additional fields will be interpreted, as a register reading of active import energy in Wh (Watt-hour) units.
  */
 export class SampledValueDto {
+  public constructor (
+    value: number
+  ) {
+    this.value = value
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -25,7 +31,7 @@ export class SampledValueDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  public value!: number
+  public value: number
 
   @ApiProperty()
   @IsOptional()

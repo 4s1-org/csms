@@ -7,6 +7,12 @@ import { RequestStartStopStatusEnum } from '../enums/request-start-stop-status.e
 import { StatusInfoDto } from './status-info.dto'
 
 export class RequestStopTransactionResponseDto {
+  public constructor (
+    status: RequestStartStopStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -14,7 +20,7 @@ export class RequestStopTransactionResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(RequestStartStopStatusEnum)
-  public status!: RequestStartStopStatusEnum
+  public status: RequestStartStopStatusEnum
 
   @ApiProperty()
   @IsOptional()

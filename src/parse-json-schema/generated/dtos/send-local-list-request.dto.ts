@@ -6,6 +6,14 @@ import { CustomDataDto } from './custom-data.dto'
 import { UpdateEnum } from '../enums/update.enum'
 
 export class SendLocalListRequestDto {
+  public constructor (
+    versionNumber: number,
+    updateType: UpdateEnum
+  ) {
+    this.versionNumber = versionNumber
+    this.updateType = updateType
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -17,10 +25,10 @@ export class SendLocalListRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public versionNumber!: number
+  public versionNumber: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(UpdateEnum)
-  public updateType!: UpdateEnum
+  public updateType: UpdateEnum
 }

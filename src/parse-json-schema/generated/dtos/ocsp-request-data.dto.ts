@@ -6,6 +6,20 @@ import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enums/hash-algorithm.enum'
 
 export class OCSPRequestDataDto {
+  public constructor (
+    hashAlgorithm: HashAlgorithmEnum,
+    issuerNameHash: string,
+    issuerKeyHash: string,
+    serialNumber: string,
+    responderURL: string
+  ) {
+    this.hashAlgorithm = hashAlgorithm
+    this.issuerNameHash = issuerNameHash
+    this.issuerKeyHash = issuerKeyHash
+    this.serialNumber = serialNumber
+    this.responderURL = responderURL
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,7 +27,7 @@ export class OCSPRequestDataDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(HashAlgorithmEnum)
-  public hashAlgorithm!: HashAlgorithmEnum
+  public hashAlgorithm: HashAlgorithmEnum
 
   /**
    * Hashed value of the Issuer DN (Distinguished Name).
@@ -22,7 +36,7 @@ export class OCSPRequestDataDto {
   @IsNotEmpty()
   @Length(0, 128)
   @IsString()
-  public issuerNameHash!: string
+  public issuerNameHash: string
 
   /**
    * Hashed value of the issuers public key
@@ -31,7 +45,7 @@ export class OCSPRequestDataDto {
   @IsNotEmpty()
   @Length(0, 128)
   @IsString()
-  public issuerKeyHash!: string
+  public issuerKeyHash: string
 
   /**
    * The serial number of the certificate.
@@ -40,7 +54,7 @@ export class OCSPRequestDataDto {
   @IsNotEmpty()
   @Length(0, 40)
   @IsString()
-  public serialNumber!: string
+  public serialNumber: string
 
   /**
    * This contains the responder URL (Case insensitive).
@@ -49,5 +63,5 @@ export class OCSPRequestDataDto {
   @IsNotEmpty()
   @Length(0, 512)
   @IsString()
-  public responderURL!: string
+  public responderURL: string
 }

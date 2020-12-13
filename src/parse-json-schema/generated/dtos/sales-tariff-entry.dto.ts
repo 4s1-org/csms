@@ -10,13 +10,19 @@ import { RelativeTimeIntervalDto } from './relative-time-interval.dto'
 urn:x-oca:ocpp:uid:2:233271
  */
 export class SalesTariffEntryDto {
+  public constructor (
+    relativeTimeInterval: RelativeTimeIntervalDto
+  ) {
+    this.relativeTimeInterval = relativeTimeInterval
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public relativeTimeInterval!: RelativeTimeIntervalDto
+  public relativeTimeInterval: RelativeTimeIntervalDto
 
   @ApiProperty()
   @IsOptional()

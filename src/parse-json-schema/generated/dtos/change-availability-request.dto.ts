@@ -7,6 +7,12 @@ import { EVSEDto } from './evse.dto'
 import { OperationalStatusEnum } from '../enums/operational-status.enum'
 
 export class ChangeAvailabilityRequestDto {
+  public constructor (
+    operationalStatus: OperationalStatusEnum
+  ) {
+    this.operationalStatus = operationalStatus
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -18,5 +24,5 @@ export class ChangeAvailabilityRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(OperationalStatusEnum)
-  public operationalStatus!: OperationalStatusEnum
+  public operationalStatus: OperationalStatusEnum
 }

@@ -13,6 +13,14 @@ Collection of configuration data needed to make a data-connection over a cellula
 NOTE: When asking a GSM modem to dial in, it is possible to specify which mobile operator should be used. This can be done with the mobile country code (MCC) in combination with a mobile network code (MNC). Example: If your preferred network is Vodafone Netherlands, the MCC=204 and the MNC=04 which means the key PreferredNetwork = 20404 Some modems allows to specify a preferred network, which means, if this network is not available, a different network is used. If you specify UseOnlyPreferredNetwork and this network is not available, the modem will not dial in.
  */
 export class APNDto {
+  public constructor (
+    apn: string,
+    apnAuthentication: APNAuthenticationEnum
+  ) {
+    this.apn = apn
+    this.apnAuthentication = apnAuthentication
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -26,7 +34,7 @@ The Access Point Name as an URL.
   @IsNotEmpty()
   @Length(0, 512)
   @IsString()
-  public apn!: string
+  public apn: string
 
   /**
    * APN. APN. User_ Name
@@ -74,5 +82,5 @@ Preferred network, written as MCC and MNC concatenated. See note.
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(APNAuthenticationEnum)
-  public apnAuthentication!: APNAuthenticationEnum
+  public apnAuthentication: APNAuthenticationEnum
 }

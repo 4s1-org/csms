@@ -11,6 +11,14 @@ urn:x-oca:ocpp:uid:2:233122
 The physical system where an Electrical Vehicle (EV) can be charged.
  */
 export class ChargingStationDto {
+  public constructor (
+    model: string,
+    vendorName: string
+  ) {
+    this.model = model
+    this.vendorName = vendorName
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -35,7 +43,7 @@ Defines the model of the device.
   @IsNotEmpty()
   @Length(0, 20)
   @IsString()
-  public model!: string
+  public model: string
 
   @ApiProperty()
   @IsOptional()
@@ -48,7 +56,7 @@ Defines the model of the device.
   @IsNotEmpty()
   @Length(0, 50)
   @IsString()
-  public vendorName!: string
+  public vendorName: string
 
   /**
    * This contains the firmware version of the Charging Station.
