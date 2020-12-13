@@ -137,7 +137,20 @@ export class ClassGenerator {
           content.push(`  public ${item.name}!: ${type}Dto`)
         } else {
           // Einfacher Datentyp
-          content.push(`  public ${item.name}!: ${item.type}`)
+          if (item.type === "integer") {
+            content.push(`  public ${item.name}!: number`)
+          } else if (item.type === "number") {
+            content.push(`  public ${item.name}!: number`)
+          } else if (item.type === "string") {
+            content.push(`  public ${item.name}!: string`)
+          } else if (item.type === "boolean") {
+            content.push(`  public ${item.name}!: boolean`)
+          } else if (item.type === "any") {
+            // ToDo: Typ implementieren
+            content.push(`  public ${item.name}!: any`)
+          } else {
+            throw new Error(`Unknown type: ${item.type}`)
+          }
         }
         isFirst = false
       }
