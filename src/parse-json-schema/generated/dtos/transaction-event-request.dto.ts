@@ -10,6 +10,10 @@ import { EVSEDto } from './evse.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class TransactionEventRequestDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

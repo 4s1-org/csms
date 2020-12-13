@@ -8,6 +8,10 @@ import { CustomDataDto } from './custom-data.dto'
  * Element providing more information about the status.
  */
 export class StatusInfoDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

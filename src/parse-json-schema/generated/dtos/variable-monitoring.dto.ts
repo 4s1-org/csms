@@ -9,6 +9,10 @@ import { MonitorEnum } from '../enums/monitor.enum'
  * A monitoring setting for a variable.
  */
 export class VariableMonitoringDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

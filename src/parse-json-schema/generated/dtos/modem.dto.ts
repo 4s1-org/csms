@@ -10,6 +10,10 @@ urn:x-oca:ocpp:uid:2:233306
 Defines parameters required for initiating and maintaining wireless communication with other devices.
  */
 export class ModemDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

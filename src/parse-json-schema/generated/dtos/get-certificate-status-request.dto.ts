@@ -6,6 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { OCSPRequestDataDto } from './ocsp-request-data.dto'
 
 export class GetCertificateStatusRequestDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

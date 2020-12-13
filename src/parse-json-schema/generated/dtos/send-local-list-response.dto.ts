@@ -7,6 +7,10 @@ import { SendLocalListStatusEnum } from '../enums/send-local-list-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class SendLocalListResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

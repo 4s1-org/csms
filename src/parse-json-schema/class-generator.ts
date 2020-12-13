@@ -122,11 +122,19 @@ export class ClassGenerator {
         content.push(` */`)
       }
       content.push(`export class ${name}Dto {`)
+      content.push(`  public constructor () {`)
+      content.push(`    // nothing to do`)
+      content.push(`  }`)
+      content.push(``)
+
       let isFirst = true
       for (const item of ele.items) {
         if (!isFirst) {
           content.push(``)
         }
+
+        // ToDo: zweites ! muss noch raus, wenn Property im Konstruktor ist.
+        const reqFlag = item.isRequired ? "!" : "!"
 
         if (item.description) {
           content.push(`  /**`)
@@ -134,10 +142,10 @@ export class ClassGenerator {
           content.push(`   */`)
         }
         content.push(`  @ApiProperty()`)
-        if (!item.isRequired) {
-          content.push(`  @IsOptional()`)
-        } else {
+        if (item.isRequired) {
           content.push(`  @IsNotEmpty()`)
+        } else {
+          content.push(`  @IsOptional()`)
         }
         if (item.maxLength !== undefined) {
           content.push(`  @Length(0, ${item.maxLength})`)
@@ -146,29 +154,29 @@ export class ClassGenerator {
           // Enum als Typ
           const type = item.type.substr(0, item.type.length - 8)
           content.push(`  @IsEnum(${type}Enum)`)
-          content.push(`  public ${item.name}!: ${type}Enum`)
+          content.push(`  public ${item.name}${reqFlag}: ${type}Enum`)
         } else if (item.type.endsWith("Type")) {
           // DTO als Typ
           // ToDo: Nested Validierung
           const type = item.type.substr(0, item.type.length - 4)
-          content.push(`  public ${item.name}!: ${type}Dto`)
+          content.push(`  public ${item.name}${reqFlag}: ${type}Dto`)
         } else {
           // Einfacher Datentyp
           if (item.type === "integer") {
             content.push(`  @IsInt()`)
-            content.push(`  public ${item.name}!: number`)
+            content.push(`  public ${item.name}${reqFlag}: number`)
           } else if (item.type === "number") {
             content.push(`  @IsNumber()`)
-            content.push(`  public ${item.name}!: number`)
+            content.push(`  public ${item.name}${reqFlag}: number`)
           } else if (item.type === "string") {
             content.push(`  @IsString()`)
-            content.push(`  public ${item.name}!: string`)
+            content.push(`  public ${item.name}${reqFlag}: string`)
           } else if (item.type === "boolean") {
             content.push(`  @IsBoolean()`)
-            content.push(`  public ${item.name}!: boolean`)
+            content.push(`  public ${item.name}${reqFlag}: boolean`)
           } else if (item.type === "any") {
             // ToDo: Typ implementieren
-            content.push(`  public ${item.name}!: any`)
+            content.push(`  public ${item.name}${reqFlag}: any`)
           } else {
             throw new Error(`Unknown type: ${item.type}`)
           }

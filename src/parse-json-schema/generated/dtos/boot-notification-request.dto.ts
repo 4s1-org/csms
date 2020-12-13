@@ -7,6 +7,10 @@ import { ChargingStationDto } from './charging-station.dto'
 import { BootReasonEnum } from '../enums/boot-reason.enum'
 
 export class BootNotificationRequestDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

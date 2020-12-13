@@ -6,6 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { FirmwareDto } from './firmware.dto'
 
 export class UpdateFirmwareRequestDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

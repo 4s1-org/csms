@@ -11,6 +11,10 @@ urn:x-oca:ocpp:uid:2:233268
 VPN Configuration settings
  */
 export class VPNDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

@@ -15,6 +15,10 @@ urn:x-oca:ocpp:uid:2:233304
 The NetworkConnectionProfile defines the functional and technical parameters of a communication link.
  */
 export class NetworkConnectionProfileDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

@@ -14,6 +14,10 @@ urn:x-enexis:ecdm:uid:2:233264
 Contains message details, for a message to be displayed on a Charging Station.
  */
 export class MessageInfoDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

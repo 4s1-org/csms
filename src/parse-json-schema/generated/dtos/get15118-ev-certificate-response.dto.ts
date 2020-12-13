@@ -7,6 +7,10 @@ import { Iso15118EVCertificateStatusEnum } from '../enums/iso15118-ev-certificat
 import { StatusInfoDto } from './status-info.dto'
 
 export class Get15118EVCertificateResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

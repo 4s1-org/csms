@@ -13,6 +13,10 @@ import { VariableDto } from './variable.dto'
  * Class to hold results of GetVariables request.
  */
 export class GetVariableResultDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

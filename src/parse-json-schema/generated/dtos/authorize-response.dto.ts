@@ -7,6 +7,10 @@ import { IdTokenInfoDto } from './id-token-info.dto'
 import { AuthorizeCertificateStatusEnum } from '../enums/authorize-certificate-status.enum'
 
 export class AuthorizeResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

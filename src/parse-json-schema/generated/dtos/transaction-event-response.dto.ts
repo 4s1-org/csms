@@ -7,6 +7,10 @@ import { IdTokenInfoDto } from './id-token-info.dto'
 import { MessageContentDto } from './message-content.dto'
 
 export class TransactionEventResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

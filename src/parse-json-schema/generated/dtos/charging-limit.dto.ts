@@ -10,6 +10,10 @@ import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 urn:x-enexis:ecdm:uid:2:234489
  */
 export class ChargingLimitDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

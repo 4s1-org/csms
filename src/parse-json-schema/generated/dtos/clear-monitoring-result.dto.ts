@@ -7,6 +7,10 @@ import { ClearMonitoringStatusEnum } from '../enums/clear-monitoring-status.enum
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearMonitoringResultDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

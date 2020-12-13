@@ -7,6 +7,10 @@ import { InstallCertificateStatusEnum } from '../enums/install-certificate-statu
 import { StatusInfoDto } from './status-info.dto'
 
 export class InstallCertificateResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

@@ -10,6 +10,10 @@ urn:x-oca:ocpp:uid:2:233272
 NOTE: This dataType is based on dataTypes from <<ref-ISOIEC15118-2,ISO 15118-2>>.
  */
 export class SalesTariffDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

@@ -6,6 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class AuthorizeRequestDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

@@ -10,6 +10,10 @@ urn:x-enexis:ecdm:uid:2:233373
 Generic class for the configuration of logging entries.
  */
 export class LogParametersDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

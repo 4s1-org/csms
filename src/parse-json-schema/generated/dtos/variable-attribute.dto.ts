@@ -10,6 +10,10 @@ import { MutabilityEnum } from '../enums/mutability.enum'
  * Attribute data of a variable.
  */
 export class VariableAttributeDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

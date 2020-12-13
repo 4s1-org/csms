@@ -9,6 +9,10 @@ import { EVSEDto } from './evse.dto'
  * A physical or logical component
  */
 export class ComponentDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

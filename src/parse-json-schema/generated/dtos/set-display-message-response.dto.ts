@@ -7,6 +7,10 @@ import { DisplayMessageStatusEnum } from '../enums/display-message-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class SetDisplayMessageResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

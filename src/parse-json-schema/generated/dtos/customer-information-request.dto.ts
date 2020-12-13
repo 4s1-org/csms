@@ -7,6 +7,10 @@ import { CertificateHashDataDto } from './certificate-hash-data.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class CustomerInformationRequestDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

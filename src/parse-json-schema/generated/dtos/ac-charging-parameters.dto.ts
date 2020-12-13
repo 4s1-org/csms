@@ -10,6 +10,10 @@ urn:x-oca:ocpp:uid:2:233250
 EV AC charging parameters.
  */
 export class ACChargingParametersDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
