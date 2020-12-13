@@ -8,9 +8,13 @@ import { IdTokenDto } from './id-token.dto'
 
 export class CustomerInformationRequestDto {
   public constructor (
-    requestId: number
+    requestId: number,
+    report: boolean,
+    clear: boolean
   ) {
     this.requestId = requestId
+    this.report = report
+    this.clear = clear
   }
 
   @ApiProperty()
@@ -28,17 +32,17 @@ export class CustomerInformationRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
-  public report!: boolean
+  public report: boolean
 
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
-  public clear!: boolean
+  public clear: boolean
 
   /**
    * A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than IdToken and Certificate.

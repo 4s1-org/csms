@@ -6,8 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { OCSPRequestDataDto } from './ocsp-request-data.dto'
 
 export class GetCertificateStatusRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    ocspRequestData: OCSPRequestDataDto
+  ) {
+    this.ocspRequestData = ocspRequestData
   }
 
   @ApiProperty()
@@ -16,5 +18,5 @@ export class GetCertificateStatusRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public ocspRequestData!: OCSPRequestDataDto
+  public ocspRequestData: OCSPRequestDataDto
 }

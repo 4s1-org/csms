@@ -7,8 +7,10 @@ import { UpdateFirmwareStatusEnum } from '../enums/update-firmware-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class UpdateFirmwareResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: UpdateFirmwareStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class UpdateFirmwareResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(UpdateFirmwareStatusEnum)
-  public status!: UpdateFirmwareStatusEnum
+  public status: UpdateFirmwareStatusEnum
 
   @ApiProperty()
   @IsOptional()

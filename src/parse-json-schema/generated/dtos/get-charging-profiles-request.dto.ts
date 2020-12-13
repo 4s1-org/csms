@@ -7,9 +7,11 @@ import { ChargingProfileCriterionDto } from './charging-profile-criterion.dto'
 
 export class GetChargingProfilesRequestDto {
   public constructor (
-    requestId: number
+    requestId: number,
+    chargingProfile: ChargingProfileCriterionDto
   ) {
     this.requestId = requestId
+    this.chargingProfile = chargingProfile
   }
 
   @ApiProperty()
@@ -19,7 +21,7 @@ export class GetChargingProfilesRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsOptional()
@@ -28,5 +30,5 @@ export class GetChargingProfilesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingProfile!: ChargingProfileCriterionDto
+  public chargingProfile: ChargingProfileCriterionDto
 }

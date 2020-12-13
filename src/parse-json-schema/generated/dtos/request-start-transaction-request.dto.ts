@@ -8,8 +8,10 @@ import { ChargingProfileDto } from './charging-profile.dto'
 
 export class RequestStartTransactionRequestDto {
   public constructor (
+    idToken: IdTokenDto,
     remoteStartId: number
   ) {
+    this.idToken = idToken
     this.remoteStartId = remoteStartId
   }
 
@@ -28,12 +30,12 @@ export class RequestStartTransactionRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public idToken!: IdTokenDto
+  public idToken: IdTokenDto
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public remoteStartId!: number
+  public remoteStartId: number
 
   @ApiProperty()
   @IsOptional()

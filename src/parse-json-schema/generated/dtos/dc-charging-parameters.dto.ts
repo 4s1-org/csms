@@ -25,12 +25,12 @@ export class DCChargingParametersDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evMaxCurrent!: number
+  public evMaxCurrent: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evMaxVoltage!: number
+  public evMaxVoltage: number
 
   @ApiProperty()
   @IsOptional()

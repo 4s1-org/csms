@@ -6,8 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class AuthorizeRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    idToken: IdTokenDto
+  ) {
+    this.idToken = idToken
   }
 
   @ApiProperty()
@@ -16,7 +18,7 @@ export class AuthorizeRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public idToken!: IdTokenDto
+  public idToken: IdTokenDto
 
   /**
    * The X.509 certificated presented by EV and encoded in PEM format.

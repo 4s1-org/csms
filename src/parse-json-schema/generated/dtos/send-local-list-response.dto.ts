@@ -7,8 +7,10 @@ import { SendLocalListStatusEnum } from '../enums/send-local-list-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class SendLocalListResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: SendLocalListStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class SendLocalListResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(SendLocalListStatusEnum)
-  public status!: SendLocalListStatusEnum
+  public status: SendLocalListStatusEnum
 
   @ApiProperty()
   @IsOptional()

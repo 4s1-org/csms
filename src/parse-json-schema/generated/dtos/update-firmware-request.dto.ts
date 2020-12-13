@@ -7,9 +7,11 @@ import { FirmwareDto } from './firmware.dto'
 
 export class UpdateFirmwareRequestDto {
   public constructor (
-    requestId: number
+    requestId: number,
+    firmware: FirmwareDto
   ) {
     this.requestId = requestId
+    this.firmware = firmware
   }
 
   @ApiProperty()
@@ -29,9 +31,9 @@ export class UpdateFirmwareRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsNotEmpty()
-  public firmware!: FirmwareDto
+  public firmware: FirmwareDto
 }

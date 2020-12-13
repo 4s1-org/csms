@@ -23,7 +23,7 @@ export class EVSEDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public id!: number
+  public id: number
 
   @ApiProperty()
   @IsOptional()

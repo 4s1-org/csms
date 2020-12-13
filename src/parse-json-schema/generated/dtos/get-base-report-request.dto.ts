@@ -7,9 +7,11 @@ import { ReportBaseEnum } from '../enums/report-base.enum'
 
 export class GetBaseReportRequestDto {
   public constructor (
-    requestId: number
+    requestId: number,
+    reportBase: ReportBaseEnum
   ) {
     this.requestId = requestId
+    this.reportBase = reportBase
   }
 
   @ApiProperty()
@@ -19,10 +21,10 @@ export class GetBaseReportRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ReportBaseEnum)
-  public reportBase!: ReportBaseEnum
+  public reportBase: ReportBaseEnum
 }

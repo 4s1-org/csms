@@ -7,9 +7,11 @@ import { ChargingProfileDto } from './charging-profile.dto'
 
 export class SetChargingProfileRequestDto {
   public constructor (
-    evseId: number
+    evseId: number,
+    chargingProfile: ChargingProfileDto
   ) {
     this.evseId = evseId
+    this.chargingProfile = chargingProfile
   }
 
   @ApiProperty()
@@ -19,9 +21,9 @@ export class SetChargingProfileRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingProfile!: ChargingProfileDto
+  public chargingProfile: ChargingProfileDto
 }

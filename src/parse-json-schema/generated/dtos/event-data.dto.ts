@@ -13,9 +13,21 @@ import { VariableDto } from './variable.dto'
  */
 export class EventDataDto {
   public constructor (
-    eventId: number
+    eventId: number,
+    timestamp: string,
+    trigger: EventTriggerEnum,
+    actualValue: string,
+    component: ComponentDto,
+    eventNotificationType: EventNotificationEnum,
+    variable: VariableDto
   ) {
     this.eventId = eventId
+    this.timestamp = timestamp
+    this.trigger = trigger
+    this.actualValue = actualValue
+    this.component = component
+    this.eventNotificationType = eventNotificationType
+    this.variable = variable
   }
 
   @ApiProperty()
@@ -25,7 +37,7 @@ export class EventDataDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public eventId!: number
+  public eventId: number
 
   /**
    * Timestamp of the moment the report was generated.
@@ -33,12 +45,12 @@ export class EventDataDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public timestamp!: string
+  public timestamp: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(EventTriggerEnum)
-  public trigger!: EventTriggerEnum
+  public trigger: EventTriggerEnum
 
   @ApiProperty()
   @IsOptional()
@@ -54,7 +66,7 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
   @IsNotEmpty()
   @Length(0, 2500)
   @IsString()
-  public actualValue!: string
+  public actualValue: string
 
   /**
    * Technical (error) code as reported by component.
@@ -90,7 +102,7 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
 
   @ApiProperty()
   @IsNotEmpty()
-  public component!: ComponentDto
+  public component: ComponentDto
 
   @ApiProperty()
   @IsOptional()
@@ -100,9 +112,9 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(EventNotificationEnum)
-  public eventNotificationType!: EventNotificationEnum
+  public eventNotificationType: EventNotificationEnum
 
   @ApiProperty()
   @IsNotEmpty()
-  public variable!: VariableDto
+  public variable: VariableDto
 }

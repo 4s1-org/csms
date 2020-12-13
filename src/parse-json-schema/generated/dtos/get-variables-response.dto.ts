@@ -5,8 +5,10 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetVariablesResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    getVariableResult: any
+  ) {
+    this.getVariableResult = getVariableResult
   }
 
   @ApiProperty()
@@ -15,5 +17,5 @@ export class GetVariablesResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public getVariableResult!: any
+  public getVariableResult: any
 }

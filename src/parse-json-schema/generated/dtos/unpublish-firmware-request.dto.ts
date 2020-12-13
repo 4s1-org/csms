@@ -5,8 +5,10 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class UnpublishFirmwareRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    checksum: string
+  ) {
+    this.checksum = checksum
   }
 
   @ApiProperty()
@@ -20,5 +22,5 @@ export class UnpublishFirmwareRequestDto {
   @IsNotEmpty()
   @Length(0, 32)
   @IsString()
-  public checksum!: string
+  public checksum: string
 }

@@ -8,8 +8,12 @@ import { LogEnum } from '../enums/log.enum'
 
 export class GetLogRequestDto {
   public constructor (
+    log: LogParametersDto,
+    logType: LogEnum,
     requestId: number
   ) {
+    this.log = log
+    this.logType = logType
     this.requestId = requestId
   }
 
@@ -19,17 +23,17 @@ export class GetLogRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public log!: LogParametersDto
+  public log: LogParametersDto
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(LogEnum)
-  public logType!: LogEnum
+  public logType: LogEnum
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsOptional()

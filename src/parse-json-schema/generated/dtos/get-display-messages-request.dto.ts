@@ -24,7 +24,7 @@ export class GetDisplayMessagesRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsOptional()

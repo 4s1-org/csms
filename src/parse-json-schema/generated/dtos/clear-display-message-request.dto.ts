@@ -18,5 +18,5 @@ export class ClearDisplayMessageRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public id!: number
+  public id: number
 }

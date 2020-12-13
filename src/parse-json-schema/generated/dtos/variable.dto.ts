@@ -8,8 +8,10 @@ import { CustomDataDto } from './custom-data.dto'
  * Reference key to a component-variable.
  */
 export class VariableDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    name: string
+  ) {
+    this.name = name
   }
 
   @ApiProperty()
@@ -23,7 +25,7 @@ export class VariableDto {
   @IsNotEmpty()
   @Length(0, 50)
   @IsString()
-  public name!: string
+  public name: string
 
   /**
    * Name of instance in case the variable exists as multiple instances. Case Insensitive. strongly advised to use Camel Case.

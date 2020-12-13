@@ -7,8 +7,10 @@ import { IdTokenInfoDto } from './id-token-info.dto'
 import { AuthorizeCertificateStatusEnum } from '../enums/authorize-certificate-status.enum'
 
 export class AuthorizeResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    idTokenInfo: IdTokenInfoDto
+  ) {
+    this.idTokenInfo = idTokenInfo
   }
 
   @ApiProperty()
@@ -17,7 +19,7 @@ export class AuthorizeResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public idTokenInfo!: IdTokenInfoDto
+  public idTokenInfo: IdTokenInfoDto
 
   @ApiProperty()
   @IsOptional()

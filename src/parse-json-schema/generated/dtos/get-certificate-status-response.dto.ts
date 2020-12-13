@@ -7,8 +7,10 @@ import { GetCertificateStatusEnum } from '../enums/get-certificate-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class GetCertificateStatusResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: GetCertificateStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class GetCertificateStatusResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GetCertificateStatusEnum)
-  public status!: GetCertificateStatusEnum
+  public status: GetCertificateStatusEnum
 
   @ApiProperty()
   @IsOptional()

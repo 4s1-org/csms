@@ -15,9 +15,13 @@ Contains message details, for a message to be displayed on a Charging Station.
  */
 export class MessageInfoDto {
   public constructor (
-    id: number
+    id: number,
+    priority: MessagePriorityEnum,
+    message: MessageContentDto
   ) {
     this.id = id
+    this.priority = priority
+    this.message = message
   }
 
   @ApiProperty()
@@ -31,12 +35,12 @@ export class MessageInfoDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public id!: number
+  public id: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(MessagePriorityEnum)
-  public priority!: MessagePriorityEnum
+  public priority: MessagePriorityEnum
 
   @ApiProperty()
   @IsOptional()
@@ -76,5 +80,5 @@ ended.
 
   @ApiProperty()
   @IsNotEmpty()
-  public message!: MessageContentDto
+  public message: MessageContentDto
 }

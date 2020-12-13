@@ -6,10 +6,14 @@ import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyCustomerInformationRequestDto {
   public constructor (
+    data: string,
     seqNo: number,
+    generatedAt: string,
     requestId: number
   ) {
+    this.data = data
     this.seqNo = seqNo
+    this.generatedAt = generatedAt
     this.requestId = requestId
   }
 
@@ -24,7 +28,7 @@ export class NotifyCustomerInformationRequestDto {
   @IsNotEmpty()
   @Length(0, 512)
   @IsString()
-  public data!: string
+  public data: string
 
   @ApiProperty()
   @IsOptional()
@@ -34,7 +38,7 @@ export class NotifyCustomerInformationRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public seqNo!: number
+  public seqNo: number
 
   /**
    * Timestamp of the moment this message was generated at the Charging Station.
@@ -42,10 +46,10 @@ export class NotifyCustomerInformationRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public generatedAt!: string
+  public generatedAt: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 }

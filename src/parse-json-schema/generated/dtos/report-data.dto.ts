@@ -11,8 +11,14 @@ import { VariableCharacteristicsDto } from './variable-characteristics.dto'
  * Class to report components, variables and variable attributes and characteristics.
  */
 export class ReportDataDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    component: ComponentDto,
+    variable: VariableDto,
+    variableAttribute: any
+  ) {
+    this.component = component
+    this.variable = variable
+    this.variableAttribute = variableAttribute
   }
 
   @ApiProperty()
@@ -21,15 +27,15 @@ export class ReportDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public component!: ComponentDto
+  public component: ComponentDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public variable!: VariableDto
+  public variable: VariableDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public variableAttribute!: any
+  public variableAttribute: any
 
   @ApiProperty()
   @IsOptional()

@@ -5,8 +5,12 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class CostUpdatedRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    totalCost: number,
+    transactionId: string
+  ) {
+    this.totalCost = totalCost
+    this.transactionId = transactionId
   }
 
   @ApiProperty()
@@ -16,7 +20,7 @@ export class CostUpdatedRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  public totalCost!: number
+  public totalCost: number
 
   /**
    * Transaction Id of the transaction the current cost are asked for.
@@ -25,5 +29,5 @@ export class CostUpdatedRequestDto {
   @IsNotEmpty()
   @Length(0, 36)
   @IsString()
-  public transactionId!: string
+  public transactionId: string
 }

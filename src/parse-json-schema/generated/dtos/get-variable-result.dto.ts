@@ -13,8 +13,14 @@ import { VariableDto } from './variable.dto'
  * Class to hold results of GetVariables request.
  */
 export class GetVariableResultDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    attributeStatus: GetVariableStatusEnum,
+    component: ComponentDto,
+    variable: VariableDto
+  ) {
+    this.attributeStatus = attributeStatus
+    this.component = component
+    this.variable = variable
   }
 
   @ApiProperty()
@@ -28,7 +34,7 @@ export class GetVariableResultDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GetVariableStatusEnum)
-  public attributeStatus!: GetVariableStatusEnum
+  public attributeStatus: GetVariableStatusEnum
 
   @ApiProperty()
   @IsOptional()
@@ -48,9 +54,9 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
 
   @ApiProperty()
   @IsNotEmpty()
-  public component!: ComponentDto
+  public component: ComponentDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public variable!: VariableDto
+  public variable: VariableDto
 }

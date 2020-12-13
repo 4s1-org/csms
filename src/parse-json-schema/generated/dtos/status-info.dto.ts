@@ -8,8 +8,10 @@ import { CustomDataDto } from './custom-data.dto'
  * Element providing more information about the status.
  */
 export class StatusInfoDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    reasonCode: string
+  ) {
+    this.reasonCode = reasonCode
   }
 
   @ApiProperty()
@@ -23,7 +25,7 @@ export class StatusInfoDto {
   @IsNotEmpty()
   @Length(0, 20)
   @IsString()
-  public reasonCode!: string
+  public reasonCode: string
 
   /**
    * Additional text to provide detailed information.

@@ -10,8 +10,10 @@ import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 urn:x-enexis:ecdm:uid:2:234489
  */
 export class ChargingLimitDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    chargingLimitSource: ChargingLimitSourceEnum
+  ) {
+    this.chargingLimitSource = chargingLimitSource
   }
 
   @ApiProperty()
@@ -21,7 +23,7 @@ export class ChargingLimitDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingLimitSourceEnum)
-  public chargingLimitSource!: ChargingLimitSourceEnum
+  public chargingLimitSource: ChargingLimitSourceEnum
 
   @ApiProperty()
   @IsOptional()

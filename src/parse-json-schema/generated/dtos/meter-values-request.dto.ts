@@ -10,9 +10,11 @@ urn:x-enexis:ecdm:uid:2:234744
  */
 export class MeterValuesRequestDto {
   public constructor (
-    evseId: number
+    evseId: number,
+    meterValue: any
   ) {
     this.evseId = evseId
+    this.meterValue = meterValue
   }
 
   @ApiProperty()
@@ -22,9 +24,9 @@ export class MeterValuesRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 
   @ApiProperty()
   @IsNotEmpty()
-  public meterValue!: any
+  public meterValue: any
 }

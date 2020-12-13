@@ -5,8 +5,12 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class SecurityEventNotificationRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    type: string,
+    timestamp: string
+  ) {
+    this.type = type
+    this.timestamp = timestamp
   }
 
   @ApiProperty()
@@ -20,7 +24,7 @@ export class SecurityEventNotificationRequestDto {
   @IsNotEmpty()
   @Length(0, 50)
   @IsString()
-  public type!: string
+  public type: string
 
   /**
    * Date and time at which the event occurred.
@@ -28,7 +32,7 @@ export class SecurityEventNotificationRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public timestamp!: string
+  public timestamp: string
 
   /**
    * Additional information about the occurred security event.

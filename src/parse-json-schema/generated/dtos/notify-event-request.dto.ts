@@ -6,9 +6,13 @@ import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyEventRequestDto {
   public constructor (
-    seqNo: number
+    generatedAt: string,
+    seqNo: number,
+    eventData: any
   ) {
+    this.generatedAt = generatedAt
     this.seqNo = seqNo
+    this.eventData = eventData
   }
 
   @ApiProperty()
@@ -21,7 +25,7 @@ export class NotifyEventRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public generatedAt!: string
+  public generatedAt: string
 
   @ApiProperty()
   @IsOptional()
@@ -31,9 +35,9 @@ export class NotifyEventRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public seqNo!: number
+  public seqNo: number
 
   @ApiProperty()
   @IsNotEmpty()
-  public eventData!: any
+  public eventData: any
 }
