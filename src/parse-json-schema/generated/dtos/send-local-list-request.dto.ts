@@ -6,8 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { UpdateEnum } from '../enums/update.enum'
 
 export class SendLocalListRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    versionNumber: number
+  ) {
+    this.versionNumber = versionNumber
   }
 
   @ApiProperty()

@@ -9,8 +9,10 @@ import { CustomDataDto } from './custom-data.dto'
 urn:x-enexis:ecdm:uid:2:234744
  */
 export class MeterValuesRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    evseId: number
+  ) {
+    this.evseId = evseId
   }
 
   @ApiProperty()

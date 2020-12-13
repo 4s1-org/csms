@@ -7,8 +7,10 @@ import { LogParametersDto } from './log-parameters.dto'
 import { LogEnum } from '../enums/log.enum'
 
 export class GetLogRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    requestId: number
+  ) {
+    this.requestId = requestId
   }
 
   @ApiProperty()

@@ -5,8 +5,12 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyCustomerInformationRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    seqNo: number,
+    requestId: number
+  ) {
+    this.seqNo = seqNo
+    this.requestId = requestId
   }
 
   @ApiProperty()

@@ -6,8 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfileCriterionDto } from './charging-profile-criterion.dto'
 
 export class GetChargingProfilesRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    requestId: number
+  ) {
+    this.requestId = requestId
   }
 
   @ApiProperty()
