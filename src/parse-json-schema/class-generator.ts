@@ -157,7 +157,7 @@ export class ClassGenerator {
       content.push(`}`)
       content.push(``)
 
-      fs.writeFileSync(file, content.join("\n"))
+      fs.writeFileSync(file, content.join("\n"), { encoding: "utf-8" })
     }
   }
 
@@ -186,7 +186,7 @@ export class ClassGenerator {
       content.push(`}`)
       content.push()
 
-      fs.writeFileSync(file, content.join("\n"))
+      fs.writeFileSync(file, content.join("\n"), { encoding: "utf-8" })
     }
   }
 
