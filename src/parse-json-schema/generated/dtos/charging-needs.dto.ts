@@ -12,6 +12,10 @@ import { EnergyTransferModeEnum } from '../enums/energy-transfer-mode.enum'
 urn:x-oca:ocpp:uid:2:233249
  */
 export class ChargingNeedsDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

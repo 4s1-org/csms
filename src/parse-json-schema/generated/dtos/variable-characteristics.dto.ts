@@ -9,6 +9,10 @@ import { DataEnum } from '../enums/data.enum'
  * Fixed read-only parameters of a variable.
  */
 export class VariableCharacteristicsDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

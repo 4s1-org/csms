@@ -10,6 +10,10 @@ urn:x-oca:ocpp:uid:2:233123
 Electric Vehicle Supply Equipment
  */
 export class EVSEDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

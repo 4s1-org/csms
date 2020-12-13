@@ -9,6 +9,10 @@ import { CustomDataDto } from './custom-data.dto'
 urn:x-oca:ocpp:uid:2:233259
  */
 export class ConsumptionCostDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

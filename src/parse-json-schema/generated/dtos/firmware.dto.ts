@@ -10,6 +10,10 @@ urn:x-enexis:ecdm:uid:2:233291
 Represents a copy of the firmware that can be loaded/updated on the Charging Station.
  */
 export class FirmwareDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

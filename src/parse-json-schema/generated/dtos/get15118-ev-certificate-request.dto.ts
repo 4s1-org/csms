@@ -6,6 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { CertificateActionEnum } from '../enums/certificate-action.enum'
 
 export class Get15118EVCertificateRequestDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

@@ -11,6 +11,10 @@ import { ReasonEnum } from '../enums/reason.enum'
 urn:x-oca:ocpp:uid:2:233318
  */
 export class TransactionDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

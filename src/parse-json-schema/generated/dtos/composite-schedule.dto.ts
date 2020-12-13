@@ -10,6 +10,10 @@ import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
 urn:x-oca:ocpp:uid:2:233362
  */
 export class CompositeScheduleDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

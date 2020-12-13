@@ -7,6 +7,10 @@ import { DataTransferStatusEnum } from '../enums/data-transfer-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class DataTransferResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

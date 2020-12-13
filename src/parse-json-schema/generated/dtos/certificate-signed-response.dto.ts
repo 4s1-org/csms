@@ -7,6 +7,10 @@ import { CertificateSignedStatusEnum } from '../enums/certificate-signed-status.
 import { StatusInfoDto } from './status-info.dto'
 
 export class CertificateSignedResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

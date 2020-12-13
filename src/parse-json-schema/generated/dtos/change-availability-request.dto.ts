@@ -7,6 +7,10 @@ import { EVSEDto } from './evse.dto'
 import { OperationalStatusEnum } from '../enums/operational-status.enum'
 
 export class ChangeAvailabilityRequestDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

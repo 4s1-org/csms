@@ -7,6 +7,10 @@ import { RegistrationStatusEnum } from '../enums/registration-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class BootNotificationResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

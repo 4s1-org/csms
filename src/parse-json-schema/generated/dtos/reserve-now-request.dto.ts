@@ -7,6 +7,10 @@ import { ConnectorEnum } from '../enums/connector.enum'
 import { IdTokenDto } from './id-token.dto'
 
 export class ReserveNowRequestDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

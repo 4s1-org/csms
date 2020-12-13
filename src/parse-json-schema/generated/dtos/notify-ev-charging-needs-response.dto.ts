@@ -7,6 +7,10 @@ import { NotifyEVChargingNeedsStatusEnum } from '../enums/notify-ev-charging-nee
 import { StatusInfoDto } from './status-info.dto'
 
 export class NotifyEVChargingNeedsResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

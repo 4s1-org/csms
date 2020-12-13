@@ -7,6 +7,10 @@ import { TriggerMessageStatusEnum } from '../enums/trigger-message-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class TriggerMessageResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

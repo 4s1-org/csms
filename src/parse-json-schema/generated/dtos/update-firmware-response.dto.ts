@@ -7,6 +7,10 @@ import { UpdateFirmwareStatusEnum } from '../enums/update-firmware-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class UpdateFirmwareResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

@@ -12,6 +12,10 @@ import { VariableDto } from './variable.dto'
  * Class to report an event notification for a component-variable.
  */
 export class EventDataDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

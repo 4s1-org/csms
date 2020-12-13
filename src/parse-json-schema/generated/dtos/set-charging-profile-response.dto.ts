@@ -7,6 +7,10 @@ import { ChargingProfileStatusEnum } from '../enums/charging-profile-status.enum
 import { StatusInfoDto } from './status-info.dto'
 
 export class SetChargingProfileResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

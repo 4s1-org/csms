@@ -10,6 +10,10 @@ import { VariableDto } from './variable.dto'
  * Class to report components, variables and variable attributes and characteristics.
  */
 export class ComponentVariableDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

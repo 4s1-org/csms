@@ -10,6 +10,10 @@ urn:x-oca:ocpp:uid:2:233265
 Collection of one or more sampled values in MeterValuesRequest and TransactionEvent. All sampled values in a MeterValue are sampled at the same point in time.
  */
 export class MeterValueDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

@@ -7,6 +7,10 @@ import { UnlockStatusEnum } from '../enums/unlock-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class UnlockConnectorResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto

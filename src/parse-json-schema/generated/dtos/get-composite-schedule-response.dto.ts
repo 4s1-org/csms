@@ -8,6 +8,10 @@ import { StatusInfoDto } from './status-info.dto'
 import { CompositeScheduleDto } from './composite-schedule.dto'
 
 export class GetCompositeScheduleResponseDto {
+  public constructor () {
+    // nothing to do
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
