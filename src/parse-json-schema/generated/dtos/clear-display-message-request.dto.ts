@@ -5,8 +5,10 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class ClearDisplayMessageRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    id: number
+  ) {
+    this.id = id
   }
 
   @ApiProperty()

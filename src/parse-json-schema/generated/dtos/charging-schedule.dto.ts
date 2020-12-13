@@ -12,8 +12,10 @@ urn:x-oca:ocpp:uid:2:233256
 Charging schedule structure defines a list of charging periods, as used in: GetCompositeSchedule.conf and ChargingProfile.
  */
 export class ChargingScheduleDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    id: number
+  ) {
+    this.id = id
   }
 
   @ApiProperty()

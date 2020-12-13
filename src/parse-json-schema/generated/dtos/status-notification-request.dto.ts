@@ -6,8 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { ConnectorStatusEnum } from '../enums/connector-status.enum'
 
 export class StatusNotificationRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    evseId: number,
+    connectorId: number
+  ) {
+    this.evseId = evseId
+    this.connectorId = connectorId
   }
 
   @ApiProperty()

@@ -9,8 +9,12 @@ import { MonitorEnum } from '../enums/monitor.enum'
  * A monitoring setting for a variable.
  */
 export class VariableMonitoringDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    id: number,
+    severity: number
+  ) {
+    this.id = id
+    this.severity = severity
   }
 
   @ApiProperty()

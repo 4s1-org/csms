@@ -7,8 +7,10 @@ import { IdTokenDto } from './id-token.dto'
 import { ChargingProfileDto } from './charging-profile.dto'
 
 export class RequestStartTransactionRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    remoteStartId: number
+  ) {
+    this.remoteStartId = remoteStartId
   }
 
   @ApiProperty()

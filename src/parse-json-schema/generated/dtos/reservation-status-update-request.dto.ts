@@ -6,8 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { ReservationUpdateStatusEnum } from '../enums/reservation-update-status.enum'
 
 export class ReservationStatusUpdateRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    reservationId: number
+  ) {
+    this.reservationId = reservationId
   }
 
   @ApiProperty()

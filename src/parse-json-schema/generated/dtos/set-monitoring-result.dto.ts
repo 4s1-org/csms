@@ -13,8 +13,10 @@ import { VariableDto } from './variable.dto'
  * Class to hold result of SetVariableMonitoring request.
  */
 export class SetMonitoringResultDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    severity: number
+  ) {
+    this.severity = severity
   }
 
   @ApiProperty()

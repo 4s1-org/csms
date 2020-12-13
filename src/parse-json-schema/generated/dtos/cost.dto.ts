@@ -10,8 +10,10 @@ import { CostKindEnum } from '../enums/cost-kind.enum'
 urn:x-oca:ocpp:uid:2:233258
  */
 export class CostDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    amount: number
+  ) {
+    this.amount = amount
   }
 
   @ApiProperty()

@@ -6,8 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { NetworkConnectionProfileDto } from './network-connection-profile.dto'
 
 export class SetNetworkProfileRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    configurationSlot: number
+  ) {
+    this.configurationSlot = configurationSlot
   }
 
   @ApiProperty()

@@ -10,8 +10,12 @@ import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
 urn:x-oca:ocpp:uid:2:233362
  */
 export class CompositeScheduleDto {
-  public constructor () {
-    // nothing to do
+  public constructor(
+    evseId: number,
+    duration: number
+  ) {
+    this.evseId = evseId
+    this.duration = duration
   }
 
   @ApiProperty()

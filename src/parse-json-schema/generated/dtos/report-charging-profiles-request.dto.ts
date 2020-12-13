@@ -6,8 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 
 export class ReportChargingProfilesRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    requestId: number,
+    evseId: number
+  ) {
+    this.requestId = requestId
+    this.evseId = evseId
   }
 
   @ApiProperty()
