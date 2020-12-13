@@ -7,15 +7,15 @@ import { ClearMessageStatusEnum } from '../enums/clear-message-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearDisplayMessageResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: ClearMessageStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { VPNEnum } from '../enums/vpn.enum'
@@ -11,8 +11,8 @@ urn:x-oca:ocpp:uid:2:233268
 VPN Configuration settings
  */
 export class VPNDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
@@ -20,9 +20,10 @@ export class VPNDto {
 urn:x-oca:ocpp:uid:1:569272
 VPN Server Address
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 512)
-  @ApiProperty()
+  @IsString()
   public server!: string
 
   /**
@@ -30,9 +31,10 @@ VPN Server Address
 urn:x-oca:ocpp:uid:1:569273
 VPN User
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 20)
-  @ApiProperty()
+  @IsString()
   public user!: string
 
   /**
@@ -40,9 +42,10 @@ VPN User
 urn:x-oca:ocpp:uid:1:569274
 VPN group.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 20)
-  @ApiProperty()
+  @IsString()
   public group!: string
 
   /**
@@ -50,9 +53,10 @@ VPN group.
 urn:x-oca:ocpp:uid:1:569275
 VPN Password.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 20)
-  @ApiProperty()
+  @IsString()
   public password!: string
 
   /**
@@ -60,12 +64,13 @@ VPN Password.
 urn:x-oca:ocpp:uid:1:569276
 VPN shared secret.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 255)
-  @ApiProperty()
+  @IsString()
   public key!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public type!: VPNEnum
 }

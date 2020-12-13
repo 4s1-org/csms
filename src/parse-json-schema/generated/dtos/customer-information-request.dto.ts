@@ -1,42 +1,46 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { CertificateHashDataDto } from './certificate-hash-data.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class CustomerInformationRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customerCertificate!: CertificateHashDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public idToken!: IdTokenDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public requestId!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
   public report!: boolean
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
   public clear!: boolean
 
   /**
    * A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than IdToken and Certificate.
 One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 64)
-  @ApiProperty()
+  @IsString()
   public customerIdentifier!: string
 }

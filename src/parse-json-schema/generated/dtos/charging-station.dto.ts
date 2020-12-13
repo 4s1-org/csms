@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ModemDto } from './modem.dto'
@@ -11,8 +11,8 @@ urn:x-oca:ocpp:uid:2:233122
 The physical system where an Electrical Vehicle (EV) can be charged.
  */
 export class ChargingStationDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
@@ -20,9 +20,10 @@ export class ChargingStationDto {
 urn:x-oca:ocpp:uid:1:569324
 Vendor-specific device identifier.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 25)
-  @ApiProperty()
+  @IsString()
   public serialNumber!: string
 
   /**
@@ -30,28 +31,31 @@ Vendor-specific device identifier.
 urn:x-oca:ocpp:uid:1:569325
 Defines the model of the device.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 20)
-  @ApiProperty()
+  @IsString()
   public model!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public modem!: ModemDto
 
   /**
    * Identifies the vendor (not necessarily in a unique manner).
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 50)
-  @ApiProperty()
+  @IsString()
   public vendorName!: string
 
   /**
    * This contains the firmware version of the Charging Station.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 50)
-  @ApiProperty()
+  @IsString()
   public firmwareVersion!: string
 }

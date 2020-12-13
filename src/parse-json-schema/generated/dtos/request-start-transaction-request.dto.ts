@@ -1,33 +1,35 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 import { ChargingProfileDto } from './charging-profile.dto'
 
 export class RequestStartTransactionRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public evseId!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public groupIdToken!: IdTokenDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public idToken!: IdTokenDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public remoteStartId!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public chargingProfile!: ChargingProfileDto
 }

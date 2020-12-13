@@ -1,24 +1,25 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { UpdateEnum } from '../enums/update.enum'
 
 export class SendLocalListRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public localAuthorizationList!: any
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public versionNumber!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public updateType!: UpdateEnum
 }

@@ -7,15 +7,15 @@ import { SetNetworkProfileStatusEnum } from '../enums/set-network-profile-status
 import { StatusInfoDto } from './status-info.dto'
 
 export class SetNetworkProfileResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: SetNetworkProfileStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { APNAuthenticationEnum } from '../enums/apn-authentication.enum'
@@ -13,8 +13,8 @@ Collection of configuration data needed to make a data-connection over a cellula
 NOTE: When asking a GSM modem to dial in, it is possible to specify which mobile operator should be used. This can be done with the mobile country code (MCC) in combination with a mobile network code (MNC). Example: If your preferred network is Vodafone Netherlands, the MCC=204 and the MNC=04 which means the key PreferredNetwork = 20404 Some modems allows to specify a preferred network, which means, if this network is not available, a different network is used. If you specify UseOnlyPreferredNetwork and this network is not available, the modem will not dial in.
  */
 export class APNDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
@@ -22,9 +22,10 @@ export class APNDto {
 urn:x-oca:ocpp:uid:1:568814
 The Access Point Name as an URL.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 512)
-  @ApiProperty()
+  @IsString()
   public apn!: string
 
   /**
@@ -32,9 +33,10 @@ The Access Point Name as an URL.
 urn:x-oca:ocpp:uid:1:568818
 APN username.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 20)
-  @ApiProperty()
+  @IsString()
   public apnUserName!: string
 
   /**
@@ -42,13 +44,15 @@ APN username.
 urn:x-oca:ocpp:uid:1:568819
 APN Password.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 20)
-  @ApiProperty()
+  @IsString()
   public apnPassword!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public simPin!: number
 
   /**
@@ -56,16 +60,18 @@ APN Password.
 urn:x-oca:ocpp:uid:1:568822
 Preferred network, written as MCC and MNC concatenated. See note.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 6)
-  @ApiProperty()
+  @IsString()
   public preferredNetwork!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
   public useOnlyPreferredNetwork!: boolean
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public apnAuthentication!: APNAuthenticationEnum
 }

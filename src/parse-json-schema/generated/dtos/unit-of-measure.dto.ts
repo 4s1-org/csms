@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsInt, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -8,8 +8,8 @@ import { CustomDataDto } from './custom-data.dto'
  * Represents a UnitOfMeasure with a multiplier
  */
 export class UnitOfMeasureDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
@@ -17,12 +17,14 @@ export class UnitOfMeasureDto {
 This field SHALL use a value from the list Standardized Units of Measurements in Part 2 Appendices. 
 If an applicable unit is available in that list, otherwise a "custom" unit might be used.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 20)
-  @ApiProperty()
+  @IsString()
   public unit!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public multiplier!: number
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { MessageFormatEnum } from '../enums/message-format.enum'
@@ -11,12 +11,12 @@ urn:x-enexis:ecdm:uid:2:234490
 Contains message details, for a message to be displayed on a Charging Station.
  */
 export class MessageContentDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public format!: MessageFormatEnum
 
   /**
@@ -24,9 +24,10 @@ export class MessageContentDto {
 urn:x-enexis:ecdm:uid:1:570849
 Message language identifier. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 8)
-  @ApiProperty()
+  @IsString()
   public language!: string
 
   /**
@@ -34,8 +35,9 @@ Message language identifier. Contains a language code as defined in <<ref-RFC564
 urn:x-enexis:ecdm:uid:1:570852
 Message contents.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 512)
-  @ApiProperty()
+  @IsString()
   public content!: string
 }

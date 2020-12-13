@@ -7,15 +7,15 @@ import { IdTokenInfoDto } from './id-token-info.dto'
 import { AuthorizeCertificateStatusEnum } from '../enums/authorize-certificate-status.enum'
 
 export class AuthorizeResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public idTokenInfo!: IdTokenInfoDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public certificateStatus!: AuthorizeCertificateStatusEnum
 }

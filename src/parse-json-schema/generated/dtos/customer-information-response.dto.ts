@@ -7,15 +7,15 @@ import { CustomerInformationStatusEnum } from '../enums/customer-information-sta
 import { StatusInfoDto } from './status-info.dto'
 
 export class CustomerInformationResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: CustomerInformationStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

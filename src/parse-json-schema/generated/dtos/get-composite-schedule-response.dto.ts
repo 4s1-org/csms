@@ -8,19 +8,19 @@ import { StatusInfoDto } from './status-info.dto'
 import { CompositeScheduleDto } from './composite-schedule.dto'
 
 export class GetCompositeScheduleResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: GenericStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public schedule!: CompositeScheduleDto
 }

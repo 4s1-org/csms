@@ -10,27 +10,27 @@ import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
 export class SetVariableResultDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public attributeType!: AttributeEnum
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public attributeStatus!: SetVariableStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public attributeStatusInfo!: StatusInfoDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public component!: ComponentDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public variable!: VariableDto
 }

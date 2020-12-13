@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsNumber, IsBoolean } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { MonitorEnum } from '../enums/monitor.enum'
@@ -9,27 +9,31 @@ import { MonitorEnum } from '../enums/monitor.enum'
  * A monitoring setting for a variable.
  */
 export class VariableMonitoringDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public id!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
   public transaction!: boolean
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
   public value!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public type!: MonitorEnum
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public severity!: number
 }
