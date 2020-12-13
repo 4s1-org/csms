@@ -10,13 +10,19 @@ import { IdTokenInfoDto } from './id-token-info.dto'
  * Contains the identifier to use for authorization.
  */
 export class AuthorizationDataDto {
+  public constructor (
+    idToken: IdTokenDto
+  ) {
+    this.idToken = idToken
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public idToken!: IdTokenDto
+  public idToken: IdTokenDto
 
   @ApiProperty()
   @IsOptional()

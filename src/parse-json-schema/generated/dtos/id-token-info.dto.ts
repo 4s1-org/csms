@@ -14,6 +14,12 @@ Contains status information about an identifier.
 It is advised to not stop charging for a token that expires during charging, as ExpiryDate is only used for caching purposes. If ExpiryDate is not given, the status has no end date.
  */
 export class IdTokenInfoDto {
+  public constructor (
+    status: AuthorizationStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -21,7 +27,7 @@ export class IdTokenInfoDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(AuthorizationStatusEnum)
-  public status!: AuthorizationStatusEnum
+  public status: AuthorizationStatusEnum
 
   /**
    * ID_ Token. Expiry. Date_ Time

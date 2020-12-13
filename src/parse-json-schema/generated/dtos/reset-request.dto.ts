@@ -6,6 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { ResetEnum } from '../enums/reset.enum'
 
 export class ResetRequestDto {
+  public constructor (
+    type: ResetEnum
+  ) {
+    this.type = type
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,7 +19,7 @@ export class ResetRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ResetEnum)
-  public type!: ResetEnum
+  public type: ResetEnum
 
   @ApiProperty()
   @IsOptional()

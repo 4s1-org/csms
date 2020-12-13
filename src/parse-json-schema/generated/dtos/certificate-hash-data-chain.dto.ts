@@ -7,18 +7,26 @@ import { CertificateHashDataDto } from './certificate-hash-data.dto'
 import { GetCertificateIdUseEnum } from '../enums/get-certificate-id-use.enum'
 
 export class CertificateHashDataChainDto {
+  public constructor (
+    certificateHashData: CertificateHashDataDto,
+    certificateType: GetCertificateIdUseEnum
+  ) {
+    this.certificateHashData = certificateHashData
+    this.certificateType = certificateType
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public certificateHashData!: CertificateHashDataDto
+  public certificateHashData: CertificateHashDataDto
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GetCertificateIdUseEnum)
-  public certificateType!: GetCertificateIdUseEnum
+  public certificateType: GetCertificateIdUseEnum
 
   @ApiProperty()
   @IsOptional()

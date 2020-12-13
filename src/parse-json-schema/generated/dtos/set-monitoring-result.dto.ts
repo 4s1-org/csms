@@ -13,6 +13,20 @@ import { VariableDto } from './variable.dto'
  * Class to hold result of SetVariableMonitoring request.
  */
 export class SetMonitoringResultDto {
+  public constructor (
+    status: SetMonitoringStatusEnum,
+    type: MonitorEnum,
+    component: ComponentDto,
+    variable: VariableDto,
+    severity: number
+  ) {
+    this.status = status
+    this.type = type
+    this.component = component
+    this.variable = variable
+    this.severity = severity
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -29,23 +43,23 @@ export class SetMonitoringResultDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(SetMonitoringStatusEnum)
-  public status!: SetMonitoringStatusEnum
+  public status: SetMonitoringStatusEnum
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(MonitorEnum)
-  public type!: MonitorEnum
+  public type: MonitorEnum
 
   @ApiProperty()
   @IsNotEmpty()
-  public component!: ComponentDto
+  public component: ComponentDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public variable!: VariableDto
+  public variable: VariableDto
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public severity!: number
+  public severity: number
 }

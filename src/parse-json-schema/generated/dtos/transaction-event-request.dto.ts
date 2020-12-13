@@ -10,6 +10,20 @@ import { EVSEDto } from './evse.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class TransactionEventRequestDto {
+  public constructor (
+    eventType: TransactionEventEnum,
+    timestamp: string,
+    triggerReason: TriggerReasonEnum,
+    seqNo: number,
+    transactionInfo: TransactionDto
+  ) {
+    this.eventType = eventType
+    this.timestamp = timestamp
+    this.triggerReason = triggerReason
+    this.seqNo = seqNo
+    this.transactionInfo = transactionInfo
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -17,7 +31,7 @@ export class TransactionEventRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(TransactionEventEnum)
-  public eventType!: TransactionEventEnum
+  public eventType: TransactionEventEnum
 
   @ApiProperty()
   @IsOptional()
@@ -29,17 +43,17 @@ export class TransactionEventRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public timestamp!: string
+  public timestamp: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(TriggerReasonEnum)
-  public triggerReason!: TriggerReasonEnum
+  public triggerReason: TriggerReasonEnum
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public seqNo!: number
+  public seqNo: number
 
   @ApiProperty()
   @IsOptional()
@@ -63,7 +77,7 @@ export class TransactionEventRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public transactionInfo!: TransactionDto
+  public transactionInfo: TransactionDto
 
   @ApiProperty()
   @IsOptional()

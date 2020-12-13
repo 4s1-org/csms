@@ -13,6 +13,20 @@ urn:x-oca:ocpp:uid:2:233255
 A ChargingProfile consists of ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
 export class ChargingProfileDto {
+  public constructor (
+    id: number,
+    stackLevel: number,
+    chargingProfilePurpose: ChargingProfilePurposeEnum,
+    chargingProfileKind: ChargingProfileKindEnum,
+    chargingSchedule: any
+  ) {
+    this.id = id
+    this.stackLevel = stackLevel
+    this.chargingProfilePurpose = chargingProfilePurpose
+    this.chargingProfileKind = chargingProfileKind
+    this.chargingSchedule = chargingSchedule
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -20,22 +34,22 @@ export class ChargingProfileDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public id!: number
+  public id: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public stackLevel!: number
+  public stackLevel: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingProfilePurposeEnum)
-  public chargingProfilePurpose!: ChargingProfilePurposeEnum
+  public chargingProfilePurpose: ChargingProfilePurposeEnum
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingProfileKindEnum)
-  public chargingProfileKind!: ChargingProfileKindEnum
+  public chargingProfileKind: ChargingProfileKindEnum
 
   @ApiProperty()
   @IsOptional()
@@ -64,7 +78,7 @@ Point in time at which the profile stops to be valid. If absent, the profile is 
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingSchedule!: any
+  public chargingSchedule: any
 
   /**
    * SHALL only be included if ChargingProfilePurpose is set to TxProfile. The transactionId is used to match the profile to a specific transaction.

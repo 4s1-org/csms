@@ -10,6 +10,14 @@ urn:x-oca:ocpp:uid:2:233251
 EV DC charging parameters
  */
 export class DCChargingParametersDto {
+  public constructor (
+    evMaxCurrent: number,
+    evMaxVoltage: number
+  ) {
+    this.evMaxCurrent = evMaxCurrent
+    this.evMaxVoltage = evMaxVoltage
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -17,12 +25,12 @@ export class DCChargingParametersDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evMaxCurrent!: number
+  public evMaxCurrent: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evMaxVoltage!: number
+  public evMaxVoltage: number
 
   @ApiProperty()
   @IsOptional()

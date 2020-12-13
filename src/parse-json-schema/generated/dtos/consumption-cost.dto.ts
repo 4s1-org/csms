@@ -9,6 +9,14 @@ import { CustomDataDto } from './custom-data.dto'
 urn:x-oca:ocpp:uid:2:233259
  */
 export class ConsumptionCostDto {
+  public constructor (
+    startValue: number,
+    cost: any
+  ) {
+    this.startValue = startValue
+    this.cost = cost
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -16,9 +24,9 @@ export class ConsumptionCostDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  public startValue!: number
+  public startValue: number
 
   @ApiProperty()
   @IsNotEmpty()
-  public cost!: any
+  public cost: any
 }

@@ -7,6 +7,12 @@ import { MessagePriorityEnum } from '../enums/message-priority.enum'
 import { MessageStateEnum } from '../enums/message-state.enum'
 
 export class GetDisplayMessagesRequestDto {
+  public constructor (
+    requestId: number
+  ) {
+    this.requestId = requestId
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -18,7 +24,7 @@ export class GetDisplayMessagesRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsOptional()

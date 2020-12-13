@@ -7,6 +7,12 @@ import { LogStatusEnum } from '../enums/log-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class GetLogResponseDto {
+  public constructor (
+    status: LogStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -14,7 +20,7 @@ export class GetLogResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(LogStatusEnum)
-  public status!: LogStatusEnum
+  public status: LogStatusEnum
 
   @ApiProperty()
   @IsOptional()

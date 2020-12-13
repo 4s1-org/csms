@@ -15,6 +15,22 @@ urn:x-oca:ocpp:uid:2:233304
 The NetworkConnectionProfile defines the functional and technical parameters of a communication link.
  */
 export class NetworkConnectionProfileDto {
+  public constructor (
+    ocppVersion: OCPPVersionEnum,
+    ocppTransport: OCPPTransportEnum,
+    ocppCsmsUrl: string,
+    messageTimeout: number,
+    securityProfile: number,
+    ocppInterface: OCPPInterfaceEnum
+  ) {
+    this.ocppVersion = ocppVersion
+    this.ocppTransport = ocppTransport
+    this.ocppCsmsUrl = ocppCsmsUrl
+    this.messageTimeout = messageTimeout
+    this.securityProfile = securityProfile
+    this.ocppInterface = ocppInterface
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -26,12 +42,12 @@ export class NetworkConnectionProfileDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(OCPPVersionEnum)
-  public ocppVersion!: OCPPVersionEnum
+  public ocppVersion: OCPPVersionEnum
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(OCPPTransportEnum)
-  public ocppTransport!: OCPPTransportEnum
+  public ocppTransport: OCPPTransportEnum
 
   /**
    * Communication_ Function. OCPP_ Central_ System_ URL. URI
@@ -42,22 +58,22 @@ URL of the CSMS(s) that this Charging Station  communicates with.
   @IsNotEmpty()
   @Length(0, 512)
   @IsString()
-  public ocppCsmsUrl!: string
+  public ocppCsmsUrl: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public messageTimeout!: number
+  public messageTimeout: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public securityProfile!: number
+  public securityProfile: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(OCPPInterfaceEnum)
-  public ocppInterface!: OCPPInterfaceEnum
+  public ocppInterface: OCPPInterfaceEnum
 
   @ApiProperty()
   @IsOptional()

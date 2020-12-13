@@ -6,6 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingLimitDto } from './charging-limit.dto'
 
 export class NotifyChargingLimitRequestDto {
+  public constructor (
+    chargingLimit: ChargingLimitDto
+  ) {
+    this.chargingLimit = chargingLimit
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -21,5 +27,5 @@ export class NotifyChargingLimitRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingLimit!: ChargingLimitDto
+  public chargingLimit: ChargingLimitDto
 }

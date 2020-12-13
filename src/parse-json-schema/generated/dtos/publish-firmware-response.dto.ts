@@ -7,6 +7,12 @@ import { GenericStatusEnum } from '../enums/generic-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class PublishFirmwareResponseDto {
+  public constructor (
+    status: GenericStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -14,7 +20,7 @@ export class PublishFirmwareResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GenericStatusEnum)
-  public status!: GenericStatusEnum
+  public status: GenericStatusEnum
 
   @ApiProperty()
   @IsOptional()

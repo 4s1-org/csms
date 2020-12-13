@@ -8,6 +8,18 @@ import { CustomDataDto } from './custom-data.dto'
  * Represent a signed version of the meter value.
  */
 export class SignedMeterValueDto {
+  public constructor (
+    signedMeterData: string,
+    signingMethod: string,
+    encodingMethod: string,
+    publicKey: string
+  ) {
+    this.signedMeterData = signedMeterData
+    this.signingMethod = signingMethod
+    this.encodingMethod = encodingMethod
+    this.publicKey = publicKey
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -19,7 +31,7 @@ export class SignedMeterValueDto {
   @IsNotEmpty()
   @Length(0, 2500)
   @IsString()
-  public signedMeterData!: string
+  public signedMeterData: string
 
   /**
    * Method used to create the digital signature.
@@ -28,7 +40,7 @@ export class SignedMeterValueDto {
   @IsNotEmpty()
   @Length(0, 50)
   @IsString()
-  public signingMethod!: string
+  public signingMethod: string
 
   /**
    * Method used to encode the meter values before applying the digital signature algorithm.
@@ -37,7 +49,7 @@ export class SignedMeterValueDto {
   @IsNotEmpty()
   @Length(0, 50)
   @IsString()
-  public encodingMethod!: string
+  public encodingMethod: string
 
   /**
    * Base64 encoded, sending depends on configuration variable _PublicKeyWithSignedMeterValue_.
@@ -46,5 +58,5 @@ export class SignedMeterValueDto {
   @IsNotEmpty()
   @Length(0, 2500)
   @IsString()
-  public publicKey!: string
+  public publicKey: string
 }

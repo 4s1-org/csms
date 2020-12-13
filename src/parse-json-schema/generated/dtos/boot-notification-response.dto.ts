@@ -7,6 +7,16 @@ import { RegistrationStatusEnum } from '../enums/registration-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class BootNotificationResponseDto {
+  public constructor (
+    currentTime: string,
+    interval: number,
+    status: RegistrationStatusEnum
+  ) {
+    this.currentTime = currentTime
+    this.interval = interval
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -17,17 +27,17 @@ export class BootNotificationResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public currentTime!: string
+  public currentTime: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public interval!: number
+  public interval: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(RegistrationStatusEnum)
-  public status!: RegistrationStatusEnum
+  public status: RegistrationStatusEnum
 
   @ApiProperty()
   @IsOptional()

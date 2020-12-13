@@ -5,6 +5,12 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class DataTransferRequestDto {
+  public constructor (
+    vendorId: string
+  ) {
+    this.vendorId = vendorId
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -33,5 +39,5 @@ export class DataTransferRequestDto {
   @IsNotEmpty()
   @Length(0, 255)
   @IsString()
-  public vendorId!: string
+  public vendorId: string
 }

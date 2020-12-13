@@ -12,6 +12,16 @@ urn:x-oca:ocpp:uid:2:233256
 Charging schedule structure defines a list of charging periods, as used in: GetCompositeSchedule.conf and ChargingProfile.
  */
 export class ChargingScheduleDto {
+  public constructor (
+    id: number,
+    chargingRateUnit: ChargingRateUnitEnum,
+    chargingSchedulePeriod: any
+  ) {
+    this.id = id
+    this.chargingRateUnit = chargingRateUnit
+    this.chargingSchedulePeriod = chargingSchedulePeriod
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -19,7 +29,7 @@ export class ChargingScheduleDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public id!: number
+  public id: number
 
   /**
    * Charging_ Schedule. Start_ Schedule. Date_ Time
@@ -39,11 +49,11 @@ Starting point of an absolute schedule. If absent the schedule will be relative 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingRateUnitEnum)
-  public chargingRateUnit!: ChargingRateUnitEnum
+  public chargingRateUnit: ChargingRateUnitEnum
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingSchedulePeriod!: any
+  public chargingSchedulePeriod: any
 
   @ApiProperty()
   @IsOptional()

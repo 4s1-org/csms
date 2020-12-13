@@ -69,11 +69,14 @@ export class ClassGenerator {
       const ele = this.dtos[name]
       const file = path.join(__dirname, "generated", "dtos", `${this.filenameFormatter(name)}.dto.ts`)
 
-      const content: string[] = []
+      const header: string[] = []
+      const props: string[] = []
+      const constructorParas: string[] = []
+      const constructorAssignments: string[] = []
       const classValidatorImports: string[] = []
 
-      content.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
-      content.push(``)
+      header.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+      header.push(``)
 
       if (ele.items.some(x => !x.isRequired)) {
         classValidatorImports.push("IsOptional")
@@ -100,81 +103,128 @@ export class ClassGenerator {
         classValidatorImports.push("Length")
       }
       if (classValidatorImports.length !== 0) {
-        content.push(`import { ${classValidatorImports.join(", ")} } from 'class-validator'`)
+        header.push(`import { ${classValidatorImports.join(", ")} } from 'class-validator'`)
       }
-      content.push(`import { ApiProperty } from '@nestjs/swagger'`)
+      header.push(`import { ApiProperty } from '@nestjs/swagger'`)
 
       // DTOs importieren
       for (const item of ele.items) {
         if (item.type.endsWith("EnumType")) {
           const type = item.type.substr(0, item.type.length - 8)
-          this.pushIfNotExists(content, `import { ${type}Enum } from '../enums/${this.filenameFormatter(type)}.enum'`)
+          this.pushIfNotExists(header, `import { ${type}Enum } from '../enums/${this.filenameFormatter(type)}.enum'`)
         } else if (item.type.endsWith("Type")) {
           const type = item.type.substr(0, item.type.length - 4)
-          this.pushIfNotExists(content, `import { ${type}Dto } from './${this.filenameFormatter(type)}.dto'`)
+          this.pushIfNotExists(header, `import { ${type}Dto } from './${this.filenameFormatter(type)}.dto'`)
         }
       }
-      content.push(``)
+      header.push(``)
 
       if (ele.description) {
-        content.push(`/**`)
-        content.push(` * ${this.descriptionFormatter(ele.description)}`)
-        content.push(` */`)
+        header.push(`/**`)
+        header.push(` * ${this.descriptionFormatter(ele.description)}`)
+        header.push(` */`)
       }
-      content.push(`export class ${name}Dto {`)
+      header.push(`export class ${name}Dto {`)
+
       let isFirst = true
       for (const item of ele.items) {
+        const reqFlag = item.isRequired ? "" : "!"
+
         if (!isFirst) {
-          content.push(``)
+          props.push(``)
         }
 
         if (item.description) {
-          content.push(`  /**`)
-          content.push(`   * ${this.descriptionFormatter(item.description)}`)
-          content.push(`   */`)
+          props.push(`  /**`)
+          props.push(`   * ${this.descriptionFormatter(item.description)}`)
+          props.push(`   */`)
         }
-        content.push(`  @ApiProperty()`)
-        if (!item.isRequired) {
-          content.push(`  @IsOptional()`)
+        props.push(`  @ApiProperty()`)
+        if (item.isRequired) {
+          props.push(`  @IsNotEmpty()`)
         } else {
-          content.push(`  @IsNotEmpty()`)
+          props.push(`  @IsOptional()`)
         }
         if (item.maxLength !== undefined) {
-          content.push(`  @Length(0, ${item.maxLength})`)
+          props.push(`  @Length(0, ${item.maxLength})`)
         }
         if (item.type.endsWith("EnumType")) {
           // Enum als Typ
           const type = item.type.substr(0, item.type.length - 8)
-          content.push(`  @IsEnum(${type}Enum)`)
-          content.push(`  public ${item.name}!: ${type}Enum`)
+          props.push(`  @IsEnum(${type}Enum)`)
+          props.push(`  public ${item.name}${reqFlag}: ${type}Enum`)
+          if (item.isRequired) {
+            constructorParas.push(`    ${item.name}: ${type}Enum`)
+            constructorAssignments.push(`    this.${item.name} = ${item.name}`)
+          }
         } else if (item.type.endsWith("Type")) {
           // DTO als Typ
           // ToDo: Nested Validierung
           const type = item.type.substr(0, item.type.length - 4)
-          content.push(`  public ${item.name}!: ${type}Dto`)
+          props.push(`  public ${item.name}${reqFlag}: ${type}Dto`)
+          if (item.isRequired) {
+            constructorParas.push(`    ${item.name}: ${type}Dto`)
+            constructorAssignments.push(`    this.${item.name} = ${item.name}`)
+          }
         } else {
           // Einfacher Datentyp
           if (item.type === "integer") {
-            content.push(`  @IsInt()`)
-            content.push(`  public ${item.name}!: number`)
+            props.push(`  @IsInt()`)
+            props.push(`  public ${item.name}${reqFlag}: number`)
+            if (item.isRequired) {
+              constructorParas.push(`    ${item.name}: number`)
+              constructorAssignments.push(`    this.${item.name} = ${item.name}`)
+            }
           } else if (item.type === "number") {
-            content.push(`  @IsNumber()`)
-            content.push(`  public ${item.name}!: number`)
+            props.push(`  @IsNumber()`)
+            props.push(`  public ${item.name}${reqFlag}: number`)
+            if (item.isRequired) {
+              constructorParas.push(`    ${item.name}: number`)
+              constructorAssignments.push(`    this.${item.name} = ${item.name}`)
+            }
           } else if (item.type === "string") {
-            content.push(`  @IsString()`)
-            content.push(`  public ${item.name}!: string`)
+            props.push(`  @IsString()`)
+            props.push(`  public ${item.name}${reqFlag}: string`)
+            if (item.isRequired) {
+              constructorParas.push(`    ${item.name}: string`)
+              constructorAssignments.push(`    this.${item.name} = ${item.name}`)
+            }
           } else if (item.type === "boolean") {
-            content.push(`  @IsBoolean()`)
-            content.push(`  public ${item.name}!: boolean`)
+            props.push(`  @IsBoolean()`)
+            props.push(`  public ${item.name}${reqFlag}: boolean`)
+            if (item.isRequired) {
+              constructorParas.push(`    ${item.name}: boolean`)
+              constructorAssignments.push(`    this.${item.name} = ${item.name}`)
+            }
           } else if (item.type === "any") {
             // ToDo: Typ implementieren
-            content.push(`  public ${item.name}!: any`)
+            props.push(`  public ${item.name}${reqFlag}: any`)
+            if (item.isRequired) {
+              constructorParas.push(`    ${item.name}: any`)
+              constructorAssignments.push(`    this.${item.name} = ${item.name}`)
+            }
           } else {
             throw new Error(`Unknown type: ${item.type}`)
           }
         }
         isFirst = false
       }
+
+      let content: string[] = []
+      content = content.concat(header)
+      if (constructorParas.length === 0) {
+        content.push(`  public constructor () {`)
+        content.push(`    // nothing to do`)
+        content.push(`  }`)
+      } else {
+        content.push(`  public constructor (`)
+        content.push(constructorParas.join(",\n"))
+        content.push(`  ) {`)
+        content.push(constructorAssignments.join("\n"))
+        content.push(`  }`)
+      }
+      content.push(``)
+      content = content.concat(props)
       content.push(`}`)
       content.push(``)
 

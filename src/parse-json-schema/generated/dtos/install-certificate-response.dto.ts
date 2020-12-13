@@ -7,6 +7,12 @@ import { InstallCertificateStatusEnum } from '../enums/install-certificate-statu
 import { StatusInfoDto } from './status-info.dto'
 
 export class InstallCertificateResponseDto {
+  public constructor (
+    status: InstallCertificateStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -14,7 +20,7 @@ export class InstallCertificateResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(InstallCertificateStatusEnum)
-  public status!: InstallCertificateStatusEnum
+  public status: InstallCertificateStatusEnum
 
   @ApiProperty()
   @IsOptional()

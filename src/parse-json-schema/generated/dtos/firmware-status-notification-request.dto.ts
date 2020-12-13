@@ -6,6 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { FirmwareStatusEnum } from '../enums/firmware-status.enum'
 
 export class FirmwareStatusNotificationRequestDto {
+  public constructor (
+    status: FirmwareStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,7 +19,7 @@ export class FirmwareStatusNotificationRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(FirmwareStatusEnum)
-  public status!: FirmwareStatusEnum
+  public status: FirmwareStatusEnum
 
   @ApiProperty()
   @IsOptional()

@@ -8,6 +8,12 @@ import { StatusInfoDto } from './status-info.dto'
 import { CompositeScheduleDto } from './composite-schedule.dto'
 
 export class GetCompositeScheduleResponseDto {
+  public constructor (
+    status: GenericStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -15,7 +21,7 @@ export class GetCompositeScheduleResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GenericStatusEnum)
-  public status!: GenericStatusEnum
+  public status: GenericStatusEnum
 
   @ApiProperty()
   @IsOptional()

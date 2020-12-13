@@ -10,6 +10,14 @@ urn:x-enexis:ecdm:uid:2:233291
 Represents a copy of the firmware that can be loaded/updated on the Charging Station.
  */
 export class FirmwareDto {
+  public constructor (
+    location: string,
+    retrieveDateTime: string
+  ) {
+    this.location = location
+    this.retrieveDateTime = retrieveDateTime
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -23,7 +31,7 @@ URI defining the origin of the firmware.
   @IsNotEmpty()
   @Length(0, 512)
   @IsString()
-  public location!: string
+  public location: string
 
   /**
    * Firmware. Retrieve. Date_ Time
@@ -33,7 +41,7 @@ Date and time at which the firmware shall be retrieved.
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public retrieveDateTime!: string
+  public retrieveDateTime: string
 
   /**
    * Firmware. Install. Date_ Time

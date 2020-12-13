@@ -9,6 +9,14 @@ import { DataEnum } from '../enums/data.enum'
  * Fixed read-only parameters of a variable.
  */
 export class VariableCharacteristicsDto {
+  public constructor (
+    dataType: DataEnum,
+    supportsMonitoring: boolean
+  ) {
+    this.dataType = dataType
+    this.supportsMonitoring = supportsMonitoring
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -25,7 +33,7 @@ export class VariableCharacteristicsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(DataEnum)
-  public dataType!: DataEnum
+  public dataType: DataEnum
 
   @ApiProperty()
   @IsOptional()
@@ -59,5 +67,5 @@ The Configuration Variable <<configkey-configuration-value-size,ConfigurationVal
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
-  public supportsMonitoring!: boolean
+  public supportsMonitoring: boolean
 }

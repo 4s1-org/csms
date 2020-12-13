@@ -5,6 +5,16 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyMonitoringReportRequestDto {
+  public constructor (
+    requestId: number,
+    seqNo: number,
+    generatedAt: string
+  ) {
+    this.requestId = requestId
+    this.seqNo = seqNo
+    this.generatedAt = generatedAt
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -16,7 +26,7 @@ export class NotifyMonitoringReportRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsOptional()
@@ -26,7 +36,7 @@ export class NotifyMonitoringReportRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public seqNo!: number
+  public seqNo: number
 
   /**
    * Timestamp of the moment this message was generated at the Charging Station.
@@ -34,5 +44,5 @@ export class NotifyMonitoringReportRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public generatedAt!: string
+  public generatedAt: string
 }

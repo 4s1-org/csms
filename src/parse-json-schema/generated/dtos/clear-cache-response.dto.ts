@@ -7,6 +7,12 @@ import { ClearCacheStatusEnum } from '../enums/clear-cache-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearCacheResponseDto {
+  public constructor (
+    status: ClearCacheStatusEnum
+  ) {
+    this.status = status
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -14,7 +20,7 @@ export class ClearCacheResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ClearCacheStatusEnum)
-  public status!: ClearCacheStatusEnum
+  public status: ClearCacheStatusEnum
 
   @ApiProperty()
   @IsOptional()

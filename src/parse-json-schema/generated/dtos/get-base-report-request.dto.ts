@@ -6,6 +6,14 @@ import { CustomDataDto } from './custom-data.dto'
 import { ReportBaseEnum } from '../enums/report-base.enum'
 
 export class GetBaseReportRequestDto {
+  public constructor (
+    requestId: number,
+    reportBase: ReportBaseEnum
+  ) {
+    this.requestId = requestId
+    this.reportBase = reportBase
+  }
+
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
@@ -13,10 +21,10 @@ export class GetBaseReportRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ReportBaseEnum)
-  public reportBase!: ReportBaseEnum
+  public reportBase: ReportBaseEnum
 }
