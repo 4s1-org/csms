@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ComponentDto } from './component.dto'
@@ -14,24 +14,27 @@ urn:x-enexis:ecdm:uid:2:233264
 Contains message details, for a message to be displayed on a Charging Station.
  */
 export class MessageInfoDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public display!: ComponentDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public id!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(MessagePriorityEnum)
   public priority!: MessagePriorityEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(MessageStateEnum)
   public state!: MessageStateEnum
 
   /**
@@ -39,8 +42,9 @@ export class MessageInfoDto {
 urn:x-enexis:ecdm:uid:1:569256
 From what date-time should this message be shown. If omitted: directly.
    */
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsString()
   public startDateTime!: string
 
   /**
@@ -48,8 +52,9 @@ From what date-time should this message be shown. If omitted: directly.
 urn:x-enexis:ecdm:uid:1:569257
 Until what date-time should this message be shown, after this date/time this message SHALL be removed.
    */
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsString()
   public endDateTime!: string
 
   /**
@@ -57,12 +62,13 @@ Until what date-time should this message be shown, after this date/time this mes
 Message SHALL be removed by the Charging Station after transaction has
 ended.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 36)
-  @ApiProperty()
+  @IsString()
   public transactionId!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public message!: MessageContentDto
 }

@@ -1,20 +1,21 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { NetworkConnectionProfileDto } from './network-connection-profile.dto'
 
 export class SetNetworkProfileRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public configurationSlot!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public connectionData!: NetworkConnectionProfileDto
 }

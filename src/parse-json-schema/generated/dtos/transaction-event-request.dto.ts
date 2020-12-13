@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { TransactionEventEnum } from '../enums/transaction-event.enum'
@@ -10,58 +10,66 @@ import { EVSEDto } from './evse.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class TransactionEventRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(TransactionEventEnum)
   public eventType!: TransactionEventEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public meterValue!: any
 
   /**
    * The date and time at which this transaction event occurred.
    */
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   public timestamp!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(TriggerReasonEnum)
   public triggerReason!: TriggerReasonEnum
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public seqNo!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
   public offline!: boolean
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public numberOfPhasesUsed!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public cableMaxCurrent!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public reservationId!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public transactionInfo!: TransactionDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public evse!: EVSEDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public idToken!: IdTokenDto
 }

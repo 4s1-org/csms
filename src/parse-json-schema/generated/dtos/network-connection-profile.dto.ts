@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { APNDto } from './apn.dto'
@@ -15,20 +15,22 @@ urn:x-oca:ocpp:uid:2:233304
 The NetworkConnectionProfile defines the functional and technical parameters of a communication link.
  */
 export class NetworkConnectionProfileDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public apn!: APNDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(OCPPVersionEnum)
   public ocppVersion!: OCPPVersionEnum
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(OCPPTransportEnum)
   public ocppTransport!: OCPPTransportEnum
 
   /**
@@ -36,24 +38,28 @@ export class NetworkConnectionProfileDto {
 urn:x-oca:ocpp:uid:1:569357
 URL of the CSMS(s) that this Charging Station  communicates with.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 512)
-  @ApiProperty()
+  @IsString()
   public ocppCsmsUrl!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public messageTimeout!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public securityProfile!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(OCPPInterfaceEnum)
   public ocppInterface!: OCPPInterfaceEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public vpn!: VPNDto
 }

@@ -88,7 +88,7 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     if (this.data.type === "integer") {
-      this.item = new SchemaDefinitionPropertyItem(this.key, "number", undefined, undefined)
+      this.item = new SchemaDefinitionPropertyItem(this.key, "integer", undefined, undefined)
       return
     }
 

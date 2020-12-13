@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsNumber, IsString, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
@@ -12,12 +12,13 @@ urn:x-oca:ocpp:uid:2:233256
 Charging schedule structure defines a list of charging periods, as used in: GetCompositeSchedule.conf and ChargingProfile.
  */
 export class ChargingScheduleDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public id!: number
 
   /**
@@ -25,27 +26,31 @@ export class ChargingScheduleDto {
 urn:x-oca:ocpp:uid:1:569237
 Starting point of an absolute schedule. If absent the schedule will be relative to start of charging.
    */
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsString()
   public startSchedule!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public duration!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(ChargingRateUnitEnum)
   public chargingRateUnit!: ChargingRateUnitEnum
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public chargingSchedulePeriod!: any
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsNumber()
   public minChargingRate!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public salesTariff!: SalesTariffDto
 }

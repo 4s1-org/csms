@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsNumber, IsString, IsBoolean, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { DataEnum } from '../enums/data.enum'
@@ -9,28 +9,32 @@ import { DataEnum } from '../enums/data.enum'
  * Fixed read-only parameters of a variable.
  */
 export class VariableCharacteristicsDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
    * Unit of the variable. When the transmitted value has a unit, this field SHALL be included.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 16)
-  @ApiProperty()
+  @IsString()
   public unit!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(DataEnum)
   public dataType!: DataEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsNumber()
   public minLimit!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsNumber()
   public maxLimit!: number
 
   /**
@@ -46,12 +50,14 @@ This is a comma separated list.
 
 The Configuration Variable <<configkey-configuration-value-size,ConfigurationValueSize>> can be used to limit SetVariableData.attributeValue and VariableCharacteristics.valueList. The max size of these values will always remain equal.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 1000)
-  @ApiProperty()
+  @IsString()
   public valuesList!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
   public supportsMonitoring!: boolean
 }

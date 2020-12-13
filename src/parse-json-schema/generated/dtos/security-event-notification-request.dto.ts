@@ -1,34 +1,37 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class SecurityEventNotificationRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
    * Type of the security event. This value should be taken from the Security events list.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 50)
-  @ApiProperty()
+  @IsString()
   public type!: string
 
   /**
    * Date and time at which the event occurred.
    */
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   public timestamp!: string
 
   /**
    * Additional information about the occurred security event.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 255)
-  @ApiProperty()
+  @IsString()
   public techInfo!: string
 }
