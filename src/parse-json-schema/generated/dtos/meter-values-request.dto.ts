@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -9,15 +9,16 @@ import { CustomDataDto } from './custom-data.dto'
 urn:x-enexis:ecdm:uid:2:234744
  */
 export class MeterValuesRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public evseId!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public meterValue!: any
 }

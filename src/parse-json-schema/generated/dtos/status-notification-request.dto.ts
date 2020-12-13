@@ -1,31 +1,34 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ConnectorStatusEnum } from '../enums/connector-status.enum'
 
 export class StatusNotificationRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
    * The time for which the status is reported. If absent time of receipt of the message will be assumed.
    */
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   public timestamp!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public connectorStatus!: ConnectorStatusEnum
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public evseId!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public connectorId!: number
 }

@@ -1,33 +1,36 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { LogParametersDto } from './log-parameters.dto'
 import { LogEnum } from '../enums/log.enum'
 
 export class GetLogRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public log!: LogParametersDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public logType!: LogEnum
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public requestId!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public retries!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public retryInterval!: number
 }

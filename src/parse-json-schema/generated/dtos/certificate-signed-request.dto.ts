@@ -1,13 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { CertificateSigningUseEnum } from '../enums/certificate-signing-use.enum'
 
 export class CertificateSignedRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
@@ -15,12 +15,13 @@ export class CertificateSignedRequestDto {
 
 The Configuration Variable <<configkey-max-certificate-chain-size,MaxCertificateChainSize>> can be used to limit the maximum size of this field.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 10000)
-  @ApiProperty()
+  @IsString()
   public certificateChain!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public certificateType!: CertificateSigningUseEnum
 }

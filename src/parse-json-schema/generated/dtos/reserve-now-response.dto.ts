@@ -7,15 +7,15 @@ import { ReserveNowStatusEnum } from '../enums/reserve-now-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ReserveNowResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: ReserveNowStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

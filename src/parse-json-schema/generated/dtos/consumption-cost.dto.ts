@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsNumber } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -9,15 +9,16 @@ import { CustomDataDto } from './custom-data.dto'
 urn:x-oca:ocpp:uid:2:233259
  */
 export class ConsumptionCostDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
   public startValue!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public cost!: any
 }

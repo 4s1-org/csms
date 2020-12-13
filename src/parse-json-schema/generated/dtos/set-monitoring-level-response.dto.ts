@@ -7,15 +7,15 @@ import { GenericStatusEnum } from '../enums/generic-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class SetMonitoringLevelResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: GenericStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

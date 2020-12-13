@@ -7,15 +7,15 @@ import { ClearCacheStatusEnum } from '../enums/clear-cache-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearCacheResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: ClearCacheStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

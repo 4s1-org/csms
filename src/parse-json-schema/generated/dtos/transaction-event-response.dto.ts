@@ -1,29 +1,31 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsInt, IsNumber } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenInfoDto } from './id-token-info.dto'
 import { MessageContentDto } from './message-content.dto'
 
 export class TransactionEventResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsNumber()
   public totalCost!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public chargingPriority!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public idTokenInfo!: IdTokenInfoDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public updatedPersonalMessage!: MessageContentDto
 }

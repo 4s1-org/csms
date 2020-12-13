@@ -81,6 +81,18 @@ export class ClassGenerator {
       if (ele.items.some(x => x.isRequired)) {
         classValidatorImports.push("IsNotEmpty")
       }
+      if (ele.items.some(x => x.type === "integer")) {
+        classValidatorImports.push("IsInt")
+      }
+      if (ele.items.some(x => x.type === "number")) {
+        classValidatorImports.push("IsNumber")
+      }
+      if (ele.items.some(x => x.type === "string")) {
+        classValidatorImports.push("IsString")
+      }
+      if (ele.items.some(x => x.type === "boolean")) {
+        classValidatorImports.push("IsBoolean")
+      }
       if (ele.items.some(x => x.maxLength !== undefined)) {
         classValidatorImports.push("Length")
       }
@@ -118,6 +130,7 @@ export class ClassGenerator {
           content.push(`   * ${this.descriptionFormatter(item.description)}`)
           content.push(`   */`)
         }
+        content.push(`  @ApiProperty()`)
         if (!item.isRequired) {
           content.push(`  @IsOptional()`)
         } else {
@@ -126,7 +139,6 @@ export class ClassGenerator {
         if (item.maxLength !== undefined) {
           content.push(`  @Length(0, ${item.maxLength})`)
         }
-        content.push(`  @ApiProperty()`)
         if (item.type.endsWith("EnumType")) {
           // Enum als Typ
           const type = item.type.substr(0, item.type.length - 8)
@@ -138,12 +150,16 @@ export class ClassGenerator {
         } else {
           // Einfacher Datentyp
           if (item.type === "integer") {
+            content.push(`  @IsInt()`)
             content.push(`  public ${item.name}!: number`)
           } else if (item.type === "number") {
+            content.push(`  @IsNumber()`)
             content.push(`  public ${item.name}!: number`)
           } else if (item.type === "string") {
+            content.push(`  @IsString()`)
             content.push(`  public ${item.name}!: string`)
           } else if (item.type === "boolean") {
+            content.push(`  @IsBoolean()`)
             content.push(`  public ${item.name}!: boolean`)
           } else if (item.type === "any") {
             // ToDo: Typ implementieren
@@ -203,14 +219,14 @@ export class ClassGenerator {
   }
 
   private filenameFormatter(name: string): string {
-    name = name.replace("OCPP", "Ocpp")
-    name = name.replace("OCSP", "Ocsp")
-    name = name.replace("EVSE", "Evse")
-    name = name.replace("VPN", "Vpn")
-    name = name.replace("APN", "Apn")
-    name = name.replace("EV", "Ev")
-    name = name.replace("AC", "Ac")
-    name = name.replace("DC", "Dc")
+    name = name.replace(/OCPP/g, "Ocpp")
+    name = name.replace(/OCSP/g, "Ocsp")
+    name = name.replace(/EVSE/g, "Evse")
+    name = name.replace(/VPN/g, "Vpn")
+    name = name.replace(/APN/g, "Apn")
+    name = name.replace(/EV/g, "Ev")
+    name = name.replace(/AC/g, "Ac")
+    name = name.replace(/DC/g, "Dc")
 
     let result = name[0].toLocaleLowerCase()
     for (let i = 1; i < name.length; i++) {

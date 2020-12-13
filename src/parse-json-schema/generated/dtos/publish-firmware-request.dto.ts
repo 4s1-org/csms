@@ -1,40 +1,45 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class PublishFirmwareRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
    * This contains a string containing a URI pointing to a
 location from which to retrieve the firmware.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 512)
-  @ApiProperty()
+  @IsString()
   public location!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public retries!: number
 
   /**
    * The MD5 checksum over the entire firmware file as a hexadecimal string of length 32.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 32)
-  @ApiProperty()
+  @IsString()
   public checksum!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public requestId!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public retryInterval!: number
 }

@@ -6,11 +6,11 @@ import { CustomDataDto } from './custom-data.dto'
 import { CertificateHashDataDto } from './certificate-hash-data.dto'
 
 export class DeleteCertificateRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public certificateHashData!: CertificateHashDataDto
 }

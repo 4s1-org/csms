@@ -1,32 +1,34 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { RegistrationStatusEnum } from '../enums/registration-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class BootNotificationResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
    * This contains the CSMS’s current time.
    */
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   public currentTime!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public interval!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: RegistrationStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

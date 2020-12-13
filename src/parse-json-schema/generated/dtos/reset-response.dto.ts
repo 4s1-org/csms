@@ -7,15 +7,15 @@ import { ResetStatusEnum } from '../enums/reset-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ResetResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: ResetStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ACChargingParametersDto } from './ac-charging-parameters.dto'
@@ -12,20 +12,20 @@ import { EnergyTransferModeEnum } from '../enums/energy-transfer-mode.enum'
 urn:x-oca:ocpp:uid:2:233249
  */
 export class ChargingNeedsDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public acChargingParameters!: ACChargingParametersDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public dcChargingParameters!: DCChargingParametersDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public requestedEnergyTransfer!: EnergyTransferModeEnum
 
   /**
@@ -33,7 +33,8 @@ export class ChargingNeedsDto {
 urn:x-oca:ocpp:uid:1:569223
 Estimated departure time of the EV.
    */
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsString()
   public departureTime!: string
 }

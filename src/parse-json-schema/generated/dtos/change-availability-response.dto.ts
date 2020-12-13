@@ -7,15 +7,15 @@ import { ChangeAvailabilityStatusEnum } from '../enums/change-availability-statu
 import { StatusInfoDto } from './status-info.dto'
 
 export class ChangeAvailabilityResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: ChangeAvailabilityStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

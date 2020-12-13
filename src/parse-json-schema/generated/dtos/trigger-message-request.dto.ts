@@ -7,15 +7,15 @@ import { EVSEDto } from './evse.dto'
 import { MessageTriggerEnum } from '../enums/message-trigger.enum'
 
 export class TriggerMessageRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public evse!: EVSEDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public requestedMessage!: MessageTriggerEnum
 }

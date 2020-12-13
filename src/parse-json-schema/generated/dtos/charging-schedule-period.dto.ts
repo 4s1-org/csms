@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsNumber } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -10,23 +10,27 @@ urn:x-oca:ocpp:uid:2:233257
 Charging schedule period structure defines a time period in a charging schedule.
  */
 export class ChargingSchedulePeriodDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public startPeriod!: number
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
   public limit!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public numberPhases!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public phaseToUse!: number
 }

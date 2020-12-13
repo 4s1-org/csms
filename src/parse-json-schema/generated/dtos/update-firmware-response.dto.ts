@@ -7,15 +7,15 @@ import { UpdateFirmwareStatusEnum } from '../enums/update-firmware-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class UpdateFirmwareResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: UpdateFirmwareStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

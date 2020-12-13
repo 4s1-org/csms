@@ -1,34 +1,38 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyMonitoringReportRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public monitor!: any
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public requestId!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
   public tbc!: boolean
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public seqNo!: number
 
   /**
    * Timestamp of the moment this message was generated at the Charging Station.
    */
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   public generatedAt!: string
 }

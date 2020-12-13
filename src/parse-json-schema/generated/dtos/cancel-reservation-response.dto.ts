@@ -7,15 +7,15 @@ import { CancelReservationStatusEnum } from '../enums/cancel-reservation-status.
 import { StatusInfoDto } from './status-info.dto'
 
 export class CancelReservationResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: CancelReservationStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

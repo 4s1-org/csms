@@ -7,15 +7,15 @@ import { NotifyEVChargingNeedsStatusEnum } from '../enums/notify-ev-charging-nee
 import { StatusInfoDto } from './status-info.dto'
 
 export class NotifyEVChargingNeedsResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: NotifyEVChargingNeedsStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 }

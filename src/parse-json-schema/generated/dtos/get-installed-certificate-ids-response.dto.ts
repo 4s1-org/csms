@@ -7,19 +7,19 @@ import { GetInstalledCertificateStatusEnum } from '../enums/get-installed-certif
 import { StatusInfoDto } from './status-info.dto'
 
 export class GetInstalledCertificateIdsResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public status!: GetInstalledCertificateStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public certificateHashDataChain!: any
 }

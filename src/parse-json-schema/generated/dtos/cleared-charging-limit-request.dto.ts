@@ -1,20 +1,21 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 
 export class ClearedChargingLimitRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public chargingLimitSource!: ChargingLimitSourceEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public evseId!: number
 }
