@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ACChargingParametersDto } from './ac-charging-parameters.dto'
@@ -26,6 +26,7 @@ export class ChargingNeedsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(EnergyTransferModeEnum)
   public requestedEnergyTransfer!: EnergyTransferModeEnum
 
   /**

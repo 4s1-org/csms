@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsNumber, IsString, IsBoolean, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsNumber, IsString, IsBoolean, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { DataEnum } from '../enums/data.enum'
@@ -24,6 +24,7 @@ export class VariableCharacteristicsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(DataEnum)
   public dataType!: DataEnum
 
   @ApiProperty()

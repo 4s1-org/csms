@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsNumber, IsBoolean } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsNumber, IsBoolean, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { MonitorEnum } from '../enums/monitor.enum'
@@ -32,6 +32,7 @@ export class SetMonitoringDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(MonitorEnum)
   public type!: MonitorEnum
 
   @ApiProperty()

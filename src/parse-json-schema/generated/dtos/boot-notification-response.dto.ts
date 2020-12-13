@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { RegistrationStatusEnum } from '../enums/registration-status.enum'
@@ -26,6 +26,7 @@ export class BootNotificationResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(RegistrationStatusEnum)
   public status!: RegistrationStatusEnum
 
   @ApiProperty()

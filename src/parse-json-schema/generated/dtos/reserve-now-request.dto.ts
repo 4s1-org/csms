@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ConnectorEnum } from '../enums/connector.enum'
@@ -26,6 +26,7 @@ export class ReserveNowRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsEnum(ConnectorEnum)
   public connectorType!: ConnectorEnum
 
   @ApiProperty()

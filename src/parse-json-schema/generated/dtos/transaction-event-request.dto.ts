@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { TransactionEventEnum } from '../enums/transaction-event.enum'
@@ -16,6 +16,7 @@ export class TransactionEventRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(TransactionEventEnum)
   public eventType!: TransactionEventEnum
 
   @ApiProperty()
@@ -32,6 +33,7 @@ export class TransactionEventRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(TriggerReasonEnum)
   public triggerReason!: TriggerReasonEnum
 
   @ApiProperty()
