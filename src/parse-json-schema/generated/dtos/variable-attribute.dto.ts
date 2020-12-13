@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, Length } from 'class-validator'
+import { IsOptional, IsString, IsBoolean, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { AttributeEnum } from '../enums/attribute.enum'
@@ -10,12 +10,13 @@ import { MutabilityEnum } from '../enums/mutability.enum'
  * Attribute data of a variable.
  */
 export class VariableAttributeDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(AttributeEnum)
   public type!: AttributeEnum
 
   /**
@@ -23,20 +24,24 @@ export class VariableAttributeDto {
 
 The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 2500)
-  @ApiProperty()
+  @IsString()
   public value!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(MutabilityEnum)
   public mutability!: MutabilityEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
   public persistent!: boolean
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
   public constant!: boolean
 }

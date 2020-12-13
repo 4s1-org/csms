@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
+import { IsOptional, IsInt, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
@@ -11,19 +11,22 @@ urn:x-oca:ocpp:uid:2:233255
 A ChargingProfile consists of a ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
 export class ClearChargingProfileDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public evseId!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(ChargingProfilePurposeEnum)
   public chargingProfilePurpose!: ChargingProfilePurposeEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public stackLevel!: number
 }

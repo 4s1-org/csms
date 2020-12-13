@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { AttributeEnum } from '../enums/attribute.enum'
@@ -10,27 +10,29 @@ import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
 export class SetVariableResultDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(AttributeEnum)
   public attributeType!: AttributeEnum
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(SetVariableStatusEnum)
   public attributeStatus!: SetVariableStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public attributeStatusInfo!: StatusInfoDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public component!: ComponentDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public variable!: VariableDto
 }

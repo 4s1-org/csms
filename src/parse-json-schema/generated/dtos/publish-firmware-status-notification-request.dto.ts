@@ -1,24 +1,26 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { PublishFirmwareStatusEnum } from '../enums/publish-firmware-status.enum'
 
 export class PublishFirmwareStatusNotificationRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(PublishFirmwareStatusEnum)
   public status!: PublishFirmwareStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public location!: any
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public requestId!: number
 }

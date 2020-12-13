@@ -11,23 +11,23 @@ import { VariableCharacteristicsDto } from './variable-characteristics.dto'
  * Class to report components, variables and variable attributes and characteristics.
  */
 export class ReportDataDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public component!: ComponentDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public variable!: VariableDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public variableAttribute!: any
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public variableCharacteristics!: VariableCharacteristicsDto
 }

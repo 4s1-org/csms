@@ -81,6 +81,21 @@ export class ClassGenerator {
       if (ele.items.some(x => x.isRequired)) {
         classValidatorImports.push("IsNotEmpty")
       }
+      if (ele.items.some(x => x.type === "integer")) {
+        classValidatorImports.push("IsInt")
+      }
+      if (ele.items.some(x => x.type === "number")) {
+        classValidatorImports.push("IsNumber")
+      }
+      if (ele.items.some(x => x.type === "string")) {
+        classValidatorImports.push("IsString")
+      }
+      if (ele.items.some(x => x.type === "boolean")) {
+        classValidatorImports.push("IsBoolean")
+      }
+      if (ele.items.some(x => x.type.endsWith("EnumType"))) {
+        classValidatorImports.push("IsEnum")
+      }
       if (ele.items.some(x => x.maxLength !== undefined)) {
         classValidatorImports.push("Length")
       }
@@ -118,6 +133,7 @@ export class ClassGenerator {
           content.push(`   * ${this.descriptionFormatter(item.description)}`)
           content.push(`   */`)
         }
+        content.push(`  @ApiProperty()`)
         if (!item.isRequired) {
           content.push(`  @IsOptional()`)
         } else {
@@ -126,26 +142,50 @@ export class ClassGenerator {
         if (item.maxLength !== undefined) {
           content.push(`  @Length(0, ${item.maxLength})`)
         }
-        content.push(`  @ApiProperty()`)
         if (item.type.endsWith("EnumType")) {
           // Enum als Typ
           const type = item.type.substr(0, item.type.length - 8)
+          content.push(`  @IsEnum(${type}Enum)`)
           content.push(`  public ${item.name}!: ${type}Enum`)
         } else if (item.type.endsWith("Type")) {
           // DTO als Typ
+          // ToDo: Nested Validierung
           const type = item.type.substr(0, item.type.length - 4)
           content.push(`  public ${item.name}!: ${type}Dto`)
         } else {
           // Einfacher Datentyp
-          content.push(`  public ${item.name}!: ${item.type}`)
+          if (item.type === "integer") {
+            content.push(`  @IsInt()`)
+            content.push(`  public ${item.name}!: number`)
+          } else if (item.type === "number") {
+            content.push(`  @IsNumber()`)
+            content.push(`  public ${item.name}!: number`)
+          } else if (item.type === "string") {
+            content.push(`  @IsString()`)
+            content.push(`  public ${item.name}!: string`)
+          } else if (item.type === "boolean") {
+            content.push(`  @IsBoolean()`)
+            content.push(`  public ${item.name}!: boolean`)
+          } else if (item.type === "any") {
+            // ToDo: Typ implementieren
+            content.push(`  public ${item.name}!: any`)
+          } else {
+            throw new Error(`Unknown type: ${item.type}`)
+          }
         }
         isFirst = false
       }
       content.push(`}`)
       content.push(``)
 
-      fs.writeFileSync(file, content.join("\n"))
+      this.writeFile(file, content)
     }
+  }
+
+  private writeFile(file: string, content: string[]): void {
+    let data = content.join("\n")
+    data = data.replace(/\r\n/g, "\n")
+    fs.writeFileSync(file, data, { encoding: "utf-8" })
   }
 
   private pushIfNotExists(content: string[], text: string): void {
@@ -173,28 +213,25 @@ export class ClassGenerator {
       content.push(`}`)
       content.push()
 
-      fs.writeFileSync(file, content.join("\n"))
+      this.writeFile(file, content)
     }
   }
 
   private descriptionFormatter(description: string): string {
-    // ToDo: Mit einem Befehl alle ersetzen. Aktuell wird nur das erste Ergebnis ersetzt.
-    description = description.replace("&lt;", "<")
-    description = description.replace("&lt;", "<")
-    description = description.replace("&gt;", ">")
-    description = description.replace("&gt;", ">")
+    description = description.replace(/&lt;/g, "<")
+    description = description.replace(/&gt;/g, ">")
     return description.trim()
   }
 
   private filenameFormatter(name: string): string {
-    name = name.replace("OCPP", "Ocpp")
-    name = name.replace("OCSP", "Ocsp")
-    name = name.replace("EVSE", "Evse")
-    name = name.replace("VPN", "Vpn")
-    name = name.replace("APN", "Apn")
-    name = name.replace("EV", "Ev")
-    name = name.replace("AC", "Ac")
-    name = name.replace("DC", "Dc")
+    name = name.replace(/OCPP/g, "Ocpp")
+    name = name.replace(/OCSP/g, "Ocsp")
+    name = name.replace(/EVSE/g, "Evse")
+    name = name.replace(/VPN/g, "Vpn")
+    name = name.replace(/APN/g, "Apn")
+    name = name.replace(/EV/g, "Ev")
+    name = name.replace(/AC/g, "Ac")
+    name = name.replace(/DC/g, "Dc")
 
     let result = name[0].toLocaleLowerCase()
     for (let i = 1; i < name.length; i++) {

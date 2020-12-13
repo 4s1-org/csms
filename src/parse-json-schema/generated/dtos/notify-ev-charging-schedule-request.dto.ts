@@ -1,27 +1,29 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingScheduleDto } from './charging-schedule.dto'
 
 export class NotifyEVChargingScheduleRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
    * Periods contained in the charging profile are relative to this point in time.
    */
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   public timeBase!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public chargingSchedule!: ChargingScheduleDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
   public evseId!: number
 }

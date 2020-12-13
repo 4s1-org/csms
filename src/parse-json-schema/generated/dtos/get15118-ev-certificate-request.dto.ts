@@ -1,32 +1,35 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { CertificateActionEnum } from '../enums/certificate-action.enum'
 
 export class Get15118EVCertificateRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
   /**
    * Schema version currently used for the 15118 session between EV and Charging Station. Needed for parsing of the EXI stream by the CSMS.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 50)
-  @ApiProperty()
+  @IsString()
   public iso15118SchemaVersion!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(CertificateActionEnum)
   public action!: CertificateActionEnum
 
   /**
    * Raw CertificateInstallationReq request from EV, Base64 encoded.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 5600)
-  @ApiProperty()
+  @IsString()
   public exiRequest!: string
 }

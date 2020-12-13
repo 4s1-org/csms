@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { GenericStatusEnum } from '../enums/generic-status.enum'
@@ -8,19 +8,20 @@ import { StatusInfoDto } from './status-info.dto'
 import { CompositeScheduleDto } from './composite-schedule.dto'
 
 export class GetCompositeScheduleResponseDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(GenericStatusEnum)
   public status!: GenericStatusEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public statusInfo!: StatusInfoDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public schedule!: CompositeScheduleDto
 }

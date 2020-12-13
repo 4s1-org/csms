@@ -10,19 +10,19 @@ import { VariableDto } from './variable.dto'
  * Class to hold parameters of SetVariableMonitoring request.
  */
 export class MonitoringDataDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public component!: ComponentDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public variable!: VariableDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public variableMonitoring!: any
 }

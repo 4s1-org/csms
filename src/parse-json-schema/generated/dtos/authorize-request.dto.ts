@@ -1,28 +1,29 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class AuthorizeRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public idToken!: IdTokenDto
 
   /**
    * The X.509 certificated presented by EV and encoded in PEM format.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 5500)
-  @ApiProperty()
+  @IsString()
   public certificate!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public iso15118CertificateHashData!: any
 }

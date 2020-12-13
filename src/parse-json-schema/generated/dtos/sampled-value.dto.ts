@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsNumber, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ReadingContextEnum } from '../enums/reading-context.enum'
@@ -18,35 +18,40 @@ Single sampled value in MeterValues. Each value can be accompanied by optional f
 To save on mobile data usage, default values of all of the optional fields are such that. The value without any additional fields will be interpreted, as a register reading of active import energy in Wh (Watt-hour) units.
  */
 export class SampledValueDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
   public value!: number
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(ReadingContextEnum)
   public context!: ReadingContextEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(MeasurandEnum)
   public measurand!: MeasurandEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(PhaseEnum)
   public phase!: PhaseEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(LocationEnum)
   public location!: LocationEnum
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public signedMeterValue!: SignedMeterValueDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public unitOfMeasure!: UnitOfMeasureDto
 }

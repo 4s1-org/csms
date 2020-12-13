@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { AuthorizationStatusEnum } from '../enums/authorization-status.enum'
@@ -14,12 +14,13 @@ Contains status information about an identifier.
 It is advised to not stop charging for a token that expires during charging, as ExpiryDate is only used for caching purposes. If ExpiryDate is not given, the status has no end date.
  */
 export class IdTokenInfoDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(AuthorizationStatusEnum)
   public status!: AuthorizationStatusEnum
 
   /**
@@ -27,12 +28,14 @@ export class IdTokenInfoDto {
 urn:x-oca:ocpp:uid:1:569373
 Date and Time after which the token must be considered invalid.
    */
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsString()
   public cacheExpiryDateTime!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsInt()
   public chargingPriority!: number
 
   /**
@@ -40,17 +43,18 @@ Date and Time after which the token must be considered invalid.
 urn:x-oca:ocpp:uid:1:569374
 Preferred user interface language of identifier user. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 8)
-  @ApiProperty()
+  @IsString()
   public language1!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public evseId!: any
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public groupIdToken!: IdTokenDto
 
   /**
@@ -58,12 +62,13 @@ Preferred user interface language of identifier user. Contains a language code a
 urn:x-oca:ocpp:uid:1:569375
 Second preferred user interface language of identifier user. Don’t use when language1 is omitted, has to be different from language1. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
+  @ApiProperty()
   @IsOptional()
   @Length(0, 8)
-  @ApiProperty()
+  @IsString()
   public language2!: string
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public personalMessage!: MessageContentDto
 }

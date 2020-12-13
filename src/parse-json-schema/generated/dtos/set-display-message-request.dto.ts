@@ -6,11 +6,11 @@ import { CustomDataDto } from './custom-data.dto'
 import { MessageInfoDto } from './message-info.dto'
 
 export class SetDisplayMessageRequestDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public message!: MessageInfoDto
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, Length } from 'class-validator'
+import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { AttributeEnum } from '../enums/attribute.enum'
@@ -8,12 +8,13 @@ import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
 export class SetVariableDataDto {
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
+  @IsEnum(AttributeEnum)
   public attributeType!: AttributeEnum
 
   /**
@@ -21,16 +22,17 @@ export class SetVariableDataDto {
 
 The Configuration Variable <<configkey-configuration-value-size,ConfigurationValueSize>> can be used to limit SetVariableData.attributeValue and VariableCharacteristics.valueList. The max size of these values will always remain equal.
    */
+  @ApiProperty()
   @IsNotEmpty()
   @Length(0, 1000)
-  @ApiProperty()
+  @IsString()
   public attributeValue!: string
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public component!: ComponentDto
 
-  @IsNotEmpty()
   @ApiProperty()
+  @IsNotEmpty()
   public variable!: VariableDto
 }
