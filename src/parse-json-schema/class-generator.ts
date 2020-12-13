@@ -197,11 +197,8 @@ export class ClassGenerator {
   }
 
   private descriptionFormatter(description: string): string {
-    // ToDo: Mit einem Befehl alle ersetzen. Aktuell wird nur das erste Ergebnis ersetzt.
-    description = description.replace("&lt;", "<")
-    description = description.replace("&lt;", "<")
-    description = description.replace("&gt;", ">")
-    description = description.replace("&gt;", ">")
+    description = description.replace(/&lt;/g, "<")
+    description = description.replace(/&gt;/g, ">")
     return description.trim()
   }
 
