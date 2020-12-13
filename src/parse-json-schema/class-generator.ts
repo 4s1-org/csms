@@ -157,8 +157,14 @@ export class ClassGenerator {
       content.push(`}`)
       content.push(``)
 
-      fs.writeFileSync(file, content.join("\n"), { encoding: "utf-8" })
+      this.writeFile(file, content)
     }
+  }
+
+  private writeFile(file: string, content: string[]): void {
+    let data = content.join("\n")
+    data = data.replace(/\r\n/g, "\n")
+    fs.writeFileSync(file, data, { encoding: "utf-8" })
   }
 
   private pushIfNotExists(content: string[], text: string): void {
@@ -186,7 +192,7 @@ export class ClassGenerator {
       content.push(`}`)
       content.push()
 
-      fs.writeFileSync(file, content.join("\n"), { encoding: "utf-8" })
+      this.writeFile(file, content)
     }
   }
 
