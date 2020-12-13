@@ -7,8 +7,10 @@ import { DeleteCertificateStatusEnum } from '../enums/delete-certificate-status.
 import { StatusInfoDto } from './status-info.dto'
 
 export class DeleteCertificateResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: DeleteCertificateStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class DeleteCertificateResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(DeleteCertificateStatusEnum)
-  public status!: DeleteCertificateStatusEnum
+  public status: DeleteCertificateStatusEnum
 
   @ApiProperty()
   @IsOptional()

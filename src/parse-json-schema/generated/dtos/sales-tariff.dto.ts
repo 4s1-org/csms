@@ -11,9 +11,11 @@ NOTE: This dataType is based on dataTypes from <<ref-ISOIEC15118-2,ISO 15118-2>>
  */
 export class SalesTariffDto {
   public constructor (
-    id: number
+    id: number,
+    salesTariffEntry: any
   ) {
     this.id = id
+    this.salesTariffEntry = salesTariffEntry
   }
 
   @ApiProperty()
@@ -23,7 +25,7 @@ export class SalesTariffDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public id!: number
+  public id: number
 
   /**
    * Sales_ Tariff. Sales. Tariff_ Description
@@ -43,5 +45,5 @@ A human readable title/short description of the sales tariff e.g. for HMI displa
 
   @ApiProperty()
   @IsNotEmpty()
-  public salesTariffEntry!: any
+  public salesTariffEntry: any
 }

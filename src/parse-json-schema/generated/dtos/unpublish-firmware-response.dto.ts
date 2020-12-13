@@ -6,8 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 import { UnpublishFirmwareStatusEnum } from '../enums/unpublish-firmware-status.enum'
 
 export class UnpublishFirmwareResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: UnpublishFirmwareStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -17,5 +19,5 @@ export class UnpublishFirmwareResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(UnpublishFirmwareStatusEnum)
-  public status!: UnpublishFirmwareStatusEnum
+  public status: UnpublishFirmwareStatusEnum
 }

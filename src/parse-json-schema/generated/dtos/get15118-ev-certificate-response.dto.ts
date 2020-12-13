@@ -7,8 +7,12 @@ import { Iso15118EVCertificateStatusEnum } from '../enums/iso15118-ev-certificat
 import { StatusInfoDto } from './status-info.dto'
 
 export class Get15118EVCertificateResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: Iso15118EVCertificateStatusEnum,
+    exiResponse: string
+  ) {
+    this.status = status
+    this.exiResponse = exiResponse
   }
 
   @ApiProperty()
@@ -18,7 +22,7 @@ export class Get15118EVCertificateResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(Iso15118EVCertificateStatusEnum)
-  public status!: Iso15118EVCertificateStatusEnum
+  public status: Iso15118EVCertificateStatusEnum
 
   @ApiProperty()
   @IsOptional()
@@ -31,5 +35,5 @@ export class Get15118EVCertificateResponseDto {
   @IsNotEmpty()
   @Length(0, 5600)
   @IsString()
-  public exiResponse!: string
+  public exiResponse: string
 }

@@ -6,8 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 import { InstallCertificateUseEnum } from '../enums/install-certificate-use.enum'
 
 export class InstallCertificateRequestDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    certificateType: InstallCertificateUseEnum,
+    certificate: string
+  ) {
+    this.certificateType = certificateType
+    this.certificate = certificate
   }
 
   @ApiProperty()
@@ -17,7 +21,7 @@ export class InstallCertificateRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(InstallCertificateUseEnum)
-  public certificateType!: InstallCertificateUseEnum
+  public certificateType: InstallCertificateUseEnum
 
   /**
    * A PEM encoded X.509 certificate.
@@ -26,5 +30,5 @@ export class InstallCertificateRequestDto {
   @IsNotEmpty()
   @Length(0, 5500)
   @IsString()
-  public certificate!: string
+  public certificate: string
 }

@@ -7,8 +7,10 @@ import { ChargingProfileStatusEnum } from '../enums/charging-profile-status.enum
 import { StatusInfoDto } from './status-info.dto'
 
 export class SetChargingProfileResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: ChargingProfileStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class SetChargingProfileResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingProfileStatusEnum)
-  public status!: ChargingProfileStatusEnum
+  public status: ChargingProfileStatusEnum
 
   @ApiProperty()
   @IsOptional()

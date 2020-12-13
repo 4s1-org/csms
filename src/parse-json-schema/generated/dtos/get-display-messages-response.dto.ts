@@ -7,8 +7,10 @@ import { GetDisplayMessagesStatusEnum } from '../enums/get-display-messages-stat
 import { StatusInfoDto } from './status-info.dto'
 
 export class GetDisplayMessagesResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: GetDisplayMessagesStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class GetDisplayMessagesResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GetDisplayMessagesStatusEnum)
-  public status!: GetDisplayMessagesStatusEnum
+  public status: GetDisplayMessagesStatusEnum
 
   @ApiProperty()
   @IsOptional()

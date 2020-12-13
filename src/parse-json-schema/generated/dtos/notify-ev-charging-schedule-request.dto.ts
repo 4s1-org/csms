@@ -7,8 +7,12 @@ import { ChargingScheduleDto } from './charging-schedule.dto'
 
 export class NotifyEVChargingScheduleRequestDto {
   public constructor (
+    timeBase: string,
+    chargingSchedule: ChargingScheduleDto,
     evseId: number
   ) {
+    this.timeBase = timeBase
+    this.chargingSchedule = chargingSchedule
     this.evseId = evseId
   }
 
@@ -22,14 +26,14 @@ export class NotifyEVChargingScheduleRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public timeBase!: string
+  public timeBase: string
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingSchedule!: ChargingScheduleDto
+  public chargingSchedule: ChargingScheduleDto
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 }

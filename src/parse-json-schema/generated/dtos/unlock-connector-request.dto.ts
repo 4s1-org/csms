@@ -20,10 +20,10 @@ export class UnlockConnectorRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public connectorId!: number
+  public connectorId: number
 }

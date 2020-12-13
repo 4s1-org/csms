@@ -29,20 +29,20 @@ export class ACChargingParametersDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public energyAmount!: number
+  public energyAmount: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evMinCurrent!: number
+  public evMinCurrent: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evMaxCurrent!: number
+  public evMaxCurrent: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evMaxVoltage!: number
+  public evMaxVoltage: number
 }

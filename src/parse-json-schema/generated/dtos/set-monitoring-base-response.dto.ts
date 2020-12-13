@@ -7,8 +7,10 @@ import { GenericDeviceModelStatusEnum } from '../enums/generic-device-model-stat
 import { StatusInfoDto } from './status-info.dto'
 
 export class SetMonitoringBaseResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: GenericDeviceModelStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class SetMonitoringBaseResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GenericDeviceModelStatusEnum)
-  public status!: GenericDeviceModelStatusEnum
+  public status: GenericDeviceModelStatusEnum
 
   @ApiProperty()
   @IsOptional()

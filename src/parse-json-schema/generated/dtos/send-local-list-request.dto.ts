@@ -7,9 +7,11 @@ import { UpdateEnum } from '../enums/update.enum'
 
 export class SendLocalListRequestDto {
   public constructor (
-    versionNumber: number
+    versionNumber: number,
+    updateType: UpdateEnum
   ) {
     this.versionNumber = versionNumber
+    this.updateType = updateType
   }
 
   @ApiProperty()
@@ -23,10 +25,10 @@ export class SendLocalListRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public versionNumber!: number
+  public versionNumber: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(UpdateEnum)
-  public updateType!: UpdateEnum
+  public updateType: UpdateEnum
 }

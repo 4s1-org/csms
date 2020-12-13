@@ -8,9 +8,13 @@ import { IdTokenDto } from './id-token.dto'
 
 export class ReserveNowRequestDto {
   public constructor (
-    id: number
+    id: number,
+    expiryDateTime: string,
+    idToken: IdTokenDto
   ) {
     this.id = id
+    this.expiryDateTime = expiryDateTime
+    this.idToken = idToken
   }
 
   @ApiProperty()
@@ -20,7 +24,7 @@ export class ReserveNowRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public id!: number
+  public id: number
 
   /**
    * Date and time at which the reservation expires.
@@ -28,7 +32,7 @@ export class ReserveNowRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public expiryDateTime!: string
+  public expiryDateTime: string
 
   @ApiProperty()
   @IsOptional()
@@ -37,7 +41,7 @@ export class ReserveNowRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public idToken!: IdTokenDto
+  public idToken: IdTokenDto
 
   @ApiProperty()
   @IsOptional()

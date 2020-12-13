@@ -11,8 +11,18 @@ urn:x-oca:ocpp:uid:2:233268
 VPN Configuration settings
  */
 export class VPNDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    server: string,
+    user: string,
+    password: string,
+    key: string,
+    type: VPNEnum
+  ) {
+    this.server = server
+    this.user = user
+    this.password = password
+    this.key = key
+    this.type = type
   }
 
   @ApiProperty()
@@ -28,7 +38,7 @@ VPN Server Address
   @IsNotEmpty()
   @Length(0, 512)
   @IsString()
-  public server!: string
+  public server: string
 
   /**
    * VPN. User. User_ Name
@@ -39,7 +49,7 @@ VPN User
   @IsNotEmpty()
   @Length(0, 20)
   @IsString()
-  public user!: string
+  public user: string
 
   /**
    * VPN. Group. Group_ Name
@@ -61,7 +71,7 @@ VPN Password.
   @IsNotEmpty()
   @Length(0, 20)
   @IsString()
-  public password!: string
+  public password: string
 
   /**
    * VPN. Key. VPN_ Key
@@ -72,10 +82,10 @@ VPN shared secret.
   @IsNotEmpty()
   @Length(0, 255)
   @IsString()
-  public key!: string
+  public key: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(VPNEnum)
-  public type!: VPNEnum
+  public type: VPNEnum
 }

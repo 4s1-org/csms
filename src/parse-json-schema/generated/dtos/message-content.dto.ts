@@ -11,8 +11,12 @@ urn:x-enexis:ecdm:uid:2:234490
 Contains message details, for a message to be displayed on a Charging Station.
  */
 export class MessageContentDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    format: MessageFormatEnum,
+    content: string
+  ) {
+    this.format = format
+    this.content = content
   }
 
   @ApiProperty()
@@ -22,7 +26,7 @@ export class MessageContentDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(MessageFormatEnum)
-  public format!: MessageFormatEnum
+  public format: MessageFormatEnum
 
   /**
    * Message_ Content. Language. Language_ Code
@@ -44,5 +48,5 @@ Message contents.
   @IsNotEmpty()
   @Length(0, 512)
   @IsString()
-  public content!: string
+  public content: string
 }

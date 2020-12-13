@@ -9,8 +9,10 @@ import { EVSEDto } from './evse.dto'
  * A physical or logical component
  */
 export class ComponentDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    name: string
+  ) {
+    this.name = name
   }
 
   @ApiProperty()
@@ -28,7 +30,7 @@ export class ComponentDto {
   @IsNotEmpty()
   @Length(0, 50)
   @IsString()
-  public name!: string
+  public name: string
 
   /**
    * Name of instance in case the component exists as multiple instances. Case Insensitive. strongly advised to use Camel Case.

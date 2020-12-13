@@ -7,8 +7,10 @@ import { CancelReservationStatusEnum } from '../enums/cancel-reservation-status.
 import { StatusInfoDto } from './status-info.dto'
 
 export class CancelReservationResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: CancelReservationStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class CancelReservationResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(CancelReservationStatusEnum)
-  public status!: CancelReservationStatusEnum
+  public status: CancelReservationStatusEnum
 
   @ApiProperty()
   @IsOptional()

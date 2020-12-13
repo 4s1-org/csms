@@ -11,8 +11,10 @@ urn:x-oca:ocpp:uid:2:233258
  */
 export class CostDto {
   public constructor (
+    costKind: CostKindEnum,
     amount: number
   ) {
+    this.costKind = costKind
     this.amount = amount
   }
 
@@ -23,12 +25,12 @@ export class CostDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(CostKindEnum)
-  public costKind!: CostKindEnum
+  public costKind: CostKindEnum
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public amount!: number
+  public amount: number
 
   @ApiProperty()
   @IsOptional()

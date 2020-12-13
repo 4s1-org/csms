@@ -11,9 +11,11 @@ Charging schedule period structure defines a time period in a charging schedule.
  */
 export class ChargingSchedulePeriodDto {
   public constructor (
-    startPeriod: number
+    startPeriod: number,
+    limit: number
   ) {
     this.startPeriod = startPeriod
+    this.limit = limit
   }
 
   @ApiProperty()
@@ -23,12 +25,12 @@ export class ChargingSchedulePeriodDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public startPeriod!: number
+  public startPeriod: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  public limit!: number
+  public limit: number
 
   @ApiProperty()
   @IsOptional()

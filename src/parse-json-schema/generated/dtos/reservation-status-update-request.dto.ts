@@ -7,9 +7,11 @@ import { ReservationUpdateStatusEnum } from '../enums/reservation-update-status.
 
 export class ReservationStatusUpdateRequestDto {
   public constructor (
-    reservationId: number
+    reservationId: number,
+    reservationUpdateStatus: ReservationUpdateStatusEnum
   ) {
     this.reservationId = reservationId
+    this.reservationUpdateStatus = reservationUpdateStatus
   }
 
   @ApiProperty()
@@ -19,10 +21,10 @@ export class ReservationStatusUpdateRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public reservationId!: number
+  public reservationId: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ReservationUpdateStatusEnum)
-  public reservationUpdateStatus!: ReservationUpdateStatusEnum
+  public reservationUpdateStatus: ReservationUpdateStatusEnum
 }

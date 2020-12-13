@@ -7,9 +7,13 @@ import { ConnectorStatusEnum } from '../enums/connector-status.enum'
 
 export class StatusNotificationRequestDto {
   public constructor (
+    timestamp: string,
+    connectorStatus: ConnectorStatusEnum,
     evseId: number,
     connectorId: number
   ) {
+    this.timestamp = timestamp
+    this.connectorStatus = connectorStatus
     this.evseId = evseId
     this.connectorId = connectorId
   }
@@ -24,20 +28,20 @@ export class StatusNotificationRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public timestamp!: string
+  public timestamp: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ConnectorStatusEnum)
-  public connectorStatus!: ConnectorStatusEnum
+  public connectorStatus: ConnectorStatusEnum
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public connectorId!: number
+  public connectorId: number
 }

@@ -8,8 +8,14 @@ import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
 export class SetVariableDataDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    attributeValue: string,
+    component: ComponentDto,
+    variable: VariableDto
+  ) {
+    this.attributeValue = attributeValue
+    this.component = component
+    this.variable = variable
   }
 
   @ApiProperty()
@@ -30,13 +36,13 @@ The Configuration Variable <<configkey-configuration-value-size,ConfigurationVal
   @IsNotEmpty()
   @Length(0, 1000)
   @IsString()
-  public attributeValue!: string
+  public attributeValue: string
 
   @ApiProperty()
   @IsNotEmpty()
-  public component!: ComponentDto
+  public component: ComponentDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public variable!: VariableDto
+  public variable: VariableDto
 }

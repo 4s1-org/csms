@@ -22,7 +22,7 @@ export class RelativeTimeIntervalDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public start!: number
+  public start: number
 
   @ApiProperty()
   @IsOptional()

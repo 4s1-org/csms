@@ -21,7 +21,7 @@ export class GetCompositeScheduleRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public duration!: number
+  public duration: number
 
   @ApiProperty()
   @IsOptional()
@@ -31,5 +31,5 @@ export class GetCompositeScheduleRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public evseId!: number
+  public evseId: number
 }

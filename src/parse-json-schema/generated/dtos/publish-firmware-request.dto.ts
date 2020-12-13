@@ -6,8 +6,12 @@ import { CustomDataDto } from './custom-data.dto'
 
 export class PublishFirmwareRequestDto {
   public constructor (
+    location: string,
+    checksum: string,
     requestId: number
   ) {
+    this.location = location
+    this.checksum = checksum
     this.requestId = requestId
   }
 
@@ -23,7 +27,7 @@ location from which to retrieve the firmware.
   @IsNotEmpty()
   @Length(0, 512)
   @IsString()
-  public location!: string
+  public location: string
 
   @ApiProperty()
   @IsOptional()
@@ -37,12 +41,12 @@ location from which to retrieve the firmware.
   @IsNotEmpty()
   @Length(0, 32)
   @IsString()
-  public checksum!: string
+  public checksum: string
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsOptional()

@@ -8,8 +8,10 @@ import { StatusInfoDto } from './status-info.dto'
 
 export class ClearMonitoringResultDto {
   public constructor (
+    status: ClearMonitoringStatusEnum,
     id: number
   ) {
+    this.status = status
     this.id = id
   }
 
@@ -20,12 +22,12 @@ export class ClearMonitoringResultDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ClearMonitoringStatusEnum)
-  public status!: ClearMonitoringStatusEnum
+  public status: ClearMonitoringStatusEnum
 
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public id!: number
+  public id: number
 
   @ApiProperty()
   @IsOptional()

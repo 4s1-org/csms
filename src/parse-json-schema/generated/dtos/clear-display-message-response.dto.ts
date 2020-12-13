@@ -7,8 +7,10 @@ import { ClearMessageStatusEnum } from '../enums/clear-message-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearDisplayMessageResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: ClearMessageStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class ClearDisplayMessageResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ClearMessageStatusEnum)
-  public status!: ClearMessageStatusEnum
+  public status: ClearMessageStatusEnum
 
   @ApiProperty()
   @IsOptional()

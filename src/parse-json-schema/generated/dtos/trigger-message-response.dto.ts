@@ -7,8 +7,10 @@ import { TriggerMessageStatusEnum } from '../enums/trigger-message-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class TriggerMessageResponseDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    status: TriggerMessageStatusEnum
+  ) {
+    this.status = status
   }
 
   @ApiProperty()
@@ -18,7 +20,7 @@ export class TriggerMessageResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(TriggerMessageStatusEnum)
-  public status!: TriggerMessageStatusEnum
+  public status: TriggerMessageStatusEnum
 
   @ApiProperty()
   @IsOptional()

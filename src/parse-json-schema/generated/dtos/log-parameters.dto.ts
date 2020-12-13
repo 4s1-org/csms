@@ -10,8 +10,10 @@ urn:x-enexis:ecdm:uid:2:233373
 Generic class for the configuration of logging entries.
  */
 export class LogParametersDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    remoteLocation: string
+  ) {
+    this.remoteLocation = remoteLocation
   }
 
   @ApiProperty()
@@ -27,7 +29,7 @@ The URL of the location at the remote system where the log should be stored.
   @IsNotEmpty()
   @Length(0, 512)
   @IsString()
-  public remoteLocation!: string
+  public remoteLocation: string
 
   /**
    * Log. Oldest_ Timestamp. Date_ Time

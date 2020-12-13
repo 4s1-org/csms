@@ -18,5 +18,5 @@ export class GetLocalListVersionResponseDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public versionNumber!: number
+  public versionNumber: number
 }

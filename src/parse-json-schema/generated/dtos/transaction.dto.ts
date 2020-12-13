@@ -11,8 +11,10 @@ import { ReasonEnum } from '../enums/reason.enum'
 urn:x-oca:ocpp:uid:2:233318
  */
 export class TransactionDto {
-  public constructor () {
-    // nothing to do
+  public constructor (
+    transactionId: string
+  ) {
+    this.transactionId = transactionId
   }
 
   @ApiProperty()
@@ -26,7 +28,7 @@ export class TransactionDto {
   @IsNotEmpty()
   @Length(0, 36)
   @IsString()
-  public transactionId!: string
+  public transactionId: string
 
   @ApiProperty()
   @IsOptional()

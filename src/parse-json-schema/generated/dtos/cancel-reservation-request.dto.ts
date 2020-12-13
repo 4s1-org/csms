@@ -18,5 +18,5 @@ export class CancelReservationRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public reservationId!: number
+  public reservationId: number
 }

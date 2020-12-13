@@ -22,7 +22,7 @@ export class GetReportRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public requestId!: number
+  public requestId: number
 
   @ApiProperty()
   @IsOptional()

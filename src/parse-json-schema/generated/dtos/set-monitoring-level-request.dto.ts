@@ -18,5 +18,5 @@ export class SetMonitoringLevelRequestDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
-  public severity!: number
+  public severity: number
 }
