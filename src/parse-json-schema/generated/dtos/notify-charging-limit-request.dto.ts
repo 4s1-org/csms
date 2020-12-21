@@ -3,6 +3,7 @@
 import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { ChargingScheduleDto } from './charging-schedule.dto'
 import { ChargingLimitDto } from './charging-limit.dto'
 
 export class NotifyChargingLimitRequestDto {
@@ -18,7 +19,7 @@ export class NotifyChargingLimitRequestDto {
 
   @ApiProperty()
   @IsOptional()
-  public chargingSchedule!: any
+  public chargingSchedule!: ChargingScheduleDto[]
 
   /**
    * The charging schedule contained in this notification applies to an EVSE. evseId must be > 0.

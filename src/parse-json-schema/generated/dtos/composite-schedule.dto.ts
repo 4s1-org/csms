@@ -3,6 +3,7 @@
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
 
 /**
@@ -11,7 +12,7 @@ import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
  */
 export class CompositeScheduleDto {
   public constructor(
-    chargingSchedulePeriod: any,
+    chargingSchedulePeriod: ChargingSchedulePeriodDto[],
     evseId: number,
     duration: number,
     scheduleStart: string,
@@ -30,7 +31,7 @@ export class CompositeScheduleDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingSchedulePeriod: any
+  public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 
   /**
    * The ID of the EVSE for which the

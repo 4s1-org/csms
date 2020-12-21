@@ -3,6 +3,7 @@
 import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { ReportDataDto } from './report-data.dto'
 
 export class NotifyReportRequestDto {
   public constructor(
@@ -37,7 +38,7 @@ export class NotifyReportRequestDto {
 
   @ApiProperty()
   @IsOptional()
-  public reportData!: any
+  public reportData!: ReportDataDto[]
 
   /**
    * “to be continued” indicator. Indicates whether another part of the report follows in an upcoming notifyReportRequest message. Default value when omitted is false.

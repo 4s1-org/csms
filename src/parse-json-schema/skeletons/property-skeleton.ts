@@ -71,6 +71,14 @@ export class PropertySkeleton extends SkeletonBase {
     this._annotations.push(`@Length(${min}, ${max})`)
   }
 
+  public setIsArray(type: string): void {
+    this._type = `${type}[]`
+  }
+
+  public setMinMaxItems(minItem: number, max: number): void {
+
+  }
+
   public toString(): string[] {
     const result: string[] = []
     for (const line of this.getComment()) {

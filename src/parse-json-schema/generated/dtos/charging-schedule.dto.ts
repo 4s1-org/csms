@@ -4,6 +4,7 @@ import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
+import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
 import { SalesTariffDto } from './sales-tariff.dto'
 
 /**
@@ -15,7 +16,7 @@ export class ChargingScheduleDto {
   public constructor(
     id: number,
     chargingRateUnit: ChargingRateUnitEnum,
-    chargingSchedulePeriod: any,
+    chargingSchedulePeriod: ChargingSchedulePeriodDto[],
   ) {
     this.id = id
     this.chargingRateUnit = chargingRateUnit
@@ -61,7 +62,7 @@ export class ChargingScheduleDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingSchedulePeriod: any
+  public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 
   /**
    * Charging_ Schedule. Min_ Charging_ Rate. Numeric

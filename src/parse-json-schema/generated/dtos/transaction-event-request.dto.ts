@@ -4,6 +4,7 @@ import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'clas
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { TransactionEventEnum } from '../enums/transaction-event.enum'
+import { MeterValueDto } from './meter-value.dto'
 import { TriggerReasonEnum } from '../enums/trigger-reason.enum'
 import { TransactionDto } from './transaction.dto'
 import { EVSEDto } from './evse.dto'
@@ -35,7 +36,7 @@ export class TransactionEventRequestDto {
 
   @ApiProperty()
   @IsOptional()
-  public meterValue!: any
+  public meterValue!: MeterValueDto[]
 
   /**
    * The date and time at which this transaction event occurred.

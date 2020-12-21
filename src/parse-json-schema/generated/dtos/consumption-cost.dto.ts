@@ -3,6 +3,7 @@
 import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { CostDto } from './cost.dto'
 
 /**
  * Consumption_ Cost
@@ -11,7 +12,7 @@ import { CustomDataDto } from './custom-data.dto'
 export class ConsumptionCostDto {
   public constructor(
     startValue: number,
-    cost: any,
+    cost: CostDto[],
   ) {
     this.startValue = startValue
     this.cost = cost
@@ -33,5 +34,5 @@ export class ConsumptionCostDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public cost: any
+  public cost: CostDto[]
 }

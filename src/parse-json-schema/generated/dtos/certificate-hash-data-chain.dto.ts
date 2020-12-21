@@ -5,6 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { CertificateHashDataDto } from './certificate-hash-data.dto'
 import { GetCertificateIdUseEnum } from '../enums/get-certificate-id-use.enum'
+import { CertificateHashDataDto } from './certificate-hash-data.dto'
 
 export class CertificateHashDataChainDto {
   public constructor(
@@ -30,5 +31,5 @@ export class CertificateHashDataChainDto {
 
   @ApiProperty()
   @IsOptional()
-  public childCertificateHashData!: any
+  public childCertificateHashData!: CertificateHashDataDto[]
 }

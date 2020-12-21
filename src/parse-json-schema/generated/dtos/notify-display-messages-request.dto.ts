@@ -3,6 +3,7 @@
 import { IsBoolean, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { MessageInfoDto } from './message-info.dto'
 
 export class NotifyDisplayMessagesRequestDto {
   public constructor(
@@ -17,7 +18,7 @@ export class NotifyDisplayMessagesRequestDto {
 
   @ApiProperty()
   @IsOptional()
-  public messageInfo!: any
+  public messageInfo!: MessageInfoDto[]
 
   /**
    * The id of the <<getdisplaymessagesrequest,GetDisplayMessagesRequest>> that requested this message.

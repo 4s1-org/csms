@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 
 export class ClearVariableMonitoringRequestDto {
   public constructor(
-    id: any,
+    id: undefined,
   ) {
     this.id = id
   }
@@ -20,5 +20,5 @@ export class ClearVariableMonitoringRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  public id: any
+  public id: undefined
 }

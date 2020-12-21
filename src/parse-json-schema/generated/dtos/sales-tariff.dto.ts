@@ -3,6 +3,7 @@
 import { IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { SalesTariffEntryDto } from './sales-tariff-entry.dto'
 
 /**
  * Sales_ Tariff
@@ -12,7 +13,7 @@ import { CustomDataDto } from './custom-data.dto'
 export class SalesTariffDto {
   public constructor(
     id: number,
-    salesTariffEntry: any,
+    salesTariffEntry: SalesTariffEntryDto[],
   ) {
     this.id = id
     this.salesTariffEntry = salesTariffEntry
@@ -55,5 +56,5 @@ export class SalesTariffDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public salesTariffEntry: any
+  public salesTariffEntry: SalesTariffEntryDto[]
 }

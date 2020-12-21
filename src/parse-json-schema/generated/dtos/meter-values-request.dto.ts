@@ -3,6 +3,7 @@
 import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { MeterValueDto } from './meter-value.dto'
 
 /**
  * Request_ Body
@@ -11,7 +12,7 @@ import { CustomDataDto } from './custom-data.dto'
 export class MeterValuesRequestDto {
   public constructor(
     evseId: number,
-    meterValue: any,
+    meterValue: MeterValueDto[],
   ) {
     this.evseId = evseId
     this.meterValue = meterValue
@@ -33,5 +34,5 @@ export class MeterValuesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public meterValue: any
+  public meterValue: MeterValueDto[]
 }

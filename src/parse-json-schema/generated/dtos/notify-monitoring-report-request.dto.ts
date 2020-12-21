@@ -3,6 +3,7 @@
 import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { MonitoringDataDto } from './monitoring-data.dto'
 
 export class NotifyMonitoringReportRequestDto {
   public constructor(
@@ -21,7 +22,7 @@ export class NotifyMonitoringReportRequestDto {
 
   @ApiProperty()
   @IsOptional()
-  public monitor!: any
+  public monitor!: MonitoringDataDto[]
 
   /**
    * The id of the GetMonitoringRequest that requested this report.
