@@ -80,6 +80,7 @@ export class PropertySkeleton extends SkeletonBase {
       result.push(`  ${annotation}`)
     }
     result.push(`  public ${this.name}${this.isRequired ? "" : "!"}: ${this._type}`)
+
     return result
   }
 }

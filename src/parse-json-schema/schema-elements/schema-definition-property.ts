@@ -66,7 +66,6 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     // Special thing beim DataTransferRequest. Da gibt es ein "data" was alles möglich sein darf.
     if (this.data.description && Object.keys(this.data).length === 1) {
       this.skeleton.setIsCustomType("any")
-      // this.item = new SchemaDefinitionPropertyItem(this.key, "string", undefined, this.data.description)
       return
     }
 
@@ -90,7 +89,7 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     if (this.data.type === "array") {
-      // ToDo
+      // ToDo Array
       this.skeleton.setIsAny()
       // this.item = new SchemaDefinitionPropertyItem(this.key, "any", undefined, undefined)
       return

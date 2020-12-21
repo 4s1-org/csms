@@ -35,7 +35,8 @@ export class SchemaDefinition extends Validatable<Foo> {
       if (!this.data.enum || !this.key.endsWith("EnumType") || !this.data.javaType.endsWith("Enum")) {
         throw new Error(`${this.key}: I thought it was a enum`)
       }
-      if (this.data.additionalProperties) {
+      // undefined ist in diesem Fall true
+      if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
         throw new Error(`${this.key}: I thought enums can't have additional properties`)
       }
 
@@ -61,6 +62,10 @@ export class SchemaDefinition extends Validatable<Foo> {
       const name = this.key.endsWith("Type") ? this.key.substr(0, this.key.length - 4) : this.key
       const skeleton = new ClassSkeleton(name)
       skeleton.setComment(this.data.description)
+
+      if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
+        skeleton.allowAdditionalProperties()
+      }
 
       const required = this.data.required || []
       for (const key in this.data.properties) {
