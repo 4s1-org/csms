@@ -26,7 +26,7 @@ export class DataTransferRequestDto {
 
   @ApiProperty()
   @IsOptional()
-  public data!: string
+  public data!: any
 
   /**
    * This identifies the Vendor specific implementation

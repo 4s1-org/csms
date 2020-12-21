@@ -28,5 +28,5 @@ export class DataTransferResponseDto {
 
   @ApiProperty()
   @IsOptional()
-  public data!: string
+  public data!: any
 }
