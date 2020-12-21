@@ -1,11 +1,11 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { ChargingProfileDto } from './charging-profile.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 import { IdTokenDto } from './id-token.dto'
-import { ChargingProfileDto } from './charging-profile.dto'
 
 export class RequestStartTransactionRequestDto {
   public constructor(

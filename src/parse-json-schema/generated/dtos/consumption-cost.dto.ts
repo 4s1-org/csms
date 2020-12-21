@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsArray, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
 import { CostDto } from './cost.dto'
+import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Consumption_ Cost

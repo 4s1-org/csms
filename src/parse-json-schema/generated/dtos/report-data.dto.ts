@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsArray, IsNotEmpty, IsOptional } from 'class-validator'
 import { ComponentDto } from './component.dto'
-import { VariableDto } from './variable.dto'
+import { CustomDataDto } from './custom-data.dto'
 import { VariableAttributeDto } from './variable-attribute.dto'
 import { VariableCharacteristicsDto } from './variable-characteristics.dto'
+import { VariableDto } from './variable.dto'
 
 /**
  * Class to report components, variables and variable attributes and characteristics.

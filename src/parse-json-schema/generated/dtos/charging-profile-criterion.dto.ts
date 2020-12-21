@@ -1,10 +1,10 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsEnum, IsInt, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
-import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
+import { IsArray, IsEnum, IsInt, IsOptional } from 'class-validator'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
+import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
+import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Charging_ Profile

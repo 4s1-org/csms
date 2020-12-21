@@ -1,10 +1,10 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { UpdateFirmwareStatusEnum } from '../enums/update-firmware-status.enum'
 import { StatusInfoDto } from './status-info.dto'
+import { UpdateFirmwareStatusEnum } from '../enums/update-firmware-status.enum'
 
 export class UpdateFirmwareResponseDto {
   public constructor(

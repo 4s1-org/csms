@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
-import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ChargingProfileKindEnum } from '../enums/charging-profile-kind.enum'
-import { RecurrencyKindEnum } from '../enums/recurrency-kind.enum'
+import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
 import { ChargingScheduleDto } from './charging-schedule.dto'
+import { CustomDataDto } from './custom-data.dto'
+import { RecurrencyKindEnum } from '../enums/recurrency-kind.enum'
 
 /**
  * Charging_ Profile

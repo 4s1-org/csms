@@ -1,10 +1,10 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsArray, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { ConsumptionCostDto } from './consumption-cost.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { RelativeTimeIntervalDto } from './relative-time-interval.dto'
-import { ConsumptionCostDto } from './consumption-cost.dto'
 
 /**
  * Sales_ Tariff_ Entry

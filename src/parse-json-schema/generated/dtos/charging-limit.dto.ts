@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsBoolean, IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
+import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Charging_ Limit

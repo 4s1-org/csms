@@ -161,7 +161,6 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       if (type === "string") {
         this.skeleton.setIsArray(type)
       } else if (type === "integer") {
-        // this.skeleton.setIsInteger()
         this.skeleton.setIsArray("number")
       } else {
         throw new Error(`${this.key}: Unknown constellation`)

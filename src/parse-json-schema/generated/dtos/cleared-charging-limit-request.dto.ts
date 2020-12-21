@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
+import { CustomDataDto } from './custom-data.dto'
 
 export class ClearedChargingLimitRequestDto {
   public constructor(

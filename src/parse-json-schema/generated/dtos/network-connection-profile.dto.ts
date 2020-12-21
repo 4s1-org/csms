@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { APNDto } from './apn.dto'
-import { OCPPVersionEnum } from '../enums/ocpp-version.enum'
-import { OCPPTransportEnum } from '../enums/ocpp-transport.enum'
+import { CustomDataDto } from './custom-data.dto'
 import { OCPPInterfaceEnum } from '../enums/ocpp-interface.enum'
+import { OCPPTransportEnum } from '../enums/ocpp-transport.enum'
+import { OCPPVersionEnum } from '../enums/ocpp-version.enum'
 import { VPNDto } from './vpn.dto'
 
 /**
