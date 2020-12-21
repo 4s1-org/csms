@@ -5,7 +5,6 @@ import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingProfileDto } from '../dtos/charging-profile.dto'
 import { CustomDataDto } from '../dtos/custom-data.dto'
 import { IdTokenDto } from '../dtos/id-token.dto'
-import { IdTokenDto } from '../dtos/id-token.dto'
 
 export class RequestStartTransactionRequestDto {
   public constructor(

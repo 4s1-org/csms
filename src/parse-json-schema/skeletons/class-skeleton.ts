@@ -43,8 +43,12 @@ export class ClassSkeleton extends SkeletonBase {
       let classValidatorItemsUnique = [...new Set(classValidatorItems)].sort()
       result.push(`import { ${classValidatorItemsUnique.join(", ")} } from 'class-validator'`)
 
-      let ownImportsUnique = [...new Set(ownImports)].sort()
-      for (const ownImport of ownImportsUnique) {
+      let ownImportsDone: string[] = []
+      for (const ownImport of ownImports.sort()) {
+        if (ownImportsDone.includes(ownImport[0])) {
+          continue
+        }
+
         if (ownImport[1].endsWith("enum")) {
           result.push(`import { ${ownImport[0]} } from '../enums/${ownImport[1]}'`)
         } else if (ownImport[1].endsWith("dto")) {
@@ -54,6 +58,7 @@ export class ClassSkeleton extends SkeletonBase {
             result.push(`import { ${ownImport[0]} } from './${ownImport[1]}'`)
           }
         }
+        ownImportsDone.push(ownImport[0])
       }
       result.push(``)
     }
