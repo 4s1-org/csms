@@ -1,5 +1,5 @@
 export abstract class SkeletonBase {
-  private _comment = ""
+  private _comment: string | undefined = ""
   private _importsClassValidator: string[] = []
   private _importsOwnClasses: [string, string][] = []
 
@@ -9,10 +9,20 @@ export abstract class SkeletonBase {
     // nothing to do
   }
 
-  public set comment(value: string) {
-    value = value.replace(/&lt;/g, "<")
-    value = value.replace(/&gt;/g, ">")
-    this._comment = value.trim()
+  public set comment(value: string | undefined) {
+    if (value) {
+      value = value.replace(/&lt;/g, "<")
+      value = value.replace(/&gt;/g, ">")
+      value = value.replace(/\r\n/g, "\n")
+      this._comment = value.trim()
+    } else {
+      this._comment = undefined
+    }
+  }
+
+
+  public get comment(): string | undefined {
+    return this._comment
   }
 
   public formatFilename(name: string): string {
@@ -36,9 +46,6 @@ export abstract class SkeletonBase {
     return result
   }
 
-  public get comment(): string {
-    return this._comment
-  }
 
   public get importClassValidator(): string[] {
     return this._importsClassValidator
@@ -56,5 +63,5 @@ export abstract class SkeletonBase {
     this._importsOwnClasses.push([name, path])
   }
 
-  public abstract toString(): string
+  public abstract toString(): string[]
 }

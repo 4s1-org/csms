@@ -42,7 +42,10 @@ export class SchemaDefinition extends Validatable<Foo> {
 
       // Remove "EnumType"
       const name = this.key.substr(0, this.key.length - 8)
-      const skeleton = new EnumSkeleton(name)
+      const skeleton = new EnumSkeleton(name, this.data.enum)
+      skeleton.comment = this.data.description
+      ClassGenerator.Instance.addEnumNew(skeleton)
+
 
       ClassGenerator.Instance.addEnum(this.key.substr(0, this.key.length - 8), this.data.enum, this.data.description)
     } else if (this.data.type === "object") {

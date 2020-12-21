@@ -14,7 +14,7 @@ export class ClassSkeleton extends SkeletonBase {
     return prop
   }
 
-  public toString(): string {
+  public toString(): string[] {
     const result: string[] = []
 
     // Headerinfo
@@ -53,14 +53,16 @@ export class ClassSkeleton extends SkeletonBase {
     // Properties
     for (const prop of this._properties) {
       result.push(``)
-      result.push(prop.toString())
+      for (const line of prop.toString()) {
+        result.push(line)
+      }
     }
 
     // End of class
     result.push(`}`)
 
     // End
-    return result.join("/n")
+    return result
   }
 }
 
