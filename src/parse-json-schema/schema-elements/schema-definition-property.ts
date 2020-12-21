@@ -59,6 +59,11 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
         const type = this.data.$ref.substr(14, this.data.$ref.length - 18)
         this.skeleton.setIsCustomType(type + "Dto")
         this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
+      } else if (this.data.$ref.endsWith("AuthorizationData")) {
+        // DTO - AuthorizationData
+        const type = this.data.$ref.substr(14, this.data.$ref.length - 14)
+        this.skeleton.setIsCustomType(type + "Dto")
+        this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       } else {
         throw new Error(`${this.key}: Unknown Type: ${this.data.type}`)
       }
