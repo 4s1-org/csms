@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsInt, IsNumber, IsOptional } from 'class-validator'
+import { IsInt, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenInfoDto } from './id-token-info.dto'
 import { MessageContentDto } from './message-content.dto'
@@ -10,6 +10,7 @@ export class TransactionEventResponseDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -30,9 +31,11 @@ export class TransactionEventResponseDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public idTokenInfo!: IdTokenInfoDto
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public updatedPersonalMessage!: MessageContentDto
 }

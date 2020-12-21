@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingProfileCriterionDto } from './charging-profile-criterion.dto'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -16,6 +16,7 @@ export class GetChargingProfilesRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -36,5 +37,6 @@ export class GetChargingProfilesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public chargingProfile: ChargingProfileCriterionDto
 }

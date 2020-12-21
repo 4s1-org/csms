@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { EventDataDto } from './event-data.dto'
 
@@ -18,6 +18,7 @@ export class NotifyEventRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -49,5 +50,6 @@ export class NotifyEventRequestDto {
   @IsNotEmpty()
   // MinItems: 1
   @IsArray()
+  @ValidateNested()
   public eventData: EventDataDto[]
 }

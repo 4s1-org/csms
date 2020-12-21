@@ -169,17 +169,17 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
 
     if (isCustomType) {
       if (isEnum) {
-        this.skeleton.setIsArray(type + "Enum")
+        this.skeleton.setIsCustomTypeArray(type + "Enum")
         this.skeleton.addImportOwnClass(type + "Enum", `../enums/${this.skeleton.formatFilename(type)}.enum`)
       } else {
-        this.skeleton.setIsArray(type + "Dto")
+        this.skeleton.setIsCustomTypeArray(type + "Dto")
         this.skeleton.addImportOwnClass(type + "Dto", `./${this.skeleton.formatFilename(type)}.dto`)
       }
     } else {
       if (type === "string") {
-        this.skeleton.setIsArray(type)
+        this.skeleton.setIsStringArray()
       } else if (type === "integer") {
-        this.skeleton.setIsArray("number")
+        this.skeleton.setIsIntegerArray()
       } else {
         throw new Error(`${this.key}: Unknown constellation`)
       }

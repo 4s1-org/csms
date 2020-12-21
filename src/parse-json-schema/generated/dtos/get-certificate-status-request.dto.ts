@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsOptional } from 'class-validator'
+import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { OCSPRequestDataDto } from './ocsp-request-data.dto'
 
@@ -14,9 +14,11 @@ export class GetCertificateStatusRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public ocspRequestData: OCSPRequestDataDto
 }

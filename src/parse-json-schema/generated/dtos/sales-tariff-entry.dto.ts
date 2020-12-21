@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ConsumptionCostDto } from './consumption-cost.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { RelativeTimeIntervalDto } from './relative-time-interval.dto'
@@ -19,10 +19,12 @@ export class SalesTariffEntryDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public relativeTimeInterval: RelativeTimeIntervalDto
 
   /**
@@ -41,5 +43,6 @@ export class SalesTariffEntryDto {
   // MinItems: 1
   // MinItems: 3
   @IsArray()
+  @ValidateNested()
   public consumptionCost!: ConsumptionCostDto[]
 }

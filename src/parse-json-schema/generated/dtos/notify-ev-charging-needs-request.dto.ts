@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingNeedsDto } from './charging-needs.dto'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -16,6 +16,7 @@ export class NotifyEVChargingNeedsRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -28,6 +29,7 @@ export class NotifyEVChargingNeedsRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public chargingNeeds: ChargingNeedsDto
 
   /**

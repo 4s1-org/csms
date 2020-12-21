@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingProfileDto } from './charging-profile.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
@@ -18,6 +18,7 @@ export class RequestStartTransactionRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -30,10 +31,12 @@ export class RequestStartTransactionRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public groupIdToken!: IdTokenDto
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public idToken: IdTokenDto
 
   /**
@@ -46,5 +49,6 @@ export class RequestStartTransactionRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public chargingProfile!: ChargingProfileDto
 }

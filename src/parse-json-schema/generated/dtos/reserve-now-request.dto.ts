@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
 import { ConnectorEnum } from '../enums/connector.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
@@ -20,6 +20,7 @@ export class ReserveNowRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -46,6 +47,7 @@ export class ReserveNowRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public idToken: IdTokenDto
 
   /**
@@ -58,5 +60,6 @@ export class ReserveNowRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public groupIdToken!: IdTokenDto
 }

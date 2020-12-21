@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 import { ChargingProfileDto } from './charging-profile.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -21,6 +21,7 @@ export class ReportChargingProfilesRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -40,6 +41,7 @@ export class ReportChargingProfilesRequestDto {
   @IsNotEmpty()
   // MinItems: 1
   @IsArray()
+  @ValidateNested()
   public chargingProfile: ChargingProfileDto[]
 
   /**
