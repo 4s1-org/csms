@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ComponentDto } from './component.dto'
@@ -35,5 +35,6 @@ export class MonitoringDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
   public variableMonitoring: VariableMonitoringDto[]
 }

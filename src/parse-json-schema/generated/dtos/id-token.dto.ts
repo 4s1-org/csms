@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { AdditionalInfoDto } from './additional-info.dto'
@@ -24,6 +24,7 @@ export class IdTokenDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsArray()
   public additionalInfo!: AdditionalInfoDto[]
 
   /**

@@ -157,10 +157,19 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
         this.skeleton.setIsArray(type + "Dto")
         this.skeleton.addImportOwnClass(type + "Dto", `./${this.skeleton.formatFilename(type)}.dto`)
       }
+    } else {
+      if (type === "string") {
+        this.skeleton.setIsArray(type)
+      } else if (type === "integer") {
+        // this.skeleton.setIsInteger()
+        this.skeleton.setIsArray("number")
+      } else {
+        throw new Error(`${this.key}: Unknown constellation`)
+      }
     }
 
     if (this.data.minItems !== undefined && this.data.maxItems !== undefined) {
-      this.skeleton.setMinMaxItems(this.data.minItems, this.data.maxItems)
+      //this.skeleton.setMinNumber(this.data.minItems, this.data.maxItems)
     } else {
       // throw new Error(`${this.key}: Array should have "minItems" and "maxItems"`)
     }

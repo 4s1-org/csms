@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
@@ -31,6 +31,7 @@ export class CompositeScheduleDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
   public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 
   /**

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
@@ -89,6 +89,7 @@ export class ChargingProfileDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
   public chargingSchedule: ChargingScheduleDto[]
 
   /**

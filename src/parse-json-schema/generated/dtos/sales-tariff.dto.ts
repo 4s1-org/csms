@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsArray, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { SalesTariffEntryDto } from './sales-tariff-entry.dto'
@@ -56,5 +56,6 @@ export class SalesTariffDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
   public salesTariffEntry: SalesTariffEntryDto[]
 }

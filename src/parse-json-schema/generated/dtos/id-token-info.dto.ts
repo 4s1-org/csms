@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { AuthorizationStatusEnum } from '../enums/authorization-status.enum'
@@ -63,7 +63,8 @@ export class IdTokenInfoDto {
    */
   @ApiProperty()
   @IsOptional()
-  public evseId!: undefined
+  @IsArray()
+  public evseId!: number[]
 
   @ApiProperty()
   @IsOptional()

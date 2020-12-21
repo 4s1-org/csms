@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { CertificateHashDataDto } from './certificate-hash-data.dto'
@@ -31,5 +31,6 @@ export class CertificateHashDataChainDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsArray()
   public childCertificateHashData!: CertificateHashDataDto[]
 }

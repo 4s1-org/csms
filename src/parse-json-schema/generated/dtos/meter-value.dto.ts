@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { SampledValueDto } from './sampled-value.dto'
@@ -25,6 +25,7 @@ export class MeterValueDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
   public sampledValue: SampledValueDto[]
 
   /**

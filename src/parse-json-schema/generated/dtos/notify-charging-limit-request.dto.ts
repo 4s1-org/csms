@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingScheduleDto } from './charging-schedule.dto'
@@ -19,6 +19,7 @@ export class NotifyChargingLimitRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsArray()
   public chargingSchedule!: ChargingScheduleDto[]
 
   /**

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { TransactionEventEnum } from '../enums/transaction-event.enum'
@@ -36,6 +36,7 @@ export class TransactionEventRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsArray()
   public meterValue!: MeterValueDto[]
 
   /**
