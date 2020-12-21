@@ -142,11 +142,15 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     if (keyZero === "$ref" && valueZero.startsWith("#/definitions/")) {
       if (valueZero.endsWith("EnumType")) {
         isCustomType = true
-        type = this.data.items["$ref"].substr(14, this.data.items["$ref"].length - 22)
+        type = valueZero.substr(14, valueZero.length - 22)
         isEnum = true
-      } else if (valueZero.endsWith("Type") || valueZero.endsWith("AuthorizationData")) {
+      } else if (valueZero.endsWith("Type")) {
         isCustomType = true
-        type = this.data.items["$ref"].substr(14, this.data.items["$ref"].length - 18)
+        type = valueZero.substr(14, valueZero.length - 18)
+        isEnum = false
+      } else if (valueZero.endsWith("AuthorizationData")) {
+        isCustomType = true
+        type = valueZero.substr(14, valueZero.length - 14)
         isEnum = false
       } else {
         throw new Error(`${this.key}: Unknown Type`)
