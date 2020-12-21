@@ -12,7 +12,7 @@ export abstract class SkeletonBase {
     // nothing to do
   }
 
-  public setComment(value: string | undefined) {
+  public setComment(value: string | undefined): void {
     this._comment = []
     if (value) {
       value = value.trim()

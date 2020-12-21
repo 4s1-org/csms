@@ -22,7 +22,7 @@ export class PropertySkeleton extends SkeletonBase {
   }
 
   public get type(): string | undefined {
-    return this._type;
+    return this._type
   }
 
   public setIsEnum(value: string): void {
