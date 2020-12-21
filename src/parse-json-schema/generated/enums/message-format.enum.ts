@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Message_ Content. Format. Message_ Format_ Code
  * urn:x-enexis:ecdm:uid:1:570848

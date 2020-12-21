@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Certificate status information. 
  * - if all certificates are valid: return 'Accepted'.
