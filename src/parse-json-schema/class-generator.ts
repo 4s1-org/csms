@@ -34,9 +34,9 @@ export class ClassGenerator {
       item.writeFile([__dirname, "generated", "enums"], "enum")
     }
 
-    // for (const item of this.classSkeletons.filter(x => x.isRoot)) {
-    //   item.writeFile([__dirname, "generated", "dtos"], "dto")
-    // }
+    for (const item of this.classSkeletons.filter(x => x.isRoot)) {
+      item.writeFile([__dirname, "generated", "dtos"], "dto")
+    }
     for (const item of this.classSkeletons.filter(x => !x.isRoot)) {
       item.writeFile([__dirname, "generated", "dtos"], "dto")
     }
