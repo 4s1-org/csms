@@ -31,8 +31,6 @@ export class SchemaDefinition extends Validatable<Foo> {
   }
 
   protected handleData(): void {
-
-
     if (this.data.type === "string") {
       if (!this.data.enum || !this.key.endsWith("EnumType") || !this.data.javaType.endsWith("Enum")) {
         throw new Error(`${this.key}: I thought it was a enum`)
@@ -44,18 +42,16 @@ export class SchemaDefinition extends Validatable<Foo> {
       // Remove "EnumType"
       const name = this.key.substr(0, this.key.length - 8)
       const skeleton = new EnumSkeleton(name, this.data.enum)
-      skeleton.comment = this.data.description
+      skeleton.setComment(this.data.description)
       ClassGenerator.instance.addEnum(skeleton)
     } else if (this.data.type === "object") {
       if (!this.data.properties) {
         throw new Error(`${this.key}: I thought it was a custom type`)
       }
-      // const skeleton = new ClassSkeleton(this.key)
-
       // Remove "Type"
       const name = this.key.substr(0, this.key.length - 4)
-      const skeleton = new ClassSkeleton(name, true)
-      skeleton.comment = this.data.description
+      const skeleton = new ClassSkeleton(name)
+      skeleton.setComment(this.data.description)
 
       const required = this.data.required || []
       for (const key in this.data.properties) {

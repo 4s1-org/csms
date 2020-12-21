@@ -4,8 +4,9 @@ import { SkeletonBase } from "./skeleton-base"
 export class ClassSkeleton extends SkeletonBase {
   private _properties: PropertySkeleton[] = []
 
-  public constructor(name: string, public readonly isRoot: boolean = false) {
-    super(name)
+  public constructor(name: string,
+    public readonly isRoot: boolean = false) {
+    super(name + "Dto")
   }
 
   public addProperty(name: string, isRequired: boolean): PropertySkeleton {
@@ -23,14 +24,27 @@ export class ClassSkeleton extends SkeletonBase {
 
     // Imports
     if (this._properties.length) {
+      const classValidatorItems: string[] = []
+      const ownImports: [string, string][] = []
+      for (const prop of this._properties) {
+        classValidatorItems.push(...prop.importClassValidator)
+        ownImports.push(...prop.imporOwnClass)
+      }
+      let uniqueItems = [...new Set(classValidatorItems)].sort()
+      let uniqueItems3 = [...new Set(ownImports)]
+
+      result.push(`import { ${uniqueItems.join(", ")} } from 'class-validator'`)
       result.push(`import { ApiProperty } from '@nestjs/swagger'`)
+
+      for (const foo of uniqueItems3) {
+        result.push(`import { ${foo[0]} } from '${foo[1]}'`)
+      }
+      result.push(``)
     }
 
     // Classcomment
-    if (this.comment) {
-      result.push("  /**")
-      result.push(`   * ${this.comment}`)
-      result.push("   */")
+    for (const line of this.getComment()) {
+      result.push(line)
     }
 
     // Begin of class
@@ -39,15 +53,15 @@ export class ClassSkeleton extends SkeletonBase {
     // Constructor
     const requiredProperties = this._properties.filter(x => x.isRequired)
     if (requiredProperties.length) {
-      result.push(`    public constructor(`)
+      result.push(`  public constructor(`)
       for (const prop of requiredProperties) {
-        result.push(`      this.${prop.name}: ${prop.type},`)
+        result.push(`    ${prop.name}: ${prop.type},`)
       }
-      result.push(`    ) {`)
+      result.push(`  ) {`)
       for (const prop of requiredProperties) {
-        result.push(`      this.${prop.name} = ${prop.name}`)
+        result.push(`    this.${prop.name} = ${prop.name}`)
       }
-      result.push(`    }`)
+      result.push(`  }`)
     }
 
     // Properties
@@ -60,6 +74,7 @@ export class ClassSkeleton extends SkeletonBase {
 
     // End of class
     result.push(`}`)
+    result.push(``)
 
     // End
     return result

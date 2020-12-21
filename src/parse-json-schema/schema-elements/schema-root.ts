@@ -41,7 +41,7 @@ export class SchemaRoot extends Validatable<Foo> {
     // Remove "Type"
     const name = this.key.substr(0, this.key.length - 4)
     const skeleton = new ClassSkeleton(name, true)
-    skeleton.comment = this.data.description
+    skeleton.setComment(this.data.description)
 
     const required = this.data.required || []
     for (const key in this.data.properties) {

@@ -43,9 +43,20 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       if (!this.data.$ref.startsWith("#/definitions/")) {
         throw new Error(`${this.key}: I though $ref should start with definition`)
       }
+      if (!this.data.$ref.endsWith("Type")) {
+        throw new Error(`${this.key}: This case is not implemented`)
+      }
 
-      const type = this.data.$ref.substr(14, this.data.$ref.length - 13)
-      this.skeleton.setIsCustomType(type)
+      const isEnum = this.data.$ref.endsWith("EnumType") // otherwise it's a DTO
+      if (isEnum) {
+        const type = this.data.$ref.substr(14, this.data.$ref.length - 22)
+        this.skeleton.setIsEnum(type + "Enum")
+        this.skeleton.addImportOwnClass(type + "Enum", `../enums/${this.skeleton.formatFilename(type)}.enum`)
+      } else {
+        const type = this.data.$ref.substr(14, this.data.$ref.length - 18)
+        this.skeleton.setIsCustomType(type + "Dto")
+        this.skeleton.addImportOwnClass(type + "Dto", `./${this.skeleton.formatFilename(type)}.dto`)
+      }
       return
     }
 
@@ -61,7 +72,7 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       throw new Error(`${this.key}: No $ref and no type`)
     }
 
-    this.skeleton.comment = this.data.description
+    this.skeleton.setComment(this.data.description)
 
     if (this.data.type === "string") {
       this.skeleton.setIsString()

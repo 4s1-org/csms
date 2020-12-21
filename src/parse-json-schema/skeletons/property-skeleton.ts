@@ -50,7 +50,7 @@ export class PropertySkeleton extends SkeletonBase {
   }
 
   public setIsCustomType(type: string): void {
-    this._type = "type"
+    this._type = type
   }
 
   /**
@@ -73,10 +73,8 @@ export class PropertySkeleton extends SkeletonBase {
 
   public toString(): string[] {
     const result: string[] = []
-    if (this.comment) {
-      result.push("  /**")
-      result.push(`   * ${this.comment}`)
-      result.push("   */")
+    for (const line of this.getComment()) {
+      result.push(`  ${line}`)
     }
     for (const annotation of this._annotations) {
       result.push(`  ${annotation}`)
