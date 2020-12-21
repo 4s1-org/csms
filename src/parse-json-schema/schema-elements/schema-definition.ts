@@ -41,7 +41,7 @@ export class SchemaDefinition extends Validatable<Foo> {
 
       // Remove "EnumType"
       if (!this.key.endsWith("EnumType")) {
-        throw new Error(`${this.key}: I thought it's ends with "EnumType"`)
+        throw new Error(`${this.key}: I thought it would ends with "EnumType"`)
       }
       const name = this.key.substr(0, this.key.length - 8)
       const skeleton = new EnumSkeleton(name, this.data.enum)
@@ -55,7 +55,7 @@ export class SchemaDefinition extends Validatable<Foo> {
       // Info: AuthorizationData ist der einzige Datentyp, der nicht mit "Type" endet.
 
       if (!this.key.endsWith("Type") && this.key !== "AuthorizationData") {
-        throw new Error(`${this.key}: I thought it's ends with "Type"`)
+        throw new Error(`${this.key}: I thought it would end with "Type"`)
       }
       // Remove "Type", außer bei dem Sonderfall "AuthorizationData"
       const name = this.key.endsWith("Type") ? this.key.substr(0, this.key.length - 4) : this.key

@@ -12,8 +12,8 @@ export class EnumSkeleton extends SkeletonBase {
     const result: string[] = []
 
     // Headerinfo
-    //result.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
-    //result.push(``)
+    result.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+    result.push(``)
 
     // Classcomment
     for (const line of this.getComment()) {

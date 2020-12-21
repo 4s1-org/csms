@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Type of attribute: Actual, Target, MinSet, MaxSet. Default is Actual when omitted.
  */

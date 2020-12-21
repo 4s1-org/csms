@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Message_ Info. Priority. Message_ Priority_ Code
  * urn:x-enexis:ecdm:uid:1:569253

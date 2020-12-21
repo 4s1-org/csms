@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Charging_ Profile. Charging_ Profile_ Purpose. Charging_ Profile_ Purpose_ Code
  * urn:x-oca:ocpp:uid:1:569231

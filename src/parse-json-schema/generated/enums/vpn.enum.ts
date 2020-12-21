@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * VPN. Type. VPN_ Code
  * urn:x-oca:ocpp:uid:1:569277

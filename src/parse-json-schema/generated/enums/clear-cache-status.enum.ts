@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Accepted if the Charging Station has executed the request, otherwise rejected.
  */

@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Communication_ Function. OCPP_ Transport. OCPP_ Transport_ Code
  * urn:x-oca:ocpp:uid:1:569356
