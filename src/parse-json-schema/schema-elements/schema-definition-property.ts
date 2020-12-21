@@ -74,7 +74,9 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     if (!this.data.type) {
       throw new Error(`${this.key}: No $ref and no type`)
     }
-
+    if (this.data.items && (this.data.additionalItems === undefined || this.data.additionalItems)) {
+      throw new Error(`${this.key}: "additionalItems" should be never set`)
+    }
 
 
     if (this.data.type === "string") {
