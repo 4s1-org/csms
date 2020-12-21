@@ -22,7 +22,7 @@
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
-    "pjs": "rm -rf src/parse-json-schema/generated && ts-node src/parse-json-schema/index.ts",
+    "pjs": "rm -rf src/parse-json-schema/generated/ && git checkout HEAD~1 -- src/parse-json-schema/generated/ && ts-node src/parse-json-schema/index.ts",
     "test": "echo No tests available",
     "test:cov": "echo No tests available"
   },
