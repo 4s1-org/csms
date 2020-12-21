@@ -2,7 +2,7 @@ import path from "path"
 import fs from "fs"
 
 export abstract class SkeletonBase {
-  private _comment: string | undefined = ""
+  private _comment: string[] = []
   private _importsClassValidator: string[] = []
   private _importsOwnClasses: [string, string][] = []
 
@@ -12,23 +12,27 @@ export abstract class SkeletonBase {
     // nothing to do
   }
 
-  public set comment(value: string | undefined) {
+  public setComment(value: string | undefined) {
+    this._comment = []
     if (value) {
+      value = value.trim()
       value = value.replace(/&lt;/g, "<")
       value = value.replace(/&gt;/g, ">")
-      value = value.replace(/\r\n/g, "\n")
-      this._comment = value.trim()
-    } else {
-      this._comment = undefined
+
+      this._comment.push("/**")
+      for (const line of value.split("\r\n")) {
+        this._comment.push(` * ${line}`)
+      }
+      this._comment.push(" */")
     }
   }
 
 
-  public get comment(): string | undefined {
+  public getComment(): string[] {
     return this._comment
   }
 
-  private formatFilename(name: string): string {
+  public formatFilename(name: string): string {
     name = name.replace(/OCPP/g, "Ocpp")
     name = name.replace(/OCSP/g, "Ocsp")
     name = name.replace(/EVSE/g, "Evse")
@@ -68,12 +72,17 @@ export abstract class SkeletonBase {
 
   public abstract toString(): string[]
 
-  public writeFile(folders: string[], extension: "dto" | "enum"): void {
+  public writeFile(folders: string[]): void {
     const folderpath = path.join(...folders)
     if (!fs.existsSync(folderpath)) {
       fs.mkdirSync(folderpath)
     }
-    const filename = path.join(folderpath, `${this.formatFilename(this.name)}.${extension}.ts`)
+
+    const cutLength = this.name.endsWith("Enum") ? 4 : this.name.endsWith("Dto") ? 3 : 0
+    const name = this.name.substr(0, this.name.length - cutLength)
+    const extension = this.name.substr(this.name.length - cutLength, cutLength).toLowerCase()
+
+    const filename = path.join(folderpath, `${this.formatFilename(name)}.${extension}.ts`)
 
     let data = this.toString().join("\n")
     data = data.replace(/\r\n/g, "\n")

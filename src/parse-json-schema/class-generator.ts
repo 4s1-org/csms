@@ -31,14 +31,14 @@ export class ClassGenerator {
 
   public generateFiles(): void {
     for (const item of this.enumSkeletons) {
-      item.writeFile([__dirname, "generated", "enums"], "enum")
+      item.writeFile([__dirname, "generated", "enums"])
     }
 
-    for (const item of this.classSkeletons.filter(x => x.isRoot)) {
-      item.writeFile([__dirname, "generated", "dtos"], "dto")
-    }
+    // for (const item of this.classSkeletons.filter(x => x.isRoot)) {
+    //   item.writeFile([__dirname, "generated", "dtos"])
+    // }
     for (const item of this.classSkeletons.filter(x => !x.isRoot)) {
-      item.writeFile([__dirname, "generated", "dtos"], "dto")
+      item.writeFile([__dirname, "generated", "dtos"])
     }
   }
 
