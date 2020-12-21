@@ -3,6 +3,7 @@
 import { IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { GetCertificateIdUseEnum } from '../enums/get-certificate-id-use.enum'
 
 export class GetInstalledCertificateIdsRequestDto {
 
@@ -15,5 +16,5 @@ export class GetInstalledCertificateIdsRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  public certificateType!: any
+  public certificateType!: GetCertificateIdUseEnum[]
 }

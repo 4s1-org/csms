@@ -26,7 +26,7 @@ export class PublishFirmwareStatusNotificationRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  public location!: any
+  public location!: undefined
 
   /**
    * The request id that was

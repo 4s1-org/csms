@@ -3,6 +3,7 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { SampledValueDto } from './sampled-value.dto'
 
 /**
  * Meter_ Value
@@ -11,7 +12,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class MeterValueDto {
   public constructor(
-    sampledValue: any,
+    sampledValue: SampledValueDto[],
     timestamp: string,
   ) {
     this.sampledValue = sampledValue
@@ -24,7 +25,7 @@ export class MeterValueDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public sampledValue: any
+  public sampledValue: SampledValueDto[]
 
   /**
    * Meter_ Value. Timestamp. Date_ Time

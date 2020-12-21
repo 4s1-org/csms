@@ -22,7 +22,7 @@ export class GetDisplayMessagesRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  public id!: any
+  public id!: undefined
 
   /**
    * The Id of this request.

@@ -4,6 +4,7 @@ import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
+import { OCSPRequestDataDto } from './ocsp-request-data.dto'
 
 export class AuthorizeRequestDto {
   public constructor(
@@ -31,5 +32,5 @@ export class AuthorizeRequestDto {
 
   @ApiProperty()
   @IsOptional()
-  public iso15118CertificateHashData!: any
+  public iso15118CertificateHashData!: OCSPRequestDataDto[]
 }

@@ -4,12 +4,13 @@ import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validato
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
+import { ChargingProfileDto } from './charging-profile.dto'
 
 export class ReportChargingProfilesRequestDto {
   public constructor(
     requestId: number,
     chargingLimitSource: ChargingLimitSourceEnum,
-    chargingProfile: any,
+    chargingProfile: ChargingProfileDto[],
     evseId: number,
   ) {
     this.requestId = requestId
@@ -37,7 +38,7 @@ export class ReportChargingProfilesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingProfile: any
+  public chargingProfile: ChargingProfileDto[]
 
   /**
    * To Be Continued. Default value when omitted: false. false indicates that there are no further messages as part of this report.

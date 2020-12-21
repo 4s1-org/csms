@@ -3,12 +3,13 @@
 import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { EventDataDto } from './event-data.dto'
 
 export class NotifyEventRequestDto {
   public constructor(
     generatedAt: string,
     seqNo: number,
-    eventData: any,
+    eventData: EventDataDto[],
   ) {
     this.generatedAt = generatedAt
     this.seqNo = seqNo
@@ -45,5 +46,5 @@ export class NotifyEventRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public eventData: any
+  public eventData: EventDataDto[]
 }

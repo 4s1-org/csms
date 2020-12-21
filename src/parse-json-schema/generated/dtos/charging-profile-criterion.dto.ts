@@ -4,6 +4,7 @@ import { IsEnum, IsInt, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
+import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 
 /**
  * Charging_ Profile
@@ -36,12 +37,12 @@ export class ChargingProfileCriterionDto {
    */
   @ApiProperty()
   @IsOptional()
-  public chargingProfileId!: any
+  public chargingProfileId!: undefined
 
   /**
    * For which charging limit sources, charging profiles SHALL be reported. If omitted, the Charging Station SHALL not filter on chargingLimitSource.
    */
   @ApiProperty()
   @IsOptional()
-  public chargingLimitSource!: any
+  public chargingLimitSource!: ChargingLimitSourceEnum[]
 }

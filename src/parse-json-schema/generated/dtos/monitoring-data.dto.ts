@@ -5,6 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
+import { VariableMonitoringDto } from './variable-monitoring.dto'
 
 /**
  * Class to hold parameters of SetVariableMonitoring request.
@@ -13,7 +14,7 @@ export class MonitoringDataDto {
   public constructor(
     component: ComponentDto,
     variable: VariableDto,
-    variableMonitoring: any,
+    variableMonitoring: VariableMonitoringDto[],
   ) {
     this.component = component
     this.variable = variable
@@ -34,5 +35,5 @@ export class MonitoringDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public variableMonitoring: any
+  public variableMonitoring: VariableMonitoringDto[]
 }

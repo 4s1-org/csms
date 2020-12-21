@@ -3,10 +3,11 @@
 import { IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { SetMonitoringResultDto } from './set-monitoring-result.dto'
 
 export class SetVariableMonitoringResponseDto {
   public constructor(
-    setMonitoringResult: any,
+    setMonitoringResult: SetMonitoringResultDto[],
   ) {
     this.setMonitoringResult = setMonitoringResult
   }
@@ -17,5 +18,5 @@ export class SetVariableMonitoringResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public setMonitoringResult: any
+  public setMonitoringResult: SetMonitoringResultDto[]
 }

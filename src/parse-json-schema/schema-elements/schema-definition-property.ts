@@ -93,9 +93,7 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     if (this.data.type === "array") {
-      // ToDo Array
-      this.skeleton.setIsAny()
-      // this.item = new SchemaDefinitionPropertyItem(this.key, "any", undefined, undefined)
+      this.handleDataArray()
       return
     }
 
@@ -110,5 +108,61 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     throw new Error(`${this.key}: Unknown typ: ${this.data.type}`)
+  }
+
+  private handleDataArray(): void {
+    if (!this.data.items || Object.keys(this.data.items).length === 0) {
+      throw new Error(`${this.key}: Muss ein Item haben`)
+    }
+    const keyZero = Object.keys(this.data.items)[0]
+    const valueZero = this.data.items[keyZero]
+
+    let isCustomType: boolean | undefined
+    let isEnum: boolean | undefined
+    let type: string | undefined
+
+    if (keyZero === "$ref" && valueZero.startsWith("#/definitions/")) {
+      if (valueZero.endsWith("EnumType")) {
+        isCustomType = true
+        type = this.data.items["$ref"].substr(14, this.data.items["$ref"].length - 22)
+        isEnum = true
+      } else if (valueZero.endsWith("Type") || valueZero.endsWith("AuthorizationData")) {
+        isCustomType = true
+        type = this.data.items["$ref"].substr(14, this.data.items["$ref"].length - 18)
+        isEnum = false
+      } else {
+        throw new Error(`${this.key}: Unknown Type`)
+      }
+    } else if (keyZero === "type" && valueZero === "integer") {
+      isCustomType = false
+      type = "integer"
+      isEnum = false
+    } else if (keyZero === "type" && valueZero === "string") {
+      isCustomType = false
+      type = "string"
+      isEnum = false
+    } else {
+      throw new Error(`${this.key}: Unknown Type`)
+    }
+
+    if (isCustomType === undefined || type === undefined || isEnum === undefined) {
+      throw new Error("All types should be defined")
+    }
+
+    if (isCustomType) {
+      if (isEnum) {
+        this.skeleton.setIsArray(type + "Enum")
+        this.skeleton.addImportOwnClass(type + "Enum", `../enums/${this.skeleton.formatFilename(type)}.enum`)
+      } else {
+        this.skeleton.setIsArray(type + "Dto")
+        this.skeleton.addImportOwnClass(type + "Dto", `./${this.skeleton.formatFilename(type)}.dto`)
+      }
+    }
+
+    if (this.data.minItems !== undefined && this.data.maxItems !== undefined) {
+      this.skeleton.setMinMaxItems(this.data.minItems, this.data.maxItems)
+    } else {
+      // throw new Error(`${this.key}: Array should have "minItems" and "maxItems"`)
+    }
   }
 }

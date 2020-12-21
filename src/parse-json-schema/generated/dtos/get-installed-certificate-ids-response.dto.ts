@@ -5,6 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { GetInstalledCertificateStatusEnum } from '../enums/get-installed-certificate-status.enum'
 import { StatusInfoDto } from './status-info.dto'
+import { CertificateHashDataChainDto } from './certificate-hash-data-chain.dto'
 
 export class GetInstalledCertificateIdsResponseDto {
   public constructor(
@@ -28,5 +29,5 @@ export class GetInstalledCertificateIdsResponseDto {
 
   @ApiProperty()
   @IsOptional()
-  public certificateHashDataChain!: any
+  public certificateHashDataChain!: CertificateHashDataChainDto[]
 }

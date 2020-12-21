@@ -6,6 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
 import { ChargingProfileKindEnum } from '../enums/charging-profile-kind.enum'
 import { RecurrencyKindEnum } from '../enums/recurrency-kind.enum'
+import { ChargingScheduleDto } from './charging-schedule.dto'
 
 /**
  * Charging_ Profile
@@ -18,7 +19,7 @@ export class ChargingProfileDto {
     stackLevel: number,
     chargingProfilePurpose: ChargingProfilePurposeEnum,
     chargingProfileKind: ChargingProfileKindEnum,
-    chargingSchedule: any,
+    chargingSchedule: ChargingScheduleDto[],
   ) {
     this.id = id
     this.stackLevel = stackLevel
@@ -88,7 +89,7 @@ export class ChargingProfileDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingSchedule: any
+  public chargingSchedule: ChargingScheduleDto[]
 
   /**
    * SHALL only be included if ChargingProfilePurpose is set to TxProfile. The transactionId is used to match the profile to a specific transaction.

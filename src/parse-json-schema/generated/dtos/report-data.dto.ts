@@ -5,6 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
+import { VariableAttributeDto } from './variable-attribute.dto'
 import { VariableCharacteristicsDto } from './variable-characteristics.dto'
 
 /**
@@ -14,7 +15,7 @@ export class ReportDataDto {
   public constructor(
     component: ComponentDto,
     variable: VariableDto,
-    variableAttribute: any,
+    variableAttribute: VariableAttributeDto[],
   ) {
     this.component = component
     this.variable = variable
@@ -35,7 +36,7 @@ export class ReportDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  public variableAttribute: any
+  public variableAttribute: VariableAttributeDto[]
 
   @ApiProperty()
   @IsOptional()

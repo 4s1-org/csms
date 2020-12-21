@@ -3,6 +3,8 @@
 import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
+import { ComponentVariableDto } from './component-variable.dto'
+import { MonitoringCriterionEnum } from '../enums/monitoring-criterion.enum'
 
 export class GetMonitoringReportRequestDto {
   public constructor(
@@ -17,7 +19,7 @@ export class GetMonitoringReportRequestDto {
 
   @ApiProperty()
   @IsOptional()
-  public componentVariable!: any
+  public componentVariable!: ComponentVariableDto[]
 
   /**
    * The Id of the request.
@@ -32,5 +34,5 @@ export class GetMonitoringReportRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  public monitoringCriteria!: any
+  public monitoringCriteria!: MonitoringCriterionEnum[]
 }

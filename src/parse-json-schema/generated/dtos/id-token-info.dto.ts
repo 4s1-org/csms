@@ -63,7 +63,7 @@ export class IdTokenInfoDto {
    */
   @ApiProperty()
   @IsOptional()
-  public evseId!: any
+  public evseId!: undefined
 
   @ApiProperty()
   @IsOptional()
