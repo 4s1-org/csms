@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { APNDto } from './apn.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { OCPPInterfaceEnum } from '../enums/ocpp-interface.enum'
@@ -33,10 +33,12 @@ export class NetworkConnectionProfileDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public apn!: APNDto
 
   @ApiProperty()
@@ -85,5 +87,6 @@ export class NetworkConnectionProfileDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public vpn!: VPNDto
 }

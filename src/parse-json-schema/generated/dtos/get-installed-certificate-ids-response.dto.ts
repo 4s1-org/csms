@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CertificateHashDataChainDto } from './certificate-hash-data-chain.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { GetInstalledCertificateStatusEnum } from '../enums/get-installed-certificate-status.enum'
@@ -16,6 +16,7 @@ export class GetInstalledCertificateIdsResponseDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
@@ -25,11 +26,13 @@ export class GetInstalledCertificateIdsResponseDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 
   @ApiProperty()
   @IsOptional()
   // MinItems: 1
   @IsArray()
+  @ValidateNested()
   public certificateHashDataChain!: CertificateHashDataChainDto[]
 }

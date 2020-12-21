@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { LocationEnum } from '../enums/location.enum'
 import { MeasurandEnum } from '../enums/measurand.enum'
@@ -26,6 +26,7 @@ export class SampledValueDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -60,9 +61,11 @@ export class SampledValueDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public signedMeterValue!: SignedMeterValueDto
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public unitOfMeasure!: UnitOfMeasureDto
 }

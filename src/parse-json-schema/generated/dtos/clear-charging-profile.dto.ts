@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsInt, IsOptional } from 'class-validator'
+import { IsEnum, IsInt, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -14,6 +14,7 @@ export class ClearChargingProfileDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**

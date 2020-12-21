@@ -37,6 +37,12 @@ export class PropertySkeleton extends SkeletonBase {
     this._type = "string"
   }
 
+  public setIsStringArray(): void {
+    this.addImportClassValidatior("IsArray")
+    this._annotations.push(`@IsArray()`)
+    this._type = "string[]"
+  }
+
   public setIsNumber(): void {
     this.addImportClassValidatior("IsNumber")
     this._annotations.push(`@IsNumber()`)
@@ -49,15 +55,24 @@ export class PropertySkeleton extends SkeletonBase {
     this._type = "number"
   }
 
+  public setIsIntegerArray(): void {
+    this.addImportClassValidatior("IsArray")
+    this._annotations.push(`@IsArray()`)
+    this._type = "number[]"
+  }
+
   public setIsCustomType(value: string): void {
+    this.addImportClassValidatior("ValidateNested")
+    this._annotations.push(`@ValidateNested()`)
     this._type = value
   }
 
-  /**
-   * @deprecated Don't use
-   */
-  public setIsAny(): void {
-    this._type = "any"
+  public setIsCustomTypeArray(value: string): void {
+    this.addImportClassValidatior("IsArray")
+    this._annotations.push(`@IsArray()`)
+    this.addImportClassValidatior("ValidateNested")
+    this._annotations.push(`@ValidateNested()`)
+    this._type = `${value}[]`
   }
 
   public setIsBoolean(): void {
@@ -85,12 +100,6 @@ export class PropertySkeleton extends SkeletonBase {
 
   public setDefault(value: string): void {
     this._annotations.push(`// setDefault: ${value}`)
-  }
-
-  public setIsArray(value: string): void {
-    this.addImportClassValidatior("IsArray")
-    this._annotations.push(`@IsArray()`)
-    this._type = `${value}[]`
   }
 
   public setMinItems(value: number): void {

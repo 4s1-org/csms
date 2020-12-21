@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { AuthorizationDto } from './authorization.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { UpdateEnum } from '../enums/update.enum'
@@ -17,12 +17,14 @@ export class SendLocalListRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsOptional()
   // MinItems: 1
   @IsArray()
+  @ValidateNested()
   public localAuthorizationList!: AuthorizationDto[]
 
   /**

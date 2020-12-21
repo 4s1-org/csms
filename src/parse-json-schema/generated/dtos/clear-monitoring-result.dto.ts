@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ClearMonitoringStatusEnum } from '../enums/clear-monitoring-status.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
@@ -17,6 +17,7 @@ export class ClearMonitoringResultDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
@@ -34,5 +35,6 @@ export class ClearMonitoringResultDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

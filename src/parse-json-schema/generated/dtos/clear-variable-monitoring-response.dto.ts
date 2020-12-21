@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ClearMonitoringResultDto } from './clear-monitoring-result.dto'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -14,11 +14,13 @@ export class ClearVariableMonitoringResponseDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
   // MinItems: 1
   @IsArray()
+  @ValidateNested()
   public clearMonitoringResult: ClearMonitoringResultDto[]
 }
