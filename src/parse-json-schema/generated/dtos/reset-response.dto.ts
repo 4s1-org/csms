@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsEnum } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ResetStatusEnum } from '../enums/reset-status.enum'
@@ -8,7 +8,7 @@ import { StatusInfoDto } from './status-info.dto'
 
 export class ResetResponseDto {
   public constructor(
-    status: ResetStatusEnum
+    status: ResetStatusEnum,
   ) {
     this.status = status
   }

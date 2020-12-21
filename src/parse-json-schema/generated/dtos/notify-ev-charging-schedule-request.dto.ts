@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingScheduleDto } from './charging-schedule.dto'
@@ -9,7 +9,7 @@ export class NotifyEVChargingScheduleRequestDto {
   public constructor(
     timeBase: string,
     chargingSchedule: ChargingScheduleDto,
-    evseId: number
+    evseId: number,
   ) {
     this.timeBase = timeBase
     this.chargingSchedule = chargingSchedule
@@ -32,6 +32,9 @@ export class NotifyEVChargingScheduleRequestDto {
   @IsNotEmpty()
   public chargingSchedule: ChargingScheduleDto
 
+  /**
+   * The charging schedule contained in this notification applies to an EVSE. EvseId must be > 0.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

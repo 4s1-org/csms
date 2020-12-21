@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsEnum } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ReportBaseEnum } from '../enums/report-base.enum'
@@ -8,7 +8,7 @@ import { ReportBaseEnum } from '../enums/report-base.enum'
 export class GetBaseReportRequestDto {
   public constructor(
     requestId: number,
-    reportBase: ReportBaseEnum
+    reportBase: ReportBaseEnum,
   ) {
     this.requestId = requestId
     this.reportBase = reportBase
@@ -18,6 +18,9 @@ export class GetBaseReportRequestDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * The Id of the request.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

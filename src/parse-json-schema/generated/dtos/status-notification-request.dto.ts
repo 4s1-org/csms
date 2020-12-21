@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ConnectorStatusEnum } from '../enums/connector-status.enum'
@@ -10,7 +10,7 @@ export class StatusNotificationRequestDto {
     timestamp: string,
     connectorStatus: ConnectorStatusEnum,
     evseId: number,
-    connectorId: number
+    connectorId: number,
   ) {
     this.timestamp = timestamp
     this.connectorStatus = connectorStatus
@@ -35,11 +35,17 @@ export class StatusNotificationRequestDto {
   @IsEnum(ConnectorStatusEnum)
   public connectorStatus: ConnectorStatusEnum
 
+  /**
+   * The id of the EVSE to which the connector belongs for which the the status is reported.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evseId: number
 
+  /**
+   * The id of the connector within the EVSE for which the status is reported.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

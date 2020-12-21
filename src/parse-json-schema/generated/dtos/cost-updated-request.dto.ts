@@ -1,13 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsNumber, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class CostUpdatedRequestDto {
   public constructor(
     totalCost: number,
-    transactionId: string
+    transactionId: string,
   ) {
     this.totalCost = totalCost
     this.transactionId = transactionId
@@ -17,6 +17,9 @@ export class CostUpdatedRequestDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * Current total cost, based on the information known by the CSMS, of the transaction including taxes. In the currency configured with the configuration Variable: [<<configkey-currency, Currency>>]
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
@@ -27,7 +30,7 @@ export class CostUpdatedRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 36)
   @IsString()
+  @Length(0, 36)
   public transactionId: string
 }

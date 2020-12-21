@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsEnum } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { LogParametersDto } from './log-parameters.dto'
@@ -10,7 +10,7 @@ export class GetLogRequestDto {
   public constructor(
     log: LogParametersDto,
     logType: LogEnum,
-    requestId: number
+    requestId: number,
   ) {
     this.log = log
     this.logType = logType
@@ -30,16 +30,25 @@ export class GetLogRequestDto {
   @IsEnum(LogEnum)
   public logType: LogEnum
 
+  /**
+   * The Id of this request
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public requestId: number
 
+  /**
+   * This specifies how many times the Charging Station must try to upload the log before giving up. If this field is not present, it is left to Charging Station to decide how many times it wants to retry.
+   */
   @ApiProperty()
   @IsOptional()
   @IsInt()
   public retries!: number
 
+  /**
+   * The interval in seconds after which a retry may be attempted. If this field is not present, it is left to Charging Station to decide how long to wait between attempts.
+   */
   @ApiProperty()
   @IsOptional()
   @IsInt()

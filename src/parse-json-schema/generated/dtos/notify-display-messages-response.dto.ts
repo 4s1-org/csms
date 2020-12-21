@@ -5,9 +5,6 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyDisplayMessagesResponseDto {
-  public constructor() {
-    // nothing to do
-  }
 
   @ApiProperty()
   @IsOptional()

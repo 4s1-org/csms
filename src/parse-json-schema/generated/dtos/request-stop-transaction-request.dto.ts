@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class RequestStopTransactionRequestDto {
   public constructor(
-    transactionId: string
+    transactionId: string,
   ) {
     this.transactionId = transactionId
   }
@@ -20,7 +20,7 @@ export class RequestStopTransactionRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 36)
   @IsString()
+  @Length(0, 36)
   public transactionId: string
 }

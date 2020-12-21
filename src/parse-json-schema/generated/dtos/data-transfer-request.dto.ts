@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class DataTransferRequestDto {
   public constructor(
-    vendorId: string
+    vendorId: string,
   ) {
     this.vendorId = vendorId
   }
@@ -20,16 +20,12 @@ export class DataTransferRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 50)
   @IsString()
+  @Length(0, 50)
   public messageId!: string
 
-  /**
-   * Data without specified length or format. This needs to be decided by both parties (Open to implementation).
-   */
   @ApiProperty()
   @IsOptional()
-  @IsString()
   public data!: string
 
   /**
@@ -37,7 +33,7 @@ export class DataTransferRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 255)
   @IsString()
+  @Length(0, 255)
   public vendorId: string
 }

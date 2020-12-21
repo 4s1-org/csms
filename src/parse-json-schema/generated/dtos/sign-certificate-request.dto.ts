@@ -1,13 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { CertificateSigningUseEnum } from '../enums/certificate-signing-use.enum'
 
 export class SignCertificateRequestDto {
   public constructor(
-    csr: string
+    csr: string,
   ) {
     this.csr = csr
   }
@@ -21,8 +21,8 @@ export class SignCertificateRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 5500)
   @IsString()
+  @Length(0, 5500)
   public csr: string
 
   @ApiProperty()

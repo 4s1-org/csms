@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { NetworkConnectionProfileDto } from './network-connection-profile.dto'
@@ -8,7 +8,7 @@ import { NetworkConnectionProfileDto } from './network-connection-profile.dto'
 export class SetNetworkProfileRequestDto {
   public constructor(
     configurationSlot: number,
-    connectionData: NetworkConnectionProfileDto
+    connectionData: NetworkConnectionProfileDto,
   ) {
     this.configurationSlot = configurationSlot
     this.connectionData = connectionData
@@ -18,6 +18,9 @@ export class SetNetworkProfileRequestDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * Slot in which the configuration should be stored.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

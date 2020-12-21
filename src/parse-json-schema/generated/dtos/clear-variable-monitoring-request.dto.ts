@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class ClearVariableMonitoringRequestDto {
   public constructor(
-    id: any
+    id: any,
   ) {
     this.id = id
   }
@@ -15,6 +15,9 @@ export class ClearVariableMonitoringRequestDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * List of the monitors to be cleared, identified by there Id.
+   */
   @ApiProperty()
   @IsNotEmpty()
   public id: any

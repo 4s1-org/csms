@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsEnum } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { EVSEDto } from './evse.dto'
@@ -8,7 +8,7 @@ import { OperationalStatusEnum } from '../enums/operational-status.enum'
 
 export class ChangeAvailabilityRequestDto {
   public constructor(
-    operationalStatus: OperationalStatusEnum
+    operationalStatus: OperationalStatusEnum,
   ) {
     this.operationalStatus = operationalStatus
   }

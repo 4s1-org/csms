@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingNeedsDto } from './charging-needs.dto'
@@ -8,7 +8,7 @@ import { ChargingNeedsDto } from './charging-needs.dto'
 export class NotifyEVChargingNeedsRequestDto {
   public constructor(
     chargingNeeds: ChargingNeedsDto,
-    evseId: number
+    evseId: number,
   ) {
     this.chargingNeeds = chargingNeeds
     this.evseId = evseId
@@ -18,6 +18,9 @@ export class NotifyEVChargingNeedsRequestDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * Contains the maximum schedule tuples the car supports per schedule.
+   */
   @ApiProperty()
   @IsOptional()
   @IsInt()
@@ -27,6 +30,9 @@ export class NotifyEVChargingNeedsRequestDto {
   @IsNotEmpty()
   public chargingNeeds: ChargingNeedsDto
 
+  /**
+   * Defines the EVSE and connector to which the EV is connected. EvseId may not be 0.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

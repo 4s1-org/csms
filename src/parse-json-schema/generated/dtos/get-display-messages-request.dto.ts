@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsEnum } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { MessagePriorityEnum } from '../enums/message-priority.enum'
@@ -8,7 +8,7 @@ import { MessageStateEnum } from '../enums/message-state.enum'
 
 export class GetDisplayMessagesRequestDto {
   public constructor(
-    requestId: number
+    requestId: number,
   ) {
     this.requestId = requestId
   }
@@ -17,10 +17,16 @@ export class GetDisplayMessagesRequestDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * If provided the Charging Station shall return Display Messages of the given ids. This field SHALL NOT contain more ids than set in <<configkey-number-of-display-messages,NumberOfDisplayMessages.maxLimit>>
+   */
   @ApiProperty()
   @IsOptional()
   public id!: any
 
+  /**
+   * The Id of this request.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
