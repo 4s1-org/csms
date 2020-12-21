@@ -5,7 +5,6 @@ import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 
 import { ConnectorEnum } from '../enums/connector.enum'
 import { CustomDataDto } from '../dtos/custom-data.dto'
 import { IdTokenDto } from '../dtos/id-token.dto'
-import { IdTokenDto } from '../dtos/id-token.dto'
 
 export class ReserveNowRequestDto {
   public constructor(
