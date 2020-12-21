@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { MessagePriorityEnum } from '../enums/message-priority.enum'
@@ -22,7 +22,8 @@ export class GetDisplayMessagesRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  public id!: undefined
+  @IsArray()
+  public id!: number[]
 
   /**
    * The Id of this request.

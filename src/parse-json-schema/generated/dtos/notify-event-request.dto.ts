@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { EventDataDto } from './event-data.dto'
@@ -46,5 +46,6 @@ export class NotifyEventRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
   public eventData: EventDataDto[]
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { MessageInfoDto } from './message-info.dto'
@@ -18,6 +18,7 @@ export class NotifyDisplayMessagesRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsArray()
   public messageInfo!: MessageInfoDto[]
 
   /**

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { SetVariableDataDto } from './set-variable-data.dto'
@@ -18,5 +18,6 @@ export class SetVariablesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
   public setVariableData: SetVariableDataDto[]
 }

@@ -72,6 +72,8 @@ export class PropertySkeleton extends SkeletonBase {
   }
 
   public setIsArray(type: string): void {
+    this.addImportClassValidatior("IsArray")
+    this._annotations.push(`@IsArray()`)
     this._type = `${type}[]`
   }
 

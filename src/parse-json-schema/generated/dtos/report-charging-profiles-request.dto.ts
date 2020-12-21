@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
@@ -38,6 +38,7 @@ export class ReportChargingProfilesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsArray()
   public chargingProfile: ChargingProfileDto[]
 
   /**

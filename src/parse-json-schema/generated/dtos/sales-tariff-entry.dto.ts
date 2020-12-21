@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
+import { IsArray, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { RelativeTimeIntervalDto } from './relative-time-interval.dto'
@@ -37,5 +37,6 @@ export class SalesTariffEntryDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsArray()
   public consumptionCost!: ConsumptionCostDto[]
 }
