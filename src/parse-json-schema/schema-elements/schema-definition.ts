@@ -1,4 +1,5 @@
 import { ClassGenerator } from "../class-generator"
+import { ClassSkeleton, EnumSkeleton } from "../class-skeleton"
 import { IKeyValue } from "../i-key-value"
 import { Validatable } from "../validatable"
 import { SchemaDefinitionProperty, SchemaDefinitionPropertyItem } from "./schema-definition-property"
@@ -29,6 +30,8 @@ export class SchemaDefinition extends Validatable<Foo> {
   }
 
   protected handleData(): void {
+
+
     if (this.data.type === "string") {
       if (!this.data.enum || !this.key.endsWith("EnumType") || !this.data.javaType.endsWith("Enum")) {
         throw new Error(`${this.key}: I thought it was a enum`)
@@ -36,11 +39,14 @@ export class SchemaDefinition extends Validatable<Foo> {
       if (this.data.additionalProperties) {
         throw new Error(`${this.key}: I thought enums can't have additional properties`)
       }
+      const skeleton = new EnumSkeleton(this.key)
+
       ClassGenerator.Instance.addEnum(this.key.substr(0, this.key.length - 8), this.data.enum, this.data.description)
     } else if (this.data.type === "object") {
       if (!this.data.properties) {
         throw new Error(`${this.key}: I thought it was a custom type`)
       }
+      // const skeleton = new ClassSkeleton(this.key)
 
       const items: SchemaDefinitionPropertyItem[] = []
       const required = this.data.required || []

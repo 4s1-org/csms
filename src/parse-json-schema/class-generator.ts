@@ -1,7 +1,6 @@
 import path from "path"
 import fs from "fs"
 import { SchemaDefinitionPropertyItem } from "./schema-elements/schema-definition-property"
-import { kMaxLength } from "buffer"
 
 type EnumsType = {
   [name: string]: EnumItemType

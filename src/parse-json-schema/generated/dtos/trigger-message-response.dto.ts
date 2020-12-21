@@ -7,8 +7,8 @@ import { TriggerMessageStatusEnum } from '../enums/trigger-message-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class TriggerMessageResponseDto {
-  public constructor (
-    status: TriggerMessageStatusEnum
+  public constructor(
+    status: TriggerMessageStatusEnum,
   ) {
     this.status = status
   }

@@ -7,7 +7,7 @@ import { UnlockStatusEnum } from '../enums/unlock-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class UnlockConnectorResponseDto {
-  public constructor (
+  public constructor(
     status: UnlockStatusEnum
   ) {
     this.status = status
