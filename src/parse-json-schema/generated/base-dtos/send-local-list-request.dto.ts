@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { AuthorizationDto } from '../dtos/authorization.dto'
+import { AuthorizationDataDto } from '../dtos/authorization-data.dto'
 import { CustomDataDto } from '../dtos/custom-data.dto'
 import { UpdateEnum } from '../enums/update.enum'
 
@@ -25,7 +25,7 @@ export class SendLocalListRequestDto {
   // MinItems: 1
   @IsArray()
   @ValidateNested()
-  public localAuthorizationList!: AuthorizationDto[]
+  public localAuthorizationList!: AuthorizationDataDto[]
 
   /**
    * In case of a full update this is the version number of the full list. In case of a differential update it is the version number of the list after the update has been applied.

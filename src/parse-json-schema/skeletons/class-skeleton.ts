@@ -3,7 +3,7 @@ import { SkeletonBase } from "./skeleton-base"
 
 export class ClassSkeleton extends SkeletonBase {
   private _properties: PropertySkeleton[] = []
-  private _allowAdditionalProperties: boolean = false
+  private _allowAdditionalProperties = false
 
   public constructor(name: string,
     public readonly isRoot: boolean = false) {
@@ -16,7 +16,7 @@ export class ClassSkeleton extends SkeletonBase {
     return prop
   }
 
-  public allowAdditionalProperties() {
+  public allowAdditionalProperties(): void {
     this._allowAdditionalProperties = true
   }
 
@@ -40,10 +40,10 @@ export class ClassSkeleton extends SkeletonBase {
         result.push(`import { ApiProperty } from '@nestjs/swagger'`)
       }
 
-      let classValidatorItemsUnique = [...new Set(classValidatorItems)].sort()
+      const classValidatorItemsUnique = [...new Set(classValidatorItems)].sort()
       result.push(`import { ${classValidatorItemsUnique.join(", ")} } from 'class-validator'`)
 
-      let ownImportsDone: string[] = []
+      const ownImportsDone: string[] = []
       for (const ownImport of ownImports.sort()) {
         if (ownImportsDone.includes(ownImport[0])) {
           continue
