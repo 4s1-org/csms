@@ -2,7 +2,6 @@ import { ClassGenerator } from "../class-generator"
 import { IKeyValue } from "../i-key-value"
 import { ClassSkeleton } from "../skeletons/class-skeleton"
 import { Validatable } from "../validatable"
-import { SchemaDefinition } from "./schema-definition"
 import { SchemaDefinitionProperty } from "./schema-definition-property"
 
 interface Foo {
