@@ -11,7 +11,7 @@ import { VariableDto } from './variable.dto'
  * Class to hold parameters for GetVariables request.
  */
 export class GetVariableDataDto {
-  public constructor (
+  public constructor(
     component: ComponentDto,
     variable: VariableDto
   ) {

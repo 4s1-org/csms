@@ -7,7 +7,7 @@ import { MessagePriorityEnum } from '../enums/message-priority.enum'
 import { MessageStateEnum } from '../enums/message-state.enum'
 
 export class GetDisplayMessagesRequestDto {
-  public constructor (
+  public constructor(
     requestId: number
   ) {
     this.requestId = requestId

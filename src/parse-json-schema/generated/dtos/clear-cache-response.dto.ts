@@ -7,7 +7,7 @@ import { ClearCacheStatusEnum } from '../enums/clear-cache-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearCacheResponseDto {
-  public constructor (
+  public constructor(
     status: ClearCacheStatusEnum
   ) {
     this.status = status

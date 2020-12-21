@@ -7,7 +7,7 @@ import { ConnectorEnum } from '../enums/connector.enum'
 import { IdTokenDto } from './id-token.dto'
 
 export class ReserveNowRequestDto {
-  public constructor (
+  public constructor(
     id: number,
     expiryDateTime: string,
     idToken: IdTokenDto

@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
 
 export class GetCompositeScheduleRequestDto {
-  public constructor (
+  public constructor(
     duration: number,
     evseId: number
   ) {

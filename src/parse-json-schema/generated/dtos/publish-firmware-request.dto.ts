@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class PublishFirmwareRequestDto {
-  public constructor (
+  public constructor(
     location: string,
     checksum: string,
     requestId: number

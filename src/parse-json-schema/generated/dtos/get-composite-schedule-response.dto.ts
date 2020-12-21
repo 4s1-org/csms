@@ -8,7 +8,7 @@ import { StatusInfoDto } from './status-info.dto'
 import { CompositeScheduleDto } from './composite-schedule.dto'
 
 export class GetCompositeScheduleResponseDto {
-  public constructor (
+  public constructor(
     status: GenericStatusEnum
   ) {
     this.status = status

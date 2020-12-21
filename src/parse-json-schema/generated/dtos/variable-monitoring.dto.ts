@@ -9,7 +9,7 @@ import { MonitorEnum } from '../enums/monitor.enum'
  * A monitoring setting for a variable.
  */
 export class VariableMonitoringDto {
-  public constructor (
+  public constructor(
     id: number,
     transaction: boolean,
     value: number,

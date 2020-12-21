@@ -7,7 +7,7 @@ import { RegistrationStatusEnum } from '../enums/registration-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class BootNotificationResponseDto {
-  public constructor (
+  public constructor(
     currentTime: string,
     interval: number,
     status: RegistrationStatusEnum

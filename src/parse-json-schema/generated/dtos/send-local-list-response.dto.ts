@@ -7,7 +7,7 @@ import { SendLocalListStatusEnum } from '../enums/send-local-list-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class SendLocalListResponseDto {
-  public constructor (
+  public constructor(
     status: SendLocalListStatusEnum
   ) {
     this.status = status

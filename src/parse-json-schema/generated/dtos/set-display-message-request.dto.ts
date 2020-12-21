@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { MessageInfoDto } from './message-info.dto'
 
 export class SetDisplayMessageRequestDto {
-  public constructor (
+  public constructor(
     message: MessageInfoDto
   ) {
     this.message = message

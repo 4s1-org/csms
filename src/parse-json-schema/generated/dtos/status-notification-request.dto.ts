@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ConnectorStatusEnum } from '../enums/connector-status.enum'
 
 export class StatusNotificationRequestDto {
-  public constructor (
+  public constructor(
     timestamp: string,
     connectorStatus: ConnectorStatusEnum,
     evseId: number,

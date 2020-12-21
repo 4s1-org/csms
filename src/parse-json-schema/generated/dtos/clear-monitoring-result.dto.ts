@@ -7,7 +7,7 @@ import { ClearMonitoringStatusEnum } from '../enums/clear-monitoring-status.enum
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearMonitoringResultDto {
-  public constructor (
+  public constructor(
     status: ClearMonitoringStatusEnum,
     id: number
   ) {

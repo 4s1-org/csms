@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class HeartbeatResponseDto {
-  public constructor (
+  public constructor(
     currentTime: string
   ) {
     this.currentTime = currentTime

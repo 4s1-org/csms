@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class SecurityEventNotificationRequestDto {
-  public constructor (
+  public constructor(
     type: string,
     timestamp: string
   ) {

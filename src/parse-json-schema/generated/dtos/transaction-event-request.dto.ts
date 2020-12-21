@@ -10,7 +10,7 @@ import { EVSEDto } from './evse.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class TransactionEventRequestDto {
-  public constructor (
+  public constructor(
     eventType: TransactionEventEnum,
     timestamp: string,
     triggerReason: TriggerReasonEnum,

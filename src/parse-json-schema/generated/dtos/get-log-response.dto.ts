@@ -7,7 +7,7 @@ import { LogStatusEnum } from '../enums/log-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class GetLogResponseDto {
-  public constructor (
+  public constructor(
     status: LogStatusEnum
   ) {
     this.status = status

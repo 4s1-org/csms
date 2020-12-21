@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ReservationUpdateStatusEnum } from '../enums/reservation-update-status.enum'
 
 export class ReservationStatusUpdateRequestDto {
-  public constructor (
+  public constructor(
     reservationId: number,
     reservationUpdateStatus: ReservationUpdateStatusEnum
   ) {

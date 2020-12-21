@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class DataTransferRequestDto {
-  public constructor (
+  public constructor(
     vendorId: string
   ) {
     this.vendorId = vendorId

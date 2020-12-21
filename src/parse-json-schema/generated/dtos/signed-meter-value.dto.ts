@@ -8,7 +8,7 @@ import { CustomDataDto } from './custom-data.dto'
  * Represent a signed version of the meter value.
  */
 export class SignedMeterValueDto {
-  public constructor (
+  public constructor(
     signedMeterData: string,
     signingMethod: string,
     encodingMethod: string,

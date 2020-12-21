@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetTransactionStatusRequestDto {
-  public constructor () {
+  public constructor() {
     // nothing to do
   }
 

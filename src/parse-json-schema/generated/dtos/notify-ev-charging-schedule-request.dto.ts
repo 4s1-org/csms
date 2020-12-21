@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingScheduleDto } from './charging-schedule.dto'
 
 export class NotifyEVChargingScheduleRequestDto {
-  public constructor (
+  public constructor(
     timeBase: string,
     chargingSchedule: ChargingScheduleDto,
     evseId: number

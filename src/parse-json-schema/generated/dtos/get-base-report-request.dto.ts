@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ReportBaseEnum } from '../enums/report-base.enum'
 
 export class GetBaseReportRequestDto {
-  public constructor (
+  public constructor(
     requestId: number,
     reportBase: ReportBaseEnum
   ) {

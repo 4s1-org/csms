@@ -11,7 +11,7 @@ urn:x-oca:ocpp:uid:2:233122
 The physical system where an Electrical Vehicle (EV) can be charged.
  */
 export class ChargingStationDto {
-  public constructor (
+  public constructor(
     model: string,
     vendorName: string
   ) {

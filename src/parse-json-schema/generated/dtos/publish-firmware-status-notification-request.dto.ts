@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { PublishFirmwareStatusEnum } from '../enums/publish-firmware-status.enum'
 
 export class PublishFirmwareStatusNotificationRequestDto {
-  public constructor (
+  public constructor(
     status: PublishFirmwareStatusEnum
   ) {
     this.status = status

@@ -7,7 +7,7 @@ import { ClearChargingProfileStatusEnum } from '../enums/clear-charging-profile-
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearChargingProfileResponseDto {
-  public constructor (
+  public constructor(
     status: ClearChargingProfileStatusEnum
   ) {
     this.status = status

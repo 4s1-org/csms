@@ -8,7 +8,7 @@ import { CustomDataDto } from './custom-data.dto'
  * Represents a UnitOfMeasure with a multiplier
  */
 export class UnitOfMeasureDto {
-  public constructor () {
+  public constructor() {
     // nothing to do
   }
 

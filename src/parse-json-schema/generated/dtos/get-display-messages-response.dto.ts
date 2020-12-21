@@ -7,7 +7,7 @@ import { GetDisplayMessagesStatusEnum } from '../enums/get-display-messages-stat
 import { StatusInfoDto } from './status-info.dto'
 
 export class GetDisplayMessagesResponseDto {
-  public constructor (
+  public constructor(
     status: GetDisplayMessagesStatusEnum
   ) {
     this.status = status

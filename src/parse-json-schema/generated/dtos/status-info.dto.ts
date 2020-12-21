@@ -8,7 +8,7 @@ import { CustomDataDto } from './custom-data.dto'
  * Element providing more information about the status.
  */
 export class StatusInfoDto {
-  public constructor (
+  public constructor(
     reasonCode: string
   ) {
     this.reasonCode = reasonCode

@@ -10,7 +10,7 @@ import { VariableDto } from './variable.dto'
  * Class to report components, variables and variable attributes and characteristics.
  */
 export class ComponentVariableDto {
-  public constructor (
+  public constructor(
     component: ComponentDto
   ) {
     this.component = component

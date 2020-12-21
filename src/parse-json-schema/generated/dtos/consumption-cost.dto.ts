@@ -9,7 +9,7 @@ import { CustomDataDto } from './custom-data.dto'
 urn:x-oca:ocpp:uid:2:233259
  */
 export class ConsumptionCostDto {
-  public constructor (
+  public constructor(
     startValue: number,
     cost: any
   ) {

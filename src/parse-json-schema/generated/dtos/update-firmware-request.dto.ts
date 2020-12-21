@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { FirmwareDto } from './firmware.dto'
 
 export class UpdateFirmwareRequestDto {
-  public constructor (
+  public constructor(
     requestId: number,
     firmware: FirmwareDto
   ) {

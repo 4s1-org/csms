@@ -10,7 +10,7 @@ urn:x-oca:ocpp:uid:2:233250
 EV AC charging parameters.
  */
 export class ACChargingParametersDto {
-  public constructor (
+  public constructor(
     energyAmount: number,
     evMinCurrent: number,
     evMaxCurrent: number,

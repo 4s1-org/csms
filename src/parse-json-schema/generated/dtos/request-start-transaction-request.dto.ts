@@ -7,7 +7,7 @@ import { IdTokenDto } from './id-token.dto'
 import { ChargingProfileDto } from './charging-profile.dto'
 
 export class RequestStartTransactionRequestDto {
-  public constructor (
+  public constructor(
     idToken: IdTokenDto,
     remoteStartId: number
   ) {

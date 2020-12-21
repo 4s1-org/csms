@@ -7,7 +7,7 @@ import { CertificateHashDataDto } from './certificate-hash-data.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class CustomerInformationRequestDto {
-  public constructor (
+  public constructor(
     requestId: number,
     report: boolean,
     clear: boolean

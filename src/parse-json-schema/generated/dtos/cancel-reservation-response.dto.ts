@@ -7,7 +7,7 @@ import { CancelReservationStatusEnum } from '../enums/cancel-reservation-status.
 import { StatusInfoDto } from './status-info.dto'
 
 export class CancelReservationResponseDto {
-  public constructor (
+  public constructor(
     status: CancelReservationStatusEnum
   ) {
     this.status = status

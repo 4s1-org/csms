@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class UnlockConnectorRequestDto {
-  public constructor (
+  public constructor(
     evseId: number,
     connectorId: number
   ) {

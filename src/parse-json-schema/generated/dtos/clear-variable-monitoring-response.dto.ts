@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class ClearVariableMonitoringResponseDto {
-  public constructor (
+  public constructor(
     clearMonitoringResult: any
   ) {
     this.clearMonitoringResult = clearMonitoringResult

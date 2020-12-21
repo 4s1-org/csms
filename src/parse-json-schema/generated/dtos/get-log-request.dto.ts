@@ -7,7 +7,7 @@ import { LogParametersDto } from './log-parameters.dto'
 import { LogEnum } from '../enums/log.enum'
 
 export class GetLogRequestDto {
-  public constructor (
+  public constructor(
     log: LogParametersDto,
     logType: LogEnum,
     requestId: number

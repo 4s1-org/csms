@@ -9,7 +9,7 @@ import { CustomDataDto } from './custom-data.dto'
 urn:x-oca:ocpp:uid:2:233270
  */
 export class RelativeTimeIntervalDto {
-  public constructor (
+  public constructor(
     start: number
   ) {
     this.start = start

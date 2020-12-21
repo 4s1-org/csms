@@ -7,7 +7,7 @@ import { ReserveNowStatusEnum } from '../enums/reserve-now-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ReserveNowResponseDto {
-  public constructor (
+  public constructor(
     status: ReserveNowStatusEnum
   ) {
     this.status = status

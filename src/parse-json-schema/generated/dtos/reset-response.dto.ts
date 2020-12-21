@@ -7,7 +7,7 @@ import { ResetStatusEnum } from '../enums/reset-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ResetResponseDto {
-  public constructor (
+  public constructor(
     status: ResetStatusEnum
   ) {
     this.status = status

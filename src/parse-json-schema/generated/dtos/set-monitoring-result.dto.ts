@@ -13,7 +13,7 @@ import { VariableDto } from './variable.dto'
  * Class to hold result of SetVariableMonitoring request.
  */
 export class SetMonitoringResultDto {
-  public constructor (
+  public constructor(
     status: SetMonitoringStatusEnum,
     type: MonitorEnum,
     component: ComponentDto,

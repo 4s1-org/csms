@@ -11,7 +11,7 @@ import { ReasonEnum } from '../enums/reason.enum'
 urn:x-oca:ocpp:uid:2:233318
  */
 export class TransactionDto {
-  public constructor (
+  public constructor(
     transactionId: string
   ) {
     this.transactionId = transactionId

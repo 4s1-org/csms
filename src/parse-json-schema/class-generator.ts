@@ -212,11 +212,11 @@ export class ClassGenerator {
       let content: string[] = []
       content = content.concat(header)
       if (constructorParas.length === 0) {
-        content.push(`  public constructor () {`)
+        content.push(`  public constructor() {`)
         content.push(`    // nothing to do`)
         content.push(`  }`)
       } else {
-        content.push(`  public constructor (`)
+        content.push(`  public constructor(`)
         content.push(constructorParas.join(",\n"))
         content.push(`  ) {`)
         content.push(constructorAssignments.join("\n"))

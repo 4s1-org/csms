@@ -7,7 +7,7 @@ import { DeleteCertificateStatusEnum } from '../enums/delete-certificate-status.
 import { StatusInfoDto } from './status-info.dto'
 
 export class DeleteCertificateResponseDto {
-  public constructor (
+  public constructor(
     status: DeleteCertificateStatusEnum
   ) {
     this.status = status

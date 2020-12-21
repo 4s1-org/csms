@@ -10,7 +10,7 @@ import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 urn:x-enexis:ecdm:uid:2:234489
  */
 export class ChargingLimitDto {
-  public constructor (
+  public constructor(
     chargingLimitSource: ChargingLimitSourceEnum
   ) {
     this.chargingLimitSource = chargingLimitSource

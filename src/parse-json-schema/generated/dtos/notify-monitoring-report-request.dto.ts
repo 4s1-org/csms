@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyMonitoringReportRequestDto {
-  public constructor (
+  public constructor(
     requestId: number,
     seqNo: number,
     generatedAt: string

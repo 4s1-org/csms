@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetTransactionStatusResponseDto {
-  public constructor (
+  public constructor(
     messagesInQueue: boolean
   ) {
     this.messagesInQueue = messagesInQueue

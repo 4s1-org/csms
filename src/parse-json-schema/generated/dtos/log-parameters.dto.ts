@@ -10,7 +10,7 @@ urn:x-enexis:ecdm:uid:2:233373
 Generic class for the configuration of logging entries.
  */
 export class LogParametersDto {
-  public constructor (
+  public constructor(
     remoteLocation: string
   ) {
     this.remoteLocation = remoteLocation

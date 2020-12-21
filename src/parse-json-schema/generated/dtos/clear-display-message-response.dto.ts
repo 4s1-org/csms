@@ -7,7 +7,7 @@ import { ClearMessageStatusEnum } from '../enums/clear-message-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearDisplayMessageResponseDto {
-  public constructor (
+  public constructor(
     status: ClearMessageStatusEnum
   ) {
     this.status = status

@@ -12,7 +12,7 @@ import { VariableDto } from './variable.dto'
  * Class to report an event notification for a component-variable.
  */
 export class EventDataDto {
-  public constructor (
+  public constructor(
     eventId: number,
     timestamp: string,
     trigger: EventTriggerEnum,

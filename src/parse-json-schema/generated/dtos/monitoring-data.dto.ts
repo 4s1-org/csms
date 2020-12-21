@@ -10,7 +10,7 @@ import { VariableDto } from './variable.dto'
  * Class to hold parameters of SetVariableMonitoring request.
  */
 export class MonitoringDataDto {
-  public constructor (
+  public constructor(
     component: ComponentDto,
     variable: VariableDto,
     variableMonitoring: any
