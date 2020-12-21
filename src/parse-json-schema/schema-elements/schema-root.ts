@@ -50,6 +50,6 @@ export class SchemaRoot extends Validatable<Foo> {
       item.Item.isRequired = required.includes(key)
       items.push(item.Item)
     }
-    ClassGenerator.Instance.addDto(this.key, this.data.description, items)
+    ClassGenerator.instance.addDto(this.key, this.data.description, items)
   }
 }

@@ -26,17 +26,17 @@ export class ClassGenerator {
   private dtos: DtosType = {}
   private skeletonEnums: EnumSkeleton[] = []
 
-  private static instance: ClassGenerator
+  private static _instance: ClassGenerator
 
   private constructor() {
     // nothing to do
   }
 
-  public static get Instance(): ClassGenerator {
-    if (!ClassGenerator.instance) {
-      ClassGenerator.instance = new ClassGenerator()
+  public static get instance(): ClassGenerator {
+    if (!ClassGenerator._instance) {
+      ClassGenerator._instance = new ClassGenerator()
     }
-    return ClassGenerator.instance
+    return ClassGenerator._instance
   }
 
   public addDto(name: string, description: string | undefined, items: SchemaDefinitionPropertyItem[]): void {
@@ -66,8 +66,10 @@ export class ClassGenerator {
   }
 
   public generateFiles(): void {
-    // this.generateEnumFiles()
-    this.generateSkeletonEnumFiles()
+    for (const item of this.skeletonEnums) {
+      item.writeFile([__dirname, "generated", "enums"], "enum")
+    }
+
     this.generateDtosFiles()
   }
 
@@ -248,36 +250,6 @@ export class ClassGenerator {
   private pushIfNotExists(content: string[], text: string): void {
     if (content.indexOf(text) === -1) {
       content.push(text)
-    }
-  }
-
-  private generateSkeletonEnumFiles(): void {
-    for (const item of this.skeletonEnums) {
-      const file = path.join(__dirname, "generated", "enums", `${this.filenameFormatter(item.name)}.enum.ts`)
-      this.writeFile(file, item.toString())
-    }
-  }
-
-  private generateEnumFiles(): void {
-    for (const name in this.enums) {
-      const ele = this.enums[name]
-      const file = path.join(__dirname, "generated", "enums", `${this.filenameFormatter(name)}.enum.ts`)
-
-      const content: string[] = []
-      if (ele.description) {
-        content.push(`/**`)
-        content.push(` * ${this.descriptionFormatter(ele.description)}`)
-        content.push(` */`)
-      }
-      content.push(`export enum ${name}Enum {`)
-      for (const item of ele.items) {
-        const propName = item.includes("-") || item.includes(".") ? `"${item}"` : item
-        content.push(`  ${propName} = "${item}",`)
-      }
-      content.push(`}`)
-      content.push()
-
-      this.writeFile(file, content)
     }
   }
 

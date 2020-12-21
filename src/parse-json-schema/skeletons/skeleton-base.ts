@@ -1,3 +1,6 @@
+import path from "path"
+import fs from "fs"
+
 export abstract class SkeletonBase {
   private _comment: string | undefined = ""
   private _importsClassValidator: string[] = []
@@ -64,4 +67,12 @@ export abstract class SkeletonBase {
   }
 
   public abstract toString(): string[]
+
+  public writeFile(folders: string[], extension: "dto" | "enum"): void {
+    const filename = path.join(...folders, `${this.formatFilename(this.name)}.${extension}.ts`)
+
+    let data = this.toString().join("\n")
+    data = data.replace(/\r\n/g, "\n")
+    fs.writeFileSync(filename, data, { encoding: "utf-8" })
+  }
 }
