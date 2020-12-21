@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { EVSEDto } from './evse.dto'
@@ -10,7 +10,7 @@ import { EVSEDto } from './evse.dto'
  */
 export class ComponentDto {
   public constructor(
-    name: string
+    name: string,
   ) {
     this.name = name
   }
@@ -28,8 +28,8 @@ export class ComponentDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 50)
   @IsString()
+  @Length(0, 50)
   public name: string
 
   /**
@@ -37,7 +37,7 @@ export class ComponentDto {
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 50)
   @IsString()
+  @Length(0, 50)
   public instance!: string
 }

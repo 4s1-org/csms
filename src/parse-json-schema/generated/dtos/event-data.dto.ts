@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, IsEnum, Length } from 'class-validator'
+import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { EventTriggerEnum } from '../enums/event-trigger.enum'
@@ -19,7 +19,7 @@ export class EventDataDto {
     actualValue: string,
     component: ComponentDto,
     eventNotificationType: EventNotificationEnum,
-    variable: VariableDto
+    variable: VariableDto,
   ) {
     this.eventId = eventId
     this.timestamp = timestamp
@@ -34,6 +34,9 @@ export class EventDataDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * Identifies the event. This field can be referred to as a cause by other events.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
@@ -52,6 +55,9 @@ export class EventDataDto {
   @IsEnum(EventTriggerEnum)
   public trigger: EventTriggerEnum
 
+  /**
+   * Refers to the Id of an event that is considered to be the cause for this event.
+   */
   @ApiProperty()
   @IsOptional()
   @IsInt()
@@ -59,13 +65,13 @@ export class EventDataDto {
 
   /**
    * Actual value (_attributeType_ Actual) of the variable.
-
-The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
+   * 
+   * The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 2500)
   @IsString()
+  @Length(0, 2500)
   public actualValue: string
 
   /**
@@ -73,8 +79,8 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 50)
   @IsString()
+  @Length(0, 50)
   public techCode!: string
 
   /**
@@ -82,10 +88,13 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 500)
   @IsString()
+  @Length(0, 500)
   public techInfo!: string
 
+  /**
+   * _Cleared_ is set to true to report the clearing of a monitored situation, i.e. a 'return to normal'.
+   */
   @ApiProperty()
   @IsOptional()
   @IsBoolean()
@@ -96,14 +105,17 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 36)
   @IsString()
+  @Length(0, 36)
   public transactionId!: string
 
   @ApiProperty()
   @IsNotEmpty()
   public component: ComponentDto
 
+  /**
+   * Identifies the VariableMonitoring which triggered the event.
+   */
   @ApiProperty()
   @IsOptional()
   @IsInt()

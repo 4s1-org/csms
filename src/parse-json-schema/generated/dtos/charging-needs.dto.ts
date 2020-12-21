@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ACChargingParametersDto } from './ac-charging-parameters.dto'
@@ -9,11 +9,11 @@ import { EnergyTransferModeEnum } from '../enums/energy-transfer-mode.enum'
 
 /**
  * Charging_ Needs
-urn:x-oca:ocpp:uid:2:233249
+ * urn:x-oca:ocpp:uid:2:233249
  */
 export class ChargingNeedsDto {
   public constructor(
-    requestedEnergyTransfer: EnergyTransferModeEnum
+    requestedEnergyTransfer: EnergyTransferModeEnum,
   ) {
     this.requestedEnergyTransfer = requestedEnergyTransfer
   }
@@ -37,8 +37,8 @@ export class ChargingNeedsDto {
 
   /**
    * Charging_ Needs. Departure_ Time. Date_ Time
-urn:x-oca:ocpp:uid:1:569223
-Estimated departure time of the EV.
+   * urn:x-oca:ocpp:uid:1:569223
+   * Estimated departure time of the EV.
    */
   @ApiProperty()
   @IsOptional()

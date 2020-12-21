@@ -39,8 +39,11 @@ export class SchemaRoot extends Validatable<Foo> {
     }
 
     // Remove "Type"
-    const name = this.key.substr(0, this.key.length - 4)
-    const skeleton = new ClassSkeleton(name, true)
+    if (!this.key.endsWith("Request") && !this.key.endsWith("Response")) {
+      throw new Error(`${this.key}: I thought it's ends with "Request" or "Response"`)
+    }
+
+    const skeleton = new ClassSkeleton(this.key, true)
     skeleton.setComment(this.data.description)
 
     const required = this.data.required || []

@@ -8,14 +8,14 @@ import { ApiProperty } from '@nestjs/swagger'
  */
 export class CustomDataDto {
   public constructor(
-    vendorId: string
+    vendorId: string,
   ) {
     this.vendorId = vendorId
   }
 
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 255)
   @IsString()
+  @Length(0, 255)
   public vendorId: string
 }

@@ -1,13 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
 
 /**
  * Composite_ Schedule
-urn:x-oca:ocpp:uid:2:233362
+ * urn:x-oca:ocpp:uid:2:233362
  */
 export class CompositeScheduleDto {
   public constructor(
@@ -15,7 +15,7 @@ export class CompositeScheduleDto {
     evseId: number,
     duration: number,
     scheduleStart: string,
-    chargingRateUnit: ChargingRateUnitEnum
+    chargingRateUnit: ChargingRateUnitEnum,
   ) {
     this.chargingSchedulePeriod = chargingSchedulePeriod
     this.evseId = evseId
@@ -32,11 +32,20 @@ export class CompositeScheduleDto {
   @IsNotEmpty()
   public chargingSchedulePeriod: any
 
+  /**
+   * The ID of the EVSE for which the
+   * schedule is requested. When evseid=0, the
+   * Charging Station calculated the expected
+   * consumption for the grid connection.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evseId: number
 
+  /**
+   * Duration of the schedule in seconds.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
@@ -44,8 +53,8 @@ export class CompositeScheduleDto {
 
   /**
    * Composite_ Schedule. Start. Date_ Time
-urn:x-oca:ocpp:uid:1:569456
-Date and time at which the schedule becomes active. All time measurements within the schedule are relative to this timestamp.
+   * urn:x-oca:ocpp:uid:1:569456
+   * Date and time at which the schedule becomes active. All time measurements within the schedule are relative to this timestamp.
    */
   @ApiProperty()
   @IsNotEmpty()

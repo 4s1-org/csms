@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enums/hash-algorithm.enum'
@@ -10,7 +10,7 @@ export class CertificateHashDataDto {
     hashAlgorithm: HashAlgorithmEnum,
     issuerNameHash: string,
     issuerKeyHash: string,
-    serialNumber: string
+    serialNumber: string,
   ) {
     this.hashAlgorithm = hashAlgorithm
     this.issuerNameHash = issuerNameHash
@@ -32,8 +32,8 @@ export class CertificateHashDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 128)
   @IsString()
+  @Length(0, 128)
   public issuerNameHash: string
 
   /**
@@ -41,8 +41,8 @@ export class CertificateHashDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 128)
   @IsString()
+  @Length(0, 128)
   public issuerKeyHash: string
 
   /**
@@ -50,7 +50,7 @@ export class CertificateHashDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 40)
   @IsString()
+  @Length(0, 40)
   public serialNumber: string
 }

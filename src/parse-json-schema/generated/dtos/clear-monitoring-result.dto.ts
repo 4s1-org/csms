@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsEnum } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ClearMonitoringStatusEnum } from '../enums/clear-monitoring-status.enum'
@@ -9,7 +9,7 @@ import { StatusInfoDto } from './status-info.dto'
 export class ClearMonitoringResultDto {
   public constructor(
     status: ClearMonitoringStatusEnum,
-    id: number
+    id: number,
   ) {
     this.status = status
     this.id = id
@@ -24,6 +24,9 @@ export class ClearMonitoringResultDto {
   @IsEnum(ClearMonitoringStatusEnum)
   public status: ClearMonitoringStatusEnum
 
+  /**
+   * Id of the monitor of which a clear was requested.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
@@ -11,7 +11,7 @@ import { IdTokenInfoDto } from './id-token-info.dto'
  */
 export class AuthorizationDataDto {
   public constructor(
-    idToken: IdTokenDto
+    idToken: IdTokenDto,
   ) {
     this.idToken = idToken
   }

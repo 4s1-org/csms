@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsEnum } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { CertificateHashDataDto } from './certificate-hash-data.dto'
@@ -9,7 +9,7 @@ import { GetCertificateIdUseEnum } from '../enums/get-certificate-id-use.enum'
 export class CertificateHashDataChainDto {
   public constructor(
     certificateHashData: CertificateHashDataDto,
-    certificateType: GetCertificateIdUseEnum
+    certificateType: GetCertificateIdUseEnum,
   ) {
     this.certificateHashData = certificateHashData
     this.certificateType = certificateType

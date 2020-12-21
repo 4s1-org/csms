@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -12,7 +12,7 @@ export class SignedMeterValueDto {
     signedMeterData: string,
     signingMethod: string,
     encodingMethod: string,
-    publicKey: string
+    publicKey: string,
   ) {
     this.signedMeterData = signedMeterData
     this.signingMethod = signingMethod
@@ -29,8 +29,8 @@ export class SignedMeterValueDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 2500)
   @IsString()
+  @Length(0, 2500)
   public signedMeterData: string
 
   /**
@@ -38,8 +38,8 @@ export class SignedMeterValueDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 50)
   @IsString()
+  @Length(0, 50)
   public signingMethod: string
 
   /**
@@ -47,8 +47,8 @@ export class SignedMeterValueDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 50)
   @IsString()
+  @Length(0, 50)
   public encodingMethod: string
 
   /**
@@ -56,7 +56,7 @@ export class SignedMeterValueDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 2500)
   @IsString()
+  @Length(0, 2500)
   public publicKey: string
 }

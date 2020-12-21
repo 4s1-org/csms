@@ -1,14 +1,14 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { VPNEnum } from '../enums/vpn.enum'
 
 /**
  * VPN
-urn:x-oca:ocpp:uid:2:233268
-VPN Configuration settings
+ * urn:x-oca:ocpp:uid:2:233268
+ * VPN Configuration settings
  */
 export class VPNDto {
   public constructor(
@@ -16,7 +16,7 @@ export class VPNDto {
     user: string,
     password: string,
     key: string,
-    type: VPNEnum
+    type: VPNEnum,
   ) {
     this.server = server
     this.user = user
@@ -31,57 +31,57 @@ export class VPNDto {
 
   /**
    * VPN. Server. URI
-urn:x-oca:ocpp:uid:1:569272
-VPN Server Address
+   * urn:x-oca:ocpp:uid:1:569272
+   * VPN Server Address
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 512)
   @IsString()
+  @Length(0, 512)
   public server: string
 
   /**
    * VPN. User. User_ Name
-urn:x-oca:ocpp:uid:1:569273
-VPN User
+   * urn:x-oca:ocpp:uid:1:569273
+   * VPN User
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 20)
   @IsString()
+  @Length(0, 20)
   public user: string
 
   /**
    * VPN. Group. Group_ Name
-urn:x-oca:ocpp:uid:1:569274
-VPN group.
+   * urn:x-oca:ocpp:uid:1:569274
+   * VPN group.
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 20)
   @IsString()
+  @Length(0, 20)
   public group!: string
 
   /**
    * VPN. Password. Password
-urn:x-oca:ocpp:uid:1:569275
-VPN Password.
+   * urn:x-oca:ocpp:uid:1:569275
+   * VPN Password.
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 20)
   @IsString()
+  @Length(0, 20)
   public password: string
 
   /**
    * VPN. Key. VPN_ Key
-urn:x-oca:ocpp:uid:1:569276
-VPN shared secret.
+   * urn:x-oca:ocpp:uid:1:569276
+   * VPN shared secret.
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 255)
   @IsString()
+  @Length(0, 255)
   public key: string
 
   @ApiProperty()
