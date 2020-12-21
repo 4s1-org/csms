@@ -1,18 +1,19 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsArray, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
+import { SampledValueDto } from './sampled-value.dto'
 
 /**
  * Meter_ Value
-urn:x-oca:ocpp:uid:2:233265
-Collection of one or more sampled values in MeterValuesRequest and TransactionEvent. All sampled values in a MeterValue are sampled at the same point in time.
+ * urn:x-oca:ocpp:uid:2:233265
+ * Collection of one or more sampled values in MeterValuesRequest and TransactionEvent. All sampled values in a MeterValue are sampled at the same point in time.
  */
 export class MeterValueDto {
-  public constructor (
-    sampledValue: any,
-    timestamp: string
+  public constructor(
+    sampledValue: SampledValueDto[],
+    timestamp: string,
   ) {
     this.sampledValue = sampledValue
     this.timestamp = timestamp
@@ -20,19 +21,24 @@ export class MeterValueDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public sampledValue: any
+  // MinItems: 1
+  @IsArray()
+  @ValidateNested()
+  public sampledValue: SampledValueDto[]
 
   /**
    * Meter_ Value. Timestamp. Date_ Time
-urn:x-oca:ocpp:uid:1:569259
-Timestamp for measured value(s).
+   * urn:x-oca:ocpp:uid:1:569259
+   * Timestamp for measured value(s).
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public timestamp: string
 }

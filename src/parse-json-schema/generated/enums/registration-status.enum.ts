@@ -1,6 +1,8 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * This contains whether the Charging Station has been registered
-within the CSMS.
+ * within the CSMS.
  */
 export enum RegistrationStatusEnum {
   Accepted = "Accepted",

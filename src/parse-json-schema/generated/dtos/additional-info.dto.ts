@@ -1,16 +1,16 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Contains a case insensitive identifier to use for the authorization and the type of authorization to support multiple forms of identifiers.
  */
 export class AdditionalInfoDto {
-  public constructor (
+  public constructor(
     additionalIdToken: string,
-    type: string
+    type: string,
   ) {
     this.additionalIdToken = additionalIdToken
     this.type = type
@@ -18,6 +18,7 @@ export class AdditionalInfoDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -25,7 +26,7 @@ export class AdditionalInfoDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 36)
+  @MaxLength(36)
   @IsString()
   public additionalIdToken: string
 
@@ -34,7 +35,7 @@ export class AdditionalInfoDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 50)
+  @MaxLength(50)
   @IsString()
   public type: string
 }

@@ -1,6 +1,8 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * This contains the progress status of the publishfirmware
-installation.
+ * installation.
  */
 export enum PublishFirmwareStatusEnum {
   Idle = "Idle",

@@ -1,18 +1,18 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CostKindEnum } from '../enums/cost-kind.enum'
+import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Cost
-urn:x-oca:ocpp:uid:2:233258
+ * urn:x-oca:ocpp:uid:2:233258
  */
 export class CostDto {
-  public constructor (
+  public constructor(
     costKind: CostKindEnum,
-    amount: number
+    amount: number,
   ) {
     this.costKind = costKind
     this.amount = amount
@@ -20,6 +20,7 @@ export class CostDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
@@ -27,11 +28,21 @@ export class CostDto {
   @IsEnum(CostKindEnum)
   public costKind: CostKindEnum
 
+  /**
+   * Cost. Amount. Amount
+   * urn:x-oca:ocpp:uid:1:569244
+   * The estimated or actual cost per kWh
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public amount: number
 
+  /**
+   * Cost. Amount_ Multiplier. Integer
+   * urn:x-oca:ocpp:uid:1:569245
+   * Values: -3..3, The amountMultiplier defines the exponent to base 10 (dec). The final value is determined by: amount * 10 ^ amountMultiplier
+   */
   @ApiProperty()
   @IsOptional()
   @IsInt()

@@ -1,5 +1,7 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
- * Attribute type for which value is requested. When absent, default Actual is assumed.
+ * Type of attribute: Actual, Target, MinSet, MaxSet. Default is Actual when omitted.
  */
 export enum AttributeEnum {
   Actual = "Actual",

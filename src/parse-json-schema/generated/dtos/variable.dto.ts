@@ -1,21 +1,22 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Reference key to a component-variable.
  */
 export class VariableDto {
-  public constructor (
-    name: string
+  public constructor(
+    name: string,
   ) {
     this.name = name
   }
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -23,7 +24,7 @@ export class VariableDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 50)
+  @MaxLength(50)
   @IsString()
   public name: string
 
@@ -32,7 +33,7 @@ export class VariableDto {
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 50)
+  @MaxLength(50)
   @IsString()
   public instance!: string
 }

@@ -16,7 +16,7 @@ async function main(): Promise<void> {
     item.init()
   }
 
-  ClassGenerator.Instance.generateFiles()
+  ClassGenerator.instance.generateFiles()
 }
 
 main().catch(console.error)

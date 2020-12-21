@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Indicates whether the Local Controller succeeded in unpublishing the firmware.
  */

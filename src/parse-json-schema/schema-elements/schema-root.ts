@@ -1,8 +1,8 @@
 import { ClassGenerator } from "../class-generator"
 import { IKeyValue } from "../i-key-value"
+import { ClassSkeleton } from "../skeletons/class-skeleton"
 import { Validatable } from "../validatable"
-import { SchemaDefinition } from "./schema-definition"
-import { SchemaDefinitionProperty, SchemaDefinitionPropertyItem } from "./schema-definition-property"
+import { SchemaDefinitionProperty } from "./schema-definition-property"
 
 interface Foo {
   $schema: string
@@ -18,8 +18,6 @@ interface Foo {
 }
 
 export class SchemaRoot extends Validatable<Foo> {
-  private requireFields: string[] = []
-
   public constructor(key: string, data: Foo) {
     super(key, data)
   }
@@ -33,23 +31,26 @@ export class SchemaRoot extends Validatable<Foo> {
   }
 
   protected handleData(): void {
-    this.requireFields = this.data.required ? this.data.required : []
-
-    // Nested stuff
-    for (const key in this.data.definitions) {
-      const item = new SchemaDefinition(key, this.data.definitions[key])
-      item.init()
+    if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
+      throw new Error(`${this.key}: "additionalProperties" should be always false`)
     }
 
-    // Object itself
-    const items: SchemaDefinitionPropertyItem[] = []
+    // Remove "Type"
+    if (!this.key.endsWith("Request") && !this.key.endsWith("Response")) {
+      throw new Error(`${this.key}: I thought it's ends with "Request" or "Response"`)
+    }
+
+    const skeleton = new ClassSkeleton(this.key, true)
+    skeleton.setComment(this.data.description)
+
     const required = this.data.required || []
     for (const key in this.data.properties) {
-      const item = new SchemaDefinitionProperty(key, this.data.properties[key])
+      const prop = this.data.properties[key]
+      const propSkeleton = skeleton.addProperty(key, required.includes(key))
+
+      const item = new SchemaDefinitionProperty(key, prop, propSkeleton)
       item.init()
-      item.Item.isRequired = required.includes(key)
-      items.push(item.Item)
     }
-    ClassGenerator.Instance.addDto(this.key, this.data.description, items)
+    ClassGenerator.instance.addClass(skeleton)
   }
 }

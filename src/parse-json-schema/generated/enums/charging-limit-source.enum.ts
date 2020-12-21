@@ -1,5 +1,7 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
- * Source of the charging limit.
+ * Source that has installed this charging profile.
  */
 export enum ChargingLimitSourceEnum {
   EMS = "EMS",

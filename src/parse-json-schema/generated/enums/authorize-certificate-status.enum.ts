@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Certificate status information. 
-- if all certificates are valid: return 'Accepted'.
-- if one of the certificates was revoked, return 'CertificateRevoked'.
+ * - if all certificates are valid: return 'Accepted'.
+ * - if one of the certificates was revoked, return 'CertificateRevoked'.
  */
 export enum AuthorizeCertificateStatusEnum {
   Accepted = "Accepted",

@@ -1,20 +1,21 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
-import { VariableDto } from './variable.dto'
+import { CustomDataDto } from './custom-data.dto'
+import { VariableAttributeDto } from './variable-attribute.dto'
 import { VariableCharacteristicsDto } from './variable-characteristics.dto'
+import { VariableDto } from './variable.dto'
 
 /**
  * Class to report components, variables and variable attributes and characteristics.
  */
 export class ReportDataDto {
-  public constructor (
+  public constructor(
     component: ComponentDto,
     variable: VariableDto,
-    variableAttribute: any
+    variableAttribute: VariableAttributeDto[],
   ) {
     this.component = component
     this.variable = variable
@@ -23,21 +24,29 @@ export class ReportDataDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public component: ComponentDto
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public variable: VariableDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public variableAttribute: any
+  // MinItems: 1
+  // MinItems: 4
+  @IsArray()
+  @ValidateNested()
+  public variableAttribute: VariableAttributeDto[]
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public variableCharacteristics!: VariableCharacteristicsDto
 }

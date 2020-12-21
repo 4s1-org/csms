@@ -1,21 +1,22 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
 import { ChargingRateUnitEnum } from '../enums/charging-rate-unit.enum'
+import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
+import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Composite_ Schedule
-urn:x-oca:ocpp:uid:2:233362
+ * urn:x-oca:ocpp:uid:2:233362
  */
 export class CompositeScheduleDto {
-  public constructor (
-    chargingSchedulePeriod: any,
+  public constructor(
+    chargingSchedulePeriod: ChargingSchedulePeriodDto[],
     evseId: number,
     duration: number,
     scheduleStart: string,
-    chargingRateUnit: ChargingRateUnitEnum
+    chargingRateUnit: ChargingRateUnitEnum,
   ) {
     this.chargingSchedulePeriod = chargingSchedulePeriod
     this.evseId = evseId
@@ -26,17 +27,30 @@ export class CompositeScheduleDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingSchedulePeriod: any
+  // MinItems: 1
+  @IsArray()
+  @ValidateNested()
+  public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 
+  /**
+   * The ID of the EVSE for which the
+   * schedule is requested. When evseid=0, the
+   * Charging Station calculated the expected
+   * consumption for the grid connection.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evseId: number
 
+  /**
+   * Duration of the schedule in seconds.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
@@ -44,11 +58,12 @@ export class CompositeScheduleDto {
 
   /**
    * Composite_ Schedule. Start. Date_ Time
-urn:x-oca:ocpp:uid:1:569456
-Date and time at which the schedule becomes active. All time measurements within the schedule are relative to this timestamp.
+   * urn:x-oca:ocpp:uid:1:569456
+   * Date and time at which the schedule becomes active. All time measurements within the schedule are relative to this timestamp.
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public scheduleStart: string
 
