@@ -78,6 +78,9 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       throw new Error(`${this.key}: "additionalItems" should be never set`)
     }
 
+    if (this.data.minItems !== undefined) {
+      throw new Error("peng")
+    }
 
     if (this.data.type === "string") {
       this.skeleton.setIsString()
@@ -167,8 +170,8 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       }
     }
 
-    if (this.data.minItems !== undefined && this.data.maxItems !== undefined) {
-      //this.skeleton.setMinNumber(this.data.minItems, this.data.maxItems)
+    if (this.data.minItems !== undefined) {
+      this.skeleton.setMinMaxItems(this.data.minItems)
     } else {
       // throw new Error(`${this.key}: Array should have "minItems" and "maxItems"`)
     }
