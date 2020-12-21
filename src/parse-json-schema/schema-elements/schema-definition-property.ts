@@ -35,6 +35,8 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
   }
 
   protected handleData(): void {
+    this.skeleton.setComment(this.data.description)
+
     // Entweder $ref oder type muss vorhanden sein
     if (this.data.$ref) {
       if (Object.keys(this.data).length !== 1) {
@@ -73,7 +75,7 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       throw new Error(`${this.key}: No $ref and no type`)
     }
 
-    this.skeleton.setComment(this.data.description)
+
 
     if (this.data.type === "string") {
       this.skeleton.setIsString()

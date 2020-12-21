@@ -24,6 +24,9 @@ export class DataTransferRequestDto {
   @Length(0, 50)
   public messageId!: string
 
+  /**
+   * Data without specified length or format. This needs to be decided by both parties (Open to implementation).
+   */
   @ApiProperty()
   @IsOptional()
   public data!: any

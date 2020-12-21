@@ -26,6 +26,9 @@ export class DataTransferResponseDto {
   @IsOptional()
   public statusInfo!: StatusInfoDto
 
+  /**
+   * Data without specified length or format, in response to request.
+   */
   @ApiProperty()
   @IsOptional()
   public data!: any
