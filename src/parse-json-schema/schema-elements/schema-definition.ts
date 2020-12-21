@@ -44,10 +44,10 @@ export class SchemaDefinition extends Validatable<Foo> {
       const name = this.key.substr(0, this.key.length - 8)
       const skeleton = new EnumSkeleton(name, this.data.enum)
       skeleton.comment = this.data.description
-      ClassGenerator.Instance.addEnumNew(skeleton)
+      ClassGenerator.instance.addEnumNew(skeleton)
 
 
-      ClassGenerator.Instance.addEnum(this.key.substr(0, this.key.length - 8), this.data.enum, this.data.description)
+      ClassGenerator.instance.addEnum(this.key.substr(0, this.key.length - 8), this.data.enum, this.data.description)
     } else if (this.data.type === "object") {
       if (!this.data.properties) {
         throw new Error(`${this.key}: I thought it was a custom type`)
@@ -62,7 +62,7 @@ export class SchemaDefinition extends Validatable<Foo> {
         item.Item.isRequired = required.includes(key)
         items.push(item.Item)
       }
-      ClassGenerator.Instance.addDto(this.data.javaType, this.data.description, items)
+      ClassGenerator.instance.addDto(this.data.javaType, this.data.description, items)
     } else {
       throw new Error(`${this.key}: Unknown Type: ${this.data.type}`)
     }
