@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class CancelReservationRequestDto {
   public constructor(
-    reservationId: number
+    reservationId: number,
   ) {
     this.reservationId = reservationId
   }
@@ -15,6 +15,9 @@ export class CancelReservationRequestDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * Id of the reservation to cancel.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

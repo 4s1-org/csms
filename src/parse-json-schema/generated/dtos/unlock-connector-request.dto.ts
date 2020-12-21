@@ -1,13 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class UnlockConnectorRequestDto {
   public constructor(
     evseId: number,
-    connectorId: number
+    connectorId: number,
   ) {
     this.evseId = evseId
     this.connectorId = connectorId
@@ -17,11 +17,17 @@ export class UnlockConnectorRequestDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * This contains the identifier of the EVSE for which a connector needs to be unlocked.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evseId: number
 
+  /**
+   * This contains the identifier of the connector that needs to be unlocked.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { LogStatusEnum } from '../enums/log-status.enum'
@@ -8,7 +8,7 @@ import { StatusInfoDto } from './status-info.dto'
 
 export class GetLogResponseDto {
   public constructor(
-    status: LogStatusEnum
+    status: LogStatusEnum,
   ) {
     this.status = status
   }
@@ -31,7 +31,7 @@ export class GetLogResponseDto {
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 255)
   @IsString()
+  @Length(0, 255)
   public filename!: string
 }

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, Length } from 'class-validator'
+import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -9,7 +9,7 @@ export class NotifyCustomerInformationRequestDto {
     data: string,
     seqNo: number,
     generatedAt: string,
-    requestId: number
+    requestId: number,
   ) {
     this.data = data
     this.seqNo = seqNo
@@ -26,15 +26,21 @@ export class NotifyCustomerInformationRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 512)
   @IsString()
+  @Length(0, 512)
   public data: string
 
+  /**
+   * “to be continued” indicator. Indicates whether another part of the monitoringData follows in an upcoming notifyMonitoringReportRequest message. Default value when omitted is false.
+   */
   @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public tbc!: boolean
 
+  /**
+   * Sequence number of this message. First message starts at 0.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
@@ -48,6 +54,9 @@ export class NotifyCustomerInformationRequestDto {
   @IsString()
   public generatedAt: string
 
+  /**
+   * The Id of the request.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

@@ -5,9 +5,6 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetTransactionStatusRequestDto {
-  public constructor() {
-    // nothing to do
-  }
 
   @ApiProperty()
   @IsOptional()
@@ -18,7 +15,7 @@ export class GetTransactionStatusRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 36)
   @IsString()
+  @Length(0, 36)
   public transactionId!: string
 }

@@ -5,14 +5,14 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetInstalledCertificateIdsRequestDto {
-  public constructor() {
-    // nothing to do
-  }
 
   @ApiProperty()
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * Indicates the type of certificates requested. When omitted, all certificate types are requested.
+   */
   @ApiProperty()
   @IsOptional()
   public certificateType!: any

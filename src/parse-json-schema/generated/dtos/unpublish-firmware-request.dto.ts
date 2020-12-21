@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class UnpublishFirmwareRequestDto {
   public constructor(
-    checksum: string
+    checksum: string,
   ) {
     this.checksum = checksum
   }
@@ -20,7 +20,7 @@ export class UnpublishFirmwareRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 32)
   @IsString()
+  @Length(0, 32)
   public checksum: string
 }

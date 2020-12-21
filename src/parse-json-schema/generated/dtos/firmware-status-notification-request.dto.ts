@@ -1,13 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsEnum } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { FirmwareStatusEnum } from '../enums/firmware-status.enum'
 
 export class FirmwareStatusNotificationRequestDto {
   public constructor(
-    status: FirmwareStatusEnum
+    status: FirmwareStatusEnum,
   ) {
     this.status = status
   }
@@ -21,6 +21,11 @@ export class FirmwareStatusNotificationRequestDto {
   @IsEnum(FirmwareStatusEnum)
   public status: FirmwareStatusEnum
 
+  /**
+   * The request id that was provided in the
+   * UpdateFirmwareRequest that started this firmware update.
+   * This field is mandatory, unless the message was triggered by a TriggerMessageRequest AND there is no firmware update ongoing.
+   */
   @ApiProperty()
   @IsOptional()
   @IsInt()

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsEnum } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { UpdateEnum } from '../enums/update.enum'
@@ -8,7 +8,7 @@ import { UpdateEnum } from '../enums/update.enum'
 export class SendLocalListRequestDto {
   public constructor(
     versionNumber: number,
-    updateType: UpdateEnum
+    updateType: UpdateEnum,
   ) {
     this.versionNumber = versionNumber
     this.updateType = updateType
@@ -22,6 +22,9 @@ export class SendLocalListRequestDto {
   @IsOptional()
   public localAuthorizationList!: any
 
+  /**
+   * In case of a full update this is the version number of the full list. In case of a differential update it is the version number of the list after the update has been applied.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

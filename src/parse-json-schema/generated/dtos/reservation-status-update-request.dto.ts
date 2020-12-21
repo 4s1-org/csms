@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsEnum } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ReservationUpdateStatusEnum } from '../enums/reservation-update-status.enum'
@@ -8,7 +8,7 @@ import { ReservationUpdateStatusEnum } from '../enums/reservation-update-status.
 export class ReservationStatusUpdateRequestDto {
   public constructor(
     reservationId: number,
-    reservationUpdateStatus: ReservationUpdateStatusEnum
+    reservationUpdateStatus: ReservationUpdateStatusEnum,
   ) {
     this.reservationId = reservationId
     this.reservationUpdateStatus = reservationUpdateStatus
@@ -18,6 +18,9 @@ export class ReservationStatusUpdateRequestDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * The ID of the reservation.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()

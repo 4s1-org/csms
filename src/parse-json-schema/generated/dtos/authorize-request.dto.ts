@@ -1,13 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class AuthorizeRequestDto {
   public constructor(
-    idToken: IdTokenDto
+    idToken: IdTokenDto,
   ) {
     this.idToken = idToken
   }
@@ -25,8 +25,8 @@ export class AuthorizeRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 5500)
   @IsString()
+  @Length(0, 5500)
   public certificate!: string
 
   @ApiProperty()

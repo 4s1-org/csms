@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsEnum } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ChargingStationDto } from './charging-station.dto'
@@ -9,7 +9,7 @@ import { BootReasonEnum } from '../enums/boot-reason.enum'
 export class BootNotificationRequestDto {
   public constructor(
     chargingStation: ChargingStationDto,
-    reason: BootReasonEnum
+    reason: BootReasonEnum,
   ) {
     this.chargingStation = chargingStation
     this.reason = reason

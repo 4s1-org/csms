@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { InstallCertificateUseEnum } from '../enums/install-certificate-use.enum'
@@ -8,7 +8,7 @@ import { InstallCertificateUseEnum } from '../enums/install-certificate-use.enum
 export class InstallCertificateRequestDto {
   public constructor(
     certificateType: InstallCertificateUseEnum,
-    certificate: string
+    certificate: string,
   ) {
     this.certificateType = certificateType
     this.certificate = certificate
@@ -28,7 +28,7 @@ export class InstallCertificateRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 5500)
   @IsString()
+  @Length(0, 5500)
   public certificate: string
 }

@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsBoolean } from 'class-validator'
+import { IsBoolean, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetTransactionStatusResponseDto {
   public constructor(
-    messagesInQueue: boolean
+    messagesInQueue: boolean,
   ) {
     this.messagesInQueue = messagesInQueue
   }
@@ -15,11 +15,17 @@ export class GetTransactionStatusResponseDto {
   @IsOptional()
   public customData!: CustomDataDto
 
+  /**
+   * Whether the transaction is still ongoing.
+   */
   @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public ongoingIndicator!: boolean
 
+  /**
+   * Whether there are still message to be delivered.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
