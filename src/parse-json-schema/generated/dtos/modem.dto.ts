@@ -6,13 +6,10 @@ import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Wireless_ Communication_ Module
-urn:x-oca:ocpp:uid:2:233306
-Defines parameters required for initiating and maintaining wireless communication with other devices.
+ * urn:x-oca:ocpp:uid:2:233306
+ * Defines parameters required for initiating and maintaining wireless communication with other devices.
  */
 export class ModemDto {
-  public constructor() {
-    // nothing to do
-  }
 
   @ApiProperty()
   @IsOptional()
@@ -20,23 +17,23 @@ export class ModemDto {
 
   /**
    * Wireless_ Communication_ Module. ICCID. CI20_ Text
-urn:x-oca:ocpp:uid:1:569327
-This contains the ICCID of the modem’s SIM card.
+   * urn:x-oca:ocpp:uid:1:569327
+   * This contains the ICCID of the modem’s SIM card.
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 20)
   @IsString()
+  @Length(0, 20)
   public iccid!: string
 
   /**
    * Wireless_ Communication_ Module. IMSI. CI20_ Text
-urn:x-oca:ocpp:uid:1:569328
-This contains the IMSI of the modem’s SIM card.
+   * urn:x-oca:ocpp:uid:1:569328
+   * This contains the IMSI of the modem’s SIM card.
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 20)
   @IsString()
+  @Length(0, 20)
   public imsi!: string
 }

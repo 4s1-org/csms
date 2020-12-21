@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
@@ -16,7 +16,7 @@ export class GetVariableResultDto {
   public constructor(
     attributeStatus: GetVariableStatusEnum,
     component: ComponentDto,
-    variable: VariableDto
+    variable: VariableDto,
   ) {
     this.attributeStatus = attributeStatus
     this.component = component
@@ -43,13 +43,13 @@ export class GetVariableResultDto {
 
   /**
    * Value of requested attribute type of component-variable. This field can only be empty when the given status is NOT accepted.
-
-The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
+   * 
+   * The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 2500)
   @IsString()
+  @Length(0, 2500)
   public attributeValue!: string
 
   @ApiProperty()

@@ -1,19 +1,19 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ModemDto } from './modem.dto'
 
 /**
  * Charge_ Point
-urn:x-oca:ocpp:uid:2:233122
-The physical system where an Electrical Vehicle (EV) can be charged.
+ * urn:x-oca:ocpp:uid:2:233122
+ * The physical system where an Electrical Vehicle (EV) can be charged.
  */
 export class ChargingStationDto {
   public constructor(
     model: string,
-    vendorName: string
+    vendorName: string,
   ) {
     this.model = model
     this.vendorName = vendorName
@@ -25,24 +25,24 @@ export class ChargingStationDto {
 
   /**
    * Device. Serial_ Number. Serial_ Number
-urn:x-oca:ocpp:uid:1:569324
-Vendor-specific device identifier.
+   * urn:x-oca:ocpp:uid:1:569324
+   * Vendor-specific device identifier.
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 25)
   @IsString()
+  @Length(0, 25)
   public serialNumber!: string
 
   /**
    * Device. Model. CI20_ Text
-urn:x-oca:ocpp:uid:1:569325
-Defines the model of the device.
+   * urn:x-oca:ocpp:uid:1:569325
+   * Defines the model of the device.
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 20)
   @IsString()
+  @Length(0, 20)
   public model: string
 
   @ApiProperty()
@@ -54,8 +54,8 @@ Defines the model of the device.
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 50)
   @IsString()
+  @Length(0, 50)
   public vendorName: string
 
   /**
@@ -63,7 +63,7 @@ Defines the model of the device.
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 50)
   @IsString()
+  @Length(0, 50)
   public firmwareVersion!: string
 }

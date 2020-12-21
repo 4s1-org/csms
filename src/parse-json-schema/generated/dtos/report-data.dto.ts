@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
+import { IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 import { ComponentDto } from './component.dto'
@@ -14,7 +14,7 @@ export class ReportDataDto {
   public constructor(
     component: ComponentDto,
     variable: VariableDto,
-    variableAttribute: any
+    variableAttribute: any,
   ) {
     this.component = component
     this.variable = variable
