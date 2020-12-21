@@ -1,5 +1,5 @@
 /**
- * This indicates whether the Charging Station is able to accept this request.
+ * Indicates whether the Charging Station was able to accept the request.
  */
 export enum GenericDeviceModelStatusEnum {
   Accepted = "Accepted",

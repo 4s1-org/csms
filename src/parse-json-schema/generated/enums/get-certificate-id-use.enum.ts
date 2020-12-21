@@ -1,3 +1,6 @@
+/**
+ * Indicates the type of the requested certificate(s).
+ */
 export enum GetCertificateIdUseEnum {
   V2GRootCertificate = "V2GRootCertificate",
   MORootCertificate = "MORootCertificate",

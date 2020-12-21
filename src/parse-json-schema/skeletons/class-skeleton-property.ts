@@ -51,7 +51,7 @@ export class ClassSkeletonProperty extends SkeletonBase {
     this.annotations.push(`@Length(${min}, ${max})`)
   }
 
-  public toString(): string {
+  public toString(): string[] {
     const result: string[] = []
     if (this.comment) {
       result.push("  /**")
@@ -62,6 +62,6 @@ export class ClassSkeletonProperty extends SkeletonBase {
       result.push(`  ${annotation}`)
     }
     result.push(`  public ${this.name}${this.isRequired ? "" : "!"}: ${this.type}`)
-    return result.join("/n")
+    return result
   }
 }

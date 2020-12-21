@@ -1,6 +1,7 @@
 import path from "path"
 import fs from "fs"
 import { SchemaDefinitionPropertyItem } from "./schema-elements/schema-definition-property"
+import { EnumSkeleton } from "./skeletons/enum-skeleton"
 
 type EnumsType = {
   [name: string]: EnumItemType
@@ -23,6 +24,7 @@ type DtoItemType = {
 export class ClassGenerator {
   private enums: EnumsType = {}
   private dtos: DtosType = {}
+  private skeletonEnums: EnumSkeleton[] = []
 
   private static instance: ClassGenerator
 
@@ -45,6 +47,11 @@ export class ClassGenerator {
     }
   }
 
+
+  public addEnumNew(skeleton: EnumSkeleton): void {
+    this.skeletonEnums.push(skeleton)
+  }
+
   public addEnum(name: string, items: string[], description: string | undefined): void {
     if (!(name in this.enums)) {
       this.enums[name] = { items, description }
@@ -59,7 +66,8 @@ export class ClassGenerator {
   }
 
   public generateFiles(): void {
-    this.generateEnumFiles()
+    // this.generateEnumFiles()
+    this.generateSkeletonEnumFiles()
     this.generateDtosFiles()
   }
 
@@ -240,6 +248,13 @@ export class ClassGenerator {
   private pushIfNotExists(content: string[], text: string): void {
     if (content.indexOf(text) === -1) {
       content.push(text)
+    }
+  }
+
+  private generateSkeletonEnumFiles(): void {
+    for (const item of this.skeletonEnums) {
+      const file = path.join(__dirname, "generated", "enums", `${this.filenameFormatter(item.name)}.enum.ts`)
+      this.writeFile(file, item.toString())
     }
   }
 
