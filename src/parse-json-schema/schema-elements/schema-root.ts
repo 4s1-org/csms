@@ -1,8 +1,9 @@
 import { ClassGenerator } from "../class-generator"
 import { IKeyValue } from "../i-key-value"
+import { ClassSkeleton } from "../skeletons/class-skeleton"
 import { Validatable } from "../validatable"
 import { SchemaDefinition } from "./schema-definition"
-import { SchemaDefinitionProperty, SchemaDefinitionPropertyItem } from "./schema-definition-property"
+import { SchemaDefinitionProperty } from "./schema-definition-property"
 
 interface Foo {
   $schema: string
@@ -18,8 +19,6 @@ interface Foo {
 }
 
 export class SchemaRoot extends Validatable<Foo> {
-  private requireFields: string[] = []
-
   public constructor(key: string, data: Foo) {
     super(key, data)
   }
@@ -33,23 +32,25 @@ export class SchemaRoot extends Validatable<Foo> {
   }
 
   protected handleData(): void {
-    this.requireFields = this.data.required ? this.data.required : []
-
     // Nested stuff
     for (const key in this.data.definitions) {
       const item = new SchemaDefinition(key, this.data.definitions[key])
       item.init()
     }
 
-    // Object itself
-    const items: SchemaDefinitionPropertyItem[] = []
+    // Remove "Type"
+    const name = this.key.substr(0, this.key.length - 4)
+    const skeleton = new ClassSkeleton(name, true)
+    skeleton.comment = this.data.description
+
     const required = this.data.required || []
     for (const key in this.data.properties) {
-      const item = new SchemaDefinitionProperty(key, this.data.properties[key])
+      const prop = this.data.properties[key]
+      const propSkeleton = skeleton.addProperty(key, required.includes(key))
+
+      const item = new SchemaDefinitionProperty(key, prop, propSkeleton)
       item.init()
-      item.Item.isRequired = required.includes(key)
-      items.push(item.Item)
     }
-    ClassGenerator.instance.addDto(this.key, this.data.description, items)
+    ClassGenerator.instance.addClass(skeleton)
   }
 }

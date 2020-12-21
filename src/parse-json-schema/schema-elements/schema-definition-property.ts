@@ -1,4 +1,5 @@
 import { IKeyValue } from "../i-key-value"
+import { PropertySkeleton } from "../skeletons/property-skeleton"
 import { Validatable } from "../validatable"
 
 interface Foo {
@@ -16,32 +17,12 @@ interface Foo {
   maximum?: number
 }
 
-export class SchemaDefinitionPropertyItem {
-  public constructor(
-    public readonly name: string,
-    public readonly type: string,
-    public maxLength: number | undefined,
-    public description: string | undefined,
-  ) {
-    // nothing to do
-  }
-
-
-  private _isRequired = false
-
-  public get isRequired(): boolean {
-    return this._isRequired
-  }
-
-  public set isRequired(isRequired: boolean) {
-    this._isRequired = isRequired
-  }
-}
-
 export class SchemaDefinitionProperty extends Validatable<Foo> {
-  private item: SchemaDefinitionPropertyItem | undefined
-
-  public constructor(key: string, data: Foo) {
+  public constructor(
+    key: string,
+    data: Foo,
+    private readonly skeleton: PropertySkeleton
+  ) {
     super(key, data)
   }
 
@@ -62,18 +43,17 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       if (!this.data.$ref.startsWith("#/definitions/")) {
         throw new Error(`${this.key}: I though $ref should start with definition`)
       }
-      this.item = new SchemaDefinitionPropertyItem(
-        this.key,
-        this.data.$ref.substr(14, this.data.$ref.length - 13),
-        undefined,
-        undefined)
+
+      const type = this.data.$ref.substr(14, this.data.$ref.length - 13)
+      this.skeleton.setIsCustomType(type)
       return
     }
 
     // Special thing beim DataTransferRequest. Da gibt es ein "data" was alles möglich sein darf.
     if (this.data.description && Object.keys(this.data).length === 1) {
       // ToDo: Das muss any sein.
-      this.item = new SchemaDefinitionPropertyItem(this.key, "string", undefined, this.data.description)
+      this.skeleton.setIsCustomType("string")
+      // this.item = new SchemaDefinitionPropertyItem(this.key, "string", undefined, this.data.description)
       return
     }
 
@@ -81,39 +61,38 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       throw new Error(`${this.key}: No $ref and no type`)
     }
 
+    this.skeleton.comment = this.data.description
 
     if (this.data.type === "string") {
-      this.item = new SchemaDefinitionPropertyItem(this.key, "string", this.data.maxLength, this.data.description)
+      this.skeleton.setIsString()
+      if (this.data.maxLength) {
+        this.skeleton.setLength(0, this.data.maxLength)
+      }
       return
     }
 
     if (this.data.type === "integer") {
-      this.item = new SchemaDefinitionPropertyItem(this.key, "integer", undefined, undefined)
+      this.skeleton.setIsInteger()
       return
     }
 
     if (this.data.type === "array") {
-      this.item = new SchemaDefinitionPropertyItem(this.key, "any", undefined, undefined)
+      // ToDo
+      this.skeleton.setIsAny()
+      // this.item = new SchemaDefinitionPropertyItem(this.key, "any", undefined, undefined)
       return
     }
 
     if (this.data.type === "number") {
-      this.item = new SchemaDefinitionPropertyItem(this.key, "number", undefined, undefined)
+      this.skeleton.setIsNumber()
       return
     }
 
     if (this.data.type === "boolean") {
-      this.item = new SchemaDefinitionPropertyItem(this.key, "boolean", undefined, undefined)
+      this.skeleton.setIsBoolean()
       return
     }
 
     throw new Error(`${this.key}: Unknown typ: ${this.data.type}`)
-  }
-
-  public get Item(): SchemaDefinitionPropertyItem {
-    if (!this.item) {
-      throw new Error("Item can't be undefined")
-    }
-    return this.item
   }
 }

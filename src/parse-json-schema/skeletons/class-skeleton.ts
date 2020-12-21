@@ -1,15 +1,15 @@
-import { ClassSkeletonProperty } from "./class-skeleton-property"
+import { PropertySkeleton } from "./property-skeleton"
 import { SkeletonBase } from "./skeleton-base"
 
 export class ClassSkeleton extends SkeletonBase {
-  private _properties: ClassSkeletonProperty[] = []
+  private _properties: PropertySkeleton[] = []
 
-  public constructor(name: string) {
+  public constructor(name: string, public readonly isRoot: boolean = false) {
     super(name)
   }
 
-  public addProperty(name: string, type: string, isRequired: boolean): ClassSkeletonProperty {
-    const prop = new ClassSkeletonProperty(name, type, isRequired)
+  public addProperty(name: string, isRequired: boolean): PropertySkeleton {
+    const prop = new PropertySkeleton(name, isRequired)
     this._properties.push(prop)
     return prop
   }
