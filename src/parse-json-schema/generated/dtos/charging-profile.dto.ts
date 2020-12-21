@@ -1,24 +1,25 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
-import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { ChargingProfileKindEnum } from '../enums/charging-profile-kind.enum'
+import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
+import { ChargingScheduleDto } from './charging-schedule.dto'
+import { CustomDataDto } from './custom-data.dto'
 import { RecurrencyKindEnum } from '../enums/recurrency-kind.enum'
 
 /**
  * Charging_ Profile
-urn:x-oca:ocpp:uid:2:233255
-A ChargingProfile consists of ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
+ * urn:x-oca:ocpp:uid:2:233255
+ * A ChargingProfile consists of ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
 export class ChargingProfileDto {
-  public constructor (
+  public constructor(
     id: number,
     stackLevel: number,
     chargingProfilePurpose: ChargingProfilePurposeEnum,
     chargingProfileKind: ChargingProfileKindEnum,
-    chargingSchedule: any
+    chargingSchedule: ChargingScheduleDto[],
   ) {
     this.id = id
     this.stackLevel = stackLevel
@@ -29,13 +30,24 @@ export class ChargingProfileDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
+  /**
+   * Identified_ Object. MRID. Numeric_ Identifier
+   * urn:x-enexis:ecdm:uid:1:569198
+   * Id of ChargingProfile.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public id: number
 
+  /**
+   * Charging_ Profile. Stack_ Level. Counter
+   * urn:x-oca:ocpp:uid:1:569230
+   * Value determining level in hierarchy stack of profiles. Higher values have precedence over lower values. Lowest level is 0.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
@@ -58,34 +70,40 @@ export class ChargingProfileDto {
 
   /**
    * Charging_ Profile. Valid_ From. Date_ Time
-urn:x-oca:ocpp:uid:1:569234
-Point in time at which the profile starts to be valid. If absent, the profile is valid as soon as it is received by the Charging Station.
+   * urn:x-oca:ocpp:uid:1:569234
+   * Point in time at which the profile starts to be valid. If absent, the profile is valid as soon as it is received by the Charging Station.
    */
   @ApiProperty()
   @IsOptional()
+  // setFormat: date-time
   @IsString()
   public validFrom!: string
 
   /**
    * Charging_ Profile. Valid_ To. Date_ Time
-urn:x-oca:ocpp:uid:1:569235
-Point in time at which the profile stops to be valid. If absent, the profile is valid until it is replaced by another profile.
+   * urn:x-oca:ocpp:uid:1:569235
+   * Point in time at which the profile stops to be valid. If absent, the profile is valid until it is replaced by another profile.
    */
   @ApiProperty()
   @IsOptional()
+  // setFormat: date-time
   @IsString()
   public validTo!: string
 
   @ApiProperty()
   @IsNotEmpty()
-  public chargingSchedule: any
+  // MinItems: 1
+  // MinItems: 3
+  @IsArray()
+  @ValidateNested()
+  public chargingSchedule: ChargingScheduleDto[]
 
   /**
    * SHALL only be included if ChargingProfilePurpose is set to TxProfile. The transactionId is used to match the profile to a specific transaction.
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 36)
+  @MaxLength(36)
   @IsString()
   public transactionId!: string
 }

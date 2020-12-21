@@ -1,19 +1,20 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
+import { CustomDataDto } from './custom-data.dto'
 import { VariableDto } from './variable.dto'
+import { VariableMonitoringDto } from './variable-monitoring.dto'
 
 /**
  * Class to hold parameters of SetVariableMonitoring request.
  */
 export class MonitoringDataDto {
-  public constructor (
+  public constructor(
     component: ComponentDto,
     variable: VariableDto,
-    variableMonitoring: any
+    variableMonitoring: VariableMonitoringDto[],
   ) {
     this.component = component
     this.variable = variable
@@ -22,17 +23,23 @@ export class MonitoringDataDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public component: ComponentDto
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public variable: VariableDto
 
   @ApiProperty()
   @IsNotEmpty()
-  public variableMonitoring: any
+  // MinItems: 1
+  @IsArray()
+  @ValidateNested()
+  public variableMonitoring: VariableMonitoringDto[]
 }

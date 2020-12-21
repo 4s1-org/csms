@@ -23,6 +23,7 @@
     "lint": "eslint --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "pjs": "ts-node src/parse-json-schema/index.ts",
+    "reset": "rm -rf src/parse-json-schema/generated/ && git checkout HEAD~1 -- src/parse-json-schema/generated/",
     "test": "echo No tests available",
     "test:cov": "echo No tests available"
   },

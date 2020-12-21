@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Specifies the event notification type of the message.
  */

@@ -1,22 +1,22 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { VPNEnum } from '../enums/vpn.enum'
 
 /**
  * VPN
-urn:x-oca:ocpp:uid:2:233268
-VPN Configuration settings
+ * urn:x-oca:ocpp:uid:2:233268
+ * VPN Configuration settings
  */
 export class VPNDto {
-  public constructor (
+  public constructor(
     server: string,
     user: string,
     password: string,
     key: string,
-    type: VPNEnum
+    type: VPNEnum,
   ) {
     this.server = server
     this.user = user
@@ -27,60 +27,61 @@ export class VPNDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
    * VPN. Server. URI
-urn:x-oca:ocpp:uid:1:569272
-VPN Server Address
+   * urn:x-oca:ocpp:uid:1:569272
+   * VPN Server Address
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 512)
+  @MaxLength(512)
   @IsString()
   public server: string
 
   /**
    * VPN. User. User_ Name
-urn:x-oca:ocpp:uid:1:569273
-VPN User
+   * urn:x-oca:ocpp:uid:1:569273
+   * VPN User
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 20)
+  @MaxLength(20)
   @IsString()
   public user: string
 
   /**
    * VPN. Group. Group_ Name
-urn:x-oca:ocpp:uid:1:569274
-VPN group.
+   * urn:x-oca:ocpp:uid:1:569274
+   * VPN group.
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 20)
+  @MaxLength(20)
   @IsString()
   public group!: string
 
   /**
    * VPN. Password. Password
-urn:x-oca:ocpp:uid:1:569275
-VPN Password.
+   * urn:x-oca:ocpp:uid:1:569275
+   * VPN Password.
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 20)
+  @MaxLength(20)
   @IsString()
   public password: string
 
   /**
    * VPN. Key. VPN_ Key
-urn:x-oca:ocpp:uid:1:569276
-VPN shared secret.
+   * urn:x-oca:ocpp:uid:1:569276
+   * VPN shared secret.
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 255)
+  @MaxLength(255)
   @IsString()
   public key: string
 

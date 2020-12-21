@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Applicable Network Interface.
  */

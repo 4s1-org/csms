@@ -1,7 +1,8 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { AdditionalInfoDto } from './additional-info.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenEnum } from '../enums/id-token.enum'
 
@@ -9,9 +10,9 @@ import { IdTokenEnum } from '../enums/id-token.enum'
  * Contains a case insensitive identifier to use for the authorization and the type of authorization to support multiple forms of identifiers.
  */
 export class IdTokenDto {
-  public constructor (
+  public constructor(
     idToken: string,
-    type: IdTokenEnum
+    type: IdTokenEnum,
   ) {
     this.idToken = idToken
     this.type = type
@@ -19,18 +20,22 @@ export class IdTokenDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
   @IsOptional()
-  public additionalInfo!: any
+  // MinItems: 1
+  @IsArray()
+  @ValidateNested()
+  public additionalInfo!: AdditionalInfoDto[]
 
   /**
    * IdToken is case insensitive. Might hold the hidden id of an RFID tag, but can for example also contain a UUID.
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 36)
+  @MaxLength(36)
   @IsString()
   public idToken: string
 

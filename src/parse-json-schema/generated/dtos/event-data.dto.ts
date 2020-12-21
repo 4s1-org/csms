@@ -1,25 +1,25 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsInt, IsString, IsBoolean, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
-import { EventTriggerEnum } from '../enums/event-trigger.enum'
+import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
+import { CustomDataDto } from './custom-data.dto'
 import { EventNotificationEnum } from '../enums/event-notification.enum'
+import { EventTriggerEnum } from '../enums/event-trigger.enum'
 import { VariableDto } from './variable.dto'
 
 /**
  * Class to report an event notification for a component-variable.
  */
 export class EventDataDto {
-  public constructor (
+  public constructor(
     eventId: number,
     timestamp: string,
     trigger: EventTriggerEnum,
     actualValue: string,
     component: ComponentDto,
     eventNotificationType: EventNotificationEnum,
-    variable: VariableDto
+    variable: VariableDto,
   ) {
     this.eventId = eventId
     this.timestamp = timestamp
@@ -32,8 +32,12 @@ export class EventDataDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
+  /**
+   * Identifies the event. This field can be referred to as a cause by other events.
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsInt()
@@ -44,6 +48,7 @@ export class EventDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public timestamp: string
 
@@ -52,6 +57,9 @@ export class EventDataDto {
   @IsEnum(EventTriggerEnum)
   public trigger: EventTriggerEnum
 
+  /**
+   * Refers to the Id of an event that is considered to be the cause for this event.
+   */
   @ApiProperty()
   @IsOptional()
   @IsInt()
@@ -59,12 +67,12 @@ export class EventDataDto {
 
   /**
    * Actual value (_attributeType_ Actual) of the variable.
-
-The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
+   * 
+   * The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 2500)
+  @MaxLength(2500)
   @IsString()
   public actualValue: string
 
@@ -73,7 +81,7 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 50)
+  @MaxLength(50)
   @IsString()
   public techCode!: string
 
@@ -82,10 +90,13 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 500)
+  @MaxLength(500)
   @IsString()
   public techInfo!: string
 
+  /**
+   * _Cleared_ is set to true to report the clearing of a monitored situation, i.e. a 'return to normal'.
+   */
   @ApiProperty()
   @IsOptional()
   @IsBoolean()
@@ -96,14 +107,18 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
    */
   @ApiProperty()
   @IsOptional()
-  @Length(0, 36)
+  @MaxLength(36)
   @IsString()
   public transactionId!: string
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public component: ComponentDto
 
+  /**
+   * Identifies the VariableMonitoring which triggered the event.
+   */
   @ApiProperty()
   @IsOptional()
   @IsInt()
@@ -116,5 +131,6 @@ The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>>
 
   @ApiProperty()
   @IsNotEmpty()
+  @ValidateNested()
   public variable: VariableDto
 }

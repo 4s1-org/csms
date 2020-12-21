@@ -1,7 +1,9 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 /**
  * Charging_ Profile. Charging_ Profile_ Purpose. Charging_ Profile_ Purpose_ Code
-urn:x-oca:ocpp:uid:1:569231
-Specifies to purpose of the charging profiles that will be cleared, if they meet the other criteria in the request.
+ * urn:x-oca:ocpp:uid:1:569231
+ * Defines the purpose of the schedule transferred by this profile
  */
 export enum ChargingProfilePurposeEnum {
   ChargingStationExternalConstraints = "ChargingStationExternalConstraints",

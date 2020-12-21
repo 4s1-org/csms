@@ -1,17 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional, IsNotEmpty, IsString, IsEnum, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enums/hash-algorithm.enum'
 
 export class OCSPRequestDataDto {
-  public constructor (
+  public constructor(
     hashAlgorithm: HashAlgorithmEnum,
     issuerNameHash: string,
     issuerKeyHash: string,
     serialNumber: string,
-    responderURL: string
+    responderURL: string,
   ) {
     this.hashAlgorithm = hashAlgorithm
     this.issuerNameHash = issuerNameHash
@@ -22,6 +22,7 @@ export class OCSPRequestDataDto {
 
   @ApiProperty()
   @IsOptional()
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @ApiProperty()
@@ -34,7 +35,7 @@ export class OCSPRequestDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 128)
+  @MaxLength(128)
   @IsString()
   public issuerNameHash: string
 
@@ -43,7 +44,7 @@ export class OCSPRequestDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 128)
+  @MaxLength(128)
   @IsString()
   public issuerKeyHash: string
 
@@ -52,7 +53,7 @@ export class OCSPRequestDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 40)
+  @MaxLength(40)
   @IsString()
   public serialNumber: string
 
@@ -61,7 +62,7 @@ export class OCSPRequestDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  @Length(0, 512)
+  @MaxLength(512)
   @IsString()
   public responderURL: string
 }
