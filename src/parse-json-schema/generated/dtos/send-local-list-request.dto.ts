@@ -21,6 +21,7 @@ export class SendLocalListRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public localAuthorizationList!: AuthorizationDto[]
 

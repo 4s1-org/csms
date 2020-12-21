@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { AttributeEnum } from '../enums/attribute.enum'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -48,8 +48,8 @@ export class GetVariableResultDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(2500)
   @IsString()
-  @Length(0, 2500)
   public attributeValue!: string
 
   @ApiProperty()

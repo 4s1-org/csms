@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 export class NotifyCustomerInformationRequestDto {
@@ -26,8 +26,8 @@ export class NotifyCustomerInformationRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(512)
   @IsString()
-  @Length(0, 512)
   public data: string
 
   /**
@@ -51,6 +51,7 @@ export class NotifyCustomerInformationRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public generatedAt: string
 

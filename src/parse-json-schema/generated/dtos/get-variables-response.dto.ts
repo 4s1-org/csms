@@ -18,6 +18,7 @@ export class GetVariablesResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public getVariableResult: GetVariableResultDto[]
 }

@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 export class PublishFirmwareRequestDto {
@@ -25,8 +25,8 @@ export class PublishFirmwareRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(512)
   @IsString()
-  @Length(0, 512)
   public location: string
 
   /**
@@ -44,8 +44,8 @@ export class PublishFirmwareRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(32)
   @IsString()
-  @Length(0, 32)
   public checksum: string
 
   /**

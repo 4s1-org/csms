@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Length } from 'class-validator'
+import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { DataEnum } from '../enums/data.enum'
 
@@ -26,8 +26,8 @@ export class VariableCharacteristicsDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(16)
   @IsString()
-  @Length(0, 16)
   public unit!: string
 
   @ApiProperty()
@@ -66,8 +66,8 @@ export class VariableCharacteristicsDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(1000)
   @IsString()
-  @Length(0, 1000)
   public valuesList!: string
 
   /**

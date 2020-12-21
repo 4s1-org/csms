@@ -35,6 +35,7 @@ export class ReserveNowRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public expiryDateTime: string
 

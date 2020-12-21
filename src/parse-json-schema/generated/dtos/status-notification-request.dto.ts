@@ -27,6 +27,7 @@ export class StatusNotificationRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public timestamp: string
 

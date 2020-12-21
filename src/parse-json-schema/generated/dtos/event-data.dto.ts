@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { EventNotificationEnum } from '../enums/event-notification.enum'
@@ -47,6 +47,7 @@ export class EventDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public timestamp: string
 
@@ -70,8 +71,8 @@ export class EventDataDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(2500)
   @IsString()
-  @Length(0, 2500)
   public actualValue: string
 
   /**
@@ -79,8 +80,8 @@ export class EventDataDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(50)
   @IsString()
-  @Length(0, 50)
   public techCode!: string
 
   /**
@@ -88,8 +89,8 @@ export class EventDataDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(500)
   @IsString()
-  @Length(0, 500)
   public techInfo!: string
 
   /**
@@ -105,8 +106,8 @@ export class EventDataDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(36)
   @IsString()
-  @Length(0, 36)
   public transactionId!: string
 
   @ApiProperty()

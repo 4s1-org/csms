@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsOptional, IsString, Length } from 'class-validator'
+import { IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetTransactionStatusRequestDto {
@@ -15,7 +15,7 @@ export class GetTransactionStatusRequestDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(36)
   @IsString()
-  @Length(0, 36)
   public transactionId!: string
 }

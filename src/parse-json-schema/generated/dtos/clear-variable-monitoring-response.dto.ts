@@ -18,6 +18,7 @@ export class ClearVariableMonitoringResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public clearMonitoringResult: ClearMonitoringResultDto[]
 }

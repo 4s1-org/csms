@@ -26,6 +26,7 @@ export class BootNotificationResponseDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public currentTime: string
 

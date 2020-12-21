@@ -25,6 +25,7 @@ export class NotifyEVChargingScheduleRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public timeBase: string
 

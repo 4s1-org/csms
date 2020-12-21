@@ -19,6 +19,7 @@ export class GetReportRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public componentVariable!: ComponentVariableDto[]
 
@@ -35,6 +36,8 @@ export class GetReportRequestDto {
    */
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
+  // MinItems: 4
   @IsArray()
   public componentCriteria!: ComponentCriterionEnum[]
 }

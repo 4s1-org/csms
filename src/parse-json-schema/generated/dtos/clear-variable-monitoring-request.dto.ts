@@ -20,6 +20,7 @@ export class ClearVariableMonitoringRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public id: number[]
 }

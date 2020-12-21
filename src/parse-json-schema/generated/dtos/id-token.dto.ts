@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { AdditionalInfoDto } from './additional-info.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenEnum } from '../enums/id-token.enum'
@@ -24,6 +24,7 @@ export class IdTokenDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public additionalInfo!: AdditionalInfoDto[]
 
@@ -32,8 +33,8 @@ export class IdTokenDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(36)
   @IsString()
-  @Length(0, 36)
   public idToken: string
 
   @ApiProperty()

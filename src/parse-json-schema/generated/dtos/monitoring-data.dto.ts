@@ -35,6 +35,7 @@ export class MonitoringDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public variableMonitoring: VariableMonitoringDto[]
 }

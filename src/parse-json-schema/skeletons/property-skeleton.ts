@@ -25,10 +25,10 @@ export class PropertySkeleton extends SkeletonBase {
     return this._type;
   }
 
-  public setIsEnum(params: string): void {
+  public setIsEnum(value: string): void {
     this.addImportClassValidatior("IsEnum")
-    this._annotations.push(`@IsEnum(${params})`)
-    this._type = params
+    this._annotations.push(`@IsEnum(${value})`)
+    this._type = value
   }
 
   public setIsString(): void {
@@ -49,8 +49,8 @@ export class PropertySkeleton extends SkeletonBase {
     this._type = "number"
   }
 
-  public setIsCustomType(type: string): void {
-    this._type = type
+  public setIsCustomType(value: string): void {
+    this._type = value
   }
 
   /**
@@ -66,19 +66,39 @@ export class PropertySkeleton extends SkeletonBase {
     this._type = "boolean"
   }
 
-  public setLength(min: number, max: number): void {
-    this.addImportClassValidatior("Length")
-    this._annotations.push(`@Length(${min}, ${max})`)
+  public setMaxLength(value: number): void {
+    this.addImportClassValidatior("MaxLength")
+    this._annotations.push(`@MaxLength(${value})`)
   }
 
-  public setIsArray(type: string): void {
+  public setMinimum(value: number): void {
+    this._annotations.push(`// setMinimum: ${value}`)
+  }
+
+  public setMaximum(value: number): void {
+    this._annotations.push(`// setMaximum: ${value}`)
+  }
+
+  public setFormat(value: string): void {
+    this._annotations.push(`// setFormat: ${value}`)
+  }
+
+  public setDefault(value: string): void {
+    this._annotations.push(`// setDefault: ${value}`)
+  }
+
+  public setIsArray(value: string): void {
     this.addImportClassValidatior("IsArray")
     this._annotations.push(`@IsArray()`)
-    this._type = `${type}[]`
+    this._type = `${value}[]`
   }
 
-  public setMinMaxItems(minItem: number, max: number): void {
+  public setMinItems(value: number): void {
+    this._annotations.push(`// MinItems: ${value}`)
+  }
 
+  public setMaxItems(value: number): void {
+    this._annotations.push(`// MaxItems: ${value}`)
   }
 
   public toString(): string[] {

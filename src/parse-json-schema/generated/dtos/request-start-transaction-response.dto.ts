@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { RequestStartStopStatusEnum } from '../enums/request-start-stop-status.enum'
 import { StatusInfoDto } from './status-info.dto'
@@ -31,7 +31,7 @@ export class RequestStartTransactionResponseDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(36)
   @IsString()
-  @Length(0, 36)
   public transactionId!: string
 }

@@ -18,6 +18,7 @@ export class NotifyDisplayMessagesRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public messageInfo!: MessageInfoDto[]
 

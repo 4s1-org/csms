@@ -18,6 +18,7 @@ export class SetVariablesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public setVariableData: SetVariableDataDto[]
 }

@@ -31,6 +31,8 @@ export class CertificateHashDataChainDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
+  // MinItems: 4
   @IsArray()
   public childCertificateHashData!: CertificateHashDataDto[]
 }

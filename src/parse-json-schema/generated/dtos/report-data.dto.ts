@@ -36,6 +36,8 @@ export class ReportDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
+  // MinItems: 4
   @IsArray()
   public variableAttribute: VariableAttributeDto[]
 
