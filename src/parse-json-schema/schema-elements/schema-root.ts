@@ -36,12 +36,6 @@ export class SchemaRoot extends Validatable<Foo> {
       throw new Error(`${this.key}: "additionalProperties" should be always false`)
     }
 
-    // Nested stuff
-    for (const key in this.data.definitions) {
-      const item = new SchemaDefinition(key, this.data.definitions[key])
-      item.init()
-    }
-
     // Remove "Type"
     if (!this.key.endsWith("Request") && !this.key.endsWith("Response")) {
       throw new Error(`${this.key}: I thought it's ends with "Request" or "Response"`)
