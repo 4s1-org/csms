@@ -7,7 +7,7 @@ import { SetNetworkProfileStatusEnum } from '../enums/set-network-profile-status
 import { StatusInfoDto } from './status-info.dto'
 
 export class SetNetworkProfileResponseDto {
-  public constructor (
+  public constructor(
     status: SetNetworkProfileStatusEnum
   ) {
     this.status = status

@@ -7,7 +7,7 @@ import { RequestStartStopStatusEnum } from '../enums/request-start-stop-status.e
 import { StatusInfoDto } from './status-info.dto'
 
 export class RequestStopTransactionResponseDto {
-  public constructor (
+  public constructor(
     status: RequestStartStopStatusEnum
   ) {
     this.status = status

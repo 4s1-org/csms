@@ -10,7 +10,7 @@ urn:x-oca:ocpp:uid:2:233123
 Electric Vehicle Supply Equipment
  */
 export class EVSEDto {
-  public constructor (
+  public constructor(
     id: number
   ) {
     this.id = id

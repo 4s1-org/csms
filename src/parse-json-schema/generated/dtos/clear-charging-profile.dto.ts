@@ -11,7 +11,7 @@ urn:x-oca:ocpp:uid:2:233255
 A ChargingProfile consists of a ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
 export class ClearChargingProfileDto {
-  public constructor () {
+  public constructor() {
     // nothing to do
   }
 

@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ClearChargingProfileDto } from './clear-charging-profile.dto'
 
 export class ClearChargingProfileRequestDto {
-  public constructor () {
+  public constructor() {
     // nothing to do
   }
 

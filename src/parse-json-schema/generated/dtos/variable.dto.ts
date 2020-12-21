@@ -8,7 +8,7 @@ import { CustomDataDto } from './custom-data.dto'
  * Reference key to a component-variable.
  */
 export class VariableDto {
-  public constructor (
+  public constructor(
     name: string
   ) {
     this.name = name

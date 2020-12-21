@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ResetEnum } from '../enums/reset.enum'
 
 export class ResetRequestDto {
-  public constructor (
+  public constructor(
     type: ResetEnum
   ) {
     this.type = type

@@ -11,7 +11,7 @@ import { VariableDto } from './variable.dto'
  * Class to hold parameters of SetVariableMonitoring request.
  */
 export class SetMonitoringDataDto {
-  public constructor (
+  public constructor(
     value: number,
     type: MonitorEnum,
     severity: number,

@@ -7,7 +7,7 @@ import { CertificateHashDataDto } from './certificate-hash-data.dto'
 import { GetCertificateIdUseEnum } from '../enums/get-certificate-id-use.enum'
 
 export class CertificateHashDataChainDto {
-  public constructor (
+  public constructor(
     certificateHashData: CertificateHashDataDto,
     certificateType: GetCertificateIdUseEnum
   ) {

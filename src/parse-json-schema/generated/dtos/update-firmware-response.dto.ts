@@ -7,7 +7,7 @@ import { UpdateFirmwareStatusEnum } from '../enums/update-firmware-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class UpdateFirmwareResponseDto {
-  public constructor (
+  public constructor(
     status: UpdateFirmwareStatusEnum
   ) {
     this.status = status

@@ -7,7 +7,7 @@ import { NotifyEVChargingNeedsStatusEnum } from '../enums/notify-ev-charging-nee
 import { StatusInfoDto } from './status-info.dto'
 
 export class NotifyEVChargingNeedsResponseDto {
-  public constructor (
+  public constructor(
     status: NotifyEVChargingNeedsStatusEnum
   ) {
     this.status = status

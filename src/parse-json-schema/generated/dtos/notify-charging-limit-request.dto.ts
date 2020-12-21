@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingLimitDto } from './charging-limit.dto'
 
 export class NotifyChargingLimitRequestDto {
-  public constructor (
+  public constructor(
     chargingLimit: ChargingLimitDto
   ) {
     this.chargingLimit = chargingLimit

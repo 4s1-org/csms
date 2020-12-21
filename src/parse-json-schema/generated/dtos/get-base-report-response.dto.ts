@@ -7,7 +7,7 @@ import { GenericDeviceModelStatusEnum } from '../enums/generic-device-model-stat
 import { StatusInfoDto } from './status-info.dto'
 
 export class GetBaseReportResponseDto {
-  public constructor (
+  public constructor(
     status: GenericDeviceModelStatusEnum
   ) {
     this.status = status

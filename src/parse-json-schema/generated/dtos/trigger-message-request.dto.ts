@@ -7,7 +7,7 @@ import { EVSEDto } from './evse.dto'
 import { MessageTriggerEnum } from '../enums/message-trigger.enum'
 
 export class TriggerMessageRequestDto {
-  public constructor (
+  public constructor(
     requestedMessage: MessageTriggerEnum
   ) {
     this.requestedMessage = requestedMessage

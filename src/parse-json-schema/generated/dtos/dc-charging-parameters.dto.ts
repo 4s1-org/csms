@@ -10,7 +10,7 @@ urn:x-oca:ocpp:uid:2:233251
 EV DC charging parameters
  */
 export class DCChargingParametersDto {
-  public constructor (
+  public constructor(
     evMaxCurrent: number,
     evMaxVoltage: number
   ) {

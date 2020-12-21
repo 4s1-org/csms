@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { CertificateSigningUseEnum } from '../enums/certificate-signing-use.enum'
 
 export class CertificateSignedRequestDto {
-  public constructor (
+  public constructor(
     certificateChain: string
   ) {
     this.certificateChain = certificateChain

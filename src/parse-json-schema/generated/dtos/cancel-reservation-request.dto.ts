@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class CancelReservationRequestDto {
-  public constructor (
+  public constructor(
     reservationId: number
   ) {
     this.reservationId = reservationId

@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class GetLocalListVersionResponseDto {
-  public constructor (
+  public constructor(
     versionNumber: number
   ) {
     this.versionNumber = versionNumber

@@ -1,6 +1,6 @@
 import { ClassGenerator } from "../class-generator"
-import { ClassSkeleton, EnumSkeleton } from "../class-skeleton"
 import { IKeyValue } from "../i-key-value"
+import { EnumSkeleton } from "../skeletons/enum-skeleton"
 import { Validatable } from "../validatable"
 import { SchemaDefinitionProperty, SchemaDefinitionPropertyItem } from "./schema-definition-property"
 
@@ -39,7 +39,10 @@ export class SchemaDefinition extends Validatable<Foo> {
       if (this.data.additionalProperties) {
         throw new Error(`${this.key}: I thought enums can't have additional properties`)
       }
-      const skeleton = new EnumSkeleton(this.key)
+
+      // Remove "EnumType"
+      const name = this.key.substr(0, this.key.length - 8)
+      const skeleton = new EnumSkeleton(name)
 
       ClassGenerator.Instance.addEnum(this.key.substr(0, this.key.length - 8), this.data.enum, this.data.description)
     } else if (this.data.type === "object") {

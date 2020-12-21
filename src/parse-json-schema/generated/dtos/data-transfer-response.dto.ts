@@ -7,7 +7,7 @@ import { DataTransferStatusEnum } from '../enums/data-transfer-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class DataTransferResponseDto {
-  public constructor (
+  public constructor(
     status: DataTransferStatusEnum
   ) {
     this.status = status

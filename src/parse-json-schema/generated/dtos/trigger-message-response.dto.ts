@@ -8,7 +8,7 @@ import { StatusInfoDto } from './status-info.dto'
 
 export class TriggerMessageResponseDto {
   public constructor(
-    status: TriggerMessageStatusEnum,
+    status: TriggerMessageStatusEnum
   ) {
     this.status = status
   }

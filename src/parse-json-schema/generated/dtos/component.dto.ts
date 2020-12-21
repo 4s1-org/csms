@@ -9,7 +9,7 @@ import { EVSEDto } from './evse.dto'
  * A physical or logical component
  */
 export class ComponentDto {
-  public constructor (
+  public constructor(
     name: string
   ) {
     this.name = name

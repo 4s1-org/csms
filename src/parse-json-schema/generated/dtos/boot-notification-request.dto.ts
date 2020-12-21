@@ -7,7 +7,7 @@ import { ChargingStationDto } from './charging-station.dto'
 import { BootReasonEnum } from '../enums/boot-reason.enum'
 
 export class BootNotificationRequestDto {
-  public constructor (
+  public constructor(
     chargingStation: ChargingStationDto,
     reason: BootReasonEnum
   ) {

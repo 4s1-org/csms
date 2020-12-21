@@ -10,7 +10,7 @@ import { RelativeTimeIntervalDto } from './relative-time-interval.dto'
 urn:x-oca:ocpp:uid:2:233271
  */
 export class SalesTariffEntryDto {
-  public constructor (
+  public constructor(
     relativeTimeInterval: RelativeTimeIntervalDto
   ) {
     this.relativeTimeInterval = relativeTimeInterval

@@ -10,7 +10,7 @@ import { MutabilityEnum } from '../enums/mutability.enum'
  * Attribute data of a variable.
  */
 export class VariableAttributeDto {
-  public constructor () {
+  public constructor() {
     // nothing to do
   }
 

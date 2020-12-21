@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
 
 export class ReportChargingProfilesRequestDto {
-  public constructor (
+  public constructor(
     requestId: number,
     chargingLimitSource: ChargingLimitSourceEnum,
     chargingProfile: any,

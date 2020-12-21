@@ -10,7 +10,7 @@ urn:x-oca:ocpp:uid:2:233257
 Charging schedule period structure defines a time period in a charging schedule.
  */
 export class ChargingSchedulePeriodDto {
-  public constructor (
+  public constructor(
     startPeriod: number,
     limit: number
   ) {

@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enums/hash-algorithm.enum'
 
 export class OCSPRequestDataDto {
-  public constructor (
+  public constructor(
     hashAlgorithm: HashAlgorithmEnum,
     issuerNameHash: string,
     issuerKeyHash: string,

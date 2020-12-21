@@ -7,7 +7,7 @@ import { GenericStatusEnum } from '../enums/generic-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 
 export class NotifyEVChargingScheduleResponseDto {
-  public constructor (
+  public constructor(
     status: GenericStatusEnum
   ) {
     this.status = status

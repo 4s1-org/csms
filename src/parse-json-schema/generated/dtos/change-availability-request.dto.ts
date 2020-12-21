@@ -7,7 +7,7 @@ import { EVSEDto } from './evse.dto'
 import { OperationalStatusEnum } from '../enums/operational-status.enum'
 
 export class ChangeAvailabilityRequestDto {
-  public constructor (
+  public constructor(
     operationalStatus: OperationalStatusEnum
   ) {
     this.operationalStatus = operationalStatus

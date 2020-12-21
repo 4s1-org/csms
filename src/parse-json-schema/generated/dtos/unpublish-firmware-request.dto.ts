@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class UnpublishFirmwareRequestDto {
-  public constructor (
+  public constructor(
     checksum: string
   ) {
     this.checksum = checksum

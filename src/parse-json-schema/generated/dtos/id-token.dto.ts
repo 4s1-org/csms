@@ -9,7 +9,7 @@ import { IdTokenEnum } from '../enums/id-token.enum'
  * Contains a case insensitive identifier to use for the authorization and the type of authorization to support multiple forms of identifiers.
  */
 export class IdTokenDto {
-  public constructor (
+  public constructor(
     idToken: string,
     type: IdTokenEnum
   ) {

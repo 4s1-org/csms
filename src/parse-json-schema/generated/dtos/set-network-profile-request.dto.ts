@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { NetworkConnectionProfileDto } from './network-connection-profile.dto'
 
 export class SetNetworkProfileRequestDto {
-  public constructor (
+  public constructor(
     configurationSlot: number,
     connectionData: NetworkConnectionProfileDto
   ) {

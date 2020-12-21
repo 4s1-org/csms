@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { UploadLogStatusEnum } from '../enums/upload-log-status.enum'
 
 export class LogStatusNotificationRequestDto {
-  public constructor (
+  public constructor(
     status: UploadLogStatusEnum
   ) {
     this.status = status

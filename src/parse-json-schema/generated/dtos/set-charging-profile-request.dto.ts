@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { ChargingProfileDto } from './charging-profile.dto'
 
 export class SetChargingProfileRequestDto {
-  public constructor (
+  public constructor(
     evseId: number,
     chargingProfile: ChargingProfileDto
   ) {

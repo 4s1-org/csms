@@ -7,7 +7,7 @@ import { InstallCertificateStatusEnum } from '../enums/install-certificate-statu
 import { StatusInfoDto } from './status-info.dto'
 
 export class InstallCertificateResponseDto {
-  public constructor (
+  public constructor(
     status: InstallCertificateStatusEnum
   ) {
     this.status = status

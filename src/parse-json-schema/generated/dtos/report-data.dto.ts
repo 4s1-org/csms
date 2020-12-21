@@ -11,7 +11,7 @@ import { VariableCharacteristicsDto } from './variable-characteristics.dto'
  * Class to report components, variables and variable attributes and characteristics.
  */
 export class ReportDataDto {
-  public constructor (
+  public constructor(
     component: ComponentDto,
     variable: VariableDto,
     variableAttribute: any

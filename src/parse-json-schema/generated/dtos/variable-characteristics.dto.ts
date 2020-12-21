@@ -9,7 +9,7 @@ import { DataEnum } from '../enums/data.enum'
  * Fixed read-only parameters of a variable.
  */
 export class VariableCharacteristicsDto {
-  public constructor (
+  public constructor(
     dataType: DataEnum,
     supportsMonitoring: boolean
   ) {

@@ -8,7 +8,7 @@ import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
 export class SetVariableDataDto {
-  public constructor (
+  public constructor(
     attributeValue: string,
     component: ComponentDto,
     variable: VariableDto

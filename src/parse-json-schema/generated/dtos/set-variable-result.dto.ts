@@ -10,7 +10,7 @@ import { ComponentDto } from './component.dto'
 import { VariableDto } from './variable.dto'
 
 export class SetVariableResultDto {
-  public constructor (
+  public constructor(
     attributeStatus: SetVariableStatusEnum,
     component: ComponentDto,
     variable: VariableDto

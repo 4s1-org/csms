@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { CustomDataDto } from './custom-data.dto'
 
 export class SetVariablesResponseDto {
-  public constructor (
+  public constructor(
     setVariableResult: any
   ) {
     this.setVariableResult = setVariableResult

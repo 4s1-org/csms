@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { OCSPRequestDataDto } from './ocsp-request-data.dto'
 
 export class GetCertificateStatusRequestDto {
-  public constructor (
+  public constructor(
     ocspRequestData: OCSPRequestDataDto
   ) {
     this.ocspRequestData = ocspRequestData

@@ -6,7 +6,7 @@ import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 
 export class AuthorizeRequestDto {
-  public constructor (
+  public constructor(
     idToken: IdTokenDto
   ) {
     this.idToken = idToken
