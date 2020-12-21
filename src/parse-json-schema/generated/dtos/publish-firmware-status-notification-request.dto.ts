@@ -26,6 +26,7 @@ export class PublishFirmwareStatusNotificationRequestDto {
    */
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public location!: string[]
 

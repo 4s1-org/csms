@@ -22,6 +22,7 @@ export class NotifyMonitoringReportRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public monitor!: MonitoringDataDto[]
 
@@ -54,6 +55,7 @@ export class NotifyMonitoringReportRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public generatedAt: string
 }

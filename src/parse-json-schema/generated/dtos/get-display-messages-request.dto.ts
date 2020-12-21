@@ -22,6 +22,7 @@ export class GetDisplayMessagesRequestDto {
    */
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public id!: number[]
 

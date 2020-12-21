@@ -79,14 +79,29 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     if (this.data.minItems !== undefined) {
-      throw new Error("peng")
+      this.skeleton.setMinItems(this.data.minItems)
+    }
+    if (this.data.maxItems !== undefined) {
+      this.skeleton.setMinItems(this.data.maxItems)
+    }
+    if (this.data.minimum !== undefined) {
+      this.skeleton.setMinimum(this.data.minimum)
+    }
+    if (this.data.maximum !== undefined) {
+      this.skeleton.setMaximum(this.data.maximum)
+    }
+    if (this.data.maxLength) {
+      this.skeleton.setMaxLength(this.data.maxLength)
+    }
+    if (this.data.format) {
+      this.skeleton.setFormat(this.data.format)
+    }
+    if (this.data.default) {
+      this.skeleton.setDefault(this.data.default)
     }
 
     if (this.data.type === "string") {
       this.skeleton.setIsString()
-      if (this.data.maxLength) {
-        this.skeleton.setLength(0, this.data.maxLength)
-      }
       return
     }
 
@@ -168,12 +183,6 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       } else {
         throw new Error(`${this.key}: Unknown constellation`)
       }
-    }
-
-    if (this.data.minItems !== undefined) {
-      this.skeleton.setMinMaxItems(this.data.minItems)
-    } else {
-      // throw new Error(`${this.key}: Array should have "minItems" and "maxItems"`)
     }
   }
 }

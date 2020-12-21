@@ -34,6 +34,8 @@ export class ConsumptionCostDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
+  // MinItems: 3
   @IsArray()
   public cost: CostDto[]
 }

@@ -19,6 +19,7 @@ export class GetMonitoringReportRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public componentVariable!: ComponentVariableDto[]
 
@@ -35,6 +36,8 @@ export class GetMonitoringReportRequestDto {
    */
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
+  // MinItems: 3
   @IsArray()
   public monitoringCriteria!: MonitoringCriterionEnum[]
 }

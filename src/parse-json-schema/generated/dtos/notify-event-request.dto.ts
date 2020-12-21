@@ -25,6 +25,7 @@ export class NotifyEventRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public generatedAt: string
 
@@ -46,6 +47,7 @@ export class NotifyEventRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public eventData: EventDataDto[]
 }

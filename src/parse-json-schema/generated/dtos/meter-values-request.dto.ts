@@ -34,6 +34,7 @@ export class MeterValuesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public meterValue: MeterValueDto[]
 }

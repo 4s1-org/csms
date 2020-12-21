@@ -20,6 +20,7 @@ export class HeartbeatResponseDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public currentTime: string
 }

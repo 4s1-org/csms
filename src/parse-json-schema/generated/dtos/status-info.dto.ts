@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
@@ -23,8 +23,8 @@ export class StatusInfoDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(20)
   @IsString()
-  @Length(0, 20)
   public reasonCode: string
 
   /**
@@ -32,7 +32,7 @@ export class StatusInfoDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(512)
   @IsString()
-  @Length(0, 512)
   public additionalInfo!: string
 }

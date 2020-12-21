@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { APNAuthenticationEnum } from '../enums/apn-authentication.enum'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -32,8 +32,8 @@ export class APNDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(512)
   @IsString()
-  @Length(0, 512)
   public apn: string
 
   /**
@@ -43,8 +43,8 @@ export class APNDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(20)
   @IsString()
-  @Length(0, 20)
   public apnUserName!: string
 
   /**
@@ -54,8 +54,8 @@ export class APNDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(20)
   @IsString()
-  @Length(0, 20)
   public apnPassword!: string
 
   /**
@@ -75,8 +75,8 @@ export class APNDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(6)
   @IsString()
-  @Length(0, 6)
   public preferredNetwork!: string
 
   /**

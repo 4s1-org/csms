@@ -31,6 +31,7 @@ export class CompositeScheduleDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 
@@ -60,6 +61,7 @@ export class CompositeScheduleDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public scheduleStart: string
 

@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsInt, IsOptional, IsString, Length } from 'class-validator'
+import { IsInt, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
@@ -20,8 +20,9 @@ export class UnitOfMeasureDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(20)
+  // setDefault: Wh
   @IsString()
-  @Length(0, 20)
   public unit!: string
 
   /**

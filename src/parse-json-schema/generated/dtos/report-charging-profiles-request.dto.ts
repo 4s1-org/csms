@@ -38,6 +38,7 @@ export class ReportChargingProfilesRequestDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public chargingProfile: ChargingProfileDto[]
 

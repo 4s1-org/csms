@@ -29,6 +29,7 @@ export class GetInstalledCertificateIdsResponseDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public certificateHashDataChain!: CertificateHashDataChainDto[]
 }

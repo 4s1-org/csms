@@ -19,6 +19,7 @@ export class NotifyChargingLimitRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public chargingSchedule!: ChargingScheduleDto[]
 

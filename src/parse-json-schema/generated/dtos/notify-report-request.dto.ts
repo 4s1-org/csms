@@ -33,11 +33,13 @@ export class NotifyReportRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public generatedAt: string
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public reportData!: ReportDataDto[]
 

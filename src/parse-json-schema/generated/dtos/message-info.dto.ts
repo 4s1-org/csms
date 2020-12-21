@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { MessageContentDto } from './message-content.dto'
@@ -59,6 +59,7 @@ export class MessageInfoDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setFormat: date-time
   @IsString()
   public startDateTime!: string
 
@@ -69,6 +70,7 @@ export class MessageInfoDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setFormat: date-time
   @IsString()
   public endDateTime!: string
 
@@ -79,8 +81,8 @@ export class MessageInfoDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(36)
   @IsString()
-  @Length(0, 36)
   public transactionId!: string
 
   @ApiProperty()

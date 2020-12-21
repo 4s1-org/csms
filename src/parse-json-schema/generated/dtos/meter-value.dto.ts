@@ -25,6 +25,7 @@ export class MeterValueDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public sampledValue: SampledValueDto[]
 
@@ -35,6 +36,7 @@ export class MeterValueDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public timestamp: string
 }

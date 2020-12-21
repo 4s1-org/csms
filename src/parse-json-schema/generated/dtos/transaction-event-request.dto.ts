@@ -36,6 +36,7 @@ export class TransactionEventRequestDto {
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public meterValue!: MeterValueDto[]
 
@@ -44,6 +45,7 @@ export class TransactionEventRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public timestamp: string
 

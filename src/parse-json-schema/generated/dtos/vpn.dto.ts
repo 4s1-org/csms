@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { VPNEnum } from '../enums/vpn.enum'
 
@@ -36,8 +36,8 @@ export class VPNDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(512)
   @IsString()
-  @Length(0, 512)
   public server: string
 
   /**
@@ -47,8 +47,8 @@ export class VPNDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(20)
   @IsString()
-  @Length(0, 20)
   public user: string
 
   /**
@@ -58,8 +58,8 @@ export class VPNDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(20)
   @IsString()
-  @Length(0, 20)
   public group!: string
 
   /**
@@ -69,8 +69,8 @@ export class VPNDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(20)
   @IsString()
-  @Length(0, 20)
   public password: string
 
   /**
@@ -80,8 +80,8 @@ export class VPNDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(255)
   @IsString()
-  @Length(0, 255)
   public key: string
 
   @ApiProperty()

@@ -42,6 +42,7 @@ export class ChargingNeedsDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setFormat: date-time
   @IsString()
   public departureTime!: string
 }

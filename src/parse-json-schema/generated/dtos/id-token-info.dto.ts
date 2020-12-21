@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { AuthorizationStatusEnum } from '../enums/authorization-status.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
@@ -36,6 +36,7 @@ export class IdTokenInfoDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setFormat: date-time
   @IsString()
   public cacheExpiryDateTime!: string
 
@@ -54,8 +55,8 @@ export class IdTokenInfoDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(8)
   @IsString()
-  @Length(0, 8)
   public language1!: string
 
   /**
@@ -63,6 +64,7 @@ export class IdTokenInfoDto {
    */
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public evseId!: number[]
 
@@ -77,8 +79,8 @@ export class IdTokenInfoDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(8)
   @IsString()
-  @Length(0, 8)
   public language2!: string
 
   @ApiProperty()

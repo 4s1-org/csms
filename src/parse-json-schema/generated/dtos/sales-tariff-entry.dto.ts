@@ -32,11 +32,14 @@ export class SalesTariffEntryDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setMinimum: 0
   @IsInt()
   public ePriceLevel!: number
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
+  // MinItems: 3
   @IsArray()
   public consumptionCost!: ConsumptionCostDto[]
 }

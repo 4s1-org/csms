@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CertificateActionEnum } from '../enums/certificate-action.enum'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -25,8 +25,8 @@ export class Get15118EVCertificateRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(50)
   @IsString()
-  @Length(0, 50)
   public iso15118SchemaVersion: string
 
   @ApiProperty()
@@ -39,7 +39,7 @@ export class Get15118EVCertificateRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(5600)
   @IsString()
-  @Length(0, 5600)
   public exiRequest: string
 }

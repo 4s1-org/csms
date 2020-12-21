@@ -16,6 +16,7 @@ export class GetInstalledCertificateIdsRequestDto {
    */
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public certificateType!: GetCertificateIdUseEnum[]
 }

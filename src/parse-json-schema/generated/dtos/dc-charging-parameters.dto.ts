@@ -69,6 +69,8 @@ export class DCChargingParametersDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setMinimum: 0
+  // setMaximum: 100
   @IsInt()
   public stateOfCharge!: number
 
@@ -89,6 +91,8 @@ export class DCChargingParametersDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setMinimum: 0
+  // setMaximum: 100
   @IsInt()
   public fullSoC!: number
 
@@ -99,6 +103,8 @@ export class DCChargingParametersDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setMinimum: 0
+  // setMaximum: 100
   @IsInt()
   public bulkSoC!: number
 }

@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { ModemDto } from './modem.dto'
 
@@ -30,8 +30,8 @@ export class ChargingStationDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(25)
   @IsString()
-  @Length(0, 25)
   public serialNumber!: string
 
   /**
@@ -41,8 +41,8 @@ export class ChargingStationDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(20)
   @IsString()
-  @Length(0, 20)
   public model: string
 
   @ApiProperty()
@@ -54,8 +54,8 @@ export class ChargingStationDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(50)
   @IsString()
-  @Length(0, 50)
   public vendorName: string
 
   /**
@@ -63,7 +63,7 @@ export class ChargingStationDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(50)
   @IsString()
-  @Length(0, 50)
   public firmwareVersion!: string
 }

@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsArray, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 import { OCSPRequestDataDto } from './ocsp-request-data.dto'
@@ -26,12 +26,14 @@ export class AuthorizeRequestDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(5500)
   @IsString()
-  @Length(0, 5500)
   public certificate!: string
 
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
+  // MinItems: 4
   @IsArray()
   public iso15118CertificateHashData!: OCSPRequestDataDto[]
 }

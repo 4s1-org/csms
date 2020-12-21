@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
@@ -29,8 +29,8 @@ export class FirmwareDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  @MaxLength(512)
   @IsString()
-  @Length(0, 512)
   public location: string
 
   /**
@@ -40,6 +40,7 @@ export class FirmwareDto {
    */
   @ApiProperty()
   @IsNotEmpty()
+  // setFormat: date-time
   @IsString()
   public retrieveDateTime: string
 
@@ -50,6 +51,7 @@ export class FirmwareDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setFormat: date-time
   @IsString()
   public installDateTime!: string
 
@@ -59,8 +61,8 @@ export class FirmwareDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(5500)
   @IsString()
-  @Length(0, 5500)
   public signingCertificate!: string
 
   /**
@@ -70,7 +72,7 @@ export class FirmwareDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(800)
   @IsString()
-  @Length(0, 800)
   public signature!: string
 }

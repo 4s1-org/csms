@@ -37,6 +37,7 @@ export class ChargingProfileCriterionDto {
    */
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
   @IsArray()
   public chargingProfileId!: number[]
 
@@ -45,6 +46,8 @@ export class ChargingProfileCriterionDto {
    */
   @ApiProperty()
   @IsOptional()
+  // MinItems: 1
+  // MinItems: 4
   @IsArray()
   public chargingLimitSource!: ChargingLimitSourceEnum[]
 }

@@ -18,6 +18,7 @@ export class SetVariableMonitoringResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
   @IsArray()
   public setMonitoringResult: SetMonitoringResultDto[]
 }

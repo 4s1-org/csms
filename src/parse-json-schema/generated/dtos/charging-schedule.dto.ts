@@ -42,6 +42,7 @@ export class ChargingScheduleDto {
    */
   @ApiProperty()
   @IsOptional()
+  // setFormat: date-time
   @IsString()
   public startSchedule!: string
 
@@ -62,6 +63,8 @@ export class ChargingScheduleDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
+  // MinItems: 1024
   @IsArray()
   public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 

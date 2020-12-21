@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
+import { IsArray, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { SalesTariffEntryDto } from './sales-tariff-entry.dto'
 
@@ -40,8 +40,8 @@ export class SalesTariffDto {
    */
   @ApiProperty()
   @IsOptional()
+  @MaxLength(32)
   @IsString()
-  @Length(0, 32)
   public salesTariffDescription!: string
 
   /**
@@ -56,6 +56,8 @@ export class SalesTariffDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  // MinItems: 1
+  // MinItems: 1024
   @IsArray()
   public salesTariffEntry: SalesTariffEntryDto[]
 }
