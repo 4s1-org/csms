@@ -28,7 +28,7 @@ export abstract class SkeletonBase {
     return this._comment
   }
 
-  public formatFilename(name: string): string {
+  private formatFilename(name: string): string {
     name = name.replace(/OCPP/g, "Ocpp")
     name = name.replace(/OCSP/g, "Ocsp")
     name = name.replace(/EVSE/g, "Evse")
@@ -69,7 +69,11 @@ export abstract class SkeletonBase {
   public abstract toString(): string[]
 
   public writeFile(folders: string[], extension: "dto" | "enum"): void {
-    const filename = path.join(...folders, `${this.formatFilename(this.name)}.${extension}.ts`)
+    const folderpath = path.join(...folders)
+    if (!fs.existsSync(folderpath)) {
+      fs.mkdirSync(folderpath)
+    }
+    const filename = path.join(folderpath, `${this.formatFilename(this.name)}.${extension}.ts`)
 
     let data = this.toString().join("\n")
     data = data.replace(/\r\n/g, "\n")
