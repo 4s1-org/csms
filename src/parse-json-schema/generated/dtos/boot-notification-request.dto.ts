@@ -1,10 +1,10 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
-import { ChargingStationDto } from './charging-station.dto'
+import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { BootReasonEnum } from '../enums/boot-reason.enum'
+import { ChargingStationDto } from './charging-station.dto'
+import { CustomDataDto } from './custom-data.dto'
 
 export class BootNotificationRequestDto {
   public constructor(

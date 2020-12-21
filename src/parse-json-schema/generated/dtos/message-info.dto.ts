@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ComponentDto } from './component.dto'
+import { CustomDataDto } from './custom-data.dto'
+import { MessageContentDto } from './message-content.dto'
 import { MessagePriorityEnum } from '../enums/message-priority.enum'
 import { MessageStateEnum } from '../enums/message-state.enum'
-import { MessageContentDto } from './message-content.dto'
 
 /**
  * Message_ Info

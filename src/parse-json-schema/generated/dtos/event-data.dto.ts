@@ -1,11 +1,11 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
-import { EventTriggerEnum } from '../enums/event-trigger.enum'
+import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ComponentDto } from './component.dto'
+import { CustomDataDto } from './custom-data.dto'
 import { EventNotificationEnum } from '../enums/event-notification.enum'
+import { EventTriggerEnum } from '../enums/event-trigger.enum'
 import { VariableDto } from './variable.dto'
 
 /**

@@ -1,10 +1,10 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator'
+import { AuthorizeCertificateStatusEnum } from '../enums/authorize-certificate-status.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenInfoDto } from './id-token-info.dto'
-import { AuthorizeCertificateStatusEnum } from '../enums/authorize-certificate-status.enum'
 
 export class AuthorizeResponseDto {
   public constructor(

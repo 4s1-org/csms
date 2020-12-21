@@ -1,10 +1,10 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { LogParametersDto } from './log-parameters.dto'
 import { LogEnum } from '../enums/log.enum'
+import { LogParametersDto } from './log-parameters.dto'
 
 export class GetLogRequestDto {
   public constructor(

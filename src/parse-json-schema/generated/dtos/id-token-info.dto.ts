@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { AuthorizationStatusEnum } from '../enums/authorization-status.enum'
+import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 import { MessageContentDto } from './message-content.dto'
 

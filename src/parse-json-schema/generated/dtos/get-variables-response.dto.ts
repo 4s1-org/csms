@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsArray, IsNotEmpty, IsOptional } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { GetVariableResultDto } from './get-variable-result.dto'
 

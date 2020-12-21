@@ -27,22 +27,25 @@ export class ClassSkeleton extends SkeletonBase {
     result.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     result.push(``)
 
+    const classValidatorItems: string[] = []
+    const ownImports: [string, string][] = []
+
     // Imports
-    if (this._properties.length) {
-      const classValidatorItems: string[] = []
-      const ownImports: [string, string][] = []
-      for (const prop of this._properties) {
-        classValidatorItems.push(...prop.importClassValidator)
-        ownImports.push(...prop.imporOwnClass)
+    {
+      if (this._properties.length) {
+        for (const prop of this._properties) {
+          classValidatorItems.push(...prop.importClassValidator)
+          ownImports.push(...prop.imporOwnClass)
+        }
+        result.push(`import { ApiProperty } from '@nestjs/swagger'`)
       }
-      let uniqueItems = [...new Set(classValidatorItems)].sort()
-      let uniqueItems3 = [...new Set(ownImports)]
 
-      result.push(`import { ${uniqueItems.join(", ")} } from 'class-validator'`)
-      result.push(`import { ApiProperty } from '@nestjs/swagger'`)
+      let classValidatorItemsUnique = [...new Set(classValidatorItems)].sort()
+      result.push(`import { ${classValidatorItemsUnique.join(", ")} } from 'class-validator'`)
 
-      for (const foo of uniqueItems3) {
-        result.push(`import { ${foo[0]} } from '${foo[1]}'`)
+      let ownImportsUnique = [...new Set(ownImports)].sort()
+      for (const ownImport of ownImportsUnique) {
+        result.push(`import { ${ownImport[0]} } from '${ownImport[1]}'`)
       }
       result.push(``)
     }

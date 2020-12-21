@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
-import { StatusInfoDto } from './status-info.dto'
-import { SetMonitoringStatusEnum } from '../enums/set-monitoring-status.enum'
-import { MonitorEnum } from '../enums/monitor.enum'
+import { IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ComponentDto } from './component.dto'
+import { CustomDataDto } from './custom-data.dto'
+import { MonitorEnum } from '../enums/monitor.enum'
+import { SetMonitoringStatusEnum } from '../enums/set-monitoring-status.enum'
+import { StatusInfoDto } from './status-info.dto'
 import { VariableDto } from './variable.dto'
 
 /**

@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { ReadingContextEnum } from '../enums/reading-context.enum'
+import { LocationEnum } from '../enums/location.enum'
 import { MeasurandEnum } from '../enums/measurand.enum'
 import { PhaseEnum } from '../enums/phase.enum'
-import { LocationEnum } from '../enums/location.enum'
+import { ReadingContextEnum } from '../enums/reading-context.enum'
 import { SignedMeterValueDto } from './signed-meter-value.dto'
 import { UnitOfMeasureDto } from './unit-of-measure.dto'
 

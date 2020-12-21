@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsInt, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsInt, IsOptional } from 'class-validator'
 import { ClearChargingProfileDto } from './clear-charging-profile.dto'
+import { CustomDataDto } from './custom-data.dto'
 
 export class ClearChargingProfileRequestDto {
 

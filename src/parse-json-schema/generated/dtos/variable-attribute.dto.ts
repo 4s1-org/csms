@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsEnum, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsBoolean, IsEnum, IsOptional, IsString, Length } from 'class-validator'
 import { AttributeEnum } from '../enums/attribute.enum'
+import { CustomDataDto } from './custom-data.dto'
 import { MutabilityEnum } from '../enums/mutability.enum'
 
 /**

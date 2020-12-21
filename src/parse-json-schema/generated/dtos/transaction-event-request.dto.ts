@@ -1,14 +1,14 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { TransactionEventEnum } from '../enums/transaction-event.enum'
-import { MeterValueDto } from './meter-value.dto'
-import { TriggerReasonEnum } from '../enums/trigger-reason.enum'
-import { TransactionDto } from './transaction.dto'
 import { EVSEDto } from './evse.dto'
 import { IdTokenDto } from './id-token.dto'
+import { MeterValueDto } from './meter-value.dto'
+import { TransactionDto } from './transaction.dto'
+import { TransactionEventEnum } from '../enums/transaction-event.enum'
+import { TriggerReasonEnum } from '../enums/trigger-reason.enum'
 
 export class TransactionEventRequestDto {
   public constructor(

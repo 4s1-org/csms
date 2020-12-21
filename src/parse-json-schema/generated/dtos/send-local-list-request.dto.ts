@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { AuthorizationDto } from './authorization.dto'
+import { CustomDataDto } from './custom-data.dto'
 import { UpdateEnum } from '../enums/update.enum'
 
 export class SendLocalListRequestDto {

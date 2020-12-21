@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { ACChargingParametersDto } from './ac-charging-parameters.dto'
+import { CustomDataDto } from './custom-data.dto'
 import { DCChargingParametersDto } from './dc-charging-parameters.dto'
 import { EnergyTransferModeEnum } from '../enums/energy-transfer-mode.enum'
 

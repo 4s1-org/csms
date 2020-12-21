@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { MessageFormatEnum } from '../enums/message-format.enum'
 

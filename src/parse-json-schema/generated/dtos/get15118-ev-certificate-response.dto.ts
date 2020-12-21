@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { Iso15118EVCertificateStatusEnum } from '../enums/iso15118-ev-certificate-status.enum'
 import { StatusInfoDto } from './status-info.dto'

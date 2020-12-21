@@ -1,9 +1,9 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsArray, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { CustomDataDto } from './custom-data.dto'
+import { IsArray, IsInt, IsNotEmpty, IsOptional } from 'class-validator'
 import { ComponentVariableDto } from './component-variable.dto'
+import { CustomDataDto } from './custom-data.dto'
 import { MonitoringCriterionEnum } from '../enums/monitoring-criterion.enum'
 
 export class GetMonitoringReportRequestDto {

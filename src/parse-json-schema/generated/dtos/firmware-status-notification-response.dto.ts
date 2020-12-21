@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsOptional } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
+import { IsOptional } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 export class FirmwareStatusNotificationResponseDto {
