@@ -1,5 +1,3 @@
-import path from "path"
-import fs from "fs"
 import { EnumSkeleton } from "./skeletons/enum-skeleton"
 import { ClassSkeleton } from "./skeletons/class-skeleton"
 
@@ -35,7 +33,7 @@ export class ClassGenerator {
     }
 
     for (const item of this.classSkeletons.filter(x => x.isRoot)) {
-      item.writeFile([__dirname, "generated", "dtos"])
+      item.writeFile([__dirname, "generated", "base-dtos"])
     }
     for (const item of this.classSkeletons.filter(x => !x.isRoot)) {
       item.writeFile([__dirname, "generated", "dtos"])
