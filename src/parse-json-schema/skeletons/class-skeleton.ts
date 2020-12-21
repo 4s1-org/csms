@@ -45,7 +45,15 @@ export class ClassSkeleton extends SkeletonBase {
 
       let ownImportsUnique = [...new Set(ownImports)].sort()
       for (const ownImport of ownImportsUnique) {
-        result.push(`import { ${ownImport[0]} } from '${ownImport[1]}'`)
+        if (ownImport[1].endsWith("enum")) {
+          result.push(`import { ${ownImport[0]} } from '../enums/${ownImport[1]}'`)
+        } else if (ownImport[1].endsWith("dto")) {
+          if (this.isRoot) {
+            result.push(`import { ${ownImport[0]} } from '../dtos/${ownImport[1]}'`)
+          } else {
+            result.push(`import { ${ownImport[0]} } from './${ownImport[1]}'`)
+          }
+        }
       }
       result.push(``)
     }

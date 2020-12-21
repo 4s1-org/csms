@@ -53,12 +53,12 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
         // Enum
         const type = this.data.$ref.substr(14, this.data.$ref.length - 22)
         this.skeleton.setIsEnum(type + "Enum")
-        this.skeleton.addImportOwnClass(type + "Enum", `../enums/${this.skeleton.formatFilename(type)}.enum`)
+        this.skeleton.addImportOwnClass(type + "Enum", `${this.skeleton.formatFilename(type)}.enum`)
       } else if (this.data.$ref.endsWith("Type")) {
         // DTO
         const type = this.data.$ref.substr(14, this.data.$ref.length - 18)
         this.skeleton.setIsCustomType(type + "Dto")
-        this.skeleton.addImportOwnClass(type + "Dto", `./${this.skeleton.formatFilename(type)}.dto`)
+        this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       } else {
         throw new Error(`${this.key}: Unknown Type: ${this.data.type}`)
       }
@@ -170,10 +170,10 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     if (isCustomType) {
       if (isEnum) {
         this.skeleton.setIsCustomTypeArray(type + "Enum")
-        this.skeleton.addImportOwnClass(type + "Enum", `../enums/${this.skeleton.formatFilename(type)}.enum`)
+        this.skeleton.addImportOwnClass(type + "Enum", `${this.skeleton.formatFilename(type)}.enum`)
       } else {
         this.skeleton.setIsCustomTypeArray(type + "Dto")
-        this.skeleton.addImportOwnClass(type + "Dto", `./${this.skeleton.formatFilename(type)}.dto`)
+        this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       }
     } else {
       if (type === "string") {
