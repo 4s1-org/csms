@@ -18,4 +18,9 @@ export class CustomDataDto {
   @IsString()
   @Length(0, 255)
   public vendorId: string
+
+  // To be implemented later
+  public get allowAdditionalProperties(): boolean {
+    return true
+  }
 }

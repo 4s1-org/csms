@@ -3,6 +3,7 @@ import { SkeletonBase } from "./skeleton-base"
 
 export class ClassSkeleton extends SkeletonBase {
   private _properties: PropertySkeleton[] = []
+  private _allowAdditionalProperties: boolean = false
 
   public constructor(name: string,
     public readonly isRoot: boolean = false) {
@@ -13,6 +14,10 @@ export class ClassSkeleton extends SkeletonBase {
     const prop = new PropertySkeleton(name, isRequired)
     this._properties.push(prop)
     return prop
+  }
+
+  public allowAdditionalProperties() {
+    this._allowAdditionalProperties = true
   }
 
   public toString(): string[] {
@@ -70,6 +75,14 @@ export class ClassSkeleton extends SkeletonBase {
       for (const line of prop.toString()) {
         result.push(line)
       }
+    }
+
+    if (this._allowAdditionalProperties) {
+      result.push("")
+      result.push("  // To be implemented later")
+      result.push("  public get allowAdditionalProperties(): boolean {")
+      result.push("    return true")
+      result.push("  }")
     }
 
     // End of class
