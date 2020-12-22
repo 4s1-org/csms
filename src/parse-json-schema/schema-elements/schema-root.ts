@@ -34,10 +34,13 @@ export class SchemaRoot extends Validatable<Foo> {
     if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
       throw new Error(`${this.key}: "additionalProperties" should be always false`)
     }
+    if (this.data.type !== "object") {
+      throw new Error(`${this.key}: I thought it would be always an object.`)
+    }
 
     // Remove "Type"
     if (!this.key.endsWith("Request") && !this.key.endsWith("Response")) {
-      throw new Error(`${this.key}: I thought it's ends with "Request" or "Response"`)
+      throw new Error(`${this.key}: I thought it would end with "Request" or "Response"`)
     }
 
     const skeleton = new ClassSkeleton(this.key, true)
