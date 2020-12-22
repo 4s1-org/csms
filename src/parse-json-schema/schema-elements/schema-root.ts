@@ -2,6 +2,7 @@ import { ClassGenerator } from "../class-generator"
 import { IKeyValue } from "../i-key-value"
 import { ClassSkeleton } from "../skeletons/class-skeleton"
 import { Validatable } from "../validatable"
+import { SchemaDefinition } from "./schema-definition"
 import { SchemaDefinitionProperty } from "./schema-definition-property"
 
 interface Foo {
@@ -54,6 +55,13 @@ export class SchemaRoot extends Validatable<Foo> {
       const item = new SchemaDefinitionProperty(key, prop, propSkeleton)
       item.init()
     }
+
+    for (const key in this.data.definitions) {
+      const definition = this.data.definitions[key]
+      const item = new SchemaDefinition(key, definition)
+      item.init()
+    }
+
     ClassGenerator.instance.addClass(skeleton)
   }
 }
