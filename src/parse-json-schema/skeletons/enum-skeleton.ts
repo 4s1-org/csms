@@ -5,7 +5,7 @@ export class EnumSkeleton extends SkeletonBase {
     name: string,
     private readonly items: string[]
   ) {
-    super(name + "Enum")
+    super(name, "Enum")
   }
 
   public toString(): string[] {
@@ -21,7 +21,7 @@ export class EnumSkeleton extends SkeletonBase {
     }
 
     // Begin of class
-    result.push(`export enum ${this.name} {`)
+    result.push(`export enum ${this.name}${this.nameSuffix} {`)
 
     for (const item of this.items) {
       const propName = item.includes("-") || item.includes(".") ? `"${item}"` : item

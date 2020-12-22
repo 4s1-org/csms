@@ -1,3 +1,4 @@
+import { getCommentForClass } from "../comments"
 import { PropertySkeleton } from "./property-skeleton"
 import { SkeletonBase } from "./skeleton-base"
 
@@ -7,7 +8,7 @@ export class ClassSkeleton extends SkeletonBase {
 
   public constructor(name: string,
     public readonly isRoot: boolean = false) {
-    super(name + "Dto")
+    super(name, "Dto")
   }
 
   public addProperty(name: string, isRequired: boolean): PropertySkeleton {
@@ -64,12 +65,13 @@ export class ClassSkeleton extends SkeletonBase {
     }
 
     // Classcomment
+    const comment = getCommentForClass(this.name)
     for (const line of this.getComment()) {
       result.push(line)
     }
 
     // Begin of class
-    result.push(`export class ${this.name} {`)
+    result.push(`export class ${this.name}${this.nameSuffix} {`)
 
     // Constructor
     const requiredProperties = this._properties.filter(x => x.isRequired)

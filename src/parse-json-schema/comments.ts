@@ -13,6 +13,10 @@ type commentType = {
   fields: commentFieldType[]
 }
 
+export function getCommentForClass(classname: string): commentType | undefined {
+  return comments.find(x => x.name === classname)
+}
+
 export const comments: commentType[] = [{
   name: "BootNotificationRequest",
   description: "This contains the field definition of the BootNotificationRequest PDU sent by the Charging Station to the CSMS.",
