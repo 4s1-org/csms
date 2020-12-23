@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
+import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ConnectorStatusEnum } from '../enumerations/connector-status.enum'
 import { CustomDataDto } from '../types/custom-data.dto'
 
@@ -34,8 +34,7 @@ export class StatusNotificationRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  // setFormat: date-time
-  @IsString()
+  @IsDateString()
   public timestamp: string
 
   /**

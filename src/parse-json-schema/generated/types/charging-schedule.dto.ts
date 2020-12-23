@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator'
+import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
 import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -43,8 +43,7 @@ export class ChargingScheduleDto {
    */
   @ApiProperty()
   @IsOptional()
-  // setFormat: date-time
-  @IsString()
+  @IsDateString()
   public startSchedule!: string
 
   /**

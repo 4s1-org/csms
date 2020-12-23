@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
+import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { SampledValueDto } from './sampled-value.dto'
 
@@ -39,7 +39,6 @@ export class MeterValueDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  // setFormat: date-time
-  @IsString()
+  @IsDateString()
   public timestamp: string
 }
