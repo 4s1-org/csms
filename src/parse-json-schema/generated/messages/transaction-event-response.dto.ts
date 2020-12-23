@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNumber, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { IdTokenInfoDto } from '../dtos/id-token-info.dto'
-import { MessageContentDto } from '../dtos/message-content.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { IdTokenInfoDto } from '../types/id-token-info.dto'
+import { MessageContentDto } from '../types/message-content.dto'
 
 export class TransactionEventResponseDto {
 

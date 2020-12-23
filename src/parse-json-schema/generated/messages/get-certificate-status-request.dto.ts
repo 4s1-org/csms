@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { OCSPRequestDataDto } from '../dtos/ocsp-request-data.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { OCSPRequestDataDto } from '../types/ocsp-request-data.dto'
 
 export class GetCertificateStatusRequestDto {
   public constructor(

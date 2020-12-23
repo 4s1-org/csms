@@ -4,8 +4,8 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
-import { EventNotificationEnum } from '../enums/event-notification.enum'
-import { EventTriggerEnum } from '../enums/event-trigger.enum'
+import { EventNotificationEnum } from '../enumerations/event-notification.enum'
+import { EventTriggerEnum } from '../enumerations/event-trigger.enum'
 import { VariableDto } from './variable.dto'
 
 /**

@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { APNAuthenticationEnum } from '../enums/apn-authentication.enum'
+import { APNAuthenticationEnum } from '../enumerations/apn-authentication.enum'
 import { CustomDataDto } from './custom-data.dto'
 
 /**

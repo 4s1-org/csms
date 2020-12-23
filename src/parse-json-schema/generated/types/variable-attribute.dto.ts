@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsEnum, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { AttributeEnum } from '../enums/attribute.enum'
+import { AttributeEnum } from '../enumerations/attribute.enum'
 import { CustomDataDto } from './custom-data.dto'
-import { MutabilityEnum } from '../enums/mutability.enum'
+import { MutabilityEnum } from '../enumerations/mutability.enum'
 
 /**
  * Attribute data of a variable.

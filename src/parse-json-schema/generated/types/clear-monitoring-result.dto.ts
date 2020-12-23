@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { ClearMonitoringStatusEnum } from '../enums/clear-monitoring-status.enum'
+import { ClearMonitoringStatusEnum } from '../enumerations/clear-monitoring-status.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
 

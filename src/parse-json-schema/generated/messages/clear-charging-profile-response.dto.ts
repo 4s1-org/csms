@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { ClearChargingProfileStatusEnum } from '../enums/clear-charging-profile-status.enum'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { StatusInfoDto } from '../dtos/status-info.dto'
+import { ClearChargingProfileStatusEnum } from '../enumerations/clear-charging-profile-status.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { StatusInfoDto } from '../types/status-info.dto'
 
 export class ClearChargingProfileResponseDto {
   public constructor(

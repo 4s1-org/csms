@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CancelReservationStatusEnum } from '../enums/cancel-reservation-status.enum'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { StatusInfoDto } from '../dtos/status-info.dto'
+import { CancelReservationStatusEnum } from '../enumerations/cancel-reservation-status.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { StatusInfoDto } from '../types/status-info.dto'
 
 export class CancelReservationResponseDto {
   public constructor(

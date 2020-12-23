@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { ChargingStateEnum } from '../enums/charging-state.enum'
+import { ChargingStateEnum } from '../enumerations/charging-state.enum'
 import { CustomDataDto } from './custom-data.dto'
-import { ReasonEnum } from '../enums/reason.enum'
+import { ReasonEnum } from '../enumerations/reason.enum'
 
 /**
  * Transaction

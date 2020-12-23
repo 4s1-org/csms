@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { IdTokenDto } from '../dtos/id-token.dto'
-import { OCSPRequestDataDto } from '../dtos/ocsp-request-data.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { IdTokenDto } from '../types/id-token.dto'
+import { OCSPRequestDataDto } from '../types/ocsp-request-data.dto'
 
 export class AuthorizeRequestDto {
   public constructor(

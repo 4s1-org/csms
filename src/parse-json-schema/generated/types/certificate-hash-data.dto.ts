@@ -3,7 +3,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { HashAlgorithmEnum } from '../enums/hash-algorithm.enum'
+import { HashAlgorithmEnum } from '../enumerations/hash-algorithm.enum'
 
 export class CertificateHashDataDto {
   public constructor(

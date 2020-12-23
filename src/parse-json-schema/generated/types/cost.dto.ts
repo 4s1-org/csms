@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CostKindEnum } from '../enums/cost-kind.enum'
+import { CostKindEnum } from '../enumerations/cost-kind.enum'
 import { CustomDataDto } from './custom-data.dto'
 
 /**

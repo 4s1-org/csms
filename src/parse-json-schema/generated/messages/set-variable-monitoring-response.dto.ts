@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { SetMonitoringResultDto } from '../dtos/set-monitoring-result.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { SetMonitoringResultDto } from '../types/set-monitoring-result.dto'
 
 export class SetVariableMonitoringResponseDto {
   public constructor(

@@ -4,9 +4,9 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { APNDto } from './apn.dto'
 import { CustomDataDto } from './custom-data.dto'
-import { OCPPInterfaceEnum } from '../enums/ocpp-interface.enum'
-import { OCPPTransportEnum } from '../enums/ocpp-transport.enum'
-import { OCPPVersionEnum } from '../enums/ocpp-version.enum'
+import { OCPPInterfaceEnum } from '../enumerations/ocpp-interface.enum'
+import { OCPPTransportEnum } from '../enumerations/ocpp-transport.enum'
+import { OCPPVersionEnum } from '../enumerations/ocpp-version.enum'
 import { VPNDto } from './vpn.dto'
 
 /**

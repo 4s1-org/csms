@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CertificateHashDataDto } from './certificate-hash-data.dto'
 import { CustomDataDto } from './custom-data.dto'
-import { GetCertificateIdUseEnum } from '../enums/get-certificate-id-use.enum'
+import { GetCertificateIdUseEnum } from '../enumerations/get-certificate-id-use.enum'
 
 export class CertificateHashDataChainDto {
   public constructor(

@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { ComponentCriterionEnum } from '../enums/component-criterion.enum'
-import { ComponentVariableDto } from '../dtos/component-variable.dto'
-import { CustomDataDto } from '../dtos/custom-data.dto'
+import { ComponentCriterionEnum } from '../enumerations/component-criterion.enum'
+import { ComponentVariableDto } from '../types/component-variable.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
 
 export class GetReportRequestDto {
   public constructor(

@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { NetworkConnectionProfileDto } from '../dtos/network-connection-profile.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { NetworkConnectionProfileDto } from '../types/network-connection-profile.dto'
 
 export class SetNetworkProfileRequestDto {
   public constructor(

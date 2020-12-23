@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
+import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
 import { CustomDataDto } from './custom-data.dto'
 
 /**

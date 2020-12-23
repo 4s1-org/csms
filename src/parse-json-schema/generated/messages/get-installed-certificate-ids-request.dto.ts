@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { GetCertificateIdUseEnum } from '../enums/get-certificate-id-use.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { GetCertificateIdUseEnum } from '../enumerations/get-certificate-id-use.enum'
 
 export class GetInstalledCertificateIdsRequestDto {
 

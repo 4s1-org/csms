@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
-import { ConnectorStatusEnum } from '../enums/connector-status.enum'
-import { CustomDataDto } from '../dtos/custom-data.dto'
+import { ConnectorStatusEnum } from '../enumerations/connector-status.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
 
 /**
  * ---

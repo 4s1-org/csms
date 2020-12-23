@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsOptional, ValidateNested } from 'class-validator'
-import { ClearChargingProfileDto } from '../dtos/clear-charging-profile.dto'
-import { CustomDataDto } from '../dtos/custom-data.dto'
+import { ClearChargingProfileDto } from '../types/clear-charging-profile.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
 
 export class ClearChargingProfileRequestDto {
 

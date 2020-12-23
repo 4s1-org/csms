@@ -3,7 +3,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { DataEnum } from '../enums/data.enum'
+import { DataEnum } from '../enumerations/data.enum'
 
 /**
  * Fixed read-only parameters of a variable.

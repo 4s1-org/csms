@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { EVSEDto } from '../dtos/evse.dto'
-import { MessageTriggerEnum } from '../enums/message-trigger.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { EVSEDto } from '../types/evse.dto'
+import { MessageTriggerEnum } from '../enumerations/message-trigger.enum'
 
 export class TriggerMessageRequestDto {
   public constructor(
