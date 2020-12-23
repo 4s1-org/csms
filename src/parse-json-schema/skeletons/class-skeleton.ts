@@ -7,7 +7,7 @@ export class ClassSkeleton extends SkeletonBase {
   private _allowAdditionalProperties = false
 
   public constructor(name: string,
-    public readonly isRoot: boolean = false) {
+    public readonly isMessage: boolean = false) {
     super(name, "Dto")
   }
 
@@ -51,10 +51,10 @@ export class ClassSkeleton extends SkeletonBase {
         }
 
         if (ownImport[1].endsWith("enum")) {
-          result.push(`import { ${ownImport[0]} } from '../enums/${ownImport[1]}'`)
+          result.push(`import { ${ownImport[0]} } from '../enumerations/${ownImport[1]}'`)
         } else if (ownImport[1].endsWith("dto")) {
-          if (this.isRoot) {
-            result.push(`import { ${ownImport[0]} } from '../dtos/${ownImport[1]}'`)
+          if (this.isMessage) {
+            result.push(`import { ${ownImport[0]} } from '../types/${ownImport[1]}'`)
           } else {
             result.push(`import { ${ownImport[0]} } from './${ownImport[1]}'`)
           }
