@@ -1,15 +1,18 @@
-type classCommentFieldType = {
-  name: string
+import { BootNotification } from "./class-items/BootNotification"
+import { StatusNotification } from "./class-items/StatusNotification"
+
+export type classCommentFieldType = {
+  fieldName: string
   fieldType: string
   cardinality: string
   description: string
   isRequired: boolean
 }
 
-type classCommentType = {
+export type classCommentType = {
   name: string
   description: string
-  toCsms: boolean
+  toCsms: boolean | undefined
   fields: classCommentFieldType[]
 }
 
@@ -21,35 +24,10 @@ export function getCommentByClassField(classComment: classCommentType | undefine
   if (!classComment) {
     return undefined
   }
-  return classComment.fields.find(x => x.name === fieldName)
+  return classComment.fields.find(x => x.fieldName === fieldName)
 }
 
-const comments: classCommentType[] = [{
-  name: "BootNotificationRequest",
-  description: "This contains the field definition of the BootNotificationRequest PDU sent by the Charging Station to the CSMS.",
-  toCsms: true,
-  fields: [{
-    name: "reason",
-    fieldType: "BootReasonEnumType",
-    cardinality: "1..1",
-    description: "This contains the reason for sending this message to the CSMS.",
-    isRequired: true
-  }, {
-    name: "chargingStation",
-    fieldType: "ChargingStationType",
-    cardinality: "1..1",
-    description: "Identifies the Charging Station",
-    isRequired: true
-  }]
-}, {
-  name: "BootNotificationResponse",
-  description: "This contains the field definition of the BootNotificationResponse PDU sent by the CSMS to the Charging Station in response to a BootNotificationRequest.",
-  toCsms: false,
-  fields: [{
-    name: "currentTime",
-    fieldType: "dateTime",
-    cardinality: "1..1",
-    description: "This contains the CSMS’s current time.",
-    isRequired: true
-  }]
-}]
+const comments: classCommentType[] = [
+  ...BootNotification,
+  ...StatusNotification
+]
