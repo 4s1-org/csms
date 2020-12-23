@@ -76,7 +76,7 @@ export abstract class SkeletonBase {
   public writeFile(folders: string[]): void {
     const folderpath = path.join(...folders)
     if (!fs.existsSync(folderpath)) {
-      fs.mkdirSync(folderpath)
+      fs.mkdirSync(folderpath, { recursive: true })
     }
 
     const filename = path.join(folderpath, `${this.formatFilename(this.name)}.${this.nameSuffix.toLowerCase()}.ts`)
