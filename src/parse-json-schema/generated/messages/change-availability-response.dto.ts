@@ -6,6 +6,9 @@ import { ChangeAvailabilityStatusEnum } from '../enumerations/change-availabilit
 import { CustomDataDto } from '../types/custom-data.dto'
 import { StatusInfoDto } from '../types/status-info.dto'
 
+/**
+ * This contains the field definition of the ChangeAvailabilityResponse PDU sent by the Charging Station to the CSMS.
+ */
 export class ChangeAvailabilityResponseDto {
   public constructor(
     status: ChangeAvailabilityStatusEnum,
@@ -18,11 +21,23 @@ export class ChangeAvailabilityResponseDto {
   @ValidateNested()
   public customData!: CustomDataDto
 
+  /**
+   * This indicates whether the Charging Station is able to perform the availability change.
+   * Required: true
+   * ChangeAvailabilityStatusEnumType
+   * 1..1
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChangeAvailabilityStatusEnum)
   public status: ChangeAvailabilityStatusEnum
 
+  /**
+   * Detailed status information.
+   * Required: false
+   * StatusInfoType
+   * 0..1
+   */
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
