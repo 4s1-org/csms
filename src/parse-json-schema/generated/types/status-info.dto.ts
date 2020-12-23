@@ -20,7 +20,10 @@ export class StatusInfoDto {
   public customData!: CustomDataDto
 
   /**
-   * A predefined code for the reason why the status is returned in this response. The string is case-insensitive.
+   * A predefined code for the reason why the status is returned in this response. The string is caseinsensitive.
+   * Required: true
+   * string[0..20]
+   * 1..1
    */
   @ApiProperty()
   @IsNotEmpty()
@@ -30,6 +33,9 @@ export class StatusInfoDto {
 
   /**
    * Additional text to provide detailed information.
+   * Required: false
+   * string[0..512]
+   * 0..1
    */
   @ApiProperty()
   @IsOptional()

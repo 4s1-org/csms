@@ -1,5 +1,8 @@
-import { BootNotification } from "./class-items/BootNotification"
-import { StatusNotification } from "./class-items/StatusNotification"
+import { ConnectorStatusEnum } from "../generated/enumerations/connector-status.enum"
+import { ConnectorStatusEnumType } from "./enumerations/ConnectorStatusEnumType"
+import { BootNotification } from "./messages/BootNotification"
+import { StatusNotification } from "./messages/StatusNotification"
+import { StatusInfoType } from "./types/StatusInfoType"
 
 export type classCommentFieldType = {
   fieldName: string
@@ -12,12 +15,11 @@ export type classCommentFieldType = {
 export type classCommentType = {
   name: string
   description: string
-  toCsms: boolean | undefined
   fields: classCommentFieldType[]
 }
 
-export function getCommentByClass(classname: string): classCommentType | undefined {
-  return comments.find(x => x.name === classname)
+export function getCommentByClass(className: string): classCommentType | undefined {
+  return comments.find(x => x.name === className || x.name === className + "Type")
 }
 
 export function getCommentByClassField(classComment: classCommentType | undefined, fieldName: string): classCommentFieldType | undefined {
@@ -29,5 +31,6 @@ export function getCommentByClassField(classComment: classCommentType | undefine
 
 const comments: classCommentType[] = [
   ...BootNotification,
-  ...StatusNotification
+  ...StatusNotification,
+  StatusInfoType
 ]

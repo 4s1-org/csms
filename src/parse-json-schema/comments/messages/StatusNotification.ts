@@ -1,9 +1,8 @@
-import { classCommentType } from "../class-comments";
+import { classCommentType } from "../class-comments"
 
 export const StatusNotification: classCommentType[] = [{
   name: "StatusNotificationRequest",
   description: "---",
-  toCsms: undefined,
   fields: [{
     fieldName: "timestamp",
     fieldType: "dateTime",
@@ -32,6 +31,7 @@ export const StatusNotification: classCommentType[] = [{
 }, {
   name: "StatusNotificationResponse",
   description: "This contains the field definition of StatusNotificationResponse sent by the CSMS to the Charging Station in response to a StatusNotificationRequest. This message is deprecated. This message might be removed in a future version of OCPP. It will be replaced by Device Management Monitoring events.",
-  toCsms: undefined,
-  fields: []
+  fields: [
+    // no fields
+  ]
 }]
