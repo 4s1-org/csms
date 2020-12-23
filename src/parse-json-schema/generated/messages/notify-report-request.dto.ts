@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
+import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../types/custom-data.dto'
 import { ReportDataDto } from '../types/report-data.dto'
 
@@ -55,9 +55,10 @@ export class NotifyReportRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  // MinItems: 1
+  @ArrayMinSize(1)
   @IsArray()
-  @ValidateNested()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
   public reportData!: ReportDataDto[]
 
   /**

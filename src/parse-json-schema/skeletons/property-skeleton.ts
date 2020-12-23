@@ -25,6 +25,17 @@ export class PropertySkeleton extends SkeletonBase {
     return this._type
   }
 
+  private setDefaultArrayAnnotations(): void {
+    this.addImportClassValidatior("IsArray")
+    this._annotations.push(`@IsArray()`)
+
+    this.addImportClassValidatior("ArrayNotEmpty")
+    this._annotations.push(`@ArrayNotEmpty()`)
+
+    this.addImportClassValidatior("ValidateNested")
+    this._annotations.push(`@ValidateNested({ each: true })`)
+  }
+
   public setIsEnum(value: string): void {
     this.addImportClassValidatior("IsEnum")
     this._annotations.push(`@IsEnum(${value})`)
@@ -38,8 +49,7 @@ export class PropertySkeleton extends SkeletonBase {
   }
 
   public setIsStringArray(): void {
-    this.addImportClassValidatior("IsArray")
-    this._annotations.push(`@IsArray()`)
+    this.setDefaultArrayAnnotations()
     this._type = "string[]"
   }
 
@@ -56,8 +66,7 @@ export class PropertySkeleton extends SkeletonBase {
   }
 
   public setIsIntegerArray(): void {
-    this.addImportClassValidatior("IsArray")
-    this._annotations.push(`@IsArray()`)
+    this.setDefaultArrayAnnotations()
     this._type = "number[]"
   }
 
@@ -67,11 +76,8 @@ export class PropertySkeleton extends SkeletonBase {
     this._type = value
   }
 
-  public setIsCustomTypeArray(value: string): void {
-    this.addImportClassValidatior("IsArray")
-    this._annotations.push(`@IsArray()`)
-    this.addImportClassValidatior("ValidateNested")
-    this._annotations.push(`@ValidateNested()`)
+  public setIsCustomArrayType(value: string): void {
+    this.setDefaultArrayAnnotations()
     this._type = `${value}[]`
   }
 
@@ -103,11 +109,13 @@ export class PropertySkeleton extends SkeletonBase {
   }
 
   public setMinItems(value: number): void {
-    this._annotations.push(`// MinItems: ${value}`)
+    this.addImportClassValidatior("ArrayMinSize")
+    this._annotations.push(`@ArrayMinSize(${value})`)
   }
 
   public setMaxItems(value: number): void {
-    this._annotations.push(`// MaxItems: ${value}`)
+    this.addImportClassValidatior("ArrayMaxSize")
+    this._annotations.push(`@ArrayMaxSize(${value})`)
   }
 
   /**

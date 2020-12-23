@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../types/custom-data.dto'
 import { MessagePriorityEnum } from '../enumerations/message-priority.enum'
 import { MessageStateEnum } from '../enumerations/message-state.enum'
@@ -23,8 +23,10 @@ export class GetDisplayMessagesRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  // MinItems: 1
+  @ArrayMinSize(1)
   @IsArray()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
   public id!: number[]
 
   /**

@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../types/custom-data.dto'
 import { SetVariableResultDto } from '../types/set-variable-result.dto'
 
@@ -28,8 +28,9 @@ export class SetVariablesResponseDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  // MinItems: 1
+  @ArrayMinSize(1)
   @IsArray()
-  @ValidateNested()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
   public setVariableResult: SetVariableResultDto[]
 }

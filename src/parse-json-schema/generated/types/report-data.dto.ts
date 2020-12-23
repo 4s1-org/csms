@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { VariableAttributeDto } from './variable-attribute.dto'
@@ -39,10 +39,11 @@ export class ReportDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  // MinItems: 1
-  // MinItems: 4
+  @ArrayMinSize(1)
+  @ArrayMaxSize(4)
   @IsArray()
-  @ValidateNested()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
   public variableAttribute: VariableAttributeDto[]
 
   @ApiProperty()
