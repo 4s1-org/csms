@@ -2,6 +2,7 @@ import { ConnectorStatusEnum } from "../generated/enumerations/connector-status.
 import { ConnectorStatusEnumType } from "./enumerations/ConnectorStatusEnumType"
 import { BootNotification } from "./messages/BootNotification"
 import { ChangeAvailability } from "./messages/ChangeAvailability"
+import { GetBaseReport } from "./messages/GetBaseReport"
 import { Heartbeat } from "./messages/Heartbeat"
 import { NotifyReport } from "./messages/NotifyReport"
 import { SetVariables } from "./messages/SetVariables"
@@ -40,6 +41,7 @@ const comments: classCommentType[] = [
   // Messages
   ...BootNotification,
   ...ChangeAvailability,
+  ...GetBaseReport,
   ...Heartbeat,
   ...NotifyReport,
   ...SetVariables,

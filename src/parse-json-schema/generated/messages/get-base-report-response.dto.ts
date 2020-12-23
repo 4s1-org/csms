@@ -6,6 +6,9 @@ import { CustomDataDto } from '../types/custom-data.dto'
 import { GenericDeviceModelStatusEnum } from '../enumerations/generic-device-model-status.enum'
 import { StatusInfoDto } from '../types/status-info.dto'
 
+/**
+ * This contains the field definition of the GetBaseReportResponse PDU sent by the Charging Station to the CSMS.
+ */
 export class GetBaseReportResponseDto {
   public constructor(
     status: GenericDeviceModelStatusEnum,
@@ -18,11 +21,23 @@ export class GetBaseReportResponseDto {
   @ValidateNested()
   public customData!: CustomDataDto
 
+  /**
+   * This indicates whether the Charging Station is able to accept this request.
+   * Required: true
+   * GenericDeviceModelStatusEnumType
+   * 1..1
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GenericDeviceModelStatusEnum)
   public status: GenericDeviceModelStatusEnum
 
+  /**
+   * Detailed status information.
+   * Required: false
+   * StatusInfoType
+   * 0..1
+   */
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
