@@ -3,6 +3,7 @@ import { SkeletonBase } from "./skeleton-base"
 export class PropertySkeleton extends SkeletonBase {
   private _annotations: string[] = []
   private _type: string | undefined
+  private _defaultValue: string | undefined
 
   public constructor(
     name: string,
@@ -110,8 +111,8 @@ export class PropertySkeleton extends SkeletonBase {
     this._type = "string"
   }
 
-  public appendDefaultAnnotation(value: string): void {
-    this._annotations.push(`// setDefault: ${value}`)
+  public setDefaultValue(value: string): void {
+    this._defaultValue = value
   }
 
   public appendMinItemsAnnotation(value: number): void {
@@ -142,7 +143,13 @@ export class PropertySkeleton extends SkeletonBase {
     for (const annotation of this._annotations) {
       result.push(`  ${annotation}`)
     }
-    result.push(`  public ${this.name}${this.isRequired ? "" : "!"}: ${this._type}`)
+
+    let defaultValueText = ""
+    if (this._defaultValue !== undefined) {
+      defaultValueText = ` // DEFAULT VALUE: ${this._defaultValue}`
+    }
+
+    result.push(`  public ${this.name}${this.isRequired ? "" : "!"}: ${this._type}${defaultValueText}`)
 
     return result
   }

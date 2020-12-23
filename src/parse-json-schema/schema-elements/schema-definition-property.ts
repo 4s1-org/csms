@@ -110,7 +110,7 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     if (this.data.default) {
-      this.skeleton.appendDefaultAnnotation(this.data.default)
+      this.skeleton.setDefaultValue(this.data.default)
     }
 
     // Sonderprüfung: Weil Format und Type unterschiedlichste Kombination haben könnten.

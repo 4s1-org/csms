@@ -25,9 +25,8 @@ export class UnitOfMeasureDto {
   @ApiProperty()
   @IsOptional()
   @MaxLength(20)
-  // setDefault: Wh
   @IsString()
-  public unit!: string
+  public unit!: string // DEFAULT VALUE: Wh
 
   /**
    * Multiplier, this value represents the exponent to base 10. I.e. multiplier 3 means 10 raised to the 3rd power. Default is 0.

@@ -28,7 +28,6 @@ export abstract class SkeletonBase {
     }
   }
 
-
   /**
    * @deprecated
    */

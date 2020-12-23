@@ -10,7 +10,7 @@ export enum ReadingContextEnum {
   "Interruption.End" = "Interruption.End",
   Other = "Other",
   "Sample.Clock" = "Sample.Clock",
-  "Sample.Periodic" = "Sample.Periodic",
+  "Sample.Periodic" = "Sample.Periodic", // DEFAULT
   "Transaction.Begin" = "Transaction.Begin",
   "Transaction.End" = "Transaction.End",
   Trigger = "Trigger",
