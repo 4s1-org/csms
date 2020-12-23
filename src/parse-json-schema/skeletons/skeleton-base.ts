@@ -7,7 +7,8 @@ export abstract class SkeletonBase {
   private _importsOwnClasses: [string, string][] = []
 
   public constructor(
-    public readonly name: string
+    public readonly name: string,
+    public readonly nameSuffix: "Dto" | "Enum" | "" = ""
   ) {
     // nothing to do
   }
@@ -28,6 +29,9 @@ export abstract class SkeletonBase {
   }
 
 
+  /**
+   * @deprecated
+   */
   public getComment(): string[] {
     return this._comment
   }
@@ -75,14 +79,10 @@ export abstract class SkeletonBase {
   public writeFile(folders: string[]): void {
     const folderpath = path.join(...folders)
     if (!fs.existsSync(folderpath)) {
-      fs.mkdirSync(folderpath)
+      fs.mkdirSync(folderpath, { recursive: true })
     }
 
-    const cutLength = this.name.endsWith("Enum") ? 4 : this.name.endsWith("Dto") ? 3 : 0
-    const name = this.name.substr(0, this.name.length - cutLength)
-    const extension = this.name.substr(this.name.length - cutLength, cutLength).toLowerCase()
-
-    const filename = path.join(folderpath, `${this.formatFilename(name)}.${extension}.ts`)
+    const filename = path.join(folderpath, `${this.formatFilename(this.name)}.${this.nameSuffix.toLowerCase()}.ts`)
 
     let data = this.toString().join("\n")
     data = data.replace(/\r\n/g, "\n")
