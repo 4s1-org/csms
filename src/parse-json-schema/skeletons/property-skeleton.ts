@@ -36,10 +36,10 @@ export class PropertySkeleton extends SkeletonBase {
     this._annotations.push(`@ValidateNested({ each: true })`)
   }
 
-  public setEnumerationType(value: string): void {
+  public setEnumerationType(value: string, suffix: "Enum"): void {
     this.addImportClassValidatior("IsEnum")
-    this._annotations.push(`@IsEnum(${value})`)
-    this._type = value
+    this._annotations.push(`@IsEnum(${value + suffix})`)
+    this._type = value + suffix
   }
 
   public setStringType(): void {
@@ -70,15 +70,19 @@ export class PropertySkeleton extends SkeletonBase {
     this._type = "number[]"
   }
 
-  public setCustomType(value: string): void {
+  public setCustomType(value: string, suffix: "Dto" | "Enum"): void {
     this.addImportClassValidatior("ValidateNested")
     this._annotations.push(`@ValidateNested()`)
-    this._type = value
+    this._type = value + suffix
   }
 
-  public setCustomArrayType(value: string): void {
+  public setCustomArrayType(value: string, suffix: "Dto" | "Enum"): void {
     this.appendDefaultArrayAnnotations()
-    this._type = `${value}[]`
+    this._type = `${value + suffix}[]`
+  }
+
+  public setAnyType(): void {
+    this._type = `any`
   }
 
   public setBooleanType(): void {

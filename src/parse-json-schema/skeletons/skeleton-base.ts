@@ -70,8 +70,8 @@ export abstract class SkeletonBase {
     return this._importsOwnClasses
   }
 
-  public addImportOwnClass(name: string, path: string): void {
-    this._importsOwnClasses.push([name, path])
+  public addImportOwnClass(name: string, suffix: "Dto" | "Enum", path: string): void {
+    this._importsOwnClasses.push([name + suffix, path])
   }
 
   public abstract toString(): string[]
