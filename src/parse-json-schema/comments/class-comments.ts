@@ -1,4 +1,4 @@
-type commentFieldType = {
+type classCommentFieldType = {
   name: string
   fieldType: string
   cardinality: string
@@ -6,18 +6,25 @@ type commentFieldType = {
   isRequired: boolean
 }
 
-type commentType = {
+type classCommentType = {
   name: string
   description: string
   toCsms: boolean
-  fields: commentFieldType[]
+  fields: classCommentFieldType[]
 }
 
-export function getCommentForClass(classname: string): commentType | undefined {
+export function getCommentByClass(classname: string): classCommentType | undefined {
   return comments.find(x => x.name === classname)
 }
 
-export const comments: commentType[] = [{
+export function getCommentByClassField(classComment: classCommentType | undefined, fieldName: string): classCommentFieldType | undefined {
+  if (!classComment) {
+    return undefined
+  }
+  return classComment.fields.find(x => x.name === fieldName)
+}
+
+const comments: classCommentType[] = [{
   name: "BootNotificationRequest",
   description: "This contains the field definition of the BootNotificationRequest PDU sent by the Charging Station to the CSMS.",
   toCsms: true,
@@ -25,13 +32,13 @@ export const comments: commentType[] = [{
     name: "reason",
     fieldType: "BootReasonEnumType",
     cardinality: "1..1",
-    description: "Required. This contains the reason for sending this message to the CSMS.",
+    description: "This contains the reason for sending this message to the CSMS.",
     isRequired: true
   }, {
     name: "chargingStation",
     fieldType: "ChargingStationType",
     cardinality: "1..1",
-    description: "Required. Identifies the Charging Station",
+    description: "Identifies the Charging Station",
     isRequired: true
   }]
 }, {
@@ -42,7 +49,7 @@ export const comments: commentType[] = [{
     name: "currentTime",
     fieldType: "dateTime",
     cardinality: "1..1",
-    description: "Required. This contains the CSMS’s current time.",
+    description: "This contains the CSMS’s current time.",
     isRequired: true
   }]
 }]

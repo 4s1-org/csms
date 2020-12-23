@@ -110,11 +110,21 @@ export class PropertySkeleton extends SkeletonBase {
     this._annotations.push(`// MaxItems: ${value}`)
   }
 
-  public toString(): string[] {
+  /**
+   * Hier sollten keine Kommentare aus den JSON verwendet werden.
+   * Besser sind die aus der PDF.
+   * @deprecated
+   */
+  public commentToString(): string[] {
     const result: string[] = []
     for (const line of this.getComment()) {
       result.push(`  ${line}`)
     }
+    return result
+  }
+
+  public toString(): string[] {
+    const result: string[] = []
     for (const annotation of this._annotations) {
       result.push(`  ${annotation}`)
     }
