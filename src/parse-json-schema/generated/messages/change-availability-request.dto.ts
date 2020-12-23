@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { EVSEDto } from '../dtos/evse.dto'
-import { OperationalStatusEnum } from '../enums/operational-status.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { EVSEDto } from '../types/evse.dto'
+import { OperationalStatusEnum } from '../enumerations/operational-status.enum'
 
 export class ChangeAvailabilityRequestDto {
   public constructor(

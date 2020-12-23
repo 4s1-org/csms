@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { RegistrationStatusEnum } from '../enums/registration-status.enum'
-import { StatusInfoDto } from '../dtos/status-info.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { RegistrationStatusEnum } from '../enumerations/registration-status.enum'
+import { StatusInfoDto } from '../types/status-info.dto'
 
 /**
  * This contains the field definition of the BootNotificationResponse PDU sent by the CSMS to the Charging Station in response to a BootNotificationRequest.

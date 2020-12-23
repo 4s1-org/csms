@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsOptional, ValidateNested } from 'class-validator'
-import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
+import { ChargingProfilePurposeEnum } from '../enumerations/charging-profile-purpose.enum'
 import { CustomDataDto } from './custom-data.dto'
 
 /**

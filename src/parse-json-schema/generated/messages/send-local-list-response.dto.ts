@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { SendLocalListStatusEnum } from '../enums/send-local-list-status.enum'
-import { StatusInfoDto } from '../dtos/status-info.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { SendLocalListStatusEnum } from '../enumerations/send-local-list-status.enum'
+import { StatusInfoDto } from '../types/status-info.dto'
 
 export class SendLocalListResponseDto {
   public constructor(

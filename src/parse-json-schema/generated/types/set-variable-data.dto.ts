@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { AttributeEnum } from '../enums/attribute.enum'
+import { AttributeEnum } from '../enumerations/attribute.enum'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { VariableDto } from './variable.dto'

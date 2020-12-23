@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { PublishFirmwareStatusEnum } from '../enums/publish-firmware-status.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { PublishFirmwareStatusEnum } from '../enumerations/publish-firmware-status.enum'
 
 export class PublishFirmwareStatusNotificationRequestDto {
   public constructor(

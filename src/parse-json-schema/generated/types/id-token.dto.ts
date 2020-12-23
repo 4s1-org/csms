@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { AdditionalInfoDto } from './additional-info.dto'
 import { CustomDataDto } from './custom-data.dto'
-import { IdTokenEnum } from '../enums/id-token.enum'
+import { IdTokenEnum } from '../enumerations/id-token.enum'
 
 /**
  * Contains a case insensitive identifier to use for the authorization and the type of authorization to support multiple forms of identifiers.

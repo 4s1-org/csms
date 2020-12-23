@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { UploadLogStatusEnum } from '../enums/upload-log-status.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { UploadLogStatusEnum } from '../enumerations/upload-log-status.enum'
 
 export class LogStatusNotificationRequestDto {
   public constructor(

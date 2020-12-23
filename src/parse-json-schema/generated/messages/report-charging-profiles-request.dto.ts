@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { ChargingLimitSourceEnum } from '../enums/charging-limit-source.enum'
-import { ChargingProfileDto } from '../dtos/charging-profile.dto'
-import { CustomDataDto } from '../dtos/custom-data.dto'
+import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
+import { ChargingProfileDto } from '../types/charging-profile.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
 
 export class ReportChargingProfilesRequestDto {
   public constructor(

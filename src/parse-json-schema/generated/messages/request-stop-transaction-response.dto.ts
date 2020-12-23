@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { RequestStartStopStatusEnum } from '../enums/request-start-stop-status.enum'
-import { StatusInfoDto } from '../dtos/status-info.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { RequestStartStopStatusEnum } from '../enumerations/request-start-stop-status.enum'
+import { StatusInfoDto } from '../types/status-info.dto'
 
 export class RequestStopTransactionResponseDto {
   public constructor(

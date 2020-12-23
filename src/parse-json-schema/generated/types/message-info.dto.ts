@@ -5,8 +5,8 @@ import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNes
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { MessageContentDto } from './message-content.dto'
-import { MessagePriorityEnum } from '../enums/message-priority.enum'
-import { MessageStateEnum } from '../enums/message-state.enum'
+import { MessagePriorityEnum } from '../enumerations/message-priority.enum'
+import { MessageStateEnum } from '../enumerations/message-state.enum'
 
 /**
  * Message_ Info

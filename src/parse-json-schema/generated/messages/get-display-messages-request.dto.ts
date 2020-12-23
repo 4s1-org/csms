@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { MessagePriorityEnum } from '../enums/message-priority.enum'
-import { MessageStateEnum } from '../enums/message-state.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { MessagePriorityEnum } from '../enumerations/message-priority.enum'
+import { MessageStateEnum } from '../enumerations/message-state.enum'
 
 export class GetDisplayMessagesRequestDto {
   public constructor(

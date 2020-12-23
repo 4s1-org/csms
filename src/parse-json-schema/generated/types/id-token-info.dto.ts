@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { AuthorizationStatusEnum } from '../enums/authorization-status.enum'
+import { AuthorizationStatusEnum } from '../enumerations/authorization-status.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
 import { MessageContentDto } from './message-content.dto'

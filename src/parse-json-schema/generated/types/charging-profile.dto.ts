@@ -2,11 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { ChargingProfileKindEnum } from '../enums/charging-profile-kind.enum'
-import { ChargingProfilePurposeEnum } from '../enums/charging-profile-purpose.enum'
+import { ChargingProfileKindEnum } from '../enumerations/charging-profile-kind.enum'
+import { ChargingProfilePurposeEnum } from '../enumerations/charging-profile-purpose.enum'
 import { ChargingScheduleDto } from './charging-schedule.dto'
 import { CustomDataDto } from './custom-data.dto'
-import { RecurrencyKindEnum } from '../enums/recurrency-kind.enum'
+import { RecurrencyKindEnum } from '../enumerations/recurrency-kind.enum'
 
 /**
  * Charging_ Profile

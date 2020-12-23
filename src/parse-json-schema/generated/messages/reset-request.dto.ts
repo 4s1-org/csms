@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { ResetEnum } from '../enums/reset.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { ResetEnum } from '../enumerations/reset.enum'
 
 export class ResetRequestDto {
   public constructor(

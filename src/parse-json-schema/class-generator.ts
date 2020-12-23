@@ -32,11 +32,11 @@ export class ClassGenerator {
       item.writeFile([__dirname, "generated", "enumerations"])
     }
 
-    for (const item of this.classSkeletons.filter(x => x.isRoot)) {
+    for (const item of this.classSkeletons.filter(x => x.isMessage)) {
       item.writeFile([__dirname, "generated", "messages"])
     }
 
-    for (const item of this.classSkeletons.filter(x => !x.isRoot)) {
+    for (const item of this.classSkeletons.filter(x => !x.isMessage)) {
       item.writeFile([__dirname, "generated", "types"])
     }
   }

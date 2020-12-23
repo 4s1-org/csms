@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { ReportBaseEnum } from '../enums/report-base.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { ReportBaseEnum } from '../enumerations/report-base.enum'
 
 export class GetBaseReportRequestDto {
   public constructor(

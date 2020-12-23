@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
 
 export class PublishFirmwareStatusNotificationResponseDto {
 

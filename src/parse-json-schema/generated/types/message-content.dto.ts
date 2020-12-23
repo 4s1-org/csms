@@ -3,7 +3,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { MessageFormatEnum } from '../enums/message-format.enum'
+import { MessageFormatEnum } from '../enumerations/message-format.enum'
 
 /**
  * Message_ Content

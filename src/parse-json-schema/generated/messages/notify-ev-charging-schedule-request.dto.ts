@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
-import { ChargingScheduleDto } from '../dtos/charging-schedule.dto'
-import { CustomDataDto } from '../dtos/custom-data.dto'
+import { ChargingScheduleDto } from '../types/charging-schedule.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
 
 export class NotifyEVChargingScheduleRequestDto {
   public constructor(

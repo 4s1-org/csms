@@ -3,7 +3,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { MonitorEnum } from '../enums/monitor.enum'
+import { MonitorEnum } from '../enumerations/monitor.enum'
 
 /**
  * A monitoring setting for a variable.

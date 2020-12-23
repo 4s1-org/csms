@@ -5,7 +5,7 @@ import { IsEnum, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-
 import { ACChargingParametersDto } from './ac-charging-parameters.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { DCChargingParametersDto } from './dc-charging-parameters.dto'
-import { EnergyTransferModeEnum } from '../enums/energy-transfer-mode.enum'
+import { EnergyTransferModeEnum } from '../enumerations/energy-transfer-mode.enum'
 
 /**
  * Charging_ Needs

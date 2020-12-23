@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { ClearCacheStatusEnum } from '../enums/clear-cache-status.enum'
-import { CustomDataDto } from '../dtos/custom-data.dto'
-import { StatusInfoDto } from '../dtos/status-info.dto'
+import { ClearCacheStatusEnum } from '../enumerations/clear-cache-status.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
+import { StatusInfoDto } from '../types/status-info.dto'
 
 export class ClearCacheResponseDto {
   public constructor(

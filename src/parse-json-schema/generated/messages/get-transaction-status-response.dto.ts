@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../dtos/custom-data.dto'
+import { CustomDataDto } from '../types/custom-data.dto'
 
 export class GetTransactionStatusResponseDto {
   public constructor(

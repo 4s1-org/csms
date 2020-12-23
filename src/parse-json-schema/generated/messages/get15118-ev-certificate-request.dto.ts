@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { CertificateActionEnum } from '../enums/certificate-action.enum'
-import { CustomDataDto } from '../dtos/custom-data.dto'
+import { CertificateActionEnum } from '../enumerations/certificate-action.enum'
+import { CustomDataDto } from '../types/custom-data.dto'
 
 export class Get15118EVCertificateRequestDto {
   public constructor(
