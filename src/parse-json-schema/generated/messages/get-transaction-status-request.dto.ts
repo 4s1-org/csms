@@ -5,6 +5,9 @@ import { IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator
 import { CustomDataDto } from '../types/custom-data.dto'
 
 export class GetTransactionStatusRequestDto {
+  public constructor() {
+    // nothing to do
+  }
 
   @ApiProperty()
   @IsOptional()

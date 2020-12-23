@@ -10,6 +10,9 @@ import { CustomDataDto } from './custom-data.dto'
  * Defines parameters required for initiating and maintaining wireless communication with other devices.
  */
 export class ModemDto {
+  public constructor() {
+    // nothing to do
+  }
 
   @ApiProperty()
   @IsOptional()

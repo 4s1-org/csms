@@ -6,6 +6,9 @@ import { ClearChargingProfileDto } from '../types/clear-charging-profile.dto'
 import { CustomDataDto } from '../types/custom-data.dto'
 
 export class ClearChargingProfileRequestDto {
+  public constructor() {
+    // nothing to do
+  }
 
   @ApiProperty()
   @IsOptional()

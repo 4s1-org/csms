@@ -5,6 +5,9 @@ import { IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../types/custom-data.dto'
 
 export class MeterValuesResponseDto {
+  public constructor() {
+    // nothing to do
+  }
 
   @ApiProperty()
   @IsOptional()

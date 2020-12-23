@@ -6,6 +6,9 @@ import { CustomDataDto } from '../types/custom-data.dto'
 import { GetCertificateIdUseEnum } from '../enumerations/get-certificate-id-use.enum'
 
 export class GetInstalledCertificateIdsRequestDto {
+  public constructor() {
+    // nothing to do
+  }
 
   @ApiProperty()
   @IsOptional()

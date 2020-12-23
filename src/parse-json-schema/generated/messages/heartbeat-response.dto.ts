@@ -4,6 +4,9 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../types/custom-data.dto'
 
+/**
+ * This contains the field definition of the HeartbeatResponse PDU sent by the CSMS to the Charging Station in response to a HeartbeatRequest.
+ */
 export class HeartbeatResponseDto {
   public constructor(
     currentTime: string,
@@ -18,6 +21,9 @@ export class HeartbeatResponseDto {
 
   /**
    * Contains the current time of the CSMS.
+   * Required: true
+   * dateTime
+   * 1..1
    */
   @ApiProperty()
   @IsNotEmpty()

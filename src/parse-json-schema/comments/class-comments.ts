@@ -1,6 +1,7 @@
 import { ConnectorStatusEnum } from "../generated/enumerations/connector-status.enum"
 import { ConnectorStatusEnumType } from "./enumerations/ConnectorStatusEnumType"
 import { BootNotification } from "./messages/BootNotification"
+import { Heartbeat } from "./messages/Heartbeat"
 import { StatusNotification } from "./messages/StatusNotification"
 import { StatusInfoType } from "./types/StatusInfoType"
 
@@ -32,5 +33,6 @@ export function getCommentByClassField(classComment: classCommentType | undefine
 const comments: classCommentType[] = [
   ...BootNotification,
   ...StatusNotification,
+  ...Heartbeat,
   StatusInfoType
 ]

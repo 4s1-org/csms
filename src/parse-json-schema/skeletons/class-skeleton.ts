@@ -95,6 +95,11 @@ export class ClassSkeleton extends SkeletonBase {
         result.push(`    this.${prop.name} = ${prop.name}`)
       }
       result.push(`  }`)
+    } else {
+      // Leerer Konstruktor
+      result.push(`  public constructor() {`)
+      result.push(`    // nothing to do`)
+      result.push(`  }`)
     }
 
     // Properties
