@@ -1,9 +1,8 @@
-import { classCommentType } from "../class-comments";
+import { classCommentType } from "../class-comments"
 
 export const BootNotification: classCommentType[] = [{
   name: "BootNotificationRequest",
   description: "This contains the field definition of the BootNotificationRequest PDU sent by the Charging Station to the CSMS.",
-  toCsms: true,
   fields: [{
     fieldName: "reason",
     fieldType: "BootReasonEnumType",
@@ -20,7 +19,6 @@ export const BootNotification: classCommentType[] = [{
 }, {
   name: "BootNotificationResponse",
   description: "This contains the field definition of the BootNotificationResponse PDU sent by the CSMS to the Charging Station in response to a BootNotificationRequest.",
-  toCsms: false,
   fields: [{
     fieldName: "currentTime",
     fieldType: "dateTime",

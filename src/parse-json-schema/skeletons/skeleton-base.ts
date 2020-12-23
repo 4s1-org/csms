@@ -29,6 +29,9 @@ export abstract class SkeletonBase {
   }
 
 
+  /**
+   * @deprecated
+   */
   public getComment(): string[] {
     return this._comment
   }
