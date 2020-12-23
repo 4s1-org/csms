@@ -1,3 +1,4 @@
+import { getCommentByClass, getCommentByClassField } from "../comments/class-comments"
 import { PropertySkeleton } from "./property-skeleton"
 import { SkeletonBase } from "./skeleton-base"
 
@@ -6,8 +7,8 @@ export class ClassSkeleton extends SkeletonBase {
   private _allowAdditionalProperties = false
 
   public constructor(name: string,
-    public readonly isRoot: boolean = false) {
-    super(name + "Dto")
+    public readonly isMessage: boolean = false) {
+    super(name, "Dto")
   }
 
   public addProperty(name: string, isRequired: boolean): PropertySkeleton {
@@ -50,10 +51,10 @@ export class ClassSkeleton extends SkeletonBase {
         }
 
         if (ownImport[1].endsWith("enum")) {
-          result.push(`import { ${ownImport[0]} } from '../enums/${ownImport[1]}'`)
+          result.push(`import { ${ownImport[0]} } from '../enumerations/${ownImport[1]}'`)
         } else if (ownImport[1].endsWith("dto")) {
-          if (this.isRoot) {
-            result.push(`import { ${ownImport[0]} } from '../dtos/${ownImport[1]}'`)
+          if (this.isMessage) {
+            result.push(`import { ${ownImport[0]} } from '../types/${ownImport[1]}'`)
           } else {
             result.push(`import { ${ownImport[0]} } from './${ownImport[1]}'`)
           }
@@ -64,12 +65,23 @@ export class ClassSkeleton extends SkeletonBase {
     }
 
     // Classcomment
-    for (const line of this.getComment()) {
-      result.push(line)
+    const classComment = getCommentByClass(this.name)
+    {
+      // Gibt es einen Kommentar aus den PDFs Dokus?
+      // Ansonsten nehme den aus den JSON-Schema Dateien.
+      if (classComment) {
+        result.push(`/**`)
+        result.push(` * ${classComment.description}`)
+        result.push(` */`)
+      } else {
+        for (const line of this.getComment()) {
+          result.push(line)
+        }
+      }
     }
 
     // Begin of class
-    result.push(`export class ${this.name} {`)
+    result.push(`export class ${this.name}${this.nameSuffix} {`)
 
     // Constructor
     const requiredProperties = this._properties.filter(x => x.isRequired)
@@ -83,14 +95,29 @@ export class ClassSkeleton extends SkeletonBase {
         result.push(`    this.${prop.name} = ${prop.name}`)
       }
       result.push(`  }`)
+    } else {
+      // Leerer Konstruktor
+      result.push(`  public constructor() {`)
+      result.push(`    // nothing to do`)
+      result.push(`  }`)
     }
 
     // Properties
     for (const prop of this._properties) {
       result.push(``)
-      for (const line of prop.toString()) {
-        result.push(line)
+      const fieldComment = getCommentByClassField(classComment, prop.name)
+      if (fieldComment) {
+        result.push(`  /**`)
+        result.push(`   * ${fieldComment.description}`)
+        result.push(`   * Required: ${fieldComment.isRequired}`)
+        result.push(`   * ${fieldComment.fieldType}`)
+        result.push(`   * ${fieldComment.cardinality}`)
+        result.push(`   */`)
+      } else {
+        result.push(...prop.commentToString())
       }
+
+      result.push(...prop.toString())
     }
 
     if (this._allowAdditionalProperties) {
@@ -108,5 +135,5 @@ export class ClassSkeleton extends SkeletonBase {
     // End
     return result
   }
-}
 
+}

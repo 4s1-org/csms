@@ -44,6 +44,7 @@ export class SchemaDefinition extends Validatable<Foo> {
       if (!this.key.endsWith("EnumType")) {
         throw new Error(`${this.key}: I thought it would ends with "EnumType"`)
       }
+
       const name = this.key.substr(0, this.key.length - 8)
       const skeleton = new EnumSkeleton(name, this.data.enum)
       skeleton.setComment(this.data.description)
