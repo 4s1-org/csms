@@ -52,18 +52,18 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       if (this.data.$ref.endsWith("EnumType")) {
         // Enum
         const type = this.data.$ref.substr(14, this.data.$ref.length - 22)
-        this.skeleton.setEnumerationType(type + "Enum")
-        this.skeleton.addImportOwnClass(type + "Enum", `${this.skeleton.formatFilename(type)}.enum`)
+        this.skeleton.setEnumerationType(type, "Enum")
+        this.skeleton.addImportOwnClass(type, "Enum", `${this.skeleton.formatFilename(type)}.enum`)
       } else if (this.data.$ref.endsWith("Type")) {
         // DTO
         const type = this.data.$ref.substr(14, this.data.$ref.length - 18)
-        this.skeleton.setCustomType(type + "Dto")
-        this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
+        this.skeleton.setCustomType(type, "Dto")
+        this.skeleton.addImportOwnClass(type, "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       } else if (this.data.$ref.endsWith("AuthorizationData")) {
         // DTO - AuthorizationData
         const type = this.data.$ref.substr(14, this.data.$ref.length - 14)
-        this.skeleton.setCustomType(type + "Dto")
-        this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
+        this.skeleton.setCustomType(type, "Dto")
+        this.skeleton.addImportOwnClass(type, "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       } else {
         throw new Error(`${this.key}: Unknown Type: ${this.data.type}`)
       }
@@ -72,7 +72,7 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
 
     // Special thing beim DataTransferRequest. Da gibt es ein "data" was alles möglich sein darf.
     if (this.data.description && Object.keys(this.data).length === 1) {
-      this.skeleton.setCustomType("any")
+      this.skeleton.setAnyType()
       return
     }
 
@@ -196,11 +196,11 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
 
     if (isCustomType) {
       if (isEnum) {
-        this.skeleton.setCustomArrayType(type + "Enum")
-        this.skeleton.addImportOwnClass(type + "Enum", `${this.skeleton.formatFilename(type)}.enum`)
+        this.skeleton.setCustomArrayType(type, "Enum")
+        this.skeleton.addImportOwnClass(type, "Enum", `${this.skeleton.formatFilename(type)}.enum`)
       } else {
-        this.skeleton.setCustomArrayType(type + "Dto")
-        this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
+        this.skeleton.setCustomArrayType(type, "Dto")
+        this.skeleton.addImportOwnClass(type, "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       }
     } else {
       if (type === "string") {

@@ -30,7 +30,6 @@ export class DataTransferRequestDto {
    */
   @ApiProperty()
   @IsOptional()
-  @ValidateNested()
   public data!: any
 
   /**
