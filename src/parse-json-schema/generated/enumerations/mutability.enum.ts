@@ -6,5 +6,5 @@
 export enum MutabilityEnum {
   ReadOnly = "ReadOnly",
   WriteOnly = "WriteOnly",
-  ReadWrite = "ReadWrite",
+  ReadWrite = "ReadWrite", // DEFAULT
 }

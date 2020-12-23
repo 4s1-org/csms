@@ -2,11 +2,17 @@ import { getCommentByEnum, getCommentByEnumValue } from "../comments/enum-commen
 import { SkeletonBase } from "./skeleton-base"
 
 export class EnumSkeleton extends SkeletonBase {
+  private _defaultValue: string | undefined
+
   public constructor(
     name: string,
     private readonly items: string[]
   ) {
     super(name, "Enum")
+  }
+
+  public setDefaultValue(value: string | undefined): void {
+    this._defaultValue = value
   }
 
   public toString(): string[] {
@@ -41,7 +47,7 @@ export class EnumSkeleton extends SkeletonBase {
         result.push(`  /** ${valueComment.description} */`)
       }
       const propName = item.includes("-") || item.includes(".") ? `"${item}"` : item
-      result.push(`  ${propName} = "${item}",`)
+      result.push(`  ${propName} = "${item}",${item === this._defaultValue ? " // DEFAULT" : ""}`)
     }
 
     // End of class

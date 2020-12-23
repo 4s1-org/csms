@@ -39,7 +39,6 @@ export class SchemaDefinition extends Validatable<Foo> {
       if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
         throw new Error(`${this.key}: I thought enums can't have additional properties`)
       }
-
       // Remove "EnumType"
       if (!this.key.endsWith("EnumType")) {
         throw new Error(`${this.key}: I thought it would ends with "EnumType"`)
@@ -48,10 +47,14 @@ export class SchemaDefinition extends Validatable<Foo> {
       const name = this.key.substr(0, this.key.length - 8)
       const skeleton = new EnumSkeleton(name, this.data.enum)
       skeleton.setComment(this.data.description)
+      skeleton.setDefaultValue(this.data.default)
       ClassGenerator.instance.addEnum(skeleton)
     } else if (this.data.type === "object") {
       if (!this.data.properties) {
         throw new Error(`${this.key}: I thought it was a custom type`)
+      }
+      if (this.data.default !== undefined) {
+        throw new Error(`${this.key}: Ich dachte Objekte haben keinen default Wert.`)
       }
 
       // Info: AuthorizationData ist der einzige Datentyp, der nicht mit "Type" endet.

@@ -10,5 +10,5 @@ export enum LocationEnum {
   Cable = "Cable",
   EV = "EV",
   Inlet = "Inlet",
-  Outlet = "Outlet",
+  Outlet = "Outlet", // DEFAULT
 }

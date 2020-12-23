@@ -10,7 +10,7 @@ export enum MeasurandEnum {
   "Current.Import" = "Current.Import",
   "Current.Offered" = "Current.Offered",
   "Energy.Active.Export.Register" = "Energy.Active.Export.Register",
-  "Energy.Active.Import.Register" = "Energy.Active.Import.Register",
+  "Energy.Active.Import.Register" = "Energy.Active.Import.Register", // DEFAULT
   "Energy.Reactive.Export.Register" = "Energy.Reactive.Export.Register",
   "Energy.Reactive.Import.Register" = "Energy.Reactive.Import.Register",
   "Energy.Active.Export.Interval" = "Energy.Active.Export.Interval",
