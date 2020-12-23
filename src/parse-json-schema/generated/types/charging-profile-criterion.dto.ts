@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsEnum, IsInt, IsOptional, ValidateNested } from 'class-validator'
+import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
 import { ChargingProfilePurposeEnum } from '../enumerations/charging-profile-purpose.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -41,8 +41,10 @@ export class ChargingProfileCriterionDto {
    */
   @ApiProperty()
   @IsOptional()
-  // MinItems: 1
+  @ArrayMinSize(1)
   @IsArray()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
   public chargingProfileId!: number[]
 
   /**
@@ -50,9 +52,10 @@ export class ChargingProfileCriterionDto {
    */
   @ApiProperty()
   @IsOptional()
-  // MinItems: 1
-  // MinItems: 4
+  @ArrayMinSize(1)
+  @ArrayMaxSize(4)
   @IsArray()
-  @ValidateNested()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
   public chargingLimitSource!: ChargingLimitSourceEnum[]
 }
