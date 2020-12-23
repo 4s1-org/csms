@@ -3,6 +3,7 @@ import { ChangeAvailabilityStatusEnumType } from "./enumerations/ChangeAvailabil
 import { ConnectorStatusEnumType } from "./enumerations/ConnectorStatusEnumType"
 import { OperationalStatusEnumType } from "./enumerations/OperationalStatusEnumType"
 import { ResetEnumType } from "./enumerations/ResetEnumType"
+import { ResetStatusEnumType } from "./enumerations/ResetStatusEnumType"
 
 export type enumCommentValueType = {
   value: string
@@ -31,5 +32,6 @@ const comments: enumCommentType[] = [
   ChangeAvailabilityStatusEnumType,
   ConnectorStatusEnumType,
   OperationalStatusEnumType,
-  ResetEnumType
+  ResetEnumType,
+  ResetStatusEnumType
 ]
