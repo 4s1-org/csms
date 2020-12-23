@@ -52,17 +52,17 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       if (this.data.$ref.endsWith("EnumType")) {
         // Enum
         const type = this.data.$ref.substr(14, this.data.$ref.length - 22)
-        this.skeleton.setIsEnum(type + "Enum")
+        this.skeleton.setEnumerationType(type + "Enum")
         this.skeleton.addImportOwnClass(type + "Enum", `${this.skeleton.formatFilename(type)}.enum`)
       } else if (this.data.$ref.endsWith("Type")) {
         // DTO
         const type = this.data.$ref.substr(14, this.data.$ref.length - 18)
-        this.skeleton.setIsCustomType(type + "Dto")
+        this.skeleton.setCustomType(type + "Dto")
         this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       } else if (this.data.$ref.endsWith("AuthorizationData")) {
         // DTO - AuthorizationData
         const type = this.data.$ref.substr(14, this.data.$ref.length - 14)
-        this.skeleton.setIsCustomType(type + "Dto")
+        this.skeleton.setCustomType(type + "Dto")
         this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       } else {
         throw new Error(`${this.key}: Unknown Type: ${this.data.type}`)
@@ -72,7 +72,7 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
 
     // Special thing beim DataTransferRequest. Da gibt es ein "data" was alles möglich sein darf.
     if (this.data.description && Object.keys(this.data).length === 1) {
-      this.skeleton.setIsCustomType("any")
+      this.skeleton.setCustomType("any")
       return
     }
 
@@ -87,37 +87,49 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
       if (this.data.type !== "array") {
         throw new Error(`${this.key}: "Ich dachte minItems gibt es nur bei Arrays`)
       }
-      this.skeleton.setMinItems(this.data.minItems)
+      this.skeleton.appendMinItemsAnnotation(this.data.minItems)
     }
+
     if (this.data.maxItems !== undefined) {
       if (this.data.type !== "array") {
         throw new Error(`${this.key}: "Ich dachte maxItems gibt es nur bei Arrays`)
       }
-      this.skeleton.setMaxItems(this.data.maxItems)
+      this.skeleton.appendMaxItemsAnnotation(this.data.maxItems)
     }
+
     if (this.data.minimum !== undefined) {
-      this.skeleton.setMinimum(this.data.minimum)
+      this.skeleton.appendMinimumAnnotation(this.data.minimum)
     }
+
     if (this.data.maximum !== undefined) {
-      this.skeleton.setMaximum(this.data.maximum)
+      this.skeleton.appendMaximumAnnotation(this.data.maximum)
     }
+
     if (this.data.maxLength) {
-      this.skeleton.setMaxLength(this.data.maxLength)
+      this.skeleton.appendMaxLengthAnnotation(this.data.maxLength)
     }
-    if (this.data.format) {
-      this.skeleton.setFormat(this.data.format)
-    }
+
     if (this.data.default) {
-      this.skeleton.setDefault(this.data.default)
+      this.skeleton.appendDefaultAnnotation(this.data.default)
+    }
+
+    // Sonderprüfung: Weil Format und Type unterschiedlichste Kombination haben könnten.
+    // Bisher hat aber nur der String ein Format "date-time", was behandelt wird.
+    if (this.data.format && this.data.type !== "string") {
+      throw new Error(`${this.key}: "Ein Format für einen nicht String hat keine Behandlung.`)
     }
 
     if (this.data.type === "string") {
-      this.skeleton.setIsString()
+      if (this.data.format === "date-time") {
+        this.skeleton.setDateTimeType()
+      } else {
+        this.skeleton.setStringType()
+      }
       return
     }
 
     if (this.data.type === "integer") {
-      this.skeleton.setIsInteger()
+      this.skeleton.setIntegerType()
       return
     }
 
@@ -127,12 +139,12 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     if (this.data.type === "number") {
-      this.skeleton.setIsNumber()
+      this.skeleton.setNumberType()
       return
     }
 
     if (this.data.type === "boolean") {
-      this.skeleton.setIsBoolean()
+      this.skeleton.setBooleanType()
       return
     }
 
@@ -184,17 +196,17 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
 
     if (isCustomType) {
       if (isEnum) {
-        this.skeleton.setIsCustomArrayType(type + "Enum")
+        this.skeleton.setCustomArrayType(type + "Enum")
         this.skeleton.addImportOwnClass(type + "Enum", `${this.skeleton.formatFilename(type)}.enum`)
       } else {
-        this.skeleton.setIsCustomArrayType(type + "Dto")
+        this.skeleton.setCustomArrayType(type + "Dto")
         this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       }
     } else {
       if (type === "string") {
-        this.skeleton.setIsStringArray()
+        this.skeleton.setStringArrayType()
       } else if (type === "integer") {
-        this.skeleton.setIsIntegerArray()
+        this.skeleton.setIntegerArrayType()
       } else {
         throw new Error(`${this.key}: Unknown constellation`)
       }
