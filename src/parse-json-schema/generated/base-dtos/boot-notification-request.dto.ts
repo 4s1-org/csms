@@ -6,6 +6,9 @@ import { BootReasonEnum } from '../enums/boot-reason.enum'
 import { ChargingStationDto } from '../dtos/charging-station.dto'
 import { CustomDataDto } from '../dtos/custom-data.dto'
 
+/**
+ * This contains the field definition of the BootNotificationRequest PDU sent by the Charging Station to the CSMS.
+ */
 export class BootNotificationRequestDto {
   public constructor(
     chargingStation: ChargingStationDto,
@@ -20,11 +23,23 @@ export class BootNotificationRequestDto {
   @ValidateNested()
   public customData!: CustomDataDto
 
+  /**
+   * Identifies the Charging Station
+   * Required: true
+   * ChargingStationType
+   * 1..1
+   */
   @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public chargingStation: ChargingStationDto
 
+  /**
+   * This contains the reason for sending this message to the CSMS.
+   * Required: true
+   * BootReasonEnumType
+   * 1..1
+   */
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(BootReasonEnum)

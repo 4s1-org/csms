@@ -1,4 +1,4 @@
-import { getCommentForClass } from "../comments"
+import { getCommentByClass, getCommentByClassField } from "../comments/class-comments"
 import { PropertySkeleton } from "./property-skeleton"
 import { SkeletonBase } from "./skeleton-base"
 
@@ -65,9 +65,19 @@ export class ClassSkeleton extends SkeletonBase {
     }
 
     // Classcomment
-    const comment = getCommentForClass(this.name)
-    for (const line of this.getComment()) {
-      result.push(line)
+    const classComment = getCommentByClass(this.name)
+    {
+      // Gibt es einen Kommentar aus den PDFs Dokus?
+      // Ansonsten nehme den aus den JSON-Schema Dateien.
+      if (classComment) {
+        result.push(`/**`)
+        result.push(` * ${classComment.description}`)
+        result.push(` */`)
+      } else {
+        for (const line of this.getComment()) {
+          result.push(line)
+        }
+      }
     }
 
     // Begin of class
@@ -90,9 +100,19 @@ export class ClassSkeleton extends SkeletonBase {
     // Properties
     for (const prop of this._properties) {
       result.push(``)
-      for (const line of prop.toString()) {
-        result.push(line)
+      const fieldComment = getCommentByClassField(classComment, prop.name)
+      if (fieldComment) {
+        result.push(`  /**`)
+        result.push(`   * ${fieldComment.description}`)
+        result.push(`   * Required: ${fieldComment.isRequired}`)
+        result.push(`   * ${fieldComment.fieldType}`)
+        result.push(`   * ${fieldComment.cardinality}`)
+        result.push(`   */`)
+      } else {
+        result.push(...prop.commentToString())
       }
+
+      result.push(...prop.toString())
     }
 
     if (this._allowAdditionalProperties) {
@@ -110,5 +130,5 @@ export class ClassSkeleton extends SkeletonBase {
     // End
     return result
   }
-}
 
+}

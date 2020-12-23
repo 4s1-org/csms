@@ -6,6 +6,9 @@ import { CustomDataDto } from '../dtos/custom-data.dto'
 import { RegistrationStatusEnum } from '../enums/registration-status.enum'
 import { StatusInfoDto } from '../dtos/status-info.dto'
 
+/**
+ * This contains the field definition of the BootNotificationResponse PDU sent by the CSMS to the Charging Station in response to a BootNotificationRequest.
+ */
 export class BootNotificationResponseDto {
   public constructor(
     currentTime: string,
@@ -24,6 +27,9 @@ export class BootNotificationResponseDto {
 
   /**
    * This contains the CSMS’s current time.
+   * Required: true
+   * dateTime
+   * 1..1
    */
   @ApiProperty()
   @IsNotEmpty()
