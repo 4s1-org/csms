@@ -25,7 +25,7 @@ export class PropertySkeleton extends SkeletonBase {
     return this._type
   }
 
-  private setDefaultArrayAnnotations(): void {
+  private appendDefaultArrayAnnotations(): void {
     this.addImportClassValidatior("IsArray")
     this._annotations.push(`@IsArray()`)
 
@@ -36,84 +36,86 @@ export class PropertySkeleton extends SkeletonBase {
     this._annotations.push(`@ValidateNested({ each: true })`)
   }
 
-  public setIsEnum(value: string): void {
+  public setEnumerationType(value: string): void {
     this.addImportClassValidatior("IsEnum")
     this._annotations.push(`@IsEnum(${value})`)
     this._type = value
   }
 
-  public setIsString(): void {
+  public setStringType(): void {
     this.addImportClassValidatior("IsString")
     this._annotations.push(`@IsString()`)
     this._type = "string"
   }
 
-  public setIsStringArray(): void {
-    this.setDefaultArrayAnnotations()
+  public setStringArrayType(): void {
+    this.appendDefaultArrayAnnotations()
     this._type = "string[]"
   }
 
-  public setIsNumber(): void {
+  public setNumberType(): void {
     this.addImportClassValidatior("IsNumber")
     this._annotations.push(`@IsNumber()`)
     this._type = "number"
   }
 
-  public setIsInteger(): void {
+  public setIntegerType(): void {
     this.addImportClassValidatior("IsInt")
     this._annotations.push(`@IsInt()`)
     this._type = "number"
   }
 
-  public setIsIntegerArray(): void {
-    this.setDefaultArrayAnnotations()
+  public setIntegerArrayType(): void {
+    this.appendDefaultArrayAnnotations()
     this._type = "number[]"
   }
 
-  public setIsCustomType(value: string): void {
+  public setCustomType(value: string): void {
     this.addImportClassValidatior("ValidateNested")
     this._annotations.push(`@ValidateNested()`)
     this._type = value
   }
 
-  public setIsCustomArrayType(value: string): void {
-    this.setDefaultArrayAnnotations()
+  public setCustomArrayType(value: string): void {
+    this.appendDefaultArrayAnnotations()
     this._type = `${value}[]`
   }
 
-  public setIsBoolean(): void {
+  public setBooleanType(): void {
     this.addImportClassValidatior("IsBoolean")
     this._annotations.push(`@IsBoolean()`)
     this._type = "boolean"
   }
 
-  public setMaxLength(value: number): void {
+  public appendMaxLengthAnnotation(value: number): void {
     this.addImportClassValidatior("MaxLength")
     this._annotations.push(`@MaxLength(${value})`)
   }
 
-  public setMinimum(value: number): void {
+  public appendMinimumAnnotation(value: number): void {
     this._annotations.push(`// setMinimum: ${value}`)
   }
 
-  public setMaximum(value: number): void {
+  public appendMaximumAnnotation(value: number): void {
     this._annotations.push(`// setMaximum: ${value}`)
   }
 
-  public setFormat(value: string): void {
-    this._annotations.push(`// setFormat: ${value}`)
+  public setDateTimeType(): void {
+    this.addImportClassValidatior("IsDateString")
+    this._annotations.push(`@IsDateString()`)
+    this._type = "string"
   }
 
-  public setDefault(value: string): void {
+  public appendDefaultAnnotation(value: string): void {
     this._annotations.push(`// setDefault: ${value}`)
   }
 
-  public setMinItems(value: number): void {
+  public appendMinItemsAnnotation(value: number): void {
     this.addImportClassValidatior("ArrayMinSize")
     this._annotations.push(`@ArrayMinSize(${value})`)
   }
 
-  public setMaxItems(value: number): void {
+  public appendMaxItemsAnnotation(value: number): void {
     this.addImportClassValidatior("ArrayMaxSize")
     this._annotations.push(`@ArrayMaxSize(${value})`)
   }

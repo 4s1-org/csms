@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../types/custom-data.dto'
 
 export class SecurityEventNotificationRequestDto {
@@ -32,8 +32,7 @@ export class SecurityEventNotificationRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  // setFormat: date-time
-  @IsString()
+  @IsDateString()
   public timestamp: string
 
   /**

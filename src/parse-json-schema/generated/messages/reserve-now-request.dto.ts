@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
+import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ConnectorEnum } from '../enumerations/connector.enum'
 import { CustomDataDto } from '../types/custom-data.dto'
 import { IdTokenDto } from '../types/id-token.dto'
@@ -35,8 +35,7 @@ export class ReserveNowRequestDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  // setFormat: date-time
-  @IsString()
+  @IsDateString()
   public expiryDateTime: string
 
   @ApiProperty()

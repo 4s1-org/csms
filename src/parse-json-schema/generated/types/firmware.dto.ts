@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
@@ -41,8 +41,7 @@ export class FirmwareDto {
    */
   @ApiProperty()
   @IsNotEmpty()
-  // setFormat: date-time
-  @IsString()
+  @IsDateString()
   public retrieveDateTime: string
 
   /**
@@ -52,8 +51,7 @@ export class FirmwareDto {
    */
   @ApiProperty()
   @IsOptional()
-  // setFormat: date-time
-  @IsString()
+  @IsDateString()
   public installDateTime!: string
 
   /**
