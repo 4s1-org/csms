@@ -1,3 +1,4 @@
+import { BootReasonEnumType } from "./enumerations/BootReasonEnumType"
 import { ConnectorStatusEnumType } from "./enumerations/ConnectorStatusEnumType"
 
 export type enumCommentValueType = {
@@ -23,5 +24,6 @@ export function getCommentByEnumValue(enumComment: enumCommentType | undefined, 
 }
 
 const comments: enumCommentType[] = [
+  BootReasonEnumType,
   ConnectorStatusEnumType
 ]

@@ -6,8 +6,6 @@ import { CustomDataDto } from './custom-data.dto'
 import { ModemDto } from './modem.dto'
 
 /**
- * Charge_ Point
- * urn:x-oca:ocpp:uid:2:233122
  * The physical system where an Electrical Vehicle (EV) can be charged.
  */
 export class ChargingStationDto {
@@ -25,9 +23,10 @@ export class ChargingStationDto {
   public customData!: CustomDataDto
 
   /**
-   * Device. Serial_ Number. Serial_ Number
-   * urn:x-oca:ocpp:uid:1:569324
    * Vendor-specific device identifier.
+   * Required: false
+   * string[0..25]
+   * 0..1
    */
   @ApiProperty()
   @IsOptional()
@@ -36,9 +35,10 @@ export class ChargingStationDto {
   public serialNumber!: string
 
   /**
-   * Device. Model. CI20_ Text
-   * urn:x-oca:ocpp:uid:1:569325
    * Defines the model of the device.
+   * Required: true
+   * string[0..20]
+   * 1..1
    */
   @ApiProperty()
   @IsNotEmpty()
@@ -46,6 +46,12 @@ export class ChargingStationDto {
   @IsString()
   public model: string
 
+  /**
+   * Defines the functional parameters of a communication link.
+   * Required: false
+   * ModemType
+   * 0..1
+   */
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
@@ -53,6 +59,9 @@ export class ChargingStationDto {
 
   /**
    * Identifies the vendor (not necessarily in a unique manner).
+   * Required: true
+   * string[0..50]
+   * 1..1
    */
   @ApiProperty()
   @IsNotEmpty()
@@ -62,6 +71,9 @@ export class ChargingStationDto {
 
   /**
    * This contains the firmware version of the Charging Station.
+   * Required: false
+   * string[0..50]
+   * 0..1
    */
   @ApiProperty()
   @IsOptional()
