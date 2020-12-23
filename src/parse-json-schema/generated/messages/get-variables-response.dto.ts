@@ -5,6 +5,9 @@ import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateN
 import { CustomDataDto } from '../types/custom-data.dto'
 import { GetVariableResultDto } from '../types/get-variable-result.dto'
 
+/**
+ * This contains the field definition of the GetVariablesResponse PDU sent by the CSMS to the Charging Station in response to GetVariablesRequest.
+ */
 export class GetVariablesResponseDto {
   public constructor(
     getVariableResult: GetVariableResultDto[],
@@ -17,6 +20,12 @@ export class GetVariablesResponseDto {
   @ValidateNested()
   public customData!: CustomDataDto
 
+  /**
+   * List of requested variables and their values.
+   * Required: true
+   * GetVariableResultType
+   * 1..*
+   */
   @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
