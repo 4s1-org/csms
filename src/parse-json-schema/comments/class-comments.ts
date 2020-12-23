@@ -2,7 +2,10 @@ import { ConnectorStatusEnum } from "../generated/enumerations/connector-status.
 import { ConnectorStatusEnumType } from "./enumerations/ConnectorStatusEnumType"
 import { BootNotification } from "./messages/BootNotification"
 import { Heartbeat } from "./messages/Heartbeat"
+import { NotifyReport } from "./messages/NotifyReport"
 import { StatusNotification } from "./messages/StatusNotification"
+import { ChargingStationType } from "./types/ChargingStationType"
+import { ModemType } from "./types/ModemType"
 import { StatusInfoType } from "./types/StatusInfoType"
 
 export type classCommentFieldType = {
@@ -31,8 +34,13 @@ export function getCommentByClassField(classComment: classCommentType | undefine
 }
 
 const comments: classCommentType[] = [
+  // Messages
   ...BootNotification,
-  ...StatusNotification,
   ...Heartbeat,
+  ...NotifyReport,
+  ...StatusNotification,
+  // Types
+  ChargingStationType,
+  ModemType,
   StatusInfoType
 ]
