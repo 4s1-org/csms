@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { ChargingProfileKindEnum } from '../enumerations/charging-profile-kind.enum'
 import { ChargingProfilePurposeEnum } from '../enumerations/charging-profile-purpose.enum'
 import { ChargingScheduleDto } from './charging-schedule.dto'
@@ -92,10 +92,11 @@ export class ChargingProfileDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  // MinItems: 1
-  // MinItems: 3
+  @ArrayMinSize(1)
+  @ArrayMaxSize(3)
   @IsArray()
-  @ValidateNested()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
   public chargingSchedule: ChargingScheduleDto[]
 
   /**

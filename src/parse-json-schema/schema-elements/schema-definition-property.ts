@@ -84,10 +84,16 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     if (this.data.minItems !== undefined) {
+      if (this.data.type !== "array") {
+        throw new Error(`${this.key}: "Ich dachte minItems gibt es nur bei Arrays`)
+      }
       this.skeleton.setMinItems(this.data.minItems)
     }
     if (this.data.maxItems !== undefined) {
-      this.skeleton.setMinItems(this.data.maxItems)
+      if (this.data.type !== "array") {
+        throw new Error(`${this.key}: "Ich dachte maxItems gibt es nur bei Arrays`)
+      }
+      this.skeleton.setMaxItems(this.data.maxItems)
     }
     if (this.data.minimum !== undefined) {
       this.skeleton.setMinimum(this.data.minimum)
@@ -178,10 +184,10 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
 
     if (isCustomType) {
       if (isEnum) {
-        this.skeleton.setIsCustomTypeArray(type + "Enum")
+        this.skeleton.setIsCustomArrayType(type + "Enum")
         this.skeleton.addImportOwnClass(type + "Enum", `${this.skeleton.formatFilename(type)}.enum`)
       } else {
-        this.skeleton.setIsCustomTypeArray(type + "Dto")
+        this.skeleton.setIsCustomArrayType(type + "Dto")
         this.skeleton.addImportOwnClass(type + "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       }
     } else {
