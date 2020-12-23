@@ -35,6 +35,7 @@ export class ClassGenerator {
     for (const item of this.classSkeletons.filter(x => x.isRoot)) {
       item.writeFile([__dirname, "generated", "messages"])
     }
+
     for (const item of this.classSkeletons.filter(x => !x.isRoot)) {
       item.writeFile([__dirname, "generated", "types"])
     }
