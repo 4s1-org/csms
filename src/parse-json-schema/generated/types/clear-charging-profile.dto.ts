@@ -11,6 +11,9 @@ import { CustomDataDto } from './custom-data.dto'
  * A ChargingProfile consists of a ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
 export class ClearChargingProfileDto {
+  public constructor() {
+    // nothing to do
+  }
 
   @ApiProperty()
   @IsOptional()

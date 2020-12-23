@@ -7,6 +7,9 @@ import { IdTokenInfoDto } from '../types/id-token-info.dto'
 import { MessageContentDto } from '../types/message-content.dto'
 
 export class TransactionEventResponseDto {
+  public constructor() {
+    // nothing to do
+  }
 
   @ApiProperty()
   @IsOptional()
