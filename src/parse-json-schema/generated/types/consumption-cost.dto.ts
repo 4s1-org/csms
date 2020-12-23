@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
+import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { CostDto } from './cost.dto'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -35,9 +35,10 @@ export class ConsumptionCostDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  // MinItems: 1
-  // MinItems: 3
+  @ArrayMinSize(1)
+  @ArrayMaxSize(3)
   @IsArray()
-  @ValidateNested()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
   public cost: CostDto[]
 }

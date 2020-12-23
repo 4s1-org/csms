@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../types/custom-data.dto'
 import { MessageInfoDto } from '../types/message-info.dto'
 
@@ -19,9 +19,10 @@ export class NotifyDisplayMessagesRequestDto {
 
   @ApiProperty()
   @IsOptional()
-  // MinItems: 1
+  @ArrayMinSize(1)
   @IsArray()
-  @ValidateNested()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
   public messageInfo!: MessageInfoDto[]
 
   /**
