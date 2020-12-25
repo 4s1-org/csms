@@ -18,12 +18,12 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "npm run lint && npm run build && npm run test",
-    "lint": "eslint --ext .ts src/",
+    "lint": "eslint \"{src,scripts}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
-    "pjs": "ts-node src/parse-json-schema/index.ts",
-    "pjs:full":"npm run reset && npm run pjs && git status",
+    "pjs": "ts-node scripts/parse-json-schema/index.ts",
+    "pjs:full": "npm run reset && npm run pjs && git status",
     "reset": "rm -rf src/parse-json-schema/generated/ && git checkout HEAD~1 -- src/parse-json-schema/generated/",
     "test": "echo No tests available",
     "test:cov": "echo No tests available"
