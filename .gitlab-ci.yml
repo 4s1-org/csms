@@ -1,8 +1,9 @@
 stages:
-  - validating
+  - validating-shared
+  - validating-apps
 
 shared:
-  stage: validating
+  stage: validating-shared
   image: node:14-alpine
   artifacts:
     when: always
@@ -17,7 +18,7 @@ shared:
     - npm run test:cov
 
 backend:
-  stage: validating
+  stage: validating-apps
   image: node:14-alpine
   artifacts:
     when: always
@@ -32,7 +33,7 @@ backend:
     - npm run test:cov
 
 simulator:
-  stage: validating
+  stage: validating-apps
   image: node:14-alpine
   artifacts:
     when: always
