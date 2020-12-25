@@ -1,0 +1,47 @@
+stages:
+  - validating
+
+shared:
+  stage: validating
+  image: node:14-alpine
+  artifacts:
+    when: always
+    paths:
+      - coverage/
+    expire_in: 1 week
+  script:
+    - cd shared
+    - npm ci
+    - npm run lint
+    - npm run build
+    - npm run test:cov
+
+backend:
+  stage: validating
+  image: node:14-alpine
+  artifacts:
+    when: always
+    paths:
+      - coverage/
+    expire_in: 1 week
+  script:
+    - cd backend
+    - npm ci
+    - npm run lint
+    - npm run build
+    - npm run test:cov
+
+simulator:
+  stage: validating
+  image: node:14-alpine
+  artifacts:
+    when: always
+    paths:
+      - coverage/
+    expire_in: 1 week
+  script:
+    - cd simulator
+    - npm ci
+    - npm run lint
+    - npm run build
+    - npm run test:cov
