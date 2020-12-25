@@ -1,5 +1,3 @@
-import { ConnectorStatusEnum } from "../generated/enumerations/connector-status.enum"
-import { ConnectorStatusEnumType } from "./enumerations/ConnectorStatusEnumType"
 import { BootNotification } from "./messages/BootNotification"
 import { ChangeAvailability } from "./messages/ChangeAvailability"
 import { GetBaseReport } from "./messages/GetBaseReport"
