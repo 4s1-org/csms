@@ -1,1 +1,1 @@
-export { ComponentVariableDto } from "./component-variable.dto"
+export { AuthorizeRequestDto } from "./authorize-request.dto"
