@@ -1,0 +1,83 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
+import { ApiProperty } from '@nestjs/swagger'
+import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { CustomDataDto } from './custom-data.dto'
+import { ModemDto } from './modem.dto'
+
+/**
+ * The physical system where an Electrical Vehicle (EV) can be charged.
+ */
+export class ChargingStationDto {
+  public constructor(
+    model: string,
+    vendorName: string,
+  ) {
+    this.model = model
+    this.vendorName = vendorName
+  }
+
+  @ApiProperty()
+  @IsOptional()
+  @ValidateNested()
+  public customData!: CustomDataDto
+
+  /**
+   * Vendor-specific device identifier.
+   * Required: false
+   * string[0..25]
+   * 0..1
+   */
+  @ApiProperty()
+  @IsOptional()
+  @MaxLength(25)
+  @IsString()
+  public serialNumber!: string
+
+  /**
+   * Defines the model of the device.
+   * Required: true
+   * string[0..20]
+   * 1..1
+   */
+  @ApiProperty()
+  @IsNotEmpty()
+  @MaxLength(20)
+  @IsString()
+  public model: string
+
+  /**
+   * Defines the functional parameters of a communication link.
+   * Required: false
+   * ModemType
+   * 0..1
+   */
+  @ApiProperty()
+  @IsOptional()
+  @ValidateNested()
+  public modem!: ModemDto
+
+  /**
+   * Identifies the vendor (not necessarily in a unique manner).
+   * Required: true
+   * string[0..50]
+   * 1..1
+   */
+  @ApiProperty()
+  @IsNotEmpty()
+  @MaxLength(50)
+  @IsString()
+  public vendorName: string
+
+  /**
+   * This contains the firmware version of the Charging Station.
+   * Required: false
+   * string[0..50]
+   * 0..1
+   */
+  @ApiProperty()
+  @IsOptional()
+  @MaxLength(50)
+  @IsString()
+  public firmwareVersion!: string
+}
