@@ -1,0 +1,46 @@
+{
+  "name": "@yellowgarbagebag/csms-simulator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Charge Station Management System - Charge Station Simulator",
+  "homepage": "https://gitlab.com/YellowGarbageBag/csms-simulator",
+  "bugs": {
+    "url": "https://gitlab.com/YellowGarbageBag/csms-simulator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com:YellowGarbageBag/csms-simulator.git"
+  },
+  "license": "UNLICENSED",
+  "author": "Steffen",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "prebuild": "rm -rf dist/",
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "start:watch": "nodemon -x npm run start --ignore dist -i *.spec.ts -e ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lbt": "npm run lint && npm run build && npm run test",
+    "lint": "eslint --ext .ts src/",
+    "lint:fix": "npm run lint -- --fix",
+    "build:watch": "nodemon -x npm run build --ignore dist -i *.spec.ts -e ts",
+    "test": "echo No tests available",
+    "test:cov": "echo No tests available"
+  },
+  "prettier": "@hest-lab/eslint-config",
+  "dependencies": {
+    "@yellowgarbagebag/csms-utils": "file:../shared",
+    "class-validator": "^0.12.2",
+    "socket.io-client": "^3.0.4"
+  },
+  "devDependencies": {
+    "@hest-lab/eslint-config": "^1.2.0",
+    "@types/node": "^14.14.7",
+    "eslint": "^7.13.0",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.1.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.0.5"
+  }
+}
