@@ -1,15 +1,15 @@
 {
-  "name": "@yellowgarbagebag/csms-utils",
+  "name": "@yellowgarbagebag/csms-shared",
   "version": "1.0.0",
   "private": true,
-  "description": "Charge Station Management System - Utils",
-  "homepage": "https://gitlab.com/YellowGarbageBag/csms-utils",
+  "description": "Charge Station Management System - Shared",
+  "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
-    "url": "https://gitlab.com/YellowGarbageBag/csms-utils/issues"
+    "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com:YellowGarbageBag/csms-utils.git"
+    "url": "git+ssh://git@gitlab.com:YellowGarbageBag/csms.git"
   },
   "license": "UNLICENSED",
   "author": "Steffen",
