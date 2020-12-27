@@ -1,5 +1,8 @@
 import { EnumSkeleton } from "./skeletons/enum-skeleton"
 import { ClassSkeleton } from "./skeletons/class-skeleton"
+import { SkeletonBase } from "./skeletons/skeleton-base"
+import path from "path"
+import fs from "fs"
 
 export class ClassGenerator {
   private enumSkeletons: EnumSkeleton[] = []
@@ -19,25 +22,32 @@ export class ClassGenerator {
   }
 
   public addClass(skeleton: ClassSkeleton): void {
-    this.classSkeletons.push(skeleton)
+    if (this.classSkeletons.filter(x => x.className === skeleton.className).length === 0) {
+      this.classSkeletons.push(skeleton)
+    }
   }
 
 
   public addEnum(skeleton: EnumSkeleton): void {
-    this.enumSkeletons.push(skeleton)
+    if (this.enumSkeletons.filter(x => x.className === skeleton.className).length === 0) {
+      this.enumSkeletons.push(skeleton)
+    }
   }
 
   public generateFiles(): void {
-    for (const item of this.enumSkeletons) {
-      item.writeFile([__dirname, "..", "..", "src", "enumerations"])
+    this._generateFiles([__dirname, "..", "..", "src", "enumerations"], this.enumSkeletons)
+    this._generateFiles([__dirname, "..", "..", "src", "messages"], this.classSkeletons.filter(x => x.isMessage))
+    this._generateFiles([__dirname, "..", "..", "src", "types"], this.classSkeletons.filter(x => !x.isMessage))
+  }
+
+  private _generateFiles(folders: string[], skeletons: SkeletonBase[]): void {
+    const exports: string[] = []
+    for (const skeleton of skeletons) {
+      const filename = skeleton.writeFile(folders)
+      exports.push(`export { ${skeleton.className} } from "./${filename}"`)
     }
 
-    for (const item of this.classSkeletons.filter(x => x.isMessage)) {
-      item.writeFile([__dirname, "..", "..", "src", "messages"])
-    }
-
-    for (const item of this.classSkeletons.filter(x => !x.isMessage)) {
-      item.writeFile([__dirname, "..", "..", "src", "types"])
-    }
+    const indexFilePath = path.join(...folders, "index.ts")
+    fs.writeFileSync(indexFilePath, exports.join("\n"), { encoding: "utf-8" })
   }
 }

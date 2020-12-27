@@ -56,6 +56,9 @@ export abstract class SkeletonBase {
     return result
   }
 
+  public get className(): string {
+    return this.name + this.nameSuffix
+  }
 
   public get importClassValidator(): string[] {
     return this._importsClassValidator
@@ -75,16 +78,18 @@ export abstract class SkeletonBase {
 
   public abstract toString(): string[]
 
-  public writeFile(folders: string[]): void {
+  public writeFile(folders: string[]): string {
     const folderpath = path.join(...folders)
     if (!fs.existsSync(folderpath)) {
       fs.mkdirSync(folderpath, { recursive: true })
     }
 
-    const filename = path.join(folderpath, `${this.formatFilename(this.name)}.${this.nameSuffix.toLowerCase()}.ts`)
+    const filenameWithoutExt = `${this.formatFilename(this.name)}.${this.nameSuffix.toLowerCase()}`
+    const filepath = path.join(folderpath, `${filenameWithoutExt}.ts`)
 
     let data = this.toString().join("\n")
     data = data.replace(/\r\n/g, "\n")
-    fs.writeFileSync(filename, data, { encoding: "utf-8" })
+    fs.writeFileSync(filepath, data, { encoding: "utf-8" })
+    return filenameWithoutExt
   }
 }

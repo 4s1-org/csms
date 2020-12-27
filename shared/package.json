@@ -24,7 +24,7 @@
     "lint:fix": "npm run lint -- --fix",
     "pjs": "ts-node scripts/parse-json-schema/index.ts",
     "pjs:full": "npm run reset && npm run pjs && git status",
-    "reset": "rm -rf src/parse-json-schema/generated/ && git checkout HEAD~1 -- src/parse-json-schema/generated/",
+    "reset": "rm -rf src/ && git checkout HEAD~1 -- src/",
     "test": "echo No tests available",
     "test:cov": "echo No tests available"
   },
