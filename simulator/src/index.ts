@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client'
+import { BootNotificationRequestDto, BootReasonEnum, ChargingStationDto } from '@yellowgarbagebag/csms-shared'
 
 async function main(): Promise<void> {
   console.log('*** main() ***')
@@ -11,40 +12,24 @@ async function main(): Promise<void> {
   socket.on('connect', () => {
     console.log('Connected - ' + socket.id)
 
-    socket.emit('events', { test: 'test' })
-    socket.emit('identity', 0, (response: any) => console.log('Identity:', response))
     socket.emit(
       'ocpp',
       [
         2,
         'hallowelt',
         'BootNotification',
-        {
-          reason: 'PowerUp',
-          chargingStation: {
-            model: 'SingleSocketCharger',
-            vendorName: 'VendorX',
-          },
-        },
+        new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
       ],
       (response: any) => console.log('ocpp:', response),
     )
   })
 
-  // socket.on('events', (data: any) => {
-  //   console.log('event', data)
-  // })
-
-  socket.on('msgToClient', (data: any) => {
-    console.log('event', data)
+  socket.on('error', (err: any) => {
+    console.error('error', err)
   })
 
-  // socket.on('exception', (data: any) => {
-  //   console.log('event', data)
-  // })
-
-  socket.on('disconnect', () => {
-    console.log('Disconnected')
+  socket.on('disconnect', (msg: any) => {
+    console.log('Disconnected', msg)
   })
 }
 

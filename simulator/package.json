@@ -30,7 +30,7 @@
   },
   "prettier": "@hest-lab/eslint-config",
   "dependencies": {
-    "@yellowgarbagebag/csms-utils": "file:../shared",
+    "@yellowgarbagebag/csms-shared": "file:../shared",
     "class-validator": "^0.12.2",
     "socket.io-client": "^3.0.4"
   },
