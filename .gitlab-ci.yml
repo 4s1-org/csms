@@ -26,6 +26,9 @@ backend:
       - coverage/
     expire_in: 1 week
   script:
+    - cd shared
+    - npm ci
+    - cd ..
     - cd backend
     - npm ci
     - npm run lint
@@ -41,6 +44,9 @@ simulator:
       - coverage/
     expire_in: 1 week
   script:
+    - cd shared
+    - npm ci
+    - cd ..
     - cd simulator
     - npm ci
     - npm run lint
