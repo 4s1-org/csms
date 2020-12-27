@@ -22,14 +22,14 @@ export class ClassGenerator {
   }
 
   public addClass(skeleton: ClassSkeleton): void {
-    if (this.classSkeletons.filter(x => x.className === skeleton.className).length === 0) {
+    if (this.classSkeletons.filter(x => x.fullName === skeleton.fullName).length === 0) {
       this.classSkeletons.push(skeleton)
     }
   }
 
 
   public addEnum(skeleton: EnumSkeleton): void {
-    if (this.enumSkeletons.filter(x => x.className === skeleton.className).length === 0) {
+    if (this.enumSkeletons.filter(x => x.fullName === skeleton.fullName).length === 0) {
       this.enumSkeletons.push(skeleton)
     }
   }
@@ -43,8 +43,8 @@ export class ClassGenerator {
   private _generateFiles(folders: string[], skeletons: SkeletonBase[]): void {
     const exports: string[] = []
     for (const skeleton of skeletons) {
-      const filename = skeleton.writeFile(folders)
-      exports.push(`export { ${skeleton.className} } from "./${filename}"`)
+      skeleton.writeFile(folders)
+      exports.push(`export { ${skeleton.fullName} } from "./${skeleton.fileNameWithoutExt}"`)
     }
 
     const indexFilePath = path.join(...folders, "index.ts")
