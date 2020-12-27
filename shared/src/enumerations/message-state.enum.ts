@@ -1,9 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 /**
- * Message_ Info. State. Message_ State_ Code
- * urn:x-enexis:ecdm:uid:1:569254
- * During what state should this message be shown. When omitted this message should be shown in any state of the Charging Station.
+ * If provided the Charging Station shall return Display Messages with the given state only.
  */
 export enum MessageStateEnum {
   Charging = "Charging",

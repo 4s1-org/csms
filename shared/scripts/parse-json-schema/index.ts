@@ -6,7 +6,6 @@ import { SchemaRoot } from "./schema-elements/schema-root"
 async function main(): Promise<void> {
   const dir = path.join(__dirname, "..", "..", "third-party", "ocpp", "2.0.1")
   const files = fs.readdirSync(dir)
-  //const files2 = [files[2]]
 
   for (const file of files) {
     console.log(`*** ${file} ***`)
