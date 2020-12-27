@@ -1,8 +1,8 @@
 import { ClassGenerator } from "../class-generator"
-import { IKeyValue } from "../i-key-value"
+import { IKeyValue } from "./i-key-value"
 import { ClassSkeleton } from "../skeletons/class-skeleton"
 import { EnumSkeleton } from "../skeletons/enum-skeleton"
-import { Validatable } from "../validatable"
+import { Validatable } from "./validatable"
 import { SchemaDefinitionProperty } from "./schema-definition-property"
 
 interface Foo {
