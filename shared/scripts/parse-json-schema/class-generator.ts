@@ -22,6 +22,7 @@ export class ClassGenerator {
   }
 
   public addClass(skeleton: ClassSkeleton): void {
+    // ToDo: Hier könnte man noch schauen, ob die vorhandene genau gleich ist.
     if (this.classSkeletons.filter(x => x.fullName === skeleton.fullName).length === 0) {
       this.classSkeletons.push(skeleton)
     }
@@ -29,6 +30,7 @@ export class ClassGenerator {
 
 
   public addEnum(skeleton: EnumSkeleton): void {
+    // ToDo: Hier könnte man noch schauen, ob die vorhandene genau gleich ist.
     if (this.enumSkeletons.filter(x => x.fullName === skeleton.fullName).length === 0) {
       this.enumSkeletons.push(skeleton)
     }
