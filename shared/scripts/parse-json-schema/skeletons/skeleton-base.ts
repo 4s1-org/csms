@@ -56,6 +56,16 @@ export abstract class SkeletonBase {
     return result
   }
 
+  /**
+   * Klassennamen bzw. Enumnamen
+   */
+  public get fullName(): string {
+    return this.name + this.nameSuffix
+  }
+
+  public get fileNameWithoutExt(): string {
+    return `${this.formatFilename(this.name)}.${this.nameSuffix.toLowerCase()}`
+  }
 
   public get importClassValidator(): string[] {
     return this._importsClassValidator
@@ -81,10 +91,10 @@ export abstract class SkeletonBase {
       fs.mkdirSync(folderpath, { recursive: true })
     }
 
-    const filename = path.join(folderpath, `${this.formatFilename(this.name)}.${this.nameSuffix.toLowerCase()}.ts`)
+    const filepath = path.join(folderpath, `${this.fileNameWithoutExt}.ts`)
 
     let data = this.toString().join("\n")
     data = data.replace(/\r\n/g, "\n")
-    fs.writeFileSync(filename, data, { encoding: "utf-8" })
+    fs.writeFileSync(filepath, data, { encoding: "utf-8" })
   }
 }

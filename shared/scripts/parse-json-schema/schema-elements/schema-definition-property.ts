@@ -1,6 +1,6 @@
-import { IKeyValue } from "../i-key-value"
+import { IKeyValue } from "./i-key-value"
 import { PropertySkeleton } from "../skeletons/property-skeleton"
-import { Validatable } from "../validatable"
+import { Validatable } from "./validatable"
 
 interface Foo {
   $ref?: string

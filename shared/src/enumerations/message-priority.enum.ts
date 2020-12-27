@@ -1,9 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 /**
- * Message_ Info. Priority. Message_ Priority_ Code
- * urn:x-enexis:ecdm:uid:1:569253
- * With what priority should this message be shown
+ * If provided the Charging Station shall return Display Messages with the given priority only.
  */
 export enum MessagePriorityEnum {
   AlwaysFront = "AlwaysFront",
