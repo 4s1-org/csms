@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client'
-import { BootNotificationRequestDto, BootReasonEnum, ChargingStationDto } from '@yellowgarbagebag/csms-shared'
+import { BootNotificationRequestDto, BootReasonEnum, ChargingStationDto } from '../../shared/dist'
 
 async function main(): Promise<void> {
   console.log('*** main() ***')
