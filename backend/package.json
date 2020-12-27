@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "description": "Charge Station Management System - Charge Station Backend",
-  "homepage": "https://gitlab.com/YellowGarbageBag/csms-backend",
+  "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
-    "url": "https://gitlab.com/YellowGarbageBag/csms-backend/issues"
+    "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com:YellowGarbageBag/csms-backend.git"
+    "url": "git+ssh://git@gitlab.com:YellowGarbageBag/csms.git"
   },
   "license": "UNLICENSED",
   "author": "Steffen",
