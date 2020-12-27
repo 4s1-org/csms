@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 /**
- * Indicates whether the Charging Station was able to accept the request.
+ * This indicates whether the Charging Station is able to accept this request.
  */
 export enum GenericDeviceModelStatusEnum {
   Accepted = "Accepted",
