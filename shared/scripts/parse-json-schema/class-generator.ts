@@ -29,15 +29,15 @@ export class ClassGenerator {
 
   public generateFiles(): void {
     for (const item of this.enumSkeletons) {
-      item.writeFile([__dirname, "generated", "enumerations"])
+      item.writeFile([__dirname, "..", "..", "src", "enumerations"])
     }
 
     for (const item of this.classSkeletons.filter(x => x.isMessage)) {
-      item.writeFile([__dirname, "generated", "messages"])
+      item.writeFile([__dirname, "..", "..", "src", "messages"])
     }
 
     for (const item of this.classSkeletons.filter(x => !x.isMessage)) {
-      item.writeFile([__dirname, "generated", "types"])
+      item.writeFile([__dirname, "..", "..", "src", "types"])
     }
   }
 }
