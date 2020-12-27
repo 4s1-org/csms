@@ -9,8 +9,7 @@ import {
   OnGatewayDisconnect,
 } from '@nestjs/websockets'
 import { Server, Socket } from 'socket.io'
-import { RegistrationStatusEnum } from './classes/enumerations/registration-status.enum'
-import { BootNotificationResponseDto } from './classes/messages/boot-notification-response.dto'
+import { BootNotificationResponseDto, RegistrationStatusEnum } from '@yellowgarbagebag/csms-shared'
 import { OcppCall, OcppCallPipe } from './ocpp-call.pipe'
 
 type CallResult = [3, string, string?]
