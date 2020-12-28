@@ -35,8 +35,9 @@ export class SchemaRoot extends Validatable<Foo> {
     if (!this.data.definitions["CustomDataType"]) {
       throw new Error(`${this.key}: Ich dachte, alle Messages haben einen CustomDataType`)
     }
+    // Undefined steht hier für true
     if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
-      throw new Error(`${this.key}: "additionalProperties" should be always false`)
+      throw new Error(`${this.key}: Ich dachte, additionalProperties sind auf oberster Ebene immer false`)
     }
     if (this.data.type !== "object") {
       throw new Error(`${this.key}: I thought it would be always an object.`)
