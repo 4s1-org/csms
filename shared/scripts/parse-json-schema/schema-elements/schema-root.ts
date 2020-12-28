@@ -32,6 +32,9 @@ export class SchemaRoot extends Validatable<Foo> {
   }
 
   protected handleData(): void {
+    if (!this.data.definitions["CustomDataType"]) {
+      throw new Error(`${this.key}: Ich dachte, alle Messages haben einen CustomDataType`)
+    }
     if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
       throw new Error(`${this.key}: "additionalProperties" should be always false`)
     }
