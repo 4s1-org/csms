@@ -31,13 +31,21 @@ export class SchemaDefinition extends Validatable<Foo> {
   }
 
   protected handleData(): void {
+    if (this.key === "CustomDataType") {
+      // Undefined steht hier für true
+      if (this.data.additionalProperties !== undefined) {
+        throw new Error(`${this.key}: Ich dachte, additionalProperties ist bei CustomDataType immer true`)
+      }
+    } else {
+      // Undefined steht hier für true
+      if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
+        throw new Error(`${this.key}: Ich dachte, additionalProperties darf nur bei den CustomDataType true sein`)
+      }
+    }
+
     if (this.data.type === "string") {
       if (!this.data.enum || !this.key.endsWith("EnumType") || !this.data.javaType.endsWith("Enum")) {
         throw new Error(`${this.key}: I thought it was a enum`)
-      }
-      // undefined ist in diesem Fall true
-      if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
-        throw new Error(`${this.key}: I thought enums can't have additional properties`)
       }
       // Remove "EnumType"
       if (!this.key.endsWith("EnumType")) {
@@ -67,6 +75,7 @@ export class SchemaDefinition extends Validatable<Foo> {
       const skeleton = new ClassSkeleton(name)
       skeleton.setComment(this.data.description)
 
+      // Undefined steht hier für true
       if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
         skeleton.allowAdditionalProperties()
       }
