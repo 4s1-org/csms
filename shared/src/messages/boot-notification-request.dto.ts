@@ -3,8 +3,8 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { BootReasonEnum } from '../enumerations/boot-reason.enum'
-import { ChargingStationDto } from '../types/charging-station.dto'
-import { CustomDataDto } from '../types/custom-data.dto'
+import { ChargingStationDto } from '../datatypes/charging-station.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 /**
  * This contains the field definition of the BootNotificationRequest PDU sent by the Charging Station to the CSMS.

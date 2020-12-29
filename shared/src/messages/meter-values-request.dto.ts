@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { MeterValueDto } from '../types/meter-value.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { MeterValueDto } from '../datatypes/meter-value.dto'
 
 /**
  * Request_ Body
