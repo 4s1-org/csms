@@ -1,3 +1,5 @@
 export * from "./enumerations"
 export * from "./messages"
 export * from "./types"
+export * from "./custom"
+export { OcppMessage } from "./ocpp-message"
