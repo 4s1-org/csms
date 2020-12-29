@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MessagePriorityEnum } from '../enumerations/message-priority.enum'
 import { MessageStateEnum } from '../enumerations/message-state.enum'
 

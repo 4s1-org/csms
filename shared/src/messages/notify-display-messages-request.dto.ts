@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { MessageInfoDto } from '../types/message-info.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { MessageInfoDto } from '../datatypes/message-info.dto'
 
 export class NotifyDisplayMessagesRequestDto {
   public constructor(

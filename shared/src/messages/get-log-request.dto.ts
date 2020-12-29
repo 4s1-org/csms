@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { LogEnum } from '../enumerations/log.enum'
-import { LogParametersDto } from '../types/log-parameters.dto'
+import { LogParametersDto } from '../datatypes/log-parameters.dto'
 
 export class GetLogRequestDto {
   public constructor(

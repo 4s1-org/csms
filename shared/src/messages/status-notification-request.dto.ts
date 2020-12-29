@@ -3,7 +3,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ConnectorStatusEnum } from '../enumerations/connector-status.enum'
-import { CustomDataDto } from '../types/custom-data.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 /**
  * ---
