@@ -2,11 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { EVSEDto } from '../types/evse.dto'
-import { IdTokenDto } from '../types/id-token.dto'
-import { MeterValueDto } from '../types/meter-value.dto'
-import { TransactionDto } from '../types/transaction.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { EVSEDto } from '../datatypes/evse.dto'
+import { IdTokenDto } from '../datatypes/id-token.dto'
+import { MeterValueDto } from '../datatypes/meter-value.dto'
+import { TransactionDto } from '../datatypes/transaction.dto'
 import { TransactionEventEnum } from '../enumerations/transaction-event.enum'
 import { TriggerReasonEnum } from '../enumerations/trigger-reason.enum'
 

@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { SetVariableDataDto } from '../types/set-variable-data.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { SetVariableDataDto } from '../datatypes/set-variable-data.dto'
 
 /**
  * This contains the field definition of the SetVariablesRequest PDU sent by the CSMS to the Charging Station.

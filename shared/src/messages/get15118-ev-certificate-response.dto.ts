@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { Iso15118EVCertificateStatusEnum } from '../enumerations/iso15118-ev-certificate-status.enum'
-import { StatusInfoDto } from '../types/status-info.dto'
+import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class Get15118EVCertificateResponseDto {
   public constructor(

@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { FirmwareDto } from '../types/firmware.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { FirmwareDto } from '../datatypes/firmware.dto'
 
 export class UpdateFirmwareRequestDto {
   public constructor(

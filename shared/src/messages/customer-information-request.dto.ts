@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { CertificateHashDataDto } from '../types/certificate-hash-data.dto'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { IdTokenDto } from '../types/id-token.dto'
+import { CertificateHashDataDto } from '../datatypes/certificate-hash-data.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { IdTokenDto } from '../datatypes/id-token.dto'
 
 export class CustomerInformationRequestDto {
   public constructor(
