@@ -9,10 +9,7 @@ import {
   OnGatewayDisconnect,
 } from '@nestjs/websockets'
 import { Server, Socket } from 'socket.io'
-import { BootNotificationResponseDto, RegistrationStatusEnum } from '../../../shared/dist'
-import { OcppCall, OcppCallPipe } from './ocpp-call.pipe'
-
-type CallResult = [3, string, string?]
+import { BootNotificationResponseDto, OcppCallPipe,OcppCallDto, OcppCallResultDto,RegistrationStatusEnum } from '../../../shared/dist'
 
 @WebSocketGateway({ path: '/ocpp/2.0.1' })
 export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewayConnection {
@@ -35,8 +32,8 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
 
   @UsePipes(new OcppCallPipe())
   @SubscribeMessage('ocpp')
-  async ocppCommand(@MessageBody() data: OcppCall): Promise<CallResult> {
+  async ocppCommand(@MessageBody() data: OcppCallDto): Promise<OcppCallResultDto> {
     const foo = new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
-    return [3, data.messageId, JSON.stringify(foo)]
+    return new OcppCallResultDto(3, data.messageId, JSON.stringify(foo))
   }
 }
