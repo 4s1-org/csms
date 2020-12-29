@@ -2,10 +2,10 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CertificateHashDataChainDto } from '../types/certificate-hash-data-chain.dto'
-import { CustomDataDto } from '../types/custom-data.dto'
+import { CertificateHashDataChainDto } from '../datatypes/certificate-hash-data-chain.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GetInstalledCertificateStatusEnum } from '../enumerations/get-installed-certificate-status.enum'
-import { StatusInfoDto } from '../types/status-info.dto'
+import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetInstalledCertificateIdsResponseDto {
   public constructor(

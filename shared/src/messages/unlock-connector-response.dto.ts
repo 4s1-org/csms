@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { StatusInfoDto } from '../types/status-info.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { StatusInfoDto } from '../datatypes/status-info.dto'
 import { UnlockStatusEnum } from '../enumerations/unlock-status.enum'
 
 export class UnlockConnectorResponseDto {

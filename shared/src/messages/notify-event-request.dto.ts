@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { EventDataDto } from '../types/event-data.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { EventDataDto } from '../datatypes/event-data.dto'
 
 export class NotifyEventRequestDto {
   public constructor(

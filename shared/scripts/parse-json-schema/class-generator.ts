@@ -39,7 +39,7 @@ export class ClassGenerator {
   public generateFiles(): void {
     this._generateFiles([__dirname, "..", "..", "src", "enumerations"], this.enumSkeletons)
     this._generateFiles([__dirname, "..", "..", "src", "messages"], this.classSkeletons.filter(x => x.isMessage))
-    this._generateFiles([__dirname, "..", "..", "src", "types"], this.classSkeletons.filter(x => !x.isMessage))
+    this._generateFiles([__dirname, "..", "..", "src", "datatypes"], this.classSkeletons.filter(x => !x.isMessage))
 
     this._generateMessageEnumList([__dirname, "..", "..", "src"],
       this.classSkeletons
