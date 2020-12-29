@@ -34,6 +34,6 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
   @SubscribeMessage('ocpp')
   async ocppCommand(@MessageBody() data: OcppCallDto): Promise<OcppCallResultDto> {
     const foo = new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
-    return new OcppCallResultDto(3, data.messageId, JSON.stringify(foo))
+    return new OcppCallResultDto(3, data.messageId, foo)
   }
 }

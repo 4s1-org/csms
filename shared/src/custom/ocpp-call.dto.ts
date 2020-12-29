@@ -6,8 +6,12 @@ export class OcppCallDto {
     public readonly messageTypeId: 2,
     public readonly messageId: string,
     public readonly action: OcppMessage,
-    public readonly payload: JSONObject,
+    public readonly payload: JSONObject | any,
   ) {
     // nothing to do
+  }
+
+  public toMessage(): [number, string, string, any] {
+    return [this.messageTypeId, this.messageId, this.action, this.payload]
   }
 }

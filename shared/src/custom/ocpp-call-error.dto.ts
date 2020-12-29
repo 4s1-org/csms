@@ -7,7 +7,7 @@ export class OcppCallErrorDto {
     public readonly messageId: string,
     public readonly errorCode: OcppErrorCodes,
     public readonly errorDescription: string,
-    public readonly errorDetails: JSONObject,
+    public readonly errorDetails: JSONObject | any,
   ) {
     // nothing to do
   }

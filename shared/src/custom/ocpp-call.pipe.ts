@@ -7,6 +7,7 @@ export class OcppCallPipe implements PipeTransform {
     if (metadata.type !== 'body') {
       throw new BadRequestException('Validation failed 1')
     }
+    console.log(value)
     if (!Array.isArray(value)) {
       throw new BadRequestException('Validation failed 2')
     }
@@ -24,11 +25,6 @@ export class OcppCallPipe implements PipeTransform {
     }
     if (typeof value[3] !== 'object') {
       throw new BadRequestException('Validation failed 7')
-    }
-    try {
-      value[3] = JSON.parse(value[3])
-    } catch {
-      throw new BadRequestException('Validation failed 8')
     }
     return new OcppCallDto(value[0], value[1], value[2], value[3])
   }
