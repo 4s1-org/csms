@@ -43,6 +43,10 @@ export class SchemaDefinition extends Validatable<Foo> {
       }
     }
 
+    if (this.data.enum && this.data.type !== "string") {
+      throw new Error(`${this.key}: Ich dachte, alle Enumerations haben den Typ string`)
+    }
+
     if (this.data.type === "string") {
       if (!this.data.enum || !this.key.endsWith("EnumType") || !this.data.javaType.endsWith("Enum")) {
         throw new Error(`${this.key}: I thought it was a enum`)
@@ -90,7 +94,7 @@ export class SchemaDefinition extends Validatable<Foo> {
       }
       ClassGenerator.instance.addClass(skeleton)
     } else {
-      throw new Error(`${this.key}: Unknown Type: ${this.data.type}`)
+      throw new Error(`${this.key}: Unbekannter Typ "${this.data.type}"`)
     }
   }
 }
