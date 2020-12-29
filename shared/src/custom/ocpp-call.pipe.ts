@@ -1,8 +1,9 @@
 import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from '@nestjs/common'
+import { OcppCallDto } from './ocpp-call.dto'
 
 @Injectable()
 export class OcppCallPipe implements PipeTransform {
-  public transform(value: any, metadata: ArgumentMetadata): OcppCall {
+  public transform(value: any, metadata: ArgumentMetadata): OcppCallDto {
     if (metadata.type !== 'body') {
       throw new BadRequestException('Validation failed 1')
     }
@@ -24,17 +25,11 @@ export class OcppCallPipe implements PipeTransform {
     if (typeof value[3] !== 'object') {
       throw new BadRequestException('Validation failed 7')
     }
-    return new OcppCall(value[0], value[1], value[2], value[3])
-  }
-}
-
-export class OcppCall {
-  constructor(
-    public readonly messageTypeId: number,
-    public readonly messageId: string,
-    public readonly action: string,
-    public readonly payload: any,
-  ) {
-    // nothing to do
+    try {
+      value[3] = JSON.parse(value[3])
+    } catch {
+      throw new BadRequestException('Validation failed 8')
+    }
+    return new OcppCallDto(value[0], value[1], value[2], value[3])
   }
 }
