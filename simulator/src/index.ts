@@ -2,8 +2,8 @@ import io from 'socket.io-client'
 
 async function main(): Promise<void> {
   console.log('*** main() ***')
-  const socket = io('ws://localhost:3000/', {
-    path: '/ocpp/CS001',
+  const socket = io('http://172.22.21.12:3000/', {
+    path: '/ocpp/2.0.1',
     transports: ['websocket'],
     forceNew: true,
   })

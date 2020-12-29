@@ -40,6 +40,12 @@ export class ClassGenerator {
     this._generateFiles([__dirname, "..", "..", "src", "enumerations"], this.enumSkeletons)
     this._generateFiles([__dirname, "..", "..", "src", "messages"], this.classSkeletons.filter(x => x.isMessage))
     this._generateFiles([__dirname, "..", "..", "src", "types"], this.classSkeletons.filter(x => !x.isMessage))
+
+    this._generateMessageEnumList([__dirname, "..", "..", "src"],
+      this.classSkeletons
+        .filter(x => x.isMessage)
+        .map(x => x.name.replace("Request", "").replace("Response", ""))
+    )
   }
 
   private _generateFiles(folders: string[], skeletons: SkeletonBase[]): void {
@@ -49,7 +55,23 @@ export class ClassGenerator {
       exports.push(`export { ${skeleton.fullName} } from "./${skeleton.fileNameWithoutExt}"`)
     }
 
-    const indexFilePath = path.join(...folders, "index.ts")
-    fs.writeFileSync(indexFilePath, exports.join("\n"), { encoding: "utf-8" })
+    const fileName = path.join(...folders, "index.ts")
+    fs.writeFileSync(fileName, exports.join("\n"), { encoding: "utf-8" })
+  }
+
+  private _generateMessageEnumList(folders: string[], messages: string[]): void {
+    // Make unique
+    messages = [...new Set(messages)]
+
+    const data: string[] = []
+    data.push(`export enum OcppMessage {`)
+    for (const message of messages) {
+      data.push(`  ${message},`)
+    }
+    data.push(`}`)
+    data.push(``)
+
+    const fileName = path.join(...folders, "ocpp-message.ts")
+    fs.writeFileSync(fileName, data.join("\n"), { encoding: "utf-8" })
   }
 }
