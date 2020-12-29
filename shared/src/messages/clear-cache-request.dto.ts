@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearCacheRequestDto {
   public constructor() {

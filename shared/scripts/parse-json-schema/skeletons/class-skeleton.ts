@@ -54,7 +54,7 @@ export class ClassSkeleton extends SkeletonBase {
           result.push(`import { ${ownImport[0]} } from '../enumerations/${ownImport[1]}'`)
         } else if (ownImport[1].endsWith("dto")) {
           if (this.isMessage) {
-            result.push(`import { ${ownImport[0]} } from '../types/${ownImport[1]}'`)
+            result.push(`import { ${ownImport[0]} } from '../datatypes/${ownImport[1]}'`)
           } else {
             result.push(`import { ${ownImport[0]} } from './${ownImport[1]}'`)
           }

@@ -3,8 +3,8 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ComponentCriterionEnum } from '../enumerations/component-criterion.enum'
-import { ComponentVariableDto } from '../types/component-variable.dto'
-import { CustomDataDto } from '../types/custom-data.dto'
+import { ComponentVariableDto } from '../datatypes/component-variable.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetReportRequestDto {
   public constructor(

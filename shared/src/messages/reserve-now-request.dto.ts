@@ -3,8 +3,8 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ConnectorEnum } from '../enumerations/connector.enum'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { IdTokenDto } from '../types/id-token.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { IdTokenDto } from '../datatypes/id-token.dto'
 
 export class ReserveNowRequestDto {
   public constructor(

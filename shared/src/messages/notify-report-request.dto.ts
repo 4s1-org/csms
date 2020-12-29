@@ -2,8 +2,8 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { CustomDataDto } from '../types/custom-data.dto'
-import { ReportDataDto } from '../types/report-data.dto'
+import { CustomDataDto } from '../datatypes/custom-data.dto'
+import { ReportDataDto } from '../datatypes/report-data.dto'
 
 /**
  * This contains the field definition of the NotifyReportRequest PDU sent by the Charging Station to the CSMS.
