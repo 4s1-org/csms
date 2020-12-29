@@ -66,7 +66,7 @@ export class ClassGenerator {
     const data: string[] = []
     data.push(`export enum OcppMessage {`)
     for (const message of messages) {
-      data.push(`  ${message},`)
+      data.push(`  ${message} = "${message}",`)
     }
     data.push(`}`)
     data.push(``)
