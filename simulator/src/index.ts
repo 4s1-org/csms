@@ -4,7 +4,7 @@ import { BootNotificationRequestDto, BootReasonEnum, ChargingStationDto } from '
 async function main(): Promise<void> {
   console.log('*** main() ***')
   const socket = io('http://172.22.21.12:3000/', {
-    path: '/ocpp',
+    path: '/ocpp/2.0.1',
     transports: ['websocket'],
     forceNew: true,
   })
