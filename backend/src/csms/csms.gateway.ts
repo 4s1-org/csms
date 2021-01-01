@@ -9,7 +9,13 @@ import {
   OnGatewayDisconnect,
 } from '@nestjs/websockets'
 import { Server, Socket } from 'socket.io'
-import { BootNotificationResponseDto, OcppCallPipe,OcppCallDto, OcppCallResultDto,RegistrationStatusEnum } from '../../../shared/dist'
+import {
+  BootNotificationResponseDto,
+  OcppCallPipe,
+  OcppCallDto,
+  OcppCallResultDto,
+  RegistrationStatusEnum,
+} from '../../../shared/dist'
 
 @WebSocketGateway({ path: '/ocpp/2.0.1' })
 export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewayConnection {
