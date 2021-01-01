@@ -12,9 +12,26 @@ function getId(): string {
   return uuid().replace(/-/g, '')
 }
 
+function resendMessage(socket: SocketIOClient.Socket): void {
+  socket.emit(
+    'ocpp',
+    new OcppCallDto(
+      2,
+      getId(),
+      OcppMessage.BootNotification,
+      new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
+    ).toMessage(),
+    (response: any) => console.log('ocpp:', JSON.stringify(response)),
+  )
+
+  setTimeout(() => {
+    resendMessage(socket)
+  }, 3000)
+}
+
 async function main(): Promise<void> {
   console.log('*** main() ***')
-  const socket = io('http://172.22.21.12:3000/', {
+  const socket: SocketIOClient.Socket = io('http://172.22.21.12:3000/', {
     path: '/ocpp/2.0.1',
     transports: ['websocket'],
     forceNew: true,
@@ -23,21 +40,7 @@ async function main(): Promise<void> {
   socket.on('connect', () => {
     console.log('Connected: ' + socket.id)
 
-    socket.emit('triggerEvents', 2)
-
-    socket.emit(
-      'ocpp',
-      new OcppCallDto(
-        2,
-        getId(),
-        OcppMessage.BootNotification,
-        new BootNotificationRequestDto(
-          new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-          BootReasonEnum.PowerUp,
-        ),
-      ).toMessage(),
-      (response: any) => console.log('ocpp:', JSON.stringify(response)),
-    )
+    resendMessage(socket)
   })
 
   socket.on('ocpp', (data: any) => {
