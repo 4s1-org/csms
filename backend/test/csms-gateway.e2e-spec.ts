@@ -4,14 +4,12 @@ import { AppModule } from './../src/app.module'
 import io from 'socket.io-client'
 import {
   BootNotificationRequestDto,
-  BootNotificationResponseDto,
   BootReasonEnum,
   ChargingStationDto,
   OcppCallResultDto,
   OcppMessageEnum,
   OcppMessageTypeIdEnum,
-  RegistrationStatusEnum,
-} from '../../shared/dist'
+} from '@yellowgarbagebag/csms-shared'
 
 describe('CSMS Gateway', () => {
   let app: INestApplication

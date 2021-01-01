@@ -8,9 +8,9 @@ import {
   IdTokenEnum,
   OcppCallDto,
   OcppMessageEnum,
-} from '../../shared/dist'
+  OcppMessageTypeIdEnum,
+} from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
-import { OcppMessageTypeIdEnum } from '../../shared/dist/custom/ocpp-message-type-id.enum'
 
 function getId(): string {
   return uuid().replace(/-/g, '')
