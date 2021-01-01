@@ -7,7 +7,6 @@ export class OcppCallPipe implements PipeTransform {
     if (metadata.type !== 'body') {
       throw new BadRequestException('Validation failed 1')
     }
-    console.log(value)
     if (!Array.isArray(value)) {
       throw new BadRequestException('Validation failed 2')
     }
