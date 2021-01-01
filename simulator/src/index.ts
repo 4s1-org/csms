@@ -9,7 +9,7 @@ import {
 import { v4 as uuid } from 'uuid'
 
 function getId(): string {
-  return uuid().replace(/-/g, "")
+  return uuid().replace(/-/g, '')
 }
 
 async function main(): Promise<void> {
