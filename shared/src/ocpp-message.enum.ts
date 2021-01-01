@@ -1,4 +1,4 @@
-export enum OcppMessage {
+export enum OcppMessageEnum {
   Authorize = "Authorize",
   BootNotification = "BootNotification",
   CancelReservation = "CancelReservation",
