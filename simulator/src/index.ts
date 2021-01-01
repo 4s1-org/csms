@@ -1,18 +1,30 @@
 import io from 'socket.io-client'
 import {
+  AuthorizeRequestDto,
   BootNotificationRequestDto,
   BootReasonEnum,
   ChargingStationDto,
+  IdTokenDto,
+  IdTokenEnum,
   OcppCallDto,
-  OcppMessage,
+  OcppMessageEnum,
 } from '../../shared/dist'
 import { v4 as uuid } from 'uuid'
+import { OcppMessageTypeIdEnum } from '../../shared/dist/custom/ocpp-message-type-id.enum'
 
 function getId(): string {
   return uuid().replace(/-/g, '')
 }
 
-function resendMessage(socket: SocketIOClient.Socket): void {
+function resendMessage1(socket: SocketIOClient.Socket): void {
+  if (socket && !socket.connected) {
+    return
+  }
+
+  socket.emit('ocpp', 34, (response: any) => console.log('ocpp:', JSON.stringify(response)))
+}
+
+function resendMessage2(socket: SocketIOClient.Socket): void {
   if (socket && !socket.connected) {
     return
   }
@@ -20,13 +32,38 @@ function resendMessage(socket: SocketIOClient.Socket): void {
   socket.emit(
     'ocpp',
     new OcppCallDto(
-      2,
+      OcppMessageTypeIdEnum.Call,
       getId(),
-      OcppMessage.BootNotification,
-      new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
+      OcppMessageEnum.BootNotification,
+      new AuthorizeRequestDto(new IdTokenDto('foo', IdTokenEnum.KeyCode)),
     ).toMessage(),
     (response: any) => console.log('ocpp:', JSON.stringify(response)),
   )
+
+  setTimeout(() => {
+    resendMessage2(socket)
+  }, 3000)
+}
+
+function resendMessage3(socket: SocketIOClient.Socket): void {
+  if (socket && !socket.connected) {
+    return
+  }
+
+  socket.emit(
+    'ocpp',
+    [
+      OcppMessageTypeIdEnum.Call,
+      getId(),
+      'BootNotification',
+      new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
+    ],
+    (response: any) => console.log('ocpp:', JSON.stringify(response)),
+  )
+
+  setTimeout(() => {
+    resendMessage1(socket)
+  }, 3000)
 }
 
 async function main(): Promise<void> {
@@ -40,7 +77,7 @@ async function main(): Promise<void> {
   socket.on('connect', () => {
     console.log('Connected: ' + socket.id)
 
-    resendMessage(socket)
+    resendMessage1(socket)
   })
 
   socket.on('ocpp', (data: any) => {
