@@ -13,6 +13,10 @@ function getId(): string {
 }
 
 function resendMessage(socket: SocketIOClient.Socket): void {
+  if (socket && !socket.connected) {
+    return
+  }
+
   socket.emit(
     'ocpp',
     new OcppCallDto(
@@ -23,10 +27,6 @@ function resendMessage(socket: SocketIOClient.Socket): void {
     ).toMessage(),
     (response: any) => console.log('ocpp:', JSON.stringify(response)),
   )
-
-  setTimeout(() => {
-    resendMessage(socket)
-  }, 3000)
 }
 
 async function main(): Promise<void> {
