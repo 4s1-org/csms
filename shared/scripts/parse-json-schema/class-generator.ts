@@ -64,14 +64,14 @@ export class ClassGenerator {
     messages = [...new Set(messages)]
 
     const data: string[] = []
-    data.push(`export enum OcppMessage {`)
+    data.push(`export enum OcppMessageEnum {`)
     for (const message of messages) {
       data.push(`  ${message} = "${message}",`)
     }
     data.push(`}`)
     data.push(``)
 
-    const fileName = path.join(...folders, "ocpp-message.ts")
+    const fileName = path.join(...folders, "ocpp-message.enum.ts")
     fs.writeFileSync(fileName, data.join("\n"), { encoding: "utf-8" })
   }
 }
