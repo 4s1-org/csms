@@ -19,9 +19,10 @@ export class OcppCallPipe implements PipeTransform {
     if (typeof value[1] !== 'string' || value[1].length > 32) {
       throw new BadRequestException('Validation failed 5')
     }
-    if (value[2] !== 'BootNotification') {
-      throw new BadRequestException('Validation failed 6')
-    }
+    // ToDo: Eigentliche müsste das DTO es selbst machen
+    // if (value[2] !== 'BootNotification') {
+    //   throw new BadRequestException('Validation failed 6')
+    // }
     if (typeof value[3] !== 'object') {
       throw new BadRequestException('Validation failed 7')
     }
