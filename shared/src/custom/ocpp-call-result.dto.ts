@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsNotEmpty, IsInt, IsPositive, IsString, MaxLength, IsOptional, ValidateNested } from "class-validator"
+import { IsNotEmpty, IsInt, IsPositive, IsString, MaxLength, ValidateNested } from "class-validator"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
 
 export class OcppCallResultDto {
