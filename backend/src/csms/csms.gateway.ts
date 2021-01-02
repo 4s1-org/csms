@@ -1,4 +1,4 @@
-import { Body, Logger, ParseArrayPipe, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Logger, ParseArrayPipe, UseFilters, UsePipes, ValidationPipe } from '@nestjs/common'
 import {
   MessageBody,
   SubscribeMessage,
@@ -11,15 +11,17 @@ import {
 import { Server, Socket } from 'socket.io'
 import {
   BootNotificationResponseDto,
-  OcppCallPipe,
   OcppCallDto,
   OcppCallResultDto,
   RegistrationStatusEnum,
   OcppMessageEnum,
   BootNotificationRequestDto,
-} from '../../../shared/dist'
+} from '@yellowgarbagebag/csms-shared'
+import { OcppCallValidationPipe } from './ocpp-call-validation.pipe'
+import { AllWsExceptionsFilter } from '../all-ws-exceptions.filter'
 
 @WebSocketGateway({ path: '/ocpp/2.0.1' })
+@UseFilters(new AllWsExceptionsFilter())
 export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewayConnection {
   @WebSocketServer()
   private server!: Server
@@ -38,14 +40,14 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
     this.logger.log(`Client connected: ${client.id}`)
   }
 
-  @UsePipes(new ParseArrayPipe(), new OcppCallPipe(), new ValidationPipe())
+  @UsePipes(new ParseArrayPipe(), new OcppCallValidationPipe(), new ValidationPipe())
   @SubscribeMessage('ocpp')
   async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<OcppCallResultDto> {
     switch (ocppCall.action) {
       case OcppMessageEnum.BootNotification:
         const data = ocppCall.payload as BootNotificationRequestDto
         const foo = this.bootNotification(data)
-        return new OcppCallResultDto(3, ocppCall.messageId, foo)
+        return new OcppCallResultDto(ocppCall.messageId, foo)
       default:
         throw new Error(`Unsupported command "${ocppCall.action}"`)
     }
