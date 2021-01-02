@@ -9,7 +9,7 @@ export class AllWsExceptionsFilter extends BaseWsExceptionFilter {
     const ws: WsArgumentsHost = host.switchToWs()
     const data = ws.getData() as any[]
     // An zweiter Stelle im Array steht die MessageId, sofern die Nachricht einigermassen gültig war.
-    const messageId = data[1] || 'xx'
+    const messageId = data[1] || ''
 
     const error = new OcppCallErrorDto(messageId, OcppErrorCodes.InternalError, '', {})
 
