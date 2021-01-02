@@ -42,12 +42,12 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
 
   @UsePipes(new ParseArrayPipe(), new OcppCallValidationPipe(), new ValidationPipe())
   @SubscribeMessage('ocpp')
-  async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<OcppCallResultDto> {
+  async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, unknown]> {
     switch (ocppCall.action) {
       case OcppMessageEnum.BootNotification:
         const data = ocppCall.payload as BootNotificationRequestDto
         const foo = this.bootNotification(data)
-        return new OcppCallResultDto(ocppCall.messageId, foo)
+        return new OcppCallResultDto(ocppCall.messageId, foo).toMessage()
       default:
         throw new Error(`Unsupported command "${ocppCall.action}"`)
     }
