@@ -22,6 +22,10 @@ function resendMessage1(socket: SocketIOClient.Socket): void {
   }
 
   socket.emit('ocpp', 34, (response: any) => console.log('ocpp:', JSON.stringify(response)))
+
+  setTimeout(() => {
+    resendMessage1(socket)
+  }, 3000)
 }
 
 function resendMessage2(socket: SocketIOClient.Socket): void {
