@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CertificateHashDataDto } from '../datatypes/certificate-hash-data.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
-export class CustomerInformationRequestDto {
+export class CustomerInformationRequestDto implements IRequestMessage {
   public constructor(
     requestId: number,
     report: boolean,

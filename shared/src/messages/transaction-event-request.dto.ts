@@ -2,6 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { EvseDto } from '../datatypes/evse.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
@@ -10,7 +11,7 @@ import { TransactionDto } from '../datatypes/transaction.dto'
 import { TransactionEventEnum } from '../enumerations/transaction-event.enum'
 import { TriggerReasonEnum } from '../enumerations/trigger-reason.enum'
 
-export class TransactionEventRequestDto {
+export class TransactionEventRequestDto implements IRequestMessage {
   public constructor(
     eventType: TransactionEventEnum,
     timestamp: string,

@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { PublishFirmwareStatusEnum } from '../enumerations/publish-firmware-status.enum'
 
-export class PublishFirmwareStatusNotificationRequestDto {
+export class PublishFirmwareStatusNotificationRequestDto implements IRequestMessage {
   public constructor(
     status: PublishFirmwareStatusEnum,
   ) {

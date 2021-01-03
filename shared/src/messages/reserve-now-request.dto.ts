@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { ConnectorEnum } from '../enumerations/connector.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
-export class ReserveNowRequestDto {
+export class ReserveNowRequestDto implements IRequestMessage {
   public constructor(
     id: number,
     expiryDateTime: string,

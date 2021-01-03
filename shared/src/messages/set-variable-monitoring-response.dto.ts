@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { SetMonitoringResultDto } from '../datatypes/set-monitoring-result.dto'
 
-export class SetVariableMonitoringResponseDto {
+export class SetVariableMonitoringResponseDto implements IResponseMessage {
   public constructor(
     setMonitoringResult: SetMonitoringResultDto[],
   ) {

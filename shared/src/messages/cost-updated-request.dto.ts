@@ -2,9 +2,10 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class CostUpdatedRequestDto {
+export class CostUpdatedRequestDto implements IRequestMessage {
   public constructor(
     totalCost: number,
     transactionId: string,

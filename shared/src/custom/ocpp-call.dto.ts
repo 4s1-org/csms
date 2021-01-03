@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsEnum, IsInt, IsNotEmpty, IsPositive, IsString, MaxLength, ValidateNested } from "class-validator"
+import { IRequestMessage } from "src/i-request-message"
 import { OcppMessageEnum } from "../ocpp-message.enum"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
 
@@ -7,7 +8,7 @@ export class OcppCallDto {
   constructor(
     messageId: string,
     action: OcppMessageEnum,
-    payload: unknown,
+    payload: IRequestMessage,
   ) {
     this.messageTypeId = OcppMessageTypeIdEnum.Call
     this.messageId = messageId
@@ -43,9 +44,9 @@ export class OcppCallDto {
   @IsNotEmpty()
   @ValidateNested()
   /** JSON Payload of the action. */
-  public payload: unknown
+  public payload: IRequestMessage
 
-  public toMessage(): [number, string, string, unknown] {
+  public toMessage(): [number, string, string, IRequestMessage] {
     return [this.messageTypeId, this.messageId, this.action, this.payload]
   }
 }

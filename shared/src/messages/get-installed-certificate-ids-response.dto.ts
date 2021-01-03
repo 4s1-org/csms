@@ -2,12 +2,13 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CertificateHashDataChainDto } from '../datatypes/certificate-hash-data-chain.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GetInstalledCertificateStatusEnum } from '../enumerations/get-installed-certificate-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class GetInstalledCertificateIdsResponseDto {
+export class GetInstalledCertificateIdsResponseDto implements IResponseMessage {
   public constructor(
     status: GetInstalledCertificateStatusEnum,
   ) {
