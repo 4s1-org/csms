@@ -3,9 +3,12 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { AppModule } from './../src/app.module'
 import io from 'socket.io-client'
 import {
+  AuthorizeRequestDto,
   BootNotificationRequestDto,
   BootReasonEnum,
   ChargingStationDto,
+  IdTokenDto,
+  IdTokenEnum,
   OcppCallDto,
   OcppErrorCode,
   OcppMessageEnum,
@@ -287,7 +290,7 @@ describe('CSMS Gateway', () => {
         socket.on('ocpp', (data: any) => {
           expect(data.length).toBe(5)
           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-          expect(data[1]).toBe('')
+          expect(data[1]).toBe(messageId)
           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()
@@ -302,7 +305,68 @@ describe('CSMS Gateway', () => {
     })
   })
 
-  describe.skip('Format validation tests', () => {
+  describe('Format validation tests', () => {
+    it('Call a not implemented action', (done) => {
+      const socket = connectToSocket()
+      const messageId = Math.random().toString()
+
+      socket.on('connect', () => {
+        socket.emit(
+          'ocpp',
+          [
+            OcppMessageTypeIdEnum.Call,
+            messageId,
+            OcppMessageEnum.UnpublishFirmware, // Noch nicht implementiert
+            {},
+          ],
+          () => {
+            fail()
+          },
+        )
+      })
+
+      socket.on('ocpp', (data: any) => {
+        expect(data.length).toBe(5)
+        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+        expect(data[1]).toBe(messageId)
+        expect(data[2]).toBe(OcppErrorCode.NotSupported)
+        expect(data[3]).toBeDefined()
+        expect(data[4]).toBeDefined()
+        socket.disconnect()
+      })
+
+      socket.on('disconnect', (data: string) => {
+        expect(data).toBe(gracefulDisconnectReason)
+        done()
+      })
+    })
+
+    it('Call an invalid action', (done) => {
+      const socket = connectToSocket()
+      const messageId = Math.random().toString()
+
+      socket.on('connect', () => {
+        socket.emit('ocpp', [OcppMessageTypeIdEnum.Call, messageId, 'LoremIpsum', {}], () => {
+          fail()
+        })
+      })
+
+      socket.on('ocpp', (data: any) => {
+        expect(data.length).toBe(5)
+        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+        expect(data[1]).toBe(messageId)
+        expect(data[2]).toBe(OcppErrorCode.NotImplemented)
+        expect(data[3]).toBeDefined()
+        expect(data[4]).toBeDefined()
+        socket.disconnect()
+      })
+
+      socket.on('disconnect', (data: string) => {
+        expect(data).toBe(gracefulDisconnectReason)
+        done()
+      })
+    })
+
     it('action and paypload does not match', (done) => {
       const socket = connectToSocket()
       const messageId = Math.random().toString()
@@ -312,12 +376,9 @@ describe('CSMS Gateway', () => {
           'ocpp',
           new OcppCallDto(
             messageId,
-            OcppMessageEnum.Authorize,
+            OcppMessageEnum.BootNotification,
             // Payload passt nicht zur Message
-            new BootNotificationRequestDto(
-              new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-              BootReasonEnum.PowerUp,
-            ),
+            new AuthorizeRequestDto(new IdTokenDto('xxx', IdTokenEnum.eMAID)),
           ).toMessage(),
           () => {
             fail()

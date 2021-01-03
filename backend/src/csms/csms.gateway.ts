@@ -17,13 +17,11 @@ import {
   OcppMessageEnum,
   BootNotificationRequestDto,
   OcppErrorCode,
-  OcppCallErrorDto,
+  IResponseMessage,
 } from '@yellowgarbagebag/csms-shared'
 import { OcppCallValidationPipe } from './ocpp-call-validation.pipe'
 import { AllWsExceptionsFilter } from '../all-ws-exceptions.filter'
-import { ConditionalValidationPipe } from './conditional-validation.pipe'
 import { plainToClass } from 'class-transformer'
-import { ClassType } from 'class-transformer/ClassTransformer'
 import { validate } from 'class-validator'
 import { OcppWsException } from './ocpp-exception'
 
@@ -49,32 +47,23 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
 
   @UsePipes(new OcppCallValidationPipe(), new ValidationPipe())
   @SubscribeMessage('ocpp')
-  async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, unknown]> {
+  async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, IResponseMessage]> {
     switch (ocppCall.action) {
       case OcppMessageEnum.BootNotification:
-        const entityClass = plainToClass(BootNotificationRequestDto, ocppCall.payload)
-        await this.validate(entityClass)
+        const entityClass = plainToClass(BootNotificationRequestDto, ocppCall.payload as unknown)
+        await this.validate(entityClass, ocppCall.messageId)
         const foo = this.bootNotification(entityClass)
         return new OcppCallResultDto(ocppCall.messageId, foo).toMessage()
-      default:
-        this.handleOtherActions(ocppCall.action)
+      default: {
+        throw new OcppWsException(OcppErrorCode.NotSupported, ocppCall.action, ocppCall.messageId)
+      }
     }
   }
 
-  private handleOtherActions(action: OcppMessageEnum): void {
-    if (Object.values(OcppMessageEnum).includes(action)) {
-      // Requested Action is recognized but not supported by the receiver
-      throw new OcppWsException(OcppErrorCode.NotSupported, action)
-    } else {
-      // Requested Action is not known by receiver
-      throw new OcppWsException(OcppErrorCode.NotImplemented, action)
-    }
-  }
-
-  private async validate(entityClass: any): Promise<void> {
+  private async validate(entityClass: any, messageId: string): Promise<void> {
     const errors = await validate(entityClass)
     if (errors.length > 0) {
-      throw new OcppWsException(OcppErrorCode.FormatViolation, 'foobar')
+      throw new OcppWsException(OcppErrorCode.FormatViolation, 'foobar', messageId)
     }
   }
 
