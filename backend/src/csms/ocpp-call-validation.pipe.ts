@@ -1,5 +1,5 @@
 import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common'
-import { OcppCallDto, OcppErrorCode, OcppMessageTypeIdEnum } from '@yellowgarbagebag/csms-shared'
+import { OcppCallDto, OcppErrorCode, OcppMessageEnum, OcppMessageTypeIdEnum } from '@yellowgarbagebag/csms-shared'
 import { OcppWsException } from './ocpp-exception'
 
 @Injectable()
@@ -18,7 +18,10 @@ export class OcppCallValidationPipe implements PipeTransform {
       throw new OcppWsException(OcppErrorCode.RpcFrameworkError, 'Received array has not exact 4 items')
     }
     if (value[0] !== OcppMessageTypeIdEnum.Call) {
-      throw new OcppWsException(OcppErrorCode.RpcFrameworkError, 'MessageType is not 2')
+      throw new OcppWsException(OcppErrorCode.RpcFrameworkError, 'MessageType is not 2', value[1])
+    }
+    if (!Object.values(OcppMessageEnum).includes(value[2])) {
+      throw new OcppWsException(OcppErrorCode.NotImplemented, value[2], value[1])
     }
     return new OcppCallDto(value[1], value[2], value[3])
   }
