@@ -1,28 +1,39 @@
 import { Catch, ArgumentsHost, HttpException, BadRequestException } from '@nestjs/common'
 import { WsArgumentsHost } from '@nestjs/common/interfaces'
 import { BaseWsExceptionFilter, WsException } from '@nestjs/websockets'
-import { OcppCallErrorDto, OcppErrorCodes } from '@yellowgarbagebag/csms-shared'
+import { OcppCallErrorDto, OcppErrorCode } from '@yellowgarbagebag/csms-shared'
+import { OcppWsException } from './csms/ocpp-exception'
 
 @Catch()
 export class AllWsExceptionsFilter extends BaseWsExceptionFilter {
   catch(exception: WsException, host: ArgumentsHost): void {
     const ws: WsArgumentsHost = host.switchToWs()
-    const data = ws.getData() as any[]
+    const data = ws.getData() as any
     // An zweiter Stelle im Array steht die MessageId, sofern die Nachricht einigermassen gültig war.
-    const messageId = data[1] || ''
+    const messageId = (data && data[1]) || ''
 
-    const error = new OcppCallErrorDto(messageId, OcppErrorCodes.InternalError, '', {})
+    if (exception instanceof OcppWsException) {
+      const error = new OcppCallErrorDto(
+        messageId,
+        exception.errorCode,
+        exception.errorDescription,
+        exception.errorDetails || {},
+      )
+      ws.getClient().emit('ocpp', error.toMessage())
+      return
+    }
 
+    const error = new OcppCallErrorDto(messageId, OcppErrorCode.InternalError, '', {})
     if (exception instanceof HttpException) {
       if (exception instanceof BadRequestException) {
-        error.errorCode = OcppErrorCodes.FormatViolation
+        error.errorCode = OcppErrorCode.FormatViolation
         error.errorDescription = exception.message
       } else {
-        error.errorCode = OcppErrorCodes.InternalError
+        error.errorCode = OcppErrorCode.InternalError
         error.errorDescription = exception.message
       }
     } else {
-      error.errorCode = OcppErrorCodes.InternalError
+      error.errorCode = OcppErrorCode.InternalError
       error.errorDescription = 'No further informations'
     }
 

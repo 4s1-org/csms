@@ -112,6 +112,81 @@ describe('CSMS Gateway', () => {
   })
 
   describe('Invalid calls', () => {
+    it('call is empty', (done) => {
+      const socket = connectToSocket()
+
+      socket.on('connect', () => {
+        socket.emit('ocpp', () => {
+          fail()
+        })
+      })
+
+      socket.on('ocpp', (data: any) => {
+        expect(data.length).toBe(5)
+        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+        expect(data[1]).toBe('')
+        expect(data[2]).toBe(OcppErrorCodes.FormatViolation)
+        expect(data[3]).toBeDefined()
+        expect(data[4]).toBeDefined()
+        socket.disconnect()
+      })
+
+      socket.on('disconnect', (data: string) => {
+        expect(data).toBe(gracefulDisconnectReason)
+        done()
+      })
+    })
+
+    it('call is null', (done) => {
+      const socket = connectToSocket()
+
+      socket.on('connect', () => {
+        socket.emit('ocpp', null, () => {
+          fail()
+        })
+      })
+
+      socket.on('ocpp', (data: any) => {
+        expect(data.length).toBe(5)
+        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+        expect(data[1]).toBe('')
+        expect(data[2]).toBe(OcppErrorCodes.FormatViolation)
+        expect(data[3]).toBeDefined()
+        expect(data[4]).toBeDefined()
+        socket.disconnect()
+      })
+
+      socket.on('disconnect', (data: string) => {
+        expect(data).toBe(gracefulDisconnectReason)
+        done()
+      })
+    })
+
+    it('call is undefined', (done) => {
+      const socket = connectToSocket()
+
+      socket.on('connect', () => {
+        socket.emit('ocpp', undefined, () => {
+          fail()
+        })
+      })
+
+      socket.on('ocpp', (data: any) => {
+        expect(data.length).toBe(5)
+        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+        expect(data[1]).toBe('')
+        expect(data[2]).toBe(OcppErrorCodes.FormatViolation)
+        expect(data[3]).toBeDefined()
+        expect(data[4]).toBeDefined()
+        socket.disconnect()
+      })
+
+      socket.on('disconnect', (data: string) => {
+        expect(data).toBe(gracefulDisconnectReason)
+        done()
+      })
+    })
+
     it('call is a number', (done) => {
       const socket = connectToSocket()
 
