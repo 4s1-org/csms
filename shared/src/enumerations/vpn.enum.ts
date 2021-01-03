@@ -5,7 +5,7 @@
  * urn:x-oca:ocpp:uid:1:569277
  * Type of VPN
  */
-export enum VPNEnum {
+export enum VpnEnum {
   IKEv2 = "IKEv2",
   IPSec = "IPSec",
   L2TP = "L2TP",

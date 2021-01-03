@@ -2,12 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { APNDto } from './apn.dto'
+import { ApnDto } from './apn.dto'
 import { CustomDataDto } from './custom-data.dto'
-import { OCPPInterfaceEnum } from '../enumerations/ocpp-interface.enum'
-import { OCPPTransportEnum } from '../enumerations/ocpp-transport.enum'
-import { OCPPVersionEnum } from '../enumerations/ocpp-version.enum'
-import { VPNDto } from './vpn.dto'
+import { OcppInterfaceEnum } from '../enumerations/ocpp-interface.enum'
+import { OcppTransportEnum } from '../enumerations/ocpp-transport.enum'
+import { OcppVersionEnum } from '../enumerations/ocpp-version.enum'
+import { VpnDto } from './vpn.dto'
 
 /**
  * Communication_ Function
@@ -16,12 +16,12 @@ import { VPNDto } from './vpn.dto'
  */
 export class NetworkConnectionProfileDto {
   public constructor(
-    ocppVersion: OCPPVersionEnum,
-    ocppTransport: OCPPTransportEnum,
+    ocppVersion: OcppVersionEnum,
+    ocppTransport: OcppTransportEnum,
     ocppCsmsUrl: string,
     messageTimeout: number,
     securityProfile: number,
-    ocppInterface: OCPPInterfaceEnum,
+    ocppInterface: OcppInterfaceEnum,
   ) {
     this.ocppVersion = ocppVersion
     this.ocppTransport = ocppTransport
@@ -39,17 +39,17 @@ export class NetworkConnectionProfileDto {
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
-  public apn!: APNDto
+  public apn!: ApnDto
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(OCPPVersionEnum)
-  public ocppVersion: OCPPVersionEnum
+  @IsEnum(OcppVersionEnum)
+  public ocppVersion: OcppVersionEnum
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(OCPPTransportEnum)
-  public ocppTransport: OCPPTransportEnum
+  @IsEnum(OcppTransportEnum)
+  public ocppTransport: OcppTransportEnum
 
   /**
    * Communication_ Function. OCPP_ Central_ System_ URL. URI
@@ -82,11 +82,11 @@ export class NetworkConnectionProfileDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(OCPPInterfaceEnum)
-  public ocppInterface: OCPPInterfaceEnum
+  @IsEnum(OcppInterfaceEnum)
+  public ocppInterface: OcppInterfaceEnum
 
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
-  public vpn!: VPNDto
+  public vpn!: VpnDto
 }

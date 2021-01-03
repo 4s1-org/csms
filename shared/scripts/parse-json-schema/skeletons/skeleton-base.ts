@@ -36,15 +36,6 @@ export abstract class SkeletonBase {
   }
 
   public formatFilename(name: string): string {
-    name = name.replace(/OCPP/g, "Ocpp")
-    name = name.replace(/OCSP/g, "Ocsp")
-    name = name.replace(/EVSE/g, "Evse")
-    name = name.replace(/VPN/g, "Vpn")
-    name = name.replace(/APN/g, "Apn")
-    name = name.replace(/EV/g, "Ev")
-    name = name.replace(/AC/g, "Ac")
-    name = name.replace(/DC/g, "Dc")
-
     let result = name[0].toLocaleLowerCase()
     for (let i = 1; i < name.length; i++) {
       if (name[i].match(/[A-Z]/) !== null) {

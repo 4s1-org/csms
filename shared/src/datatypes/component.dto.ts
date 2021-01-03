@@ -3,7 +3,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { EVSEDto } from './evse.dto'
+import { EvseDto } from './evse.dto'
 
 /**
  * A physical or logical component
@@ -23,7 +23,7 @@ export class ComponentDto {
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
-  public evse!: EVSEDto
+  public evse!: EvseDto
 
   /**
    * Name of the component. Name should be taken from the list of standardized component names whenever possible. Case Insensitive. strongly advised to use Camel Case.

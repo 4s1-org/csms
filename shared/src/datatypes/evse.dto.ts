@@ -5,9 +5,11 @@ import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
+ * EVSE
+ * urn:x-oca:ocpp:uid:2:233123
  * Electric Vehicle Supply Equipment
  */
-export class EVSEDto {
+export class EvseDto {
   public constructor(
     id: number,
   ) {
@@ -20,10 +22,9 @@ export class EVSEDto {
   public customData!: CustomDataDto
 
   /**
+   * Identified_ Object. MRID. Numeric_ Identifier
+   * urn:x-enexis:ecdm:uid:1:569198
    * EVSE Identifier. This contains a number (> 0) designating an EVSE of the Charging Station.
-   * Required: true
-   * integer
-   * 1..1
    */
   @ApiProperty()
   @IsNotEmpty()
@@ -32,9 +33,6 @@ export class EVSEDto {
 
   /**
    * An id to designate a specific connector (on an EVSE) by connector index number.
-   * Required: false
-   * integer
-   * 0..1
    */
   @ApiProperty()
   @IsOptional()

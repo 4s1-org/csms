@@ -6,6 +6,6 @@
     "request": "launch",
     "cwd": "${workspaceRoot}",
     "runtimeArgs": ["-r", "ts-node/register"],
-    "args": ["${workspaceRoot}/src/parse-json-schema/index.ts"]
+    "args": ["${workspaceRoot}/scripts/parse-json-schema/index.ts"]
   }]
 }
