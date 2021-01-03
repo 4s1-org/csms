@@ -48,16 +48,20 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
   @UsePipes(new OcppCallValidationPipe(), new ValidationPipe())
   @SubscribeMessage('ocpp')
   async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, IResponseMessage]> {
+    let response: IResponseMessage
+
     switch (ocppCall.action) {
       case OcppMessageEnum.BootNotification:
         const entityClass = plainToClass(BootNotificationRequestDto, ocppCall.payload as unknown)
         await this.validate(entityClass, ocppCall.messageId)
-        const foo = this.bootNotification(entityClass)
-        return new OcppCallResultDto(ocppCall.messageId, foo).toMessage()
+        response = this.bootNotification(entityClass)
+        break
       default: {
         throw new OcppWsException(OcppErrorCode.NotSupported, ocppCall.action, ocppCall.messageId)
       }
     }
+
+    return new OcppCallResultDto(ocppCall.messageId, response).toMessage()
   }
 
   private async validate(entityClass: any, messageId: string): Promise<void> {
