@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 import { UpdateFirmwareStatusEnum } from '../enumerations/update-firmware-status.enum'
 
-export class UpdateFirmwareResponseDto {
+export class UpdateFirmwareResponseDto implements IResponseMessage {
   public constructor(
     status: UpdateFirmwareStatusEnum,
   ) {

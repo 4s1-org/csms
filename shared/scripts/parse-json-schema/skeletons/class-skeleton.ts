@@ -5,10 +5,31 @@ import { SkeletonBase } from "./skeleton-base"
 export class ClassSkeleton extends SkeletonBase {
   private _properties: PropertySkeleton[] = []
   private _allowAdditionalProperties = false
+  private _isRequest = false
+  private _isResponse = false
 
-  public constructor(name: string,
-    public readonly isMessage: boolean = false) {
+  public constructor(name: string) {
     super(name, "Dto")
+  }
+
+  public get isRequest(): boolean {
+    return this._isRequest
+  }
+
+  public set isRequest(value: boolean) {
+    this._isRequest = value
+  }
+
+  public get isResponse(): boolean {
+    return this._isResponse
+  }
+
+  public set isResponse(value: boolean) {
+    this._isResponse = value
+  }
+
+  public get isMessage(): boolean {
+    return this._isRequest || this._isResponse
   }
 
   public addProperty(name: string, isRequired: boolean): PropertySkeleton {
@@ -43,6 +64,12 @@ export class ClassSkeleton extends SkeletonBase {
 
       const classValidatorItemsUnique = [...new Set(classValidatorItems)].sort()
       result.push(`import { ${classValidatorItemsUnique.join(", ")} } from 'class-validator'`)
+
+      if (this.isRequest) {
+        result.push(`import { IRequestMessage } from '../i-request-message'`)
+      } else if (this.isResponse) {
+        result.push(`import { IResponseMessage } from '../i-response-message'`)
+      }
 
       const ownImportsDone: string[] = []
       for (const ownImport of ownImports.sort()) {
@@ -81,7 +108,13 @@ export class ClassSkeleton extends SkeletonBase {
     }
 
     // Begin of class
-    result.push(`export class ${this.name}${this.nameSuffix} {`)
+    let markerInterface = ""
+    if (this.isRequest) {
+      markerInterface = "implements IRequestMessage "
+    } else if (this.isResponse) {
+      markerInterface = "implements IResponseMessage "
+    }
+    result.push(`export class ${this.name}${this.nameSuffix} ${markerInterface}{`)
 
     // Constructor
     const requiredProperties = this._properties.filter(x => x.isRequired)

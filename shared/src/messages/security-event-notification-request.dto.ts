@@ -2,9 +2,10 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class SecurityEventNotificationRequestDto {
+export class SecurityEventNotificationRequestDto implements IRequestMessage {
   public constructor(
     type: string,
     timestamp: string,

@@ -16,9 +16,14 @@ import {
   RegistrationStatusEnum,
   OcppMessageEnum,
   BootNotificationRequestDto,
+  OcppErrorCode,
+  IResponseMessage,
 } from '@yellowgarbagebag/csms-shared'
 import { OcppCallValidationPipe } from './ocpp-call-validation.pipe'
 import { AllWsExceptionsFilter } from '../all-ws-exceptions.filter'
+import { plainToClass } from 'class-transformer'
+import { validate } from 'class-validator'
+import { OcppWsException } from './ocpp-exception'
 
 @WebSocketGateway({ path: '/ocpp/2.0.1' })
 @UseFilters(new AllWsExceptionsFilter())
@@ -42,21 +47,31 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
 
   @UsePipes(new OcppCallValidationPipe(), new ValidationPipe())
   @SubscribeMessage('ocpp')
-  async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, unknown]> {
+  async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, IResponseMessage]> {
+    let response: IResponseMessage
+
     switch (ocppCall.action) {
       case OcppMessageEnum.BootNotification:
-        const data = ocppCall.payload as BootNotificationRequestDto
-        const foo = this.bootNotification(data)
-        return new OcppCallResultDto(ocppCall.messageId, foo).toMessage()
-      default:
-        throw new Error(`Unsupported command "${ocppCall.action}"`)
+        const entityClass = plainToClass(BootNotificationRequestDto, ocppCall.payload as unknown)
+        await this.validate(entityClass, ocppCall.messageId)
+        response = this.bootNotification(entityClass)
+        break
+      default: {
+        throw new OcppWsException(OcppErrorCode.NotSupported, ocppCall.action, ocppCall.messageId)
+      }
+    }
+
+    return new OcppCallResultDto(ocppCall.messageId, response).toMessage()
+  }
+
+  private async validate(entityClass: any, messageId: string): Promise<void> {
+    const errors = await validate(entityClass)
+    if (errors.length > 0) {
+      throw new OcppWsException(OcppErrorCode.FormatViolation, 'foobar', messageId)
     }
   }
 
-  @UsePipes()
-  private async bootNotification(
-    @MessageBody() body: BootNotificationRequestDto,
-  ): Promise<BootNotificationResponseDto> {
+  private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
     return new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
   }
 }

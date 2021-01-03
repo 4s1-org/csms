@@ -2,12 +2,13 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 /**
  * This contains the field definition of the HeartbeatResponse PDU sent by the CSMS to the Charging Station in response to a HeartbeatRequest.
  */
-export class HeartbeatResponseDto {
+export class HeartbeatResponseDto implements IResponseMessage {
   public constructor(
     currentTime: string,
   ) {

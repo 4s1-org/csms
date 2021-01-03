@@ -37,6 +37,9 @@ export class ClassGenerator {
   }
 
   public generateFiles(): void {
+    this._generateMessageMarkerInterface([__dirname, "..", "..", "src"], "Request")
+    this._generateMessageMarkerInterface([__dirname, "..", "..", "src"], "Response")
+
     this._generateFiles([__dirname, "..", "..", "src", "enumerations"], this.enumSkeletons)
     this._generateFiles([__dirname, "..", "..", "src", "messages"], this.classSkeletons.filter(x => x.isMessage))
     this._generateFiles([__dirname, "..", "..", "src", "datatypes"], this.classSkeletons.filter(x => !x.isMessage))
@@ -72,6 +75,17 @@ export class ClassGenerator {
     data.push(``)
 
     const fileName = path.join(...folders, "ocpp-message.enum.ts")
+    fs.writeFileSync(fileName, data.join("\n"), { encoding: "utf-8" })
+  }
+
+  private _generateMessageMarkerInterface(folders: string[], type: "Request" | "Response"): void {
+    const data: string[] = []
+    data.push(`export interface I${type}Message {`)
+    data.push(`  // nothing to do`)
+    data.push(`}`)
+    data.push(``)
+
+    const fileName = path.join(...folders, `i-${type.toLocaleLowerCase()}-message.ts`)
     fs.writeFileSync(fileName, data.join("\n"), { encoding: "utf-8" })
   }
 }

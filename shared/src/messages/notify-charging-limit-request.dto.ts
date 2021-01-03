@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { ChargingLimitDto } from '../datatypes/charging-limit.dto'
 import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class NotifyChargingLimitRequestDto {
+export class NotifyChargingLimitRequestDto implements IRequestMessage {
   public constructor(
     chargingLimit: ChargingLimitDto,
   ) {

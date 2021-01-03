@@ -2,13 +2,14 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { ReportBaseEnum } from '../enumerations/report-base.enum'
 
 /**
  * This contains the field definition of the GetBaseReportRequest PDU sent by the CSMS to the Charging Station.
  */
-export class GetBaseReportRequestDto {
+export class GetBaseReportRequestDto implements IRequestMessage {
   public constructor(
     requestId: number,
     reportBase: ReportBaseEnum,

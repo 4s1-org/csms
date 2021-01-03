@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { FirmwareDto } from '../datatypes/firmware.dto'
 
-export class UpdateFirmwareRequestDto {
+export class UpdateFirmwareRequestDto implements IRequestMessage {
   public constructor(
     requestId: number,
     firmware: FirmwareDto,

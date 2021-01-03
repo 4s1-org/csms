@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { ReserveNowStatusEnum } from '../enumerations/reserve-now-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class ReserveNowResponseDto {
+export class ReserveNowResponseDto implements IResponseMessage {
   public constructor(
     status: ReserveNowStatusEnum,
   ) {
