@@ -1,12 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsNotEmpty, IsInt, IsPositive, IsEnum, IsString, ValidateNested, MaxLength } from "class-validator"
-import { OcppErrorCodes } from "./ocpp-error-codes"
+import { OcppErrorCode } from "./ocpp-error-code"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
 
 export class OcppCallErrorDto {
   constructor(
     messageId: string,
-    errorCode: OcppErrorCodes,
+    errorCode: OcppErrorCode,
     errorDescription: string,
     errorDetails: unknown,
   ) {
@@ -34,9 +34,9 @@ export class OcppCallErrorDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(OcppErrorCodes)
+  @IsEnum(OcppErrorCode)
   /** This field must contain a string from the RPC Framework Error Codes table. */
-  public errorCode: OcppErrorCodes
+  public errorCode: OcppErrorCode
 
   @ApiProperty()
   @IsNotEmpty()
