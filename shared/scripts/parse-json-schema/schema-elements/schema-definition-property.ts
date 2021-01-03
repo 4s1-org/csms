@@ -51,17 +51,17 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
 
       if (this.data.$ref.endsWith("EnumType")) {
         // Enum
-        const type = this.data.$ref.substr(14, this.data.$ref.length - 22)
+        const type = this.formatKey(this.data.$ref.substr(14, this.data.$ref.length - 22))
         this.skeleton.setEnumerationType(type, "Enum")
         this.skeleton.addImportOwnClass(type, "Enum", `${this.skeleton.formatFilename(type)}.enum`)
       } else if (this.data.$ref.endsWith("Type")) {
         // DTO
-        const type = this.data.$ref.substr(14, this.data.$ref.length - 18)
+        const type = this.formatKey(this.data.$ref.substr(14, this.data.$ref.length - 18))
         this.skeleton.setCustomType(type, "Dto")
         this.skeleton.addImportOwnClass(type, "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       } else if (this.data.$ref.endsWith("AuthorizationData")) {
         // DTO - AuthorizationData
-        const type = this.data.$ref.substr(14, this.data.$ref.length - 14)
+        const type = this.formatKey(this.data.$ref.substr(14, this.data.$ref.length - 14))
         this.skeleton.setCustomType(type, "Dto")
         this.skeleton.addImportOwnClass(type, "Dto", `${this.skeleton.formatFilename(type)}.dto`)
       } else {
@@ -166,15 +166,15 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     if (keyZero === "$ref" && valueZero.startsWith("#/definitions/")) {
       if (valueZero.endsWith("EnumType")) {
         isCustomType = true
-        type = valueZero.substr(14, valueZero.length - 22)
+        type = this.formatKey(valueZero.substr(14, valueZero.length - 22))
         isEnum = true
       } else if (valueZero.endsWith("Type")) {
         isCustomType = true
-        type = valueZero.substr(14, valueZero.length - 18)
+        type = this.formatKey(valueZero.substr(14, valueZero.length - 18))
         isEnum = false
       } else if (valueZero.endsWith("AuthorizationData")) {
         isCustomType = true
-        type = valueZero.substr(14, valueZero.length - 14)
+        type = this.formatKey(valueZero.substr(14, valueZero.length - 14))
         isEnum = false
       } else {
         throw new Error(`${this.key}: Unknown Type`)

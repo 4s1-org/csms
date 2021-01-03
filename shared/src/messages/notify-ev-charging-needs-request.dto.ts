@@ -5,7 +5,7 @@ import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingNeedsDto } from '../datatypes/charging-needs.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class NotifyEVChargingNeedsRequestDto {
+export class NotifyEvChargingNeedsRequestDto {
   public constructor(
     chargingNeeds: ChargingNeedsDto,
     evseId: number,

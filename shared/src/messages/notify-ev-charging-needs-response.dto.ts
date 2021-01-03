@@ -3,12 +3,12 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
-import { NotifyEVChargingNeedsStatusEnum } from '../enumerations/notify-ev-charging-needs-status.enum'
+import { NotifyEvChargingNeedsStatusEnum } from '../enumerations/notify-ev-charging-needs-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class NotifyEVChargingNeedsResponseDto {
+export class NotifyEvChargingNeedsResponseDto {
   public constructor(
-    status: NotifyEVChargingNeedsStatusEnum,
+    status: NotifyEvChargingNeedsStatusEnum,
   ) {
     this.status = status
   }
@@ -20,8 +20,8 @@ export class NotifyEVChargingNeedsResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(NotifyEVChargingNeedsStatusEnum)
-  public status: NotifyEVChargingNeedsStatusEnum
+  @IsEnum(NotifyEvChargingNeedsStatusEnum)
+  public status: NotifyEvChargingNeedsStatusEnum
 
   @ApiProperty()
   @IsOptional()
