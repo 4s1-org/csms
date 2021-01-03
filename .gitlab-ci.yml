@@ -20,6 +20,7 @@ shared:
 backend:
   stage: validating-apps
   image: node:14-alpine
+  only: ["branches", "tags"]
   artifacts:
     when: always
     paths:
@@ -27,7 +28,24 @@ backend:
     expire_in: 1 week
   script:
     - cd shared && npm ci && npm run build && cd ..
-    - cd backend && npm ci
+    - cd backend
+    - npm ci
+    - npm run lint
+    - npm run build
+    - npm run test:cov
+
+backend-e2e:
+  stage: validating-apps
+  image: node:14-alpine
+  only: ["master"]
+  artifacts:
+    when: always
+    paths:
+      - coverage/
+    expire_in: 1 week
+  script:
+    - cd shared && npm ci && npm run build && cd ..
+    - cd backend
     - npm ci
     - npm run lint
     - npm run build
@@ -43,7 +61,8 @@ simulator:
     expire_in: 1 week
   script:
     - cd shared && npm ci && npm run build && cd ..
-    - cd simulator && npm ci
+    - cd simulator
+    - npm ci
     - npm run lint
     - npm run build
     - npm run test:cov
