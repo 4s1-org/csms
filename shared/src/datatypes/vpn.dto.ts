@@ -3,20 +3,20 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
-import { VPNEnum } from '../enumerations/vpn.enum'
+import { VpnEnum } from '../enumerations/vpn.enum'
 
 /**
  * VPN
  * urn:x-oca:ocpp:uid:2:233268
  * VPN Configuration settings
  */
-export class VPNDto {
+export class VpnDto {
   public constructor(
     server: string,
     user: string,
     password: string,
     key: string,
-    type: VPNEnum,
+    type: VpnEnum,
   ) {
     this.server = server
     this.user = user
@@ -87,6 +87,6 @@ export class VPNDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(VPNEnum)
-  public type: VPNEnum
+  @IsEnum(VpnEnum)
+  public type: VpnEnum
 }

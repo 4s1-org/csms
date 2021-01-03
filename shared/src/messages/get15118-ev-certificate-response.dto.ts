@@ -3,12 +3,12 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
-import { Iso15118EVCertificateStatusEnum } from '../enumerations/iso15118-ev-certificate-status.enum'
+import { Iso15118EvCertificateStatusEnum } from '../enumerations/iso15118-ev-certificate-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class Get15118EVCertificateResponseDto {
+export class Get15118EvCertificateResponseDto {
   public constructor(
-    status: Iso15118EVCertificateStatusEnum,
+    status: Iso15118EvCertificateStatusEnum,
     exiResponse: string,
   ) {
     this.status = status
@@ -22,8 +22,8 @@ export class Get15118EVCertificateResponseDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(Iso15118EVCertificateStatusEnum)
-  public status: Iso15118EVCertificateStatusEnum
+  @IsEnum(Iso15118EvCertificateStatusEnum)
+  public status: Iso15118EvCertificateStatusEnum
 
   @ApiProperty()
   @IsOptional()

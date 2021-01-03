@@ -9,6 +9,10 @@ async function main(): Promise<void> {
 
   for (const file of files) {
     console.log(`*** ${file} ***`)
+    // if (file !== "NotifyEVChargingNeedsResponse.json") {
+    //   continue
+    // }
+
     const content: any = JSON.parse(fs.readFileSync(path.join(dir, file)).toString())
     const filenameWithoutExt = file.substr(0, file.length - 5)
     const item = new SchemaRoot(filenameWithoutExt, content)
