@@ -5,11 +5,6 @@ stages:
 shared:
   stage: validating-shared
   image: node:14-alpine
-  artifacts:
-    when: always
-    paths:
-      - coverage/
-    expire_in: 1 week
   script:
     - cd shared
     - npm ci
@@ -23,11 +18,6 @@ backend:
   except:
     refs:
       - master
-  artifacts:
-    when: always
-    paths:
-      - coverage/
-    expire_in: 1 week
   script:
     - cd shared && npm ci && npm run build && cd ..
     - cd backend
@@ -36,17 +26,12 @@ backend:
     - npm run build
     - npm run test:cov
 
-backend-e2e:
+backend-with-e2e:
   stage: validating-apps
   image: node:14-alpine
   only:
     refs:
       - master
-  artifacts:
-    when: always
-    paths:
-      - coverage/
-    expire_in: 1 week
   script:
     - cd shared && npm ci && npm run build && cd ..
     - cd backend
@@ -58,11 +43,6 @@ backend-e2e:
 simulator:
   stage: validating-apps
   image: node:14-alpine
-  artifacts:
-    when: always
-    paths:
-      - coverage/
-    expire_in: 1 week
   script:
     - cd shared && npm ci && npm run build && cd ..
     - cd simulator
