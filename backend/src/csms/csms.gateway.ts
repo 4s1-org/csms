@@ -1,4 +1,4 @@
-import { Logger, ParseArrayPipe, UseFilters, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Logger, UseFilters, UsePipes, ValidationPipe } from '@nestjs/common'
 import {
   MessageBody,
   SubscribeMessage,
@@ -40,7 +40,7 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
     this.logger.log(`Client connected: ${client.id}`)
   }
 
-  @UsePipes(new ParseArrayPipe(), new OcppCallValidationPipe(), new ValidationPipe())
+  @UsePipes(new OcppCallValidationPipe(), new ValidationPipe())
   @SubscribeMessage('ocpp')
   async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, unknown]> {
     switch (ocppCall.action) {

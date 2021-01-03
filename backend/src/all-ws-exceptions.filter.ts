@@ -6,15 +6,12 @@ import { OcppWsException } from './csms/ocpp-exception'
 
 @Catch()
 export class AllWsExceptionsFilter extends BaseWsExceptionFilter {
-  catch(exception: WsException, host: ArgumentsHost): void {
+  catch(exception: unknown, host: ArgumentsHost): void {
     const ws: WsArgumentsHost = host.switchToWs()
-    const data = ws.getData() as any
-    // An zweiter Stelle im Array steht die MessageId, sofern die Nachricht einigermassen gültig war.
-    const messageId = (data && data[1]) || ''
 
     if (exception instanceof OcppWsException) {
       const error = new OcppCallErrorDto(
-        messageId,
+        '', // Bei diesen Fehlern habe ich keine valide messageId
         exception.errorCode,
         exception.errorDescription,
         exception.errorDetails || {},
@@ -22,6 +19,11 @@ export class AllWsExceptionsFilter extends BaseWsExceptionFilter {
       ws.getClient().emit('ocpp', error.toMessage())
       return
     }
+
+    console.log('--------------------------------------', JSON.stringify(exception))
+    const data = ws.getData() as any
+    // An zweiter Stelle im Array steht die MessageId, sofern die Nachricht einigermassen gültig war.
+    const messageId = (data && data[1]) || ''
 
     const error = new OcppCallErrorDto(messageId, OcppErrorCode.InternalError, '', {})
     if (exception instanceof HttpException) {
