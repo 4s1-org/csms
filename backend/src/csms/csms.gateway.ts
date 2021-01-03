@@ -16,9 +16,16 @@ import {
   RegistrationStatusEnum,
   OcppMessageEnum,
   BootNotificationRequestDto,
+  OcppErrorCode,
+  OcppCallErrorDto,
 } from '@yellowgarbagebag/csms-shared'
 import { OcppCallValidationPipe } from './ocpp-call-validation.pipe'
 import { AllWsExceptionsFilter } from '../all-ws-exceptions.filter'
+import { ConditionalValidationPipe } from './conditional-validation.pipe'
+import { plainToClass } from 'class-transformer'
+import { ClassType } from 'class-transformer/ClassTransformer'
+import { validate } from 'class-validator'
+import { OcppWsException } from './ocpp-exception'
 
 @WebSocketGateway({ path: '/ocpp/2.0.1' })
 @UseFilters(new AllWsExceptionsFilter())
@@ -45,18 +52,33 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
   async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, unknown]> {
     switch (ocppCall.action) {
       case OcppMessageEnum.BootNotification:
-        const data = ocppCall.payload as BootNotificationRequestDto
-        const foo = this.bootNotification(data)
+        const entityClass = plainToClass(BootNotificationRequestDto, ocppCall.payload)
+        await this.validate(entityClass)
+        const foo = this.bootNotification(entityClass)
         return new OcppCallResultDto(ocppCall.messageId, foo).toMessage()
       default:
-        throw new Error(`Unsupported command "${ocppCall.action}"`)
+        this.handleOtherActions(ocppCall.action)
     }
   }
 
-  @UsePipes()
-  private async bootNotification(
-    @MessageBody() body: BootNotificationRequestDto,
-  ): Promise<BootNotificationResponseDto> {
+  private handleOtherActions(action: OcppMessageEnum): void {
+    if (Object.values(OcppMessageEnum).includes(action)) {
+      // Requested Action is recognized but not supported by the receiver
+      throw new OcppWsException(OcppErrorCode.NotSupported, action)
+    } else {
+      // Requested Action is not known by receiver
+      throw new OcppWsException(OcppErrorCode.NotImplemented, action)
+    }
+  }
+
+  private async validate(entityClass: any): Promise<void> {
+    const errors = await validate(entityClass)
+    if (errors.length > 0) {
+      throw new OcppWsException(OcppErrorCode.FormatViolation, 'foobar')
+    }
+  }
+
+  private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
     return new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
   }
 }

@@ -111,6 +111,33 @@ function sendValidMessageWithCallDto(socket: SocketIOClient.Socket): void {
   }, 3000)
 }
 
+function spielwiese(socket: SocketIOClient.Socket): void {
+  if (socket && !socket.connected) {
+    return
+  }
+
+  socket.emit(
+    'ocpp',
+    [
+      OcppMessageTypeIdEnum.Call,
+      getId(),
+      OcppMessageEnum.BootNotification,
+      {
+        chargingStation: {
+          model: 'SingleSocketCharger',
+          vendor: 'VendorX',
+        },
+        reason: BootReasonEnum.PowerUp,
+      },
+    ],
+    (response: any) => console.log('sendValidMessageWithCallDto:', JSON.stringify(response)),
+  )
+
+  setTimeout(() => {
+    spielwiese(socket)
+  }, 3000)
+}
+
 async function main(): Promise<void> {
   console.log('*** main() ***')
   const socket: SocketIOClient.Socket = io('http://172.22.21.12:3000/', {
@@ -122,12 +149,12 @@ async function main(): Promise<void> {
   socket.on('connect', () => {
     console.log('Connected: ' + socket.id)
 
-    sendNoArray(socket)
+    //sendNoArray(socket)
     //sendToLongId(socket)
     //sendMessageAndDataNotWorkTogether(socket)
     //sendValidMessageWithoutCallDto(socket)
-    //sendValidMessageWithoutCallDto(socket)
     //sendValidMessageWithCallDto(socket)
+    spielwiese(socket)
   })
 
   socket.on('ocpp', (data: any) => {
