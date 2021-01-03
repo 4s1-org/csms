@@ -1,4 +1,4 @@
-export enum OcppErrorCodes {
+export enum OcppErrorCode {
   /** Payload for Action is syntactically incorrect */
   FormatViolation = "FormatViolation",
   /** Any other error not covered by the more specific error codes in this table */
