@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { ChargingProfileCriterionDto } from '../datatypes/charging-profile-criterion.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class GetChargingProfilesRequestDto {
+export class GetChargingProfilesRequestDto implements IRequestMessage {
   public constructor(
     requestId: number,
     chargingProfile: ChargingProfileCriterionDto,

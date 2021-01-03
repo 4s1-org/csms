@@ -2,9 +2,10 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class PublishFirmwareRequestDto {
+export class PublishFirmwareRequestDto implements IRequestMessage {
   public constructor(
     location: string,
     checksum: string,

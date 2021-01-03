@@ -2,13 +2,14 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { ConnectorStatusEnum } from '../enumerations/connector-status.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 /**
  * ---
  */
-export class StatusNotificationRequestDto {
+export class StatusNotificationRequestDto implements IRequestMessage {
   public constructor(
     timestamp: string,
     connectorStatus: ConnectorStatusEnum,

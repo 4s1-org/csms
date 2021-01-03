@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class NotifyEvChargingScheduleRequestDto {
+export class NotifyEvChargingScheduleRequestDto implements IRequestMessage {
   public constructor(
     timeBase: string,
     chargingSchedule: ChargingScheduleDto,

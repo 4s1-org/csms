@@ -2,6 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { EvseDto } from '../datatypes/evse.dto'
 import { OperationalStatusEnum } from '../enumerations/operational-status.enum'
@@ -9,7 +10,7 @@ import { OperationalStatusEnum } from '../enumerations/operational-status.enum'
 /**
  * This contains the field definition of the ChangeAvailabilityRequest PDU sent by the CSMS to the Charging Station.
  */
-export class ChangeAvailabilityRequestDto {
+export class ChangeAvailabilityRequestDto implements IRequestMessage {
   public constructor(
     operationalStatus: OperationalStatusEnum,
   ) {

@@ -2,6 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { RegistrationStatusEnum } from '../enumerations/registration-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
@@ -9,7 +10,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 /**
  * This contains the field definition of the BootNotificationResponse PDU sent by the CSMS to the Charging Station in response to a BootNotificationRequest.
  */
-export class BootNotificationResponseDto {
+export class BootNotificationResponseDto implements IResponseMessage {
   public constructor(
     currentTime: string,
     interval: number,

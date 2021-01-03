@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { NetworkConnectionProfileDto } from '../datatypes/network-connection-profile.dto'
 
-export class SetNetworkProfileRequestDto {
+export class SetNetworkProfileRequestDto implements IRequestMessage {
   public constructor(
     configurationSlot: number,
     connectionData: NetworkConnectionProfileDto,
