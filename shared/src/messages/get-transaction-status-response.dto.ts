@@ -2,9 +2,10 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class GetTransactionStatusResponseDto {
+export class GetTransactionStatusResponseDto implements IResponseMessage {
   public constructor(
     messagesInQueue: boolean,
   ) {

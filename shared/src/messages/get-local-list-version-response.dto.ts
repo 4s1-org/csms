@@ -2,9 +2,10 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class GetLocalListVersionResponseDto {
+export class GetLocalListVersionResponseDto implements IResponseMessage {
   public constructor(
     versionNumber: number,
   ) {

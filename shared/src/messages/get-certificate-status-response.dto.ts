@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GetCertificateStatusEnum } from '../enumerations/get-certificate-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class GetCertificateStatusResponseDto {
+export class GetCertificateStatusResponseDto implements IResponseMessage {
   public constructor(
     status: GetCertificateStatusEnum,
   ) {

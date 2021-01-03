@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class GetCompositeScheduleRequestDto {
+export class GetCompositeScheduleRequestDto implements IRequestMessage {
   public constructor(
     duration: number,
     evseId: number,

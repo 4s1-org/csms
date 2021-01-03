@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { RequestStartStopStatusEnum } from '../enumerations/request-start-stop-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class RequestStartTransactionResponseDto {
+export class RequestStartTransactionResponseDto implements IResponseMessage {
   public constructor(
     status: RequestStartStopStatusEnum,
   ) {

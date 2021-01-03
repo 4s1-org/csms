@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNumber, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenInfoDto } from '../datatypes/id-token-info.dto'
 import { MessageContentDto } from '../datatypes/message-content.dto'
 
-export class TransactionEventResponseDto {
+export class TransactionEventResponseDto implements IResponseMessage {
   public constructor() {
     // nothing to do
   }

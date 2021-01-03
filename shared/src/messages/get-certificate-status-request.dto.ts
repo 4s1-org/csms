@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { OcspRequestDataDto } from '../datatypes/ocsp-request-data.dto'
 
-export class GetCertificateStatusRequestDto {
+export class GetCertificateStatusRequestDto implements IRequestMessage {
   public constructor(
     ocspRequestData: OcspRequestDataDto,
   ) {

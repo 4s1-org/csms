@@ -1,6 +1,6 @@
 import { Catch, ArgumentsHost, HttpException, BadRequestException } from '@nestjs/common'
 import { WsArgumentsHost } from '@nestjs/common/interfaces'
-import { BaseWsExceptionFilter, WsException } from '@nestjs/websockets'
+import { BaseWsExceptionFilter } from '@nestjs/websockets'
 import { OcppCallErrorDto, OcppErrorCode } from '@yellowgarbagebag/csms-shared'
 import { OcppWsException } from './csms/ocpp-exception'
 
@@ -11,7 +11,7 @@ export class AllWsExceptionsFilter extends BaseWsExceptionFilter {
 
     if (exception instanceof OcppWsException) {
       const error = new OcppCallErrorDto(
-        '', // Bei diesen Fehlern habe ich keine valide messageId
+        exception.messageId || '',
         exception.errorCode,
         exception.errorDescription,
         exception.errorDetails || {},
