@@ -20,7 +20,9 @@ shared:
 backend:
   stage: validating-apps
   image: node:14-alpine
-  only: ["branches", "tags"]
+  except:
+    refs:
+      - master
   artifacts:
     when: always
     paths:
@@ -37,7 +39,9 @@ backend:
 backend-e2e:
   stage: validating-apps
   image: node:14-alpine
-  only: ["master"]
+  only:
+    refs:
+      - master
   artifacts:
     when: always
     paths:
