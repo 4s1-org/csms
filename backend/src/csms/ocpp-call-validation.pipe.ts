@@ -8,6 +8,9 @@ export class OcppCallValidationPipe implements PipeTransform {
     if (metadata.type !== 'body') {
       throw new OcppWsException(OcppErrorCode.RpcFrameworkError, 'Invalid parameter transfer')
     }
+    if (!value) {
+      throw new OcppWsException(OcppErrorCode.RpcFrameworkError, 'Invalid data format received')
+    }
     if (!Array.isArray(value)) {
       throw new OcppWsException(OcppErrorCode.RpcFrameworkError, 'No array received')
     }
