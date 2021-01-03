@@ -2,13 +2,14 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { SetVariableDataDto } from '../datatypes/set-variable-data.dto'
 
 /**
  * This contains the field definition of the SetVariablesRequest PDU sent by the CSMS to the Charging Station.
  */
-export class SetVariablesRequestDto {
+export class SetVariablesRequestDto implements IRequestMessage {
   public constructor(
     setVariableData: SetVariableDataDto[],
   ) {

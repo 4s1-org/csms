@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { ComponentVariableDto } from '../datatypes/component-variable.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MonitoringCriterionEnum } from '../enumerations/monitoring-criterion.enum'
 
-export class GetMonitoringReportRequestDto {
+export class GetMonitoringReportRequestDto implements IRequestMessage {
   public constructor(
     requestId: number,
   ) {

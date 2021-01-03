@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { InstallCertificateUseEnum } from '../enumerations/install-certificate-use.enum'
 
-export class InstallCertificateRequestDto {
+export class InstallCertificateRequestDto implements IRequestMessage {
   public constructor(
     certificateType: InstallCertificateUseEnum,
     certificate: string,

@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { ResetEnum } from '../enumerations/reset.enum'
 
-export class ResetRequestDto {
+export class ResetRequestDto implements IRequestMessage {
   public constructor(
     type: ResetEnum,
   ) {

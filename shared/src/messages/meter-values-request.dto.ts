@@ -2,6 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MeterValueDto } from '../datatypes/meter-value.dto'
 
@@ -9,7 +10,7 @@ import { MeterValueDto } from '../datatypes/meter-value.dto'
  * Request_ Body
  * urn:x-enexis:ecdm:uid:2:234744
  */
-export class MeterValuesRequestDto {
+export class MeterValuesRequestDto implements IRequestMessage {
   public constructor(
     evseId: number,
     meterValue: MeterValueDto[],

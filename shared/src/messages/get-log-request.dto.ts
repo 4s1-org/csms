@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { LogEnum } from '../enumerations/log.enum'
 import { LogParametersDto } from '../datatypes/log-parameters.dto'
 
-export class GetLogRequestDto {
+export class GetLogRequestDto implements IRequestMessage {
   public constructor(
     log: LogParametersDto,
     logType: LogEnum,

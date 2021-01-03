@@ -2,12 +2,13 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IResponseMessage } from '../i-response-message'
 import { CompositeScheduleDto } from '../datatypes/composite-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GenericStatusEnum } from '../enumerations/generic-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class GetCompositeScheduleResponseDto {
+export class GetCompositeScheduleResponseDto implements IResponseMessage {
   public constructor(
     status: GenericStatusEnum,
   ) {

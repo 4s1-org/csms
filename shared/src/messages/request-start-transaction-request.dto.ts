@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
-export class RequestStartTransactionRequestDto {
+export class RequestStartTransactionRequestDto implements IRequestMessage {
   public constructor(
     idToken: IdTokenDto,
     remoteStartId: number,

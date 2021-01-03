@@ -2,10 +2,11 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MessageInfoDto } from '../datatypes/message-info.dto'
 
-export class NotifyDisplayMessagesRequestDto {
+export class NotifyDisplayMessagesRequestDto implements IRequestMessage {
   public constructor(
     requestId: number,
   ) {

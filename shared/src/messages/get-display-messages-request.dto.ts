@@ -2,11 +2,12 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MessagePriorityEnum } from '../enumerations/message-priority.enum'
 import { MessageStateEnum } from '../enumerations/message-state.enum'
 
-export class GetDisplayMessagesRequestDto {
+export class GetDisplayMessagesRequestDto implements IRequestMessage {
   public constructor(
     requestId: number,
   ) {
