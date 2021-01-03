@@ -9,7 +9,7 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233250
  * EV AC charging parameters.
  */
-export class ACChargingParametersDto {
+export class AcChargingParametersDto {
   public constructor(
     energyAmount: number,
     evMinCurrent: number,

@@ -5,7 +5,7 @@ import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } f
 import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enumerations/hash-algorithm.enum'
 
-export class OCSPRequestDataDto {
+export class OcspRequestDataDto {
   public constructor(
     hashAlgorithm: HashAlgorithmEnum,
     issuerNameHash: string,

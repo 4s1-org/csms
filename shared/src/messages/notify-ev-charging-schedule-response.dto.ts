@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GenericStatusEnum } from '../enumerations/generic-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class NotifyEVChargingScheduleResponseDto {
+export class NotifyEvChargingScheduleResponseDto {
   public constructor(
     status: GenericStatusEnum,
   ) {

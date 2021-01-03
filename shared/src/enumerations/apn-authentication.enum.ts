@@ -5,7 +5,7 @@
  * urn:x-oca:ocpp:uid:1:568828
  * Authentication method.
  */
-export enum APNAuthenticationEnum {
+export enum ApnAuthenticationEnum {
   CHAP = "CHAP",
   NONE = "NONE",
   PAP = "PAP",

@@ -3,7 +3,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
-import { EVSEDto } from '../datatypes/evse.dto'
+import { EvseDto } from '../datatypes/evse.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 import { MeterValueDto } from '../datatypes/meter-value.dto'
 import { TransactionDto } from '../datatypes/transaction.dto'
@@ -104,7 +104,7 @@ export class TransactionEventRequestDto {
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
-  public evse!: EVSEDto
+  public evse!: EvseDto
 
   @ApiProperty()
   @IsOptional()

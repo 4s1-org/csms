@@ -5,7 +5,7 @@ import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } f
 import { CertificateActionEnum } from '../enumerations/certificate-action.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class Get15118EVCertificateRequestDto {
+export class Get15118EvCertificateRequestDto {
   public constructor(
     iso15118SchemaVersion: string,
     action: CertificateActionEnum,
