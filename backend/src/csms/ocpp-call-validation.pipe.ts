@@ -1,4 +1,4 @@
-import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from '@nestjs/common'
+import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common'
 import { OcppCallDto, OcppErrorCode, OcppMessageTypeIdEnum } from '@yellowgarbagebag/csms-shared'
 import { OcppWsException } from './ocpp-exception'
 
