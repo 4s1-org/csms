@@ -3,7 +3,7 @@
 /**
  * Applicable Network Interface.
  */
-export enum OCPPInterfaceEnum {
+export enum OcppInterfaceEnum {
   Wired0 = "Wired0",
   Wired1 = "Wired1",
   Wired2 = "Wired2",

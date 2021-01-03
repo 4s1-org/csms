@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
-import { OCSPRequestDataDto } from '../datatypes/ocsp-request-data.dto'
+import { OcspRequestDataDto } from '../datatypes/ocsp-request-data.dto'
 
 export class AuthorizeRequestDto {
   public constructor(
@@ -39,5 +39,5 @@ export class AuthorizeRequestDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  public iso15118CertificateHashData!: OCSPRequestDataDto[]
+  public iso15118CertificateHashData!: OcspRequestDataDto[]
 }

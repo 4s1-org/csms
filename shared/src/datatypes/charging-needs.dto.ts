@@ -2,9 +2,9 @@
 
 import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { ACChargingParametersDto } from './ac-charging-parameters.dto'
+import { AcChargingParametersDto } from './ac-charging-parameters.dto'
 import { CustomDataDto } from './custom-data.dto'
-import { DCChargingParametersDto } from './dc-charging-parameters.dto'
+import { DcChargingParametersDto } from './dc-charging-parameters.dto'
 import { EnergyTransferModeEnum } from '../enumerations/energy-transfer-mode.enum'
 
 /**
@@ -26,12 +26,12 @@ export class ChargingNeedsDto {
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
-  public acChargingParameters!: ACChargingParametersDto
+  public acChargingParameters!: AcChargingParametersDto
 
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
-  public dcChargingParameters!: DCChargingParametersDto
+  public dcChargingParameters!: DcChargingParametersDto
 
   @ApiProperty()
   @IsNotEmpty()

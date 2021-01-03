@@ -5,7 +5,7 @@ import { IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'cla
 import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class NotifyEVChargingScheduleRequestDto {
+export class NotifyEvChargingScheduleRequestDto {
   public constructor(
     timeBase: string,
     chargingSchedule: ChargingScheduleDto,

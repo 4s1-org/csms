@@ -3,7 +3,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
-import { EVSEDto } from '../datatypes/evse.dto'
+import { EvseDto } from '../datatypes/evse.dto'
 import { OperationalStatusEnum } from '../enumerations/operational-status.enum'
 
 /**
@@ -30,7 +30,7 @@ export class ChangeAvailabilityRequestDto {
   @ApiProperty()
   @IsOptional()
   @ValidateNested()
-  public evse!: EVSEDto
+  public evse!: EvseDto
 
   /**
    * This contains the type of availability change that the Charging Station should perform.
