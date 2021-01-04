@@ -18,6 +18,7 @@ import {
   BootNotificationRequestDto,
   OcppErrorCode,
   IResponseMessage,
+  OcppCallErrorDto,
 } from '@yellowgarbagebag/csms-shared'
 import { OcppCallValidationPipe } from './ocpp-call-validation.pipe'
 import { AllWsExceptionsFilter } from '../all-ws-exceptions.filter'
@@ -47,7 +48,7 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
 
   @UsePipes(new OcppCallValidationPipe(), new ValidationPipe())
   @SubscribeMessage('ocpp')
-  async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, IResponseMessage]> {
+  async ocppCommand(@MessageBody() ocppCall: OcppCallDto): Promise<[number, string, IResponseMessage] | any> {
     let response: IResponseMessage
 
     switch (ocppCall.action) {
@@ -60,7 +61,6 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
         throw new OcppWsException(OcppErrorCode.NotSupported, ocppCall.action, ocppCall.messageId)
       }
     }
-
     return new OcppCallResultDto(ocppCall.messageId, response).toMessage()
   }
 
