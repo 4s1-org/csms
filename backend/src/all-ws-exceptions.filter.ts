@@ -2,21 +2,31 @@ import { Catch, ArgumentsHost, HttpException, BadRequestException } from '@nestj
 import { WsArgumentsHost } from '@nestjs/common/interfaces'
 import { BaseWsExceptionFilter } from '@nestjs/websockets'
 import { OcppCallErrorDto, OcppErrorCode } from '@yellowgarbagebag/csms-shared'
+import supertest from 'supertest'
 import { OcppWsException } from './csms/ocpp-exception'
 
 @Catch()
 export class AllWsExceptionsFilter extends BaseWsExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost): void {
     const ws: WsArgumentsHost = host.switchToWs()
+    // const client = ws.getClient()
+
+    // Acknowledge Callback, sofern vorhanden
+    const callback: (data: any) => void | undefined = host.getArgByIndex(2)
 
     if (exception instanceof OcppWsException) {
+      console.log('FEHLER')
       const error = new OcppCallErrorDto(
         exception.messageId || '',
         exception.errorCode,
         exception.errorDescription,
         exception.errorDetails || {},
       )
-      ws.getClient().emit('ocpp', error.toMessage())
+      if (callback && typeof callback === 'function') {
+        callback(error.toMessage())
+      } else {
+        super.catch(exception, host)
+      }
       return
     }
 
@@ -39,6 +49,6 @@ export class AllWsExceptionsFilter extends BaseWsExceptionFilter {
       error.errorDescription = 'No further informations'
     }
 
-    ws.getClient().emit('ocpp', error.toMessage())
+    ws.getClient().send(error.toMessage())
   }
 }
