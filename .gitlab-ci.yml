@@ -39,6 +39,7 @@ backend-with-e2e:
     - npm run lint
     - npm run build
     - npm run test:cov
+    - npm run test:e2e
 
 simulator:
   stage: validating-apps
