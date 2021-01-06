@@ -110,9 +110,9 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
     let response: IResponseMessage
     switch (ocppCall.action) {
       case OcppMessageEnum.BootNotification:
-        const entityClass = plainToClass(BootNotificationRequestDto, ocppCall.payload as unknown)
-        await this.validate(entityClass, ocppCall.messageId)
-        response = this.bootNotification(entityClass)
+        const bootNotification = plainToClass(BootNotificationRequestDto, ocppCall.payload as unknown)
+        await this.validate(bootNotification, ocppCall.messageId)
+        response = this.bootNotification(bootNotification)
         break
       default: {
         throw new OcppWsException(OcppErrorCode.NotSupported, ocppCall.action, ocppCall.messageId)
