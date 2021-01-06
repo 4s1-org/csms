@@ -31,7 +31,7 @@ describe('CSMS Gateway', () => {
     const httpServer = app.getHttpServer()
     connectToSocket = (): any =>
       io.connect(`http://127.0.0.1:${httpServer.address().port}`, {
-        path: '/ocpp/2.0.1',
+        path: '/ocpp/2.0.1/e2eTests',
         transports: ['websocket'],
         forceNew: true,
       })
@@ -120,19 +120,19 @@ describe('CSMS Gateway', () => {
         const socket = connectToSocket()
 
         socket.on('connect', () => {
-          socket.emit('ocpp', () => {
-            fail()
+          socket.emit('ocpp', (data: any) => {
+            expect(data.length).toBe(5)
+            expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+            expect(data[1]).toBe('')
+            expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+            expect(data[3]).toBeDefined()
+            expect(data[4]).toBeDefined()
+            socket.disconnect()
           })
         })
 
-        socket.on('ocpp', (data: any) => {
-          expect(data.length).toBe(5)
-          expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-          expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-          expect(data[3]).toBeDefined()
-          expect(data[4]).toBeDefined()
-          socket.disconnect()
+        socket.on('ocpp', () => {
+          fail()
         })
 
         socket.on('disconnect', (data: string) => {
@@ -145,19 +145,19 @@ describe('CSMS Gateway', () => {
         const socket = connectToSocket()
 
         socket.on('connect', () => {
-          socket.emit('ocpp', null, () => {
-            fail()
+          socket.emit('ocpp', null, (data: any) => {
+            expect(data.length).toBe(5)
+            expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+            expect(data[1]).toBe('')
+            expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+            expect(data[3]).toBeDefined()
+            expect(data[4]).toBeDefined()
+            socket.disconnect()
           })
         })
 
-        socket.on('ocpp', (data: any) => {
-          expect(data.length).toBe(5)
-          expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-          expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-          expect(data[3]).toBeDefined()
-          expect(data[4]).toBeDefined()
-          socket.disconnect()
+        socket.on('ocpp', () => {
+          fail()
         })
 
         socket.on('disconnect', (data: string) => {
@@ -170,19 +170,19 @@ describe('CSMS Gateway', () => {
         const socket = connectToSocket()
 
         socket.on('connect', () => {
-          socket.emit('ocpp', undefined, () => {
-            fail()
+          socket.emit('ocpp', undefined, (data: any) => {
+            expect(data.length).toBe(5)
+            expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+            expect(data[1]).toBe('')
+            expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+            expect(data[3]).toBeDefined()
+            expect(data[4]).toBeDefined()
+            socket.disconnect()
           })
         })
 
-        socket.on('ocpp', (data: any) => {
-          expect(data.length).toBe(5)
-          expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-          expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-          expect(data[3]).toBeDefined()
-          expect(data[4]).toBeDefined()
-          socket.disconnect()
+        socket.on('ocpp', () => {
+          fail()
         })
 
         socket.on('disconnect', (data: string) => {
@@ -195,19 +195,19 @@ describe('CSMS Gateway', () => {
         const socket = connectToSocket()
 
         socket.on('connect', () => {
-          socket.emit('ocpp', 42, () => {
-            fail()
+          socket.emit('ocpp', 42, (data: any) => {
+            expect(data.length).toBe(5)
+            expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+            expect(data[1]).toBe('')
+            expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+            expect(data[3]).toBeDefined()
+            expect(data[4]).toBeDefined()
+            socket.disconnect()
           })
         })
 
-        socket.on('ocpp', (data: any) => {
-          expect(data.length).toBe(5)
-          expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-          expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-          expect(data[3]).toBeDefined()
-          expect(data[4]).toBeDefined()
-          socket.disconnect()
+        socket.on('ocpp', () => {
+          fail()
         })
 
         socket.on('disconnect', (data: string) => {
@@ -219,19 +219,19 @@ describe('CSMS Gateway', () => {
       it('call is a string', (done) => {
         const socket = connectToSocket()
         socket.on('connect', () => {
-          socket.emit('ocpp', 'LoremIpsum', () => {
-            fail()
+          socket.emit('ocpp', 'LoremIpsum', (data: any) => {
+            expect(data.length).toBe(5)
+            expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+            expect(data[1]).toBe('')
+            expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+            expect(data[3]).toBeDefined()
+            expect(data[4]).toBeDefined()
+            socket.disconnect()
           })
         })
 
-        socket.on('ocpp', (data: any) => {
-          expect(data.length).toBe(5)
-          expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-          expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-          expect(data[3]).toBeDefined()
-          expect(data[4]).toBeDefined()
-          socket.disconnect()
+        socket.on('ocpp', () => {
+          fail()
         })
 
         socket.on('disconnect', (data: string) => {
@@ -244,19 +244,19 @@ describe('CSMS Gateway', () => {
         const socket = connectToSocket()
 
         socket.on('connect', () => {
-          socket.emit('ocpp', 'ABCD', () => {
-            fail()
+          socket.emit('ocpp', 'ABCD', (data: any) => {
+            expect(data.length).toBe(5)
+            expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+            expect(data[1]).toBe('')
+            expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+            expect(data[3]).toBeDefined()
+            expect(data[4]).toBeDefined()
+            socket.disconnect()
           })
         })
 
-        socket.on('ocpp', (data: any) => {
-          expect(data.length).toBe(5)
-          expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-          expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-          expect(data[3]).toBeDefined()
-          expect(data[4]).toBeDefined()
-          socket.disconnect()
+        socket.on('ocpp', () => {
+          fail()
         })
 
         socket.on('disconnect', (data: string) => {
@@ -281,20 +281,20 @@ describe('CSMS Gateway', () => {
                 BootReasonEnum.PowerUp,
               ),
             ],
-            () => {
-              fail()
+            (data: any) => {
+              expect(data.length).toBe(5)
+              expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+              expect(data[1]).toBe(messageId)
+              expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+              expect(data[3]).toBeDefined()
+              expect(data[4]).toBeDefined()
+              socket.disconnect()
             },
           )
         })
 
-        socket.on('ocpp', (data: any) => {
-          expect(data.length).toBe(5)
-          expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-          expect(data[1]).toBe(messageId)
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-          expect(data[3]).toBeDefined()
-          expect(data[4]).toBeDefined()
-          socket.disconnect()
+        socket.on('ocpp', () => {
+          fail()
         })
 
         socket.on('disconnect', (data: string) => {
@@ -319,20 +319,20 @@ describe('CSMS Gateway', () => {
             OcppMessageEnum.UnpublishFirmware, // Noch nicht implementiert
             {},
           ],
-          () => {
-            fail()
+          (data: any) => {
+            expect(data.length).toBe(5)
+            expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+            expect(data[1]).toBe(messageId)
+            expect(data[2]).toBe(OcppErrorCode.NotSupported)
+            expect(data[3]).toBeDefined()
+            expect(data[4]).toBeDefined()
+            socket.disconnect()
           },
         )
       })
 
-      socket.on('ocpp', (data: any) => {
-        expect(data.length).toBe(5)
-        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-        expect(data[1]).toBe(messageId)
-        expect(data[2]).toBe(OcppErrorCode.NotSupported)
-        expect(data[3]).toBeDefined()
-        expect(data[4]).toBeDefined()
-        socket.disconnect()
+      socket.on('ocpp', () => {
+        fail()
       })
 
       socket.on('disconnect', (data: string) => {
@@ -346,19 +346,19 @@ describe('CSMS Gateway', () => {
       const messageId = Math.random().toString()
 
       socket.on('connect', () => {
-        socket.emit('ocpp', [OcppMessageTypeIdEnum.Call, messageId, 'LoremIpsum', {}], () => {
-          fail()
+        socket.emit('ocpp', [OcppMessageTypeIdEnum.Call, messageId, 'LoremIpsum', {}], (data: any) => {
+          expect(data.length).toBe(5)
+          expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+          expect(data[1]).toBe(messageId)
+          expect(data[2]).toBe(OcppErrorCode.NotImplemented)
+          expect(data[3]).toBeDefined()
+          expect(data[4]).toBeDefined()
+          socket.disconnect()
         })
       })
 
-      socket.on('ocpp', (data: any) => {
-        expect(data.length).toBe(5)
-        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-        expect(data[1]).toBe(messageId)
-        expect(data[2]).toBe(OcppErrorCode.NotImplemented)
-        expect(data[3]).toBeDefined()
-        expect(data[4]).toBeDefined()
-        socket.disconnect()
+      socket.on('ocpp', () => {
+        fail()
       })
 
       socket.on('disconnect', (data: string) => {
@@ -380,20 +380,20 @@ describe('CSMS Gateway', () => {
             // Payload passt nicht zur Message
             new AuthorizeRequestDto(new IdTokenDto('xxx', IdTokenEnum.eMAID)),
           ).toMessage(),
-          () => {
-            fail()
+          (data: any) => {
+            expect(data.length).toBe(5)
+            expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+            expect(data[1]).toBe(messageId)
+            expect(data[2]).toBe(OcppErrorCode.FormatViolation)
+            expect(data[3]).toBeDefined()
+            expect(data[4]).toBeDefined()
+            socket.disconnect()
           },
         )
       })
 
-      socket.on('ocpp', (data: any) => {
-        expect(data.length).toBe(5)
-        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-        expect(data[1]).toBe(messageId)
-        expect(data[2]).toBe(OcppErrorCode.FormatViolation)
-        expect(data[3]).toBeDefined()
-        expect(data[4]).toBeDefined()
-        socket.disconnect()
+      socket.on('ocpp', () => {
+        fail()
       })
 
       socket.on('disconnect', (data: string) => {
