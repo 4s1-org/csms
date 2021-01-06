@@ -2,7 +2,6 @@ import { Catch, ArgumentsHost, HttpException, BadRequestException } from '@nestj
 import { WsArgumentsHost } from '@nestjs/common/interfaces'
 import { BaseWsExceptionFilter } from '@nestjs/websockets'
 import { OcppCallErrorDto, OcppErrorCode } from '@yellowgarbagebag/csms-shared'
-import supertest from 'supertest'
 import { OcppWsException } from './csms/ocpp-exception'
 
 @Catch()
@@ -15,7 +14,7 @@ export class AllWsExceptionsFilter extends BaseWsExceptionFilter {
     const callback: (data: any) => void | undefined = host.getArgByIndex(2)
 
     if (exception instanceof OcppWsException) {
-      console.log('FEHLER')
+      console.log('FEHLER', exception)
       const error = new OcppCallErrorDto(
         exception.messageId || '',
         exception.errorCode,
