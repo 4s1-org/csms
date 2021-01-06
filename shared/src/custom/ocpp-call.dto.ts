@@ -4,6 +4,8 @@ import { IRequestMessage } from "src/i-request-message"
 import { OcppMessageEnum } from "../ocpp-message.enum"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
 
+export type OccpCallType = [number, string, string, IRequestMessage]
+
 export class OcppCallDto {
   constructor(
     messageId: string,
@@ -46,7 +48,7 @@ export class OcppCallDto {
   /** JSON Payload of the action. */
   public payload: IRequestMessage
 
-  public toMessage(): [number, string, string, IRequestMessage] {
+  public toMessage(): OccpCallType {
     return [this.messageTypeId, this.messageId, this.action, this.payload]
   }
 }
