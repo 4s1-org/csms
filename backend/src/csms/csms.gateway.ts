@@ -1,4 +1,4 @@
-import { Logger, UseFilters } from '@nestjs/common'
+import { Logger, UseFilters, UsePipes, ValidationPipe } from '@nestjs/common'
 import {
   MessageBody,
   SubscribeMessage,
@@ -8,8 +8,9 @@ import {
   OnGatewayInit,
   OnGatewayDisconnect,
   ConnectedSocket,
+  WsResponse,
 } from '@nestjs/websockets'
-import { Server, Socket } from 'socket.io'
+import { Client, Server, Socket } from 'socket.io'
 import {
   BootNotificationResponseDto,
   OcppCallDto,
@@ -28,6 +29,7 @@ import { validate } from 'class-validator'
 import { OcppWsException } from './ocpp-exception'
 import { IncomingMessage } from 'http'
 import { ChargingStation } from './charging-station'
+import { OcppCallValidationPipe } from './ocpp-call-validation.pipe'
 
 @WebSocketGateway({ path: '/ocpp/2.0.1' })
 @UseFilters(new AllWsExceptionsFilter())
@@ -98,15 +100,32 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
     return ocppCall
   }
 
+  @UsePipes(new OcppCallValidationPipe(), new ValidationPipe())
   @SubscribeMessage('ocpp')
+  async handleEvent(client: Client, data: OcppCallDto): Promise<WsResponse<unknown> | undefined> {
+    console.log('drin', data)
+    if (!data) {
+      console.log('no data')
+      return undefined
+    }
+    return { data: true, event: 'ocpp' }
+  }
+
+  @SubscribeMessage('xocpp2')
+  @UsePipes(new OcppCallValidationPipe(), new ValidationPipe())
   async ocppCommand(
-    @MessageBody() data: unknown,
+    @MessageBody() data: OcppCallDto,
     @ConnectedSocket() client: Socket,
   ): Promise<OccpCallResultType | any> {
-    const ocppCall = await this.convertInputToOcppCall(data)
-    const chargingStation = this.chargingStations.find((x) => x.socketId === client.id)
+    if (!data) {
+      console.log('SKIP')
+      return
+    }
+    const ocppCall = data
+    //const ocppCall = await this.convertInputToOcppCall(data)
+    //const chargingStation = this.chargingStations.find((x) => x.socketId === client.id)
     // ToDo: Was ist, wenn es keine ChargingStation gibt?
-    console.log(chargingStation)
+    //console.log(chargingStation)
 
     let response: IResponseMessage
     switch (ocppCall.action) {
