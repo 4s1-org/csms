@@ -20,6 +20,7 @@ import {
   OcppErrorCode,
   IResponseMessage,
   OcppMessageTypeIdEnum,
+  OccpCallResultType,
 } from '@yellowgarbagebag/csms-shared'
 import { AllWsExceptionsFilter } from '../all-ws-exceptions.filter'
 import { plainToClass } from 'class-transformer'
@@ -101,7 +102,7 @@ export class CsmsGateway implements OnGatewayInit, OnGatewayDisconnect, OnGatewa
   async ocppCommand(
     @MessageBody() data: unknown,
     @ConnectedSocket() client: Socket,
-  ): Promise<[number, string, IResponseMessage] | any> {
+  ): Promise<OccpCallResultType | any> {
     const ocppCall = await this.convertInputToOcppCall(data)
     const chargingStation = this.chargingStations.find((x) => x.socketId === client.id)
     // ToDo: Was ist, wenn es keine ChargingStation gibt?
