@@ -1,11 +1,8 @@
 import io from 'socket.io-client'
 import {
-  AuthorizeRequestDto,
   BootNotificationRequestDto,
   BootReasonEnum,
   ChargingStationDto,
-  IdTokenDto,
-  IdTokenEnum,
   OcppCallDto,
   OcppMessageEnum,
   OcppMessageTypeIdEnum,
@@ -16,86 +13,7 @@ function getId(): string {
   return uuid().replace(/-/g, '')
 }
 
-function sendNoArray(socket: SocketIOClient.Socket): void {
-  if (socket && !socket.connected) {
-    return
-  }
-
-  socket.emit('ocpp', 34, (response: any) => console.log('sendNoArray:', JSON.stringify(response)))
-
-  setTimeout(() => {
-    sendNoArray(socket)
-  }, 3000)
-}
-
-function sendMessageAndDataNotWorkTogether(socket: SocketIOClient.Socket): void {
-  if (socket && !socket.connected) {
-    return
-  }
-
-  socket.emit(
-    'ocpp',
-    [
-      OcppMessageTypeIdEnum.Call,
-      getId(),
-      OcppMessageEnum.BootNotification,
-      new AuthorizeRequestDto(new IdTokenDto('foo', IdTokenEnum.KeyCode)),
-    ],
-    (response: any) => console.log('sendMessageAndDataNotWorkTogether:', JSON.stringify(response)),
-  )
-
-  setTimeout(() => {
-    sendMessageAndDataNotWorkTogether(socket)
-  }, 3000)
-}
-
-function sendToLongId(socket: SocketIOClient.Socket): void {
-  if (socket && !socket.connected) {
-    return
-  }
-
-  socket.emit(
-    'ocpp',
-    [
-      OcppMessageTypeIdEnum.Call,
-      getId() + 'xxx',
-      OcppMessageEnum.BootNotification,
-      new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
-    ],
-    (response: any) => console.log('sendToLongId:', JSON.stringify(response)),
-  )
-
-  setTimeout(() => {
-    sendToLongId(socket)
-  }, 3000)
-}
-
-function sendValidMessageWithoutCallDto(socket: SocketIOClient.Socket): void {
-  if (socket && !socket.connected) {
-    return
-  }
-
-  socket.emit(
-    'ocpp',
-    [
-      OcppMessageTypeIdEnum.Call,
-      getId(),
-      OcppMessageEnum.BootNotification,
-      new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
-    ],
-    (response: any) => console.log('sendValidMessageWithoutCallDto:', JSON.stringify(response)),
-  )
-
-  setTimeout(() => {
-    sendValidMessageWithoutCallDto(socket)
-  }, 3000)
-}
-
 function sendValidMessageWithCallDto(socket: SocketIOClient.Socket): void {
-  if (socket && !socket.connected) {
-    return
-  }
-
   socket.emit(
     'ocpp',
     new OcppCallDto(
@@ -105,10 +23,6 @@ function sendValidMessageWithCallDto(socket: SocketIOClient.Socket): void {
     ).toMessage(),
     (response: any) => console.log('sendValidMessageWithCallDto:', JSON.stringify(response)),
   )
-
-  setTimeout(() => {
-    sendValidMessageWithCallDto(socket)
-  }, 3000)
 }
 
 function spielwiese(socket: SocketIOClient.Socket): void {
@@ -141,7 +55,7 @@ function spielwiese(socket: SocketIOClient.Socket): void {
 async function main(): Promise<void> {
   console.log('*** main() ***')
   const socket: SocketIOClient.Socket = io('http://172.22.21.12:3000/', {
-    path: '/ocpp/2.0.1',
+    path: '/ocpp/2.0.1/CS001',
     transports: ['websocket'],
     forceNew: true,
   })
@@ -149,12 +63,8 @@ async function main(): Promise<void> {
   socket.on('connect', () => {
     console.log('Connected: ' + socket.id)
 
-    //sendNoArray(socket)
-    //sendToLongId(socket)
-    //sendMessageAndDataNotWorkTogether(socket)
-    //sendValidMessageWithoutCallDto(socket)
-    //sendValidMessageWithCallDto(socket)
-    spielwiese(socket)
+    sendValidMessageWithCallDto(socket)
+    //spielwiese(socket)
   })
 
   socket.on('ocpp', (data: any) => {
