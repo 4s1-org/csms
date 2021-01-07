@@ -1,6 +1,6 @@
 import WebSocket from 'ws'
 import http from 'http'
-import url from 'url'
+//import url from 'url'
 import {
   BootNotificationRequestDto,
   BootNotificationResponseDto,
@@ -12,7 +12,7 @@ import {
   RegistrationStatusEnum,
 } from '@yellowgarbagebag/csms-shared'
 import { plainToClass } from 'class-transformer'
-import { validate, validateSync } from 'class-validator'
+import { validateSync } from 'class-validator'
 
 const server = http.createServer({})
 const ws = new WebSocket.Server({
