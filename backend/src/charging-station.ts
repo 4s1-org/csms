@@ -28,28 +28,28 @@ export class ChargingStation {
     this.logger.info('Disconnected')
   }
 
-  public messageReceived(msg: any): OcppCallResultDto | OcppCallErrorDto {
+  public messageReceived(data: unknown): OcppCallResultDto | OcppCallErrorDto {
     this.logger.info(`Received message`)
 
-    const data: OcppCallDto | OcppCallErrorDto = validateOcppCall(msg)
-    if (data instanceof OcppCallErrorDto) {
+    const dto: OcppCallDto | OcppCallErrorDto = validateOcppCall(data)
+    if (dto instanceof OcppCallErrorDto) {
       this.logger.error(`Received OcppCallDto has errors`)
-      return data
+      return dto
     }
 
-    this.logger.info(`Type of "${data.action}"`)
-    switch (data.action) {
+    this.logger.info(`Type of "${dto.action}"`)
+    switch (dto.action) {
       case OcppMessageEnum.BootNotification:
-        const bootNotification = plainToClass(BootNotificationRequestDto, data.payload as unknown)
+        const bootNotification = plainToClass(BootNotificationRequestDto, dto.payload as unknown)
         const errors = validateSync(bootNotification)
         if (errors.length > 0) {
           this.logger.error(`Received BootNotificationRequestDto has errors`)
-          return new OcppCallErrorDto(data.messageId, OcppErrorCode.FormatViolation, 'Validation failed')
+          return new OcppCallErrorDto(dto.messageId, OcppErrorCode.FormatViolation, 'Validation failed')
         }
         const res = new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
-        return new OcppCallResultDto(data.messageId, res)
+        return new OcppCallResultDto(dto.messageId, res)
       default:
-        return new OcppCallErrorDto(data.messageId, OcppErrorCode.NotSupported)
+        return new OcppCallErrorDto(dto.messageId, OcppErrorCode.NotSupported)
     }
   }
 }
