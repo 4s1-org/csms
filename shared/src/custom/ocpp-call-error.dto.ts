@@ -9,14 +9,14 @@ export class OcppCallErrorDto {
   constructor(
     messageId: string,
     errorCode: OcppErrorCode,
-    errorDescription: string,
-    errorDetails: unknown,
+    errorDescription?: string,
+    errorDetails?: unknown,
   ) {
     this.messageTypeId = OcppMessageTypeIdEnum.Error
     this.messageId = messageId
     this.errorCode = errorCode
-    this.errorDescription = errorDescription
-    this.errorDetails = errorDetails
+    this.errorDescription = errorDescription || ""
+    this.errorDetails = errorDetails || {}
   }
 
   // ToDo: Fixer Wert setzen
