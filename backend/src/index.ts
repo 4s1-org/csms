@@ -1,9 +1,9 @@
 import WebSocket from 'ws'
-//import url from 'url'
-import { OcppCallErrorDto, OcppCallResultDto } from '@yellowgarbagebag/csms-shared'
+import { OcppCallErrorDto, OcppCallResultDto, OcppErrorCode } from '@yellowgarbagebag/csms-shared'
 import { createLogger } from './logger'
 import { IncomingMessage } from 'http'
 import { ChargingStation } from './charging-station'
+import { OcppError } from './ocpp-error'
 
 const logger = createLogger('Core')
 const chargingStations: ChargingStation[] = []
@@ -21,7 +21,7 @@ ws.on('connection', (ws: WebSocket, request: IncomingMessage) => {
   let cs: ChargingStation | undefined
 
   const parts = request.url?.split('/')
-  if (parts && parts.length >= 4) {
+  if (parts && parts[1] === 'ocpp' && parts[2] === '2.0.1' && parts.length >= 4) {
     const uniqueIdentifier = parts[3]
     cs = chargingStations.find((x) => x.uniqueIdentifier === uniqueIdentifier)
     if (!cs) {
@@ -42,11 +42,18 @@ ws.on('connection', (ws: WebSocket, request: IncomingMessage) => {
   ws.on('message', (data: any) => {
     try {
       if (cs) {
-        const dto: OcppCallResultDto | OcppCallErrorDto = cs.messageReceived(data)
+        const dto: OcppCallResultDto = cs.messageReceived(data)
         ws.send(JSON.stringify(dto.toMessage()))
       }
     } catch (err) {
-      logger.error('Error', err)
+      if (err instanceof OcppError) {
+        ws.send(JSON.stringify(err.dto.toMessage()))
+      } else {
+        logger.error('Internal Server Error')
+        console.log(err)
+        const dto = new OcppCallErrorDto('', OcppErrorCode.InternalError)
+        ws.send(JSON.stringify(dto.toMessage()))
+      }
     }
   })
 })
