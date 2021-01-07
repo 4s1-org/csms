@@ -34,7 +34,6 @@ function spielwiese(socket: SocketIOClient.Socket): void {
     'ocpp',
     [
       OcppMessageTypeIdEnum.Call,
-      getId(),
       OcppMessageEnum.BootNotification,
       {
         chargingStation: {
@@ -44,7 +43,7 @@ function spielwiese(socket: SocketIOClient.Socket): void {
         reason: BootReasonEnum.PowerUp,
       },
     ],
-    (response: any) => console.log('sendValidMessageWithCallDto:', JSON.stringify(response)),
+    (response: any) => console.log('sendValidMessageWithCallDto:', response),
   )
 
   setTimeout(() => {
@@ -54,7 +53,7 @@ function spielwiese(socket: SocketIOClient.Socket): void {
 
 async function main(): Promise<void> {
   console.log('*** main() ***')
-  const socket: SocketIOClient.Socket = io('http://172.22.21.12:3000/', {
+  const socket: SocketIOClient.Socket = io('http://localhost:3000/', {
     path: '/ocpp/2.0.1/CS001',
     transports: ['websocket'],
     forceNew: true,
