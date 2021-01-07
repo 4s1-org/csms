@@ -39,11 +39,11 @@ ws.on('connection', (ws: WebSocket, request: IncomingMessage) => {
     }
   })
 
-  ws.on('message', (msg: any) => {
+  ws.on('message', (data: any) => {
     try {
       if (cs) {
-        const res: OcppCallResultDto | OcppCallErrorDto = cs.messageReceived(msg)
-        ws.send(JSON.stringify(res.toMessage()))
+        const dto: OcppCallResultDto | OcppCallErrorDto = cs.messageReceived(data)
+        ws.send(JSON.stringify(dto.toMessage()))
       }
     } catch (err) {
       logger.error('Error', err)
