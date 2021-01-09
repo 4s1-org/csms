@@ -1,0 +1,1 @@
+process.env.NOLOG = true
