@@ -38,6 +38,9 @@ function BootNotification(ws: WebSocket): void {
 
 describe('CSMS Gateway', () => {
   const gracefulDisconnectReason = 'io client disconnect'
+  const connectToSocket = (): WebSocket => {
+    return new WebSocket('ws://localhost:3000/ocpp/2.0.1/LS001', ['ocpp2.0.1'])
+  }
 
   beforeEach(async () => {
     // Start server
@@ -48,381 +51,388 @@ describe('CSMS Gateway', () => {
     WebSocketServer.stop()
   })
 
-  it.only('connect', (done) => {
-    const websocket = new WebSocket('ws://localhost:3000/ocpp/2.0.1/LS001', ['ocpp2.0.1'])
-    websocket.onopen = (authorizationData: any): void => {
-      BootNotification(websocket)
+  it('connect', (done) => {
+    const socket = connectToSocket()
+    socket.onopen = (authorizationData: any): void => {
+      BootNotification(socket)
     }
 
-    websocket.onmessage = (msg: any): void => {
-      expect(msg).toBeDefined()
-      done()
+    socket.onmessage = (data: any): void => {
+      console.log(data)
+      expect(data).toBeDefined()
+      socket.close()
     }
 
-    websocket.onerror = (): void => {
+    socket.onerror = (): void => {
       fail()
+    }
+
+    socket.onclose = (): void => {
+      done()
     }
   })
 
-  // describe('RPC Framework tests', () => {
-  //   describe('Valid calls', () => {
-  //     it('Without OcppCallDto', (done) => {
-  //       const socket = connectToSocket()
-  //       const messageId = Math.random().toString()
+  describe('RPC Framework tests', () => {
+    describe('Valid calls', () => {
+      it('Without OcppCallDto', (done) => {
+        const socket = connectToSocket()
+        const messageId = Math.random().toString()
 
-  //       socket.on('connect', () => {
-  //         socket.emit(
-  //           'ocpp',
-  //           [
-  //             OcppMessageTypeIdEnum.Call,
-  //             messageId,
-  //             OcppMessageEnum.BootNotification,
-  //             new BootNotificationRequestDto(
-  //               new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-  //               BootReasonEnum.PowerUp,
-  //             ),
-  //           ],
-  //           (data: any) => {
-  //             expect(data.length).toBe(3)
-  //             expect(data[0]).toBe(OcppMessageTypeIdEnum.Result)
-  //             expect(data[1]).toBe(messageId)
-  //             expect(data[2]).toBeDefined()
-  //             socket.disconnect()
-  //           },
-  //         )
-  //       })
+        socket.onopen = (): void => {
+          socket.send(
+            JSON.stringify([
+              OcppMessageTypeIdEnum.Call,
+              messageId,
+              OcppMessageEnum.BootNotification,
+              new BootNotificationRequestDto(
+                new ChargingStationDto('SingleSocketCharger', 'VendorX'),
+                BootReasonEnum.PowerUp,
+              ),
+            ]),
+          )
+        }
 
-  //       socket.on('ocpp', () => {
-  //         fail()
-  //       })
+        socket.onmessage = (data: any): void => {
+          //var ddata = (JSON.parse(msg.data));
+          console.log(data)
+          expect(data.length).toBe(3)
+          expect(data[0]).toBe(OcppMessageTypeIdEnum.Result)
+          expect(data[1]).toBe(messageId)
+          expect(data[2]).toBeDefined()
+          socket.close()
+          done()
+        }
 
-  //       socket.on('disconnect', (data: string) => {
-  //         expect(data).toBe(gracefulDisconnectReason)
-  //         done()
-  //       })
-  //     })
+        socket.onerror = (): void => {
+          fail()
+        }
 
-  //     it('With OcppCallDto', (done) => {
-  //       const socket = connectToSocket()
-  //       const messageId = Math.random().toString()
+        socket.onclose = (): void => {
+          done()
+        }
+      })
 
-  //       socket.on('connect', () => {
-  //         socket.emit(
-  //           'ocpp',
-  //           new OcppCallDto(
-  //             messageId,
-  //             OcppMessageEnum.BootNotification,
-  //             new BootNotificationRequestDto(
-  //               new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-  //               BootReasonEnum.PowerUp,
-  //             ),
-  //           ).toMessage(),
-  //           (data: any) => {
-  //             expect(data.length).toBe(3)
-  //             expect(data[0]).toBe(OcppMessageTypeIdEnum.Result)
-  //             expect(data[1]).toBe(messageId)
-  //             expect(data[2]).toBeDefined()
-  //             socket.disconnect()
-  //           },
-  //         )
-  //       })
+      //     it('With OcppCallDto', (done) => {
+      //       const socket = connectToSocket()
+      //       const messageId = Math.random().toString()
 
-  //       socket.on('ocpp', () => {
-  //         fail()
-  //       })
+      //       socket.on('connect', () => {
+      //         socket.emit(
+      //           'ocpp',
+      //           new OcppCallDto(
+      //             messageId,
+      //             OcppMessageEnum.BootNotification,
+      //             new BootNotificationRequestDto(
+      //               new ChargingStationDto('SingleSocketCharger', 'VendorX'),
+      //               BootReasonEnum.PowerUp,
+      //             ),
+      //           ).toMessage(),
+      //           (data: any) => {
+      //             expect(data.length).toBe(3)
+      //             expect(data[0]).toBe(OcppMessageTypeIdEnum.Result)
+      //             expect(data[1]).toBe(messageId)
+      //             expect(data[2]).toBeDefined()
+      //             socket.disconnect()
+      //           },
+      //         )
+      //       })
 
-  //       socket.on('disconnect', (data: string) => {
-  //         expect(data).toBe(gracefulDisconnectReason)
-  //         done()
-  //       })
-  //     })
-  //   })
+      //       socket.on('ocpp', () => {
+      //         fail()
+      //       })
 
-  //   describe('Invalid calls', () => {
-  //     it('call is empty', (done) => {
-  //       const socket = connectToSocket()
+      //       socket.on('disconnect', (data: string) => {
+      //         expect(data).toBe(gracefulDisconnectReason)
+      //         done()
+      //       })
+      //     })
+      //   })
 
-  //       socket.on('connect', () => {
-  //         socket.emit('ocpp', (data: any) => {
-  //           expect(data.length).toBe(5)
-  //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //           expect(data[1]).toBe('')
-  //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-  //           expect(data[3]).toBeDefined()
-  //           expect(data[4]).toBeDefined()
-  //           socket.disconnect()
-  //         })
-  //       })
+      //   describe('Invalid calls', () => {
+      //     it('call is empty', (done) => {
+      //       const socket = connectToSocket()
 
-  //       socket.on('ocpp', () => {
-  //         fail()
-  //       })
+      //       socket.on('connect', () => {
+      //         socket.emit('ocpp', (data: any) => {
+      //           expect(data.length).toBe(5)
+      //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //           expect(data[1]).toBe('')
+      //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+      //           expect(data[3]).toBeDefined()
+      //           expect(data[4]).toBeDefined()
+      //           socket.disconnect()
+      //         })
+      //       })
 
-  //       socket.on('disconnect', (data: string) => {
-  //         expect(data).toBe(gracefulDisconnectReason)
-  //         done()
-  //       })
-  //     })
+      //       socket.on('ocpp', () => {
+      //         fail()
+      //       })
 
-  //     it('call is null', (done) => {
-  //       const socket = connectToSocket()
+      //       socket.on('disconnect', (data: string) => {
+      //         expect(data).toBe(gracefulDisconnectReason)
+      //         done()
+      //       })
+      //     })
 
-  //       socket.on('connect', () => {
-  //         socket.emit('ocpp', null, (data: any) => {
-  //           expect(data.length).toBe(5)
-  //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //           expect(data[1]).toBe('')
-  //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-  //           expect(data[3]).toBeDefined()
-  //           expect(data[4]).toBeDefined()
-  //           socket.disconnect()
-  //         })
-  //       })
+      //     it('call is null', (done) => {
+      //       const socket = connectToSocket()
 
-  //       socket.on('ocpp', () => {
-  //         fail()
-  //       })
+      //       socket.on('connect', () => {
+      //         socket.emit('ocpp', null, (data: any) => {
+      //           expect(data.length).toBe(5)
+      //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //           expect(data[1]).toBe('')
+      //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+      //           expect(data[3]).toBeDefined()
+      //           expect(data[4]).toBeDefined()
+      //           socket.disconnect()
+      //         })
+      //       })
 
-  //       socket.on('disconnect', (data: string) => {
-  //         expect(data).toBe(gracefulDisconnectReason)
-  //         done()
-  //       })
-  //     })
+      //       socket.on('ocpp', () => {
+      //         fail()
+      //       })
 
-  //     it('call is undefined', (done) => {
-  //       const socket = connectToSocket()
+      //       socket.on('disconnect', (data: string) => {
+      //         expect(data).toBe(gracefulDisconnectReason)
+      //         done()
+      //       })
+      //     })
 
-  //       socket.on('connect', () => {
-  //         socket.emit('ocpp', undefined, (data: any) => {
-  //           expect(data.length).toBe(5)
-  //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //           expect(data[1]).toBe('')
-  //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-  //           expect(data[3]).toBeDefined()
-  //           expect(data[4]).toBeDefined()
-  //           socket.disconnect()
-  //         })
-  //       })
+      //     it('call is undefined', (done) => {
+      //       const socket = connectToSocket()
 
-  //       socket.on('ocpp', () => {
-  //         fail()
-  //       })
+      //       socket.on('connect', () => {
+      //         socket.emit('ocpp', undefined, (data: any) => {
+      //           expect(data.length).toBe(5)
+      //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //           expect(data[1]).toBe('')
+      //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+      //           expect(data[3]).toBeDefined()
+      //           expect(data[4]).toBeDefined()
+      //           socket.disconnect()
+      //         })
+      //       })
 
-  //       socket.on('disconnect', (data: string) => {
-  //         expect(data).toBe(gracefulDisconnectReason)
-  //         done()
-  //       })
-  //     })
+      //       socket.on('ocpp', () => {
+      //         fail()
+      //       })
 
-  //     it('call is a number', (done) => {
-  //       const socket = connectToSocket()
+      //       socket.on('disconnect', (data: string) => {
+      //         expect(data).toBe(gracefulDisconnectReason)
+      //         done()
+      //       })
+      //     })
 
-  //       socket.on('connect', () => {
-  //         socket.emit('ocpp', 42, (data: any) => {
-  //           expect(data.length).toBe(5)
-  //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //           expect(data[1]).toBe('')
-  //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-  //           expect(data[3]).toBeDefined()
-  //           expect(data[4]).toBeDefined()
-  //           socket.disconnect()
-  //         })
-  //       })
+      //     it('call is a number', (done) => {
+      //       const socket = connectToSocket()
 
-  //       socket.on('ocpp', () => {
-  //         fail()
-  //       })
+      //       socket.on('connect', () => {
+      //         socket.emit('ocpp', 42, (data: any) => {
+      //           expect(data.length).toBe(5)
+      //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //           expect(data[1]).toBe('')
+      //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+      //           expect(data[3]).toBeDefined()
+      //           expect(data[4]).toBeDefined()
+      //           socket.disconnect()
+      //         })
+      //       })
 
-  //       socket.on('disconnect', (data: string) => {
-  //         expect(data).toBe(gracefulDisconnectReason)
-  //         done()
-  //       })
-  //     })
+      //       socket.on('ocpp', () => {
+      //         fail()
+      //       })
 
-  //     it('call is a string', (done) => {
-  //       const socket = connectToSocket()
-  //       socket.on('connect', () => {
-  //         socket.emit('ocpp', 'LoremIpsum', (data: any) => {
-  //           expect(data.length).toBe(5)
-  //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //           expect(data[1]).toBe('')
-  //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-  //           expect(data[3]).toBeDefined()
-  //           expect(data[4]).toBeDefined()
-  //           socket.disconnect()
-  //         })
-  //       })
+      //       socket.on('disconnect', (data: string) => {
+      //         expect(data).toBe(gracefulDisconnectReason)
+      //         done()
+      //       })
+      //     })
 
-  //       socket.on('ocpp', () => {
-  //         fail()
-  //       })
+      //     it('call is a string', (done) => {
+      //       const socket = connectToSocket()
+      //       socket.on('connect', () => {
+      //         socket.emit('ocpp', 'LoremIpsum', (data: any) => {
+      //           expect(data.length).toBe(5)
+      //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //           expect(data[1]).toBe('')
+      //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+      //           expect(data[3]).toBeDefined()
+      //           expect(data[4]).toBeDefined()
+      //           socket.disconnect()
+      //         })
+      //       })
 
-  //       socket.on('disconnect', (data: string) => {
-  //         expect(data).toBe(gracefulDisconnectReason)
-  //         done()
-  //       })
-  //     })
+      //       socket.on('ocpp', () => {
+      //         fail()
+      //       })
 
-  //     it('call is a string with 4 chars, like the correct array length', (done) => {
-  //       const socket = connectToSocket()
+      //       socket.on('disconnect', (data: string) => {
+      //         expect(data).toBe(gracefulDisconnectReason)
+      //         done()
+      //       })
+      //     })
 
-  //       socket.on('connect', () => {
-  //         socket.emit('ocpp', 'ABCD', (data: any) => {
-  //           expect(data.length).toBe(5)
-  //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //           expect(data[1]).toBe('')
-  //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-  //           expect(data[3]).toBeDefined()
-  //           expect(data[4]).toBeDefined()
-  //           socket.disconnect()
-  //         })
-  //       })
+      //     it('call is a string with 4 chars, like the correct array length', (done) => {
+      //       const socket = connectToSocket()
 
-  //       socket.on('ocpp', () => {
-  //         fail()
-  //       })
+      //       socket.on('connect', () => {
+      //         socket.emit('ocpp', 'ABCD', (data: any) => {
+      //           expect(data.length).toBe(5)
+      //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //           expect(data[1]).toBe('')
+      //           expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+      //           expect(data[3]).toBeDefined()
+      //           expect(data[4]).toBeDefined()
+      //           socket.disconnect()
+      //         })
+      //       })
 
-  //       socket.on('disconnect', (data: string) => {
-  //         expect(data).toBe(gracefulDisconnectReason)
-  //         done()
-  //       })
-  //     })
+      //       socket.on('ocpp', () => {
+      //         fail()
+      //       })
 
-  //     it('messageTypeId is not 2', (done) => {
-  //       const socket = connectToSocket()
-  //       const messageId = Math.random().toString()
+      //       socket.on('disconnect', (data: string) => {
+      //         expect(data).toBe(gracefulDisconnectReason)
+      //         done()
+      //       })
+      //     })
 
-  //       socket.on('connect', () => {
-  //         socket.emit(
-  //           'ocpp',
-  //           [
-  //             OcppMessageTypeIdEnum.Result, // Es müsste ein Call sein
-  //             messageId,
-  //             OcppMessageEnum.BootNotification,
-  //             new BootNotificationRequestDto(
-  //               new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-  //               BootReasonEnum.PowerUp,
-  //             ),
-  //           ],
-  //           (data: any) => {
-  //             expect(data.length).toBe(5)
-  //             expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //             expect(data[1]).toBe(messageId)
-  //             expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
-  //             expect(data[3]).toBeDefined()
-  //             expect(data[4]).toBeDefined()
-  //             socket.disconnect()
-  //           },
-  //         )
-  //       })
+      //     it('messageTypeId is not 2', (done) => {
+      //       const socket = connectToSocket()
+      //       const messageId = Math.random().toString()
 
-  //       socket.on('ocpp', () => {
-  //         fail()
-  //       })
+      //       socket.on('connect', () => {
+      //         socket.emit(
+      //           'ocpp',
+      //           [
+      //             OcppMessageTypeIdEnum.Result, // Es müsste ein Call sein
+      //             messageId,
+      //             OcppMessageEnum.BootNotification,
+      //             new BootNotificationRequestDto(
+      //               new ChargingStationDto('SingleSocketCharger', 'VendorX'),
+      //               BootReasonEnum.PowerUp,
+      //             ),
+      //           ],
+      //           (data: any) => {
+      //             expect(data.length).toBe(5)
+      //             expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //             expect(data[1]).toBe(messageId)
+      //             expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+      //             expect(data[3]).toBeDefined()
+      //             expect(data[4]).toBeDefined()
+      //             socket.disconnect()
+      //           },
+      //         )
+      //       })
 
-  //       socket.on('disconnect', (data: string) => {
-  //         expect(data).toBe(gracefulDisconnectReason)
-  //         done()
-  //       })
-  //     })
-  //   })
-  // })
+      //       socket.on('ocpp', () => {
+      //         fail()
+      //       })
 
-  // describe('Format validation tests', () => {
-  //   it('Call a not implemented action', (done) => {
-  //     const socket = connectToSocket()
-  //     const messageId = Math.random().toString()
+      //       socket.on('disconnect', (data: string) => {
+      //         expect(data).toBe(gracefulDisconnectReason)
+      //         done()
+      //       })
+      //     })
+      //   })
+      // })
 
-  //     socket.on('connect', () => {
-  //       socket.emit(
-  //         'ocpp',
-  //         [
-  //           OcppMessageTypeIdEnum.Call,
-  //           messageId,
-  //           OcppMessageEnum.UnpublishFirmware, // Noch nicht implementiert
-  //           {},
-  //         ],
-  //         (data: any) => {
-  //           expect(data.length).toBe(5)
-  //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //           expect(data[1]).toBe(messageId)
-  //           expect(data[2]).toBe(OcppErrorCode.NotSupported)
-  //           expect(data[3]).toBeDefined()
-  //           expect(data[4]).toBeDefined()
-  //           socket.disconnect()
-  //         },
-  //       )
-  //     })
+      // describe('Format validation tests', () => {
+      //   it('Call a not implemented action', (done) => {
+      //     const socket = connectToSocket()
+      //     const messageId = Math.random().toString()
 
-  //     socket.on('ocpp', () => {
-  //       fail()
-  //     })
+      //     socket.on('connect', () => {
+      //       socket.emit(
+      //         'ocpp',
+      //         [
+      //           OcppMessageTypeIdEnum.Call,
+      //           messageId,
+      //           OcppMessageEnum.UnpublishFirmware, // Noch nicht implementiert
+      //           {},
+      //         ],
+      //         (data: any) => {
+      //           expect(data.length).toBe(5)
+      //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //           expect(data[1]).toBe(messageId)
+      //           expect(data[2]).toBe(OcppErrorCode.NotSupported)
+      //           expect(data[3]).toBeDefined()
+      //           expect(data[4]).toBeDefined()
+      //           socket.disconnect()
+      //         },
+      //       )
+      //     })
 
-  //     socket.on('disconnect', (data: string) => {
-  //       expect(data).toBe(gracefulDisconnectReason)
-  //       done()
-  //     })
-  //   })
+      //     socket.on('ocpp', () => {
+      //       fail()
+      //     })
 
-  //   it('Call an invalid action', (done) => {
-  //     const socket = connectToSocket()
-  //     const messageId = Math.random().toString()
+      //     socket.on('disconnect', (data: string) => {
+      //       expect(data).toBe(gracefulDisconnectReason)
+      //       done()
+      //     })
+      //   })
 
-  //     socket.on('connect', () => {
-  //       socket.emit('ocpp', [OcppMessageTypeIdEnum.Call, messageId, 'LoremIpsum', {}], (data: any) => {
-  //         expect(data.length).toBe(5)
-  //         expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //         expect(data[1]).toBe(messageId)
-  //         expect(data[2]).toBe(OcppErrorCode.NotImplemented)
-  //         expect(data[3]).toBeDefined()
-  //         expect(data[4]).toBeDefined()
-  //         socket.disconnect()
-  //       })
-  //     })
+      //   it('Call an invalid action', (done) => {
+      //     const socket = connectToSocket()
+      //     const messageId = Math.random().toString()
 
-  //     socket.on('ocpp', () => {
-  //       fail()
-  //     })
+      //     socket.on('connect', () => {
+      //       socket.emit('ocpp', [OcppMessageTypeIdEnum.Call, messageId, 'LoremIpsum', {}], (data: any) => {
+      //         expect(data.length).toBe(5)
+      //         expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //         expect(data[1]).toBe(messageId)
+      //         expect(data[2]).toBe(OcppErrorCode.NotImplemented)
+      //         expect(data[3]).toBeDefined()
+      //         expect(data[4]).toBeDefined()
+      //         socket.disconnect()
+      //       })
+      //     })
 
-  //     socket.on('disconnect', (data: string) => {
-  //       expect(data).toBe(gracefulDisconnectReason)
-  //       done()
-  //     })
-  //   })
+      //     socket.on('ocpp', () => {
+      //       fail()
+      //     })
 
-  //   it('action and paypload does not match', (done) => {
-  //     const socket = connectToSocket()
-  //     const messageId = Math.random().toString()
+      //     socket.on('disconnect', (data: string) => {
+      //       expect(data).toBe(gracefulDisconnectReason)
+      //       done()
+      //     })
+      //   })
 
-  //     socket.on('connect', () => {
-  //       socket.emit(
-  //         'ocpp',
-  //         new OcppCallDto(
-  //           messageId,
-  //           OcppMessageEnum.BootNotification,
-  //           // Payload passt nicht zur Message
-  //           new AuthorizeRequestDto(new IdTokenDto('xxx', IdTokenEnum.eMAID)),
-  //         ).toMessage(),
-  //         (data: any) => {
-  //           expect(data.length).toBe(5)
-  //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-  //           expect(data[1]).toBe(messageId)
-  //           expect(data[2]).toBe(OcppErrorCode.FormatViolation)
-  //           expect(data[3]).toBeDefined()
-  //           expect(data[4]).toBeDefined()
-  //           socket.disconnect()
-  //         },
-  //       )
-  //     })
+      //   it('action and paypload does not match', (done) => {
+      //     const socket = connectToSocket()
+      //     const messageId = Math.random().toString()
 
-  //     socket.on('ocpp', () => {
-  //       fail()
-  //     })
+      //     socket.on('connect', () => {
+      //       socket.emit(
+      //         'ocpp',
+      //         new OcppCallDto(
+      //           messageId,
+      //           OcppMessageEnum.BootNotification,
+      //           // Payload passt nicht zur Message
+      //           new AuthorizeRequestDto(new IdTokenDto('xxx', IdTokenEnum.eMAID)),
+      //         ).toMessage(),
+      //         (data: any) => {
+      //           expect(data.length).toBe(5)
+      //           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+      //           expect(data[1]).toBe(messageId)
+      //           expect(data[2]).toBe(OcppErrorCode.FormatViolation)
+      //           expect(data[3]).toBeDefined()
+      //           expect(data[4]).toBeDefined()
+      //           socket.disconnect()
+      //         },
+      //       )
+      //     })
 
-  //     socket.on('disconnect', (data: string) => {
-  //       expect(data).toBe(gracefulDisconnectReason)
-  //       done()
-  //     })
-  //   })
-  // })
+      //     socket.on('ocpp', () => {
+      //       fail()
+      //     })
+
+      //     socket.on('disconnect', (data: string) => {
+      //       expect(data).toBe(gracefulDisconnectReason)
+      //       done()
+      //     })
+    })
+  })
 })
