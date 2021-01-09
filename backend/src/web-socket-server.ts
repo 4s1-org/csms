@@ -6,11 +6,11 @@ import { ChargingStation } from './charging-station'
 import { OcppError } from './ocpp-error'
 
 export abstract class WebSocketServer {
-  private static wss: WebSocket.Server
+  private static server: WebSocket.Server
 
   public static stop(): void {
-    if (this.wss) {
-      this.wss.close()
+    if (this.server) {
+      this.server.close()
     }
   }
 
@@ -18,13 +18,13 @@ export abstract class WebSocketServer {
     const logger = createLogger('Core')
     const chargingStations: ChargingStation[] = []
 
-    this.wss = new WebSocket.Server({
+    this.server = new WebSocket.Server({
       port,
     })
 
-    logger.info(`WebSocket Server is running on port ${this.wss.options.port}`)
+    logger.info(`WebSocket Server is running on port ${this.server.options.port}`)
 
-    this.wss.on('connection', (ws: WebSocket, request: IncomingMessage) => {
+    this.server.on('connection', (socket: WebSocket, request: IncomingMessage) => {
       const socketId = request.headers['sec-websocket-key']
       logger.info(`Client connected: ${socketId}`)
 
@@ -43,26 +43,26 @@ export abstract class WebSocketServer {
         logger.error(`Client URL is invalid "${request.url}"`)
       }
 
-      ws.on('close', () => {
+      socket.on('close', () => {
         if (cs) {
           cs.disconnect()
         }
       })
 
-      ws.on('message', (data: any) => {
+      socket.on('message', (data: any) => {
         try {
           if (cs) {
             const dto: OcppCallResultDto = cs.messageReceived(data)
-            ws.send(JSON.stringify(dto.toMessage()))
+            socket.send(dto.toString())
           }
         } catch (err) {
           if (err instanceof OcppError) {
-            ws.send(JSON.stringify(err.dto.toMessage()))
+            socket.send(err.dto.toString())
           } else {
             logger.error('Internal Server Error')
             console.log(err)
             const dto = new OcppCallErrorDto('', OcppErrorCode.InternalError)
-            ws.send(JSON.stringify(dto.toMessage()))
+            socket.send(dto.toString())
           }
         }
       })
