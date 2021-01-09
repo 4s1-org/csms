@@ -47,7 +47,7 @@ export class ChargingStation {
       }
     } catch (err) {
       if (err instanceof OcppError) {
-        this.logger.error('Invalid status: ' + JSON.stringify(err.dto.toMessage()))
+        this.logger.error('Invalid status: ' + err.dto.toString())
       }
       throw err
     }

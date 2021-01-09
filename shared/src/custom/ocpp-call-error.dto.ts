@@ -3,8 +3,6 @@ import { IsNotEmpty, IsInt, IsPositive, IsEnum, IsString, ValidateNested, MaxLen
 import { OcppErrorCode } from "./ocpp-error-code"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
 
-export type OccpCallErrorType = [number, string, string, string, unknown]
-
 export class OcppCallErrorDto {
   constructor(
     messageId: string,
@@ -52,7 +50,7 @@ export class OcppCallErrorDto {
   /** This JSON object describes error details in an undefined way. If there are no error details you MUST fill in an empty object {}. */
   public errorDetails: unknown
 
-  public toMessage(): OccpCallErrorType {
-    return [this.messageTypeId, this.messageId, this.errorCode, this.errorDescription, this.errorDetails]
+  public toString(): string {
+    return JSON.stringify([this.messageTypeId, this.messageId, this.errorCode, this.errorDescription, this.errorDetails])
   }
 }

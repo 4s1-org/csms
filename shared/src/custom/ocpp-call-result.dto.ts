@@ -3,8 +3,6 @@ import { IsNotEmpty, IsInt, IsPositive, IsString, MaxLength, ValidateNested } fr
 import { IResponseMessage } from "src/i-response-message"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
 
-export type OccpCallResultType = [number, string, IResponseMessage]
-
 export class OcppCallResultDto {
   constructor(
     messageId: string,
@@ -36,7 +34,7 @@ export class OcppCallResultDto {
   /** JSON Payload of the action. */
   public payload: IResponseMessage
 
-  public toMessage(): OccpCallResultType {
-    return [this.messageTypeId, this.messageId, this.payload]
+  public toString(): string {
+    return JSON.stringify([this.messageTypeId, this.messageId, this.payload])
   }
 }
