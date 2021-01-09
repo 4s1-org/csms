@@ -10,7 +10,7 @@ validate-all:
     - npm --prefix shared ci
     - npm --prefix shared run lint
     - npm --prefix shared run build
-    - npm --prefix shared run test:cov
+    - npm --prefix shared run test
 
     - echo "*** backend ***"
     - npm --prefix backend ci
@@ -22,7 +22,7 @@ validate-all:
     - npm --prefix simulator ci
     - npm --prefix simulator run lint
     - npm --prefix simulator run build
-    - npm --prefix simulator run test:cov
+    - npm --prefix simulator run test
 
 backend-e2e-tests:
   stage: e2e
