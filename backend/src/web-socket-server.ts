@@ -6,17 +6,25 @@ import { ChargingStation } from './charging-station'
 import { OcppError } from './ocpp-error'
 
 export abstract class WebSocketServer {
-  public static run(): void {
+  private static wss: WebSocket.Server
+
+  public static stop(): void {
+    if (this.wss) {
+      this.wss.close()
+    }
+  }
+
+  public static run(port: number): void {
     const logger = createLogger('Core')
     const chargingStations: ChargingStation[] = []
 
-    const ws = new WebSocket.Server({
-      port: 3000,
+    this.wss = new WebSocket.Server({
+      port,
     })
 
-    logger.info(`WebSocket Server is running on port ${ws.options.port}`)
+    logger.info(`WebSocket Server is running on port ${this.wss.options.port}`)
 
-    ws.on('connection', (ws: WebSocket, request: IncomingMessage) => {
+    this.wss.on('connection', (ws: WebSocket, request: IncomingMessage) => {
       const socketId = request.headers['sec-websocket-key']
       logger.info(`Client connected: ${socketId}`)
 
