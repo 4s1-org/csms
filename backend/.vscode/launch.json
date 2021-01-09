@@ -17,5 +17,12 @@
     "envFile": "${workspaceFolder}/.env",
     "console": "integratedTerminal",
     "protocol": "inspector"
+  },{
+    "name": "Debug WebSocket Server",
+    "type": "node",
+    "request": "launch",
+    "cwd": "${workspaceRoot}",
+    "runtimeArgs": ["-r", "ts-node/register"],
+    "args": ["${workspaceRoot}/src/index.ts"]
   }]
 }

@@ -20,7 +20,7 @@ function sendValidMessageWithCallDto(socket: SocketIOClient.Socket): void {
       getId(),
       OcppMessageEnum.BootNotification,
       new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
-    ).toMessage(),
+    ).toString(),
     (response: any) => console.log('sendValidMessageWithCallDto:', JSON.stringify(response)),
   )
 }
