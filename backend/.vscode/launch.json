@@ -1,28 +1,64 @@
 {
   "version": "0.2.0",
-  "configurations": [{
-    "name": "Debug Nest Framework",
-    "type": "node",
-    "request": "launch",
-    "cwd": "${workspaceRoot}",
-    "runtimeArgs": [
-      "--nolazy",
-      "-r",
-      "ts-node/register",
-      "-r",
-      "tsconfig-paths/register"
-    ],
-    "args": ["${workspaceRoot}/src/main.ts"],
-    "sourceMaps": true,
-    "envFile": "${workspaceFolder}/.env",
-    "console": "integratedTerminal",
-    "protocol": "inspector"
-  },{
-    "name": "Debug WebSocket Server",
-    "type": "node",
-    "request": "launch",
-    "cwd": "${workspaceRoot}",
-    "runtimeArgs": ["-r", "ts-node/register"],
-    "args": ["${workspaceRoot}/src/index.ts"]
-  }]
+  "configurations": [
+    {
+      "name": "Debug WebSocket Server",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "args": ["${workspaceRoot}/src/index.ts"]
+    }, {
+      "name": "Debug Jest Tests",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "-r",
+        "tsconfig-paths/register",
+        "-r",
+        "ts-node/register",
+        "node_modules/.bin/jest",
+        "--runInBand"
+      ],
+      "port": 9229
+    }, {
+      "name": "Debug Jest Current Testfile",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "-r",
+        "tsconfig-paths/register",
+        "-r",
+        "ts-node/register",
+        "node_modules/.bin/jest",
+        "${fileBasenameNoExtension}",
+        "--runInBand"
+      ],
+      "port": 9229
+    }, {
+      "name": "Debug Jest e2e Tests",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "-r",
+        "tsconfig-paths/register",
+        "-r",
+        "ts-node/register",
+        "node_modules/.bin/jest",
+        "--config",
+        "./test/jest-e2e.json",
+        "--runInBand"
+      ],
+      "port": 9229
+    }
+  ]
 }
