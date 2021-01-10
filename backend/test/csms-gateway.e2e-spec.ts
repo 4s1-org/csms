@@ -14,8 +14,15 @@ import {
 } from '@yellowgarbagebag/csms-shared'
 
 describe('CSMS Gateway', () => {
-  const connectToSocket = (): WebSocket => {
-    return new WebSocket('ws://localhost:3000/ocpp/2.0.1/LS001', ['ocpp2.0.1'])
+  const connectToSocket = (done: jest.DoneCallback): WebSocket => {
+    const socket = new WebSocket('ws://localhost:3000/ocpp/2.0.1/LS001', ['ocpp2.0.1'])
+    socket.onerror = (): void => {
+      fail()
+    }
+    socket.onclose = (): void => {
+      done()
+    }
+    return socket
   }
 
   beforeEach(async () => {
@@ -29,8 +36,8 @@ describe('CSMS Gateway', () => {
 
   describe('RPC Framework tests', () => {
     describe('Valid calls', () => {
-      it('Without OcppCallDto', (done) => {
-        const socket = connectToSocket()
+      it('Without OcppCallDto', (done: jest.DoneCallback) => {
+        const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
         socket.onopen = (): void => {
@@ -56,18 +63,10 @@ describe('CSMS Gateway', () => {
           expect(data[2]).toBeDefined()
           socket.close()
         }
-
-        socket.onerror = (): void => {
-          fail()
-        }
-
-        socket.onclose = (): void => {
-          done()
-        }
       })
 
-      it('With OcppCallDto', (done) => {
-        const socket = connectToSocket()
+      it('With OcppCallDto', (done: jest.DoneCallback) => {
+        const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
         socket.onopen = (): void => {
@@ -92,19 +91,11 @@ describe('CSMS Gateway', () => {
           expect(data[2]).toBeDefined()
           socket.close()
         }
-
-        socket.onerror = (): void => {
-          fail()
-        }
-
-        socket.onclose = (): void => {
-          done()
-        }
       })
 
       describe('Invalid calls', () => {
-        it('call is empty', (done) => {
-          const socket = connectToSocket()
+        it('call is empty', (done: jest.DoneCallback) => {
+          const socket = connectToSocket(done)
 
           socket.onopen = (): void => {
             socket.send(JSON.stringify(''))
@@ -121,18 +112,10 @@ describe('CSMS Gateway', () => {
             expect(data[4]).toBeDefined()
             socket.close()
           }
-
-          socket.onerror = (): void => {
-            fail()
-          }
-
-          socket.onclose = (): void => {
-            done()
-          }
         })
 
-        it('call is null', (done) => {
-          const socket = connectToSocket()
+        it('call is null', (done: jest.DoneCallback) => {
+          const socket = connectToSocket(done)
 
           socket.onopen = (): void => {
             socket.send(null)
@@ -149,18 +132,10 @@ describe('CSMS Gateway', () => {
             expect(data[4]).toBeDefined()
             socket.close()
           }
-
-          socket.onerror = (): void => {
-            fail()
-          }
-
-          socket.onclose = (): void => {
-            done()
-          }
         })
 
-        it('call is undefined', (done) => {
-          const socket = connectToSocket()
+        it('call is undefined', (done: jest.DoneCallback) => {
+          const socket = connectToSocket(done)
 
           socket.onopen = (): void => {
             socket.send(undefined)
@@ -177,18 +152,10 @@ describe('CSMS Gateway', () => {
             expect(data[4]).toBeDefined()
             socket.close()
           }
-
-          socket.onerror = (): void => {
-            fail()
-          }
-
-          socket.onclose = (): void => {
-            done()
-          }
         })
 
-        it('call is a number', (done) => {
-          const socket = connectToSocket()
+        it('call is a number', (done: jest.DoneCallback) => {
+          const socket = connectToSocket(done)
 
           socket.onopen = (): void => {
             socket.send(42)
@@ -205,18 +172,10 @@ describe('CSMS Gateway', () => {
             expect(data[4]).toBeDefined()
             socket.close()
           }
-
-          socket.onerror = (): void => {
-            fail()
-          }
-
-          socket.onclose = (): void => {
-            done()
-          }
         })
 
-        it('call is a string', (done) => {
-          const socket = connectToSocket()
+        it('call is a string', (done: jest.DoneCallback) => {
+          const socket = connectToSocket(done)
 
           socket.onopen = (): void => {
             socket.send('LoremIpsum')
@@ -233,18 +192,10 @@ describe('CSMS Gateway', () => {
             expect(data[4]).toBeDefined()
             socket.close()
           }
-
-          socket.onerror = (): void => {
-            fail()
-          }
-
-          socket.onclose = (): void => {
-            done()
-          }
         })
 
-        it('call is a string with 4 chars, like the correct array length', (done) => {
-          const socket = connectToSocket()
+        it('call is a string with 4 chars, like the correct array length', (done: jest.DoneCallback) => {
+          const socket = connectToSocket(done)
 
           socket.onopen = (): void => {
             socket.send('ABCD')
@@ -261,18 +212,10 @@ describe('CSMS Gateway', () => {
             expect(data[4]).toBeDefined()
             socket.close()
           }
-
-          socket.onerror = (): void => {
-            fail()
-          }
-
-          socket.onclose = (): void => {
-            done()
-          }
         })
 
-        it('messageTypeId is not 2', (done) => {
-          const socket = connectToSocket()
+        it('messageTypeId is not 2', (done: jest.DoneCallback) => {
+          const socket = connectToSocket(done)
           const messageId = Math.random().toString()
 
           socket.onopen = (): void => {
@@ -301,21 +244,13 @@ describe('CSMS Gateway', () => {
             expect(data[4]).toBeDefined()
             socket.close()
           }
-
-          socket.onerror = (): void => {
-            fail()
-          }
-
-          socket.onclose = (): void => {
-            done()
-          }
         })
       })
     })
 
     describe('Format validation tests', () => {
-      it('Call a not implemented action', (done) => {
-        const socket = connectToSocket()
+      it('Call a not implemented action', (done: jest.DoneCallback) => {
+        const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
         socket.onopen = (): void => {
@@ -340,18 +275,10 @@ describe('CSMS Gateway', () => {
           expect(data[4]).toBeDefined()
           socket.close()
         }
-
-        socket.onerror = (): void => {
-          fail()
-        }
-
-        socket.onclose = (): void => {
-          done()
-        }
       })
 
-      it('Call an invalid action', (done) => {
-        const socket = connectToSocket()
+      it('Call an invalid action', (done: jest.DoneCallback) => {
+        const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
         socket.onopen = (): void => {
@@ -369,18 +296,10 @@ describe('CSMS Gateway', () => {
           expect(data[4]).toBeDefined()
           socket.close()
         }
-
-        socket.onerror = (): void => {
-          fail()
-        }
-
-        socket.onclose = (): void => {
-          done()
-        }
       })
 
-      it('action and paypload does not match', (done) => {
-        const socket = connectToSocket()
+      it('action and paypload does not match', (done: jest.DoneCallback) => {
+        const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
         socket.onopen = (): void => {
@@ -404,14 +323,6 @@ describe('CSMS Gateway', () => {
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()
           socket.close()
-        }
-
-        socket.onerror = (): void => {
-          fail()
-        }
-
-        socket.onclose = (): void => {
-          done()
         }
       })
     })
