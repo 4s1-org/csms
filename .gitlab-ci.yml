@@ -1,53 +1,25 @@
 stages:
-  - validating-shared
-  - validating-apps
+  - validation
 
-shared:
-  stage: validating-shared
+validate-all:
+  stage: validation
   image: node:14-alpine
   script:
-    - cd shared
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test:cov
+    - echo "*** shared ***"
+    - npm --prefix shared ci
+    - npm --prefix shared run lint
+    - npm --prefix shared run build
+    - npm --prefix shared run test
 
-backend:
-  stage: validating-apps
-  image: node:14-alpine
-  except:
-    refs:
-      - master
-  script:
-    - cd shared && npm ci && npm run build && cd ..
-    - cd backend
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test:cov
+    - echo "*** backend ***"
+    - npm --prefix backend ci
+    - npm --prefix backend run lint
+    - npm --prefix backend run build
+    - npm --prefix backend run test:cov
+    - npm --prefix backend run test:e2e
 
-backend-with-e2e:
-  stage: validating-apps
-  image: node:14-alpine
-  only:
-    refs:
-      - master
-  script:
-    - cd shared && npm ci && npm run build && cd ..
-    - cd backend
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test:cov
-    - npm run test:e2e
-
-simulator:
-  stage: validating-apps
-  image: node:14-alpine
-  script:
-    - cd shared && npm ci && npm run build && cd ..
-    - cd simulator
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test:cov
+    - echo "*** simulator ***"
+    - npm --prefix simulator ci
+    - npm --prefix simulator run lint
+    - npm --prefix simulator run build
+    - npm --prefix simulator run test
