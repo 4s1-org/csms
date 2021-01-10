@@ -1,6 +1,5 @@
 stages:
   - validation
-  - e2e
 
 validate-all:
   stage: validation
@@ -17,24 +16,10 @@ validate-all:
     - npm --prefix backend run lint
     - npm --prefix backend run build
     - npm --prefix backend run test:cov
+    - npm --prefix backend run test:e2e
 
     - echo "*** simulator ***"
     - npm --prefix simulator ci
     - npm --prefix simulator run lint
     - npm --prefix simulator run build
     - npm --prefix simulator run test
-
-backend-e2e-tests:
-  stage: e2e
-  image: node:14-alpine
-  only:
-    refs:
-      - master
-  script:
-    - echo "*** shared ***"
-    - npm --prefix shared ci
-    - npm --prefix shared run build
-
-    - echo "*** backend ***"
-    - npm --prefix backend ci
-    - npm --prefix backend run test:e2e
