@@ -25,8 +25,8 @@
     "start": "ts-node src/index.ts",
     "start:dev": "nodemon --watch src/ -e ts --exec \"npm run build && npm run start:prod\"",
     "start:prod": "node dist/index.js",
-    "test": "jest --passWithNoTests",
-    "test:cov": "jest --coverage --passWithNoTests",
+    "test": "jest",
+    "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "test:watch": "jest --watch"
