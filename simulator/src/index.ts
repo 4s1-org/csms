@@ -1,82 +1,53 @@
-import io from 'socket.io-client'
 import {
   BootNotificationRequestDto,
   BootReasonEnum,
   ChargingStationDto,
   OcppCallDto,
   OcppMessageEnum,
-  OcppMessageTypeIdEnum,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
+import WebSocket from 'ws'
+import { createLogger } from './logger'
+
+const logger = createLogger()
 
 function getId(): string {
   return uuid().replace(/-/g, '')
 }
 
-function sendValidMessageWithCallDto(socket: SocketIOClient.Socket): void {
-  socket.emit(
-    'ocpp',
+function sendBootNotification(socket: WebSocket): void {
+  socket.send(
     new OcppCallDto(
       getId(),
       OcppMessageEnum.BootNotification,
       new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
     ).toString(),
-    (response: any) => console.log('sendValidMessageWithCallDto:', JSON.stringify(response)),
   )
-}
-
-function spielwiese(socket: SocketIOClient.Socket): void {
-  if (socket && !socket.connected) {
-    return
-  }
-
-  socket.emit(
-    'ocpp',
-    [
-      OcppMessageTypeIdEnum.Call,
-      OcppMessageEnum.BootNotification,
-      {
-        chargingStation: {
-          model: 'SingleSocketCharger',
-          vendor: 'VendorX',
-        },
-        reason: BootReasonEnum.PowerUp,
-      },
-    ],
-    (response: any) => console.log('sendValidMessageWithCallDto:', response),
-  )
-
-  setTimeout(() => {
-    spielwiese(socket)
-  }, 3000)
 }
 
 async function main(): Promise<void> {
   console.log('*** main() ***')
-  const socket: SocketIOClient.Socket = io('http://localhost:3000/', {
-    path: '/ocpp/2.0.1/CS001',
-    transports: ['websocket'],
-    forceNew: true,
-  })
 
-  socket.on('connect', () => {
-    console.log('Connected: ' + socket.id)
+  const socket = new WebSocket('ws://localhost:3000/ocpp/2.0.1/LS001', ['ocpp2.0.1'])
 
-    sendValidMessageWithCallDto(socket)
-    //spielwiese(socket)
-  })
+  socket.onopen = (): void => {
+    const socketId = 'foo' // request.headers['sec-websocket-key']
+    logger.info('Connected: ' + socketId)
 
-  socket.on('ocpp', (data: any) => {
-    console.log('ocpp-response:', JSON.stringify(data))
-  })
+    sendBootNotification(socket)
+  }
 
-  socket.on('exception', (data: any) => {
-    console.log('exception', data)
-  })
+  socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+    const data = JSON.parse(msg.data as string)
+    logger.info(data)
+  }
 
-  socket.on('disconnect', () => {
-    console.log('Disconnected')
-  })
+  socket.onerror = (err: any): void => {
+    logger.error('Error' + err)
+  }
+  socket.onclose = (): void => {
+    logger.info('Close')
+  }
 }
 
 main().catch(console.error)
