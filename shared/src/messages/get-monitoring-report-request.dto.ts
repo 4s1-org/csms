@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { ComponentVariableDto } from '../datatypes/component-variable.dto'
@@ -14,12 +13,10 @@ export class GetMonitoringReportRequestDto implements IRequestMessage {
     this.requestId = requestId
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @IsArray()
@@ -30,7 +27,6 @@ export class GetMonitoringReportRequestDto implements IRequestMessage {
   /**
    * The Id of the request.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public requestId: number
@@ -38,7 +34,6 @@ export class GetMonitoringReportRequestDto implements IRequestMessage {
   /**
    * This field contains criteria for components for which a monitoring report is requested
    */
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @ArrayMaxSize(3)

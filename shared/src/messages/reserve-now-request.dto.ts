@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { ConnectorEnum } from '../enumerations/connector.enum'
@@ -18,7 +17,6 @@ export class ReserveNowRequestDto implements IRequestMessage {
     this.idToken = idToken
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -26,7 +24,6 @@ export class ReserveNowRequestDto implements IRequestMessage {
   /**
    * Id of reservation.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public id: number
@@ -34,17 +31,14 @@ export class ReserveNowRequestDto implements IRequestMessage {
   /**
    * Date and time at which the reservation expires.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public expiryDateTime: string
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(ConnectorEnum)
   public connectorType!: ConnectorEnum
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public idToken: IdTokenDto
@@ -52,12 +46,10 @@ export class ReserveNowRequestDto implements IRequestMessage {
   /**
    * This contains ID of the evse to be reserved.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public evseId!: number
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public groupIdToken!: IdTokenDto

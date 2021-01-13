@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -14,17 +13,14 @@ export class GetCertificateStatusResponseDto implements IResponseMessage {
     this.status = status
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GetCertificateStatusEnum)
   public status: GetCertificateStatusEnum
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public statusInfo!: StatusInfoDto
@@ -32,7 +28,6 @@ export class GetCertificateStatusResponseDto implements IResponseMessage {
   /**
    * OCSPResponse class as defined in <<ref-ocpp_security_24, IETF RFC 6960>>. DER encoded (as defined in <<ref-ocpp_security_24, IETF RFC 6960>>), and then base64 encoded. MAY only be omitted when status is not Accepted.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(5500)
   @IsString()

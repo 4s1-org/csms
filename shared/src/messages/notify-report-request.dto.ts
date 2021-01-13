@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -20,7 +19,6 @@ export class NotifyReportRequestDto implements IRequestMessage {
     this.seqNo = seqNo
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -31,7 +29,6 @@ export class NotifyReportRequestDto implements IRequestMessage {
    * integer
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public requestId: number
@@ -42,7 +39,6 @@ export class NotifyReportRequestDto implements IRequestMessage {
    * dateTime
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public generatedAt: string
@@ -53,7 +49,6 @@ export class NotifyReportRequestDto implements IRequestMessage {
    * ReportDataType
    * 0..*
    */
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @IsArray()
@@ -67,7 +62,6 @@ export class NotifyReportRequestDto implements IRequestMessage {
    * boolean
    * 0..1
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public tbc!: boolean
@@ -78,7 +72,6 @@ export class NotifyReportRequestDto implements IRequestMessage {
    * integer
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public seqNo: number

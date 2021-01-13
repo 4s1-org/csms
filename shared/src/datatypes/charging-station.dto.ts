@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { ModemDto } from './modem.dto'
@@ -17,7 +16,6 @@ export class ChargingStationDto {
     this.vendorName = vendorName
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -28,7 +26,6 @@ export class ChargingStationDto {
    * string[0..25]
    * 0..1
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(25)
   @IsString()
@@ -40,7 +37,6 @@ export class ChargingStationDto {
    * string[0..20]
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(20)
   @IsString()
@@ -52,7 +48,6 @@ export class ChargingStationDto {
    * ModemType
    * 0..1
    */
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public modem!: ModemDto
@@ -63,7 +58,6 @@ export class ChargingStationDto {
    * string[0..50]
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(50)
   @IsString()
@@ -75,7 +69,6 @@ export class ChargingStationDto {
    * string[0..50]
    * 0..1
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(50)
   @IsString()

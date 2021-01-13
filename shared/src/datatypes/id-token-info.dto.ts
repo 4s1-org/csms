@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { AuthorizationStatusEnum } from '../enumerations/authorization-status.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -20,12 +19,10 @@ export class IdTokenInfoDto {
     this.status = status
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(AuthorizationStatusEnum)
   public status: AuthorizationStatusEnum
@@ -35,7 +32,6 @@ export class IdTokenInfoDto {
    * urn:x-oca:ocpp:uid:1:569373
    * Date and Time after which the token must be considered invalid.
    */
-  @ApiProperty()
   @IsOptional()
   @IsDateString()
   public cacheExpiryDateTime!: string
@@ -43,7 +39,6 @@ export class IdTokenInfoDto {
   /**
    * Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in <<transactioneventresponse,TransactionEventResponse>> overrules this one.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public chargingPriority!: number
@@ -53,7 +48,6 @@ export class IdTokenInfoDto {
    * urn:x-oca:ocpp:uid:1:569374
    * Preferred user interface language of identifier user. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(8)
   @IsString()
@@ -62,7 +56,6 @@ export class IdTokenInfoDto {
   /**
    * Only used when the IdToken is only valid for one or more specific EVSEs, not for the entire Charging Station.
    */
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @IsArray()
@@ -70,7 +63,6 @@ export class IdTokenInfoDto {
   @ValidateNested({ each: true })
   public evseId!: number[]
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public groupIdToken!: IdTokenDto
@@ -80,13 +72,11 @@ export class IdTokenInfoDto {
    * urn:x-oca:ocpp:uid:1:569375
    * Second preferred user interface language of identifier user. Don’t use when language1 is omitted, has to be different from language1. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(8)
   @IsString()
   public language2!: string
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public personalMessage!: MessageContentDto

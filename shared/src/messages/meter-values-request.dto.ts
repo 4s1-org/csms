@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -19,7 +18,6 @@ export class MeterValuesRequestDto implements IRequestMessage {
     this.meterValue = meterValue
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -29,12 +27,10 @@ export class MeterValuesRequestDto implements IRequestMessage {
    * urn:x-enexis:ecdm:uid:1:571101
    * This contains a number (>0) designating an EVSE of the Charging Station. ‘0’ (zero) is used to designate the main power meter.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evseId: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @IsArray()

@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -12,7 +11,6 @@ export class GetTransactionStatusResponseDto implements IResponseMessage {
     this.messagesInQueue = messagesInQueue
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -20,7 +18,6 @@ export class GetTransactionStatusResponseDto implements IResponseMessage {
   /**
    * Whether the transaction is still ongoing.
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public ongoingIndicator!: boolean
@@ -28,7 +25,6 @@ export class GetTransactionStatusResponseDto implements IResponseMessage {
   /**
    * Whether there are still message to be delivered.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
   public messagesInQueue: boolean

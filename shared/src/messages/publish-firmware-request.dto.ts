@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -16,7 +15,6 @@ export class PublishFirmwareRequestDto implements IRequestMessage {
     this.requestId = requestId
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -25,7 +23,6 @@ export class PublishFirmwareRequestDto implements IRequestMessage {
    * This contains a string containing a URI pointing to a
    * location from which to retrieve the firmware.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(512)
   @IsString()
@@ -36,7 +33,6 @@ export class PublishFirmwareRequestDto implements IRequestMessage {
    * to download the firmware before giving up. If this field is not
    * present, it is left to Charging Station to decide how many times it wants to retry.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public retries!: number
@@ -44,7 +40,6 @@ export class PublishFirmwareRequestDto implements IRequestMessage {
   /**
    * The MD5 checksum over the entire firmware file as a hexadecimal string of length 32.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(32)
   @IsString()
@@ -53,7 +48,6 @@ export class PublishFirmwareRequestDto implements IRequestMessage {
   /**
    * The Id of the request.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public requestId: number
@@ -66,7 +60,6 @@ export class PublishFirmwareRequestDto implements IRequestMessage {
    * Station to decide how long to wait
    * between attempts.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public retryInterval!: number

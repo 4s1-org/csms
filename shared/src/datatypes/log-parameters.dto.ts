@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -16,7 +15,6 @@ export class LogParametersDto {
     this.remoteLocation = remoteLocation
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -26,7 +24,6 @@ export class LogParametersDto {
    * urn:x-enexis:ecdm:uid:1:569484
    * The URL of the location at the remote system where the log should be stored.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(512)
   @IsString()
@@ -37,7 +34,6 @@ export class LogParametersDto {
    * urn:x-enexis:ecdm:uid:1:569477
    * This contains the date and time of the oldest logging information to include in the diagnostics.
    */
-  @ApiProperty()
   @IsOptional()
   @IsDateString()
   public oldestTimestamp!: string
@@ -47,7 +43,6 @@ export class LogParametersDto {
    * urn:x-enexis:ecdm:uid:1:569482
    * This contains the date and time of the latest logging information to include in the diagnostics.
    */
-  @ApiProperty()
   @IsOptional()
   @IsDateString()
   public latestTimestamp!: string

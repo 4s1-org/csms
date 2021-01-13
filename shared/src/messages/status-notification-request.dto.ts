@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { ConnectorStatusEnum } from '../enumerations/connector-status.enum'
@@ -22,7 +21,6 @@ export class StatusNotificationRequestDto implements IRequestMessage {
     this.connectorId = connectorId
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -33,7 +31,6 @@ export class StatusNotificationRequestDto implements IRequestMessage {
    * dateTime
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public timestamp: string
@@ -44,7 +41,6 @@ export class StatusNotificationRequestDto implements IRequestMessage {
    * ConnectorStatusEnumType
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ConnectorStatusEnum)
   public connectorStatus: ConnectorStatusEnum
@@ -55,7 +51,6 @@ export class StatusNotificationRequestDto implements IRequestMessage {
    * integer
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evseId: number
@@ -66,7 +61,6 @@ export class StatusNotificationRequestDto implements IRequestMessage {
    * integer
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public connectorId: number

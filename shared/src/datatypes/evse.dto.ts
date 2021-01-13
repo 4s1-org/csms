@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -16,7 +15,6 @@ export class EvseDto {
     this.id = id
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -26,7 +24,6 @@ export class EvseDto {
    * urn:x-enexis:ecdm:uid:1:569198
    * EVSE Identifier. This contains a number (> 0) designating an EVSE of the Charging Station.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public id: number
@@ -34,7 +31,6 @@ export class EvseDto {
   /**
    * An id to designate a specific connector (on an EVSE) by connector index number.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public connectorId!: number

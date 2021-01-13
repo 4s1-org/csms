@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -30,7 +29,6 @@ export class EventDataDto {
     this.variable = variable
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -38,7 +36,6 @@ export class EventDataDto {
   /**
    * Identifies the event. This field can be referred to as a cause by other events.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public eventId: number
@@ -46,12 +43,10 @@ export class EventDataDto {
   /**
    * Timestamp of the moment the report was generated.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public timestamp: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(EventTriggerEnum)
   public trigger: EventTriggerEnum
@@ -59,7 +54,6 @@ export class EventDataDto {
   /**
    * Refers to the Id of an event that is considered to be the cause for this event.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public cause!: number
@@ -69,7 +63,6 @@ export class EventDataDto {
    * 
    * The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(2500)
   @IsString()
@@ -78,7 +71,6 @@ export class EventDataDto {
   /**
    * Technical (error) code as reported by component.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(50)
   @IsString()
@@ -87,7 +79,6 @@ export class EventDataDto {
   /**
    * Technical detail information as reported by component.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(500)
   @IsString()
@@ -96,7 +87,6 @@ export class EventDataDto {
   /**
    * _Cleared_ is set to true to report the clearing of a monitored situation, i.e. a 'return to normal'.
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public cleared!: boolean
@@ -104,13 +94,11 @@ export class EventDataDto {
   /**
    * If an event notification is linked to a specific transaction, this field can be used to specify its transactionId.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(36)
   @IsString()
   public transactionId!: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public component: ComponentDto
@@ -118,17 +106,14 @@ export class EventDataDto {
   /**
    * Identifies the VariableMonitoring which triggered the event.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public variableMonitoringId!: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(EventNotificationEnum)
   public eventNotificationType: EventNotificationEnum
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public variable: VariableDto

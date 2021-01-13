@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -14,7 +13,6 @@ export class StatusInfoDto {
     this.reasonCode = reasonCode
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -25,7 +23,6 @@ export class StatusInfoDto {
    * string[0..20]
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(20)
   @IsString()
@@ -37,7 +34,6 @@ export class StatusInfoDto {
    * string[0..512]
    * 0..1
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(512)
   @IsString()

@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -13,12 +12,10 @@ export class NotifyDisplayMessagesRequestDto implements IRequestMessage {
     this.requestId = requestId
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @IsArray()
@@ -29,7 +26,6 @@ export class NotifyDisplayMessagesRequestDto implements IRequestMessage {
   /**
    * The id of the <<getdisplaymessagesrequest,GetDisplayMessagesRequest>> that requested this message.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public requestId: number
@@ -37,7 +33,6 @@ export class NotifyDisplayMessagesRequestDto implements IRequestMessage {
   /**
    * "to be continued" indicator. Indicates whether another part of the report follows in an upcoming NotifyDisplayMessagesRequest message. Default value when omitted is false.
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public tbc!: boolean

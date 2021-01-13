@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -14,7 +13,6 @@ export class CostUpdatedRequestDto implements IRequestMessage {
     this.transactionId = transactionId
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -22,7 +20,6 @@ export class CostUpdatedRequestDto implements IRequestMessage {
   /**
    * Current total cost, based on the information known by the CSMS, of the transaction including taxes. In the currency configured with the configuration Variable: [<<configkey-currency, Currency>>]
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   public totalCost: number
@@ -30,7 +27,6 @@ export class CostUpdatedRequestDto implements IRequestMessage {
   /**
    * Transaction Id of the transaction the current cost are asked for.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(36)
   @IsString()

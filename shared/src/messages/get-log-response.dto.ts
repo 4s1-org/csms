@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -14,17 +13,14 @@ export class GetLogResponseDto implements IResponseMessage {
     this.status = status
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(LogStatusEnum)
   public status: LogStatusEnum
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public statusInfo!: StatusInfoDto
@@ -32,7 +28,6 @@ export class GetLogResponseDto implements IResponseMessage {
   /**
    * This contains the name of the log file that will be uploaded. This field is not present when no logging information is available.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(255)
   @IsString()

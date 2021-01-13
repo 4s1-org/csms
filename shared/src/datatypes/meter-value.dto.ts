@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { SampledValueDto } from './sampled-value.dto'
@@ -19,12 +18,10 @@ export class MeterValueDto {
     this.timestamp = timestamp
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @IsArray()
@@ -37,7 +34,6 @@ export class MeterValueDto {
    * urn:x-oca:ocpp:uid:1:569259
    * Timestamp for measured value(s).
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public timestamp: string

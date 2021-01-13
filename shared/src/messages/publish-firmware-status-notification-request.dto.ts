@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -13,12 +12,10 @@ export class PublishFirmwareStatusNotificationRequestDto implements IRequestMess
     this.status = status
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(PublishFirmwareStatusEnum)
   public status: PublishFirmwareStatusEnum
@@ -26,7 +23,6 @@ export class PublishFirmwareStatusNotificationRequestDto implements IRequestMess
   /**
    * Required if status is Published. Can be multiple URI’s, if the Local Controller supports e.g. HTTP, HTTPS, and FTP.
    */
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @IsArray()
@@ -40,7 +36,6 @@ export class PublishFirmwareStatusNotificationRequestDto implements IRequestMess
    * PublishFirmwareRequest which
    * triggered this action.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public requestId!: number

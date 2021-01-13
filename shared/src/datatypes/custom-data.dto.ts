@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator'
 
 /**
@@ -13,7 +12,6 @@ export class CustomDataDto {
     this.vendorId = vendorId
   }
 
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(255)
   @IsString()

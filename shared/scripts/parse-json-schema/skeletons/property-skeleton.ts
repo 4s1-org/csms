@@ -11,8 +11,6 @@ export class PropertySkeleton extends SkeletonBase {
   ) {
     super(name)
 
-    this._annotations.push(`@ApiProperty()`)
-
     if (isRequired) {
       this.addImportClassValidatior("IsNotEmpty")
       this._annotations.push("@IsNotEmpty()")

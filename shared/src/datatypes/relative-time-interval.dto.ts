@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -15,7 +14,6 @@ export class RelativeTimeIntervalDto {
     this.start = start
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -25,7 +23,6 @@ export class RelativeTimeIntervalDto {
    * urn:x-oca:ocpp:uid:1:569279
    * Start of the interval, in seconds from NOW.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public start: number
@@ -35,7 +32,6 @@ export class RelativeTimeIntervalDto {
    * urn:x-oca:ocpp:uid:1:569280
    * Duration of the interval, in seconds.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public duration!: number

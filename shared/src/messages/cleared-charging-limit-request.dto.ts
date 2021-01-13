@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
@@ -13,12 +12,10 @@ export class ClearedChargingLimitRequestDto implements IRequestMessage {
     this.chargingLimitSource = chargingLimitSource
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingLimitSourceEnum)
   public chargingLimitSource: ChargingLimitSourceEnum
@@ -26,7 +23,6 @@ export class ClearedChargingLimitRequestDto implements IRequestMessage {
   /**
    * EVSE Identifier.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public evseId!: number

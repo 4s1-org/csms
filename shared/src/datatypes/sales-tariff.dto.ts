@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { SalesTariffEntryDto } from './sales-tariff-entry.dto'
@@ -19,7 +18,6 @@ export class SalesTariffDto {
     this.salesTariffEntry = salesTariffEntry
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -29,7 +27,6 @@ export class SalesTariffDto {
    * urn:x-enexis:ecdm:uid:1:569198
    * SalesTariff identifier used to identify one sales tariff. An SAID remains a unique identifier for one schedule throughout a charging session.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public id: number
@@ -39,7 +36,6 @@ export class SalesTariffDto {
    * urn:x-oca:ocpp:uid:1:569283
    * A human readable title/short description of the sales tariff e.g. for HMI display purposes.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(32)
   @IsString()
@@ -50,12 +46,10 @@ export class SalesTariffDto {
    * urn:x-oca:ocpp:uid:1:569284
    * Defines the overall number of distinct price levels used across all provided SalesTariff elements.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public numEPriceLevels!: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @ArrayMaxSize(1024)

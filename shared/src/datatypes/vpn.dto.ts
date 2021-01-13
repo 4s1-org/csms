@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { VpnEnum } from '../enumerations/vpn.enum'
@@ -25,7 +24,6 @@ export class VpnDto {
     this.type = type
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -35,7 +33,6 @@ export class VpnDto {
    * urn:x-oca:ocpp:uid:1:569272
    * VPN Server Address
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(512)
   @IsString()
@@ -46,7 +43,6 @@ export class VpnDto {
    * urn:x-oca:ocpp:uid:1:569273
    * VPN User
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(20)
   @IsString()
@@ -57,7 +53,6 @@ export class VpnDto {
    * urn:x-oca:ocpp:uid:1:569274
    * VPN group.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(20)
   @IsString()
@@ -68,7 +63,6 @@ export class VpnDto {
    * urn:x-oca:ocpp:uid:1:569275
    * VPN Password.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(20)
   @IsString()
@@ -79,13 +73,11 @@ export class VpnDto {
    * urn:x-oca:ocpp:uid:1:569276
    * VPN shared secret.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(255)
   @IsString()
   public key: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(VpnEnum)
   public type: VpnEnum

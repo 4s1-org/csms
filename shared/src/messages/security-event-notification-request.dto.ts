@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -14,7 +13,6 @@ export class SecurityEventNotificationRequestDto implements IRequestMessage {
     this.timestamp = timestamp
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -22,7 +20,6 @@ export class SecurityEventNotificationRequestDto implements IRequestMessage {
   /**
    * Type of the security event. This value should be taken from the Security events list.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(50)
   @IsString()
@@ -31,7 +28,6 @@ export class SecurityEventNotificationRequestDto implements IRequestMessage {
   /**
    * Date and time at which the event occurred.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public timestamp: string
@@ -39,7 +35,6 @@ export class SecurityEventNotificationRequestDto implements IRequestMessage {
   /**
    * Additional information about the occurred security event.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(255)
   @IsString()

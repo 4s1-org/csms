@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { AttributeEnum } from '../enumerations/attribute.enum'
 import { ComponentDto } from './component.dto'
@@ -23,22 +22,18 @@ export class GetVariableResultDto {
     this.variable = variable
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public attributeStatusInfo!: StatusInfoDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GetVariableStatusEnum)
   public attributeStatus: GetVariableStatusEnum
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(AttributeEnum)
   public attributeType!: AttributeEnum
@@ -48,18 +43,15 @@ export class GetVariableResultDto {
    * 
    * The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(2500)
   @IsString()
   public attributeValue!: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public component: ComponentDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public variable: VariableDto

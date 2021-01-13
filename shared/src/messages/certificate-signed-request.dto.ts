@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CertificateSigningUseEnum } from '../enumerations/certificate-signing-use.enum'
@@ -13,7 +12,6 @@ export class CertificateSignedRequestDto implements IRequestMessage {
     this.certificateChain = certificateChain
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -23,13 +21,11 @@ export class CertificateSignedRequestDto implements IRequestMessage {
    * 
    * The Configuration Variable <<configkey-max-certificate-chain-size,MaxCertificateChainSize>> can be used to limit the maximum size of this field.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(10000)
   @IsString()
   public certificateChain: string
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(CertificateSigningUseEnum)
   public certificateType!: CertificateSigningUseEnum

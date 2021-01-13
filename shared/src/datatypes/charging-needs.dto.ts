@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { AcChargingParametersDto } from './ac-charging-parameters.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -18,22 +17,18 @@ export class ChargingNeedsDto {
     this.requestedEnergyTransfer = requestedEnergyTransfer
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public acChargingParameters!: AcChargingParametersDto
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public dcChargingParameters!: DcChargingParametersDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(EnergyTransferModeEnum)
   public requestedEnergyTransfer: EnergyTransferModeEnum
@@ -43,7 +38,6 @@ export class ChargingNeedsDto {
    * urn:x-oca:ocpp:uid:1:569223
    * Estimated departure time of the EV.
    */
-  @ApiProperty()
   @IsOptional()
   @IsDateString()
   public departureTime!: string

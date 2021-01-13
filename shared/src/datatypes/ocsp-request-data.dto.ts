@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enumerations/hash-algorithm.enum'
@@ -20,12 +19,10 @@ export class OcspRequestDataDto {
     this.responderURL = responderURL
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(HashAlgorithmEnum)
   public hashAlgorithm: HashAlgorithmEnum
@@ -33,7 +30,6 @@ export class OcspRequestDataDto {
   /**
    * Hashed value of the Issuer DN (Distinguished Name).
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(128)
   @IsString()
@@ -42,7 +38,6 @@ export class OcspRequestDataDto {
   /**
    * Hashed value of the issuers public key
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(128)
   @IsString()
@@ -51,7 +46,6 @@ export class OcspRequestDataDto {
   /**
    * The serial number of the certificate.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(40)
   @IsString()
@@ -60,7 +54,6 @@ export class OcspRequestDataDto {
   /**
    * This contains the responder URL (Case insensitive).
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(512)
   @IsString()

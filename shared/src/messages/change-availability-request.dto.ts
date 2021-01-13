@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -17,7 +16,6 @@ export class ChangeAvailabilityRequestDto implements IRequestMessage {
     this.operationalStatus = operationalStatus
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -28,7 +26,6 @@ export class ChangeAvailabilityRequestDto implements IRequestMessage {
    * EVSEType
    * 0..1
    */
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public evse!: EvseDto
@@ -39,7 +36,6 @@ export class ChangeAvailabilityRequestDto implements IRequestMessage {
    * OperationalStatusEnumType
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(OperationalStatusEnum)
   public operationalStatus: OperationalStatusEnum

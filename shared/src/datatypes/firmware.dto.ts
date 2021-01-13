@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -18,7 +17,6 @@ export class FirmwareDto {
     this.retrieveDateTime = retrieveDateTime
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -28,7 +26,6 @@ export class FirmwareDto {
    * urn:x-enexis:ecdm:uid:1:569460
    * URI defining the origin of the firmware.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(512)
   @IsString()
@@ -39,7 +36,6 @@ export class FirmwareDto {
    * urn:x-enexis:ecdm:uid:1:569461
    * Date and time at which the firmware shall be retrieved.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public retrieveDateTime: string
@@ -49,7 +45,6 @@ export class FirmwareDto {
    * urn:x-enexis:ecdm:uid:1:569462
    * Date and time at which the firmware shall be installed.
    */
-  @ApiProperty()
   @IsOptional()
   @IsDateString()
   public installDateTime!: string
@@ -58,7 +53,6 @@ export class FirmwareDto {
    * Certificate with which the firmware was signed.
    * PEM encoded X.509 certificate.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(5500)
   @IsString()
@@ -69,7 +63,6 @@ export class FirmwareDto {
    * urn:x-enexis:ecdm:uid:1:569464
    * Base64 encoded firmware signature.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(800)
   @IsString()

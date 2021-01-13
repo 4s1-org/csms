@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { ApnAuthenticationEnum } from '../enumerations/apn-authentication.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -21,7 +20,6 @@ export class ApnDto {
     this.apnAuthentication = apnAuthentication
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -31,7 +29,6 @@ export class ApnDto {
    * urn:x-oca:ocpp:uid:1:568814
    * The Access Point Name as an URL.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(512)
   @IsString()
@@ -42,7 +39,6 @@ export class ApnDto {
    * urn:x-oca:ocpp:uid:1:568818
    * APN username.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(20)
   @IsString()
@@ -53,7 +49,6 @@ export class ApnDto {
    * urn:x-oca:ocpp:uid:1:568819
    * APN Password.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(20)
   @IsString()
@@ -64,7 +59,6 @@ export class ApnDto {
    * urn:x-oca:ocpp:uid:1:568821
    * SIM card pin code.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public simPin!: number
@@ -74,7 +68,6 @@ export class ApnDto {
    * urn:x-oca:ocpp:uid:1:568822
    * Preferred network, written as MCC and MNC concatenated. See note.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(6)
   @IsString()
@@ -86,12 +79,10 @@ export class ApnDto {
    * Default: false. Use only the preferred Network, do
    * not dial in when not available. See Note.
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public useOnlyPreferredNetwork!: boolean
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ApnAuthenticationEnum)
   public apnAuthentication: ApnAuthenticationEnum
