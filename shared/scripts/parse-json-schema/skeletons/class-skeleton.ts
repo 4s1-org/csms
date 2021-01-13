@@ -59,7 +59,6 @@ export class ClassSkeleton extends SkeletonBase {
           classValidatorItems.push(...prop.importClassValidator)
           ownImports.push(...prop.imporOwnClass)
         }
-        result.push(`import { ApiProperty } from '@nestjs/swagger'`)
       }
 
       const classValidatorItemsUnique = [...new Set(classValidatorItems)].sort()

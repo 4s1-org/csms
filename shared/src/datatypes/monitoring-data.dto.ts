@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -21,22 +20,18 @@ export class MonitoringDataDto {
     this.variableMonitoring = variableMonitoring
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public component: ComponentDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public variable: VariableDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @IsArray()

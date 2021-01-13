@@ -1,4 +1,3 @@
-import { ApiProperty } from "@nestjs/swagger"
 import { IsEnum, IsInt, IsNotEmpty, IsPositive, IsString, MaxLength, ValidateNested } from "class-validator"
 import { IRequestMessage } from "src/i-request-message"
 import { OcppMessageEnum } from "../ocpp-message.enum"
@@ -17,21 +16,18 @@ export class OcppCallDto {
   }
 
   // ToDo: Fixer Wert setzen
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   @IsPositive()
   /** This is a Message Type Number which is used to identify the type of the message. */
   public messageTypeId: OcppMessageTypeIdEnum.Call
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @MaxLength(36)
   /** This is a unique identifier that will be used to match request and result */
   public messageId: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(OcppMessageEnum)
   /** The name of the remote procedure or action. This field SHALL contain a case-sensitive string.
@@ -40,7 +36,6 @@ export class OcppCallDto {
     */
   public action: OcppMessageEnum
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   /** JSON Payload of the action. */

@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IResponseMessage } from '../i-response-message'
 import { ChangeAvailabilityStatusEnum } from '../enumerations/change-availability-status.enum'
@@ -17,7 +16,6 @@ export class ChangeAvailabilityResponseDto implements IResponseMessage {
     this.status = status
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -28,7 +26,6 @@ export class ChangeAvailabilityResponseDto implements IResponseMessage {
    * ChangeAvailabilityStatusEnumType
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChangeAvailabilityStatusEnum)
   public status: ChangeAvailabilityStatusEnum
@@ -39,7 +36,6 @@ export class ChangeAvailabilityResponseDto implements IResponseMessage {
    * StatusInfoType
    * 0..1
    */
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public statusInfo!: StatusInfoDto

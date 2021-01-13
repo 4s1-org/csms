@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -26,17 +25,14 @@ export class TransactionEventRequestDto implements IRequestMessage {
     this.transactionInfo = transactionInfo
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(TransactionEventEnum)
   public eventType: TransactionEventEnum
 
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @IsArray()
@@ -47,12 +43,10 @@ export class TransactionEventRequestDto implements IRequestMessage {
   /**
    * The date and time at which this transaction event occurred.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public timestamp: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(TriggerReasonEnum)
   public triggerReason: TriggerReasonEnum
@@ -60,7 +54,6 @@ export class TransactionEventRequestDto implements IRequestMessage {
   /**
    * Incremental sequence number, helps with determining if all messages of a transaction have been received.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public seqNo: number
@@ -68,7 +61,6 @@ export class TransactionEventRequestDto implements IRequestMessage {
   /**
    * Indication that this transaction event happened when the Charging Station was offline. Default = false, meaning: the event occurred when the Charging Station was online.
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public offline!: boolean
@@ -76,7 +68,6 @@ export class TransactionEventRequestDto implements IRequestMessage {
   /**
    * If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used via device management.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public numberOfPhasesUsed!: number
@@ -84,7 +75,6 @@ export class TransactionEventRequestDto implements IRequestMessage {
   /**
    * The maximum current of the connected cable in Ampere (A).
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public cableMaxCurrent!: number
@@ -92,22 +82,18 @@ export class TransactionEventRequestDto implements IRequestMessage {
   /**
    * This contains the Id of the reservation that terminates as a result of this transaction.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public reservationId!: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public transactionInfo: TransactionDto
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public evse!: EvseDto
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public idToken!: IdTokenDto

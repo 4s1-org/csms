@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { AuthorizationDataDto } from '../datatypes/authorization-data.dto'
@@ -16,12 +15,10 @@ export class SendLocalListRequestDto implements IRequestMessage {
     this.updateType = updateType
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @IsArray()
@@ -32,12 +29,10 @@ export class SendLocalListRequestDto implements IRequestMessage {
   /**
    * In case of a full update this is the version number of the full list. In case of a differential update it is the version number of the list after the update has been applied.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public versionNumber: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(UpdateEnum)
   public updateType: UpdateEnum

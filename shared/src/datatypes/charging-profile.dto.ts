@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { ChargingProfileKindEnum } from '../enumerations/charging-profile-kind.enum'
 import { ChargingProfilePurposeEnum } from '../enumerations/charging-profile-purpose.enum'
@@ -28,7 +27,6 @@ export class ChargingProfileDto {
     this.chargingSchedule = chargingSchedule
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -38,7 +36,6 @@ export class ChargingProfileDto {
    * urn:x-enexis:ecdm:uid:1:569198
    * Id of ChargingProfile.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public id: number
@@ -48,22 +45,18 @@ export class ChargingProfileDto {
    * urn:x-oca:ocpp:uid:1:569230
    * Value determining level in hierarchy stack of profiles. Higher values have precedence over lower values. Lowest level is 0.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public stackLevel: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingProfilePurposeEnum)
   public chargingProfilePurpose: ChargingProfilePurposeEnum
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingProfileKindEnum)
   public chargingProfileKind: ChargingProfileKindEnum
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(RecurrencyKindEnum)
   public recurrencyKind!: RecurrencyKindEnum
@@ -73,7 +66,6 @@ export class ChargingProfileDto {
    * urn:x-oca:ocpp:uid:1:569234
    * Point in time at which the profile starts to be valid. If absent, the profile is valid as soon as it is received by the Charging Station.
    */
-  @ApiProperty()
   @IsOptional()
   @IsDateString()
   public validFrom!: string
@@ -83,12 +75,10 @@ export class ChargingProfileDto {
    * urn:x-oca:ocpp:uid:1:569235
    * Point in time at which the profile stops to be valid. If absent, the profile is valid until it is replaced by another profile.
    */
-  @ApiProperty()
   @IsOptional()
   @IsDateString()
   public validTo!: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @ArrayMaxSize(3)
@@ -100,7 +90,6 @@ export class ChargingProfileDto {
   /**
    * SHALL only be included if ChargingProfilePurpose is set to TxProfile. The transactionId is used to match the profile to a specific transaction.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(36)
   @IsString()

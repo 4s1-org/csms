@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { ApnDto } from './apn.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -31,22 +30,18 @@ export class NetworkConnectionProfileDto {
     this.ocppInterface = ocppInterface
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public apn!: ApnDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(OcppVersionEnum)
   public ocppVersion: OcppVersionEnum
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(OcppTransportEnum)
   public ocppTransport: OcppTransportEnum
@@ -56,7 +51,6 @@ export class NetworkConnectionProfileDto {
    * urn:x-oca:ocpp:uid:1:569357
    * URL of the CSMS(s) that this Charging Station  communicates with.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(512)
   @IsString()
@@ -67,7 +61,6 @@ export class NetworkConnectionProfileDto {
    * The best setting depends on the underlying network and response times of the CSMS.
    * If you are looking for a some guideline: use 30 seconds as a starting point.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public messageTimeout: number
@@ -75,17 +68,14 @@ export class NetworkConnectionProfileDto {
   /**
    * This field specifies the security profile used when connecting to the CSMS with this NetworkConnectionProfile.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public securityProfile: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(OcppInterfaceEnum)
   public ocppInterface: OcppInterfaceEnum
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public vpn!: VpnDto

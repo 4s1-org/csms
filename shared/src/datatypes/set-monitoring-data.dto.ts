@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -25,7 +24,6 @@ export class SetMonitoringDataDto {
     this.variable = variable
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -33,7 +31,6 @@ export class SetMonitoringDataDto {
   /**
    * An id SHALL only be given to replace an existing monitor. The Charging Station handles the generation of id's for new monitors.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public id!: number
@@ -41,7 +38,6 @@ export class SetMonitoringDataDto {
   /**
    * Monitor only active when a transaction is ongoing on a component relevant to this transaction. Default = false.
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public transaction!: boolean
@@ -50,12 +46,10 @@ export class SetMonitoringDataDto {
    * Value for threshold or delta monitoring.
    * For Periodic or PeriodicClockAligned this is the interval in seconds.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   public value: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(MonitorEnum)
   public type: MonitorEnum
@@ -85,17 +79,14 @@ export class SetMonitoringDataDto {
    * *9-Debug* +
    * Indicates information useful to developers for debugging, not useful during operations.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public severity: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public component: ComponentDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public variable: VariableDto

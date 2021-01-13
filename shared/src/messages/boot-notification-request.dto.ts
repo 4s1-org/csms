@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { BootReasonEnum } from '../enumerations/boot-reason.enum'
@@ -19,7 +18,6 @@ export class BootNotificationRequestDto implements IRequestMessage {
     this.reason = reason
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -30,7 +28,6 @@ export class BootNotificationRequestDto implements IRequestMessage {
    * ChargingStationType
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public chargingStation: ChargingStationDto
@@ -41,7 +38,6 @@ export class BootNotificationRequestDto implements IRequestMessage {
    * BootReasonEnumType
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(BootReasonEnum)
   public reason: BootReasonEnum

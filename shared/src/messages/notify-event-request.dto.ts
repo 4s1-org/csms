@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -17,7 +16,6 @@ export class NotifyEventRequestDto implements IRequestMessage {
     this.eventData = eventData
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -25,7 +23,6 @@ export class NotifyEventRequestDto implements IRequestMessage {
   /**
    * Timestamp of the moment this message was generated at the Charging Station.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public generatedAt: string
@@ -33,7 +30,6 @@ export class NotifyEventRequestDto implements IRequestMessage {
   /**
    * “to be continued” indicator. Indicates whether another part of the report follows in an upcoming notifyEventRequest message. Default value when omitted is false.
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public tbc!: boolean
@@ -41,12 +37,10 @@ export class NotifyEventRequestDto implements IRequestMessage {
   /**
    * Sequence number of this message. First message starts at 0.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public seqNo: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @IsArray()

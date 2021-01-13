@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -21,7 +20,6 @@ export class BootNotificationResponseDto implements IResponseMessage {
     this.status = status
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -32,7 +30,6 @@ export class BootNotificationResponseDto implements IResponseMessage {
    * dateTime
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public currentTime: string
@@ -40,17 +37,14 @@ export class BootNotificationResponseDto implements IResponseMessage {
   /**
    * When <<cmn_registrationstatusenumtype,Status>> is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next BootNotification request.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public interval: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(RegistrationStatusEnum)
   public status: RegistrationStatusEnum
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public statusInfo!: StatusInfoDto

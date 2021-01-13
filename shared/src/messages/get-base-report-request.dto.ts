@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -18,7 +17,6 @@ export class GetBaseReportRequestDto implements IRequestMessage {
     this.reportBase = reportBase
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -29,7 +27,6 @@ export class GetBaseReportRequestDto implements IRequestMessage {
    * integer
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public requestId: number
@@ -40,7 +37,6 @@ export class GetBaseReportRequestDto implements IRequestMessage {
    * ReportBaseEnumType
    * 1..1
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ReportBaseEnum)
   public reportBase: ReportBaseEnum

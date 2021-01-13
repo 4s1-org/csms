@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -27,7 +26,6 @@ export class SetMonitoringResultDto {
     this.severity = severity
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -35,32 +33,26 @@ export class SetMonitoringResultDto {
   /**
    * Id given to the VariableMonitor by the Charging Station. The Id is only returned when status is accepted. Installed VariableMonitors should have unique id's but the id's of removed Installed monitors should have unique id's but the id's of removed monitors MAY be reused.
    */
-  @ApiProperty()
   @IsOptional()
   @IsInt()
   public id!: number
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public statusInfo!: StatusInfoDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(SetMonitoringStatusEnum)
   public status: SetMonitoringStatusEnum
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(MonitorEnum)
   public type: MonitorEnum
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public component: ComponentDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public variable: VariableDto
@@ -90,7 +82,6 @@ export class SetMonitoringResultDto {
    * *9-Debug* +
    * Indicates information useful to developers for debugging, not useful during operations.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public severity: number

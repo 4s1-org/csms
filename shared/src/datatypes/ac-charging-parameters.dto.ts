@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -22,7 +21,6 @@ export class AcChargingParametersDto {
     this.evMaxVoltage = evMaxVoltage
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -32,7 +30,6 @@ export class AcChargingParametersDto {
    * urn:x-oca:ocpp:uid:1:569211
    * Amount of energy requested (in Wh). This includes energy required for preconditioning.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public energyAmount: number
@@ -42,7 +39,6 @@ export class AcChargingParametersDto {
    * urn:x-oca:ocpp:uid:1:569212
    * Minimum current (amps) supported by the electric vehicle (per phase).
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evMinCurrent: number
@@ -52,7 +48,6 @@ export class AcChargingParametersDto {
    * urn:x-oca:ocpp:uid:1:569213
    * Maximum current (amps) supported by the electric vehicle (per phase). Includes cable capacity.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evMaxCurrent: number
@@ -62,7 +57,6 @@ export class AcChargingParametersDto {
    * urn:x-oca:ocpp:uid:1:569214
    * Maximum voltage supported by the electric vehicle
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evMaxVoltage: number

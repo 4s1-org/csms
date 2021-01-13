@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
@@ -17,7 +16,6 @@ export class NotifyEvChargingScheduleRequestDto implements IRequestMessage {
     this.evseId = evseId
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -25,12 +23,10 @@ export class NotifyEvChargingScheduleRequestDto implements IRequestMessage {
   /**
    * Periods contained in the charging profile are relative to this point in time.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public timeBase: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public chargingSchedule: ChargingScheduleDto
@@ -38,7 +34,6 @@ export class NotifyEvChargingScheduleRequestDto implements IRequestMessage {
   /**
    * The charging schedule contained in this notification applies to an EVSE. EvseId must be > 0.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evseId: number

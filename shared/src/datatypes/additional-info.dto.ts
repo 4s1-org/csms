@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -16,7 +15,6 @@ export class AdditionalInfoDto {
     this.type = type
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -24,7 +22,6 @@ export class AdditionalInfoDto {
   /**
    * This field specifies the additional IdToken.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(36)
   @IsString()
@@ -33,7 +30,6 @@ export class AdditionalInfoDto {
   /**
    * This defines the type of the additionalIdToken. This is a custom type, so the implementation needs to be agreed upon by all involved parties.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(50)
   @IsString()

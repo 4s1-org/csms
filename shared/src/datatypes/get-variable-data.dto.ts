@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { AttributeEnum } from '../enumerations/attribute.enum'
 import { ComponentDto } from './component.dto'
@@ -19,22 +18,18 @@ export class GetVariableDataDto {
     this.variable = variable
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(AttributeEnum)
   public attributeType!: AttributeEnum
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public component: ComponentDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public variable: VariableDto

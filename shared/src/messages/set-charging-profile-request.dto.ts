@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
@@ -15,7 +14,6 @@ export class SetChargingProfileRequestDto implements IRequestMessage {
     this.chargingProfile = chargingProfile
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -23,12 +21,10 @@ export class SetChargingProfileRequestDto implements IRequestMessage {
   /**
    * For TxDefaultProfile an evseId=0 applies the profile to each individual evse. For ChargingStationMaxProfile and ChargingStationExternalConstraints an evseId=0 contains an overal limit for the whole Charging Station.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evseId: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public chargingProfile: ChargingProfileDto

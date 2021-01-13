@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IResponseMessage } from '../i-response-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -16,7 +15,6 @@ export class GetVariablesResponseDto implements IResponseMessage {
     this.getVariableResult = getVariableResult
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -27,7 +25,6 @@ export class GetVariablesResponseDto implements IResponseMessage {
    * GetVariableResultType
    * 1..*
    */
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @IsArray()

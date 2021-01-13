@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -16,12 +15,10 @@ export class ChargingLimitDto {
     this.chargingLimitSource = chargingLimitSource
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingLimitSourceEnum)
   public chargingLimitSource: ChargingLimitSourceEnum
@@ -31,7 +28,6 @@ export class ChargingLimitDto {
    * urn:x-enexis:ecdm:uid:1:570847
    * Indicates whether the charging limit is critical for the grid.
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public isGridCritical!: boolean

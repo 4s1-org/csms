@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -12,7 +11,6 @@ export class ClearDisplayMessageRequestDto implements IRequestMessage {
     this.id = id
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -20,7 +18,6 @@ export class ClearDisplayMessageRequestDto implements IRequestMessage {
   /**
    * Id of the message that SHALL be removed from the Charging Station.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public id: number

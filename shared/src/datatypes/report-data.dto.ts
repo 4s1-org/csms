@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -22,22 +21,18 @@ export class ReportDataDto {
     this.variableAttribute = variableAttribute
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public component: ComponentDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public variable: VariableDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @ArrayMaxSize(4)
@@ -46,7 +41,6 @@ export class ReportDataDto {
   @ValidateNested({ each: true })
   public variableAttribute: VariableAttributeDto[]
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public variableCharacteristics!: VariableCharacteristicsDto

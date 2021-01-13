@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsEnum, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { CustomDataDto } from './custom-data.dto'
 import { LocationEnum } from '../enumerations/location.enum'
@@ -24,7 +23,6 @@ export class SampledValueDto {
     this.value = value
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -34,37 +32,30 @@ export class SampledValueDto {
    * urn:x-oca:ocpp:uid:1:569260
    * Indicates the measured value.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   public value: number
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(ReadingContextEnum)
   public context!: ReadingContextEnum
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(MeasurandEnum)
   public measurand!: MeasurandEnum
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(PhaseEnum)
   public phase!: PhaseEnum
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(LocationEnum)
   public location!: LocationEnum
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public signedMeterValue!: SignedMeterValueDto
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public unitOfMeasure!: UnitOfMeasureDto

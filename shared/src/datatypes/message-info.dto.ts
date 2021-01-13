@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -24,12 +23,10 @@ export class MessageInfoDto {
     this.message = message
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public display!: ComponentDto
@@ -39,17 +36,14 @@ export class MessageInfoDto {
    * urn:x-enexis:ecdm:uid:1:569198
    * Master resource identifier, unique within an exchange context. It is defined within the OCPP context as a positive Integer value (greater or equal to zero).
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public id: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(MessagePriorityEnum)
   public priority: MessagePriorityEnum
 
-  @ApiProperty()
   @IsOptional()
   @IsEnum(MessageStateEnum)
   public state!: MessageStateEnum
@@ -59,7 +53,6 @@ export class MessageInfoDto {
    * urn:x-enexis:ecdm:uid:1:569256
    * From what date-time should this message be shown. If omitted: directly.
    */
-  @ApiProperty()
   @IsOptional()
   @IsDateString()
   public startDateTime!: string
@@ -69,7 +62,6 @@ export class MessageInfoDto {
    * urn:x-enexis:ecdm:uid:1:569257
    * Until what date-time should this message be shown, after this date/time this message SHALL be removed.
    */
-  @ApiProperty()
   @IsOptional()
   @IsDateString()
   public endDateTime!: string
@@ -79,13 +71,11 @@ export class MessageInfoDto {
    * Message SHALL be removed by the Charging Station after transaction has
    * ended.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(36)
   @IsString()
   public transactionId!: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public message: MessageContentDto

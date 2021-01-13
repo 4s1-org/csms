@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { CostDto } from './cost.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -18,7 +17,6 @@ export class ConsumptionCostDto {
     this.cost = cost
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -28,12 +26,10 @@ export class ConsumptionCostDto {
    * urn:x-oca:ocpp:uid:1:569246
    * The lowest level of consumption that defines the starting point of this consumption block. The block interval extends to the start of the next interval.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   public startValue: number
 
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @ArrayMaxSize(3)

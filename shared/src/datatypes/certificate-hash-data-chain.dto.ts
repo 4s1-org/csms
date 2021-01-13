@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { CertificateHashDataDto } from './certificate-hash-data.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -15,22 +14,18 @@ export class CertificateHashDataChainDto {
     this.certificateType = certificateType
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public certificateHashData: CertificateHashDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(GetCertificateIdUseEnum)
   public certificateType: GetCertificateIdUseEnum
 
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @ArrayMaxSize(4)

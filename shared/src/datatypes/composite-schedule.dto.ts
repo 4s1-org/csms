@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
 import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
@@ -25,12 +24,10 @@ export class CompositeScheduleDto {
     this.chargingRateUnit = chargingRateUnit
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ArrayMinSize(1)
   @IsArray()
@@ -44,7 +41,6 @@ export class CompositeScheduleDto {
    * Charging Station calculated the expected
    * consumption for the grid connection.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public evseId: number
@@ -52,7 +48,6 @@ export class CompositeScheduleDto {
   /**
    * Duration of the schedule in seconds.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public duration: number
@@ -62,12 +57,10 @@ export class CompositeScheduleDto {
    * urn:x-oca:ocpp:uid:1:569456
    * Date and time at which the schedule becomes active. All time measurements within the schedule are relative to this timestamp.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public scheduleStart: string
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(ChargingRateUnitEnum)
   public chargingRateUnit: ChargingRateUnitEnum

@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -12,7 +11,6 @@ export class DataTransferRequestDto implements IRequestMessage {
     this.vendorId = vendorId
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -20,7 +18,6 @@ export class DataTransferRequestDto implements IRequestMessage {
   /**
    * May be used to indicate a specific message or implementation.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(50)
   @IsString()
@@ -29,14 +26,12 @@ export class DataTransferRequestDto implements IRequestMessage {
   /**
    * Data without specified length or format. This needs to be decided by both parties (Open to implementation).
    */
-  @ApiProperty()
   @IsOptional()
   public data!: any
 
   /**
    * This identifies the Vendor specific implementation
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(255)
   @IsString()

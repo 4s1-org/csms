@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -14,12 +13,10 @@ export class AuthorizeRequestDto implements IRequestMessage {
     this.idToken = idToken
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
 
-  @ApiProperty()
   @IsNotEmpty()
   @ValidateNested()
   public idToken: IdTokenDto
@@ -27,13 +24,11 @@ export class AuthorizeRequestDto implements IRequestMessage {
   /**
    * The X.509 certificated presented by EV and encoded in PEM format.
    */
-  @ApiProperty()
   @IsOptional()
   @MaxLength(5500)
   @IsString()
   public certificate!: string
 
-  @ApiProperty()
   @IsOptional()
   @ArrayMinSize(1)
   @ArrayMaxSize(4)

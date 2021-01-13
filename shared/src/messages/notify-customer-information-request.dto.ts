@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ApiProperty } from '@nestjs/swagger'
 import { IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { IRequestMessage } from '../i-request-message'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -18,7 +17,6 @@ export class NotifyCustomerInformationRequestDto implements IRequestMessage {
     this.requestId = requestId
   }
 
-  @ApiProperty()
   @IsOptional()
   @ValidateNested()
   public customData!: CustomDataDto
@@ -26,7 +24,6 @@ export class NotifyCustomerInformationRequestDto implements IRequestMessage {
   /**
    * (Part of) the requested data. No format specified in which the data is returned. Should be human readable.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(512)
   @IsString()
@@ -35,7 +32,6 @@ export class NotifyCustomerInformationRequestDto implements IRequestMessage {
   /**
    * “to be continued” indicator. Indicates whether another part of the monitoringData follows in an upcoming notifyMonitoringReportRequest message. Default value when omitted is false.
    */
-  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   public tbc!: boolean
@@ -43,7 +39,6 @@ export class NotifyCustomerInformationRequestDto implements IRequestMessage {
   /**
    * Sequence number of this message. First message starts at 0.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public seqNo: number
@@ -51,7 +46,6 @@ export class NotifyCustomerInformationRequestDto implements IRequestMessage {
   /**
    * Timestamp of the moment this message was generated at the Charging Station.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public generatedAt: string
@@ -59,7 +53,6 @@ export class NotifyCustomerInformationRequestDto implements IRequestMessage {
   /**
    * The Id of the request.
    */
-  @ApiProperty()
   @IsNotEmpty()
   @IsInt()
   public requestId: number
