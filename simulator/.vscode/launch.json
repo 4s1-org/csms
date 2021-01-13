@@ -1,0 +1,47 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug WebSocket Client",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "args": ["${workspaceRoot}/src/index.ts"]
+    }, {
+      "name": "Debug Jest Tests",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "-r",
+        "tsconfig-paths/register",
+        "-r",
+        "ts-node/register",
+        "node_modules/.bin/jest",
+        "--runInBand"
+      ],
+      "port": 9229
+    }, {
+      "name": "Debug Jest Current Testfile",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "-r",
+        "tsconfig-paths/register",
+        "-r",
+        "ts-node/register",
+        "node_modules/.bin/jest",
+        "${fileBasenameNoExtension}",
+        "--runInBand"
+      ],
+      "port": 9229
+    }
+  ]
+}
