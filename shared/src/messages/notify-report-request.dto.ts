@@ -1,19 +1,20 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { ReportDataDto } from '../datatypes/report-data.dto'
 
 /**
  * This contains the field definition of the NotifyReportRequest PDU sent by the Charging Station to the CSMS.
  */
-export class NotifyReportRequestDto implements IRequestMessage {
+export class NotifyReportRequestDto extends RequestBaseDto {
   public constructor(
     requestId: number,
     generatedAt: string,
     seqNo: number,
   ) {
+    super()
     this.requestId = requestId
     this.generatedAt = generatedAt
     this.seqNo = seqNo

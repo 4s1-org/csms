@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AuthorizationStatusEnum } from '../enumerations/authorization-status.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
@@ -12,10 +13,11 @@ import { MessageContentDto } from './message-content.dto'
  * Contains status information about an identifier.
  * It is advised to not stop charging for a token that expires during charging, as ExpiryDate is only used for caching purposes. If ExpiryDate is not given, the status has no end date.
  */
-export class IdTokenInfoDto {
+export class IdTokenInfoDto extends DatatypeBaseDto {
   public constructor(
     status: AuthorizationStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

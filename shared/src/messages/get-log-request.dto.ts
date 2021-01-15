@@ -1,17 +1,18 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { LogEnum } from '../enumerations/log.enum'
 import { LogParametersDto } from '../datatypes/log-parameters.dto'
 
-export class GetLogRequestDto implements IRequestMessage {
+export class GetLogRequestDto extends RequestBaseDto {
   public constructor(
     log: LogParametersDto,
     logType: LogEnum,
     requestId: number,
   ) {
+    super()
     this.log = log
     this.logType = logType
     this.requestId = requestId

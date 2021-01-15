@@ -1,14 +1,14 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNumber, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenInfoDto } from '../datatypes/id-token-info.dto'
 import { MessageContentDto } from '../datatypes/message-content.dto'
 
-export class TransactionEventResponseDto implements IResponseMessage {
+export class TransactionEventResponseDto extends ResponseBaseDto {
   public constructor() {
-    // nothing to do
+    super()
   }
 
   @IsOptional()

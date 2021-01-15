@@ -1,13 +1,14 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class GetTransactionStatusResponseDto implements IResponseMessage {
+export class GetTransactionStatusResponseDto extends ResponseBaseDto {
   public constructor(
     messagesInQueue: boolean,
   ) {
+    super()
     this.messagesInQueue = messagesInQueue
   }
 

@@ -1,16 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 /**
  * This contains the field definition of the HeartbeatResponse PDU sent by the CSMS to the Charging Station in response to a HeartbeatRequest.
  */
-export class HeartbeatResponseDto implements IResponseMessage {
+export class HeartbeatResponseDto extends ResponseBaseDto {
   public constructor(
     currentTime: string,
   ) {
+    super()
     this.currentTime = currentTime
   }
 

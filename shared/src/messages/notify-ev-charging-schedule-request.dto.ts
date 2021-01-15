@@ -1,16 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class NotifyEvChargingScheduleRequestDto implements IRequestMessage {
+export class NotifyEvChargingScheduleRequestDto extends RequestBaseDto {
   public constructor(
     timeBase: string,
     chargingSchedule: ChargingScheduleDto,
     evseId: number,
   ) {
+    super()
     this.timeBase = timeBase
     this.chargingSchedule = chargingSchedule
     this.evseId = evseId

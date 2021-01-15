@@ -1,13 +1,14 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class GetLocalListVersionResponseDto implements IResponseMessage {
+export class GetLocalListVersionResponseDto extends ResponseBaseDto {
   public constructor(
     versionNumber: number,
   ) {
+    super()
     this.versionNumber = versionNumber
   }
 

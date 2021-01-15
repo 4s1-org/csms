@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class SecurityEventNotificationRequestDto implements IRequestMessage {
+export class SecurityEventNotificationRequestDto extends RequestBaseDto {
   public constructor(
     type: string,
     timestamp: string,
   ) {
+    super()
     this.type = type
     this.timestamp = timestamp
   }

@@ -1,16 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { AuthorizationDataDto } from '../datatypes/authorization-data.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { UpdateEnum } from '../enumerations/update.enum'
 
-export class SendLocalListRequestDto implements IRequestMessage {
+export class SendLocalListRequestDto extends RequestBaseDto {
   public constructor(
     versionNumber: number,
     updateType: UpdateEnum,
   ) {
+    super()
     this.versionNumber = versionNumber
     this.updateType = updateType
   }

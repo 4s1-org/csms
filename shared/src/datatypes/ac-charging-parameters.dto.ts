@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
@@ -8,13 +9,14 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233250
  * EV AC charging parameters.
  */
-export class AcChargingParametersDto {
+export class AcChargingParametersDto extends DatatypeBaseDto {
   public constructor(
     energyAmount: number,
     evMinCurrent: number,
     evMaxCurrent: number,
     evMaxVoltage: number,
   ) {
+    super()
     this.energyAmount = energyAmount
     this.evMinCurrent = evMinCurrent
     this.evMaxCurrent = evMaxCurrent

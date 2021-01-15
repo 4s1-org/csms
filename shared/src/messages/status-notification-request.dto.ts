@@ -1,20 +1,21 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { ConnectorStatusEnum } from '../enumerations/connector-status.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 /**
  * ---
  */
-export class StatusNotificationRequestDto implements IRequestMessage {
+export class StatusNotificationRequestDto extends RequestBaseDto {
   public constructor(
     timestamp: string,
     connectorStatus: ConnectorStatusEnum,
     evseId: number,
     connectorId: number,
   ) {
+    super()
     this.timestamp = timestamp
     this.connectorStatus = connectorStatus
     this.evseId = evseId

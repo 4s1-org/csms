@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { EvseDto } from '../datatypes/evse.dto'
 import { OperationalStatusEnum } from '../enumerations/operational-status.enum'
@@ -9,10 +9,11 @@ import { OperationalStatusEnum } from '../enumerations/operational-status.enum'
 /**
  * This contains the field definition of the ChangeAvailabilityRequest PDU sent by the CSMS to the Charging Station.
  */
-export class ChangeAvailabilityRequestDto implements IRequestMessage {
+export class ChangeAvailabilityRequestDto extends RequestBaseDto {
   public constructor(
     operationalStatus: OperationalStatusEnum,
   ) {
+    super()
     this.operationalStatus = operationalStatus
   }
 

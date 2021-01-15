@@ -1,17 +1,18 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { ConnectorEnum } from '../enumerations/connector.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
-export class ReserveNowRequestDto implements IRequestMessage {
+export class ReserveNowRequestDto extends RequestBaseDto {
   public constructor(
     id: number,
     expiryDateTime: string,
     idToken: IdTokenDto,
   ) {
+    super()
     this.id = id
     this.expiryDateTime = expiryDateTime
     this.idToken = idToken

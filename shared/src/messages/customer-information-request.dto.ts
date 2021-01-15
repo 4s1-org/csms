@@ -1,17 +1,18 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CertificateHashDataDto } from '../datatypes/certificate-hash-data.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
-export class CustomerInformationRequestDto implements IRequestMessage {
+export class CustomerInformationRequestDto extends RequestBaseDto {
   public constructor(
     requestId: number,
     report: boolean,
     clear: boolean,
   ) {
+    super()
     this.requestId = requestId
     this.report = report
     this.clear = clear

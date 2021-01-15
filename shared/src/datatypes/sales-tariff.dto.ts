@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { SalesTariffEntryDto } from './sales-tariff-entry.dto'
 
@@ -9,11 +10,12 @@ import { SalesTariffEntryDto } from './sales-tariff-entry.dto'
  * urn:x-oca:ocpp:uid:2:233272
  * NOTE: This dataType is based on dataTypes from <<ref-ISOIEC15118-2,ISO 15118-2>>.
  */
-export class SalesTariffDto {
+export class SalesTariffDto extends DatatypeBaseDto {
   public constructor(
     id: number,
     salesTariffEntry: SalesTariffEntryDto[],
   ) {
+    super()
     this.id = id
     this.salesTariffEntry = salesTariffEntry
   }

@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingProfileKindEnum } from '../enumerations/charging-profile-kind.enum'
 import { ChargingProfilePurposeEnum } from '../enumerations/charging-profile-purpose.enum'
 import { ChargingScheduleDto } from './charging-schedule.dto'
@@ -12,7 +13,7 @@ import { RecurrencyKindEnum } from '../enumerations/recurrency-kind.enum'
  * urn:x-oca:ocpp:uid:2:233255
  * A ChargingProfile consists of ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
-export class ChargingProfileDto {
+export class ChargingProfileDto extends DatatypeBaseDto {
   public constructor(
     id: number,
     stackLevel: number,
@@ -20,6 +21,7 @@ export class ChargingProfileDto {
     chargingProfileKind: ChargingProfileKindEnum,
     chargingSchedule: ChargingScheduleDto[],
   ) {
+    super()
     this.id = id
     this.stackLevel = stackLevel
     this.chargingProfilePurpose = chargingProfilePurpose
