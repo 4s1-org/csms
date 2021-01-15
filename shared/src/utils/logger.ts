@@ -21,58 +21,51 @@ export class Logger {
   }
 
   public fatal(msg: string, obj?: any): void {
+    this._logger.fatal(msg)
     if (obj !== undefined) {
       this._logger.fatal(obj, msg)
-    } else {
-      this._logger.fatal(msg)
     }
   }
 
   public error(msg: string, obj?: any): void {
+    this._logger.error(msg)
     if (obj !== undefined) {
       this._logger.error(obj, msg)
-    } else {
-      this._logger.error(msg)
     }
   }
 
   public warn(msg: string, obj?: any): void {
+    this._logger.warn(msg)
     if (obj !== undefined) {
       this._logger.warn(obj, msg)
-    } else {
-      this._logger.warn(msg)
     }
   }
 
   public info(msg: string, obj?: any): void {
+    this._logger.info(msg)
     if (obj !== undefined) {
       this._logger.info(obj, msg)
-    } else {
-      this._logger.info(msg)
     }
   }
 
   public debug(msg: string, obj?: any): void {
+    this._logger.debug(msg)
     if (obj !== undefined) {
-      this._logger.debug(obj, msg)
-    } else {
-      this._logger.debug(msg)
+      this._logger.debug(obj)
     }
   }
 
   public trace(msg: string, obj?: any): void {
+    this._logger.trace(msg)
     if (obj !== undefined) {
-      this._logger.trace(obj, msg)
-    } else {
-      this._logger.trace(msg)
+      this._logger.trace(obj)
     }
   }
 
   public silent(msg: string, obj?: any): void {
+    this._logger.silent(msg)
     if (obj !== undefined) {
       this._logger.silent(obj, msg)
-    } else {
-      this._logger.silent(msg)
     }
   }
 }
