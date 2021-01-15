@@ -56,14 +56,16 @@ export class ClassGenerator {
   }
 
   private _generateFiles(folders: string[], skeletons: SkeletonBase[]): void {
-    const exports: string[] = []
+    const data: string[] = []
+    data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+    data.push(``)
     for (const skeleton of skeletons) {
       skeleton.writeFile(folders)
-      exports.push(`export { ${skeleton.fullName} } from "./${skeleton.fileNameWithoutExt}"`)
+      data.push(`export { ${skeleton.fullName} } from "./${skeleton.fileNameWithoutExt}"`)
     }
 
     const fileName = path.join(...folders, "index.ts")
-    fs.writeFileSync(fileName, exports.join("\n"), { encoding: "utf-8" })
+    fs.writeFileSync(fileName, data.join("\n"), { encoding: "utf-8" })
   }
 
   private _generateMessageEnumList(folders: string[], messages: string[]): void {
