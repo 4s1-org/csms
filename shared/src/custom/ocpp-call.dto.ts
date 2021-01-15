@@ -39,7 +39,6 @@ export class OcppCallDto extends OcppBaseDto {
   public action: OcppMessageEnum
 
   @IsNotEmpty()
-  @ValidateNested()
   /** JSON Payload of the action. */
   public payload: RequestBaseDto
 
