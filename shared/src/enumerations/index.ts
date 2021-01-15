@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 export { HashAlgorithmEnum } from "./hash-algorithm.enum"
 export { IdTokenEnum } from "./id-token.enum"
 export { AuthorizationStatusEnum } from "./authorization-status.enum"

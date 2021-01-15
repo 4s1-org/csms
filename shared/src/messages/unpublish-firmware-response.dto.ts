@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { UnpublishFirmwareStatusEnum } from '../enumerations/unpublish-firmware-status.enum'
 
-export class UnpublishFirmwareResponseDto implements IResponseMessage {
+export class UnpublishFirmwareResponseDto extends ResponseBaseDto {
   public constructor(
     status: UnpublishFirmwareStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

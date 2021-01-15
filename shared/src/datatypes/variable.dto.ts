@@ -1,15 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Reference key to a component-variable.
  */
-export class VariableDto {
+export class VariableDto extends DatatypeBaseDto {
   public constructor(
     name: string,
   ) {
+    super()
     this.name = name
   }
 

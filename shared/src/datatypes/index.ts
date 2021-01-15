@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 export { CustomDataDto } from "./custom-data.dto"
 export { AdditionalInfoDto } from "./additional-info.dto"
 export { IdTokenDto } from "./id-token.dto"

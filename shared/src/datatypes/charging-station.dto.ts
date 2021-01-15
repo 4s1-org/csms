@@ -1,17 +1,19 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { ModemDto } from './modem.dto'
 
 /**
  * The physical system where an Electrical Vehicle (EV) can be charged.
  */
-export class ChargingStationDto {
+export class ChargingStationDto extends DatatypeBaseDto {
   public constructor(
     model: string,
     vendorName: string,
   ) {
+    super()
     this.model = model
     this.vendorName = vendorName
   }

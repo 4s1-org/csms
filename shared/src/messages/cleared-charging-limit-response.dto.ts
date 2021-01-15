@@ -1,12 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class ClearedChargingLimitResponseDto implements IResponseMessage {
+export class ClearedChargingLimitResponseDto extends ResponseBaseDto {
   public constructor() {
-    // nothing to do
+    super()
   }
 
   @IsOptional()

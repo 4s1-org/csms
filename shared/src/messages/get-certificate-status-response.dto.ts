@@ -1,15 +1,16 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GetCertificateStatusEnum } from '../enumerations/get-certificate-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class GetCertificateStatusResponseDto implements IResponseMessage {
+export class GetCertificateStatusResponseDto extends ResponseBaseDto {
   public constructor(
     status: GetCertificateStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

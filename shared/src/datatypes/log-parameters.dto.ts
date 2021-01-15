@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
@@ -8,10 +9,11 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-enexis:ecdm:uid:2:233373
  * Generic class for the configuration of logging entries.
  */
-export class LogParametersDto {
+export class LogParametersDto extends DatatypeBaseDto {
   public constructor(
     remoteLocation: string,
   ) {
+    super()
     this.remoteLocation = remoteLocation
   }
 

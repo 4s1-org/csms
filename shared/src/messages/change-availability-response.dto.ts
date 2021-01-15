@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { ChangeAvailabilityStatusEnum } from '../enumerations/change-availability-status.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
@@ -9,10 +9,11 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 /**
  * This contains the field definition of the ChangeAvailabilityResponse PDU sent by the Charging Station to the CSMS.
  */
-export class ChangeAvailabilityResponseDto implements IResponseMessage {
+export class ChangeAvailabilityResponseDto extends ResponseBaseDto {
   public constructor(
     status: ChangeAvailabilityStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

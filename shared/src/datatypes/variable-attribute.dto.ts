@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsEnum, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AttributeEnum } from '../enumerations/attribute.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { MutabilityEnum } from '../enumerations/mutability.enum'
@@ -8,9 +9,9 @@ import { MutabilityEnum } from '../enumerations/mutability.enum'
 /**
  * Attribute data of a variable.
  */
-export class VariableAttributeDto {
+export class VariableAttributeDto extends DatatypeBaseDto {
   public constructor() {
-    // nothing to do
+    super()
   }
 
   @IsOptional()

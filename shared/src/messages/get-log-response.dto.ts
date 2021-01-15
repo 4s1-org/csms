@@ -1,15 +1,16 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { LogStatusEnum } from '../enumerations/log-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class GetLogResponseDto implements IResponseMessage {
+export class GetLogResponseDto extends ResponseBaseDto {
   public constructor(
     status: LogStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

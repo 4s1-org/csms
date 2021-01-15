@@ -1,17 +1,19 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AttributeEnum } from '../enumerations/attribute.enum'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { VariableDto } from './variable.dto'
 
-export class SetVariableDataDto {
+export class SetVariableDataDto extends DatatypeBaseDto {
   public constructor(
     attributeValue: string,
     component: ComponentDto,
     variable: VariableDto,
   ) {
+    super()
     this.attributeValue = attributeValue
     this.component = component
     this.variable = variable

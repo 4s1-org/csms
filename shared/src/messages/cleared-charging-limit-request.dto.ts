@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class ClearedChargingLimitRequestDto implements IRequestMessage {
+export class ClearedChargingLimitRequestDto extends RequestBaseDto {
   public constructor(
     chargingLimitSource: ChargingLimitSourceEnum,
   ) {
+    super()
     this.chargingLimitSource = chargingLimitSource
   }
 

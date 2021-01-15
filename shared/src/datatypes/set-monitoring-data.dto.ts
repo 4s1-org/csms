@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { MonitorEnum } from '../enumerations/monitor.enum'
@@ -9,7 +10,7 @@ import { VariableDto } from './variable.dto'
 /**
  * Class to hold parameters of SetVariableMonitoring request.
  */
-export class SetMonitoringDataDto {
+export class SetMonitoringDataDto extends DatatypeBaseDto {
   public constructor(
     value: number,
     type: MonitorEnum,
@@ -17,6 +18,7 @@ export class SetMonitoringDataDto {
     component: ComponentDto,
     variable: VariableDto,
   ) {
+    super()
     this.value = value
     this.type = type
     this.severity = severity

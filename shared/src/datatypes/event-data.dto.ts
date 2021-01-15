@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { EventNotificationEnum } from '../enumerations/event-notification.enum'
@@ -10,7 +11,7 @@ import { VariableDto } from './variable.dto'
 /**
  * Class to report an event notification for a component-variable.
  */
-export class EventDataDto {
+export class EventDataDto extends DatatypeBaseDto {
   public constructor(
     eventId: number,
     timestamp: string,
@@ -20,6 +21,7 @@ export class EventDataDto {
     eventNotificationType: EventNotificationEnum,
     variable: VariableDto,
   ) {
+    super()
     this.eventId = eventId
     this.timestamp = timestamp
     this.trigger = trigger
