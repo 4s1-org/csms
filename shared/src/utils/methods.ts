@@ -1,9 +1,9 @@
 import { validateSync } from "class-validator"
-import { OcppBaseDto } from "src/custom/ocpp-base.dto"
-import { OcppCallErrorDto } from "src/custom/ocpp-call-error.dto"
-import { OcppErrorCode } from "src/custom/ocpp-error-code"
-import { RequestBaseDto } from "src/generated/request-base.dto"
-import { ResponseBaseDto } from "src/generated/response-base.dto"
+import { OcppBaseDto } from "../custom/ocpp-base.dto"
+import { OcppCallErrorDto } from "../custom/ocpp-call-error.dto"
+import { OcppErrorCode } from "../custom/ocpp-error-code"
+import { RequestBaseDto } from "../generated/request-base.dto"
+import { ResponseBaseDto } from "../generated/response-base.dto"
 
 export function validateData(data: OcppBaseDto | RequestBaseDto | ResponseBaseDto, messageId: string): void {
   const errors = validateSync(data)
