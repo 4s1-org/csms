@@ -1,5 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
+import "reflect-metadata"
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -75,4 +76,8 @@ export class ChargingStationDto extends DatatypeBaseDto {
   @MaxLength(50)
   @IsString()
   public firmwareVersion!: string
+
+  public foo(): void {
+    console.log("**********************")
+  }
 }
