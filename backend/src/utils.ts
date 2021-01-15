@@ -4,9 +4,9 @@ import {
   OcppErrorCode,
   OcppMessageEnum,
   OcppMessageTypeIdEnum,
+  validateData,
 } from '@yellowgarbagebag/csms-shared'
 import { plainToClass } from 'class-transformer'
-import { validateSync } from 'class-validator'
 import { OcppError } from './ocpp-error'
 
 export function validateOcppCall(data: unknown): OcppCallDto {
@@ -46,9 +46,6 @@ export function validateOcppCall(data: unknown): OcppCallDto {
   }
 
   const ocppCall = plainToClass(OcppCallDto, obj)
-  const errors = validateSync(ocppCall)
-  if (errors.length > 0) {
-    throw new OcppError(new OcppCallErrorDto(data[1], OcppErrorCode.FormatViolation, 'Validation failed'))
-  }
+  validateData(ocppCall, data[1])
   return ocppCall
 }
