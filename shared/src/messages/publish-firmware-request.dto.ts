@@ -1,15 +1,16 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class PublishFirmwareRequestDto implements IRequestMessage {
+export class PublishFirmwareRequestDto extends RequestBaseDto {
   public constructor(
     location: string,
     checksum: string,
     requestId: number,
   ) {
+    super()
     this.location = location
     this.checksum = checksum
     this.requestId = requestId

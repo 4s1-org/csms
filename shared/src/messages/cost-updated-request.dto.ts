@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class CostUpdatedRequestDto implements IRequestMessage {
+export class CostUpdatedRequestDto extends RequestBaseDto {
   public constructor(
     totalCost: number,
     transactionId: string,
   ) {
+    super()
     this.totalCost = totalCost
     this.transactionId = transactionId
   }

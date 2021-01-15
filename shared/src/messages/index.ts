@@ -1,3 +1,5 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
 export { AuthorizeRequestDto } from "./authorize-request.dto"
 export { AuthorizeResponseDto } from "./authorize-response.dto"
 export { BootNotificationRequestDto } from "./boot-notification-request.dto"

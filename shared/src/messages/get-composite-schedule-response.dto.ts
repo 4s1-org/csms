@@ -1,16 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CompositeScheduleDto } from '../datatypes/composite-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GenericStatusEnum } from '../enumerations/generic-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class GetCompositeScheduleResponseDto implements IResponseMessage {
+export class GetCompositeScheduleResponseDto extends ResponseBaseDto {
   public constructor(
     status: GenericStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

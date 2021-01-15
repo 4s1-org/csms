@@ -1,15 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ClearMonitoringStatusEnum } from '../enumerations/clear-monitoring-status.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
 
-export class ClearMonitoringResultDto {
+export class ClearMonitoringResultDto extends DatatypeBaseDto {
   public constructor(
     status: ClearMonitoringStatusEnum,
     id: number,
   ) {
+    super()
     this.status = status
     this.id = id
   }

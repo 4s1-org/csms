@@ -1,15 +1,16 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class SetChargingProfileRequestDto implements IRequestMessage {
+export class SetChargingProfileRequestDto extends RequestBaseDto {
   public constructor(
     evseId: number,
     chargingProfile: ChargingProfileDto,
   ) {
+    super()
     this.evseId = evseId
     this.chargingProfile = chargingProfile
   }

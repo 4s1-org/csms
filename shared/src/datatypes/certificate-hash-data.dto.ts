@@ -1,16 +1,18 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enumerations/hash-algorithm.enum'
 
-export class CertificateHashDataDto {
+export class CertificateHashDataDto extends DatatypeBaseDto {
   public constructor(
     hashAlgorithm: HashAlgorithmEnum,
     issuerNameHash: string,
     issuerKeyHash: string,
     serialNumber: string,
   ) {
+    super()
     this.hashAlgorithm = hashAlgorithm
     this.issuerNameHash = issuerNameHash
     this.issuerKeyHash = issuerKeyHash

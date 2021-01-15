@@ -1,16 +1,18 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Relative_ Timer_ Interval
  * urn:x-oca:ocpp:uid:2:233270
  */
-export class RelativeTimeIntervalDto {
+export class RelativeTimeIntervalDto extends DatatypeBaseDto {
   public constructor(
     start: number,
   ) {
+    super()
     this.start = start
   }
 

@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CostDto } from './cost.dto'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -8,11 +9,12 @@ import { CustomDataDto } from './custom-data.dto'
  * Consumption_ Cost
  * urn:x-oca:ocpp:uid:2:233259
  */
-export class ConsumptionCostDto {
+export class ConsumptionCostDto extends DatatypeBaseDto {
   public constructor(
     startValue: number,
     cost: CostDto[],
   ) {
+    super()
     this.startValue = startValue
     this.cost = cost
   }

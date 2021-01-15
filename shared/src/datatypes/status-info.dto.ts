@@ -1,15 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Element providing more information about the status.
  */
-export class StatusInfoDto {
+export class StatusInfoDto extends DatatypeBaseDto {
   public constructor(
     reasonCode: string,
   ) {
+    super()
     this.reasonCode = reasonCode
   }
 

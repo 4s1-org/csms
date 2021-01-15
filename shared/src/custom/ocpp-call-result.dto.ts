@@ -1,12 +1,14 @@
 import { IsNotEmpty, IsInt, IsPositive, IsString, MaxLength, ValidateNested } from "class-validator"
-import { IResponseMessage } from "src/i-response-message"
+import { ResponseBaseDto } from "../generated/response-base.dto"
+import { OcppBaseDto } from "./ocpp-base.dto"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
 
-export class OcppCallResultDto {
+export class OcppCallResultDto extends OcppBaseDto {
   constructor(
     messageId: string,
-    payload: IResponseMessage,
+    payload: ResponseBaseDto,
   ) {
+    super()
     this.messageTypeId = OcppMessageTypeIdEnum.Result
     this.messageId = messageId
     this.payload = payload
@@ -28,7 +30,7 @@ export class OcppCallResultDto {
   @IsNotEmpty()
   @ValidateNested()
   /** JSON Payload of the action. */
-  public payload: IResponseMessage
+  public payload: ResponseBaseDto
 
   public toString(): string {
     return JSON.stringify([this.messageTypeId, this.messageId, this.payload])

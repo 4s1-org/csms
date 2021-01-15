@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { MessageContentDto } from './message-content.dto'
@@ -12,12 +13,13 @@ import { MessageStateEnum } from '../enumerations/message-state.enum'
  * urn:x-enexis:ecdm:uid:2:233264
  * Contains message details, for a message to be displayed on a Charging Station.
  */
-export class MessageInfoDto {
+export class MessageInfoDto extends DatatypeBaseDto {
   public constructor(
     id: number,
     priority: MessagePriorityEnum,
     message: MessageContentDto,
   ) {
+    super()
     this.id = id
     this.priority = priority
     this.message = message

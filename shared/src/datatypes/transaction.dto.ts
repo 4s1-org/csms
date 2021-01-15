@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingStateEnum } from '../enumerations/charging-state.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { ReasonEnum } from '../enumerations/reason.enum'
@@ -9,10 +10,11 @@ import { ReasonEnum } from '../enumerations/reason.enum'
  * Transaction
  * urn:x-oca:ocpp:uid:2:233318
  */
-export class TransactionDto {
+export class TransactionDto extends DatatypeBaseDto {
   public constructor(
     transactionId: string,
   ) {
+    super()
     this.transactionId = transactionId
   }
 

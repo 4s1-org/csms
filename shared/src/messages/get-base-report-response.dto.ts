@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GenericDeviceModelStatusEnum } from '../enumerations/generic-device-model-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
@@ -9,10 +9,11 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 /**
  * This contains the field definition of the GetBaseReportResponse PDU sent by the Charging Station to the CSMS.
  */
-export class GetBaseReportResponseDto implements IResponseMessage {
+export class GetBaseReportResponseDto extends ResponseBaseDto {
   public constructor(
     status: GenericDeviceModelStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

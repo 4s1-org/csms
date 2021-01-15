@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { VpnEnum } from '../enumerations/vpn.enum'
 
@@ -9,7 +10,7 @@ import { VpnEnum } from '../enumerations/vpn.enum'
  * urn:x-oca:ocpp:uid:2:233268
  * VPN Configuration settings
  */
-export class VpnDto {
+export class VpnDto extends DatatypeBaseDto {
   public constructor(
     server: string,
     user: string,
@@ -17,6 +18,7 @@ export class VpnDto {
     key: string,
     type: VpnEnum,
   ) {
+    super()
     this.server = server
     this.user = user
     this.password = password

@@ -2,15 +2,15 @@ import {
   BootNotificationRequestDto,
   BootReasonEnum,
   ChargingStationDto,
+  Logger,
   OcppCallDto,
   OcppMessageEnum,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
-import { createLogger } from './logger'
 
 export class WebSocketClient {
-  private logger = createLogger(this.name)
+  private logger = new Logger(this.name)
 
   public constructor(public readonly name: string) {
     // nothing to do
@@ -21,16 +21,16 @@ export class WebSocketClient {
   }
 
   private sendBootNotification(socket: WebSocket): void {
-    socket.send(
-      new OcppCallDto(
-        this.getId(),
-        OcppMessageEnum.BootNotification,
-        new BootNotificationRequestDto(
-          new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-          BootReasonEnum.PowerUp,
-        ),
-      ).toString(),
-    )
+    const msg = new OcppCallDto(
+      this.getId(),
+      OcppMessageEnum.BootNotification,
+      new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
+    ).toString()
+
+    this.logger.debug('Send')
+    this.logger.debug(msg)
+
+    socket.send(msg)
   }
 
   public async run(): Promise<void> {
@@ -44,15 +44,18 @@ export class WebSocketClient {
     }
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+      this.logger.debug('Received', msg.data)
+
       const data = JSON.parse(msg.data as string)
-      this.logger.info(data)
     }
 
     socket.onerror = (err: any): void => {
       this.logger.error('Error' + err)
     }
+
     socket.onclose = (): void => {
       this.logger.info('Close')
+      setTimeout(() => this.run(), 3000)
     }
   }
 }

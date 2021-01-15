@@ -1,15 +1,16 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { FirmwareDto } from '../datatypes/firmware.dto'
 
-export class UpdateFirmwareRequestDto implements IRequestMessage {
+export class UpdateFirmwareRequestDto extends RequestBaseDto {
   public constructor(
     requestId: number,
     firmware: FirmwareDto,
   ) {
+    super()
     this.requestId = requestId
     this.firmware = firmware
   }

@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ConsumptionCostDto } from './consumption-cost.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { RelativeTimeIntervalDto } from './relative-time-interval.dto'
@@ -9,10 +10,11 @@ import { RelativeTimeIntervalDto } from './relative-time-interval.dto'
  * Sales_ Tariff_ Entry
  * urn:x-oca:ocpp:uid:2:233271
  */
-export class SalesTariffEntryDto {
+export class SalesTariffEntryDto extends DatatypeBaseDto {
   public constructor(
     relativeTimeInterval: RelativeTimeIntervalDto,
   ) {
+    super()
     this.relativeTimeInterval = relativeTimeInterval
   }
 

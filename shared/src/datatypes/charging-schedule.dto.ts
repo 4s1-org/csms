@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
 import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -11,12 +12,13 @@ import { SalesTariffDto } from './sales-tariff.dto'
  * urn:x-oca:ocpp:uid:2:233256
  * Charging schedule structure defines a list of charging periods, as used in: GetCompositeSchedule.conf and ChargingProfile.
  */
-export class ChargingScheduleDto {
+export class ChargingScheduleDto extends DatatypeBaseDto {
   public constructor(
     id: number,
     chargingRateUnit: ChargingRateUnitEnum,
     chargingSchedulePeriod: ChargingSchedulePeriodDto[],
   ) {
+    super()
     this.id = id
     this.chargingRateUnit = chargingRateUnit
     this.chargingSchedulePeriod = chargingSchedulePeriod
