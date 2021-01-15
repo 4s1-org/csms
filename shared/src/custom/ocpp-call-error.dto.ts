@@ -42,7 +42,6 @@ export class OcppCallErrorDto extends OcppBaseDto {
   public errorDescription: string
 
   @IsNotEmpty()
-  @ValidateNested()
   /** This JSON object describes error details in an undefined way. If there are no error details you MUST fill in an empty object {}. */
   public errorDetails: unknown
 

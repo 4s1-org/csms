@@ -28,7 +28,6 @@ export class OcppCallResultDto extends OcppBaseDto {
   public messageId: string
 
   @IsNotEmpty()
-  @ValidateNested()
   /** JSON Payload of the action. */
   public payload: ResponseBaseDto
 
