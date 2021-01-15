@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CertificateSigningUseEnum } from '../enumerations/certificate-signing-use.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class SignCertificateRequestDto implements IRequestMessage {
+export class SignCertificateRequestDto extends RequestBaseDto {
   public constructor(
     csr: string,
   ) {
+    super()
     this.csr = csr
   }
 

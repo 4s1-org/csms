@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CostKindEnum } from '../enumerations/cost-kind.enum'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -8,11 +9,12 @@ import { CustomDataDto } from './custom-data.dto'
  * Cost
  * urn:x-oca:ocpp:uid:2:233258
  */
-export class CostDto {
+export class CostDto extends DatatypeBaseDto {
   public constructor(
     costKind: CostKindEnum,
     amount: number,
   ) {
+    super()
     this.costKind = costKind
     this.amount = amount
   }

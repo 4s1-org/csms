@@ -1,16 +1,18 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { EvseDto } from './evse.dto'
 
 /**
  * A physical or logical component
  */
-export class ComponentDto {
+export class ComponentDto extends DatatypeBaseDto {
   public constructor(
     name: string,
   ) {
+    super()
     this.name = name
   }
 

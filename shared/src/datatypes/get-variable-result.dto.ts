@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AttributeEnum } from '../enumerations/attribute.enum'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -11,12 +12,13 @@ import { VariableDto } from './variable.dto'
 /**
  * Class to hold results of GetVariables request.
  */
-export class GetVariableResultDto {
+export class GetVariableResultDto extends DatatypeBaseDto {
   public constructor(
     attributeStatus: GetVariableStatusEnum,
     component: ComponentDto,
     variable: VariableDto,
   ) {
+    super()
     this.attributeStatus = attributeStatus
     this.component = component
     this.variable = variable

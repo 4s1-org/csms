@@ -1,15 +1,16 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { ChargingProfileStatusEnum } from '../enumerations/charging-profile-status.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
-export class SetChargingProfileResponseDto implements IResponseMessage {
+export class SetChargingProfileResponseDto extends ResponseBaseDto {
   public constructor(
     status: ChargingProfileStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

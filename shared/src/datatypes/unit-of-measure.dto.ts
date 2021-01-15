@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Represents a UnitOfMeasure with a multiplier
  */
-export class UnitOfMeasureDto {
+export class UnitOfMeasureDto extends DatatypeBaseDto {
   public constructor() {
-    // nothing to do
+    super()
   }
 
   @IsOptional()

@@ -1,13 +1,14 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class SetMonitoringLevelRequestDto implements IRequestMessage {
+export class SetMonitoringLevelRequestDto extends RequestBaseDto {
   public constructor(
     severity: number,
   ) {
+    super()
     this.severity = severity
   }
 

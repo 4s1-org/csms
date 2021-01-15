@@ -1,16 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
-export class RequestStartTransactionRequestDto implements IRequestMessage {
+export class RequestStartTransactionRequestDto extends RequestBaseDto {
   public constructor(
     idToken: IdTokenDto,
     remoteStartId: number,
   ) {
+    super()
     this.idToken = idToken
     this.remoteStartId = remoteStartId
   }

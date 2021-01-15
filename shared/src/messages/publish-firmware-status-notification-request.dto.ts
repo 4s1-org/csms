@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { PublishFirmwareStatusEnum } from '../enumerations/publish-firmware-status.enum'
 
-export class PublishFirmwareStatusNotificationRequestDto implements IRequestMessage {
+export class PublishFirmwareStatusNotificationRequestDto extends RequestBaseDto {
   public constructor(
     status: PublishFirmwareStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

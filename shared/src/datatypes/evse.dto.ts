@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
@@ -8,10 +9,11 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233123
  * Electric Vehicle Supply Equipment
  */
-export class EvseDto {
+export class EvseDto extends DatatypeBaseDto {
   public constructor(
     id: number,
   ) {
+    super()
     this.id = id
   }
 

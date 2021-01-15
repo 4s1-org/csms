@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { MessageFormatEnum } from '../enumerations/message-format.enum'
 
@@ -9,11 +10,12 @@ import { MessageFormatEnum } from '../enumerations/message-format.enum'
  * urn:x-enexis:ecdm:uid:2:234490
  * Contains message details, for a message to be displayed on a Charging Station.
  */
-export class MessageContentDto {
+export class MessageContentDto extends DatatypeBaseDto {
   public constructor(
     format: MessageFormatEnum,
     content: string,
   ) {
+    super()
     this.format = format
     this.content = content
   }

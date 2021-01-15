@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingProfilePurposeEnum } from '../enumerations/charging-profile-purpose.enum'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -9,9 +10,9 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233255
  * A ChargingProfile consists of a ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
-export class ClearChargingProfileDto {
+export class ClearChargingProfileDto extends DatatypeBaseDto {
   public constructor() {
-    // nothing to do
+    super()
   }
 
   @IsOptional()

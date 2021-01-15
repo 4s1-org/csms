@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { UploadLogStatusEnum } from '../enumerations/upload-log-status.enum'
 
-export class LogStatusNotificationRequestDto implements IRequestMessage {
+export class LogStatusNotificationRequestDto extends RequestBaseDto {
   public constructor(
     status: UploadLogStatusEnum,
   ) {
+    super()
     this.status = status
   }
 

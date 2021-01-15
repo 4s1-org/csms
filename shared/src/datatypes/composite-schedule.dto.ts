@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
 import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -9,7 +10,7 @@ import { CustomDataDto } from './custom-data.dto'
  * Composite_ Schedule
  * urn:x-oca:ocpp:uid:2:233362
  */
-export class CompositeScheduleDto {
+export class CompositeScheduleDto extends DatatypeBaseDto {
   public constructor(
     chargingSchedulePeriod: ChargingSchedulePeriodDto[],
     evseId: number,
@@ -17,6 +18,7 @@ export class CompositeScheduleDto {
     scheduleStart: string,
     chargingRateUnit: ChargingRateUnitEnum,
   ) {
+    super()
     this.chargingSchedulePeriod = chargingSchedulePeriod
     this.evseId = evseId
     this.duration = duration
