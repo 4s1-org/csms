@@ -1,6 +1,8 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
+import "reflect-metadata"
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from "class-transformer"
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { BootReasonEnum } from '../enumerations/boot-reason.enum'
 import { ChargingStationDto } from '../datatypes/charging-station.dto'
@@ -21,6 +23,7 @@ export class BootNotificationRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -30,7 +33,8 @@ export class BootNotificationRequestDto extends RequestBaseDto {
    * 1..1
    */
   @IsNotEmpty()
-  @ValidateNested()
+  @ValidateNested({ each: true })
+  @Type(() => ChargingStationDto)
   public chargingStation: ChargingStationDto
 
   /**
