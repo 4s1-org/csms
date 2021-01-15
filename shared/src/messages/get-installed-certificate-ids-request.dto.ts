@@ -1,13 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GetCertificateIdUseEnum } from '../enumerations/get-certificate-id-use.enum'
 
-export class GetInstalledCertificateIdsRequestDto implements IRequestMessage {
+export class GetInstalledCertificateIdsRequestDto extends RequestBaseDto {
   public constructor() {
-    // nothing to do
+    super()
   }
 
   @IsOptional()

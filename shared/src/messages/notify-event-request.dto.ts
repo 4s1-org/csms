@@ -1,16 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { EventDataDto } from '../datatypes/event-data.dto'
 
-export class NotifyEventRequestDto implements IRequestMessage {
+export class NotifyEventRequestDto extends RequestBaseDto {
   public constructor(
     generatedAt: string,
     seqNo: number,
     eventData: EventDataDto[],
   ) {
+    super()
     this.generatedAt = generatedAt
     this.seqNo = seqNo
     this.eventData = eventData

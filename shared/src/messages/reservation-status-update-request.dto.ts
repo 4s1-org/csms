@@ -1,15 +1,16 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { ReservationUpdateStatusEnum } from '../enumerations/reservation-update-status.enum'
 
-export class ReservationStatusUpdateRequestDto implements IRequestMessage {
+export class ReservationStatusUpdateRequestDto extends RequestBaseDto {
   public constructor(
     reservationId: number,
     reservationUpdateStatus: ReservationUpdateStatusEnum,
   ) {
+    super()
     this.reservationId = reservationId
     this.reservationUpdateStatus = reservationUpdateStatus
   }

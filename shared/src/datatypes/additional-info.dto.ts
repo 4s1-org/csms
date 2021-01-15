@@ -1,16 +1,18 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Contains a case insensitive identifier to use for the authorization and the type of authorization to support multiple forms of identifiers.
  */
-export class AdditionalInfoDto {
+export class AdditionalInfoDto extends DatatypeBaseDto {
   public constructor(
     additionalIdToken: string,
     type: string,
   ) {
+    super()
     this.additionalIdToken = additionalIdToken
     this.type = type
   }

@@ -1,16 +1,17 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class NotifyCustomerInformationRequestDto implements IRequestMessage {
+export class NotifyCustomerInformationRequestDto extends RequestBaseDto {
   public constructor(
     data: string,
     seqNo: number,
     generatedAt: string,
     requestId: number,
   ) {
+    super()
     this.data = data
     this.seqNo = seqNo
     this.generatedAt = generatedAt

@@ -1,7 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MeterValueDto } from '../datatypes/meter-value.dto'
 
@@ -9,11 +9,12 @@ import { MeterValueDto } from '../datatypes/meter-value.dto'
  * Request_ Body
  * urn:x-enexis:ecdm:uid:2:234744
  */
-export class MeterValuesRequestDto implements IRequestMessage {
+export class MeterValuesRequestDto extends RequestBaseDto {
   public constructor(
     evseId: number,
     meterValue: MeterValueDto[],
   ) {
+    super()
     this.evseId = evseId
     this.meterValue = meterValue
   }

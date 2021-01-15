@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
  * Defines parameters required for initiating and maintaining wireless communication with other devices.
  */
-export class ModemDto {
+export class ModemDto extends DatatypeBaseDto {
   public constructor() {
-    // nothing to do
+    super()
   }
 
   @IsOptional()

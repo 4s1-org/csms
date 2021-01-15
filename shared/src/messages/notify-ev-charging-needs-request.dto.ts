@@ -1,15 +1,16 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingNeedsDto } from '../datatypes/charging-needs.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class NotifyEvChargingNeedsRequestDto implements IRequestMessage {
+export class NotifyEvChargingNeedsRequestDto extends RequestBaseDto {
   public constructor(
     chargingNeeds: ChargingNeedsDto,
     evseId: number,
   ) {
+    super()
     this.chargingNeeds = chargingNeeds
     this.evseId = evseId
   }

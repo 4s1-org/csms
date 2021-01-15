@@ -1,18 +1,19 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IRequestMessage } from '../i-request-message'
+import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
 import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class ReportChargingProfilesRequestDto implements IRequestMessage {
+export class ReportChargingProfilesRequestDto extends RequestBaseDto {
   public constructor(
     requestId: number,
     chargingLimitSource: ChargingLimitSourceEnum,
     chargingProfile: ChargingProfileDto[],
     evseId: number,
   ) {
+    super()
     this.requestId = requestId
     this.chargingLimitSource = chargingLimitSource
     this.chargingProfile = chargingProfile

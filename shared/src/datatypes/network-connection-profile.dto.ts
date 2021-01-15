@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ApnDto } from './apn.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { OcppInterfaceEnum } from '../enumerations/ocpp-interface.enum'
@@ -13,7 +14,7 @@ import { VpnDto } from './vpn.dto'
  * urn:x-oca:ocpp:uid:2:233304
  * The NetworkConnectionProfile defines the functional and technical parameters of a communication link.
  */
-export class NetworkConnectionProfileDto {
+export class NetworkConnectionProfileDto extends DatatypeBaseDto {
   public constructor(
     ocppVersion: OcppVersionEnum,
     ocppTransport: OcppTransportEnum,
@@ -22,6 +23,7 @@ export class NetworkConnectionProfileDto {
     securityProfile: number,
     ocppInterface: OcppInterfaceEnum,
   ) {
+    super()
     this.ocppVersion = ocppVersion
     this.ocppTransport = ocppTransport
     this.ocppCsmsUrl = ocppCsmsUrl

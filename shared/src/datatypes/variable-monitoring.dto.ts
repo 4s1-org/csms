@@ -1,13 +1,14 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { MonitorEnum } from '../enumerations/monitor.enum'
 
 /**
  * A monitoring setting for a variable.
  */
-export class VariableMonitoringDto {
+export class VariableMonitoringDto extends DatatypeBaseDto {
   public constructor(
     id: number,
     transaction: boolean,
@@ -15,6 +16,7 @@ export class VariableMonitoringDto {
     type: MonitorEnum,
     severity: number,
   ) {
+    super()
     this.id = id
     this.transaction = transaction
     this.value = value

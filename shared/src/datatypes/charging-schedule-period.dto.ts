@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
@@ -8,11 +9,12 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233257
  * Charging schedule period structure defines a time period in a charging schedule.
  */
-export class ChargingSchedulePeriodDto {
+export class ChargingSchedulePeriodDto extends DatatypeBaseDto {
   public constructor(
     startPeriod: number,
     limit: number,
   ) {
+    super()
     this.startPeriod = startPeriod
     this.limit = limit
   }

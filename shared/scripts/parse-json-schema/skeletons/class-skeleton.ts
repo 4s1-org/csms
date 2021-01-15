@@ -65,9 +65,11 @@ export class ClassSkeleton extends SkeletonBase {
       result.push(`import { ${classValidatorItemsUnique.join(", ")} } from 'class-validator'`)
 
       if (this.isRequest) {
-        result.push(`import { IRequestMessage } from '../i-request-message'`)
+        result.push(`import { RequestBaseDto } from '../generated/request-base.dto'`)
       } else if (this.isResponse) {
-        result.push(`import { IResponseMessage } from '../i-response-message'`)
+        result.push(`import { ResponseBaseDto } from '../generated/response-base.dto'`)
+      } else {
+        result.push(`import { DatatypeBaseDto } from '../generated/datatype-base.dto'`)
       }
 
       const ownImportsDone: string[] = []
@@ -109,9 +111,11 @@ export class ClassSkeleton extends SkeletonBase {
     // Begin of class
     let markerInterface = ""
     if (this.isRequest) {
-      markerInterface = "implements IRequestMessage "
+      markerInterface = "extends RequestBaseDto "
     } else if (this.isResponse) {
-      markerInterface = "implements IResponseMessage "
+      markerInterface = "extends ResponseBaseDto "
+    } else {
+      markerInterface = "extends DatatypeBaseDto "
     }
     result.push(`export class ${this.name}${this.nameSuffix} ${markerInterface}{`)
 
@@ -123,6 +127,7 @@ export class ClassSkeleton extends SkeletonBase {
         result.push(`    ${prop.name}: ${prop.type},`)
       }
       result.push(`  ) {`)
+      result.push(`    super()`)
       for (const prop of requiredProperties) {
         result.push(`    this.${prop.name} = ${prop.name}`)
       }
@@ -130,7 +135,7 @@ export class ClassSkeleton extends SkeletonBase {
     } else {
       // Leerer Konstruktor
       result.push(`  public constructor() {`)
-      result.push(`    // nothing to do`)
+      result.push(`    super()`)
       result.push(`  }`)
     }
 

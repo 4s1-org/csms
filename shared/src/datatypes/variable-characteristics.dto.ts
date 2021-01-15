@@ -1,17 +1,19 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { DataEnum } from '../enumerations/data.enum'
 
 /**
  * Fixed read-only parameters of a variable.
  */
-export class VariableCharacteristicsDto {
+export class VariableCharacteristicsDto extends DatatypeBaseDto {
   public constructor(
     dataType: DataEnum,
     supportsMonitoring: boolean,
   ) {
+    super()
     this.dataType = dataType
     this.supportsMonitoring = supportsMonitoring
   }

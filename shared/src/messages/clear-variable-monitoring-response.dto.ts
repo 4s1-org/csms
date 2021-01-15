@@ -1,14 +1,15 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
-import { IResponseMessage } from '../i-response-message'
+import { ResponseBaseDto } from '../generated/response-base.dto'
 import { ClearMonitoringResultDto } from '../datatypes/clear-monitoring-result.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
-export class ClearVariableMonitoringResponseDto implements IResponseMessage {
+export class ClearVariableMonitoringResponseDto extends ResponseBaseDto {
   public constructor(
     clearMonitoringResult: ClearMonitoringResultDto[],
   ) {
+    super()
     this.clearMonitoringResult = clearMonitoringResult
   }
 

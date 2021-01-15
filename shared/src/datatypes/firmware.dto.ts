@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
 /**
@@ -8,11 +9,12 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-enexis:ecdm:uid:2:233291
  * Represents a copy of the firmware that can be loaded/updated on the Charging Station.
  */
-export class FirmwareDto {
+export class FirmwareDto extends DatatypeBaseDto {
   public constructor(
     location: string,
     retrieveDateTime: string,
   ) {
+    super()
     this.location = location
     this.retrieveDateTime = retrieveDateTime
   }

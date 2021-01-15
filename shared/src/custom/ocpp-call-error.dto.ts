@@ -1,14 +1,16 @@
 import { IsNotEmpty, IsInt, IsPositive, IsEnum, IsString, ValidateNested, MaxLength } from "class-validator"
+import { OcppBaseDto } from "./ocpp-base.dto"
 import { OcppErrorCode } from "./ocpp-error-code"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
 
-export class OcppCallErrorDto {
+export class OcppCallErrorDto extends OcppBaseDto {
   constructor(
     messageId: string,
     errorCode: OcppErrorCode,
     errorDescription?: string,
     errorDetails?: unknown,
   ) {
+    super()
     this.messageTypeId = OcppMessageTypeIdEnum.Error
     this.messageId = messageId
     this.errorCode = errorCode
