@@ -51,9 +51,6 @@
   "dependencies": {
     "@yellowgarbagebag/csms-shared": "file:../shared",
     "class-transformer": "^0.3.1",
-    "class-validator": "^0.12.2",
-    "pino": "^6.10.0",
-    "pino-pretty": "^4.3.0",
     "uuid": "^8.3.2",
     "ws": "^7.4.2"
   },
@@ -61,7 +58,6 @@
     "@hest-lab/eslint-config": "^1.2.1",
     "@types/jest": "^26.0.15",
     "@types/node": "^14.14.14",
-    "@types/pino": "^6.3.5",
     "@types/uuid": "^8.3.0",
     "@types/ws": "^7.4.0",
     "eslint": "^7.16.0",
