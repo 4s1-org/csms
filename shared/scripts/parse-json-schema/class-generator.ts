@@ -37,14 +37,18 @@ export class ClassGenerator {
   }
 
   public generateFiles(): void {
-    this._generateMessageMarkerInterface([__dirname, "..", "..", "src"], "Request")
-    this._generateMessageMarkerInterface([__dirname, "..", "..", "src"], "Response")
+    this._generateBaseDtoClasses([__dirname, "..", "..", "src", "generated"], "Request")
+    this._generateBaseDtoClasses([__dirname, "..", "..", "src", "generated"], "Response")
+    this._generateBaseDtoClasses([__dirname, "..", "..", "src", "generated"], "Datatype")
+
+    this._generateMessageTypes([__dirname, "..", "..", "src", "generated"], "Request", this.classSkeletons.filter(x => x.isMessage && x.isRequest))
+    this._generateMessageTypes([__dirname, "..", "..", "src", "generated"], "Response", this.classSkeletons.filter(x => x.isMessage && x.isResponse))
 
     this._generateFiles([__dirname, "..", "..", "src", "enumerations"], this.enumSkeletons)
     this._generateFiles([__dirname, "..", "..", "src", "messages"], this.classSkeletons.filter(x => x.isMessage))
     this._generateFiles([__dirname, "..", "..", "src", "datatypes"], this.classSkeletons.filter(x => !x.isMessage))
 
-    this._generateMessageEnumList([__dirname, "..", "..", "src"],
+    this._generateMessageEnumList([__dirname, "..", "..", "src", "generated"],
       this.classSkeletons
         .filter(x => x.isMessage)
         .map(x => x.name.replace("Request", "").replace("Response", ""))
@@ -67,6 +71,8 @@ export class ClassGenerator {
     messages = [...new Set(messages)]
 
     const data: string[] = []
+    data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+    data.push(``)
     data.push(`export enum OcppMessageEnum {`)
     for (const message of messages) {
       data.push(`  ${message} = "${message}",`)
@@ -78,14 +84,32 @@ export class ClassGenerator {
     fs.writeFileSync(fileName, data.join("\n"), { encoding: "utf-8" })
   }
 
-  private _generateMessageMarkerInterface(folders: string[], type: "Request" | "Response"): void {
+  private _generateBaseDtoClasses(folders: string[], type: "Request" | "Response" | "Datatype"): void {
     const data: string[] = []
-    data.push(`export interface I${type}Message {`)
+    data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+    data.push(``)
+    data.push(`export abstract class ${type}BaseDto {`)
     data.push(`  // nothing to do`)
     data.push(`}`)
     data.push(``)
 
-    const fileName = path.join(...folders, `i-${type.toLocaleLowerCase()}-message.ts`)
+    const fileName = path.join(...folders, `${type.toLocaleLowerCase()}-base.dto.ts`)
+    fs.writeFileSync(fileName, data.join("\n"), { encoding: "utf-8" })
+  }
+
+  private _generateMessageTypes(folders: string[], type: "Request" | "Response", skeletons: ClassSkeleton[]): void {
+    const data: string[] = []
+
+    data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+    data.push(``)
+    for (const skeleton of skeletons) {
+      data.push(`import { ${skeleton.fullName} } from "../messages/${skeleton.fileNameWithoutExt}"`)
+    }
+    data.push(`export type ${type}MessageType =`)
+    data.push(`  ` + skeletons.map(x => x.fullName).join(" | \r\n  "))
+    data.push(``)
+
+    const fileName = path.join(...folders, `${type.toLocaleLowerCase()}-message.type.ts`)
     fs.writeFileSync(fileName, data.join("\n"), { encoding: "utf-8" })
   }
 }
