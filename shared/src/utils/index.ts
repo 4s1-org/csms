@@ -1,2 +1,2 @@
 export { Logger, LogLevel } from "./logger"
-export { validatePayload } from "./methods"
+export { validateData } from "./methods"
