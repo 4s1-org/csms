@@ -2,7 +2,6 @@ import WebSocket from 'ws'
 import { Logger, OcppCallErrorDto, OcppCallResultDto, OcppErrorCode } from '@yellowgarbagebag/csms-shared'
 import { IncomingMessage } from 'http'
 import { ChargingStation } from './charging-station'
-import { OcppError } from './ocpp-error'
 
 export abstract class WebSocketServer {
   private static server: WebSocket.Server
@@ -59,8 +58,8 @@ export abstract class WebSocketServer {
             socket.send(dto.toString())
           }
         } catch (err) {
-          if (err instanceof OcppError) {
-            socket.send(err.dto.toString())
+          if (err instanceof OcppCallErrorDto) {
+            socket.send(err.toString())
           } else {
             logger.error('Internal Server Error')
             console.log(err)

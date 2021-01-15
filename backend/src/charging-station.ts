@@ -11,7 +11,6 @@ import {
   validateData,
 } from '@yellowgarbagebag/csms-shared'
 import { plainToClass } from 'class-transformer'
-import { OcppError } from './ocpp-error'
 import { validateOcppCall } from './utils'
 import WebSocket from 'ws'
 
@@ -40,16 +39,16 @@ export class ChargingStation {
       this.logger.info(`Type of "${dto.action}"`)
       switch (dto.action) {
         case OcppMessageEnum.BootNotification:
-          const bootNotification = plainToClass(BootNotificationRequestDto, dto.payload as unknown)
+          const bootNotification = plainToClass(BootNotificationRequestDto, dto.payload)
           validateData(bootNotification, dto.messageId)
           const res = new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
           return new OcppCallResultDto(dto.messageId, res)
         default:
-          throw new OcppError(new OcppCallErrorDto(dto.messageId, OcppErrorCode.NotSupported))
+          throw new OcppCallErrorDto(dto.messageId, OcppErrorCode.NotSupported)
       }
     } catch (err) {
-      if (err instanceof OcppError) {
-        this.logger.error('Invalid status: ' + err.dto.toString())
+      if (err instanceof OcppCallErrorDto) {
+        this.logger.error('Invalid status: ' + err.toString())
       }
       throw err
     }
