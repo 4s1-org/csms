@@ -50,8 +50,8 @@
     }
   },
   "dependencies": {
-    "@yellowgarbagebag/csms-shared": "file:yellowgarbagebag-csms-shared-1.0.0.tgz",
-    "class-transformer": "^0.3.1",
+    "@yellowgarbagebag/csms-shared": "file:../shared/yellowgarbagebag-csms-shared-1.0.0.tgz",
+    "class-transformer": "^0.3.2",
     "class-validator": "^0.13.1",
     "reflect-metadata": "^0.1.13",
     "ws": "^7.4.2"
@@ -61,7 +61,7 @@
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.21",
     "@types/ws": "^7.4.0",
-    "eslint": "^7.17.0",
+    "eslint": "^7.18.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "prettier": "^2.1.2",
