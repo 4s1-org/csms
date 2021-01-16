@@ -69,12 +69,14 @@ export class PropertySkeleton extends SkeletonBase {
   public setCustomType(value: string, suffix: 'Dto' | 'Enum'): void {
     this.addImportClassValidatior('ValidateNested')
     this._annotations.push(`@ValidateNested()`)
+    this.addImportClassTransformer('Type')
     this._annotations.push(`@Type(() => ${value}${suffix})`)
     this._type = value + suffix
   }
 
   public setCustomArrayType(value: string, suffix: 'Dto' | 'Enum'): void {
     this.appendDefaultArrayAnnotations()
+    this.addImportClassTransformer('Type')
     this._annotations.push(`@Type(() => ${value}${suffix})`)
     this._type = `${value}${suffix}[]`
   }
