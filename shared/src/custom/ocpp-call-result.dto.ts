@@ -1,14 +1,10 @@
-import 'reflect-metadata'
-import { IsNotEmpty, IsInt, IsPositive, IsString, MaxLength, ValidateNested } from "class-validator"
-import { ResponseBaseDto } from "../generated/response-base.dto"
-import { OcppBaseDto } from "./ocpp-base.dto"
-import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
+import { IsNotEmpty, IsInt, IsPositive, IsString, MaxLength } from 'class-validator'
+import { ResponseBaseDto } from '../generated/response-base.dto'
+import { OcppBaseDto } from './ocpp-base.dto'
+import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
 export class OcppCallResultDto extends OcppBaseDto {
-  constructor(
-    messageId: string,
-    payload: ResponseBaseDto,
-  ) {
+  constructor(messageId: string, payload: ResponseBaseDto) {
     super()
     this.messageTypeId = OcppMessageTypeIdEnum.Result
     this.messageId = messageId

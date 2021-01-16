@@ -1,5 +1,4 @@
-import 'reflect-metadata'
-import { IsNotEmpty, IsInt, IsPositive, IsEnum, IsString, ValidateNested, MaxLength } from "class-validator"
+import { IsNotEmpty, IsInt, IsPositive, IsEnum, IsString, MaxLength } from "class-validator"
 import { OcppBaseDto } from "./ocpp-base.dto"
 import { OcppErrorCode } from "./ocpp-error-code"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
