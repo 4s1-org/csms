@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ConsumptionCostDto } from './consumption-cost.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -19,10 +20,12 @@ export class SalesTariffEntryDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
+  @Type(() => RelativeTimeIntervalDto)
   @ValidateNested()
   public relativeTimeInterval: RelativeTimeIntervalDto
 
@@ -39,6 +42,7 @@ export class SalesTariffEntryDto extends DatatypeBaseDto {
   @IsOptional()
   @ArrayMinSize(1)
   @ArrayMaxSize(3)
+  @Type(() => ConsumptionCostDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })

@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -32,6 +33,7 @@ export class EventDataDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -102,6 +104,7 @@ export class EventDataDto extends DatatypeBaseDto {
   public transactionId!: string
 
   @IsNotEmpty()
+  @Type(() => ComponentDto)
   @ValidateNested()
   public component: ComponentDto
 
@@ -117,6 +120,7 @@ export class EventDataDto extends DatatypeBaseDto {
   public eventNotificationType: EventNotificationEnum
 
   @IsNotEmpty()
+  @Type(() => VariableDto)
   @ValidateNested()
   public variable: VariableDto
 }

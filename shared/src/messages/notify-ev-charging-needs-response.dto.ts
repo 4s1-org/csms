@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { NotifyEvChargingNeedsStatusEnum } from '../enumerations/notify-ev-charging-needs-status.enum'
@@ -15,6 +16,7 @@ export class NotifyEvChargingNeedsResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -23,6 +25,7 @@ export class NotifyEvChargingNeedsResponseDto extends ResponseBaseDto {
   public status: NotifyEvChargingNeedsStatusEnum
 
   @IsOptional()
+  @Type(() => StatusInfoDto)
   @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

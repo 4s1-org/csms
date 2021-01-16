@@ -1,9 +1,9 @@
-import { ClassGenerator } from "../class-generator"
-import { IKeyValue } from "./i-key-value"
-import { ClassSkeleton } from "../skeletons/class-skeleton"
-import { Validatable } from "./validatable"
-import { SchemaDefinition } from "./schema-definition"
-import { SchemaDefinitionProperty } from "./schema-definition-property"
+import { ClassGenerator } from '../class-generator'
+import { IKeyValue } from './i-key-value'
+import { ClassSkeleton } from '../skeletons/class-skeleton'
+import { Validatable } from './validatable'
+import { SchemaDefinition } from './schema-definition'
+import { SchemaDefinitionProperty } from './schema-definition-property'
 
 interface Foo {
   $schema: string
@@ -24,18 +24,18 @@ export class SchemaRoot extends Validatable<Foo> {
   }
 
   protected getMustProperties(): string[] {
-    return ["$schema", "$id", "comment", "definitions", "type", "additionalProperties", "properties"]
+    return ['$schema', '$id', 'comment', 'definitions', 'type', 'additionalProperties', 'properties']
   }
 
   protected getCouldProperties(): string[] {
-    return ["required", "description"]
+    return ['required', 'description']
   }
 
   protected handleData(): void {
-    if (!this.data.definitions["CustomDataType"]) {
+    if (!this.data.definitions['CustomDataType']) {
       throw new Error(`${this.key}: Ich dachte, alle Messages haben einen CustomDataType`)
     }
-    if (!this.data.properties["customData"]) {
+    if (!this.data.properties['customData']) {
       throw new Error(`${this.key}: Ich dachte, alle Messages haben einen CustomDataType`)
     }
 
@@ -43,18 +43,18 @@ export class SchemaRoot extends Validatable<Foo> {
     if (this.data.additionalProperties === undefined || this.data.additionalProperties) {
       throw new Error(`${this.key}: Ich dachte, additionalProperties sind auf oberster Ebene immer false`)
     }
-    if (this.data.type !== "object") {
+    if (this.data.type !== 'object') {
       throw new Error(`${this.key}: I thought it would be always an object.`)
     }
 
     // Remove "Type"
-    if (!this.key.endsWith("Request") && !this.key.endsWith("Response")) {
+    if (!this.key.endsWith('Request') && !this.key.endsWith('Response')) {
       throw new Error(`${this.key}: I thought it would end with "Request" or "Response"`)
     }
 
     const skeleton = new ClassSkeleton(this.key)
-    skeleton.isRequest = this.key.endsWith("Request")
-    skeleton.isResponse = this.key.endsWith("Response")
+    skeleton.isRequest = this.key.endsWith('Request')
+    skeleton.isResponse = this.key.endsWith('Response')
     skeleton.setComment(this.data.description)
 
     const required = this.data.required || []

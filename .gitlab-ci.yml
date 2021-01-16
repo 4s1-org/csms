@@ -6,20 +6,28 @@ validate-all:
   image: node:14-alpine
   script:
     - echo "*** shared ***"
-    - npm --prefix shared ci
-    - npm --prefix shared run lint
-    - npm --prefix shared run build
-    - npm --prefix shared run test
+    - cd shared
+    - npm ci
+    - npm run lint
+    - npm run build
+    - npm run test
+    - npm pack
+    - npm run share
+    - cd ..
 
     - echo "*** backend ***"
-    - npm --prefix backend ci
-    - npm --prefix backend run lint
-    - npm --prefix backend run build
-    - npm --prefix backend run test:cov
-    - npm --prefix backend run test:e2e
+    - cd backend
+    - npm ci
+    - npm run lint
+    - npm run build
+    - npm run test:cov
+    - npm run test:e2e
+    - cd ..
 
     - echo "*** simulator ***"
-    - npm --prefix simulator ci
-    - npm --prefix simulator run lint
-    - npm --prefix simulator run build
-    - npm --prefix simulator run test
+    - cd simulator
+    - npm ci
+    - npm run lint
+    - npm run build
+    - npm run test
+    - cd ..

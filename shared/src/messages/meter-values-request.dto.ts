@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MeterValueDto } from '../datatypes/meter-value.dto'
@@ -20,6 +21,7 @@ export class MeterValuesRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -34,6 +36,7 @@ export class MeterValuesRequestDto extends RequestBaseDto {
 
   @IsNotEmpty()
   @ArrayMinSize(1)
+  @Type(() => MeterValueDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })

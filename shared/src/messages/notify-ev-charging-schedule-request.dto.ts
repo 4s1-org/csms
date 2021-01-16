@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -18,6 +19,7 @@ export class NotifyEvChargingScheduleRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -29,6 +31,7 @@ export class NotifyEvChargingScheduleRequestDto extends RequestBaseDto {
   public timeBase: string
 
   @IsNotEmpty()
+  @Type(() => ChargingScheduleDto)
   @ValidateNested()
   public chargingSchedule: ChargingScheduleDto
 

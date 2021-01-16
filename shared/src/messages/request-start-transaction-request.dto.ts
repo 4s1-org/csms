@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -17,6 +18,7 @@ export class RequestStartTransactionRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -28,10 +30,12 @@ export class RequestStartTransactionRequestDto extends RequestBaseDto {
   public evseId!: number
 
   @IsOptional()
+  @Type(() => IdTokenDto)
   @ValidateNested()
   public groupIdToken!: IdTokenDto
 
   @IsNotEmpty()
+  @Type(() => IdTokenDto)
   @ValidateNested()
   public idToken: IdTokenDto
 
@@ -43,6 +47,7 @@ export class RequestStartTransactionRequestDto extends RequestBaseDto {
   public remoteStartId: number
 
   @IsOptional()
+  @Type(() => ChargingProfileDto)
   @ValidateNested()
   public chargingProfile!: ChargingProfileDto
 }

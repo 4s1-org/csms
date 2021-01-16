@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { ModemDto } from './modem.dto'
@@ -19,6 +20,7 @@ export class ChargingStationDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -51,6 +53,7 @@ export class ChargingStationDto extends DatatypeBaseDto {
    * 0..1
    */
   @IsOptional()
+  @Type(() => ModemDto)
   @ValidateNested()
   public modem!: ModemDto
 

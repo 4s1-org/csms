@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MessageInfoDto } from '../datatypes/message-info.dto'
@@ -14,11 +15,13 @@ export class NotifyDisplayMessagesRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
   @ArrayMinSize(1)
+  @Type(() => MessageInfoDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })

@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingProfileCriterionDto } from '../datatypes/charging-profile-criterion.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -16,6 +17,7 @@ export class GetChargingProfilesRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -34,6 +36,7 @@ export class GetChargingProfilesRequestDto extends RequestBaseDto {
   public evseId!: number
 
   @IsNotEmpty()
+  @Type(() => ChargingProfileCriterionDto)
   @ValidateNested()
   public chargingProfile: ChargingProfileCriterionDto
 }

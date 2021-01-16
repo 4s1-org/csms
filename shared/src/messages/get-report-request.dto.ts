@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ComponentCriterionEnum } from '../enumerations/component-criterion.enum'
 import { ComponentVariableDto } from '../datatypes/component-variable.dto'
@@ -15,11 +16,13 @@ export class GetReportRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
   @ArrayMinSize(1)
+  @Type(() => ComponentVariableDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
