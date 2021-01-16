@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { FirmwareDto } from '../datatypes/firmware.dto'
@@ -16,6 +17,7 @@ export class UpdateFirmwareRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -41,6 +43,7 @@ export class UpdateFirmwareRequestDto extends RequestBaseDto {
   public requestId: number
 
   @IsNotEmpty()
+  @Type(() => FirmwareDto)
   @ValidateNested()
   public firmware: FirmwareDto
 }

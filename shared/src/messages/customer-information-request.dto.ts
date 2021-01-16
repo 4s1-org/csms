@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CertificateHashDataDto } from '../datatypes/certificate-hash-data.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -19,14 +20,17 @@ export class CustomerInformationRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
+  @Type(() => CertificateHashDataDto)
   @ValidateNested()
   public customerCertificate!: CertificateHashDataDto
 
   @IsOptional()
+  @Type(() => IdTokenDto)
   @ValidateNested()
   public idToken!: IdTokenDto
 

@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
 import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
@@ -25,6 +26,7 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -60,6 +62,7 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
   @IsNotEmpty()
   @ArrayMinSize(1)
   @ArrayMaxSize(1024)
+  @Type(() => ChargingSchedulePeriodDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
@@ -75,6 +78,7 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
   public minChargingRate!: number
 
   @IsOptional()
+  @Type(() => SalesTariffDto)
   @ValidateNested()
   public salesTariff!: SalesTariffDto
 }

@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
@@ -15,10 +16,12 @@ export class AuthorizeRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
+  @Type(() => IdTokenDto)
   @ValidateNested()
   public idToken: IdTokenDto
 
@@ -33,6 +36,7 @@ export class AuthorizeRequestDto extends RequestBaseDto {
   @IsOptional()
   @ArrayMinSize(1)
   @ArrayMaxSize(4)
+  @Type(() => OcspRequestDataDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })

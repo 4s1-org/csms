@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { EventDataDto } from '../datatypes/event-data.dto'
@@ -18,6 +19,7 @@ export class NotifyEventRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -44,6 +46,7 @@ export class NotifyEventRequestDto extends RequestBaseDto {
 
   @IsNotEmpty()
   @ArrayMinSize(1)
+  @Type(() => EventDataDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })

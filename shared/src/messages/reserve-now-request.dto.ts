@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ConnectorEnum } from '../enumerations/connector.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -19,6 +20,7 @@ export class ReserveNowRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -41,6 +43,7 @@ export class ReserveNowRequestDto extends RequestBaseDto {
   public connectorType!: ConnectorEnum
 
   @IsNotEmpty()
+  @Type(() => IdTokenDto)
   @ValidateNested()
   public idToken: IdTokenDto
 
@@ -52,6 +55,7 @@ export class ReserveNowRequestDto extends RequestBaseDto {
   public evseId!: number
 
   @IsOptional()
+  @Type(() => IdTokenDto)
   @ValidateNested()
   public groupIdToken!: IdTokenDto
 }

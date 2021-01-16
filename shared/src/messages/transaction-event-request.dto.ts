@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { EvseDto } from '../datatypes/evse.dto'
@@ -27,6 +28,7 @@ export class TransactionEventRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -36,6 +38,7 @@ export class TransactionEventRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ArrayMinSize(1)
+  @Type(() => MeterValueDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
@@ -88,14 +91,17 @@ export class TransactionEventRequestDto extends RequestBaseDto {
   public reservationId!: number
 
   @IsNotEmpty()
+  @Type(() => TransactionDto)
   @ValidateNested()
   public transactionInfo: TransactionDto
 
   @IsOptional()
+  @Type(() => EvseDto)
   @ValidateNested()
   public evse!: EvseDto
 
   @IsOptional()
+  @Type(() => IdTokenDto)
   @ValidateNested()
   public idToken!: IdTokenDto
 }

@@ -4,6 +4,7 @@ import {
   ChargingStationDto,
   Logger,
   OcppCallDto,
+  OcppMessageTypeIdEnum,
   OcppMessageEnum,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
@@ -27,9 +28,26 @@ export class WebSocketClient {
       new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
     ).toString()
 
-    this.logger.debug('Send')
-    this.logger.debug(msg)
+    this.logger.debug('Send', msg)
+    socket.send(msg)
+  }
 
+  private sendSpielwiese(socket: WebSocket): void {
+    const msg = JSON.stringify([
+      OcppMessageTypeIdEnum.Call,
+      this.getId(),
+      OcppMessageEnum.BootNotification,
+      {
+        chargingStation: {
+          model: 'SingleSocketCharger',
+          vendorName: 'VendorX',
+        },
+        reason: 'PowerUp',
+        //foobar: true,
+      },
+    ])
+
+    this.logger.debug('Send', msg)
     socket.send(msg)
   }
 
@@ -40,7 +58,8 @@ export class WebSocketClient {
       const socketId = 'foo' // request.headers['sec-websocket-key']
       this.logger.info('Connected: ' + socketId)
 
-      this.sendBootNotification(socket)
+      //this.sendBootNotification(socket)
+      this.sendSpielwiese(socket)
     }
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {

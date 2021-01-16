@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MonitoringDataDto } from '../datatypes/monitoring-data.dto'
@@ -18,11 +19,13 @@ export class NotifyMonitoringReportRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
   @ArrayMinSize(1)
+  @Type(() => MonitoringDataDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })

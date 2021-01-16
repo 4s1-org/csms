@@ -1,6 +1,6 @@
-import { getCommentByClass, getCommentByClassField } from "../comments/class-comments"
-import { PropertySkeleton } from "./property-skeleton"
-import { SkeletonBase } from "./skeleton-base"
+import { getCommentByClass, getCommentByClassField } from '../comments/class-comments'
+import { PropertySkeleton } from './property-skeleton'
+import { SkeletonBase } from './skeleton-base'
 
 export class ClassSkeleton extends SkeletonBase {
   private _properties: PropertySkeleton[] = []
@@ -9,7 +9,7 @@ export class ClassSkeleton extends SkeletonBase {
   private _isResponse = false
 
   public constructor(name: string) {
-    super(name, "Dto")
+    super(name, 'Dto')
   }
 
   public get isRequest(): boolean {
@@ -50,6 +50,7 @@ export class ClassSkeleton extends SkeletonBase {
     result.push(``)
 
     const classValidatorItems: string[] = []
+    const classTransformerItems: string[] = []
     const ownImports: [string, string][] = []
 
     // Imports
@@ -57,12 +58,19 @@ export class ClassSkeleton extends SkeletonBase {
       if (this._properties.length) {
         for (const prop of this._properties) {
           classValidatorItems.push(...prop.importClassValidator)
+          classTransformerItems.push(...prop.importClassTransformer)
           ownImports.push(...prop.imporOwnClass)
         }
       }
 
       const classValidatorItemsUnique = [...new Set(classValidatorItems)].sort()
-      result.push(`import { ${classValidatorItemsUnique.join(", ")} } from 'class-validator'`)
+      if (classValidatorItemsUnique.length > 0) {
+        result.push(`import { ${classValidatorItemsUnique.join(', ')} } from 'class-validator'`)
+      }
+      const classTransformerItemsUnique = [...new Set(classTransformerItems)].sort()
+      if (classTransformerItemsUnique.length > 0) {
+        result.push(`import { ${classTransformerItemsUnique.join(', ')} } from 'class-transformer'`)
+      }
 
       if (this.isRequest) {
         result.push(`import { RequestBaseDto } from '../generated/request-base.dto'`)
@@ -78,9 +86,9 @@ export class ClassSkeleton extends SkeletonBase {
           continue
         }
 
-        if (ownImport[1].endsWith("enum")) {
+        if (ownImport[1].endsWith('enum')) {
           result.push(`import { ${ownImport[0]} } from '../enumerations/${ownImport[1]}'`)
-        } else if (ownImport[1].endsWith("dto")) {
+        } else if (ownImport[1].endsWith('dto')) {
           if (this.isMessage) {
             result.push(`import { ${ownImport[0]} } from '../datatypes/${ownImport[1]}'`)
           } else {
@@ -109,18 +117,18 @@ export class ClassSkeleton extends SkeletonBase {
     }
 
     // Begin of class
-    let markerInterface = ""
+    let markerInterface = ''
     if (this.isRequest) {
-      markerInterface = "extends RequestBaseDto "
+      markerInterface = 'extends RequestBaseDto '
     } else if (this.isResponse) {
-      markerInterface = "extends ResponseBaseDto "
+      markerInterface = 'extends ResponseBaseDto '
     } else {
-      markerInterface = "extends DatatypeBaseDto "
+      markerInterface = 'extends DatatypeBaseDto '
     }
     result.push(`export class ${this.name}${this.nameSuffix} ${markerInterface}{`)
 
     // Constructor
-    const requiredProperties = this._properties.filter(x => x.isRequired)
+    const requiredProperties = this._properties.filter((x) => x.isRequired)
     if (requiredProperties.length) {
       result.push(`  public constructor(`)
       for (const prop of requiredProperties) {
@@ -158,11 +166,11 @@ export class ClassSkeleton extends SkeletonBase {
     }
 
     if (this._allowAdditionalProperties) {
-      result.push("")
-      result.push("  // To be implemented later")
-      result.push("  public get allowAdditionalProperties(): boolean {")
-      result.push("    return true")
-      result.push("  }")
+      result.push('')
+      result.push('  // To be implemented later')
+      result.push('  public get allowAdditionalProperties(): boolean {')
+      result.push('    return true')
+      result.push('  }')
     }
 
     // End of class
@@ -172,5 +180,4 @@ export class ClassSkeleton extends SkeletonBase {
     // End
     return result
   }
-
 }

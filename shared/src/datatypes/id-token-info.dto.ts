@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AuthorizationStatusEnum } from '../enumerations/authorization-status.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -22,6 +23,7 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -66,6 +68,7 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
   public evseId!: number[]
 
   @IsOptional()
+  @Type(() => IdTokenDto)
   @ValidateNested()
   public groupIdToken!: IdTokenDto
 
@@ -80,6 +83,7 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
   public language2!: string
 
   @IsOptional()
+  @Type(() => MessageContentDto)
   @ValidateNested()
   public personalMessage!: MessageContentDto
 }

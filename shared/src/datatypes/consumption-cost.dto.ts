@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CostDto } from './cost.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -20,6 +21,7 @@ export class ConsumptionCostDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -35,6 +37,7 @@ export class ConsumptionCostDto extends DatatypeBaseDto {
   @IsNotEmpty()
   @ArrayMinSize(1)
   @ArrayMaxSize(3)
+  @Type(() => CostDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })

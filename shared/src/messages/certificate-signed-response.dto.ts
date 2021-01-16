@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CertificateSignedStatusEnum } from '../enumerations/certificate-signed-status.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -15,6 +16,7 @@ export class CertificateSignedResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -23,6 +25,7 @@ export class CertificateSignedResponseDto extends ResponseBaseDto {
   public status: CertificateSignedStatusEnum
 
   @IsOptional()
+  @Type(() => StatusInfoDto)
   @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

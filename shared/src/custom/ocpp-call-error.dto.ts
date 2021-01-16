@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsInt, IsPositive, IsEnum, IsString, ValidateNested, MaxLength } from "class-validator"
+import { IsNotEmpty, IsInt, IsPositive, IsEnum, IsString, MaxLength } from "class-validator"
 import { OcppBaseDto } from "./ocpp-base.dto"
 import { OcppErrorCode } from "./ocpp-error-code"
 import { OcppMessageTypeIdEnum } from "./ocpp-message-type-id.enum"
@@ -42,7 +42,6 @@ export class OcppCallErrorDto extends OcppBaseDto {
   public errorDescription: string
 
   @IsNotEmpty()
-  @ValidateNested()
   /** This JSON object describes error details in an undefined way. If there are no error details you MUST fill in an empty object {}. */
   public errorDetails: unknown
 
