@@ -327,7 +327,7 @@ describe('CSMS Gateway', () => {
       }
     })
 
-    it('with additional property', (done: jest.DoneCallback) => {
+    it('with additional property in payload item direct', (done: jest.DoneCallback) => {
       const socket = connectToSocket(done)
       const messageId = Math.random().toString()
 
@@ -344,6 +344,41 @@ describe('CSMS Gateway', () => {
               },
               reason: 'PowerUp',
               foobar: true,
+            },
+          ]),
+        )
+      }
+
+      socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+        const data = JSON.parse(msg.data as string)
+
+        expect(data.length).toBe(5)
+        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+        expect(data[1]).toBe(messageId)
+        expect(data[2]).toBe(OcppErrorCode.FormatViolation)
+        expect(data[3]).toBeDefined()
+        expect(data[4]).toBeDefined()
+        socket.close()
+      }
+    })
+
+    it('with additional property in nested payload item', (done: jest.DoneCallback) => {
+      const socket = connectToSocket(done)
+      const messageId = Math.random().toString()
+
+      socket.onopen = (): void => {
+        socket.send(
+          JSON.stringify([
+            OcppMessageTypeIdEnum.Call,
+            messageId,
+            OcppMessageEnum.BootNotification,
+            {
+              chargingStation: {
+                model: 'SingleSocketCharger',
+                vendorName: 'VendorX',
+                xxx: 'invalid',
+              },
+              reason: 'PowerUp',
             },
           ]),
         )

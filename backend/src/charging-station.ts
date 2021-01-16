@@ -1,7 +1,6 @@
 import {
   BootNotificationRequestDto,
   BootNotificationResponseDto,
-  ChargingStationDto,
   Logger,
   OcppCallDto,
   OcppCallErrorDto,
