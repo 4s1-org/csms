@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import 'reflect-metadata'
 import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -11,10 +10,7 @@ import { Type } from 'class-transformer'
  * The physical system where an Electrical Vehicle (EV) can be charged.
  */
 export class ChargingStationDto extends DatatypeBaseDto {
-  public constructor(
-    model: string,
-    vendorName: string,
-  ) {
+  public constructor(model: string, vendorName: string) {
     super()
     this.model = model
     this.vendorName = vendorName
@@ -80,6 +76,6 @@ export class ChargingStationDto extends DatatypeBaseDto {
   public firmwareVersion!: string
 
   public foo(): void {
-    console.log("**********************")
+    console.log('**********************')
   }
 }
