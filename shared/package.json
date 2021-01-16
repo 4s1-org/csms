@@ -18,8 +18,8 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "postbuild": "npm pack && npm run share",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
+    "go": "npm run build && npm pack && npm run share",
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
