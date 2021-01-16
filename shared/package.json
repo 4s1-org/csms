@@ -18,18 +18,18 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "postbuild":"npm run share",
+    "postbuild": "npm run share",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
     "pjs": "ts-node scripts/parse-json-schema/index.ts",
     "pjs:full": "npm run reset && npm run pjs && git status",
-    "test": "echo No tests available",
-    "test:cov": "echo No tests available",
     "share": "npm run share:backend && npm run share:simulator",
+    "share:backend": "npm i --prefix ../backend yellowgarbagebag-csms-shared-1.0.0.tgz",
     "share:simulator": "npm i --prefix ../simulator yellowgarbagebag-csms-shared-1.0.0.tgz",
-    "share:backend": "npm i --prefix ../backend yellowgarbagebag-csms-shared-1.0.0.tgz"
+    "test": "echo No tests available",
+    "test:cov": "echo No tests available"
   },
   "prettier": "@hest-lab/eslint-config",
   "dependencies": {
@@ -43,7 +43,7 @@
     "@hest-lab/eslint-config": "^1.3.0",
     "@types/node": "^14.14.21",
     "@types/pino": "^6.3.5",
-    "eslint": "^7.17.0",
+    "eslint": "^7.18.0",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
