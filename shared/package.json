@@ -18,6 +18,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
+    "postbuild":"npm run share",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
@@ -25,7 +26,10 @@
     "pjs": "ts-node scripts/parse-json-schema/index.ts",
     "pjs:full": "npm run reset && npm run pjs && git status",
     "test": "echo No tests available",
-    "test:cov": "echo No tests available"
+    "test:cov": "echo No tests available",
+    "share": "npm run share:backend && npm run share:simulator",
+    "share:simulator": "npm i --prefix ../simulator yellowgarbagebag-csms-shared-1.0.0.tgz",
+    "share:backend": "npm i --prefix ../backend yellowgarbagebag-csms-shared-1.0.0.tgz"
   },
   "prettier": "@hest-lab/eslint-config",
   "dependencies": {
