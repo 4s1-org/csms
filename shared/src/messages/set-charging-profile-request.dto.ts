@@ -17,8 +17,8 @@ export class SetChargingProfileRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -29,7 +29,7 @@ export class SetChargingProfileRequestDto extends RequestBaseDto {
   public evseId: number
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => ChargingProfileDto)
+  @ValidateNested()
   public chargingProfile: ChargingProfileDto
 }

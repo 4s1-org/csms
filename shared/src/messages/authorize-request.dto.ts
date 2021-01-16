@@ -16,13 +16,13 @@ export class AuthorizeRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => IdTokenDto)
+  @ValidateNested()
   public idToken: IdTokenDto
 
   /**
@@ -36,9 +36,9 @@ export class AuthorizeRequestDto extends RequestBaseDto {
   @IsOptional()
   @ArrayMinSize(1)
   @ArrayMaxSize(4)
+  @Type(() => OcspRequestDataDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => OcspRequestDataDto)
   public iso15118CertificateHashData!: OcspRequestDataDto[]
 }

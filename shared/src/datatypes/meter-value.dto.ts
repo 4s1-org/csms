@@ -22,16 +22,16 @@ export class MeterValueDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ArrayMinSize(1)
+  @Type(() => SampledValueDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => SampledValueDto)
   public sampledValue: SampledValueDto[]
 
   /**

@@ -18,8 +18,8 @@ export class RequestStartTransactionRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -30,13 +30,13 @@ export class RequestStartTransactionRequestDto extends RequestBaseDto {
   public evseId!: number
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => IdTokenDto)
+  @ValidateNested()
   public groupIdToken!: IdTokenDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => IdTokenDto)
+  @ValidateNested()
   public idToken: IdTokenDto
 
   /**
@@ -47,7 +47,7 @@ export class RequestStartTransactionRequestDto extends RequestBaseDto {
   public remoteStartId: number
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => ChargingProfileDto)
+  @ValidateNested()
   public chargingProfile!: ChargingProfileDto
 }

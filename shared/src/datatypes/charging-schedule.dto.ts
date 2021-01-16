@@ -26,8 +26,8 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -62,10 +62,10 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
   @IsNotEmpty()
   @ArrayMinSize(1)
   @ArrayMaxSize(1024)
+  @Type(() => ChargingSchedulePeriodDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => ChargingSchedulePeriodDto)
   public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 
   /**
@@ -78,7 +78,7 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
   public minChargingRate!: number
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => SalesTariffDto)
+  @ValidateNested()
   public salesTariff!: SalesTariffDto
 }

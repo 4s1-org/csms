@@ -15,12 +15,12 @@ export class SetDisplayMessageRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => MessageInfoDto)
+  @ValidateNested()
   public message: MessageInfoDto
 }

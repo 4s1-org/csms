@@ -18,13 +18,13 @@ export class CertificateHashDataChainDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => CertificateHashDataDto)
+  @ValidateNested()
   public certificateHashData: CertificateHashDataDto
 
   @IsNotEmpty()
@@ -34,9 +34,9 @@ export class CertificateHashDataChainDto extends DatatypeBaseDto {
   @IsOptional()
   @ArrayMinSize(1)
   @ArrayMaxSize(4)
+  @Type(() => CertificateHashDataDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => CertificateHashDataDto)
   public childCertificateHashData!: CertificateHashDataDto[]
 }

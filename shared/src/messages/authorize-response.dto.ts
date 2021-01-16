@@ -16,13 +16,13 @@ export class AuthorizeResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => IdTokenInfoDto)
+  @ValidateNested()
   public idTokenInfo: IdTokenInfoDto
 
   @IsOptional()

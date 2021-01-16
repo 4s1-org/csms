@@ -20,8 +20,8 @@ export class ChargingStationDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -53,8 +53,8 @@ export class ChargingStationDto extends DatatypeBaseDto {
    * 0..1
    */
   @IsOptional()
-  @ValidateNested()
   @Type(() => ModemDto)
+  @ValidateNested()
   public modem!: ModemDto
 
   /**

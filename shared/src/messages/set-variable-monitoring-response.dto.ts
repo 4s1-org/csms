@@ -15,15 +15,15 @@ export class SetVariableMonitoringResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ArrayMinSize(1)
+  @Type(() => SetMonitoringResultDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => SetMonitoringResultDto)
   public setMonitoringResult: SetMonitoringResultDto[]
 }

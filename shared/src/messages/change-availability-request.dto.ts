@@ -19,8 +19,8 @@ export class ChangeAvailabilityRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -30,8 +30,8 @@ export class ChangeAvailabilityRequestDto extends RequestBaseDto {
    * 0..1
    */
   @IsOptional()
-  @ValidateNested()
   @Type(() => EvseDto)
+  @ValidateNested()
   public evse!: EvseDto
 
   /**

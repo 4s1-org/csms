@@ -33,8 +33,8 @@ export class EventDataDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -104,8 +104,8 @@ export class EventDataDto extends DatatypeBaseDto {
   public transactionId!: string
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => ComponentDto)
+  @ValidateNested()
   public component: ComponentDto
 
   /**
@@ -120,7 +120,7 @@ export class EventDataDto extends DatatypeBaseDto {
   public eventNotificationType: EventNotificationEnum
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => VariableDto)
+  @ValidateNested()
   public variable: VariableDto
 }

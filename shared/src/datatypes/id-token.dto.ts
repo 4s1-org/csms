@@ -21,16 +21,16 @@ export class IdTokenDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
   @ArrayMinSize(1)
+  @Type(() => AdditionalInfoDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => AdditionalInfoDto)
   public additionalInfo!: AdditionalInfoDto[]
 
   /**

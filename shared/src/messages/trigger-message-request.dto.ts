@@ -16,13 +16,13 @@ export class TriggerMessageRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => EvseDto)
+  @ValidateNested()
   public evse!: EvseDto
 
   @IsNotEmpty()

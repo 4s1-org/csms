@@ -18,8 +18,8 @@ export class ClearMonitoringResultDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -34,7 +34,7 @@ export class ClearMonitoringResultDto extends DatatypeBaseDto {
   public id: number
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

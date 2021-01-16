@@ -18,8 +18,8 @@ export class ChargingProfileCriterionDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
@@ -54,6 +54,5 @@ export class ChargingProfileCriterionDto extends DatatypeBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => ChargingLimitSourceEnum)
   public chargingLimitSource!: ChargingLimitSourceEnum[]
 }

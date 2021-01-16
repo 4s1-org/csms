@@ -12,8 +12,8 @@ export class GetInstalledCertificateIdsRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -24,6 +24,5 @@ export class GetInstalledCertificateIdsRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => GetCertificateIdUseEnum)
   public certificateType!: GetCertificateIdUseEnum[]
 }

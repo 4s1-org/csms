@@ -21,8 +21,8 @@ export class BootNotificationRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -32,8 +32,8 @@ export class BootNotificationRequestDto extends RequestBaseDto {
    * 1..1
    */
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => ChargingStationDto)
+  @ValidateNested()
   public chargingStation: ChargingStationDto
 
   /**

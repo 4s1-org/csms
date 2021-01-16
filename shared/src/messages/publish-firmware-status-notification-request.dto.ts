@@ -15,8 +15,8 @@ export class PublishFirmwareStatusNotificationRequestDto extends RequestBaseDto 
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()

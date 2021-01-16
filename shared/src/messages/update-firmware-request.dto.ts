@@ -17,8 +17,8 @@ export class UpdateFirmwareRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -43,7 +43,7 @@ export class UpdateFirmwareRequestDto extends RequestBaseDto {
   public requestId: number
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => FirmwareDto)
+  @ValidateNested()
   public firmware: FirmwareDto
 }

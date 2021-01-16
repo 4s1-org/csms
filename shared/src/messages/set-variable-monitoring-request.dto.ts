@@ -15,15 +15,15 @@ export class SetVariableMonitoringRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ArrayMinSize(1)
+  @Type(() => SetMonitoringDataDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => SetMonitoringDataDto)
   public setMonitoringData: SetMonitoringDataDto[]
 }

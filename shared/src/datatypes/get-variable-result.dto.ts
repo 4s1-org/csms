@@ -26,13 +26,13 @@ export class GetVariableResultDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public attributeStatusInfo!: StatusInfoDto
 
   @IsNotEmpty()
@@ -54,12 +54,12 @@ export class GetVariableResultDto extends DatatypeBaseDto {
   public attributeValue!: string
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => ComponentDto)
+  @ValidateNested()
   public component: ComponentDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => VariableDto)
+  @ValidateNested()
   public variable: VariableDto
 }

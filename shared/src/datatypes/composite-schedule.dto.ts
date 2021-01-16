@@ -28,16 +28,16 @@ export class CompositeScheduleDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ArrayMinSize(1)
+  @Type(() => ChargingSchedulePeriodDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => ChargingSchedulePeriodDto)
   public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 
   /**

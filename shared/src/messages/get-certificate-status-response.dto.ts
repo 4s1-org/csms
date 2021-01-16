@@ -16,8 +16,8 @@ export class GetCertificateStatusResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -25,8 +25,8 @@ export class GetCertificateStatusResponseDto extends ResponseBaseDto {
   public status: GetCertificateStatusEnum
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 
   /**

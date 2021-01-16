@@ -20,8 +20,8 @@ export class ReserveNowRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -43,8 +43,8 @@ export class ReserveNowRequestDto extends RequestBaseDto {
   public connectorType!: ConnectorEnum
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => IdTokenDto)
+  @ValidateNested()
   public idToken: IdTokenDto
 
   /**
@@ -55,7 +55,7 @@ export class ReserveNowRequestDto extends RequestBaseDto {
   public evseId!: number
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => IdTokenDto)
+  @ValidateNested()
   public groupIdToken!: IdTokenDto
 }
