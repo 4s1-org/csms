@@ -327,7 +327,7 @@ describe('CSMS Gateway', () => {
       }
     })
 
-    it.only('with additional property', (done: jest.DoneCallback) => {
+    it('with additional property', (done: jest.DoneCallback) => {
       const socket = connectToSocket(done)
       const messageId = Math.random().toString()
 
@@ -343,7 +343,7 @@ describe('CSMS Gateway', () => {
                 vendorName: 'VendorX',
               },
               reason: 'PowerUp',
-              //foobar: true,
+              foobar: true,
             },
           ]),
         )
