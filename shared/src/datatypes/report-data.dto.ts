@@ -25,14 +25,17 @@ export class ReportDataDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => ComponentDto)
   public component: ComponentDto
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => VariableDto)
   public variable: VariableDto
 
   @IsNotEmpty()
@@ -41,9 +44,11 @@ export class ReportDataDto extends DatatypeBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => VariableAttributeDto)
   public variableAttribute: VariableAttributeDto[]
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => VariableCharacteristicsDto)
   public variableCharacteristics!: VariableCharacteristicsDto
 }

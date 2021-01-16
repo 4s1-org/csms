@@ -27,10 +27,12 @@ export class MessageInfoDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => ComponentDto)
   public display!: ComponentDto
 
   /**
@@ -80,5 +82,6 @@ export class MessageInfoDto extends DatatypeBaseDto {
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => MessageContentDto)
   public message: MessageContentDto
 }

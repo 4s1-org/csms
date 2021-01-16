@@ -16,6 +16,7 @@ export class DataTransferResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -24,6 +25,7 @@ export class DataTransferResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => StatusInfoDto)
   public statusInfo!: StatusInfoDto
 
   /**

@@ -14,5 +14,6 @@ export class HeartbeatRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 }

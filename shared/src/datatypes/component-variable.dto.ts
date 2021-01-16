@@ -19,13 +19,16 @@ export class ComponentVariableDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => ComponentDto)
   public component: ComponentDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => VariableDto)
   public variable!: VariableDto
 }

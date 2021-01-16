@@ -20,6 +20,7 @@ export class ReserveNowRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -42,6 +43,7 @@ export class ReserveNowRequestDto extends RequestBaseDto {
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => IdTokenDto)
   public idToken: IdTokenDto
 
   /**
@@ -53,5 +55,6 @@ export class ReserveNowRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => IdTokenDto)
   public groupIdToken!: IdTokenDto
 }

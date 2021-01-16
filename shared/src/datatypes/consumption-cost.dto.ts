@@ -21,6 +21,7 @@ export class ConsumptionCostDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -38,5 +39,6 @@ export class ConsumptionCostDto extends DatatypeBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => CostDto)
   public cost: CostDto[]
 }

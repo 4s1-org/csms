@@ -11,6 +11,7 @@ export class GetTransactionStatusRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**

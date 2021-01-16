@@ -11,5 +11,6 @@ export class NotifyDisplayMessagesResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 }

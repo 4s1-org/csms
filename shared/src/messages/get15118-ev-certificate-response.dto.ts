@@ -18,6 +18,7 @@ export class Get15118EvCertificateResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -26,6 +27,7 @@ export class Get15118EvCertificateResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => StatusInfoDto)
   public statusInfo!: StatusInfoDto
 
   /**

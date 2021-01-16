@@ -24,14 +24,17 @@ export class MonitoringDataDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => ComponentDto)
   public component: ComponentDto
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => VariableDto)
   public variable: VariableDto
 
   @IsNotEmpty()
@@ -39,5 +42,6 @@ export class MonitoringDataDto extends DatatypeBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => VariableMonitoringDto)
   public variableMonitoring: VariableMonitoringDto[]
 }

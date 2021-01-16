@@ -11,5 +11,6 @@ export class PublishFirmwareStatusNotificationResponseDto extends ResponseBaseDt
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 }

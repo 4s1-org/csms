@@ -22,6 +22,7 @@ export class NotifyReportRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -55,6 +56,7 @@ export class NotifyReportRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => ReportDataDto)
   public reportData!: ReportDataDto[]
 
   /**

@@ -28,6 +28,7 @@ export class TransactionEventRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -39,6 +40,7 @@ export class TransactionEventRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => MeterValueDto)
   public meterValue!: MeterValueDto[]
 
   /**
@@ -89,13 +91,16 @@ export class TransactionEventRequestDto extends RequestBaseDto {
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => TransactionDto)
   public transactionInfo: TransactionDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => EvseDto)
   public evse!: EvseDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => IdTokenDto)
   public idToken!: IdTokenDto
 }

@@ -19,6 +19,7 @@ export class ChangeAvailabilityResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -39,5 +40,6 @@ export class ChangeAvailabilityResponseDto extends ResponseBaseDto {
    */
   @IsOptional()
   @ValidateNested()
+  @Type(() => StatusInfoDto)
   public statusInfo!: StatusInfoDto
 }

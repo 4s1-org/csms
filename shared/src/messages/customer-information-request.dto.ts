@@ -20,14 +20,17 @@ export class CustomerInformationRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CertificateHashDataDto)
   public customerCertificate!: CertificateHashDataDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => IdTokenDto)
   public idToken!: IdTokenDto
 
   /**

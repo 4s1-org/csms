@@ -30,6 +30,7 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -41,6 +42,7 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => StatusInfoDto)
   public statusInfo!: StatusInfoDto
 
   @IsNotEmpty()
@@ -53,10 +55,12 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => ComponentDto)
   public component: ComponentDto
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => VariableDto)
   public variable: VariableDto
 
   /**

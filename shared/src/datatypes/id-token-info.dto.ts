@@ -23,6 +23,7 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -67,6 +68,7 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => IdTokenDto)
   public groupIdToken!: IdTokenDto
 
   /**
@@ -81,5 +83,6 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => MessageContentDto)
   public personalMessage!: MessageContentDto
 }

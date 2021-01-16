@@ -22,6 +22,7 @@ export class SalesTariffDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -58,5 +59,6 @@ export class SalesTariffDto extends DatatypeBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => SalesTariffEntryDto)
   public salesTariffEntry: SalesTariffEntryDto[]
 }

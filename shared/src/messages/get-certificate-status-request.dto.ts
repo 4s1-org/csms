@@ -15,9 +15,11 @@ export class GetCertificateStatusRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => OcspRequestDataDto)
   public ocspRequestData: OcspRequestDataDto
 }

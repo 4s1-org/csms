@@ -27,6 +27,7 @@ export class SampledValueDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -56,9 +57,11 @@ export class SampledValueDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => SignedMeterValueDto)
   public signedMeterValue!: SignedMeterValueDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => UnitOfMeasureDto)
   public unitOfMeasure!: UnitOfMeasureDto
 }

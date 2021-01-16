@@ -17,6 +17,7 @@ export class GetChargingProfilesRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -35,5 +36,6 @@ export class GetChargingProfilesRequestDto extends RequestBaseDto {
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => ChargingProfileCriterionDto)
   public chargingProfile: ChargingProfileCriterionDto
 }

@@ -15,9 +15,11 @@ export class DeleteCertificateRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => CertificateHashDataDto)
   public certificateHashData: CertificateHashDataDto
 }
