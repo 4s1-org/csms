@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { LogEnum } from '../enumerations/log.enum'
@@ -19,10 +20,12 @@ export class GetLogRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
+  @Type(() => LogParametersDto)
   @ValidateNested()
   public log: LogParametersDto
 

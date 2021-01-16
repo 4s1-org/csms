@@ -1,9 +1,9 @@
-import { BootReasonEnumType } from "./enumerations/BootReasonEnumType"
-import { ChangeAvailabilityStatusEnumType } from "./enumerations/ChangeAvailabilityStatusEnumType"
-import { ConnectorStatusEnumType } from "./enumerations/ConnectorStatusEnumType"
-import { OperationalStatusEnumType } from "./enumerations/OperationalStatusEnumType"
-import { ResetEnumType } from "./enumerations/ResetEnumType"
-import { ResetStatusEnumType } from "./enumerations/ResetStatusEnumType"
+import { BootReasonEnumType } from './enumerations/BootReasonEnumType'
+import { ChangeAvailabilityStatusEnumType } from './enumerations/ChangeAvailabilityStatusEnumType'
+import { ConnectorStatusEnumType } from './enumerations/ConnectorStatusEnumType'
+import { OperationalStatusEnumType } from './enumerations/OperationalStatusEnumType'
+import { ResetEnumType } from './enumerations/ResetEnumType'
+import { ResetStatusEnumType } from './enumerations/ResetStatusEnumType'
 
 export type enumCommentValueType = {
   value: string
@@ -17,14 +17,17 @@ export type enumCommentType = {
 }
 
 export function getCommentByEnum(enumName: string): enumCommentType | undefined {
-  return comments.find(x => x.name === enumName || x.name === enumName + "EnumType")
+  return comments.find((x) => x.name === enumName || x.name === enumName + 'EnumType')
 }
 
-export function getCommentByEnumValue(enumComment: enumCommentType | undefined, valueName: string): enumCommentValueType | undefined {
+export function getCommentByEnumValue(
+  enumComment: enumCommentType | undefined,
+  valueName: string,
+): enumCommentValueType | undefined {
   if (!enumComment) {
     return undefined
   }
-  return enumComment.values.find(x => x.value === valueName)
+  return enumComment.values.find((x) => x.value === valueName)
 }
 
 const comments: enumCommentType[] = [
@@ -33,5 +36,5 @@ const comments: enumCommentType[] = [
   ConnectorStatusEnumType,
   OperationalStatusEnumType,
   ResetEnumType,
-  ResetStatusEnumType
+  ResetStatusEnumType,
 ]

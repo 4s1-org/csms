@@ -43,6 +43,6 @@ export function validateOcppCall(data: unknown): OcppCallDto {
   }
 
   const ocppCall = plainToClass(OcppCallDto, obj)
-  validateData(ocppCall, data[1])
+  validateData(ocppCall, obj.messageId)
   return ocppCall
 }

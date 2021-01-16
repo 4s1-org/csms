@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CertificateActionEnum } from '../enumerations/certificate-action.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -18,6 +19,7 @@ export class Get15118EvCertificateRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 

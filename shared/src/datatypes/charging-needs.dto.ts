@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsDateString, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AcChargingParametersDto } from './ac-charging-parameters.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -20,14 +21,17 @@ export class ChargingNeedsDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
+  @Type(() => AcChargingParametersDto)
   @ValidateNested()
   public acChargingParameters!: AcChargingParametersDto
 
   @IsOptional()
+  @Type(() => DcChargingParametersDto)
   @ValidateNested()
   public dcChargingParameters!: DcChargingParametersDto
 

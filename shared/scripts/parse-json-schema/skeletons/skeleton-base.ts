@@ -1,15 +1,13 @@
-import path from "path"
-import fs from "fs"
+import path from 'path'
+import fs from 'fs'
 
 export abstract class SkeletonBase {
   private _comment: string[] = []
   private _importsClassValidator: string[] = []
+  private _importsClassTransformer: string[] = []
   private _importsOwnClasses: [string, string][] = []
 
-  public constructor(
-    public readonly name: string,
-    public readonly nameSuffix: "Dto" | "Enum" | "" = ""
-  ) {
+  public constructor(public readonly name: string, public readonly nameSuffix: 'Dto' | 'Enum' | '' = '') {
     // nothing to do
   }
 
@@ -17,14 +15,14 @@ export abstract class SkeletonBase {
     this._comment = []
     if (value) {
       value = value.trim()
-      value = value.replace(/&lt;/g, "<")
-      value = value.replace(/&gt;/g, ">")
+      value = value.replace(/&lt;/g, '<')
+      value = value.replace(/&gt;/g, '>')
 
-      this._comment.push("/**")
-      for (const line of value.split("\r\n")) {
+      this._comment.push('/**')
+      for (const line of value.split('\r\n')) {
         this._comment.push(` * ${line}`)
       }
-      this._comment.push(" */")
+      this._comment.push(' */')
     }
   }
 
@@ -39,7 +37,7 @@ export abstract class SkeletonBase {
     let result = name[0].toLocaleLowerCase()
     for (let i = 1; i < name.length; i++) {
       if (name[i].match(/[A-Z]/) !== null) {
-        result += "-" + name[i].toLowerCase()
+        result += '-' + name[i].toLowerCase()
       } else {
         result += name[i]
       }
@@ -62,6 +60,14 @@ export abstract class SkeletonBase {
     return this._importsClassValidator
   }
 
+  public addImportClassTransformer(value: string): void {
+    this._importsClassTransformer.push(value)
+  }
+
+  public get importClassTransformer(): string[] {
+    return this._importsClassTransformer
+  }
+
   public addImportClassValidatior(value: string): void {
     this._importsClassValidator.push(value)
   }
@@ -70,7 +76,7 @@ export abstract class SkeletonBase {
     return this._importsOwnClasses
   }
 
-  public addImportOwnClass(name: string, suffix: "Dto" | "Enum", path: string): void {
+  public addImportOwnClass(name: string, suffix: 'Dto' | 'Enum', path: string): void {
     this._importsOwnClasses.push([name + suffix, path])
   }
 
@@ -84,8 +90,8 @@ export abstract class SkeletonBase {
 
     const filepath = path.join(folderpath, `${this.fileNameWithoutExt}.ts`)
 
-    let data = this.toString().join("\n")
-    data = data.replace(/\r\n/g, "\n")
-    fs.writeFileSync(filepath, data, { encoding: "utf-8" })
+    let data = this.toString().join('\n')
+    data = data.replace(/\r\n/g, '\n')
+    fs.writeFileSync(filepath, data, { encoding: 'utf-8' })
   }
 }

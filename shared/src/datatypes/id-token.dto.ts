@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AdditionalInfoDto } from './additional-info.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -20,11 +21,13 @@ export class IdTokenDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
   @ArrayMinSize(1)
+  @Type(() => AdditionalInfoDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })

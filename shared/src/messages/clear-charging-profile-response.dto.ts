@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { ClearChargingProfileStatusEnum } from '../enumerations/clear-charging-profile-status.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -15,6 +16,7 @@ export class ClearChargingProfileResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -23,6 +25,7 @@ export class ClearChargingProfileResponseDto extends ResponseBaseDto {
   public status: ClearChargingProfileStatusEnum
 
   @IsOptional()
+  @Type(() => StatusInfoDto)
   @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

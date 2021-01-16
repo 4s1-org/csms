@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -29,6 +30,7 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -40,6 +42,7 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
   public id!: number
 
   @IsOptional()
+  @Type(() => StatusInfoDto)
   @ValidateNested()
   public statusInfo!: StatusInfoDto
 
@@ -52,10 +55,12 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
   public type: MonitorEnum
 
   @IsNotEmpty()
+  @Type(() => ComponentDto)
   @ValidateNested()
   public component: ComponentDto
 
   @IsNotEmpty()
+  @Type(() => VariableDto)
   @ValidateNested()
   public variable: VariableDto
 

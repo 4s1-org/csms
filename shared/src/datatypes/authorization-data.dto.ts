@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { IdTokenDto } from './id-token.dto'
@@ -18,14 +19,17 @@ export class AuthorizationDataDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
+  @Type(() => IdTokenDto)
   @ValidateNested()
   public idToken: IdTokenDto
 
   @IsOptional()
+  @Type(() => IdTokenInfoDto)
   @ValidateNested()
   public idTokenInfo!: IdTokenInfoDto
 }

@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { EvseDto } from '../datatypes/evse.dto'
@@ -18,6 +19,7 @@ export class ChangeAvailabilityRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
@@ -28,6 +30,7 @@ export class ChangeAvailabilityRequestDto extends RequestBaseDto {
    * 0..1
    */
   @IsOptional()
+  @Type(() => EvseDto)
   @ValidateNested()
   public evse!: EvseDto
 

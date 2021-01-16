@@ -1,6 +1,7 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
+import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AttributeEnum } from '../enumerations/attribute.enum'
 import { ComponentDto } from './component.dto'
@@ -25,10 +26,12 @@ export class GetVariableResultDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
+  @Type(() => CustomDataDto)
   @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
+  @Type(() => StatusInfoDto)
   @ValidateNested()
   public attributeStatusInfo!: StatusInfoDto
 
@@ -51,10 +54,12 @@ export class GetVariableResultDto extends DatatypeBaseDto {
   public attributeValue!: string
 
   @IsNotEmpty()
+  @Type(() => ComponentDto)
   @ValidateNested()
   public component: ComponentDto
 
   @IsNotEmpty()
+  @Type(() => VariableDto)
   @ValidateNested()
   public variable: VariableDto
 }

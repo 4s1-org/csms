@@ -1,10 +1,10 @@
-import fs from "fs"
-import path from "path"
-import { ClassGenerator } from "./class-generator"
-import { SchemaRoot } from "./schema-elements/schema-root"
+import fs from 'fs'
+import path from 'path'
+import { ClassGenerator } from './class-generator'
+import { SchemaRoot } from './schema-elements/schema-root'
 
 async function main(): Promise<void> {
-  const dir = path.join(__dirname, "..", "..", "third-party", "ocpp", "2.0.1")
+  const dir = path.join(__dirname, '..', '..', 'third-party', 'ocpp', '2.0.1')
   const files = fs.readdirSync(dir)
 
   for (const file of files) {

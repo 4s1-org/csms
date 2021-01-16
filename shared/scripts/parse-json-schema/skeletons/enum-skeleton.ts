@@ -1,14 +1,11 @@
-import { getCommentByEnum, getCommentByEnumValue } from "../comments/enum-comments"
-import { SkeletonBase } from "./skeleton-base"
+import { getCommentByEnum, getCommentByEnumValue } from '../comments/enum-comments'
+import { SkeletonBase } from './skeleton-base'
 
 export class EnumSkeleton extends SkeletonBase {
   private _defaultValue: string | undefined
 
-  public constructor(
-    name: string,
-    private readonly items: string[]
-  ) {
-    super(name, "Enum")
+  public constructor(name: string, private readonly items: string[]) {
+    super(name, 'Enum')
   }
 
   public setDefaultValue(value: string | undefined): void {
@@ -23,7 +20,7 @@ export class EnumSkeleton extends SkeletonBase {
     result.push(``)
 
     // Classcomment
-    const enumComment = getCommentByEnum(this.name + "EnumType")
+    const enumComment = getCommentByEnum(this.name + 'EnumType')
     {
       // Gibt es einen Kommentar aus den PDFs Dokus?
       // Ansonsten nehme den aus den JSON-Schema Dateien.
@@ -46,8 +43,8 @@ export class EnumSkeleton extends SkeletonBase {
       if (valueComment) {
         result.push(`  /** ${valueComment.description} */`)
       }
-      const propName = item.includes("-") || item.includes(".") ? `"${item}"` : item
-      result.push(`  ${propName} = "${item}",${item === this._defaultValue ? " // DEFAULT" : ""}`)
+      const propName = item.includes('-') || item.includes('.') ? `"${item}"` : item
+      result.push(`  ${propName} = "${item}",${item === this._defaultValue ? ' // DEFAULT' : ''}`)
     }
 
     // End of class
