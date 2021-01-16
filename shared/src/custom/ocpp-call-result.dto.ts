@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { IsNotEmpty, IsInt, IsPositive, IsString, MaxLength, ValidateNested } from "class-validator"
 import { ResponseBaseDto } from "../generated/response-base.dto"
 import { OcppBaseDto } from "./ocpp-base.dto"

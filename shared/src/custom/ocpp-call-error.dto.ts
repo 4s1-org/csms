@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { IsNotEmpty, IsInt, IsPositive, IsEnum, IsString, ValidateNested, MaxLength } from "class-validator"
 import { OcppBaseDto } from "./ocpp-base.dto"
 import { OcppErrorCode } from "./ocpp-error-code"

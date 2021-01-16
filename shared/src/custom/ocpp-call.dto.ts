@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { IsEnum, IsInt, IsNotEmpty, IsPositive, IsString, MaxLength } from "class-validator"
 import { OcppMessageEnum } from "../generated/ocpp-message.enum"
 import { RequestBaseDto } from "../generated/request-base.dto"
