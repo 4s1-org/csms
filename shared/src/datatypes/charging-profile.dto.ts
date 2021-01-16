@@ -31,6 +31,7 @@ export class ChargingProfileDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -87,6 +88,7 @@ export class ChargingProfileDto extends DatatypeBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => ChargingScheduleDto)
   public chargingSchedule: ChargingScheduleDto[]
 
   /**

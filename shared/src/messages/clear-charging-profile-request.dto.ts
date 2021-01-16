@@ -12,6 +12,7 @@ export class ClearChargingProfileRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -23,5 +24,6 @@ export class ClearChargingProfileRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => ClearChargingProfileDto)
   public chargingProfileCriteria!: ClearChargingProfileDto
 }

@@ -22,6 +22,7 @@ export class ReportChargingProfilesRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -40,6 +41,7 @@ export class ReportChargingProfilesRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => ChargingProfileDto)
   public chargingProfile: ChargingProfileDto[]
 
   /**

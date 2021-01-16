@@ -34,10 +34,12 @@ export class NetworkConnectionProfileDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => ApnDto)
   public apn!: ApnDto
 
   @IsNotEmpty()
@@ -80,5 +82,6 @@ export class NetworkConnectionProfileDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => VpnDto)
   public vpn!: VpnDto
 }

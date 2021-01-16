@@ -33,6 +33,7 @@ export class EventDataDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -103,6 +104,7 @@ export class EventDataDto extends DatatypeBaseDto {
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => ComponentDto)
   public component: ComponentDto
 
   /**
@@ -118,5 +120,6 @@ export class EventDataDto extends DatatypeBaseDto {
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => VariableDto)
   public variable: VariableDto
 }

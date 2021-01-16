@@ -19,6 +19,7 @@ export class NotifyMonitoringReportRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsOptional()
@@ -26,6 +27,7 @@ export class NotifyMonitoringReportRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => MonitoringDataDto)
   public monitor!: MonitoringDataDto[]
 
   /**

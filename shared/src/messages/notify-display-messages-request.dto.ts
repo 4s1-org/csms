@@ -15,6 +15,7 @@ export class NotifyDisplayMessagesRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsOptional()
@@ -22,6 +23,7 @@ export class NotifyDisplayMessagesRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => MessageInfoDto)
   public messageInfo!: MessageInfoDto[]
 
   /**

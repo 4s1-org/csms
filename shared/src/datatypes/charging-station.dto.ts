@@ -4,13 +4,15 @@ import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'cla
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { ModemDto } from './modem.dto'
-import { Type } from 'class-transformer'
 
 /**
  * The physical system where an Electrical Vehicle (EV) can be charged.
  */
 export class ChargingStationDto extends DatatypeBaseDto {
-  public constructor(model: string, vendorName: string) {
+  public constructor(
+    model: string,
+    vendorName: string,
+  ) {
     super()
     this.model = model
     this.vendorName = vendorName
@@ -51,6 +53,7 @@ export class ChargingStationDto extends DatatypeBaseDto {
    */
   @IsOptional()
   @ValidateNested()
+  @Type(() => ModemDto)
   public modem!: ModemDto
 
   /**
@@ -74,8 +77,4 @@ export class ChargingStationDto extends DatatypeBaseDto {
   @MaxLength(50)
   @IsString()
   public firmwareVersion!: string
-
-  public foo(): void {
-    console.log('**********************')
-  }
 }

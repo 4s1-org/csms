@@ -17,6 +17,7 @@ export class GetInstalledCertificateIdsResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -25,6 +26,7 @@ export class GetInstalledCertificateIdsResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => StatusInfoDto)
   public statusInfo!: StatusInfoDto
 
   @IsOptional()
@@ -32,5 +34,6 @@ export class GetInstalledCertificateIdsResponseDto extends ResponseBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => CertificateHashDataChainDto)
   public certificateHashDataChain!: CertificateHashDataChainDto[]
 }

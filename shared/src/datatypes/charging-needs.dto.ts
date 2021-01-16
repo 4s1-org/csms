@@ -21,14 +21,17 @@ export class ChargingNeedsDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => AcChargingParametersDto)
   public acChargingParameters!: AcChargingParametersDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => DcChargingParametersDto)
   public dcChargingParameters!: DcChargingParametersDto
 
   @IsNotEmpty()

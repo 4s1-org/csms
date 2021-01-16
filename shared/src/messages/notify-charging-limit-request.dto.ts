@@ -16,6 +16,7 @@ export class NotifyChargingLimitRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsOptional()
@@ -23,6 +24,7 @@ export class NotifyChargingLimitRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => ChargingScheduleDto)
   public chargingSchedule!: ChargingScheduleDto[]
 
   /**
@@ -34,5 +36,6 @@ export class NotifyChargingLimitRequestDto extends RequestBaseDto {
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => ChargingLimitDto)
   public chargingLimit: ChargingLimitDto
 }

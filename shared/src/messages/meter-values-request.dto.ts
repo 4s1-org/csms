@@ -21,6 +21,7 @@ export class MeterValuesRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -37,5 +38,6 @@ export class MeterValuesRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => MeterValueDto)
   public meterValue: MeterValueDto[]
 }

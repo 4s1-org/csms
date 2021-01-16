@@ -18,6 +18,7 @@ export class SetVariablesResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -31,5 +32,6 @@ export class SetVariablesResponseDto extends ResponseBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => SetVariableResultDto)
   public setVariableResult: SetVariableResultDto[]
 }

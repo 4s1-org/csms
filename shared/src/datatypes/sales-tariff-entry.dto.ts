@@ -20,10 +20,12 @@ export class SalesTariffEntryDto extends DatatypeBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => RelativeTimeIntervalDto)
   public relativeTimeInterval: RelativeTimeIntervalDto
 
   /**
@@ -42,5 +44,6 @@ export class SalesTariffEntryDto extends DatatypeBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => ConsumptionCostDto)
   public consumptionCost!: ConsumptionCostDto[]
 }

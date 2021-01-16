@@ -17,6 +17,7 @@ export class SetNetworkProfileRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   /**
@@ -28,5 +29,6 @@ export class SetNetworkProfileRequestDto extends RequestBaseDto {
 
   @IsNotEmpty()
   @ValidateNested()
+  @Type(() => NetworkConnectionProfileDto)
   public connectionData: NetworkConnectionProfileDto
 }

@@ -17,6 +17,7 @@ export class GetCompositeScheduleResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -25,9 +26,11 @@ export class GetCompositeScheduleResponseDto extends ResponseBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => StatusInfoDto)
   public statusInfo!: StatusInfoDto
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CompositeScheduleDto)
   public schedule!: CompositeScheduleDto
 }

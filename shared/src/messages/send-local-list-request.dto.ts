@@ -18,6 +18,7 @@ export class SendLocalListRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
   @IsOptional()
@@ -25,6 +26,7 @@ export class SendLocalListRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => AuthorizationDataDto)
   public localAuthorizationList!: AuthorizationDataDto[]
 
   /**
