@@ -12,7 +12,7 @@ validate-all:
     - npm run build
     - npm run test
     - npm pack
-    - npm share
+    - npm run share
     - cd ..
 
     - echo "*** backend ***"
