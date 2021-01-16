@@ -20,13 +20,13 @@ export class GetLogRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => LogParametersDto)
+  @ValidateNested()
   public log: LogParametersDto
 
   @IsNotEmpty()

@@ -23,8 +23,8 @@ export class SetVariableResultDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
@@ -36,17 +36,17 @@ export class SetVariableResultDto extends DatatypeBaseDto {
   public attributeStatus: SetVariableStatusEnum
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public attributeStatusInfo!: StatusInfoDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => ComponentDto)
+  @ValidateNested()
   public component: ComponentDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => VariableDto)
+  @ValidateNested()
   public variable: VariableDto
 }

@@ -11,7 +11,7 @@ export class NotifyReportResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 }

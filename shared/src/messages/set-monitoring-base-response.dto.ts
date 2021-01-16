@@ -16,8 +16,8 @@ export class SetMonitoringBaseResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -25,7 +25,7 @@ export class SetMonitoringBaseResponseDto extends ResponseBaseDto {
   public status: GenericDeviceModelStatusEnum
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

@@ -16,8 +16,8 @@ export class ClearChargingProfileResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -25,7 +25,7 @@ export class ClearChargingProfileResponseDto extends ResponseBaseDto {
   public status: ClearChargingProfileStatusEnum
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

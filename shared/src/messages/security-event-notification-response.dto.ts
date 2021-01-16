@@ -11,7 +11,7 @@ export class SecurityEventNotificationResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 }

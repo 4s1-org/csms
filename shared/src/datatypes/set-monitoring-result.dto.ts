@@ -30,8 +30,8 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -42,8 +42,8 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
   public id!: number
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 
   @IsNotEmpty()
@@ -55,13 +55,13 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
   public type: MonitorEnum
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => ComponentDto)
+  @ValidateNested()
   public component: ComponentDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => VariableDto)
+  @ValidateNested()
   public variable: VariableDto
 
   /**

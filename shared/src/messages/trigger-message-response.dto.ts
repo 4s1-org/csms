@@ -16,8 +16,8 @@ export class TriggerMessageResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -25,7 +25,7 @@ export class TriggerMessageResponseDto extends ResponseBaseDto {
   public status: TriggerMessageStatusEnum
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

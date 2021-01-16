@@ -19,8 +19,8 @@ export class NotifyEventRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -46,9 +46,9 @@ export class NotifyEventRequestDto extends RequestBaseDto {
 
   @IsNotEmpty()
   @ArrayMinSize(1)
+  @Type(() => EventDataDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => EventDataDto)
   public eventData: EventDataDto[]
 }

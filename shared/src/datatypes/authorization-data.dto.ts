@@ -19,17 +19,17 @@ export class AuthorizationDataDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => IdTokenDto)
+  @ValidateNested()
   public idToken: IdTokenDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => IdTokenInfoDto)
+  @ValidateNested()
   public idTokenInfo!: IdTokenInfoDto
 }

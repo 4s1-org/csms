@@ -21,8 +21,8 @@ export class DcChargingParametersDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**

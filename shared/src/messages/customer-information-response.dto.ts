@@ -16,8 +16,8 @@ export class CustomerInformationResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -25,7 +25,7 @@ export class CustomerInformationResponseDto extends ResponseBaseDto {
   public status: CustomerInformationStatusEnum
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

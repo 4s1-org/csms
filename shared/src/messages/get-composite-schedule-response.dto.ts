@@ -17,8 +17,8 @@ export class GetCompositeScheduleResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -26,12 +26,12 @@ export class GetCompositeScheduleResponseDto extends ResponseBaseDto {
   public status: GenericStatusEnum
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CompositeScheduleDto)
+  @ValidateNested()
   public schedule!: CompositeScheduleDto
 }

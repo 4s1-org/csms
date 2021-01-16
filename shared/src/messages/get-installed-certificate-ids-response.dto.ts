@@ -17,8 +17,8 @@ export class GetInstalledCertificateIdsResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -26,15 +26,15 @@ export class GetInstalledCertificateIdsResponseDto extends ResponseBaseDto {
   public status: GetInstalledCertificateStatusEnum
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 
   @IsOptional()
   @ArrayMinSize(1)
+  @Type(() => CertificateHashDataChainDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => CertificateHashDataChainDto)
   public certificateHashDataChain!: CertificateHashDataChainDto[]
 }

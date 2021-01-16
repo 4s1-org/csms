@@ -27,13 +27,13 @@ export class MessageInfoDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => ComponentDto)
+  @ValidateNested()
   public display!: ComponentDto
 
   /**
@@ -82,7 +82,7 @@ export class MessageInfoDto extends DatatypeBaseDto {
   public transactionId!: string
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => MessageContentDto)
+  @ValidateNested()
   public message: MessageContentDto
 }

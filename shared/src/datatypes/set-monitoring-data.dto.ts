@@ -28,8 +28,8 @@ export class SetMonitoringDataDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -88,12 +88,12 @@ export class SetMonitoringDataDto extends DatatypeBaseDto {
   public severity: number
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => ComponentDto)
+  @ValidateNested()
   public component: ComponentDto
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => VariableDto)
+  @ValidateNested()
   public variable: VariableDto
 }

@@ -23,8 +23,8 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -68,8 +68,8 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
   public evseId!: number[]
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => IdTokenDto)
+  @ValidateNested()
   public groupIdToken!: IdTokenDto
 
   /**
@@ -83,7 +83,7 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
   public language2!: string
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => MessageContentDto)
+  @ValidateNested()
   public personalMessage!: MessageContentDto
 }

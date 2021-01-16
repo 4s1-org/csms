@@ -15,8 +15,8 @@ export class SignCertificateRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**

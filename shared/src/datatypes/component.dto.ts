@@ -18,13 +18,13 @@ export class ComponentDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => EvseDto)
+  @ValidateNested()
   public evse!: EvseDto
 
   /**

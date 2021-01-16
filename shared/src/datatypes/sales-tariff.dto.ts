@@ -22,8 +22,8 @@ export class SalesTariffDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -57,9 +57,9 @@ export class SalesTariffDto extends DatatypeBaseDto {
   @IsNotEmpty()
   @ArrayMinSize(1)
   @ArrayMaxSize(1024)
+  @Type(() => SalesTariffEntryDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => SalesTariffEntryDto)
   public salesTariffEntry: SalesTariffEntryDto[]
 }

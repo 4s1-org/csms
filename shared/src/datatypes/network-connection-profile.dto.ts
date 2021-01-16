@@ -34,13 +34,13 @@ export class NetworkConnectionProfileDto extends DatatypeBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => ApnDto)
+  @ValidateNested()
   public apn!: ApnDto
 
   @IsNotEmpty()
@@ -82,7 +82,7 @@ export class NetworkConnectionProfileDto extends DatatypeBaseDto {
   public ocppInterface: OcppInterfaceEnum
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => VpnDto)
+  @ValidateNested()
   public vpn!: VpnDto
 }

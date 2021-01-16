@@ -16,16 +16,16 @@ export class GetReportRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsOptional()
   @ArrayMinSize(1)
+  @Type(() => ComponentVariableDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => ComponentVariableDto)
   public componentVariable!: ComponentVariableDto[]
 
   /**
@@ -44,6 +44,5 @@ export class GetReportRequestDto extends RequestBaseDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => ComponentCriterionEnum)
   public componentCriteria!: ComponentCriterionEnum[]
 }

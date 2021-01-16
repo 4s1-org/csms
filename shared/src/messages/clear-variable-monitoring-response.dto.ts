@@ -15,15 +15,15 @@ export class ClearVariableMonitoringResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
   @ArrayMinSize(1)
+  @Type(() => ClearMonitoringResultDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => ClearMonitoringResultDto)
   public clearMonitoringResult: ClearMonitoringResultDto[]
 }

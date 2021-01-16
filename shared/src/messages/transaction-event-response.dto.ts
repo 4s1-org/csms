@@ -13,8 +13,8 @@ export class TransactionEventResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -32,12 +32,12 @@ export class TransactionEventResponseDto extends ResponseBaseDto {
   public chargingPriority!: number
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => IdTokenInfoDto)
+  @ValidateNested()
   public idTokenInfo!: IdTokenInfoDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => MessageContentDto)
+  @ValidateNested()
   public updatedPersonalMessage!: MessageContentDto
 }

@@ -28,8 +28,8 @@ export class TransactionEventRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   @IsNotEmpty()
@@ -38,10 +38,10 @@ export class TransactionEventRequestDto extends RequestBaseDto {
 
   @IsOptional()
   @ArrayMinSize(1)
+  @Type(() => MeterValueDto)
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => MeterValueDto)
   public meterValue!: MeterValueDto[]
 
   /**
@@ -91,17 +91,17 @@ export class TransactionEventRequestDto extends RequestBaseDto {
   public reservationId!: number
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => TransactionDto)
+  @ValidateNested()
   public transactionInfo: TransactionDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => EvseDto)
+  @ValidateNested()
   public evse!: EvseDto
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => IdTokenDto)
+  @ValidateNested()
   public idToken!: IdTokenDto
 }

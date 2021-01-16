@@ -19,8 +19,8 @@ export class NotifyEvChargingScheduleRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -31,8 +31,8 @@ export class NotifyEvChargingScheduleRequestDto extends RequestBaseDto {
   public timeBase: string
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => ChargingScheduleDto)
+  @ValidateNested()
   public chargingSchedule: ChargingScheduleDto
 
   /**

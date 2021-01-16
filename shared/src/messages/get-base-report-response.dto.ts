@@ -19,8 +19,8 @@ export class GetBaseReportResponseDto extends ResponseBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -40,7 +40,7 @@ export class GetBaseReportResponseDto extends ResponseBaseDto {
    * 0..1
    */
   @IsOptional()
-  @ValidateNested()
   @Type(() => StatusInfoDto)
+  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

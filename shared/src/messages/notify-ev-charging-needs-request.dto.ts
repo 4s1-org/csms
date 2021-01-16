@@ -17,8 +17,8 @@ export class NotifyEvChargingNeedsRequestDto extends RequestBaseDto {
   }
 
   @IsOptional()
-  @ValidateNested()
   @Type(() => CustomDataDto)
+  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -29,8 +29,8 @@ export class NotifyEvChargingNeedsRequestDto extends RequestBaseDto {
   public maxScheduleTuples!: number
 
   @IsNotEmpty()
-  @ValidateNested()
   @Type(() => ChargingNeedsDto)
+  @ValidateNested()
   public chargingNeeds: ChargingNeedsDto
 
   /**
