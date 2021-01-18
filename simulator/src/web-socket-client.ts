@@ -6,6 +6,8 @@ import {
   OcppCallDto,
   OcppMessageTypeIdEnum,
   OcppMessageEnum,
+  OcppCallResultDto,
+  toClass,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
@@ -63,7 +65,7 @@ export class WebSocketClient {
     }
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-      this.logger.debug('Received', msg.data)
+      this.logger.debug('Received', toClass(OcppCallResultDto, msg.data))
 
       const data = JSON.parse(msg.data as string)
     }
