@@ -5,8 +5,8 @@ import {
   OcppMessageEnum,
   OcppMessageTypeIdEnum,
   validateData,
+  toClass,
 } from '@yellowgarbagebag/csms-shared'
-import { plainToClass } from 'class-transformer'
 
 export function validateOcppCall(data: unknown): OcppCallDto {
   if (!data) {
@@ -42,7 +42,7 @@ export function validateOcppCall(data: unknown): OcppCallDto {
     payload: data[3],
   }
 
-  const ocppCall = plainToClass(OcppCallDto, obj)
+  const ocppCall = toClass(OcppCallDto, obj)
   validateData(ocppCall, obj.messageId)
   return ocppCall
 }
