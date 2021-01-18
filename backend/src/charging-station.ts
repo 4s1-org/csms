@@ -9,8 +9,8 @@ import {
   OcppMessageEnum,
   RegistrationStatusEnum,
   validateData,
+  toClass,
 } from '@yellowgarbagebag/csms-shared'
-import { plainToClass } from 'class-transformer'
 import { validateOcppCall } from './utils'
 import WebSocket from 'ws'
 
@@ -39,7 +39,7 @@ export class ChargingStation {
       this.logger.info(`Type of "${dto.action}"`)
       switch (dto.action) {
         case OcppMessageEnum.BootNotification:
-          const bootNotification = plainToClass(BootNotificationRequestDto, dto.payload)
+          const bootNotification = toClass(BootNotificationRequestDto, dto.payload)
           validateData(bootNotification, dto.messageId)
           const res = new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
           return new OcppCallResultDto(dto.messageId, res)
