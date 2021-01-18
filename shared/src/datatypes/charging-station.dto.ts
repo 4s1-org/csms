@@ -16,10 +16,6 @@ export class ChargingStationDto extends DatatypeBaseDto {
     this.vendorName = vendorName
   }
 
-  public foo(): void {
-    //
-  }
-
   @IsOptional()
   @Type(() => CustomDataDto)
   @ValidateNested()
