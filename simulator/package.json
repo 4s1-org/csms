@@ -49,8 +49,8 @@
     }
   },
   "dependencies": {
-    "@yellowgarbagebag/csms-shared": "file:../shared/yellowgarbagebag-csms-shared-1.0.0.tgz",
-    "class-transformer": "^0.3.2",
+    "@yellowgarbagebag/csms-shared": "file:../shared",
+    "class-validator": "^0.13.1",
     "uuid": "^8.3.2",
     "ws": "^7.4.2"
   },
