@@ -40,6 +40,7 @@ export class ChargingStation {
       switch (dto.action) {
         case OcppMessageEnum.BootNotification:
           const bootNotification = plainToClass(BootNotificationRequestDto, dto.payload)
+          bootNotification.chargingStation.foo()
           validateData(bootNotification, dto.messageId)
           const res = new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
           return new OcppCallResultDto(dto.messageId, res)
