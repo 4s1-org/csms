@@ -3,11 +3,11 @@ import {
   BootReasonEnum,
   ChargingStationDto,
   Logger,
-  OcppCallDto,
   OcppMessageTypeIdEnum,
   OcppMessageEnum,
-  OcppCallResultDto,
   toClass,
+  OcppRequestMessageDto,
+  OcppResponseMessageDto,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
@@ -24,7 +24,7 @@ export class WebSocketClient {
   }
 
   private sendBootNotification(socket: WebSocket): void {
-    const msg = new OcppCallDto(
+    const msg = new OcppRequestMessageDto(
       this.getId(),
       OcppMessageEnum.BootNotification,
       new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
@@ -45,7 +45,7 @@ export class WebSocketClient {
           vendorName: 'VendorX',
         },
         reason: 'PowerUp',
-        //foobar: true,
+        foobar: true,
       },
     ])
 
@@ -60,12 +60,12 @@ export class WebSocketClient {
       const socketId = 'foo' // request.headers['sec-websocket-key']
       this.logger.info('Connected: ' + socketId)
 
-      //this.sendBootNotification(socket)
+      this.sendBootNotification(socket)
       this.sendSpielwiese(socket)
     }
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-      this.logger.debug('Received', toClass(OcppCallResultDto, msg.data))
+      this.logger.debug('Received', toClass(OcppResponseMessageDto, msg.data))
 
       const data = JSON.parse(msg.data as string)
     }
