@@ -9,6 +9,8 @@ import {
   OcppResponseMessageDto,
   HeartbeatRequestDto,
   RequestBaseDto,
+  StatusNotificationRequestDto,
+  ConnectorStatusEnum,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
@@ -39,6 +41,17 @@ export class WebSocketClient {
   private sendHeartbeat(socket: WebSocket): void {
     const payload = new HeartbeatRequestDto()
     this.send(socket, OcppMessageEnum.Heartbeat, payload)
+
+    setTimeout(() => {
+      if (socket.OPEN) {
+        this.sendHeartbeat(socket)
+      }
+    }, 60000)
+  }
+
+  private sendStatusNotification(socket: WebSocket): void {
+    const payload = new StatusNotificationRequestDto(new Date().toISOString(), ConnectorStatusEnum.Available, 1, 1)
+    this.send(socket, OcppMessageEnum.StatusNotification, payload)
   }
 
   public async run(): Promise<void> {
@@ -49,11 +62,18 @@ export class WebSocketClient {
       this.logger.info('Connected: ' + socketId)
 
       this.sendBootNotification(socket)
+
+      setTimeout(() => {
+        if (socket.OPEN) {
+          this.sendStatusNotification(socket)
+        }
+      }, 1000)
+
       setTimeout(() => {
         if (socket.OPEN) {
           this.sendHeartbeat(socket)
         }
-      }, 5000)
+      }, 2000)
     }
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {
