@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { ChangeAvailabilityStatusEnum } from '../enumerations/change-availability-status.enum'
@@ -18,9 +17,7 @@ export class ChangeAvailabilityResponseDto extends ResponseBaseDto {
     this.status = status
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -29,8 +26,6 @@ export class ChangeAvailabilityResponseDto extends ResponseBaseDto {
    * ChangeAvailabilityStatusEnumType
    * 1..1
    */
-  @IsNotEmpty()
-  @IsEnum(ChangeAvailabilityStatusEnum)
   public status: ChangeAvailabilityStatusEnum
 
   /**
@@ -39,8 +34,6 @@ export class ChangeAvailabilityResponseDto extends ResponseBaseDto {
    * StatusInfoType
    * 0..1
    */
-  @IsOptional()
   @Type(() => StatusInfoDto)
-  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

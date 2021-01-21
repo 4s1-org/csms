@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -14,30 +13,19 @@ export class NotifyDisplayMessagesRequestDto extends RequestBaseDto {
     this.requestId = requestId
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsOptional()
-  @ArrayMinSize(1)
   @Type(() => MessageInfoDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public messageInfo!: MessageInfoDto[]
 
   /**
    * The id of the <<getdisplaymessagesrequest,GetDisplayMessagesRequest>> that requested this message.
    */
-  @IsNotEmpty()
-  @IsInt()
   public requestId: number
 
   /**
    * "to be continued" indicator. Indicates whether another part of the report follows in an upcoming NotifyDisplayMessagesRequest message. Default value when omitted is false.
    */
-  @IsOptional()
-  @IsBoolean()
   public tbc!: boolean
 }

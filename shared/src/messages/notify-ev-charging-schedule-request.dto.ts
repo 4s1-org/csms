@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
@@ -18,27 +17,19 @@ export class NotifyEvChargingScheduleRequestDto extends RequestBaseDto {
     this.evseId = evseId
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
    * Periods contained in the charging profile are relative to this point in time.
    */
-  @IsNotEmpty()
-  @IsDateString()
   public timeBase: string
 
-  @IsNotEmpty()
   @Type(() => ChargingScheduleDto)
-  @ValidateNested()
   public chargingSchedule: ChargingScheduleDto
 
   /**
    * The charging schedule contained in this notification applies to an EVSE. EvseId must be > 0.
    */
-  @IsNotEmpty()
-  @IsInt()
   public evseId: number
 }

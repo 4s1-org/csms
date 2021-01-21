@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -19,35 +18,24 @@ export class VariableCharacteristicsDto extends DatatypeBaseDto {
     this.supportsMonitoring = supportsMonitoring
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
    * Unit of the variable. When the transmitted value has a unit, this field SHALL be included.
    */
-  @IsOptional()
-  @MaxLength(16)
-  @IsString()
   public unit!: string
 
-  @IsNotEmpty()
-  @IsEnum(DataEnum)
   public dataType: DataEnum
 
   /**
    * Minimum possible value of this variable.
    */
-  @IsOptional()
-  @IsNumber()
   public minLimit!: number
 
   /**
    * Maximum possible value of this variable. When the datatype of this Variable is String, OptionList, SequenceList or MemberList, this field defines the maximum length of the (CSV) string.
    */
-  @IsOptional()
-  @IsNumber()
   public maxLimit!: number
 
   /**
@@ -63,15 +51,10 @@ export class VariableCharacteristicsDto extends DatatypeBaseDto {
    * 
    * The Configuration Variable <<configkey-configuration-value-size,ConfigurationValueSize>> can be used to limit SetVariableData.attributeValue and VariableCharacteristics.valueList. The max size of these values will always remain equal.
    */
-  @IsOptional()
-  @MaxLength(1000)
-  @IsString()
   public valuesList!: string
 
   /**
    * Flag indicating if this variable supports monitoring.
    */
-  @IsNotEmpty()
-  @IsBoolean()
   public supportsMonitoring: boolean
 }

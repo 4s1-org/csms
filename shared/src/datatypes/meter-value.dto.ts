@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -21,17 +20,10 @@ export class MeterValueDto extends DatatypeBaseDto {
     this.timestamp = timestamp
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @ArrayMinSize(1)
   @Type(() => SampledValueDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public sampledValue: SampledValueDto[]
 
   /**
@@ -39,7 +31,5 @@ export class MeterValueDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569259
    * Timestamp for measured value(s).
    */
-  @IsNotEmpty()
-  @IsDateString()
   public timestamp: string
 }

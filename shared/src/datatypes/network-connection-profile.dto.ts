@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ApnDto } from './apn.dto'
@@ -33,22 +32,14 @@ export class NetworkConnectionProfileDto extends DatatypeBaseDto {
     this.ocppInterface = ocppInterface
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @Type(() => ApnDto)
-  @ValidateNested()
   public apn!: ApnDto
 
-  @IsNotEmpty()
-  @IsEnum(OcppVersionEnum)
   public ocppVersion: OcppVersionEnum
 
-  @IsNotEmpty()
-  @IsEnum(OcppTransportEnum)
   public ocppTransport: OcppTransportEnum
 
   /**
@@ -56,9 +47,6 @@ export class NetworkConnectionProfileDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569357
    * URL of the CSMS(s) that this Charging Station  communicates with.
    */
-  @IsNotEmpty()
-  @MaxLength(512)
-  @IsString()
   public ocppCsmsUrl: string
 
   /**
@@ -66,23 +54,15 @@ export class NetworkConnectionProfileDto extends DatatypeBaseDto {
    * The best setting depends on the underlying network and response times of the CSMS.
    * If you are looking for a some guideline: use 30 seconds as a starting point.
    */
-  @IsNotEmpty()
-  @IsInt()
   public messageTimeout: number
 
   /**
    * This field specifies the security profile used when connecting to the CSMS with this NetworkConnectionProfile.
    */
-  @IsNotEmpty()
-  @IsInt()
   public securityProfile: number
 
-  @IsNotEmpty()
-  @IsEnum(OcppInterfaceEnum)
   public ocppInterface: OcppInterfaceEnum
 
-  @IsOptional()
   @Type(() => VpnDto)
-  @ValidateNested()
   public vpn!: VpnDto
 }
