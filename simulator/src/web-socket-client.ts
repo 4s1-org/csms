@@ -3,11 +3,12 @@ import {
   BootReasonEnum,
   ChargingStationDto,
   Logger,
-  OcppMessageTypeIdEnum,
   OcppMessageEnum,
   toClass,
   OcppRequestMessageDto,
   OcppResponseMessageDto,
+  HeartbeatRequestDto,
+  RequestBaseDto,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
@@ -23,34 +24,21 @@ export class WebSocketClient {
     return uuid().replace(/-/g, '')
   }
 
-  private sendBootNotification(socket: WebSocket): void {
-    const msg = new OcppRequestMessageDto(
-      this.getId(),
-      OcppMessageEnum.BootNotification,
-      new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
-    ).toString()
-
+  private send(socket: WebSocket, action: OcppMessageEnum, payload: RequestBaseDto): void {
+    const msg = new OcppRequestMessageDto(this.getId(), action, payload).toString()
     this.logger.debug('Send', msg)
     socket.send(msg)
   }
 
-  private sendSpielwiese(socket: WebSocket): void {
-    const msg = JSON.stringify([
-      OcppMessageTypeIdEnum.Call,
-      this.getId(),
-      OcppMessageEnum.BootNotification,
-      {
-        chargingStation: {
-          model: 'SingleSocketCharger',
-          vendorName: 'VendorX',
-        },
-        reason: 'PowerUp',
-        //foobar: true,
-      },
-    ])
+  private sendBootNotification(socket: WebSocket): void {
+    const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
+    const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
+    this.send(socket, OcppMessageEnum.BootNotification, payload)
+  }
 
-    this.logger.debug('Send', msg)
-    socket.send(msg)
+  private sendHeartbeat(socket: WebSocket): void {
+    const payload = new HeartbeatRequestDto()
+    this.send(socket, OcppMessageEnum.Heartbeat, payload)
   }
 
   public async run(): Promise<void> {
@@ -60,8 +48,12 @@ export class WebSocketClient {
       const socketId = 'foo' // request.headers['sec-websocket-key']
       this.logger.info('Connected: ' + socketId)
 
-      //this.sendBootNotification(socket)
-      this.sendSpielwiese(socket)
+      this.sendBootNotification(socket)
+      setTimeout(() => {
+        if (socket.OPEN) {
+          this.sendHeartbeat(socket)
+        }
+      }, 5000)
     }
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {

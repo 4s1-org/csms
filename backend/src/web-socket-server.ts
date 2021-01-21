@@ -82,11 +82,22 @@ export class WebSocketServer {
             // Verarbeitung der Daten
             const payload: ResponseBaseDto = cs.messageReceived(requestMessage.action, requestMessage.payload)
 
-            // Antwort zurück senden
+            // Antwortobjekt erstellen
             const responseMessage: OcppResponseMessageDto = new OcppResponseMessageDto(
               requestMessage.messageId,
               payload,
             )
+            // Anwortdaten validieren
+            try {
+              MessageValidator.instance.validateResponsePayload(responseMessage, requestMessage.action)
+            } catch (err) {
+              if (err instanceof CsmsError) {
+                cs.logger.error(`Server send invalid data | ${err.errorCode} | ${err.errorDescription}`)
+              } else {
+                throw err
+              }
+            }
+            // Loggen und senden
             const response: string = responseMessage.toString()
             cs.logger.debug('Send', response)
             socket.send(response)
@@ -104,7 +115,7 @@ export class WebSocketServer {
             logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
             socket.send(err.toString())
           } else {
-            logger.error('Internal Server Error', err)
+            logger.fatal('Internal Server Error', err)
             const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, OcppErrorCodeEnum.InternalError)
             socket.send(errorResponseMessage.toString())
           }
