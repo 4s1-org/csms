@@ -1,38 +1,44 @@
 import {
-  OcppCallDto,
-  OcppCallErrorDto,
-  OcppErrorCode,
+  OcppErrorCodeEnum,
+  OcppErrorResponseMessageDto,
   OcppMessageEnum,
   OcppMessageTypeIdEnum,
-  validateData,
+  OcppRequestMessageDto,
   toClass,
 } from '@yellowgarbagebag/csms-shared'
 
-export function validateOcppCall(data: unknown): OcppCallDto {
+export function arrayToRequestMessage(data: unknown): OcppRequestMessageDto {
   if (!data) {
-    throw new OcppCallErrorDto('', OcppErrorCode.RpcFrameworkError, 'Invalid data format received')
+    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
   }
   if (typeof data !== 'string') {
-    throw new OcppCallErrorDto('', OcppErrorCode.RpcFrameworkError, 'Invalid data format received')
+    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
   }
 
   try {
     data = JSON.parse(data)
   } catch (err) {
-    throw new OcppCallErrorDto('', OcppErrorCode.RpcFrameworkError, 'Invalid data format received')
+    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
   }
 
   if (!Array.isArray(data)) {
-    throw new OcppCallErrorDto('', OcppErrorCode.RpcFrameworkError, 'No array received')
+    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'No array received')
   }
   if (data.length !== 4) {
-    throw new OcppCallErrorDto('', OcppErrorCode.RpcFrameworkError, 'Received array has not exact 4 items')
+    throw new OcppErrorResponseMessageDto(
+      '',
+      OcppErrorCodeEnum.RpcFrameworkError,
+      'Received array has not exact 4 items',
+    )
   }
   if (data[0] !== OcppMessageTypeIdEnum.Call) {
-    throw new OcppCallErrorDto('', OcppErrorCode.RpcFrameworkError, 'MessageType is not 2')
+    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'MessageType is not 2')
+  }
+  if (data[1].length > 32) {
+    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'MessageId is too long')
   }
   if (!Object.values(OcppMessageEnum).includes(data[2])) {
-    throw new OcppCallErrorDto(data[1], OcppErrorCode.NotImplemented)
+    throw new OcppErrorResponseMessageDto(data[1], OcppErrorCodeEnum.NotImplemented)
   }
 
   const obj = {
@@ -42,7 +48,5 @@ export function validateOcppCall(data: unknown): OcppCallDto {
     payload: data[3],
   }
 
-  const ocppCall = toClass(OcppCallDto, obj)
-  validateData(ocppCall, obj.messageId)
-  return ocppCall
+  return toClass(OcppRequestMessageDto, obj)
 }

@@ -70,12 +70,12 @@ export class WebSocketClient {
       const data = JSON.parse(msg.data as string)
     }
 
-    socket.onerror = (err: any): void => {
-      this.logger.error('Error' + err)
+    socket.onerror = (err: WebSocket.ErrorEvent): void => {
+      this.logger.error(err.message)
     }
 
     socket.onclose = (): void => {
-      this.logger.info('Close')
+      this.logger.info('Connection closed')
       setTimeout(() => this.run(), 3000)
     }
   }
