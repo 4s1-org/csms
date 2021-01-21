@@ -11,6 +11,8 @@ import {
   CsmsError,
   HeartbeatRequestDto,
   HeartbeatResponseDto,
+  StatusNotificationRequestDto,
+  StatusNotificationResponseDto,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation {
@@ -34,6 +36,8 @@ export class ChargingStation {
         return this.bootNotification(toClass(BootNotificationRequestDto, payload))
       case OcppMessageEnum.Heartbeat:
         return this.heartbeat(toClass(HeartbeatRequestDto, payload))
+      case OcppMessageEnum.StatusNotification:
+        return this.statusNotification(toClass(StatusNotificationRequestDto, payload))
       default:
         throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
     }
@@ -45,5 +49,9 @@ export class ChargingStation {
 
   private heartbeat(payload: HeartbeatRequestDto): HeartbeatResponseDto {
     return new HeartbeatResponseDto(new Date().toISOString())
+  }
+
+  private statusNotification(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
+    return new StatusNotificationResponseDto()
   }
 }
