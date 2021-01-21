@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AdditionalInfoDto } from './additional-info.dto'
@@ -20,28 +19,16 @@ export class IdTokenDto extends DatatypeBaseDto {
     this.type = type
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsOptional()
-  @ArrayMinSize(1)
   @Type(() => AdditionalInfoDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public additionalInfo!: AdditionalInfoDto[]
 
   /**
    * IdToken is case insensitive. Might hold the hidden id of an RFID tag, but can for example also contain a UUID.
    */
-  @IsNotEmpty()
-  @MaxLength(36)
-  @IsString()
   public idToken: string
 
-  @IsNotEmpty()
-  @IsEnum(IdTokenEnum)
   public type: IdTokenEnum
 }

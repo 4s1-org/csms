@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsNotEmpty, IsString, MaxLength } from 'class-validator'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 
 /**
@@ -14,9 +13,6 @@ export class CustomDataDto extends DatatypeBaseDto {
     this.vendorId = vendorId
   }
 
-  @IsNotEmpty()
-  @MaxLength(255)
-  @IsString()
   public vendorId: string
 
   // To be implemented later

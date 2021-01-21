@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMinSize, ArrayNotEmpty, IsArray, IsBoolean, IsDateString, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -21,9 +20,7 @@ export class NotifyReportRequestDto extends RequestBaseDto {
     this.seqNo = seqNo
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -32,8 +29,6 @@ export class NotifyReportRequestDto extends RequestBaseDto {
    * integer
    * 1..1
    */
-  @IsNotEmpty()
-  @IsInt()
   public requestId: number
 
   /**
@@ -42,8 +37,6 @@ export class NotifyReportRequestDto extends RequestBaseDto {
    * dateTime
    * 1..1
    */
-  @IsNotEmpty()
-  @IsDateString()
   public generatedAt: string
 
   /**
@@ -52,12 +45,7 @@ export class NotifyReportRequestDto extends RequestBaseDto {
    * ReportDataType
    * 0..*
    */
-  @IsOptional()
-  @ArrayMinSize(1)
   @Type(() => ReportDataDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public reportData!: ReportDataDto[]
 
   /**
@@ -66,8 +54,6 @@ export class NotifyReportRequestDto extends RequestBaseDto {
    * boolean
    * 0..1
    */
-  @IsOptional()
-  @IsBoolean()
   public tbc!: boolean
 
   /**
@@ -76,7 +62,5 @@ export class NotifyReportRequestDto extends RequestBaseDto {
    * integer
    * 1..1
    */
-  @IsNotEmpty()
-  @IsInt()
   public seqNo: number
 }

@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -17,25 +16,16 @@ export class Get15118EvCertificateResponseDto extends ResponseBaseDto {
     this.exiResponse = exiResponse
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(Iso15118EvCertificateStatusEnum)
   public status: Iso15118EvCertificateStatusEnum
 
-  @IsOptional()
   @Type(() => StatusInfoDto)
-  @ValidateNested()
   public statusInfo!: StatusInfoDto
 
   /**
    * Raw CertificateInstallationRes response for the EV, Base64 encoded.
    */
-  @IsNotEmpty()
-  @MaxLength(5600)
-  @IsString()
   public exiResponse: string
 }

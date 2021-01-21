@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
@@ -27,17 +26,10 @@ export class CompositeScheduleDto extends DatatypeBaseDto {
     this.chargingRateUnit = chargingRateUnit
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @ArrayMinSize(1)
   @Type(() => ChargingSchedulePeriodDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 
   /**
@@ -46,15 +38,11 @@ export class CompositeScheduleDto extends DatatypeBaseDto {
    * Charging Station calculated the expected
    * consumption for the grid connection.
    */
-  @IsNotEmpty()
-  @IsInt()
   public evseId: number
 
   /**
    * Duration of the schedule in seconds.
    */
-  @IsNotEmpty()
-  @IsInt()
   public duration: number
 
   /**
@@ -62,11 +50,7 @@ export class CompositeScheduleDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569456
    * Date and time at which the schedule becomes active. All time measurements within the schedule are relative to this timestamp.
    */
-  @IsNotEmpty()
-  @IsDateString()
   public scheduleStart: string
 
-  @IsNotEmpty()
-  @IsEnum(ChargingRateUnitEnum)
   public chargingRateUnit: ChargingRateUnitEnum
 }

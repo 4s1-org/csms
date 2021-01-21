@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CompositeScheduleDto } from '../datatypes/composite-schedule.dto'
@@ -16,22 +15,14 @@ export class GetCompositeScheduleResponseDto extends ResponseBaseDto {
     this.status = status
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(GenericStatusEnum)
   public status: GenericStatusEnum
 
-  @IsOptional()
   @Type(() => StatusInfoDto)
-  @ValidateNested()
   public statusInfo!: StatusInfoDto
 
-  @IsOptional()
   @Type(() => CompositeScheduleDto)
-  @ValidateNested()
   public schedule!: CompositeScheduleDto
 }

@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -20,9 +19,7 @@ export class MeterValuesRequestDto extends RequestBaseDto {
     this.meterValue = meterValue
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -30,15 +27,8 @@ export class MeterValuesRequestDto extends RequestBaseDto {
    * urn:x-enexis:ecdm:uid:1:571101
    * This contains a number (>0) designating an EVSE of the Charging Station. ‘0’ (zero) is used to designate the main power meter.
    */
-  @IsNotEmpty()
-  @IsInt()
   public evseId: number
 
-  @IsNotEmpty()
-  @ArrayMinSize(1)
   @Type(() => MeterValueDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public meterValue: MeterValueDto[]
 }

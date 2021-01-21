@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -18,9 +17,7 @@ export class EvseDto extends DatatypeBaseDto {
     this.id = id
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -28,14 +25,10 @@ export class EvseDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:569198
    * EVSE Identifier. This contains a number (> 0) designating an EVSE of the Charging Station.
    */
-  @IsNotEmpty()
-  @IsInt()
   public id: number
 
   /**
    * An id to designate a specific connector (on an EVSE) by connector index number.
    */
-  @IsOptional()
-  @IsInt()
   public connectorId!: number
 }

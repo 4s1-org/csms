@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AuthorizationStatusEnum } from '../enumerations/authorization-status.enum'
@@ -22,13 +21,9 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
     this.status = status
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(AuthorizationStatusEnum)
   public status: AuthorizationStatusEnum
 
   /**
@@ -36,15 +31,11 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569373
    * Date and Time after which the token must be considered invalid.
    */
-  @IsOptional()
-  @IsDateString()
   public cacheExpiryDateTime!: string
 
   /**
    * Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in <<transactioneventresponse,TransactionEventResponse>> overrules this one.
    */
-  @IsOptional()
-  @IsInt()
   public chargingPriority!: number
 
   /**
@@ -52,24 +43,14 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569374
    * Preferred user interface language of identifier user. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
-  @IsOptional()
-  @MaxLength(8)
-  @IsString()
   public language1!: string
 
   /**
    * Only used when the IdToken is only valid for one or more specific EVSEs, not for the entire Charging Station.
    */
-  @IsOptional()
-  @ArrayMinSize(1)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public evseId!: number[]
 
-  @IsOptional()
   @Type(() => IdTokenDto)
-  @ValidateNested()
   public groupIdToken!: IdTokenDto
 
   /**
@@ -77,13 +58,8 @@ export class IdTokenInfoDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569375
    * Second preferred user interface language of identifier user. Don’t use when language1 is omitted, has to be different from language1. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
-  @IsOptional()
-  @MaxLength(8)
-  @IsString()
   public language2!: string
 
-  @IsOptional()
   @Type(() => MessageContentDto)
-  @ValidateNested()
   public personalMessage!: MessageContentDto
 }

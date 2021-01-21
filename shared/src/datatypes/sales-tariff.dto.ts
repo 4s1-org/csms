@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -21,9 +20,7 @@ export class SalesTariffDto extends DatatypeBaseDto {
     this.salesTariffEntry = salesTariffEntry
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -31,8 +28,6 @@ export class SalesTariffDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:569198
    * SalesTariff identifier used to identify one sales tariff. An SAID remains a unique identifier for one schedule throughout a charging session.
    */
-  @IsNotEmpty()
-  @IsInt()
   public id: number
 
   /**
@@ -40,9 +35,6 @@ export class SalesTariffDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569283
    * A human readable title/short description of the sales tariff e.g. for HMI display purposes.
    */
-  @IsOptional()
-  @MaxLength(32)
-  @IsString()
   public salesTariffDescription!: string
 
   /**
@@ -50,16 +42,8 @@ export class SalesTariffDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569284
    * Defines the overall number of distinct price levels used across all provided SalesTariff elements.
    */
-  @IsOptional()
-  @IsInt()
   public numEPriceLevels!: number
 
-  @IsNotEmpty()
-  @ArrayMinSize(1)
-  @ArrayMaxSize(1024)
   @Type(() => SalesTariffEntryDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public salesTariffEntry: SalesTariffEntryDto[]
 }

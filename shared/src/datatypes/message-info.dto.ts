@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ComponentDto } from './component.dto'
@@ -26,14 +25,10 @@ export class MessageInfoDto extends DatatypeBaseDto {
     this.message = message
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @Type(() => ComponentDto)
-  @ValidateNested()
   public display!: ComponentDto
 
   /**
@@ -41,16 +36,10 @@ export class MessageInfoDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:569198
    * Master resource identifier, unique within an exchange context. It is defined within the OCPP context as a positive Integer value (greater or equal to zero).
    */
-  @IsNotEmpty()
-  @IsInt()
   public id: number
 
-  @IsNotEmpty()
-  @IsEnum(MessagePriorityEnum)
   public priority: MessagePriorityEnum
 
-  @IsOptional()
-  @IsEnum(MessageStateEnum)
   public state!: MessageStateEnum
 
   /**
@@ -58,8 +47,6 @@ export class MessageInfoDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:569256
    * From what date-time should this message be shown. If omitted: directly.
    */
-  @IsOptional()
-  @IsDateString()
   public startDateTime!: string
 
   /**
@@ -67,8 +54,6 @@ export class MessageInfoDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:569257
    * Until what date-time should this message be shown, after this date/time this message SHALL be removed.
    */
-  @IsOptional()
-  @IsDateString()
   public endDateTime!: string
 
   /**
@@ -76,13 +61,8 @@ export class MessageInfoDto extends DatatypeBaseDto {
    * Message SHALL be removed by the Charging Station after transaction has
    * ended.
    */
-  @IsOptional()
-  @MaxLength(36)
-  @IsString()
   public transactionId!: string
 
-  @IsNotEmpty()
   @Type(() => MessageContentDto)
-  @ValidateNested()
   public message: MessageContentDto
 }

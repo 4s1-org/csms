@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -16,20 +15,13 @@ export class InstallCertificateRequestDto extends RequestBaseDto {
     this.certificate = certificate
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(InstallCertificateUseEnum)
   public certificateType: InstallCertificateUseEnum
 
   /**
    * A PEM encoded X.509 certificate.
    */
-  @IsNotEmpty()
-  @MaxLength(5500)
-  @IsString()
   public certificate: string
 }

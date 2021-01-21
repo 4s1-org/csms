@@ -7,13 +7,15 @@ import {
   ChargingStationDto,
   IdTokenDto,
   IdTokenEnum,
-  OcppCallDto,
-  OcppErrorCode,
+  OcppErrorCodeEnum,
   OcppMessageEnum,
   OcppMessageTypeIdEnum,
+  OcppRequestMessageDto,
+  UnpublishFirmwareRequestDto,
 } from '@yellowgarbagebag/csms-shared'
 
 describe('CSMS Gateway', () => {
+  let server: WebSocketServer | undefined
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
     const socket = new WebSocket('ws://localhost:3000/ocpp/2.0.1/LS001', ['ocpp2.0.1'])
     socket.onerror = (): void => {
@@ -26,12 +28,14 @@ describe('CSMS Gateway', () => {
   }
 
   beforeEach(async () => {
-    // Start server
-    WebSocketServer.run(3000)
+    server = new WebSocketServer()
+    server.start()
   })
 
   afterEach(() => {
-    WebSocketServer.stop()
+    if (server) {
+      server.stop()
+    }
   })
 
   describe('RPC Framework tests', () => {
@@ -71,7 +75,7 @@ describe('CSMS Gateway', () => {
 
         socket.onopen = (): void => {
           socket.send(
-            new OcppCallDto(
+            new OcppRequestMessageDto(
               messageId,
               OcppMessageEnum.BootNotification,
               new BootNotificationRequestDto(
@@ -108,7 +112,7 @@ describe('CSMS Gateway', () => {
           expect(data.length).toBe(5)
           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
           expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+          expect(data[2]).toBe(OcppErrorCodeEnum.RpcFrameworkError)
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()
           socket.close()
@@ -128,7 +132,7 @@ describe('CSMS Gateway', () => {
           expect(data.length).toBe(5)
           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
           expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+          expect(data[2]).toBe(OcppErrorCodeEnum.RpcFrameworkError)
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()
           socket.close()
@@ -148,7 +152,7 @@ describe('CSMS Gateway', () => {
           expect(data.length).toBe(5)
           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
           expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+          expect(data[2]).toBe(OcppErrorCodeEnum.RpcFrameworkError)
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()
           socket.close()
@@ -168,7 +172,7 @@ describe('CSMS Gateway', () => {
           expect(data.length).toBe(5)
           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
           expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+          expect(data[2]).toBe(OcppErrorCodeEnum.RpcFrameworkError)
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()
           socket.close()
@@ -188,7 +192,7 @@ describe('CSMS Gateway', () => {
           expect(data.length).toBe(5)
           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
           expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+          expect(data[2]).toBe(OcppErrorCodeEnum.RpcFrameworkError)
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()
           socket.close()
@@ -208,7 +212,7 @@ describe('CSMS Gateway', () => {
           expect(data.length).toBe(5)
           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
           expect(data[1]).toBe('')
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+          expect(data[2]).toBe(OcppErrorCodeEnum.RpcFrameworkError)
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()
           socket.close()
@@ -240,7 +244,7 @@ describe('CSMS Gateway', () => {
           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
           // ToDo: Sollte eigentlich möglich sein, die messageId zu bekommen
           //expect(data[1]).toBe(messageId)
-          expect(data[2]).toBe(OcppErrorCode.RpcFrameworkError)
+          expect(data[2]).toBe(OcppErrorCodeEnum.RpcFrameworkError)
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()
           socket.close()
@@ -260,7 +264,7 @@ describe('CSMS Gateway', () => {
             OcppMessageTypeIdEnum.Call,
             messageId,
             OcppMessageEnum.UnpublishFirmware, // Noch nicht implementiert
-            {},
+            new UnpublishFirmwareRequestDto('abcdefg'),
           ]),
         )
       }
@@ -271,7 +275,7 @@ describe('CSMS Gateway', () => {
         expect(data.length).toBe(5)
         expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
         expect(data[1]).toBe(messageId)
-        expect(data[2]).toBe(OcppErrorCode.NotSupported)
+        expect(data[2]).toBe(OcppErrorCodeEnum.NotSupported)
         expect(data[3]).toBeDefined()
         expect(data[4]).toBeDefined()
         socket.close()
@@ -292,7 +296,7 @@ describe('CSMS Gateway', () => {
         expect(data.length).toBe(5)
         expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
         expect(data[1]).toBe(messageId)
-        expect(data[2]).toBe(OcppErrorCode.NotImplemented)
+        expect(data[2]).toBe(OcppErrorCodeEnum.NotImplemented)
         expect(data[3]).toBeDefined()
         expect(data[4]).toBeDefined()
         socket.close()
@@ -305,7 +309,7 @@ describe('CSMS Gateway', () => {
 
       socket.onopen = (): void => {
         socket.send(
-          new OcppCallDto(
+          new OcppRequestMessageDto(
             messageId,
             OcppMessageEnum.BootNotification,
             // Payload passt nicht zur Message
@@ -320,7 +324,7 @@ describe('CSMS Gateway', () => {
         expect(data.length).toBe(5)
         expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
         expect(data[1]).toBe(messageId)
-        expect(data[2]).toBe(OcppErrorCode.FormatViolation)
+        expect(data[2]).toBe(OcppErrorCodeEnum.FormatViolation)
         expect(data[3]).toBeDefined()
         expect(data[4]).toBeDefined()
         socket.close()
@@ -355,7 +359,7 @@ describe('CSMS Gateway', () => {
         expect(data.length).toBe(5)
         expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
         expect(data[1]).toBe(messageId)
-        expect(data[2]).toBe(OcppErrorCode.FormatViolation)
+        expect(data[2]).toBe(OcppErrorCodeEnum.FormatViolation)
         expect(data[3]).toBeDefined()
         expect(data[4]).toBeDefined()
         socket.close()
@@ -390,7 +394,7 @@ describe('CSMS Gateway', () => {
         expect(data.length).toBe(5)
         expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
         expect(data[1]).toBe(messageId)
-        expect(data[2]).toBe(OcppErrorCode.FormatViolation)
+        expect(data[2]).toBe(OcppErrorCodeEnum.FormatViolation)
         expect(data[3]).toBeDefined()
         expect(data[4]).toBeDefined()
         socket.close()

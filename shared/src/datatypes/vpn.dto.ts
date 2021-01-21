@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -27,9 +26,7 @@ export class VpnDto extends DatatypeBaseDto {
     this.type = type
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -37,9 +34,6 @@ export class VpnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569272
    * VPN Server Address
    */
-  @IsNotEmpty()
-  @MaxLength(512)
-  @IsString()
   public server: string
 
   /**
@@ -47,9 +41,6 @@ export class VpnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569273
    * VPN User
    */
-  @IsNotEmpty()
-  @MaxLength(20)
-  @IsString()
   public user: string
 
   /**
@@ -57,9 +48,6 @@ export class VpnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569274
    * VPN group.
    */
-  @IsOptional()
-  @MaxLength(20)
-  @IsString()
   public group!: string
 
   /**
@@ -67,9 +55,6 @@ export class VpnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569275
    * VPN Password.
    */
-  @IsNotEmpty()
-  @MaxLength(20)
-  @IsString()
   public password: string
 
   /**
@@ -77,12 +62,7 @@ export class VpnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569276
    * VPN shared secret.
    */
-  @IsNotEmpty()
-  @MaxLength(255)
-  @IsString()
   public key: string
 
-  @IsNotEmpty()
-  @IsEnum(VpnEnum)
   public type: VpnEnum
 }

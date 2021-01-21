@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { ClearMessageStatusEnum } from '../enumerations/clear-message-status.enum'
@@ -15,17 +14,11 @@ export class ClearDisplayMessageResponseDto extends ResponseBaseDto {
     this.status = status
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(ClearMessageStatusEnum)
   public status: ClearMessageStatusEnum
 
-  @IsOptional()
   @Type(() => StatusInfoDto)
-  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

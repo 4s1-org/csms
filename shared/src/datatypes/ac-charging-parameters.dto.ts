@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -24,9 +23,7 @@ export class AcChargingParametersDto extends DatatypeBaseDto {
     this.evMaxVoltage = evMaxVoltage
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -34,8 +31,6 @@ export class AcChargingParametersDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569211
    * Amount of energy requested (in Wh). This includes energy required for preconditioning.
    */
-  @IsNotEmpty()
-  @IsInt()
   public energyAmount: number
 
   /**
@@ -43,8 +38,6 @@ export class AcChargingParametersDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569212
    * Minimum current (amps) supported by the electric vehicle (per phase).
    */
-  @IsNotEmpty()
-  @IsInt()
   public evMinCurrent: number
 
   /**
@@ -52,8 +45,6 @@ export class AcChargingParametersDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569213
    * Maximum current (amps) supported by the electric vehicle (per phase). Includes cable capacity.
    */
-  @IsNotEmpty()
-  @IsInt()
   public evMaxCurrent: number
 
   /**
@@ -61,7 +52,5 @@ export class AcChargingParametersDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569214
    * Maximum voltage supported by the electric vehicle
    */
-  @IsNotEmpty()
-  @IsInt()
   public evMaxVoltage: number
 }

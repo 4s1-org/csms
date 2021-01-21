@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsDateString, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AcChargingParametersDto } from './ac-charging-parameters.dto'
@@ -20,23 +19,15 @@ export class ChargingNeedsDto extends DatatypeBaseDto {
     this.requestedEnergyTransfer = requestedEnergyTransfer
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @Type(() => AcChargingParametersDto)
-  @ValidateNested()
   public acChargingParameters!: AcChargingParametersDto
 
-  @IsOptional()
   @Type(() => DcChargingParametersDto)
-  @ValidateNested()
   public dcChargingParameters!: DcChargingParametersDto
 
-  @IsNotEmpty()
-  @IsEnum(EnergyTransferModeEnum)
   public requestedEnergyTransfer: EnergyTransferModeEnum
 
   /**
@@ -44,7 +35,5 @@ export class ChargingNeedsDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569223
    * Estimated departure time of the EV.
    */
-  @IsOptional()
-  @IsDateString()
   public departureTime!: string
 }
