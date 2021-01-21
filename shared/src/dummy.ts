@@ -13,7 +13,7 @@ async function main(): Promise<void> {
     BootReasonEnum.PowerUp,
   )
   const call = new OcppRequestMessageDto('foo', OcppMessageEnum.BootNotification, payload)
-  MessageValidator.instance.validateRequest(call)
+  MessageValidator.instance.validateRequestPayload(call)
 }
 
 main()

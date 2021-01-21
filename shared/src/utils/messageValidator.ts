@@ -2,10 +2,10 @@ import { Validator } from 'jsonschema'
 import fs from 'fs'
 import path from 'path'
 import { OcppRequestMessageDto } from '../callMessages/ocpp-request-message.dto'
-import { OcppErrorResponseMessageDto } from '../callMessages/ocpp-error-response-message.dto'
 import { OcppErrorCodeEnum } from '../callMessages/ocpp-error-code.enum'
 import { OcppResponseMessageDto } from '../callMessages/ocpp-response-message.dto'
 import { OcppMessageEnum } from '../generated/ocpp-message.enum'
+import { CsmsError } from './csms-error'
 
 export class MessageValidator {
   private static _instance: MessageValidator
@@ -35,24 +35,23 @@ export class MessageValidator {
     }
   }
 
-  public validateRequest(request: OcppRequestMessageDto): any {
-    console.log(request)
-    this.validate(request.messageId, request.payload, this._schemas[request.action + 'Request'])
+  public validateRequestPayload(request: OcppRequestMessageDto): any {
+    this.validate(request.payload, this._schemas[request.action + 'Request'])
   }
 
-  public validateResponse(response: OcppResponseMessageDto, action: OcppMessageEnum): any {
-    this.validate('', response.payload, this._schemas[action + 'Response'])
+  public validateResponsePayload(response: OcppResponseMessageDto, action: OcppMessageEnum): any {
+    this.validate(response.payload, this._schemas[action + 'Response'])
   }
 
-  private validate(messageId: string, data: any, schema: any): void {
+  private validate(data: any, schema: any): void {
     const validation = this._validator.validate(data, schema, {
       allowUnknownAttributes: false,
       skipAttributes: ['$id', 'comment', 'definitions', 'javaType'],
     })
 
     if (!validation.valid) {
-      const errStr = validation.errors.map((x) => x.toString()).join('\n')
-      throw new OcppErrorResponseMessageDto(messageId, OcppErrorCodeEnum.FormatViolation, 'Validation failed', errStr)
+      const errMessage = validation.errors.map((x) => x.toString()).join('\n')
+      throw new CsmsError(OcppErrorCodeEnum.FormatViolation, errMessage)
     }
   }
 }

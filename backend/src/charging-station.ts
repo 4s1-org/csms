@@ -2,20 +2,17 @@ import {
   BootNotificationRequestDto,
   BootNotificationResponseDto,
   Logger,
-  OcppCallDto,
-  OcppCallErrorDto,
-  OcppCallResultDto,
-  OcppErrorCode,
+  OcppErrorCodeEnum,
   OcppMessageEnum,
   RegistrationStatusEnum,
-  validateData,
   toClass,
+  RequestBaseDto,
+  ResponseBaseDto,
+  CsmsError,
 } from '@yellowgarbagebag/csms-shared'
-import { validateOcppCall } from './utils'
-import WebSocket from 'ws'
 
 export class ChargingStation {
-  private logger = new Logger(this.uniqueIdentifier)
+  public readonly logger = new Logger(this.uniqueIdentifier)
 
   public constructor(public readonly uniqueIdentifier: string) {
     this.logger.info('First contact')
@@ -29,28 +26,14 @@ export class ChargingStation {
     this.logger.info('Disconnected')
   }
 
-  public messageReceived(msg: WebSocket.MessageEvent): OcppCallResultDto {
-    this.logger.debug(`Received`)
-    this.logger.debug(msg.data as string)
+  public messageReceived(action: OcppMessageEnum, payload: RequestBaseDto): ResponseBaseDto {
+    switch (action) {
+      case OcppMessageEnum.BootNotification:
+        const bootNotification = toClass(BootNotificationRequestDto, payload)
 
-    try {
-      const dto: OcppCallDto = validateOcppCall(msg.data)
-
-      this.logger.info(`Type of "${dto.action}"`)
-      switch (dto.action) {
-        case OcppMessageEnum.BootNotification:
-          const bootNotification = toClass(BootNotificationRequestDto, dto.payload)
-          validateData(bootNotification, dto.messageId)
-          const res = new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
-          return new OcppCallResultDto(dto.messageId, res)
-        default:
-          throw new OcppCallErrorDto(dto.messageId, OcppErrorCode.NotSupported)
-      }
-    } catch (err) {
-      if (err instanceof OcppCallErrorDto) {
-        this.logger.error('Invalid status: ' + err.toString())
-      }
-      throw err
+        return new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
+      default:
+        throw new CsmsError(OcppErrorCodeEnum.NotSupported)
     }
   }
 }
