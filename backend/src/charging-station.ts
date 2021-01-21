@@ -9,6 +9,8 @@ import {
   RequestBaseDto,
   ResponseBaseDto,
   CsmsError,
+  HeartbeatRequestDto,
+  HeartbeatResponseDto,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation {
@@ -30,12 +32,18 @@ export class ChargingStation {
     switch (action) {
       case OcppMessageEnum.BootNotification:
         return this.bootNotification(toClass(BootNotificationRequestDto, payload))
+      case OcppMessageEnum.Heartbeat:
+        return this.heartbeat(toClass(HeartbeatRequestDto, payload))
       default:
-        throw new CsmsError(OcppErrorCodeEnum.NotSupported)
+        throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
     }
   }
 
   private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
-    return new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
+    return new BootNotificationResponseDto(new Date().toISOString(), 300, RegistrationStatusEnum.Accepted)
+  }
+
+  private heartbeat(payload: HeartbeatRequestDto): HeartbeatResponseDto {
+    return new HeartbeatResponseDto(new Date().toISOString())
   }
 }
