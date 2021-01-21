@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ComponentDto } from './component.dto'
@@ -27,35 +26,25 @@ export class SetMonitoringDataDto extends DatatypeBaseDto {
     this.variable = variable
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
    * An id SHALL only be given to replace an existing monitor. The Charging Station handles the generation of id's for new monitors.
    */
-  @IsOptional()
-  @IsInt()
   public id!: number
 
   /**
    * Monitor only active when a transaction is ongoing on a component relevant to this transaction. Default = false.
    */
-  @IsOptional()
-  @IsBoolean()
   public transaction!: boolean
 
   /**
    * Value for threshold or delta monitoring.
    * For Periodic or PeriodicClockAligned this is the interval in seconds.
    */
-  @IsNotEmpty()
-  @IsNumber()
   public value: number
 
-  @IsNotEmpty()
-  @IsEnum(MonitorEnum)
   public type: MonitorEnum
 
   /**
@@ -83,17 +72,11 @@ export class SetMonitoringDataDto extends DatatypeBaseDto {
    * *9-Debug* +
    * Indicates information useful to developers for debugging, not useful during operations.
    */
-  @IsNotEmpty()
-  @IsInt()
   public severity: number
 
-  @IsNotEmpty()
   @Type(() => ComponentDto)
-  @ValidateNested()
   public component: ComponentDto
 
-  @IsNotEmpty()
   @Type(() => VariableDto)
-  @ValidateNested()
   public variable: VariableDto
 }

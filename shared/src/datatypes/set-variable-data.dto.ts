@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AttributeEnum } from '../enumerations/attribute.enum'
@@ -20,13 +19,9 @@ export class SetVariableDataDto extends DatatypeBaseDto {
     this.variable = variable
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsOptional()
-  @IsEnum(AttributeEnum)
   public attributeType!: AttributeEnum
 
   /**
@@ -34,18 +29,11 @@ export class SetVariableDataDto extends DatatypeBaseDto {
    * 
    * The Configuration Variable <<configkey-configuration-value-size,ConfigurationValueSize>> can be used to limit SetVariableData.attributeValue and VariableCharacteristics.valueList. The max size of these values will always remain equal.
    */
-  @IsNotEmpty()
-  @MaxLength(1000)
-  @IsString()
   public attributeValue: string
 
-  @IsNotEmpty()
   @Type(() => ComponentDto)
-  @ValidateNested()
   public component: ComponentDto
 
-  @IsNotEmpty()
   @Type(() => VariableDto)
-  @ValidateNested()
   public variable: VariableDto
 }

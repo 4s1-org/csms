@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ComponentDto } from './component.dto'
@@ -29,39 +28,25 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
     this.severity = severity
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
    * Id given to the VariableMonitor by the Charging Station. The Id is only returned when status is accepted. Installed VariableMonitors should have unique id's but the id's of removed Installed monitors should have unique id's but the id's of removed monitors MAY be reused.
    */
-  @IsOptional()
-  @IsInt()
   public id!: number
 
-  @IsOptional()
   @Type(() => StatusInfoDto)
-  @ValidateNested()
   public statusInfo!: StatusInfoDto
 
-  @IsNotEmpty()
-  @IsEnum(SetMonitoringStatusEnum)
   public status: SetMonitoringStatusEnum
 
-  @IsNotEmpty()
-  @IsEnum(MonitorEnum)
   public type: MonitorEnum
 
-  @IsNotEmpty()
   @Type(() => ComponentDto)
-  @ValidateNested()
   public component: ComponentDto
 
-  @IsNotEmpty()
   @Type(() => VariableDto)
-  @ValidateNested()
   public variable: VariableDto
 
   /**
@@ -89,7 +74,5 @@ export class SetMonitoringResultDto extends DatatypeBaseDto {
    * *9-Debug* +
    * Indicates information useful to developers for debugging, not useful during operations.
    */
-  @IsNotEmpty()
-  @IsInt()
   public severity: number
 }

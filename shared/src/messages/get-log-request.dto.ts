@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -19,38 +18,26 @@ export class GetLogRequestDto extends RequestBaseDto {
     this.requestId = requestId
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @Type(() => LogParametersDto)
-  @ValidateNested()
   public log: LogParametersDto
 
-  @IsNotEmpty()
-  @IsEnum(LogEnum)
   public logType: LogEnum
 
   /**
    * The Id of this request
    */
-  @IsNotEmpty()
-  @IsInt()
   public requestId: number
 
   /**
    * This specifies how many times the Charging Station must try to upload the log before giving up. If this field is not present, it is left to Charging Station to decide how many times it wants to retry.
    */
-  @IsOptional()
-  @IsInt()
   public retries!: number
 
   /**
    * The interval in seconds after which a retry may be attempted. If this field is not present, it is left to Charging Station to decide how long to wait between attempts.
    */
-  @IsOptional()
-  @IsInt()
   public retryInterval!: number
 }

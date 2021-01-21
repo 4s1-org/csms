@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ClearMonitoringStatusEnum } from '../enumerations/clear-monitoring-status.enum'
@@ -17,24 +16,16 @@ export class ClearMonitoringResultDto extends DatatypeBaseDto {
     this.id = id
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(ClearMonitoringStatusEnum)
   public status: ClearMonitoringStatusEnum
 
   /**
    * Id of the monitor of which a clear was requested.
    */
-  @IsNotEmpty()
-  @IsInt()
   public id: number
 
-  @IsOptional()
   @Type(() => StatusInfoDto)
-  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

@@ -1,30 +1,46 @@
 import WebSocket from 'ws'
-import { Logger, OcppCallErrorDto, OcppCallResultDto, OcppErrorCode } from '@yellowgarbagebag/csms-shared'
+import {
+  Logger,
+  OcppErrorResponseMessageDto,
+  OcppResponseMessageDto,
+  OcppErrorCodeEnum,
+  OcppRequestMessageDto,
+  MessageValidator,
+  ResponseBaseDto,
+  CsmsError,
+} from '@yellowgarbagebag/csms-shared'
 import { IncomingMessage } from 'http'
 import { ChargingStation } from './charging-station'
+import { arrayToRequestMessage } from './utils'
 
-export abstract class WebSocketServer {
-  private static server: WebSocket.Server
+export class WebSocketServer {
+  private server: WebSocket.Server | undefined
+  private logger = new Logger('Core')
 
-  public static stop(): void {
+  constructor(public readonly host: string = '127.0.0.1', public readonly port: number = 3000) {
+    // nothing to do
+  }
+
+  public stop(): void {
     if (this.server) {
       this.server.close()
     }
+    this.logger.info(`WebSocketServer stopped`)
   }
 
-  public static run(port: number): void {
-    const logger = new Logger('Core')
+  public start(): void {
     const chargingStations: ChargingStation[] = []
 
     this.server = new WebSocket.Server({
-      port,
+      host: this.host,
+      port: this.port,
     })
 
-    logger.info(`WebSocket Server is running on port ${this.server.options.port}`)
+    this.logger.info(`WebSocketServer is running on ${this.server.options.host}:${this.server.options.port}`)
 
     this.server.on('connection', (socket: WebSocket, request: IncomingMessage) => {
       const socketId = request.headers['sec-websocket-key']
-      logger.info(`Client connected: ${socketId}`)
+      this.logger.info(`Client connected: ${socketId}`)
 
       let cs: ChargingStation | undefined
 
@@ -38,7 +54,7 @@ export abstract class WebSocketServer {
         }
         cs.connect()
       } else {
-        logger.error(`Client URL is invalid "${request.url}"`)
+        this.logger.error(`Client URL is invalid "${request.url}"`)
       }
 
       socket.onclose = (): void => {
@@ -52,19 +68,45 @@ export abstract class WebSocketServer {
       }
 
       socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+        // Brauche im Fehlerfall
+        let requestMessage: OcppRequestMessageDto | undefined
+
         try {
           if (cs) {
-            const dto: OcppCallResultDto = cs.messageReceived(msg)
-            socket.send(dto.toString())
+            cs.logger.debug(`Received`, msg.data)
+            // Das "Array" validieren
+            requestMessage = arrayToRequestMessage(msg.data)
+            // Kombi aus Action und Payload validieren
+            MessageValidator.instance.validateRequestPayload(requestMessage)
+
+            // Verarbeitung der Daten
+            const payload: ResponseBaseDto = cs.messageReceived(requestMessage.action, requestMessage.payload)
+
+            // Antwort zurück senden
+            const responseMessage: OcppResponseMessageDto = new OcppResponseMessageDto(
+              requestMessage.messageId,
+              payload,
+            )
+            const response: string = responseMessage.toString()
+            cs.logger.debug('Send', response)
+            socket.send(response)
           }
         } catch (err) {
-          if (err instanceof OcppCallErrorDto) {
+          const logger: Logger = cs?.logger || this.logger
+          const messageId: string = requestMessage?.messageId || ''
+
+          if (err instanceof CsmsError) {
+            logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
+            const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, err.errorCode, err.errorDescription)
+            socket.send(errorResponseMessage.toString())
+          } else if (err instanceof OcppErrorResponseMessageDto) {
+            // Dieser Fall kommt vor, wenn es schon beim Validieren des Call Arrays kracht.
+            logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
             socket.send(err.toString())
           } else {
-            logger.error('Internal Server Error')
-            console.log(err)
-            const dto = new OcppCallErrorDto('', OcppErrorCode.InternalError)
-            socket.send(dto.toString())
+            logger.error('Internal Server Error', err)
+            const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, OcppErrorCodeEnum.InternalError)
+            socket.send(errorResponseMessage.toString())
           }
         }
       }

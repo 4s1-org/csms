@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
@@ -16,20 +15,14 @@ export class SetChargingProfileRequestDto extends RequestBaseDto {
     this.chargingProfile = chargingProfile
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
    * For TxDefaultProfile an evseId=0 applies the profile to each individual evse. For ChargingStationMaxProfile and ChargingStationExternalConstraints an evseId=0 contains an overal limit for the whole Charging Station.
    */
-  @IsNotEmpty()
-  @IsInt()
   public evseId: number
 
-  @IsNotEmpty()
   @Type(() => ChargingProfileDto)
-  @ValidateNested()
   public chargingProfile: ChargingProfileDto
 }

@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -20,36 +19,23 @@ export class CertificateHashDataDto extends DatatypeBaseDto {
     this.serialNumber = serialNumber
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(HashAlgorithmEnum)
   public hashAlgorithm: HashAlgorithmEnum
 
   /**
    * Hashed value of the Issuer DN (Distinguished Name).
    */
-  @IsNotEmpty()
-  @MaxLength(128)
-  @IsString()
   public issuerNameHash: string
 
   /**
    * Hashed value of the issuers public key
    */
-  @IsNotEmpty()
-  @MaxLength(128)
-  @IsString()
   public issuerKeyHash: string
 
   /**
    * The serial number of the certificate.
    */
-  @IsNotEmpty()
-  @MaxLength(40)
-  @IsString()
   public serialNumber: string
 }

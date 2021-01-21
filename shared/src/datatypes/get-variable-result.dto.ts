@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AttributeEnum } from '../enumerations/attribute.enum'
@@ -25,22 +24,14 @@ export class GetVariableResultDto extends DatatypeBaseDto {
     this.variable = variable
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsOptional()
   @Type(() => StatusInfoDto)
-  @ValidateNested()
   public attributeStatusInfo!: StatusInfoDto
 
-  @IsNotEmpty()
-  @IsEnum(GetVariableStatusEnum)
   public attributeStatus: GetVariableStatusEnum
 
-  @IsOptional()
-  @IsEnum(AttributeEnum)
   public attributeType!: AttributeEnum
 
   /**
@@ -48,18 +39,11 @@ export class GetVariableResultDto extends DatatypeBaseDto {
    * 
    * The Configuration Variable <<configkey-reporting-value-size,ReportingValueSize>> can be used to limit GetVariableResult.attributeValue, VariableAttribute.value and EventData.actualValue. The max size of these values will always remain equal.
    */
-  @IsOptional()
-  @MaxLength(2500)
-  @IsString()
   public attributeValue!: string
 
-  @IsNotEmpty()
   @Type(() => ComponentDto)
-  @ValidateNested()
   public component: ComponentDto
 
-  @IsNotEmpty()
   @Type(() => VariableDto)
-  @ValidateNested()
   public variable: VariableDto
 }

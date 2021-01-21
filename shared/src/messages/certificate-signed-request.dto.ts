@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CertificateSigningUseEnum } from '../enumerations/certificate-signing-use.enum'
@@ -14,9 +13,7 @@ export class CertificateSignedRequestDto extends RequestBaseDto {
     this.certificateChain = certificateChain
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -24,12 +21,7 @@ export class CertificateSignedRequestDto extends RequestBaseDto {
    * 
    * The Configuration Variable <<configkey-max-certificate-chain-size,MaxCertificateChainSize>> can be used to limit the maximum size of this field.
    */
-  @IsNotEmpty()
-  @MaxLength(10000)
-  @IsString()
   public certificateChain: string
 
-  @IsOptional()
-  @IsEnum(CertificateSigningUseEnum)
   public certificateType!: CertificateSigningUseEnum
 }
