@@ -26,16 +26,16 @@ export function arrayToRequestMessage(data: unknown): OcppRequestMessageDto {
   }
   if (data.length !== 4) {
     throw new OcppErrorResponseMessageDto(
-      '',
+      data[1],
       OcppErrorCodeEnum.RpcFrameworkError,
       'Received array has not exact 4 items',
     )
   }
   if (data[0] !== OcppMessageTypeIdEnum.Call) {
-    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'MessageType is not 2')
+    throw new OcppErrorResponseMessageDto(data[1], OcppErrorCodeEnum.RpcFrameworkError, 'MessageType is not 2')
   }
   if (data[1].length > 32) {
-    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'MessageId is too long')
+    throw new OcppErrorResponseMessageDto(data[1], OcppErrorCodeEnum.RpcFrameworkError, 'MessageId is too long')
   }
   if (!Object.values(OcppMessageEnum).includes(data[2])) {
     throw new OcppErrorResponseMessageDto(data[1], OcppErrorCodeEnum.NotImplemented)
