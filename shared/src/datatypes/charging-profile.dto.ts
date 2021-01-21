@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingProfileKindEnum } from '../enumerations/charging-profile-kind.enum'
@@ -30,9 +29,7 @@ export class ChargingProfileDto extends DatatypeBaseDto {
     this.chargingSchedule = chargingSchedule
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -40,8 +37,6 @@ export class ChargingProfileDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:569198
    * Id of ChargingProfile.
    */
-  @IsNotEmpty()
-  @IsInt()
   public id: number
 
   /**
@@ -49,20 +44,12 @@ export class ChargingProfileDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569230
    * Value determining level in hierarchy stack of profiles. Higher values have precedence over lower values. Lowest level is 0.
    */
-  @IsNotEmpty()
-  @IsInt()
   public stackLevel: number
 
-  @IsNotEmpty()
-  @IsEnum(ChargingProfilePurposeEnum)
   public chargingProfilePurpose: ChargingProfilePurposeEnum
 
-  @IsNotEmpty()
-  @IsEnum(ChargingProfileKindEnum)
   public chargingProfileKind: ChargingProfileKindEnum
 
-  @IsOptional()
-  @IsEnum(RecurrencyKindEnum)
   public recurrencyKind!: RecurrencyKindEnum
 
   /**
@@ -70,8 +57,6 @@ export class ChargingProfileDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569234
    * Point in time at which the profile starts to be valid. If absent, the profile is valid as soon as it is received by the Charging Station.
    */
-  @IsOptional()
-  @IsDateString()
   public validFrom!: string
 
   /**
@@ -79,24 +64,13 @@ export class ChargingProfileDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569235
    * Point in time at which the profile stops to be valid. If absent, the profile is valid until it is replaced by another profile.
    */
-  @IsOptional()
-  @IsDateString()
   public validTo!: string
 
-  @IsNotEmpty()
-  @ArrayMinSize(1)
-  @ArrayMaxSize(3)
   @Type(() => ChargingScheduleDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public chargingSchedule: ChargingScheduleDto[]
 
   /**
    * SHALL only be included if ChargingProfilePurpose is set to TxProfile. The transactionId is used to match the profile to a specific transaction.
    */
-  @IsOptional()
-  @MaxLength(36)
-  @IsString()
   public transactionId!: string
 }

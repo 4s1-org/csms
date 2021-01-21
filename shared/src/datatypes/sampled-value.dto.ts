@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -26,9 +25,7 @@ export class SampledValueDto extends DatatypeBaseDto {
     this.value = value
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -36,33 +33,19 @@ export class SampledValueDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569260
    * Indicates the measured value.
    */
-  @IsNotEmpty()
-  @IsNumber()
   public value: number
 
-  @IsOptional()
-  @IsEnum(ReadingContextEnum)
   public context!: ReadingContextEnum
 
-  @IsOptional()
-  @IsEnum(MeasurandEnum)
   public measurand!: MeasurandEnum
 
-  @IsOptional()
-  @IsEnum(PhaseEnum)
   public phase!: PhaseEnum
 
-  @IsOptional()
-  @IsEnum(LocationEnum)
   public location!: LocationEnum
 
-  @IsOptional()
   @Type(() => SignedMeterValueDto)
-  @ValidateNested()
   public signedMeterValue!: SignedMeterValueDto
 
-  @IsOptional()
   @Type(() => UnitOfMeasureDto)
-  @ValidateNested()
   public unitOfMeasure!: UnitOfMeasureDto
 }

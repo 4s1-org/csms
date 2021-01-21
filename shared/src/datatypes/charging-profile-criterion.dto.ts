@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
@@ -17,13 +16,9 @@ export class ChargingProfileCriterionDto extends DatatypeBaseDto {
     super()
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsOptional()
-  @IsEnum(ChargingProfilePurposeEnum)
   public chargingProfilePurpose!: ChargingProfilePurposeEnum
 
   /**
@@ -31,28 +26,15 @@ export class ChargingProfileCriterionDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569230
    * Value determining level in hierarchy stack of profiles. Higher values have precedence over lower values. Lowest level is 0.
    */
-  @IsOptional()
-  @IsInt()
   public stackLevel!: number
 
   /**
    * List of all the chargingProfileIds requested. Any ChargingProfile that matches one of these profiles will be reported. If omitted, the Charging Station SHALL not filter on chargingProfileId. This field SHALL NOT contain more ids than set in <<configkey-charging-profile-entries,ChargingProfileEntries.maxLimit>>
    */
-  @IsOptional()
-  @ArrayMinSize(1)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public chargingProfileId!: number[]
 
   /**
    * For which charging limit sources, charging profiles SHALL be reported. If omitted, the Charging Station SHALL not filter on chargingLimitSource.
    */
-  @IsOptional()
-  @ArrayMinSize(1)
-  @ArrayMaxSize(4)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public chargingLimitSource!: ChargingLimitSourceEnum[]
 }

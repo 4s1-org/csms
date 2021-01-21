@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ApnAuthenticationEnum } from '../enumerations/apn-authentication.enum'
@@ -23,9 +22,7 @@ export class ApnDto extends DatatypeBaseDto {
     this.apnAuthentication = apnAuthentication
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -33,9 +30,6 @@ export class ApnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:568814
    * The Access Point Name as an URL.
    */
-  @IsNotEmpty()
-  @MaxLength(512)
-  @IsString()
   public apn: string
 
   /**
@@ -43,9 +37,6 @@ export class ApnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:568818
    * APN username.
    */
-  @IsOptional()
-  @MaxLength(20)
-  @IsString()
   public apnUserName!: string
 
   /**
@@ -53,9 +44,6 @@ export class ApnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:568819
    * APN Password.
    */
-  @IsOptional()
-  @MaxLength(20)
-  @IsString()
   public apnPassword!: string
 
   /**
@@ -63,8 +51,6 @@ export class ApnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:568821
    * SIM card pin code.
    */
-  @IsOptional()
-  @IsInt()
   public simPin!: number
 
   /**
@@ -72,9 +58,6 @@ export class ApnDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:568822
    * Preferred network, written as MCC and MNC concatenated. See note.
    */
-  @IsOptional()
-  @MaxLength(6)
-  @IsString()
   public preferredNetwork!: string
 
   /**
@@ -83,11 +66,7 @@ export class ApnDto extends DatatypeBaseDto {
    * Default: false. Use only the preferred Network, do
    * not dial in when not available. See Note.
    */
-  @IsOptional()
-  @IsBoolean()
   public useOnlyPreferredNetwork!: boolean
 
-  @IsNotEmpty()
-  @IsEnum(ApnAuthenticationEnum)
   public apnAuthentication: ApnAuthenticationEnum
 }

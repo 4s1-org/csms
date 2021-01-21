@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -16,9 +15,7 @@ export class StatusInfoDto extends DatatypeBaseDto {
     this.reasonCode = reasonCode
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -27,9 +24,6 @@ export class StatusInfoDto extends DatatypeBaseDto {
    * string[0..20]
    * 1..1
    */
-  @IsNotEmpty()
-  @MaxLength(20)
-  @IsString()
   public reasonCode: string
 
   /**
@@ -38,8 +32,5 @@ export class StatusInfoDto extends DatatypeBaseDto {
    * string[0..512]
    * 0..1
    */
-  @IsOptional()
-  @MaxLength(512)
-  @IsString()
   public additionalInfo!: string
 }

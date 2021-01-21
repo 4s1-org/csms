@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsDateString, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -18,9 +17,7 @@ export class LogParametersDto extends DatatypeBaseDto {
     this.remoteLocation = remoteLocation
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -28,9 +25,6 @@ export class LogParametersDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:569484
    * The URL of the location at the remote system where the log should be stored.
    */
-  @IsNotEmpty()
-  @MaxLength(512)
-  @IsString()
   public remoteLocation: string
 
   /**
@@ -38,8 +32,6 @@ export class LogParametersDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:569477
    * This contains the date and time of the oldest logging information to include in the diagnostics.
    */
-  @IsOptional()
-  @IsDateString()
   public oldestTimestamp!: string
 
   /**
@@ -47,7 +39,5 @@ export class LogParametersDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:569482
    * This contains the date and time of the latest logging information to include in the diagnostics.
    */
-  @IsOptional()
-  @IsDateString()
   public latestTimestamp!: string
 }

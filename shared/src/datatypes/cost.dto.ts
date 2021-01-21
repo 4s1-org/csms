@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CostKindEnum } from '../enumerations/cost-kind.enum'
@@ -20,13 +19,9 @@ export class CostDto extends DatatypeBaseDto {
     this.amount = amount
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(CostKindEnum)
   public costKind: CostKindEnum
 
   /**
@@ -34,8 +29,6 @@ export class CostDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569244
    * The estimated or actual cost per kWh
    */
-  @IsNotEmpty()
-  @IsInt()
   public amount: number
 
   /**
@@ -43,7 +36,5 @@ export class CostDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569245
    * Values: -3..3, The amountMultiplier defines the exponent to base 10 (dec). The final value is determined by: amount * 10 ^ amountMultiplier
    */
-  @IsOptional()
-  @IsInt()
   public amountMultiplier!: number
 }
