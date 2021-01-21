@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsDateString, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
@@ -25,16 +24,12 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
     this.chargingSchedulePeriod = chargingSchedulePeriod
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
    * Identifies the ChargingSchedule.
    */
-  @IsNotEmpty()
-  @IsInt()
   public id: number
 
   /**
@@ -42,8 +37,6 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569237
    * Starting point of an absolute schedule. If absent the schedule will be relative to start of charging.
    */
-  @IsOptional()
-  @IsDateString()
   public startSchedule!: string
 
   /**
@@ -51,21 +44,11 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569236
    * Duration of the charging schedule in seconds. If the duration is left empty, the last period will continue indefinitely or until end of the transaction if chargingProfilePurpose = TxProfile.
    */
-  @IsOptional()
-  @IsInt()
   public duration!: number
 
-  @IsNotEmpty()
-  @IsEnum(ChargingRateUnitEnum)
   public chargingRateUnit: ChargingRateUnitEnum
 
-  @IsNotEmpty()
-  @ArrayMinSize(1)
-  @ArrayMaxSize(1024)
   @Type(() => ChargingSchedulePeriodDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public chargingSchedulePeriod: ChargingSchedulePeriodDto[]
 
   /**
@@ -73,12 +56,8 @@ export class ChargingScheduleDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569239
    * Minimum charging rate supported by the EV. The unit of measure is defined by the chargingRateUnit. This parameter is intended to be used by a local smart charging algorithm to optimize the power allocation for in the case a charging process is inefficient at lower charging rates. Accepts at most one digit fraction (e.g. 8.1)
    */
-  @IsOptional()
-  @IsNumber()
   public minChargingRate!: number
 
-  @IsOptional()
   @Type(() => SalesTariffDto)
-  @ValidateNested()
   public salesTariff!: SalesTariffDto
 }

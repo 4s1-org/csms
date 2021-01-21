@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -10,15 +9,16 @@ import { ModemDto } from './modem.dto'
  * The physical system where an Electrical Vehicle (EV) can be charged.
  */
 export class ChargingStationDto extends DatatypeBaseDto {
-  public constructor(model: string, vendorName: string) {
+  public constructor(
+    model: string,
+    vendorName: string,
+  ) {
     super()
     this.model = model
     this.vendorName = vendorName
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -27,9 +27,6 @@ export class ChargingStationDto extends DatatypeBaseDto {
    * string[0..25]
    * 0..1
    */
-  @IsOptional()
-  @MaxLength(25)
-  @IsString()
   public serialNumber!: string
 
   /**
@@ -38,9 +35,6 @@ export class ChargingStationDto extends DatatypeBaseDto {
    * string[0..20]
    * 1..1
    */
-  @IsNotEmpty()
-  @MaxLength(20)
-  @IsString()
   public model: string
 
   /**
@@ -49,9 +43,7 @@ export class ChargingStationDto extends DatatypeBaseDto {
    * ModemType
    * 0..1
    */
-  @IsOptional()
   @Type(() => ModemDto)
-  @ValidateNested()
   public modem!: ModemDto
 
   /**
@@ -60,9 +52,6 @@ export class ChargingStationDto extends DatatypeBaseDto {
    * string[0..50]
    * 1..1
    */
-  @IsNotEmpty()
-  @MaxLength(50)
-  @IsString()
   public vendorName: string
 
   /**
@@ -71,8 +60,5 @@ export class ChargingStationDto extends DatatypeBaseDto {
    * string[0..50]
    * 0..1
    */
-  @IsOptional()
-  @MaxLength(50)
-  @IsString()
   public firmwareVersion!: string
 }

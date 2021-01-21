@@ -8,7 +8,6 @@
 /node_modules/
 /scripts/
 /src/
-/third-party/
 /tsconfig.eslint.json
 /tsconfig.json
 /vscode.code-workspace

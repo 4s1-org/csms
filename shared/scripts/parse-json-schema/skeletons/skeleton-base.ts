@@ -57,7 +57,9 @@ export abstract class SkeletonBase {
   }
 
   public get importClassValidator(): string[] {
-    return this._importsClassValidator
+    // class-validator deaktiviert, weil ich JSON-Schema nutze (#44).
+    return []
+    // return this._importsClassValidator
   }
 
   public addImportClassTransformer(value: string): void {

@@ -22,4 +22,9 @@ async function main(): Promise<void> {
   ClassGenerator.instance.generateFiles()
 }
 
-main().catch(console.error)
+main()
+  .then()
+  .catch((err) => {
+    console.error(err)
+    process.exit(1)
+  })

@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -22,9 +21,7 @@ export class BootNotificationResponseDto extends ResponseBaseDto {
     this.status = status
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
   /**
@@ -33,23 +30,15 @@ export class BootNotificationResponseDto extends ResponseBaseDto {
    * dateTime
    * 1..1
    */
-  @IsNotEmpty()
-  @IsDateString()
   public currentTime: string
 
   /**
    * When <<cmn_registrationstatusenumtype,Status>> is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next BootNotification request.
    */
-  @IsNotEmpty()
-  @IsInt()
   public interval: number
 
-  @IsNotEmpty()
-  @IsEnum(RegistrationStatusEnum)
   public status: RegistrationStatusEnum
 
-  @IsOptional()
   @Type(() => StatusInfoDto)
-  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

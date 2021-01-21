@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsBoolean, IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
@@ -18,13 +17,9 @@ export class ChargingLimitDto extends DatatypeBaseDto {
     this.chargingLimitSource = chargingLimitSource
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(ChargingLimitSourceEnum)
   public chargingLimitSource: ChargingLimitSourceEnum
 
   /**
@@ -32,7 +27,5 @@ export class ChargingLimitDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:570847
    * Indicates whether the charging limit is critical for the grid.
    */
-  @IsOptional()
-  @IsBoolean()
   public isGridCritical!: boolean
 }

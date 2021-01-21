@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -21,13 +20,9 @@ export class MessageContentDto extends DatatypeBaseDto {
     this.content = content
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(MessageFormatEnum)
   public format: MessageFormatEnum
 
   /**
@@ -35,9 +30,6 @@ export class MessageContentDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:570849
    * Message language identifier. Contains a language code as defined in <<ref-RFC5646,[RFC5646]>>.
    */
-  @IsOptional()
-  @MaxLength(8)
-  @IsString()
   public language!: string
 
   /**
@@ -45,8 +37,5 @@ export class MessageContentDto extends DatatypeBaseDto {
    * urn:x-enexis:ecdm:uid:1:570852
    * Message contents.
    */
-  @IsNotEmpty()
-  @MaxLength(512)
-  @IsString()
   public content: string
 }

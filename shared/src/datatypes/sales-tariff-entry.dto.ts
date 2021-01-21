@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMaxSize, ArrayMinSize, ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ConsumptionCostDto } from './consumption-cost.dto'
@@ -19,14 +18,10 @@ export class SalesTariffEntryDto extends DatatypeBaseDto {
     this.relativeTimeInterval = relativeTimeInterval
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
   @Type(() => RelativeTimeIntervalDto)
-  @ValidateNested()
   public relativeTimeInterval: RelativeTimeIntervalDto
 
   /**
@@ -34,17 +29,8 @@ export class SalesTariffEntryDto extends DatatypeBaseDto {
    * urn:x-oca:ocpp:uid:1:569281
    * Defines the price level of this SalesTariffEntry (referring to NumEPriceLevels). Small values for the EPriceLevel represent a cheaper TariffEntry. Large values for the EPriceLevel represent a more expensive TariffEntry.
    */
-  @IsOptional()
-  // setMinimum: 0
-  @IsInt()
   public ePriceLevel!: number
 
-  @IsOptional()
-  @ArrayMinSize(1)
-  @ArrayMaxSize(3)
   @Type(() => ConsumptionCostDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public consumptionCost!: ConsumptionCostDto[]
 }

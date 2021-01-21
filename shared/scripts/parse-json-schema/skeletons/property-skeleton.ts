@@ -1,7 +1,8 @@
 import { SkeletonBase } from './skeleton-base'
 
 export class PropertySkeleton extends SkeletonBase {
-  private _annotations: string[] = []
+  private _annotationsClassValidator: string[] = []
+  private _annotationsClassTransformer: string[] = []
   private _type: string | undefined
   private _defaultValue: string | undefined
 
@@ -10,10 +11,10 @@ export class PropertySkeleton extends SkeletonBase {
 
     if (isRequired) {
       this.addImportClassValidatior('IsNotEmpty')
-      this._annotations.push('@IsNotEmpty()')
+      this._annotationsClassValidator.push('@IsNotEmpty()')
     } else {
       this.addImportClassValidatior('IsOptional')
-      this._annotations.push('@IsOptional()')
+      this._annotationsClassValidator.push('@IsOptional()')
     }
   }
 
@@ -23,24 +24,24 @@ export class PropertySkeleton extends SkeletonBase {
 
   private appendDefaultArrayAnnotations(): void {
     this.addImportClassValidatior('IsArray')
-    this._annotations.push(`@IsArray()`)
+    this._annotationsClassValidator.push(`@IsArray()`)
 
     this.addImportClassValidatior('ArrayNotEmpty')
-    this._annotations.push(`@ArrayNotEmpty()`)
+    this._annotationsClassValidator.push(`@ArrayNotEmpty()`)
 
     this.addImportClassValidatior('ValidateNested')
-    this._annotations.push(`@ValidateNested({ each: true })`)
+    this._annotationsClassValidator.push(`@ValidateNested({ each: true })`)
   }
 
   public setEnumerationType(value: string, suffix: 'Enum'): void {
     this.addImportClassValidatior('IsEnum')
-    this._annotations.push(`@IsEnum(${value}${suffix})`)
+    this._annotationsClassValidator.push(`@IsEnum(${value}${suffix})`)
     this._type = value + suffix
   }
 
   public setStringType(): void {
     this.addImportClassValidatior('IsString')
-    this._annotations.push(`@IsString()`)
+    this._annotationsClassValidator.push(`@IsString()`)
     this._type = 'string'
   }
 
@@ -51,13 +52,13 @@ export class PropertySkeleton extends SkeletonBase {
 
   public setNumberType(): void {
     this.addImportClassValidatior('IsNumber')
-    this._annotations.push(`@IsNumber()`)
+    this._annotationsClassValidator.push(`@IsNumber()`)
     this._type = 'number'
   }
 
   public setIntegerType(): void {
     this.addImportClassValidatior('IsInt')
-    this._annotations.push(`@IsInt()`)
+    this._annotationsClassValidator.push(`@IsInt()`)
     this._type = 'number'
   }
 
@@ -69,17 +70,17 @@ export class PropertySkeleton extends SkeletonBase {
   public setCustomType(value: string, suffix: 'Dto' | 'Enum'): void {
     if (suffix !== 'Enum') {
       this.addImportClassTransformer('Type')
-      this._annotations.push(`@Type(() => ${value}${suffix})`)
+      this._annotationsClassTransformer.push(`@Type(() => ${value}${suffix})`)
     }
     this.addImportClassValidatior('ValidateNested')
-    this._annotations.push(`@ValidateNested()`)
+    this._annotationsClassValidator.push(`@ValidateNested()`)
     this._type = value + suffix
   }
 
   public setCustomArrayType(value: string, suffix: 'Dto' | 'Enum'): void {
     if (suffix !== 'Enum') {
       this.addImportClassTransformer('Type')
-      this._annotations.push(`@Type(() => ${value}${suffix})`)
+      this._annotationsClassTransformer.push(`@Type(() => ${value}${suffix})`)
     }
     this.appendDefaultArrayAnnotations()
     this._type = `${value}${suffix}[]`
@@ -91,26 +92,26 @@ export class PropertySkeleton extends SkeletonBase {
 
   public setBooleanType(): void {
     this.addImportClassValidatior('IsBoolean')
-    this._annotations.push(`@IsBoolean()`)
+    this._annotationsClassValidator.push(`@IsBoolean()`)
     this._type = 'boolean'
   }
 
   public appendMaxLengthAnnotation(value: number): void {
     this.addImportClassValidatior('MaxLength')
-    this._annotations.push(`@MaxLength(${value})`)
+    this._annotationsClassValidator.push(`@MaxLength(${value})`)
   }
 
   public appendMinimumAnnotation(value: number): void {
-    this._annotations.push(`// setMinimum: ${value}`)
+    this._annotationsClassValidator.push(`// setMinimum: ${value}`)
   }
 
   public appendMaximumAnnotation(value: number): void {
-    this._annotations.push(`// setMaximum: ${value}`)
+    this._annotationsClassValidator.push(`// setMaximum: ${value}`)
   }
 
   public setDateTimeType(): void {
     this.addImportClassValidatior('IsDateString')
-    this._annotations.push(`@IsDateString()`)
+    this._annotationsClassValidator.push(`@IsDateString()`)
     this._type = 'string'
   }
 
@@ -120,12 +121,12 @@ export class PropertySkeleton extends SkeletonBase {
 
   public appendMinItemsAnnotation(value: number): void {
     this.addImportClassValidatior('ArrayMinSize')
-    this._annotations.push(`@ArrayMinSize(${value})`)
+    this._annotationsClassValidator.push(`@ArrayMinSize(${value})`)
   }
 
   public appendMaxItemsAnnotation(value: number): void {
     this.addImportClassValidatior('ArrayMaxSize')
-    this._annotations.push(`@ArrayMaxSize(${value})`)
+    this._annotationsClassValidator.push(`@ArrayMaxSize(${value})`)
   }
 
   /**
@@ -143,7 +144,12 @@ export class PropertySkeleton extends SkeletonBase {
 
   public toString(): string[] {
     const result: string[] = []
-    for (const annotation of this._annotations) {
+
+    // class-validator deaktiviert, weil ich JSON-Schema nutze (#44).
+    // for (const annotation of this._annotationsClassValidator) {
+    //   result.push(`  ${annotation}`)
+    // }
+    for (const annotation of this._annotationsClassTransformer) {
       result.push(`  ${annotation}`)
     }
 

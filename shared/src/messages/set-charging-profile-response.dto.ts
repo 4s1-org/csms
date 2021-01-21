@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { IsEnum, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { ChargingProfileStatusEnum } from '../enumerations/charging-profile-status.enum'
@@ -15,17 +14,11 @@ export class SetChargingProfileResponseDto extends ResponseBaseDto {
     this.status = status
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsNotEmpty()
-  @IsEnum(ChargingProfileStatusEnum)
   public status: ChargingProfileStatusEnum
 
-  @IsOptional()
   @Type(() => StatusInfoDto)
-  @ValidateNested()
   public statusInfo!: StatusInfoDto
 }

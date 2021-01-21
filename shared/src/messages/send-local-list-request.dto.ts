@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { ArrayMinSize, ArrayNotEmpty, IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, ValidateNested } from 'class-validator'
 import { Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { AuthorizationDataDto } from '../datatypes/authorization-data.dto'
@@ -17,27 +16,16 @@ export class SendLocalListRequestDto extends RequestBaseDto {
     this.updateType = updateType
   }
 
-  @IsOptional()
   @Type(() => CustomDataDto)
-  @ValidateNested()
   public customData!: CustomDataDto
 
-  @IsOptional()
-  @ArrayMinSize(1)
   @Type(() => AuthorizationDataDto)
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested({ each: true })
   public localAuthorizationList!: AuthorizationDataDto[]
 
   /**
    * In case of a full update this is the version number of the full list. In case of a differential update it is the version number of the list after the update has been applied.
    */
-  @IsNotEmpty()
-  @IsInt()
   public versionNumber: number
 
-  @IsNotEmpty()
-  @IsEnum(UpdateEnum)
   public updateType: UpdateEnum
 }
