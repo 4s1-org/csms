@@ -6,3 +6,4 @@
 /.gitlab-ci.yml
 /.eslintrc.yaml
 /tsconfig.json
+/.eslintignore
