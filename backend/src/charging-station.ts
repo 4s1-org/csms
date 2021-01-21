@@ -29,11 +29,13 @@ export class ChargingStation {
   public messageReceived(action: OcppMessageEnum, payload: RequestBaseDto): ResponseBaseDto {
     switch (action) {
       case OcppMessageEnum.BootNotification:
-        const bootNotification = toClass(BootNotificationRequestDto, payload)
-
-        return new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
+        return this.bootNotification(toClass(BootNotificationRequestDto, payload))
       default:
         throw new CsmsError(OcppErrorCodeEnum.NotSupported)
     }
+  }
+
+  private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
+    return new BootNotificationResponseDto('2013-02-01T20:53:32.486Z', 300, RegistrationStatusEnum.Accepted)
   }
 }
