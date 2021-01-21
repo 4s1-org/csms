@@ -45,7 +45,7 @@ export class WebSocketClient {
           vendorName: 'VendorX',
         },
         reason: 'PowerUp',
-        foobar: true,
+        //foobar: true,
       },
     ])
 
@@ -60,7 +60,7 @@ export class WebSocketClient {
       const socketId = 'foo' // request.headers['sec-websocket-key']
       this.logger.info('Connected: ' + socketId)
 
-      this.sendBootNotification(socket)
+      //this.sendBootNotification(socket)
       this.sendSpielwiese(socket)
     }
 

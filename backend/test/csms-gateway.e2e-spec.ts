@@ -11,9 +11,11 @@ import {
   OcppMessageEnum,
   OcppMessageTypeIdEnum,
   OcppRequestMessageDto,
+  UnpublishFirmwareRequestDto,
 } from '@yellowgarbagebag/csms-shared'
 
 describe('CSMS Gateway', () => {
+  let server: WebSocketServer | undefined
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
     const socket = new WebSocket('ws://localhost:3000/ocpp/2.0.1/LS001', ['ocpp2.0.1'])
     socket.onerror = (): void => {
@@ -26,12 +28,14 @@ describe('CSMS Gateway', () => {
   }
 
   beforeEach(async () => {
-    // Start server
-    WebSocketServer.run(3000)
+    server = new WebSocketServer()
+    server.start()
   })
 
   afterEach(() => {
-    WebSocketServer.stop()
+    if (server) {
+      server.stop()
+    }
   })
 
   describe('RPC Framework tests', () => {
@@ -260,7 +264,7 @@ describe('CSMS Gateway', () => {
             OcppMessageTypeIdEnum.Call,
             messageId,
             OcppMessageEnum.UnpublishFirmware, // Noch nicht implementiert
-            {},
+            new UnpublishFirmwareRequestDto('abcdefg'),
           ]),
         )
       }

@@ -17,7 +17,7 @@ export class WebSocketServer {
   private server: WebSocket.Server | undefined
   private logger = new Logger('Core')
 
-  constructor(public readonly host: string, public readonly port: number) {
+  constructor(public readonly host: string = '127.0.0.1', public readonly port: number = 3000) {
     // nothing to do
   }
 
@@ -87,7 +87,9 @@ export class WebSocketServer {
               requestMessage.messageId,
               payload,
             )
-            socket.send(responseMessage.toString())
+            const response: string = responseMessage.toString()
+            cs.logger.debug('Send', response)
+            socket.send(response)
           }
         } catch (err) {
           const logger: Logger = cs?.logger || this.logger
@@ -97,6 +99,10 @@ export class WebSocketServer {
             logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
             const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, err.errorCode, err.errorDescription)
             socket.send(errorResponseMessage.toString())
+          } else if (err instanceof OcppErrorResponseMessageDto) {
+            // Dieser Fall kommt vor, wenn es schon beim Validieren des Call Arrays kracht.
+            logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
+            socket.send(err.toString())
           } else {
             logger.error('Internal Server Error', err)
             const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, OcppErrorCodeEnum.InternalError)
