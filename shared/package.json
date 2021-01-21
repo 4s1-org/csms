@@ -18,6 +18,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
+    "dummy": "ts-node src/dummy.ts",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
@@ -30,7 +31,7 @@
   "prettier": "@hest-lab/eslint-config",
   "dependencies": {
     "class-transformer": "^0.3.2",
-    "class-validator": "^0.13.1",
+    "jsonschema": "^1.4.0",
     "pino": "^6.10.0",
     "pino-pretty": "^4.3.0",
     "reflect-metadata": "^0.1.13"
