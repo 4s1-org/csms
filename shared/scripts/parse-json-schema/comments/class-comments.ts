@@ -6,6 +6,7 @@ import { Heartbeat } from './messages/Heartbeat'
 import { NotifyReport } from './messages/NotifyReport'
 import { SetVariables } from './messages/SetVariables'
 import { StatusNotification } from './messages/StatusNotification'
+import { TransactionEvent } from './messages/TransactionEvent'
 import { ChargingStationType } from './types/ChargingStationType'
 import { EVSEType } from './types/EVSEType'
 import { ModemType } from './types/ModemType'
@@ -49,6 +50,7 @@ const comments: classCommentType[] = [
   ...NotifyReport,
   ...SetVariables,
   ...StatusNotification,
+  ...TransactionEvent,
   // Types
   ChargingStationType,
   EVSEType,
