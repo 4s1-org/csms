@@ -1,6 +1,7 @@
 import WebSocket from 'ws'
 import { WebSocketServerBase } from '../src/web-socket-server-base'
 import { IncomingMessage } from 'http'
+import { ChargingStation } from '../src/charging-station'
 
 export class WebSocketServerMock extends WebSocketServerBase {
   private server: WebSocket.Server | undefined
@@ -14,7 +15,9 @@ export class WebSocketServerMock extends WebSocketServerBase {
       host: 'localhost',
       port: this.port,
     })
-    this.server.on('connection', (socket: WebSocket, request: IncomingMessage) => this.onConnection(socket, request))
+    this.server.on('connection', (socket: WebSocket, request: IncomingMessage) =>
+      this.onConnection(socket, request, new ChargingStation('TEST')),
+    )
 
     this.logger.info(`WebSocketServer is running on port ${this.port}`)
   }
