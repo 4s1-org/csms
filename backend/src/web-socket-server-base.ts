@@ -32,8 +32,8 @@ export abstract class WebSocketServerBase {
     let cs: ChargingStation | undefined
 
     const parts = request.url?.split('/')
-    if (parts && parts[1] === 'ocpp' && parts[2] === '2.0.1' && parts.length >= 4) {
-      const uniqueIdentifier = parts[3]
+    if (parts && parts[1] === 'ocpp' && parts.length === 3) {
+      const uniqueIdentifier = parts[2]
       cs = this.chargingStations.find((x) => x.uniqueIdentifier === uniqueIdentifier)
       if (!cs) {
         cs = new ChargingStation(uniqueIdentifier)
