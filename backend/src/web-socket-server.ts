@@ -34,10 +34,17 @@ export class WebSocketServer {
   public start(): void {
     const chargingStations: ChargingStation[] = []
 
-    const server = https.createServer({
-      cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost-chain.pem')),
-      key: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.key')),
-    })
+    const server = https.createServer(
+      {
+        cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost-chain.pem')),
+        key: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.key')),
+      },
+      (req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.write('Server is running!')
+        res.end()
+      },
+    )
 
     this.server = new WebSocket.Server({
       server,
