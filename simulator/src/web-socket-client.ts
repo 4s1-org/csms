@@ -22,12 +22,8 @@ export class WebSocketClient {
     // nothing to do
   }
 
-  private getId(): string {
-    return uuid().replace(/-/g, '')
-  }
-
   private send(socket: WebSocket, action: OcppMessageEnum, payload: RequestBaseDto): void {
-    const msg = new OcppRequestMessageDto(this.getId(), action, payload).toString()
+    const msg = new OcppRequestMessageDto(uuid(), action, payload).toString()
     this.logger.debug('Send', msg)
     socket.send(msg)
   }
