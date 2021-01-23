@@ -1,24 +1,37 @@
 import WebSocket from 'ws'
-import {
-  Logger,
-  OcppErrorResponseMessageDto,
-  OcppResponseMessageDto,
-  OcppErrorCodeEnum,
-  OcppRequestMessageDto,
-  MessageValidator,
-  ResponseBaseDto,
-  CsmsError,
-} from '@yellowgarbagebag/csms-shared'
+import fs from 'fs'
+import path from 'path'
+import https from 'https'
+import { WebSocketServerBase } from './web-socket-server-base'
 import { IncomingMessage } from 'http'
-import { ChargingStation } from './charging-station'
-import { arrayToRequestMessage } from './utils'
 
-export class WebSocketServer {
-  private server: WebSocket.Server | undefined
-  private logger = new Logger('Core')
+export class WebSocketServer extends WebSocketServerBase {
+  private server: https.Server | undefined
 
-  constructor(public readonly host: string = '127.0.0.1', public readonly port: number = 3000) {
-    // nothing to do
+  constructor(public readonly port: number = 3000) {
+    super()
+  }
+
+  public start(): void {
+    this.server = https.createServer(
+      {
+        cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost-chain.pem')),
+        key: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.key')),
+      },
+      (req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.write('Server is running!')
+        res.end()
+      },
+    )
+
+    const wss = new WebSocket.Server({
+      server: this.server,
+    })
+    wss.on('connection', (socket: WebSocket, request: IncomingMessage) => this.onConnection(socket, request))
+
+    this.server.listen(this.port)
+    this.logger.info(`WebSocketServer is running on port ${this.port}`)
   }
 
   public stop(): void {
@@ -26,101 +39,5 @@ export class WebSocketServer {
       this.server.close()
     }
     this.logger.info(`WebSocketServer stopped`)
-  }
-
-  public start(): void {
-    const chargingStations: ChargingStation[] = []
-
-    this.server = new WebSocket.Server({
-      host: this.host,
-      port: this.port,
-    })
-
-    this.logger.info(`WebSocketServer is running on ${this.server.options.host}:${this.server.options.port}`)
-
-    this.server.on('connection', (socket: WebSocket, request: IncomingMessage) => {
-      const socketId = request.headers['sec-websocket-key']
-      this.logger.info(`Client connected: ${socketId}`)
-
-      let cs: ChargingStation | undefined
-
-      const parts = request.url?.split('/')
-      if (parts && parts[1] === 'ocpp' && parts[2] === '2.0.1' && parts.length >= 4) {
-        const uniqueIdentifier = parts[3]
-        cs = chargingStations.find((x) => x.uniqueIdentifier === uniqueIdentifier)
-        if (!cs) {
-          cs = new ChargingStation(uniqueIdentifier)
-          chargingStations.push(cs)
-        }
-        cs.connect()
-      } else {
-        this.logger.error(`Client URL is invalid "${request.url}"`)
-      }
-
-      socket.onclose = (): void => {
-        if (cs) {
-          cs.disconnect()
-        }
-      }
-
-      socket.onerror = (err: any): void => {
-        // this.logger.error('Error' + err)
-      }
-
-      socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-        // Brauche im Fehlerfall
-        let requestMessage: OcppRequestMessageDto | undefined
-
-        try {
-          if (cs) {
-            cs.logger.debug(`Received`, msg.data)
-            // Das "Array" validieren
-            requestMessage = arrayToRequestMessage(msg.data)
-            // Kombi aus Action und Payload validieren
-            MessageValidator.instance.validateRequestPayload(requestMessage)
-
-            // Verarbeitung der Daten
-            const payload: ResponseBaseDto = cs.messageReceived(requestMessage.action, requestMessage.payload)
-
-            // Antwortobjekt erstellen
-            const responseMessage: OcppResponseMessageDto = new OcppResponseMessageDto(
-              requestMessage.messageId,
-              payload,
-            )
-            // Anwortdaten validieren
-            try {
-              MessageValidator.instance.validateResponsePayload(responseMessage, requestMessage.action)
-            } catch (err) {
-              if (err instanceof CsmsError) {
-                cs.logger.error(`Server send invalid data | ${err.errorCode} | ${err.errorDescription}`)
-              } else {
-                throw err
-              }
-            }
-            // Loggen und senden
-            const response: string = responseMessage.toString()
-            cs.logger.debug('Send', response)
-            socket.send(response)
-          }
-        } catch (err) {
-          const logger: Logger = cs?.logger || this.logger
-          const messageId: string = requestMessage?.messageId || ''
-
-          if (err instanceof CsmsError) {
-            logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
-            const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, err.errorCode, err.errorDescription)
-            socket.send(errorResponseMessage.toString())
-          } else if (err instanceof OcppErrorResponseMessageDto) {
-            // Dieser Fall kommt vor, wenn es schon beim Validieren des Call Arrays kracht.
-            logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
-            socket.send(err.toString())
-          } else {
-            logger.fatal('Internal Server Error', err)
-            const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, OcppErrorCodeEnum.InternalError)
-            socket.send(errorResponseMessage.toString())
-          }
-        }
-      }
-    })
   }
 }
