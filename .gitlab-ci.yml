@@ -11,7 +11,7 @@ shared:
     - npm run build
     - npm run test
 
-csms:
+backend:
   stage: validation
   image: node:14-alpine
   script:
