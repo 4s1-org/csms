@@ -17,7 +17,7 @@ import {
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
-    const socket = new WebSocket('ws://localhost:3000/ocpp/2.0.1/LS001', ['ocpp2.0.1'])
+    const socket = new WebSocket('wss://localhost:3000/ocpp/2.0.1/LS001', ['ocpp2.0.1'])
     socket.onerror = (): void => {
       fail()
     }
@@ -27,12 +27,12 @@ describe('CSMS Gateway', () => {
     return socket
   }
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     server = new WebSocketServer()
     server.start()
   })
 
-  afterEach(() => {
+  afterAll(() => {
     if (server) {
       server.stop()
     }
