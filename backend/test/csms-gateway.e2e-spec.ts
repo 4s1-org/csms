@@ -14,6 +14,9 @@ import {
   UnpublishFirmwareRequestDto,
 } from '@yellowgarbagebag/csms-shared'
 
+// Disable certification checks
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
+
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
