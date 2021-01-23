@@ -1,7 +1,7 @@
 import { WebSocketClient } from './web-socket-client'
 
 process.on('uncaughtException', (err) => {
-  console.log(`Uncaught Exception: ${err.message}`)
+  console.log(`Uncaught Exception: ${err.message}\n${err.stack}`)
   process.exit(1)
 })
 
