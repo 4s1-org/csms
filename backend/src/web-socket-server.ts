@@ -12,6 +12,9 @@ import {
 import { IncomingMessage } from 'http'
 import { ChargingStation } from './charging-station'
 import { arrayToRequestMessage } from './utils'
+import fs from 'fs'
+import path from 'path'
+import https from 'https'
 
 export class WebSocketServer {
   private server: WebSocket.Server | undefined
@@ -31,9 +34,15 @@ export class WebSocketServer {
   public start(): void {
     const chargingStations: ChargingStation[] = []
 
+    const server = https.createServer({
+      cert: fs.readFileSync(path.join('..', 'third-party', 'certificates', 'localhost.key')),
+      key: fs.readFileSync(path.join('..', 'third-party', 'certificates', 'localhost-chain.key')),
+    })
+
     this.server = new WebSocket.Server({
-      host: this.host,
-      port: this.port,
+      server,
+      //host: this.host,
+      //port: this.port,
     })
 
     this.logger.info(`WebSocketServer is running on ${this.server.options.host}:${this.server.options.port}`)
