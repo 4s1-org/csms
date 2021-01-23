@@ -55,7 +55,7 @@ export class WebSocketClient {
   }
 
   public async run(): Promise<void> {
-    const socket = new WebSocket(`ws://localhost:3000/ocpp/2.0.1/${this.name}`, ['ocpp2.0.1'])
+    const socket = new WebSocket(`wss://localhost:3000/ocpp/2.0.1/${this.name}`, ['ocpp2.0.1'])
 
     socket.onopen = (): void => {
       const socketId = 'foo' // request.headers['sec-websocket-key']

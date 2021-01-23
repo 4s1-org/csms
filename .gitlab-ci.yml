@@ -1,31 +1,39 @@
 stages:
   - validation
 
-validate-all:
+shared:
   stage: validation
   image: node:14-alpine
   script:
-    - echo "*** shared ***"
     - cd shared
     - npm ci
     - npm run lint
     - npm run build
     - npm run test
-    - cd ..
 
-    - echo "*** backend ***"
-    - cd backend
+backend:
+  stage: validation
+  image: node:14-alpine
+  script:
+    - cd shared
+    - npm ci
+    - npm run build
+    - cd ../backend
     - npm ci
     - npm run lint
     - npm run build
     - npm run test:cov
     - npm run test:e2e
-    - cd ..
 
-    - echo "*** simulator ***"
-    - cd simulator
+simulator:
+  stage: validation
+  image: node:14-alpine
+  script:
+    - cd shared
+    - npm ci
+    - npm run build
+    - cd ../simulator
     - npm ci
     - npm run lint
     - npm run build
     - npm run test
-    - cd ..
