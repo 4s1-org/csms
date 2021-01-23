@@ -27,12 +27,12 @@ describe('CSMS Gateway', () => {
     return socket
   }
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     server = new WebSocketServer()
     server.start()
   })
 
-  afterAll(() => {
+  afterEach(() => {
     if (server) {
       server.stop()
     }
