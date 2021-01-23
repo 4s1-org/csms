@@ -17,7 +17,7 @@ import path from 'path'
 import https from 'https'
 
 export class WebSocketServer {
-  private server: WebSocket.Server | undefined
+  private server: https.Server | undefined
   private logger = new Logger('Core')
 
   constructor(public readonly port: number = 3000) {
@@ -34,7 +34,7 @@ export class WebSocketServer {
   public start(): void {
     const chargingStations: ChargingStation[] = []
 
-    const server = https.createServer(
+    this.server = https.createServer(
       {
         cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost-chain.pem')),
         key: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.key')),
@@ -46,13 +46,13 @@ export class WebSocketServer {
       },
     )
 
-    this.server = new WebSocket.Server({
-      server,
+    const wss = new WebSocket.Server({
+      server: this.server,
     })
 
     this.logger.info(`WebSocketServer is running on port ${this.port}`)
 
-    this.server.on('connection', (socket: WebSocket, request: IncomingMessage) => {
+    wss.on('connection', (socket: WebSocket, request: IncomingMessage) => {
       const socketId = request.headers['sec-websocket-key']
       this.logger.info(`Client connected: ${socketId}`)
 
@@ -137,6 +137,6 @@ export class WebSocketServer {
       }
     })
 
-    server.listen(this.port)
+    this.server.listen(this.port)
   }
 }
