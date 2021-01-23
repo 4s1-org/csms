@@ -15,7 +15,6 @@ import { arrayToRequestMessage } from './utils'
 
 export abstract class WebSocketServerBase {
   protected logger: Logger = new Logger('Core')
-  private chargingStations: ChargingStation[] = []
 
   constructor(public readonly port: number = 3000) {
     // nothing to do
@@ -25,40 +24,18 @@ export abstract class WebSocketServerBase {
 
   public abstract start(): void
 
-  protected onConnection(socket: WebSocket, request: IncomingMessage): void {
-    const socketId = request.headers['sec-websocket-key']
-    this.logger.info(`Client connected: ${socketId}`)
-
-    let cs: ChargingStation | undefined
-
-    const parts = request.url?.split('/')
-    if (parts && parts[1] === 'ocpp' && parts.length === 3) {
-      const uniqueIdentifier = parts[2]
-      cs = this.chargingStations.find((x) => x.uniqueIdentifier === uniqueIdentifier)
-      if (!cs) {
-        cs = new ChargingStation(uniqueIdentifier)
-        this.chargingStations.push(cs)
-      }
-      cs.connect()
-    } else {
-      this.logger.error(`Client URL is invalid "${request.url}"`)
-    }
-
+  protected onConnection(socket: WebSocket, request: IncomingMessage, cs: ChargingStation): void {
     socket.onclose = (): void => {
-      if (cs) {
-        this.onClose(cs)
-      }
+      this.onClose(cs)
     }
 
     socket.onerror = (err: any): void => {
-      // this.logger.error('Error' + err)
+      this.onError(err)
     }
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-      if (cs) {
-        const res = this.onMessage(cs, msg.data)
-        socket.send(res)
-      }
+      const res = this.onMessage(cs, msg.data)
+      socket.send(res)
     }
   }
 
@@ -66,8 +43,8 @@ export abstract class WebSocketServerBase {
     cs.disconnect()
   }
 
-  private onError(): void {
-    // this.logger.error('Error' + err)
+  private onError(err: any): void {
+    this.logger.error('Error' + err)
   }
 
   private onMessage(cs: ChargingStation, data: any): string {
