@@ -20,7 +20,7 @@ export class WebSocketServer {
   private server: WebSocket.Server | undefined
   private logger = new Logger('Core')
 
-  constructor(public readonly host: string = '127.0.0.1', public readonly port: number = 3000) {
+  constructor(public readonly port: number = 3000) {
     // nothing to do
   }
 
@@ -35,17 +35,15 @@ export class WebSocketServer {
     const chargingStations: ChargingStation[] = []
 
     const server = https.createServer({
-      cert: fs.readFileSync(path.join(__dirname, 'certificates', 'localhost-chain.pem')),
-      key: fs.readFileSync(path.join(__dirname, 'certificates', 'localhost.key')),
+      cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost-chain.pem')),
+      key: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.key')),
     })
 
     this.server = new WebSocket.Server({
       server,
-      //host: this.host,
-      //port: this.port,
     })
 
-    this.logger.info(`WebSocketServer is running on ${this.server.options.host}:${this.server.options.port}`)
+    this.logger.info(`WebSocketServer is running on port ${this.port}`)
 
     this.server.on('connection', (socket: WebSocket, request: IncomingMessage) => {
       const socketId = request.headers['sec-websocket-key']
@@ -131,5 +129,7 @@ export class WebSocketServer {
         }
       }
     })
+
+    server.listen(this.port)
   }
 }

@@ -10,7 +10,7 @@ process.on('unhandledRejection', (reason, promise) => {
   process.exit(1)
 })
 
-const server = new WebSocketServer('127.0.0.1', 3000)
+const server = new WebSocketServer(3000)
 try {
   server.start()
 } catch (err) {
