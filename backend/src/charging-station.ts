@@ -18,8 +18,12 @@ import {
 export class ChargingStation {
   public readonly logger = new Logger(this.uniqueIdentifier)
 
-  public constructor(public readonly uniqueIdentifier: string) {
-    this.logger.info('First contact')
+  public constructor(
+    public readonly uniqueIdentifier: string,
+    public readonly username: string,
+    public readonly password: string,
+  ) {
+    // nothing to do
   }
 
   public connect(): void {
