@@ -22,12 +22,8 @@ export class WebSocketClient {
     // nothing to do
   }
 
-  private getId(): string {
-    return uuid().replace(/-/g, '')
-  }
-
   private send(socket: WebSocket, action: OcppMessageEnum, payload: RequestBaseDto): void {
-    const msg = new OcppRequestMessageDto(this.getId(), action, payload).toString()
+    const msg = new OcppRequestMessageDto(uuid(), action, payload).toString()
     this.logger.debug('Send', msg)
     socket.send(msg)
   }
@@ -55,7 +51,11 @@ export class WebSocketClient {
   }
 
   public async run(): Promise<void> {
-    const socket = new WebSocket(`wss://localhost:3000/ocpp/2.0.1/${this.name}`, ['ocpp2.0.1'])
+    const socket = new WebSocket(`wss://localhost:3000/ocpp/${this.name}`, ['ocpp2.0.1'], {
+      headers: {
+        authorization: `Basic ${Buffer.from(`${this.name}:test`).toString('base64')}`,
+      },
+    })
 
     socket.onopen = (): void => {
       const socketId = 'foo' // request.headers['sec-websocket-key']
