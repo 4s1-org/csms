@@ -34,6 +34,28 @@ export const BootNotification: classCommentType[] = [
         description: 'This contains the CSMS’s current time.',
         isRequired: true,
       },
+      {
+        fieldName: 'interval',
+        fieldType: 'integer',
+        cardinality: '1..1',
+        description:
+          'When Status is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next BootNotification request.',
+        isRequired: true,
+      },
+      {
+        fieldName: 'status',
+        fieldType: 'RegistrationStatusEnumType',
+        cardinality: '1..1',
+        description: 'This contains whether the Charging Station has been registered within the CSMS.',
+        isRequired: true,
+      },
+      {
+        fieldName: 'statusInfo',
+        fieldType: 'StatusInfoType',
+        cardinality: '0..1',
+        description: 'Detailed status information.',
+        isRequired: false,
+      },
     ],
   },
 ]

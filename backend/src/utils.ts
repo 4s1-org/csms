@@ -34,7 +34,7 @@ export function arrayToRequestMessage(data: unknown): OcppRequestMessageDto {
   if (data[0] !== OcppMessageTypeIdEnum.Call) {
     throw new OcppErrorResponseMessageDto(data[1], OcppErrorCodeEnum.RpcFrameworkError, 'MessageType is not 2')
   }
-  if (data[1].length > 32) {
+  if (data[1].length > 36) {
     throw new OcppErrorResponseMessageDto(data[1], OcppErrorCodeEnum.RpcFrameworkError, 'MessageId is too long')
   }
   if (!Object.values(OcppMessageEnum).includes(data[2])) {
