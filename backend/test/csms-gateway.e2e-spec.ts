@@ -14,9 +14,6 @@ import {
 } from '@yellowgarbagebag/csms-shared'
 import { WebSocketServer } from '../src/web-socket-server'
 
-// Disable certification checks
-//process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
-
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
@@ -24,10 +21,10 @@ describe('CSMS Gateway', () => {
       headers: {
         authorization: `Basic ${Buffer.from(`LS001:test`).toString('base64')}`,
       },
-      rejectUnauthorized: false,
+      rejectUnauthorized: false, // wg. SelfSignedCertificate
     })
     socket.onerror = (err): void => {
-      console.log(err)
+      console.error(err)
       fail()
     }
     socket.onclose = (): void => {
