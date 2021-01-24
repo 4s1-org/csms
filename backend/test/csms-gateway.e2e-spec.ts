@@ -12,15 +12,19 @@ import {
   OcppRequestMessageDto,
   UnpublishFirmwareRequestDto,
 } from '@yellowgarbagebag/csms-shared'
-import { WebSocketServerMock } from './web-socket-server-mock'
+import { WebSocketServer } from '../src/web-socket-server'
 
 // Disable certification checks
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
 
 describe('CSMS Gateway', () => {
-  let server: WebSocketServerMock | undefined
+  let server: WebSocketServer | undefined
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
-    const socket = new WebSocket('ws://localhost:3001/ocpp/LS001', ['ocpp2.0.1'])
+    const socket = new WebSocket(`wss://localhost:3000/ocpp/LS001`, ['ocpp2.0.1'], {
+      headers: {
+        authorization: `Basic ${Buffer.from(`LS001:test`).toString('base64')}`,
+      },
+    })
     socket.onerror = (): void => {
       fail()
     }
@@ -31,7 +35,7 @@ describe('CSMS Gateway', () => {
   }
 
   beforeEach(async () => {
-    server = new WebSocketServerMock()
+    server = new WebSocketServer()
     server.start()
   })
 
