@@ -6,26 +6,19 @@ import { ChargingStation } from '../src/charging-station'
 export class WebSocketServerMock extends WebSocketServerBase {
   private server: WebSocket.Server | undefined
 
-  constructor(public readonly port: number = 3000) {
-    super()
-  }
-
   public start(): void {
     this.server = new WebSocket.Server({
       host: 'localhost',
-      port: this.port,
+      port: 3001,
     })
     this.server.on('connection', (socket: WebSocket, request: IncomingMessage) =>
-      this.onConnection(socket, request, new ChargingStation('TEST')),
+      this.onConnection(socket, request, new ChargingStation('Test', 'Test', 'Test')),
     )
-
-    this.logger.info(`WebSocketServer is running on port ${this.port}`)
   }
 
   public stop(): void {
     if (this.server) {
       this.server.close()
     }
-    this.logger.info(`WebSocketServer stopped`)
   }
 }
