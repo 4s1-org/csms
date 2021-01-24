@@ -5,11 +5,14 @@ import https from 'https'
 import { WebSocketServerBase } from './web-socket-server-base'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
-import { ChargingStateEnum } from '@yellowgarbagebag/csms-shared'
 import { ChargingStation } from './charging-station'
 
 export class WebSocketServer extends WebSocketServerBase {
   private server: https.Server | undefined
+  private chargingStations: ChargingStation[] = [
+    new ChargingStation('LS001', 'LS001', 'test'),
+    new ChargingStation('LS002', 'LS002', 'test'),
+  ]
 
   constructor(public readonly port: number = 3000) {
     super()
@@ -33,6 +36,7 @@ export class WebSocketServer extends WebSocketServerBase {
       const cs: ChargingStation | undefined = this.authenticate(request)
 
       if (!cs) {
+        this.logger.error(`Client not accepted`)
         tlsSocket.write('HTTP/1.1 401 Unauthorized\r\n\r\n')
         tlsSocket.destroy()
         return
@@ -54,28 +58,23 @@ export class WebSocketServer extends WebSocketServerBase {
     this.logger.info(`WebSocketServer stopped`)
   }
 
-  private chargingStations: ChargingStation[] = []
-
   private authenticate(request: IncomingMessage): ChargingStation | undefined {
     const socketId = request.headers['sec-websocket-key']
     this.logger.info(`Client connected: ${socketId}`)
 
-    let cs: ChargingStation | undefined
-
     // ToDo: Das muss schöner werden
     const parts = request.url?.split('/')
-    if (parts && parts[1] === 'ocpp' && parts.length === 3) {
-      const uniqueIdentifier = parts[2]
-      cs = this.chargingStations.find((x) => x.uniqueIdentifier === uniqueIdentifier)
-      if (!cs) {
-        cs = new ChargingStation(uniqueIdentifier)
-        this.chargingStations.push(cs)
-      }
-      cs.connect()
-      return cs
-    } else {
+    if (!parts || parts[1] !== 'ocpp' || parts.length !== 3) {
       this.logger.error(`Client URL is invalid "${request.url}"`)
       return undefined
     }
+
+    const uniqueIdentifier = parts[2]
+    const b64auth = (request.headers.authorization || '').split(' ')[1] || ''
+    const [username, password] = Buffer.from(b64auth, 'base64').toString().split(':')
+
+    return this.chargingStations.find(
+      (cs) => cs.uniqueIdentifier === uniqueIdentifier && cs.username === username && cs.password === password,
+    )
   }
 }
