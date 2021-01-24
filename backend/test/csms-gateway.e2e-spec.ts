@@ -15,7 +15,7 @@ import {
 import { WebSocketServer } from '../src/web-socket-server'
 
 // Disable certification checks
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
+//process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
 
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
@@ -24,6 +24,7 @@ describe('CSMS Gateway', () => {
       headers: {
         authorization: `Basic ${Buffer.from(`LS001:test`).toString('base64')}`,
       },
+      rejectUnauthorized: false,
     })
     socket.onerror = (err): void => {
       console.log(err)
