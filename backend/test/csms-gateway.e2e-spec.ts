@@ -25,7 +25,8 @@ describe('CSMS Gateway', () => {
         authorization: `Basic ${Buffer.from(`LS001:test`).toString('base64')}`,
       },
     })
-    socket.onerror = (): void => {
+    socket.onerror = (err): void => {
+      console.log(err)
       fail()
     }
     socket.onclose = (): void => {

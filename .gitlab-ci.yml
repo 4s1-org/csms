@@ -1,7 +1,7 @@
 stages:
   - validation
 
-shared:
+.shared:
   stage: validation
   image: node:14-alpine
   script:
@@ -20,12 +20,12 @@ backend:
     - npm run build
     - cd ../backend
     - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test:cov
+    #- npm run lint
+    #- npm run build
+    #- npm run test:cov
     - npm run test:e2e
 
-simulator:
+.simulator:
   stage: validation
   image: node:14-alpine
   script:
