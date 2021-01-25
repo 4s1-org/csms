@@ -13,6 +13,12 @@ import {
   HeartbeatResponseDto,
   StatusNotificationRequestDto,
   StatusNotificationResponseDto,
+  AuthorizeRequestDto,
+  AuthorizeResponseDto,
+  IdTokenInfoDto,
+  AuthorizationStatusEnum,
+  IdTokenDto,
+  IdTokenEnum,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation {
@@ -42,6 +48,8 @@ export class ChargingStation {
         return this.heartbeat(toClass(HeartbeatRequestDto, payload))
       case OcppMessageEnum.StatusNotification:
         return this.statusNotification(toClass(StatusNotificationRequestDto, payload))
+      case OcppMessageEnum.Authorize:
+        return this.authorize(toClass(AuthorizeRequestDto, payload))
       default:
         throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
     }
@@ -57,5 +65,15 @@ export class ChargingStation {
 
   private statusNotification(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     return new StatusNotificationResponseDto()
+  }
+
+  private authorize(payload: AuthorizeRequestDto): AuthorizeResponseDto {
+    if (payload.idToken.type === IdTokenEnum.KeyCode) {
+      if (payload.idToken.idToken === '1234') {
+        return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
+      }
+    }
+
+    return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Blocked))
   }
 }

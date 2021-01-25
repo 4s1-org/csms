@@ -14,6 +14,14 @@ import {
   IdTokenDto,
   IdTokenEnum,
   toClass,
+  ResponseBaseDto,
+  CsmsError,
+  OcppErrorCodeEnum,
+  BootNotificationResponseDto,
+  AuthorizeResponseDto,
+  HeartbeatResponseDto,
+  StatusNotificationResponseDto,
+  AuthorizationStatusEnum,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
@@ -108,13 +116,14 @@ export class WebSocketClient {
         messageId: msgData[1],
         payload: msgData[2],
       }
-      const data = toClass(OcppResponseMessageDto, obj)
+      const response = toClass(OcppResponseMessageDto, obj)
 
-      const request = this.sendList.find((x) => x.messageId === data.messageId)
+      const request = this.sendList.find((x) => x.messageId === response.messageId)
       if (request) {
         const index = this.sendList.indexOf(request)
         this.sendList.splice(index, 1)
         this.logger.info(`-IN-  ${request.action}`)
+        this.messageReceived(request.action, response.payload)
       }
     }
 
@@ -125,6 +134,41 @@ export class WebSocketClient {
     socket.onclose = (): void => {
       this.logger.info('Connection closed')
       setTimeout(() => this.run(), 3000)
+    }
+  }
+
+  private messageReceived(action: OcppMessageEnum, payload: ResponseBaseDto): void {
+    switch (action) {
+      case OcppMessageEnum.BootNotification:
+        return this.bootNotification(toClass(BootNotificationResponseDto, payload))
+      case OcppMessageEnum.Heartbeat:
+        return this.heartbeat(toClass(HeartbeatResponseDto, payload))
+      case OcppMessageEnum.StatusNotification:
+        return this.statusNotification(toClass(StatusNotificationResponseDto, payload))
+      case OcppMessageEnum.Authorize:
+        return this.authorize(toClass(AuthorizeResponseDto, payload))
+      default:
+        throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
+    }
+  }
+
+  private bootNotification(payload: BootNotificationResponseDto): void {
+    // nothing to do
+  }
+
+  private heartbeat(payload: HeartbeatResponseDto): void {
+    // nothing to do
+  }
+
+  private statusNotification(payload: StatusNotificationResponseDto): void {
+    // nothing to do
+  }
+
+  private authorize(payload: AuthorizeResponseDto): void {
+    if (payload.idTokenInfo.status === AuthorizationStatusEnum.Accepted) {
+      this.logger.info(payload.idTokenInfo.status)
+    } else {
+      this.logger.error(payload.idTokenInfo.status)
     }
   }
 }
