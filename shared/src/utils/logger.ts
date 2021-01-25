@@ -9,7 +9,6 @@ export class Logger {
     this._logger = pino({
       enabled: process.env.NODE_ENV !== 'test',
       level: logLevel,
-      prettyPrint: { colorize: true },
       name,
       base: {
         hostname: null,
