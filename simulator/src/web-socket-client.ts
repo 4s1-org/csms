@@ -22,9 +22,13 @@ import {
   HeartbeatResponseDto,
   StatusNotificationResponseDto,
   AuthorizationStatusEnum,
+  OcppMessageTypeIdEnum,
+  OcppErrorResponseMessageDto,
+  MeterValuesResponseDto,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
+import { MeterValueDto, MeterValuesRequestDto, SampledValueDto } from '../../shared/dist'
 
 export class WebSocketClient {
   private logger = new Logger(this.name)
@@ -75,6 +79,13 @@ export class WebSocketClient {
     this.send(OcppMessageEnum.StatusNotification, payload)
   }
 
+  private sendMeterValue(): void {
+    const sampleValue = new SampledValueDto(53)
+    const meterValue = new MeterValueDto([sampleValue], new Date().toISOString())
+    const payload = new MeterValuesRequestDto(1, [meterValue])
+    this.send(OcppMessageEnum.MeterValues, payload)
+  }
+
   public async run(): Promise<void> {
     this.socket = new WebSocket(`wss://localhost:3000/ocpp/${this.name}`, ['ocpp2.0.1'], {
       headers: {
@@ -95,6 +106,10 @@ export class WebSocketClient {
       setTimeout(() => {
         this.sendAuthorization()
       }, 700)
+
+      setTimeout(() => {
+        this.sendMeterValue()
+      }, 920)
     }
 
     this.socket.onmessage = (msg: WebSocket.MessageEvent): void => {
@@ -104,19 +119,26 @@ export class WebSocketClient {
       if (!Array.isArray(msgData)) {
         throw new Error('Incoming data are not an array')
       }
-      const obj = {
-        messageTypeId: msgData[0],
-        messageId: msgData[1],
-        payload: msgData[2],
-      }
-      const response = toClass(OcppResponseMessageDto, obj)
-
-      const request = this.sendList.find((x) => x.messageId === response.messageId)
-      if (request) {
-        const index = this.sendList.indexOf(request)
-        this.sendList.splice(index, 1)
-        this.logger.info(`-IN-  ${request.action}`)
+      if (msgData.length === 3 && msgData[0] === OcppMessageTypeIdEnum.Result) {
+        const obj = {
+          messageTypeId: msgData[0],
+          messageId: msgData[1],
+          payload: msgData[2],
+        }
+        const response: OcppResponseMessageDto = toClass(OcppResponseMessageDto, obj)
+        const request: OcppRequestMessageDto = this.getRequestMessage(response.messageId)
         this.messageReceived(request.action, response.payload)
+      } else if (msgData.length === 5 && msgData[0] === OcppMessageTypeIdEnum.Error) {
+        const obj = {
+          messageTypeId: msgData[0],
+          messageId: msgData[1],
+          payload: msgData[2],
+        }
+        const response: OcppErrorResponseMessageDto = toClass(OcppErrorResponseMessageDto, obj)
+        const request: OcppRequestMessageDto = this.getRequestMessage(response.messageId)
+        this.logger.error(`${request.action} | ${response.errorCode} | ${response.errorDescription}`)
+      } else {
+        this.logger.fatal('Unknown response type', msgData)
       }
     }
 
@@ -130,6 +152,18 @@ export class WebSocketClient {
     }
   }
 
+  private getRequestMessage(messageId: string): OcppRequestMessageDto {
+    const request = this.sendList.find((x) => x.messageId === messageId)
+    if (request) {
+      this.logger.info(`-IN-  ${request.action}`)
+      const index = this.sendList.indexOf(request)
+      this.sendList.splice(index, 1)
+      return request
+    } else {
+      throw new Error()
+    }
+  }
+
   private messageReceived(action: OcppMessageEnum, payload: ResponseBaseDto): void {
     switch (action) {
       case OcppMessageEnum.BootNotification:
@@ -140,9 +174,15 @@ export class WebSocketClient {
         return this.statusNotification(toClass(StatusNotificationResponseDto, payload))
       case OcppMessageEnum.Authorize:
         return this.authorize(toClass(AuthorizeResponseDto, payload))
+      case OcppMessageEnum.MeterValues:
+        return this.meterValues(toClass(MeterValuesResponseDto, payload))
       default:
         throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
     }
+  }
+
+  private meterValues(payload: MeterValuesResponseDto): void {
+    // nothing to do
   }
 
   private bootNotification(payload: BootNotificationResponseDto): void {

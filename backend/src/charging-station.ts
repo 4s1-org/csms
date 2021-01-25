@@ -18,6 +18,8 @@ import {
   IdTokenInfoDto,
   AuthorizationStatusEnum,
   IdTokenEnum,
+  MeterValuesRequestDto,
+  MeterValuesResponseDto,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation {
@@ -49,6 +51,8 @@ export class ChargingStation {
         return this.statusNotification(toClass(StatusNotificationRequestDto, payload))
       case OcppMessageEnum.Authorize:
         return this.authorize(toClass(AuthorizeRequestDto, payload))
+      case OcppMessageEnum.MeterValues:
+        return this.meterValues(toClass(MeterValuesRequestDto, payload))
       default:
         throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
     }
@@ -64,6 +68,10 @@ export class ChargingStation {
 
   private statusNotification(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     return new StatusNotificationResponseDto()
+  }
+
+  private meterValues(payload: MeterValuesRequestDto): MeterValuesResponseDto {
+    return new MeterValuesResponseDto()
   }
 
   private authorize(payload: AuthorizeRequestDto): AuthorizeResponseDto {
