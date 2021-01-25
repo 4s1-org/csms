@@ -112,6 +112,7 @@ export class WebSocketClient {
       }, 920)
     }
 
+    // Handling, besonders der Fehler, wie im Backend lösen
     this.socket.onmessage = (msg: WebSocket.MessageEvent): void => {
       const msgData = JSON.parse(msg.data.toString())
       this.logger.debug('Received', msgData)
