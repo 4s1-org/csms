@@ -21,7 +21,7 @@ import {
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation {
-  public readonly logger = new Logger(this.uniqueIdentifier, 'debug')
+  public readonly logger = new Logger(this.uniqueIdentifier)
 
   public constructor(
     public readonly uniqueIdentifier: string,

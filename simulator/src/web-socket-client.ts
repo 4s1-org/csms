@@ -27,7 +27,7 @@ import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
 
 export class WebSocketClient {
-  private logger = new Logger(this.name, 'debug')
+  private logger = new Logger(this.name)
   private heartbeatInterval = 6000
   private socket: WebSocket | undefined
 
