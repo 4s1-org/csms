@@ -105,9 +105,7 @@ export class WebSocketServer {
     let requestMessage: OcppRequestMessageDto | undefined
 
     try {
-      if (data) {
-        cs.logger.debug('Received', JSON.parse(data.toString()))
-      }
+      cs.logger.debug('Received', data)
 
       // Das "Array" validieren
       requestMessage = arrayToRequestMessage(data)
