@@ -6,8 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MeterValueDto } from '../datatypes/meter-value.dto'
 
 /**
- * Request_ Body
- * urn:x-enexis:ecdm:uid:2:234744
+ * ---
  */
 export class MeterValuesRequestDto extends RequestBaseDto {
   public constructor(
@@ -23,12 +22,19 @@ export class MeterValuesRequestDto extends RequestBaseDto {
   public customData!: CustomDataDto
 
   /**
-   * Request_ Body. EVSEID. Numeric_ Identifier
-   * urn:x-enexis:ecdm:uid:1:571101
    * This contains a number (>0) designating an EVSE of the Charging Station. ‘0’ (zero) is used to designate the main power meter.
+   * Required: true
+   * integer
+   * 1..1
    */
   public evseId: number
 
+  /**
+   * The sampled meter values with timestamps.
+   * Required: true
+   * MeterValueType
+   * 1..*
+   */
   @Type(() => MeterValueDto)
   public meterValue: MeterValueDto[]
 }
