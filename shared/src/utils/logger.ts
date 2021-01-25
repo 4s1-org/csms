@@ -5,7 +5,7 @@ export type LogLevel = 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace' |
 export class Logger {
   private _logger: pino.Logger
 
-  public constructor(public readonly name: string, logLevel: LogLevel = 'debug') {
+  public constructor(public readonly name: string, logLevel: LogLevel = 'info') {
     this._logger = pino({
       enabled: process.env.NODE_ENV !== 'test',
       level: logLevel,
