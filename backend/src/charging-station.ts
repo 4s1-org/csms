@@ -13,6 +13,13 @@ import {
   HeartbeatResponseDto,
   StatusNotificationRequestDto,
   StatusNotificationResponseDto,
+  AuthorizeRequestDto,
+  AuthorizeResponseDto,
+  IdTokenInfoDto,
+  AuthorizationStatusEnum,
+  IdTokenEnum,
+  MeterValuesRequestDto,
+  MeterValuesResponseDto,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation {
@@ -42,13 +49,17 @@ export class ChargingStation {
         return this.heartbeat(toClass(HeartbeatRequestDto, payload))
       case OcppMessageEnum.StatusNotification:
         return this.statusNotification(toClass(StatusNotificationRequestDto, payload))
+      case OcppMessageEnum.Authorize:
+        return this.authorize(toClass(AuthorizeRequestDto, payload))
+      case OcppMessageEnum.MeterValues:
+        return this.meterValues(toClass(MeterValuesRequestDto, payload))
       default:
         throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
     }
   }
 
   private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
-    return new BootNotificationResponseDto(new Date().toISOString(), 300, RegistrationStatusEnum.Accepted)
+    return new BootNotificationResponseDto(new Date().toISOString(), 1, RegistrationStatusEnum.Accepted)
   }
 
   private heartbeat(payload: HeartbeatRequestDto): HeartbeatResponseDto {
@@ -57,5 +68,23 @@ export class ChargingStation {
 
   private statusNotification(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     return new StatusNotificationResponseDto()
+  }
+
+  private meterValues(payload: MeterValuesRequestDto): MeterValuesResponseDto {
+    return new MeterValuesResponseDto()
+  }
+
+  private authorize(payload: AuthorizeRequestDto): AuthorizeResponseDto {
+    if (payload.idToken.type === IdTokenEnum.KeyCode) {
+      if (payload.idToken.idToken === '1234') {
+        // C04.FR.02 - alles richtig
+        return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
+      } else {
+        // C04.FR.01 - PIN falsch
+        return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
+      }
+    }
+
+    return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Blocked))
   }
 }
