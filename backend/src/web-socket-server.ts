@@ -138,12 +138,12 @@ export class WebSocketServer {
       const messageId: string = requestMessage?.messageId || ''
 
       if (err instanceof CsmsError) {
-        logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
+        logger.warn(`${err.errorCode} | ${err.errorDescription}`)
         const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, err.errorCode, err.errorDescription)
         return errorResponseMessage.toString()
       } else if (err instanceof OcppErrorResponseMessageDto) {
         // Dieser Fall kommt vor, wenn es schon beim Validieren des Call Arrays kracht.
-        logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
+        logger.warn(`${err.errorCode} | ${err.errorDescription}`)
         return err.toString()
       } else {
         logger.fatal('Internal Server Error')
