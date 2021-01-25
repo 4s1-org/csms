@@ -17,12 +17,11 @@ import {
   AuthorizeResponseDto,
   IdTokenInfoDto,
   AuthorizationStatusEnum,
-  IdTokenDto,
   IdTokenEnum,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation {
-  public readonly logger = new Logger(this.uniqueIdentifier)
+  public readonly logger = new Logger(this.uniqueIdentifier, 'debug')
 
   public constructor(
     public readonly uniqueIdentifier: string,
@@ -56,7 +55,7 @@ export class ChargingStation {
   }
 
   private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
-    return new BootNotificationResponseDto(new Date().toISOString(), 300, RegistrationStatusEnum.Accepted)
+    return new BootNotificationResponseDto(new Date().toISOString(), 1, RegistrationStatusEnum.Accepted)
   }
 
   private heartbeat(payload: HeartbeatRequestDto): HeartbeatResponseDto {
@@ -70,7 +69,11 @@ export class ChargingStation {
   private authorize(payload: AuthorizeRequestDto): AuthorizeResponseDto {
     if (payload.idToken.type === IdTokenEnum.KeyCode) {
       if (payload.idToken.idToken === '1234') {
+        // C04.FR.02 - alles richtig
         return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
+      } else {
+        // C04.FR.01 - PIN falsch
+        return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
       }
     }
 
