@@ -2,16 +2,16 @@
 
 cd shared
 npm install
-npm build
+npm run build
 cd ..
 
 cd simulator
 npm install
-npm build
+npm run build
 cd ..
 
 cd backend
 npm install
-npm build
+npm run build
 cd ..
 
