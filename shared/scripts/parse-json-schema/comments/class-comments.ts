@@ -3,13 +3,16 @@ import { ChangeAvailability } from './messages/ChangeAvailability'
 import { GetBaseReport } from './messages/GetBaseReport'
 import { GetVariables } from './messages/GetVariables'
 import { Heartbeat } from './messages/Heartbeat'
+import { MeterValues } from './messages/MeterValues'
 import { NotifyReport } from './messages/NotifyReport'
 import { SetVariables } from './messages/SetVariables'
 import { StatusNotification } from './messages/StatusNotification'
 import { TransactionEvent } from './messages/TransactionEvent'
 import { ChargingStationType } from './types/ChargingStationType'
 import { EVSEType } from './types/EVSEType'
+import { MeterValueType } from './types/MeterValueType'
 import { ModemType } from './types/ModemType'
+import { SampledValueType } from './types/SampledValueType'
 import { StatusInfoType } from './types/StatusInfoType'
 
 export type classCommentFieldType = {
@@ -47,6 +50,7 @@ const comments: classCommentType[] = [
   ...GetBaseReport,
   ...GetVariables,
   ...Heartbeat,
+  ...MeterValues,
   ...NotifyReport,
   ...SetVariables,
   ...StatusNotification,
@@ -54,6 +58,8 @@ const comments: classCommentType[] = [
   // Types
   ChargingStationType,
   EVSEType,
+  MeterValueType,
   ModemType,
+  SampledValueType,
   StatusInfoType,
 ]
