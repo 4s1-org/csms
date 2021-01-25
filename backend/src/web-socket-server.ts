@@ -105,13 +105,15 @@ export class WebSocketServer {
     let requestMessage: OcppRequestMessageDto | undefined
 
     try {
-      cs.logger.debug(`Received`, data)
+      cs.logger.debug('Received', data)
+
       // Das "Array" validieren
       requestMessage = arrayToRequestMessage(data)
       // Kombi aus Action und Payload validieren
       MessageValidator.instance.validateRequestPayload(requestMessage)
 
       // Verarbeitung der Daten
+      cs.logger.info(`-IN-  ${requestMessage.action}`)
       const payload: ResponseBaseDto = cs.messageReceived(requestMessage.action, requestMessage.payload)
 
       // Antwortobjekt erstellen
@@ -128,22 +130,24 @@ export class WebSocketServer {
       }
       // Loggen und senden
       const response: string = responseMessage.toString()
-      cs.logger.debug('Send', response)
+      cs.logger.info(`-OUT- ${requestMessage.action}`)
+      cs.logger.debug('Send', responseMessage)
       return response
     } catch (err) {
       const logger: Logger = cs?.logger || this.logger
       const messageId: string = requestMessage?.messageId || ''
 
       if (err instanceof CsmsError) {
-        logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
+        logger.warn(`${err.errorCode} | ${err.errorDescription}`)
         const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, err.errorCode, err.errorDescription)
         return errorResponseMessage.toString()
       } else if (err instanceof OcppErrorResponseMessageDto) {
         // Dieser Fall kommt vor, wenn es schon beim Validieren des Call Arrays kracht.
-        logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
+        logger.warn(`${err.errorCode} | ${err.errorDescription}`)
         return err.toString()
       } else {
-        logger.fatal('Internal Server Error', err)
+        logger.fatal('Internal Server Error')
+        logger.fatal(err)
         const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, OcppErrorCodeEnum.InternalError)
         return errorResponseMessage.toString()
       }
