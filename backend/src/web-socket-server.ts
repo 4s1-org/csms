@@ -112,6 +112,7 @@ export class WebSocketServer {
       MessageValidator.instance.validateRequestPayload(requestMessage)
 
       // Verarbeitung der Daten
+      cs.logger.info(`-IN-  ${requestMessage.action}`)
       const payload: ResponseBaseDto = cs.messageReceived(requestMessage.action, requestMessage.payload)
 
       // Antwortobjekt erstellen
@@ -128,6 +129,7 @@ export class WebSocketServer {
       }
       // Loggen und senden
       const response: string = responseMessage.toString()
+      cs.logger.info(`-OUT- ${requestMessage.action}`)
       cs.logger.debug('Send', response)
       return response
     } catch (err) {
