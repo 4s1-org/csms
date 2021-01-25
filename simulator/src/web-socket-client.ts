@@ -27,7 +27,9 @@ import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
 
 export class WebSocketClient {
-  private logger = new Logger(this.name)
+  private logger = new Logger(this.name, 'debug')
+  private heartbeatInterval = 6000
+  private socket: WebSocket | undefined
 
   private sendList: OcppRequestMessageDto[] = []
 
@@ -35,79 +37,70 @@ export class WebSocketClient {
     // nothing to do
   }
 
-  private send(socket: WebSocket, action: OcppMessageEnum, payload: RequestBaseDto): void {
+  private send(action: OcppMessageEnum, payload: RequestBaseDto): void {
     const msg = new OcppRequestMessageDto(uuid(), action, payload)
-    const msgStr = msg.toString()
     this.logger.info(`-OUT- ${action}`)
-    this.logger.debug('Send', msgStr)
-    socket.send(msgStr)
+    this.logger.debug('Send', msg)
+    if (this.socket && this.socket.OPEN) {
+      this.socket.send(msg.toString())
+    }
     this.sendList.push(msg)
   }
 
-  private sendBootNotification(socket: WebSocket): void {
+  private sendBootNotification(): void {
     const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
     const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
 
-    this.send(socket, OcppMessageEnum.BootNotification, payload)
+    this.send(OcppMessageEnum.BootNotification, payload)
   }
 
-  private sendHeartbeat(socket: WebSocket): void {
-    const payload = new HeartbeatRequestDto()
-    this.send(socket, OcppMessageEnum.Heartbeat, payload)
-
-    setTimeout(() => {
-      if (socket.OPEN) {
-        this.sendHeartbeat(socket)
-      }
-    }, 60000)
+  private sendHeartbeat(): void {
+    if (this.socket && this.socket.OPEN) {
+      setTimeout(() => {
+        const payload = new HeartbeatRequestDto()
+        this.send(OcppMessageEnum.Heartbeat, payload)
+        this.sendHeartbeat()
+      }, this.heartbeatInterval * 1000)
+    }
   }
 
-  private sendAuthorization(socket: WebSocket): void {
+  private sendAuthorization(): void {
     const idTocken = new IdTokenDto('1234', IdTokenEnum.KeyCode)
     const payload = new AuthorizeRequestDto(idTocken)
-    this.send(socket, OcppMessageEnum.Authorize, payload)
+    this.send(OcppMessageEnum.Authorize, payload)
   }
 
-  private sendStatusNotification(socket: WebSocket): void {
+  private sendStatusNotification(): void {
     const payload = new StatusNotificationRequestDto(new Date().toISOString(), ConnectorStatusEnum.Available, 1, 1)
-    this.send(socket, OcppMessageEnum.StatusNotification, payload)
+    this.send(OcppMessageEnum.StatusNotification, payload)
   }
 
   public async run(): Promise<void> {
-    const socket = new WebSocket(`wss://localhost:3000/ocpp/${this.name}`, ['ocpp2.0.1'], {
+    this.socket = new WebSocket(`wss://localhost:3000/ocpp/${this.name}`, ['ocpp2.0.1'], {
       headers: {
         authorization: `Basic ${Buffer.from(`${this.name}:test`).toString('base64')}`,
       },
     })
 
-    socket.onopen = (): void => {
+    this.socket.onopen = (): void => {
       const socketId = 'foo' // request.headers['sec-websocket-key']
       this.logger.info('Connected: ' + socketId)
 
-      this.sendBootNotification(socket)
+      this.sendBootNotification()
 
       setTimeout(() => {
-        if (socket.OPEN) {
-          this.sendStatusNotification(socket)
-        }
-      }, 500)
+        this.sendStatusNotification()
+      }, 200)
 
       setTimeout(() => {
-        if (socket.OPEN) {
-          this.sendHeartbeat(socket)
-        }
-      }, 1000)
-
-      setTimeout(() => {
-        if (socket.OPEN) {
-          this.sendAuthorization(socket)
-        }
-      }, 1500)
+        this.sendAuthorization()
+      }, 700)
     }
 
-    socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+    this.socket.onmessage = (msg: WebSocket.MessageEvent): void => {
       const msgData = JSON.parse(msg.data.toString())
       this.logger.debug('Received', msgData)
+
       if (!Array.isArray(msgData)) {
         throw new Error('Incoming data are not an array')
       }
@@ -127,11 +120,11 @@ export class WebSocketClient {
       }
     }
 
-    socket.onerror = (err: WebSocket.ErrorEvent): void => {
+    this.socket.onerror = (err: WebSocket.ErrorEvent): void => {
       this.logger.error(err.message)
     }
 
-    socket.onclose = (): void => {
+    this.socket.onclose = (): void => {
       this.logger.info('Connection closed')
       setTimeout(() => this.run(), 3000)
     }
@@ -153,7 +146,8 @@ export class WebSocketClient {
   }
 
   private bootNotification(payload: BootNotificationResponseDto): void {
-    // nothing to do
+    this.logger.info(`Set Heartbeat interval to ${payload.interval} seconds`)
+    this.heartbeatInterval = payload.interval * 1000
   }
 
   private heartbeat(payload: HeartbeatResponseDto): void {

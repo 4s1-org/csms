@@ -105,7 +105,10 @@ export class WebSocketServer {
     let requestMessage: OcppRequestMessageDto | undefined
 
     try {
-      cs.logger.debug(`Received`, data)
+      if (data) {
+        cs.logger.debug('Received', JSON.parse(data.toString()))
+      }
+
       // Das "Array" validieren
       requestMessage = arrayToRequestMessage(data)
       // Kombi aus Action und Payload validieren
@@ -130,7 +133,7 @@ export class WebSocketServer {
       // Loggen und senden
       const response: string = responseMessage.toString()
       cs.logger.info(`-OUT- ${requestMessage.action}`)
-      cs.logger.debug('Send', response)
+      cs.logger.debug('Send', responseMessage)
       return response
     } catch (err) {
       const logger: Logger = cs?.logger || this.logger
@@ -145,7 +148,8 @@ export class WebSocketServer {
         logger.warn(`Error | ${err.errorCode} | ${err.errorDescription}`)
         return err.toString()
       } else {
-        logger.fatal('Internal Server Error', err)
+        logger.fatal('Internal Server Error')
+        logger.fatal(err)
         const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, OcppErrorCodeEnum.InternalError)
         return errorResponseMessage.toString()
       }
