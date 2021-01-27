@@ -6,6 +6,8 @@ import { OcppMessageTypeIdEnum } from '../callMessages/ocpp-message-type-id.enum
 import { OcppMessageEnum } from '../generated/ocpp-message.enum'
 import { OcppResponseMessageDto } from '../callMessages/ocpp-response-message.dto'
 import { CsmsError } from './csms-error'
+import { RequestBaseDto } from '../generated/request-base.dto'
+import { actionDtoMapping } from '../generated'
 
 export declare type ClassConstructor<T> = {
   new (...args: any[]): T
@@ -15,7 +17,23 @@ export function toClass<T, V>(cls: ClassConstructor<T>, plain: V): T {
   return plainToClass(cls, plain)
 }
 
-export function arrayToMessage(
+export function requestPayloadToDto(action: OcppMessageEnum, payload: any): RequestBaseDto {
+  const mapping = actionDtoMapping.find((x) => x.action === action)
+  if (mapping) {
+    return toClass(mapping.requestDto, payload)
+  }
+  throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
+}
+
+export function responsePayloadToDto(action: OcppMessageEnum, payload: any): RequestBaseDto {
+  const mapping = actionDtoMapping.find((x) => x.action === action)
+  if (mapping) {
+    return toClass(mapping.responseDto, payload)
+  }
+  throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
+}
+
+export function arrayToMessageDto(
   data: unknown,
 ): OcppRequestMessageDto | OcppResponseMessageDto | OcppErrorResponseMessageDto {
   if (!data) {
