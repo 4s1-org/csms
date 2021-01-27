@@ -11,11 +11,13 @@ import {
   OcppResponseMessageDto,
   OcppErrorCodeEnum,
   OcppRequestMessageDto,
-  MessageValidator,
   ResponseBaseDto,
   CsmsError,
+  arrayToMessageDto,
+  BootNotificationRequestDto,
+  requestPayloadHandler,
+  OcppBaseMessageDto,
 } from '@yellowgarbagebag/csms-shared'
-import { arrayToRequestMessage } from './utils'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
@@ -102,40 +104,43 @@ export class WebSocketServer {
 
   protected handleIncomingMessage(cs: ChargingStation, data: any): string {
     // Brauche im Fehlerfall
-    let requestMessage: OcppRequestMessageDto | undefined
+    let call: OcppBaseMessageDto | undefined
 
     try {
       cs.logger.debug('Received', data)
 
       // Das "Array" validieren
-      requestMessage = arrayToRequestMessage(data)
+      call = arrayToMessageDto(data)
       // Kombi aus Action und Payload validieren
-      MessageValidator.instance.validateRequestPayload(requestMessage)
+      if (call instanceof OcppRequestMessageDto) {
+        requestPayloadHandler(call)
 
-      // Verarbeitung der Daten
-      cs.logger.info(`-IN-  ${requestMessage.action}`)
-      const payload: ResponseBaseDto = cs.messageReceived(requestMessage.action, requestMessage.payload)
+        cs.logger.info(`-IN-  ${call.action}`)
+        // Verarbeitung der Daten
+        const payload: ResponseBaseDto = cs.messageReceived(call.payload)
 
-      // Antwortobjekt erstellen
-      const responseMessage: OcppResponseMessageDto = new OcppResponseMessageDto(requestMessage.messageId, payload)
-      // Anwortdaten validieren
-      try {
-        MessageValidator.instance.validateResponsePayload(responseMessage, requestMessage.action)
-      } catch (err) {
-        if (err instanceof CsmsError) {
-          cs.logger.error(`Server send invalid data | ${err.errorCode} | ${err.errorDescription}`)
-        } else {
-          throw err
+        // Antwortobjekt erstellen
+        const responseMessage: OcppResponseMessageDto = new OcppResponseMessageDto(call.messageId, payload)
+        // Anwortdaten validieren
+        try {
+          //MessageValidator.instance.validateResponsePayload(responseMessage, requestMessage.action)
+        } catch (err) {
+          if (err instanceof CsmsError) {
+            cs.logger.error(`Server send invalid data | ${err.errorCode} | ${err.errorDescription}`)
+          } else {
+            throw err
+          }
         }
+        // Loggen und senden
+        const response: string = responseMessage.toString()
+        cs.logger.info(`-OUT- ${call.action}`)
+        cs.logger.debug('Send', responseMessage)
+        return response
       }
-      // Loggen und senden
-      const response: string = responseMessage.toString()
-      cs.logger.info(`-OUT- ${requestMessage.action}`)
-      cs.logger.debug('Send', responseMessage)
-      return response
+      return ''
     } catch (err) {
       const logger: Logger = cs?.logger || this.logger
-      const messageId: string = requestMessage?.messageId || ''
+      const messageId: string = call?.messageId || ''
 
       if (err instanceof CsmsError) {
         logger.warn(`${err.errorCode} | ${err.errorDescription}`)

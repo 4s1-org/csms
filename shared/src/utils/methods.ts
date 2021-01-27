@@ -8,6 +8,7 @@ import { OcppResponseMessageDto } from '../callMessages/ocpp-response-message.dt
 import { CsmsError } from './csms-error'
 import { actionDtoMapping } from '../generated'
 import { MessageValidator } from './messageValidator'
+import { OcppBaseMessageDto } from '../callMessages/ocpp-base-message.dto'
 
 export function requestPayloadHandler(call: OcppRequestMessageDto): void {
   MessageValidator.instance.validateRequestPayload(call.action, call.payload)
@@ -29,9 +30,7 @@ export function responsePayloadHandler(call: OcppResponseMessageDto, action: Ocp
   call.payload = plainToClass(mapping.responseDto, call.payload)
 }
 
-export function arrayToMessageDto(
-  data: unknown,
-): OcppRequestMessageDto | OcppResponseMessageDto | OcppErrorResponseMessageDto {
+export function arrayToMessageDto(data: unknown): OcppBaseMessageDto {
   if (!data) {
     throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
   }
