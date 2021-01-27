@@ -4,6 +4,8 @@ import { OcppRequestMessageDto } from '../callMessages/ocpp-request-message.dto'
 import { OcppErrorResponseMessageDto } from '../callMessages/ocpp-error-response-message.dto'
 import { OcppMessageTypeIdEnum } from '../callMessages/ocpp-message-type-id.enum'
 import { OcppMessageEnum } from '../generated/ocpp-message.enum'
+import { OcppResponseMessageDto } from '../callMessages/ocpp-response-message.dto'
+import { CsmsError } from './csms-error'
 
 export declare type ClassConstructor<T> = {
   new (...args: any[]): T
@@ -13,46 +15,76 @@ export function toClass<T, V>(cls: ClassConstructor<T>, plain: V): T {
   return plainToClass(cls, plain)
 }
 
-export function arrayToRequestMessage(data: unknown): OcppRequestMessageDto {
+export function arrayToMessage(
+  data: unknown,
+): OcppRequestMessageDto | OcppResponseMessageDto | OcppErrorResponseMessageDto {
   if (!data) {
-    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
+    throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
   }
   if (typeof data !== 'string') {
-    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
+    throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
   }
 
   try {
     data = JSON.parse(data)
   } catch (err) {
-    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
+    console.log(err)
+    throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
   }
 
   if (!Array.isArray(data)) {
-    throw new OcppErrorResponseMessageDto('', OcppErrorCodeEnum.RpcFrameworkError, 'No array received')
-  }
-  if (data.length !== 4) {
-    throw new OcppErrorResponseMessageDto(
-      data[1],
-      OcppErrorCodeEnum.RpcFrameworkError,
-      'Received array has not exact 4 items',
-    )
-  }
-  if (data[0] !== OcppMessageTypeIdEnum.Call) {
-    throw new OcppErrorResponseMessageDto(data[1], OcppErrorCodeEnum.RpcFrameworkError, 'MessageType is not 2')
-  }
-  if (data[1].length > 36) {
-    throw new OcppErrorResponseMessageDto(data[1], OcppErrorCodeEnum.RpcFrameworkError, 'MessageId is too long')
-  }
-  if (!Object.values(OcppMessageEnum).includes(data[2])) {
-    throw new OcppErrorResponseMessageDto(data[1], OcppErrorCodeEnum.NotImplemented)
+    throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'No array received')
   }
 
-  const obj = {
-    messageTypeId: data[0],
-    messageId: data[1],
-    action: data[2],
-    payload: data[3],
-  }
+  const messageTypeId = data[0]
 
-  return toClass(OcppRequestMessageDto, obj)
+  if (messageTypeId === OcppMessageTypeIdEnum.Call && data.length === 4) {
+    const messageId = data[1]
+    const action = data[2]
+    const payload = data[3]
+
+    if (messageId.length > 36) {
+      throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'MessageId is too long')
+    }
+    if (!Object.values(OcppMessageEnum).includes(action)) {
+      throw new CsmsError(OcppErrorCodeEnum.NotImplemented)
+    }
+    if (!payload) {
+      throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Wrong payload')
+    }
+
+    return toClass(OcppRequestMessageDto, { messageTypeId, messageId, action, payload })
+  } else if (messageTypeId === OcppMessageTypeIdEnum.Result && data.length === 3) {
+    const messageId = data[1]
+    const payload = data[2]
+
+    if (messageId.length > 36) {
+      throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'MessageId is too long')
+    }
+    if (!payload) {
+      throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Wrong payload')
+    }
+    return toClass(OcppResponseMessageDto, { messageTypeId, messageId, payload })
+  } else if (messageTypeId === OcppMessageTypeIdEnum.Error && data.length === 5) {
+    const messageId = data[1]
+    const errorCode = data[2]
+    const errorDescription = data[2]
+    const errorDetails = data[2]
+
+    if (messageId.length > 36) {
+      throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'MessageId is too long')
+    }
+    if (!Object.values(OcppErrorCodeEnum).includes(errorCode)) {
+      throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Unknown error code')
+    }
+    if (errorDescription.length > 255) {
+      throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Error description is too long')
+    }
+    if (!errorDetails) {
+      throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Wrong errorDetails')
+    }
+    return toClass(OcppErrorResponseMessageDto, { messageTypeId, messageId, errorCode, errorDescription, errorDetails })
+  } else {
+    throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Unknown Call')
+  }
 }
