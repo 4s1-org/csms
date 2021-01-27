@@ -13,7 +13,6 @@ import {
   AuthorizeRequestDto,
   IdTokenDto,
   IdTokenEnum,
-  toClass,
   ResponseBaseDto,
   CsmsError,
   OcppErrorCodeEnum,
@@ -116,31 +115,6 @@ export class WebSocketClient {
     this.socket.onmessage = (msg: WebSocket.MessageEvent): void => {
       const msgData = JSON.parse(msg.data.toString())
       this.logger.debug('Received', msgData)
-
-      if (!Array.isArray(msgData)) {
-        throw new Error('Incoming data are not an array')
-      }
-      if (msgData.length === 3 && msgData[0] === OcppMessageTypeIdEnum.Result) {
-        const obj = {
-          messageTypeId: msgData[0],
-          messageId: msgData[1],
-          payload: msgData[2],
-        }
-        const response: OcppResponseMessageDto = toClass(OcppResponseMessageDto, obj)
-        const request: OcppRequestMessageDto = this.getRequestMessage(response.messageId)
-        this.messageReceived(request.action, response.payload)
-      } else if (msgData.length === 5 && msgData[0] === OcppMessageTypeIdEnum.Error) {
-        const obj = {
-          messageTypeId: msgData[0],
-          messageId: msgData[1],
-          payload: msgData[2],
-        }
-        const response: OcppErrorResponseMessageDto = toClass(OcppErrorResponseMessageDto, obj)
-        const request: OcppRequestMessageDto = this.getRequestMessage(response.messageId)
-        this.logger.error(`${request.action} | ${response.errorCode} | ${response.errorDescription}`)
-      } else {
-        this.logger.fatal('Unknown response type', msgData)
-      }
     }
 
     this.socket.onerror = (err: WebSocket.ErrorEvent): void => {
@@ -167,16 +141,16 @@ export class WebSocketClient {
 
   private messageReceived(action: OcppMessageEnum, payload: ResponseBaseDto): void {
     switch (action) {
-      case OcppMessageEnum.BootNotification:
-        return this.bootNotification(toClass(BootNotificationResponseDto, payload))
-      case OcppMessageEnum.Heartbeat:
-        return this.heartbeat(toClass(HeartbeatResponseDto, payload))
-      case OcppMessageEnum.StatusNotification:
-        return this.statusNotification(toClass(StatusNotificationResponseDto, payload))
-      case OcppMessageEnum.Authorize:
-        return this.authorize(toClass(AuthorizeResponseDto, payload))
-      case OcppMessageEnum.MeterValues:
-        return this.meterValues(toClass(MeterValuesResponseDto, payload))
+      // case OcppMessageEnum.BootNotification:
+      //   return this.bootNotification(toClass(BootNotificationResponseDto, payload))
+      // case OcppMessageEnum.Heartbeat:
+      //   return this.heartbeat(toClass(HeartbeatResponseDto, payload))
+      // case OcppMessageEnum.StatusNotification:
+      //   return this.statusNotification(toClass(StatusNotificationResponseDto, payload))
+      // case OcppMessageEnum.Authorize:
+      //   return this.authorize(toClass(AuthorizeResponseDto, payload))
+      // case OcppMessageEnum.MeterValues:
+      //   return this.meterValues(toClass(MeterValuesResponseDto, payload))
       default:
         throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
     }

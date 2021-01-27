@@ -5,7 +5,6 @@ import {
   OcppErrorCodeEnum,
   OcppMessageEnum,
   RegistrationStatusEnum,
-  toClass,
   RequestBaseDto,
   ResponseBaseDto,
   CsmsError,
@@ -20,6 +19,7 @@ import {
   IdTokenEnum,
   MeterValuesRequestDto,
   MeterValuesResponseDto,
+  OcppRequestMessageDto,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation {
@@ -41,21 +41,24 @@ export class ChargingStation {
     this.logger.info('Disconnected')
   }
 
-  public messageReceived(action: OcppMessageEnum, payload: RequestBaseDto): ResponseBaseDto {
-    switch (action) {
-      case OcppMessageEnum.BootNotification:
-        return this.bootNotification(toClass(BootNotificationRequestDto, payload))
-      case OcppMessageEnum.Heartbeat:
-        return this.heartbeat(toClass(HeartbeatRequestDto, payload))
-      case OcppMessageEnum.StatusNotification:
-        return this.statusNotification(toClass(StatusNotificationRequestDto, payload))
-      case OcppMessageEnum.Authorize:
-        return this.authorize(toClass(AuthorizeRequestDto, payload))
-      case OcppMessageEnum.MeterValues:
-        return this.meterValues(toClass(MeterValuesRequestDto, payload))
-      default:
-        throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
+  public messageReceived(payload: RequestBaseDto): ResponseBaseDto {
+    if (payload instanceof BootNotificationRequestDto) {
+      return this.bootNotification(payload)
     }
+    if (payload instanceof HeartbeatRequestDto) {
+      return this.heartbeat(payload)
+    }
+    if (payload instanceof StatusNotificationRequestDto) {
+      return this.statusNotification(payload)
+    }
+    if (payload instanceof AuthorizeRequestDto) {
+      return this.authorize(payload)
+    }
+    if (payload instanceof MeterValuesRequestDto) {
+      return this.meterValues(payload)
+    }
+
+    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
   private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
