@@ -18,7 +18,6 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "dummy": "ts-node src/dummy.ts",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",

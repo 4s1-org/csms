@@ -6,31 +6,27 @@ import { OcppMessageTypeIdEnum } from '../callMessages/ocpp-message-type-id.enum
 import { OcppMessageEnum } from '../generated/ocpp-message.enum'
 import { OcppResponseMessageDto } from '../callMessages/ocpp-response-message.dto'
 import { CsmsError } from './csms-error'
-import { RequestBaseDto } from '../generated/request-base.dto'
 import { actionDtoMapping } from '../generated'
+import { MessageValidator } from './messageValidator'
 
-export declare type ClassConstructor<T> = {
-  new (...args: any[]): T
-}
+export function requestPayloadHandler(call: OcppRequestMessageDto): void {
+  MessageValidator.instance.validateRequestPayload(call.action, call.payload)
 
-export function toClass<T, V>(cls: ClassConstructor<T>, plain: V): T {
-  return plainToClass(cls, plain)
-}
-
-export function requestPayloadToDto(action: OcppMessageEnum, payload: any): RequestBaseDto {
-  const mapping = actionDtoMapping.find((x) => x.action === action)
-  if (mapping) {
-    return toClass(mapping.requestDto, payload)
+  const mapping = actionDtoMapping.find((x) => x.action === call.action)
+  if (!mapping) {
+    throw new CsmsError(OcppErrorCodeEnum.NotSupported, call.action)
   }
-  throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
+  call.payload = plainToClass(mapping.requestDto, call.payload)
 }
 
-export function responsePayloadToDto(action: OcppMessageEnum, payload: any): RequestBaseDto {
+export function responsePayloadHandler(call: OcppResponseMessageDto, action: OcppMessageEnum): void {
+  MessageValidator.instance.validateResponsePayload(action, call.payload)
+
   const mapping = actionDtoMapping.find((x) => x.action === action)
-  if (mapping) {
-    return toClass(mapping.responseDto, payload)
+  if (!mapping) {
+    throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
   }
-  throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
+  call.payload = plainToClass(mapping.responseDto, call.payload)
 }
 
 export function arrayToMessageDto(
@@ -71,7 +67,7 @@ export function arrayToMessageDto(
       throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Wrong payload')
     }
 
-    return toClass(OcppRequestMessageDto, { messageTypeId, messageId, action, payload })
+    return plainToClass(OcppRequestMessageDto, { messageTypeId, messageId, action, payload })
   } else if (messageTypeId === OcppMessageTypeIdEnum.Result && data.length === 3) {
     const messageId = data[1]
     const payload = data[2]
@@ -82,7 +78,7 @@ export function arrayToMessageDto(
     if (!payload) {
       throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Wrong payload')
     }
-    return toClass(OcppResponseMessageDto, { messageTypeId, messageId, payload })
+    return plainToClass(OcppResponseMessageDto, { messageTypeId, messageId, payload })
   } else if (messageTypeId === OcppMessageTypeIdEnum.Error && data.length === 5) {
     const messageId = data[1]
     const errorCode = data[2]
@@ -101,7 +97,13 @@ export function arrayToMessageDto(
     if (!errorDetails) {
       throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Wrong errorDetails')
     }
-    return toClass(OcppErrorResponseMessageDto, { messageTypeId, messageId, errorCode, errorDescription, errorDetails })
+    return plainToClass(OcppErrorResponseMessageDto, {
+      messageTypeId,
+      messageId,
+      errorCode,
+      errorDescription,
+      errorDetails,
+    })
   } else {
     throw new CsmsError(OcppErrorCodeEnum.RpcFrameworkError, 'Unknown Call')
   }

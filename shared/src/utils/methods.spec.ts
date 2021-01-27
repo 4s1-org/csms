@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { OcppErrorResponseMessageDto, OcppRequestMessageDto, OcppResponseMessageDto } from '../callMessages'
 import { arrayToMessageDto } from './methods'
 

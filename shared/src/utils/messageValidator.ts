@@ -1,9 +1,7 @@
 import { Validator } from 'jsonschema'
 import fs from 'fs'
 import path from 'path'
-import { OcppRequestMessageDto } from '../callMessages/ocpp-request-message.dto'
 import { OcppErrorCodeEnum } from '../callMessages/ocpp-error-code.enum'
-import { OcppResponseMessageDto } from '../callMessages/ocpp-response-message.dto'
 import { OcppMessageEnum } from '../generated/ocpp-message.enum'
 import { CsmsError } from './csms-error'
 
@@ -35,12 +33,12 @@ export class MessageValidator {
     }
   }
 
-  public validateRequestPayload(request: OcppRequestMessageDto): any {
-    this.validate(request.payload, this._schemas[request.action + 'Request'])
+  public validateRequestPayload(action: OcppMessageEnum, payload: any): any {
+    this.validate(payload, this._schemas[action + 'Request'])
   }
 
-  public validateResponsePayload(response: OcppResponseMessageDto, action: OcppMessageEnum): any {
-    this.validate(response.payload, this._schemas[action + 'Response'])
+  public validateResponsePayload(action: OcppMessageEnum, payload: any): any {
+    this.validate(payload, this._schemas[action + 'Response'])
   }
 
   private validate(data: any, schema: any): void {
