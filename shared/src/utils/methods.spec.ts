@@ -1,5 +1,5 @@
 import { OcppErrorResponseMessageDto, OcppRequestMessageDto, OcppResponseMessageDto } from '../callMessages'
-import { arrayToMessage } from './methods'
+import { arrayToMessageDto } from './methods'
 
 describe('Methods', () => {
   describe('arrayToMessage', () => {
@@ -8,7 +8,7 @@ describe('Methods', () => {
       const data =
         '[2,"19223201","BootNotification",{"reason":"PowerUp","chargingStation":{"model":"SingleSocketCharger","vendorName":"VendorX"}}]'
       // Act
-      const message = arrayToMessage(data)
+      const message = arrayToMessageDto(data)
       // Assert
       expect(message).toBeInstanceOf(OcppRequestMessageDto)
     })
@@ -17,7 +17,7 @@ describe('Methods', () => {
       // Arrange
       const data = '[3,"19223201",{"currentTime": "2013-02-01T20:53:32.486Z","interval": 300,"status": "Accepted"}]'
       // Act
-      const message = arrayToMessage(data)
+      const message = arrayToMessageDto(data)
       // Assert
       expect(message).toBeInstanceOf(OcppResponseMessageDto)
     })
@@ -26,7 +26,7 @@ describe('Methods', () => {
       // Arrange
       const data = '[4,"162376037","NotSupported","SetDisplayMessageRequest not implemented",{}]'
       // Act
-      const message = arrayToMessage(data)
+      const message = arrayToMessageDto(data)
       // Assert
       expect(message).toBeInstanceOf(OcppErrorResponseMessageDto)
     })

@@ -1,0 +1,440 @@
+// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
+
+import { OcppMessageEnum } from './ocpp-message.enum'
+import { AuthorizeRequestDto } from '../messages/authorize-request.dto'
+import { AuthorizeResponseDto } from '../messages/authorize-response.dto'
+import { BootNotificationRequestDto } from '../messages/boot-notification-request.dto'
+import { BootNotificationResponseDto } from '../messages/boot-notification-response.dto'
+import { CancelReservationRequestDto } from '../messages/cancel-reservation-request.dto'
+import { CancelReservationResponseDto } from '../messages/cancel-reservation-response.dto'
+import { CertificateSignedRequestDto } from '../messages/certificate-signed-request.dto'
+import { CertificateSignedResponseDto } from '../messages/certificate-signed-response.dto'
+import { ChangeAvailabilityRequestDto } from '../messages/change-availability-request.dto'
+import { ChangeAvailabilityResponseDto } from '../messages/change-availability-response.dto'
+import { ClearCacheRequestDto } from '../messages/clear-cache-request.dto'
+import { ClearCacheResponseDto } from '../messages/clear-cache-response.dto'
+import { ClearChargingProfileRequestDto } from '../messages/clear-charging-profile-request.dto'
+import { ClearChargingProfileResponseDto } from '../messages/clear-charging-profile-response.dto'
+import { ClearDisplayMessageRequestDto } from '../messages/clear-display-message-request.dto'
+import { ClearDisplayMessageResponseDto } from '../messages/clear-display-message-response.dto'
+import { ClearVariableMonitoringRequestDto } from '../messages/clear-variable-monitoring-request.dto'
+import { ClearVariableMonitoringResponseDto } from '../messages/clear-variable-monitoring-response.dto'
+import { ClearedChargingLimitRequestDto } from '../messages/cleared-charging-limit-request.dto'
+import { ClearedChargingLimitResponseDto } from '../messages/cleared-charging-limit-response.dto'
+import { CostUpdatedRequestDto } from '../messages/cost-updated-request.dto'
+import { CostUpdatedResponseDto } from '../messages/cost-updated-response.dto'
+import { CustomerInformationRequestDto } from '../messages/customer-information-request.dto'
+import { CustomerInformationResponseDto } from '../messages/customer-information-response.dto'
+import { DataTransferRequestDto } from '../messages/data-transfer-request.dto'
+import { DataTransferResponseDto } from '../messages/data-transfer-response.dto'
+import { DeleteCertificateRequestDto } from '../messages/delete-certificate-request.dto'
+import { DeleteCertificateResponseDto } from '../messages/delete-certificate-response.dto'
+import { FirmwareStatusNotificationRequestDto } from '../messages/firmware-status-notification-request.dto'
+import { FirmwareStatusNotificationResponseDto } from '../messages/firmware-status-notification-response.dto'
+import { Get15118EvCertificateRequestDto } from '../messages/get15118-ev-certificate-request.dto'
+import { Get15118EvCertificateResponseDto } from '../messages/get15118-ev-certificate-response.dto'
+import { GetBaseReportRequestDto } from '../messages/get-base-report-request.dto'
+import { GetBaseReportResponseDto } from '../messages/get-base-report-response.dto'
+import { GetCertificateStatusRequestDto } from '../messages/get-certificate-status-request.dto'
+import { GetCertificateStatusResponseDto } from '../messages/get-certificate-status-response.dto'
+import { GetChargingProfilesRequestDto } from '../messages/get-charging-profiles-request.dto'
+import { GetChargingProfilesResponseDto } from '../messages/get-charging-profiles-response.dto'
+import { GetCompositeScheduleRequestDto } from '../messages/get-composite-schedule-request.dto'
+import { GetCompositeScheduleResponseDto } from '../messages/get-composite-schedule-response.dto'
+import { GetDisplayMessagesRequestDto } from '../messages/get-display-messages-request.dto'
+import { GetDisplayMessagesResponseDto } from '../messages/get-display-messages-response.dto'
+import { GetInstalledCertificateIdsRequestDto } from '../messages/get-installed-certificate-ids-request.dto'
+import { GetInstalledCertificateIdsResponseDto } from '../messages/get-installed-certificate-ids-response.dto'
+import { GetLocalListVersionRequestDto } from '../messages/get-local-list-version-request.dto'
+import { GetLocalListVersionResponseDto } from '../messages/get-local-list-version-response.dto'
+import { GetLogRequestDto } from '../messages/get-log-request.dto'
+import { GetLogResponseDto } from '../messages/get-log-response.dto'
+import { GetMonitoringReportRequestDto } from '../messages/get-monitoring-report-request.dto'
+import { GetMonitoringReportResponseDto } from '../messages/get-monitoring-report-response.dto'
+import { GetReportRequestDto } from '../messages/get-report-request.dto'
+import { GetReportResponseDto } from '../messages/get-report-response.dto'
+import { GetTransactionStatusRequestDto } from '../messages/get-transaction-status-request.dto'
+import { GetTransactionStatusResponseDto } from '../messages/get-transaction-status-response.dto'
+import { GetVariablesRequestDto } from '../messages/get-variables-request.dto'
+import { GetVariablesResponseDto } from '../messages/get-variables-response.dto'
+import { HeartbeatRequestDto } from '../messages/heartbeat-request.dto'
+import { HeartbeatResponseDto } from '../messages/heartbeat-response.dto'
+import { InstallCertificateRequestDto } from '../messages/install-certificate-request.dto'
+import { InstallCertificateResponseDto } from '../messages/install-certificate-response.dto'
+import { LogStatusNotificationRequestDto } from '../messages/log-status-notification-request.dto'
+import { LogStatusNotificationResponseDto } from '../messages/log-status-notification-response.dto'
+import { MeterValuesRequestDto } from '../messages/meter-values-request.dto'
+import { MeterValuesResponseDto } from '../messages/meter-values-response.dto'
+import { NotifyChargingLimitRequestDto } from '../messages/notify-charging-limit-request.dto'
+import { NotifyChargingLimitResponseDto } from '../messages/notify-charging-limit-response.dto'
+import { NotifyCustomerInformationRequestDto } from '../messages/notify-customer-information-request.dto'
+import { NotifyCustomerInformationResponseDto } from '../messages/notify-customer-information-response.dto'
+import { NotifyDisplayMessagesRequestDto } from '../messages/notify-display-messages-request.dto'
+import { NotifyDisplayMessagesResponseDto } from '../messages/notify-display-messages-response.dto'
+import { NotifyEvChargingNeedsRequestDto } from '../messages/notify-ev-charging-needs-request.dto'
+import { NotifyEvChargingNeedsResponseDto } from '../messages/notify-ev-charging-needs-response.dto'
+import { NotifyEvChargingScheduleRequestDto } from '../messages/notify-ev-charging-schedule-request.dto'
+import { NotifyEvChargingScheduleResponseDto } from '../messages/notify-ev-charging-schedule-response.dto'
+import { NotifyEventRequestDto } from '../messages/notify-event-request.dto'
+import { NotifyEventResponseDto } from '../messages/notify-event-response.dto'
+import { NotifyMonitoringReportRequestDto } from '../messages/notify-monitoring-report-request.dto'
+import { NotifyMonitoringReportResponseDto } from '../messages/notify-monitoring-report-response.dto'
+import { NotifyReportRequestDto } from '../messages/notify-report-request.dto'
+import { NotifyReportResponseDto } from '../messages/notify-report-response.dto'
+import { PublishFirmwareRequestDto } from '../messages/publish-firmware-request.dto'
+import { PublishFirmwareResponseDto } from '../messages/publish-firmware-response.dto'
+import { PublishFirmwareStatusNotificationRequestDto } from '../messages/publish-firmware-status-notification-request.dto'
+import { PublishFirmwareStatusNotificationResponseDto } from '../messages/publish-firmware-status-notification-response.dto'
+import { ReportChargingProfilesRequestDto } from '../messages/report-charging-profiles-request.dto'
+import { ReportChargingProfilesResponseDto } from '../messages/report-charging-profiles-response.dto'
+import { ReservationStatusUpdateRequestDto } from '../messages/reservation-status-update-request.dto'
+import { ReservationStatusUpdateResponseDto } from '../messages/reservation-status-update-response.dto'
+import { ReserveNowRequestDto } from '../messages/reserve-now-request.dto'
+import { ReserveNowResponseDto } from '../messages/reserve-now-response.dto'
+import { ResetRequestDto } from '../messages/reset-request.dto'
+import { ResetResponseDto } from '../messages/reset-response.dto'
+import { SecurityEventNotificationRequestDto } from '../messages/security-event-notification-request.dto'
+import { SecurityEventNotificationResponseDto } from '../messages/security-event-notification-response.dto'
+import { SendLocalListRequestDto } from '../messages/send-local-list-request.dto'
+import { SendLocalListResponseDto } from '../messages/send-local-list-response.dto'
+import { SetChargingProfileRequestDto } from '../messages/set-charging-profile-request.dto'
+import { SetChargingProfileResponseDto } from '../messages/set-charging-profile-response.dto'
+import { SetDisplayMessageRequestDto } from '../messages/set-display-message-request.dto'
+import { SetDisplayMessageResponseDto } from '../messages/set-display-message-response.dto'
+import { SetMonitoringBaseRequestDto } from '../messages/set-monitoring-base-request.dto'
+import { SetMonitoringBaseResponseDto } from '../messages/set-monitoring-base-response.dto'
+import { SetMonitoringLevelRequestDto } from '../messages/set-monitoring-level-request.dto'
+import { SetMonitoringLevelResponseDto } from '../messages/set-monitoring-level-response.dto'
+import { SetNetworkProfileRequestDto } from '../messages/set-network-profile-request.dto'
+import { SetNetworkProfileResponseDto } from '../messages/set-network-profile-response.dto'
+import { SetVariableMonitoringRequestDto } from '../messages/set-variable-monitoring-request.dto'
+import { SetVariableMonitoringResponseDto } from '../messages/set-variable-monitoring-response.dto'
+import { SetVariablesRequestDto } from '../messages/set-variables-request.dto'
+import { SetVariablesResponseDto } from '../messages/set-variables-response.dto'
+import { SignCertificateRequestDto } from '../messages/sign-certificate-request.dto'
+import { SignCertificateResponseDto } from '../messages/sign-certificate-response.dto'
+import { StatusNotificationRequestDto } from '../messages/status-notification-request.dto'
+import { StatusNotificationResponseDto } from '../messages/status-notification-response.dto'
+import { TransactionEventRequestDto } from '../messages/transaction-event-request.dto'
+import { TransactionEventResponseDto } from '../messages/transaction-event-response.dto'
+import { TriggerMessageRequestDto } from '../messages/trigger-message-request.dto'
+import { TriggerMessageResponseDto } from '../messages/trigger-message-response.dto'
+import { UnlockConnectorRequestDto } from '../messages/unlock-connector-request.dto'
+import { UnlockConnectorResponseDto } from '../messages/unlock-connector-response.dto'
+import { UnpublishFirmwareRequestDto } from '../messages/unpublish-firmware-request.dto'
+import { UnpublishFirmwareResponseDto } from '../messages/unpublish-firmware-response.dto'
+import { UpdateFirmwareRequestDto } from '../messages/update-firmware-request.dto'
+import { UpdateFirmwareResponseDto } from '../messages/update-firmware-response.dto'
+
+export const actionDtoMapping = [
+  {
+    action: OcppMessageEnum.Authorize,
+    requestDto: AuthorizeRequestDto,
+    responseDto: AuthorizeResponseDto,
+  },
+  {
+    action: OcppMessageEnum.BootNotification,
+    requestDto: BootNotificationRequestDto,
+    responseDto: BootNotificationResponseDto,
+  },
+  {
+    action: OcppMessageEnum.CancelReservation,
+    requestDto: CancelReservationRequestDto,
+    responseDto: CancelReservationResponseDto,
+  },
+  {
+    action: OcppMessageEnum.CertificateSigned,
+    requestDto: CertificateSignedRequestDto,
+    responseDto: CertificateSignedResponseDto,
+  },
+  {
+    action: OcppMessageEnum.ChangeAvailability,
+    requestDto: ChangeAvailabilityRequestDto,
+    responseDto: ChangeAvailabilityResponseDto,
+  },
+  {
+    action: OcppMessageEnum.ClearCache,
+    requestDto: ClearCacheRequestDto,
+    responseDto: ClearCacheResponseDto,
+  },
+  {
+    action: OcppMessageEnum.ClearChargingProfile,
+    requestDto: ClearChargingProfileRequestDto,
+    responseDto: ClearChargingProfileResponseDto,
+  },
+  {
+    action: OcppMessageEnum.ClearDisplayMessage,
+    requestDto: ClearDisplayMessageRequestDto,
+    responseDto: ClearDisplayMessageResponseDto,
+  },
+  {
+    action: OcppMessageEnum.ClearVariableMonitoring,
+    requestDto: ClearVariableMonitoringRequestDto,
+    responseDto: ClearVariableMonitoringResponseDto,
+  },
+  {
+    action: OcppMessageEnum.ClearedChargingLimit,
+    requestDto: ClearedChargingLimitRequestDto,
+    responseDto: ClearedChargingLimitResponseDto,
+  },
+  {
+    action: OcppMessageEnum.CostUpdated,
+    requestDto: CostUpdatedRequestDto,
+    responseDto: CostUpdatedResponseDto,
+  },
+  {
+    action: OcppMessageEnum.CustomerInformation,
+    requestDto: CustomerInformationRequestDto,
+    responseDto: CustomerInformationResponseDto,
+  },
+  {
+    action: OcppMessageEnum.DataTransfer,
+    requestDto: DataTransferRequestDto,
+    responseDto: DataTransferResponseDto,
+  },
+  {
+    action: OcppMessageEnum.DeleteCertificate,
+    requestDto: DeleteCertificateRequestDto,
+    responseDto: DeleteCertificateResponseDto,
+  },
+  {
+    action: OcppMessageEnum.FirmwareStatusNotification,
+    requestDto: FirmwareStatusNotificationRequestDto,
+    responseDto: FirmwareStatusNotificationResponseDto,
+  },
+  {
+    action: OcppMessageEnum.Get15118EvCertificate,
+    requestDto: Get15118EvCertificateRequestDto,
+    responseDto: Get15118EvCertificateResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetBaseReport,
+    requestDto: GetBaseReportRequestDto,
+    responseDto: GetBaseReportResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetCertificateStatus,
+    requestDto: GetCertificateStatusRequestDto,
+    responseDto: GetCertificateStatusResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetChargingProfiles,
+    requestDto: GetChargingProfilesRequestDto,
+    responseDto: GetChargingProfilesResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetCompositeSchedule,
+    requestDto: GetCompositeScheduleRequestDto,
+    responseDto: GetCompositeScheduleResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetDisplayMessages,
+    requestDto: GetDisplayMessagesRequestDto,
+    responseDto: GetDisplayMessagesResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetInstalledCertificateIds,
+    requestDto: GetInstalledCertificateIdsRequestDto,
+    responseDto: GetInstalledCertificateIdsResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetLocalListVersion,
+    requestDto: GetLocalListVersionRequestDto,
+    responseDto: GetLocalListVersionResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetLog,
+    requestDto: GetLogRequestDto,
+    responseDto: GetLogResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetMonitoringReport,
+    requestDto: GetMonitoringReportRequestDto,
+    responseDto: GetMonitoringReportResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetReport,
+    requestDto: GetReportRequestDto,
+    responseDto: GetReportResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetTransactionStatus,
+    requestDto: GetTransactionStatusRequestDto,
+    responseDto: GetTransactionStatusResponseDto,
+  },
+  {
+    action: OcppMessageEnum.GetVariables,
+    requestDto: GetVariablesRequestDto,
+    responseDto: GetVariablesResponseDto,
+  },
+  {
+    action: OcppMessageEnum.Heartbeat,
+    requestDto: HeartbeatRequestDto,
+    responseDto: HeartbeatResponseDto,
+  },
+  {
+    action: OcppMessageEnum.InstallCertificate,
+    requestDto: InstallCertificateRequestDto,
+    responseDto: InstallCertificateResponseDto,
+  },
+  {
+    action: OcppMessageEnum.LogStatusNotification,
+    requestDto: LogStatusNotificationRequestDto,
+    responseDto: LogStatusNotificationResponseDto,
+  },
+  {
+    action: OcppMessageEnum.MeterValues,
+    requestDto: MeterValuesRequestDto,
+    responseDto: MeterValuesResponseDto,
+  },
+  {
+    action: OcppMessageEnum.NotifyChargingLimit,
+    requestDto: NotifyChargingLimitRequestDto,
+    responseDto: NotifyChargingLimitResponseDto,
+  },
+  {
+    action: OcppMessageEnum.NotifyCustomerInformation,
+    requestDto: NotifyCustomerInformationRequestDto,
+    responseDto: NotifyCustomerInformationResponseDto,
+  },
+  {
+    action: OcppMessageEnum.NotifyDisplayMessages,
+    requestDto: NotifyDisplayMessagesRequestDto,
+    responseDto: NotifyDisplayMessagesResponseDto,
+  },
+  {
+    action: OcppMessageEnum.NotifyEvChargingNeeds,
+    requestDto: NotifyEvChargingNeedsRequestDto,
+    responseDto: NotifyEvChargingNeedsResponseDto,
+  },
+  {
+    action: OcppMessageEnum.NotifyEvChargingSchedule,
+    requestDto: NotifyEvChargingScheduleRequestDto,
+    responseDto: NotifyEvChargingScheduleResponseDto,
+  },
+  {
+    action: OcppMessageEnum.NotifyEvent,
+    requestDto: NotifyEventRequestDto,
+    responseDto: NotifyEventResponseDto,
+  },
+  {
+    action: OcppMessageEnum.NotifyMonitoringReport,
+    requestDto: NotifyMonitoringReportRequestDto,
+    responseDto: NotifyMonitoringReportResponseDto,
+  },
+  {
+    action: OcppMessageEnum.NotifyReport,
+    requestDto: NotifyReportRequestDto,
+    responseDto: NotifyReportResponseDto,
+  },
+  {
+    action: OcppMessageEnum.PublishFirmware,
+    requestDto: PublishFirmwareRequestDto,
+    responseDto: PublishFirmwareResponseDto,
+  },
+  {
+    action: OcppMessageEnum.PublishFirmwareStatusNotification,
+    requestDto: PublishFirmwareStatusNotificationRequestDto,
+    responseDto: PublishFirmwareStatusNotificationResponseDto,
+  },
+  {
+    action: OcppMessageEnum.ReportChargingProfiles,
+    requestDto: ReportChargingProfilesRequestDto,
+    responseDto: ReportChargingProfilesResponseDto,
+  },
+  {
+    action: OcppMessageEnum.ReservationStatusUpdate,
+    requestDto: ReservationStatusUpdateRequestDto,
+    responseDto: ReservationStatusUpdateResponseDto,
+  },
+  {
+    action: OcppMessageEnum.ReserveNow,
+    requestDto: ReserveNowRequestDto,
+    responseDto: ReserveNowResponseDto,
+  },
+  {
+    action: OcppMessageEnum.Reset,
+    requestDto: ResetRequestDto,
+    responseDto: ResetResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SecurityEventNotification,
+    requestDto: SecurityEventNotificationRequestDto,
+    responseDto: SecurityEventNotificationResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SendLocalList,
+    requestDto: SendLocalListRequestDto,
+    responseDto: SendLocalListResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SetChargingProfile,
+    requestDto: SetChargingProfileRequestDto,
+    responseDto: SetChargingProfileResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SetDisplayMessage,
+    requestDto: SetDisplayMessageRequestDto,
+    responseDto: SetDisplayMessageResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SetMonitoringBase,
+    requestDto: SetMonitoringBaseRequestDto,
+    responseDto: SetMonitoringBaseResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SetMonitoringLevel,
+    requestDto: SetMonitoringLevelRequestDto,
+    responseDto: SetMonitoringLevelResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SetNetworkProfile,
+    requestDto: SetNetworkProfileRequestDto,
+    responseDto: SetNetworkProfileResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SetVariableMonitoring,
+    requestDto: SetVariableMonitoringRequestDto,
+    responseDto: SetVariableMonitoringResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SetVariables,
+    requestDto: SetVariablesRequestDto,
+    responseDto: SetVariablesResponseDto,
+  },
+  {
+    action: OcppMessageEnum.SignCertificate,
+    requestDto: SignCertificateRequestDto,
+    responseDto: SignCertificateResponseDto,
+  },
+  {
+    action: OcppMessageEnum.StatusNotification,
+    requestDto: StatusNotificationRequestDto,
+    responseDto: StatusNotificationResponseDto,
+  },
+  {
+    action: OcppMessageEnum.TransactionEvent,
+    requestDto: TransactionEventRequestDto,
+    responseDto: TransactionEventResponseDto,
+  },
+  {
+    action: OcppMessageEnum.TriggerMessage,
+    requestDto: TriggerMessageRequestDto,
+    responseDto: TriggerMessageResponseDto,
+  },
+  {
+    action: OcppMessageEnum.UnlockConnector,
+    requestDto: UnlockConnectorRequestDto,
+    responseDto: UnlockConnectorResponseDto,
+  },
+  {
+    action: OcppMessageEnum.UnpublishFirmware,
+    requestDto: UnpublishFirmwareRequestDto,
+    responseDto: UnpublishFirmwareResponseDto,
+  },
+  {
+    action: OcppMessageEnum.UpdateFirmware,
+    requestDto: UpdateFirmwareRequestDto,
+    responseDto: UpdateFirmwareResponseDto,
+  },
+]
