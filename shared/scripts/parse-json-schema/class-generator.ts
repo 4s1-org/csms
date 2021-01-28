@@ -64,7 +64,7 @@ export class ClassGenerator {
 
     this._generateMessageEnumList(
       [__dirname, '..', '..', 'src', 'generated'],
-      this.classSkeletons.filter((x) => x.isMessage).map((x) => x.name.replace('Request', '').replace('Response', '')),
+      this.classSkeletons.filter((x) => x.isMessage).map((x) => x.nameWithoutReqOrRes),
     )
 
     this._generateActionDtpMapping(
@@ -141,7 +141,7 @@ export class ClassGenerator {
     data.push(``)
     data.push(`export const ${className} = [`)
     for (const skeleton of skeletons.filter((x) => x.isRequest)) {
-      const name = skeleton.name.replace('Request', '')
+      const name = skeleton.nameWithoutReqOrRes
       data.push(`  {`)
       data.push(`    action: OcppActionEnum.${name},`)
       data.push(`    requestDto: ${name}RequestDto,`)

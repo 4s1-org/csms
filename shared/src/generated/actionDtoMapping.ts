@@ -87,6 +87,10 @@ import { PublishFirmwareStatusNotificationRequestDto } from '../messages/publish
 import { PublishFirmwareStatusNotificationResponseDto } from '../messages/publish-firmware-status-notification-response.dto'
 import { ReportChargingProfilesRequestDto } from '../messages/report-charging-profiles-request.dto'
 import { ReportChargingProfilesResponseDto } from '../messages/report-charging-profiles-response.dto'
+import { RequestStartTransactionRequestDto } from '../messages/request-start-transaction-request.dto'
+import { RequestStartTransactionResponseDto } from '../messages/request-start-transaction-response.dto'
+import { RequestStopTransactionRequestDto } from '../messages/request-stop-transaction-request.dto'
+import { RequestStopTransactionResponseDto } from '../messages/request-stop-transaction-response.dto'
 import { ReservationStatusUpdateRequestDto } from '../messages/reservation-status-update-request.dto'
 import { ReservationStatusUpdateResponseDto } from '../messages/reservation-status-update-response.dto'
 import { ReserveNowRequestDto } from '../messages/reserve-now-request.dto'
@@ -341,6 +345,16 @@ export const actionDtoMapping = [
     action: OcppActionEnum.ReportChargingProfiles,
     requestDto: ReportChargingProfilesRequestDto,
     responseDto: ReportChargingProfilesResponseDto,
+  },
+  {
+    action: OcppActionEnum.RequestStartTransaction,
+    requestDto: RequestStartTransactionRequestDto,
+    responseDto: RequestStartTransactionResponseDto,
+  },
+  {
+    action: OcppActionEnum.RequestStopTransaction,
+    requestDto: RequestStopTransactionRequestDto,
+    responseDto: RequestStopTransactionResponseDto,
   },
   {
     action: OcppActionEnum.ReservationStatusUpdate,
