@@ -33,7 +33,6 @@ export class CallConverter {
     try {
       data = JSON.parse(data)
     } catch (err) {
-      console.log(err)
       throw new CsmsCallValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
     }
 
@@ -144,7 +143,7 @@ export class CallConverter {
     }
 
     if (!Object.values(OcppActionEnum).includes(action as OcppActionEnum)) {
-      throw new CsmsCallValidationError(messageId, OcppErrorCodeEnum.RpcFrameworkError, 'Unknown error code')
+      throw new CsmsCallValidationError(messageId, OcppErrorCodeEnum.NotImplemented, action)
     }
   }
 }
