@@ -1,10 +1,10 @@
-import { OcppMessageEnum } from '../generated/ocpp-message.enum'
+import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { RequestBaseDto } from '../generated/request-base.dto'
-import { OcppBaseMessageDto } from './ocpp-base-message.dto'
+import { OcppBaseCallDto } from './ocpp-base-call.dto'
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
-export class OcppRequestMessageDto extends OcppBaseMessageDto {
-  constructor(messageId: string, action: OcppMessageEnum, payload: RequestBaseDto) {
+export class OcppRequestCallDto extends OcppBaseCallDto {
+  constructor(messageId: string, action: OcppActionEnum, payload: RequestBaseDto) {
     super(OcppMessageTypeIdEnum.Call, messageId)
     this.action = action
     this.payload = payload
@@ -14,7 +14,7 @@ export class OcppRequestMessageDto extends OcppBaseMessageDto {
    * The field SHALL contain the OCPP Message name without the "Request" suffix. For example: For
    * a "BootNotificationRequest", this field shall be set to "BootNotification".
    */
-  public action: OcppMessageEnum
+  public action: OcppActionEnum
 
   /** JSON Payload of the action. */
   public payload: RequestBaseDto
