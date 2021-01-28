@@ -1,12 +1,12 @@
 import { Validator } from 'jsonschema'
 import fs from 'fs'
 import path from 'path'
-import { OcppErrorCodeEnum } from '../callMessages/ocpp-error-code.enum'
-import { OcppMessageEnum } from '../generated/ocpp-message.enum'
-import { CsmsError } from './csms-error'
+import { OcppErrorCodeEnum } from '../../calls/ocpp-error-code.enum'
+import { CsmsError } from '../errors/csms-error'
+import { OcppActionEnum } from '../../generated/ocpp-action.enum'
 
-export class MessageValidator {
-  private static _instance: MessageValidator
+export class PayloadValidator {
+  private static _instance: PayloadValidator
   private _validator: Validator
   private _schemas: { [key: string]: any } = {}
 
@@ -14,9 +14,9 @@ export class MessageValidator {
     this._validator = new Validator()
   }
 
-  public static get instance(): MessageValidator {
+  public static get instance(): PayloadValidator {
     if (!this._instance) {
-      this._instance = new MessageValidator()
+      this._instance = new PayloadValidator()
       this._instance.init()
     }
     return this._instance
@@ -33,11 +33,11 @@ export class MessageValidator {
     }
   }
 
-  public validateRequestPayload(action: OcppMessageEnum, payload: any): any {
+  public validateRequestPayload(action: OcppActionEnum, payload: any): any {
     this.validate(payload, this._schemas[action + 'Request'])
   }
 
-  public validateResponsePayload(action: OcppMessageEnum, payload: any): any {
+  public validateResponsePayload(action: OcppActionEnum, payload: any): any {
     this.validate(payload, this._schemas[action + 'Response'])
   }
 
