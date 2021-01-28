@@ -11,7 +11,7 @@ export class OcppResponseCallDto extends OcppBaseCallDto {
   /** JSON Payload of the action. */
   public payload: ResponseBaseDto
 
-  public toString(): string {
+  public toCallString(): string {
     return JSON.stringify([this.messageTypeId, this.messageId, this.payload])
   }
 }

@@ -11,4 +11,6 @@ export abstract class OcppBaseCallDto {
 
   /** This is a unique identifier that will be used to match request and result */
   public readonly messageId: string
+
+  public abstract toCallString(): string
 }
