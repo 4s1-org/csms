@@ -3,7 +3,6 @@ import {
   BootNotificationResponseDto,
   Logger,
   OcppErrorCodeEnum,
-  OcppMessageEnum,
   RegistrationStatusEnum,
   RequestBaseDto,
   ResponseBaseDto,
@@ -19,7 +18,8 @@ import {
   IdTokenEnum,
   MeterValuesRequestDto,
   MeterValuesResponseDto,
-  OcppRequestMessageDto,
+  OcppErrorCallDto,
+  OcppActionEnum,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation {
@@ -27,8 +27,8 @@ export class ChargingStation {
 
   public constructor(
     public readonly uniqueIdentifier: string,
-    public readonly username: string,
-    public readonly password: string,
+    private readonly username: string,
+    private readonly password: string,
   ) {
     // nothing to do
   }
@@ -41,7 +41,17 @@ export class ChargingStation {
     this.logger.info('Disconnected')
   }
 
-  public messageReceived(payload: RequestBaseDto): ResponseBaseDto {
+  public checkCredentials(username: string, password: string): boolean {
+    const result = username === this.username && password === this.password
+    if (result) {
+      this.logger.info('Login successful')
+    } else {
+      this.logger.warn('Login failed')
+    }
+    return result
+  }
+
+  public incomingRequestCall(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof BootNotificationRequestDto) {
       return this.bootNotification(payload)
     }
@@ -59,6 +69,19 @@ export class ChargingStation {
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
+  }
+
+  public incomingResponseCall(payload: ResponseBaseDto): void {
+    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
+  }
+
+  public incomingErrorCall(error: OcppErrorCallDto): void {
+    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
+  }
+
+  public getActionToRequest(messageId: string): OcppActionEnum {
+    // ToDo
+    return OcppActionEnum.Heartbeat
   }
 
   private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {

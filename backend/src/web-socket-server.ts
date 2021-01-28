@@ -7,25 +7,23 @@ import { TLSSocket } from 'tls'
 import { ChargingStation } from './charging-station'
 import {
   Logger,
-  OcppErrorResponseMessageDto,
-  OcppResponseMessageDto,
   OcppErrorCodeEnum,
-  OcppRequestMessageDto,
   ResponseBaseDto,
   CsmsError,
-  arrayToMessageDto,
-  BootNotificationRequestDto,
-  requestPayloadHandler,
-  OcppBaseMessageDto,
+  OcppBaseCallDto,
+  CallConverter,
+  OcppRequestCallDto,
+  PayloadConverter,
+  OcppResponseCallDto,
+  OcppErrorCallDto,
+  CsmsCallValidationError,
+  PayloadValidator,
 } from '@yellowgarbagebag/csms-shared'
+import { DataProvider } from './data-provider'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
   private server: https.Server | undefined
-  private chargingStations: ChargingStation[] = [
-    new ChargingStation('LS001', 'LS001', 'test'),
-    new ChargingStation('LS002', 'LS002', 'test'),
-  ]
 
   constructor(public readonly port: number = 3000) {
     // nothing to do
@@ -46,8 +44,10 @@ export class WebSocketServer {
       }
 
       socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-        const result: string = this.handleIncomingMessage(cs, msg.data)
-        socket.send(result)
+        const result: string | undefined = this.handleIncomingCall(cs, msg.data)
+        if (result) {
+          socket.send(result)
+        }
       }
     })
 
@@ -97,33 +97,34 @@ export class WebSocketServer {
     const b64auth = (request.headers.authorization || '').split(' ')[1] || ''
     const [username, password] = Buffer.from(b64auth, 'base64').toString().split(':')
 
-    return this.chargingStations.find(
-      (cs) => cs.uniqueIdentifier === uniqueIdentifier && cs.username === username && cs.password === password,
-    )
+    const cs = DataProvider.instance.getChargingStation(uniqueIdentifier)
+    if (cs && cs.checkCredentials(username, password)) {
+      return cs
+    } else {
+      return undefined
+    }
   }
 
-  protected handleIncomingMessage(cs: ChargingStation, data: any): string {
+  private handleIncomingCall(cs: ChargingStation, data: any): string | undefined {
     // Brauche im Fehlerfall
-    let call: OcppBaseMessageDto | undefined
+    let call: OcppBaseCallDto | undefined
 
     try {
       cs.logger.debug('Received', data)
-
       // Das "Array" validieren
-      call = arrayToMessageDto(data)
-      // Kombi aus Action und Payload validieren
-      if (call instanceof OcppRequestMessageDto) {
-        requestPayloadHandler(call)
+      call = CallConverter.instance.convert(data)
 
-        cs.logger.info(`-IN-  ${call.action}`)
+      if (call instanceof OcppRequestCallDto) {
+        cs.logger.info(`Incoming Request | ${call.action} | ${call.messageId}`)
+        PayloadValidator.instance.validateRequest(call)
+        PayloadConverter.instance.convertRequest(call)
         // Verarbeitung der Daten
-        const payload: ResponseBaseDto = cs.messageReceived(call.payload)
-
+        const responsePayload: ResponseBaseDto = cs.incomingRequestCall(call.payload)
         // Antwortobjekt erstellen
-        const responseMessage: OcppResponseMessageDto = new OcppResponseMessageDto(call.messageId, payload)
-        // Anwortdaten validieren
+        const responseCall = new OcppResponseCallDto(call.messageId, responsePayload)
+        // Anwortdaten validieren (nice to have)
         try {
-          //MessageValidator.instance.validateResponsePayload(responseMessage, requestMessage.action)
+          PayloadValidator.instance.validateResponse(responseCall, call.action)
         } catch (err) {
           if (err instanceof CsmsError) {
             cs.logger.error(`Server send invalid data | ${err.errorCode} | ${err.errorDescription}`)
@@ -132,29 +133,42 @@ export class WebSocketServer {
           }
         }
         // Loggen und senden
-        const response: string = responseMessage.toString()
-        cs.logger.info(`-OUT- ${call.action}`)
-        cs.logger.debug('Send', responseMessage)
-        return response
+        cs.logger.info(`Outgoing Response | ${call.action} | ${call.messageId}`)
+        cs.logger.debug('Send', responseCall)
+        return responseCall.toString()
+      } else if (call instanceof OcppResponseCallDto) {
+        const action = cs.getActionToRequest(call.messageId)
+        cs.logger.info(`Incoming Response | ${action} | ${call.messageId}`)
+        PayloadValidator.instance.validateResponse(call, action)
+        PayloadConverter.instance.convertResponse(call, action)
+        cs.incomingResponseCall(call.payload)
+        // Auf eine Antwort wird keine Antwort gesendet
+        return undefined
+      } else if (call instanceof OcppErrorCallDto) {
+        const action = cs.getActionToRequest(call.messageId)
+        cs.logger.info(`Incoming Error | ${action} | ${call.messageId}`)
+        cs.incomingErrorCall(call)
+        // Auf einen Fehler wird keine Antwort gesendet
+        return undefined
+      } else {
+        // Das kann eigentlich nie passieren
+        throw new CsmsError(OcppErrorCodeEnum.InternalError, 'Unknown call')
       }
-      return ''
     } catch (err) {
       const logger: Logger = cs?.logger || this.logger
-      const messageId: string = call?.messageId || ''
 
-      if (err instanceof CsmsError) {
-        logger.warn(`${err.errorCode} | ${err.errorDescription}`)
-        const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, err.errorCode, err.errorDescription)
-        return errorResponseMessage.toString()
-      } else if (err instanceof OcppErrorResponseMessageDto) {
-        // Dieser Fall kommt vor, wenn es schon beim Validieren des Call Arrays kracht.
-        logger.warn(`${err.errorCode} | ${err.errorDescription}`)
-        return err.toString()
+      if (err instanceof CsmsCallValidationError) {
+        logger.warn(`Validation Error | ${err.errorCode} | ${err.errorDescription}`)
+        return new OcppErrorCallDto(err.messageId, err.errorCode, err.errorDescription).toString()
+      } else if (err instanceof CsmsError) {
+        const messageId: string = call?.messageId || ''
+        logger.warn(`Csms Error | ${err.errorCode} | ${err.errorDescription}`)
+        return new OcppErrorCallDto(messageId, err.errorCode, err.errorDescription).toString()
       } else {
+        const messageId: string = call?.messageId || ''
         logger.fatal('Internal Server Error')
         logger.fatal(err)
-        const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, OcppErrorCodeEnum.InternalError)
-        return errorResponseMessage.toString()
+        return new OcppErrorCallDto(messageId, OcppErrorCodeEnum.InternalError).toString()
       }
     }
   }
