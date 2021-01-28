@@ -33,11 +33,11 @@ export class PayloadValidator {
     }
   }
 
-  public validateRequestPayload(action: OcppActionEnum, payload: any): any {
+  public validateRequest(action: OcppActionEnum, payload: any): any {
     this.validate(payload, this._schemas[action + 'Request'])
   }
 
-  public validateResponsePayload(action: OcppActionEnum, payload: any): any {
+  public validateResponse(action: OcppActionEnum, payload: any): any {
     this.validate(payload, this._schemas[action + 'Response'])
   }
 
