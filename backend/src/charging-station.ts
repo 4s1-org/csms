@@ -20,16 +20,15 @@ import {
   MeterValuesResponseDto,
   OcppErrorCallDto,
   OcppActionEnum,
+  OcppRequestCallDto,
+  IChargingStation,
 } from '@yellowgarbagebag/csms-shared'
 
-export class ChargingStation {
+export class ChargingStation implements IChargingStation {
   public readonly logger = new Logger(this.uniqueIdentifier)
+  private sendList: OcppRequestCallDto[] = []
 
-  public constructor(
-    public readonly uniqueIdentifier: string,
-    private readonly username: string,
-    private readonly password: string,
-  ) {
+  public constructor(public readonly uniqueIdentifier: string, private username: string, private password: string) {
     // nothing to do
   }
 
@@ -53,19 +52,19 @@ export class ChargingStation {
 
   public incomingRequestCall(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof BootNotificationRequestDto) {
-      return this.bootNotification(payload)
+      return this.bootNotificationRequest(payload)
     }
     if (payload instanceof HeartbeatRequestDto) {
-      return this.heartbeat(payload)
+      return this.heartbeatRequest(payload)
     }
     if (payload instanceof StatusNotificationRequestDto) {
-      return this.statusNotification(payload)
+      return this.statusNotificationRequest(payload)
     }
     if (payload instanceof AuthorizeRequestDto) {
-      return this.authorize(payload)
+      return this.authorizeRequest(payload)
     }
     if (payload instanceof MeterValuesRequestDto) {
-      return this.meterValues(payload)
+      return this.meterValuesRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -80,27 +79,33 @@ export class ChargingStation {
   }
 
   public getActionToRequest(messageId: string): OcppActionEnum {
-    // ToDo
-    return OcppActionEnum.Heartbeat
+    const request = this.sendList.find((x) => x.messageId === messageId)
+    if (request) {
+      const index = this.sendList.indexOf(request)
+      this.sendList.splice(index, 1)
+      return request.action
+    }
+
+    throw new CsmsError(OcppErrorCodeEnum.GenericError, 'Request to response not found')
   }
 
-  private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
+  private bootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
     return new BootNotificationResponseDto(new Date().toISOString(), 1, RegistrationStatusEnum.Accepted)
   }
 
-  private heartbeat(payload: HeartbeatRequestDto): HeartbeatResponseDto {
+  private heartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
     return new HeartbeatResponseDto(new Date().toISOString())
   }
 
-  private statusNotification(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
+  private statusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     return new StatusNotificationResponseDto()
   }
 
-  private meterValues(payload: MeterValuesRequestDto): MeterValuesResponseDto {
+  private meterValuesRequest(payload: MeterValuesRequestDto): MeterValuesResponseDto {
     return new MeterValuesResponseDto()
   }
 
-  private authorize(payload: AuthorizeRequestDto): AuthorizeResponseDto {
+  private authorizeRequest(payload: AuthorizeRequestDto): AuthorizeResponseDto {
     if (payload.idToken.type === IdTokenEnum.KeyCode) {
       if (payload.idToken.idToken === '1234') {
         // C04.FR.02 - alles richtig
