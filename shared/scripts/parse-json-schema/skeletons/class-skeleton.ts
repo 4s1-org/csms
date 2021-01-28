@@ -20,6 +20,16 @@ export class ClassSkeleton extends SkeletonBase {
     this._isRequest = value
   }
 
+  public get nameWithoutReqOrRes(): string {
+    if (this.name.endsWith('Request')) {
+      return this.name.substr(0, this.name.length - 7)
+    } else if (this.name.endsWith('Response')) {
+      return this.name.substr(0, this.name.length - 8)
+    } else {
+      return this.name
+    }
+  }
+
   public get isResponse(): boolean {
     return this._isResponse
   }
