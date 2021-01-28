@@ -19,7 +19,7 @@ export class OcppErrorCallDto extends OcppBaseCallDto {
   /** This JSON object describes error details in an undefined way. If there are no error details you MUST fill in an empty object {}. */
   public errorDetails: unknown
 
-  public toString(): string {
+  public toCallString(): string {
     return JSON.stringify([
       this.messageTypeId,
       this.messageId,
