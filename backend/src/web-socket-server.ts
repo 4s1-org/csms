@@ -5,25 +5,12 @@ import https from 'https'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
 import { ChargingStation } from './charging-station'
-import {
-  Logger,
-  OcppErrorResponseMessageDto,
-  OcppResponseMessageDto,
-  OcppErrorCodeEnum,
-  OcppRequestMessageDto,
-  MessageValidator,
-  ResponseBaseDto,
-  CsmsError,
-} from '@yellowgarbagebag/csms-shared'
-import { arrayToRequestMessage } from './utils'
+import { Logger, OcppBaseCallDto, handleIncomingCall } from '@yellowgarbagebag/csms-shared'
+import { DataProvider } from './data-provider'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
   private server: https.Server | undefined
-  private chargingStations: ChargingStation[] = [
-    new ChargingStation('LS001', 'LS001', 'test'),
-    new ChargingStation('LS002', 'LS002', 'test'),
-  ]
 
   constructor(public readonly port: number = 3000) {
     // nothing to do
@@ -44,8 +31,10 @@ export class WebSocketServer {
       }
 
       socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-        const result: string = this.handleIncomingMessage(cs, msg.data)
-        socket.send(result)
+        const result: OcppBaseCallDto | undefined = handleIncomingCall(cs, msg.data)
+        if (result) {
+          socket.send(result.toCallString())
+        }
       }
     })
 
@@ -95,62 +84,11 @@ export class WebSocketServer {
     const b64auth = (request.headers.authorization || '').split(' ')[1] || ''
     const [username, password] = Buffer.from(b64auth, 'base64').toString().split(':')
 
-    return this.chargingStations.find(
-      (cs) => cs.uniqueIdentifier === uniqueIdentifier && cs.username === username && cs.password === password,
-    )
-  }
-
-  protected handleIncomingMessage(cs: ChargingStation, data: any): string {
-    // Brauche im Fehlerfall
-    let requestMessage: OcppRequestMessageDto | undefined
-
-    try {
-      cs.logger.debug('Received', data)
-
-      // Das "Array" validieren
-      requestMessage = arrayToRequestMessage(data)
-      // Kombi aus Action und Payload validieren
-      MessageValidator.instance.validateRequestPayload(requestMessage)
-
-      // Verarbeitung der Daten
-      cs.logger.info(`-IN-  ${requestMessage.action}`)
-      const payload: ResponseBaseDto = cs.messageReceived(requestMessage.action, requestMessage.payload)
-
-      // Antwortobjekt erstellen
-      const responseMessage: OcppResponseMessageDto = new OcppResponseMessageDto(requestMessage.messageId, payload)
-      // Anwortdaten validieren
-      try {
-        MessageValidator.instance.validateResponsePayload(responseMessage, requestMessage.action)
-      } catch (err) {
-        if (err instanceof CsmsError) {
-          cs.logger.error(`Server send invalid data | ${err.errorCode} | ${err.errorDescription}`)
-        } else {
-          throw err
-        }
-      }
-      // Loggen und senden
-      const response: string = responseMessage.toString()
-      cs.logger.info(`-OUT- ${requestMessage.action}`)
-      cs.logger.debug('Send', responseMessage)
-      return response
-    } catch (err) {
-      const logger: Logger = cs?.logger || this.logger
-      const messageId: string = requestMessage?.messageId || ''
-
-      if (err instanceof CsmsError) {
-        logger.warn(`${err.errorCode} | ${err.errorDescription}`)
-        const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, err.errorCode, err.errorDescription)
-        return errorResponseMessage.toString()
-      } else if (err instanceof OcppErrorResponseMessageDto) {
-        // Dieser Fall kommt vor, wenn es schon beim Validieren des Call Arrays kracht.
-        logger.warn(`${err.errorCode} | ${err.errorDescription}`)
-        return err.toString()
-      } else {
-        logger.fatal('Internal Server Error')
-        logger.fatal(err)
-        const errorResponseMessage = new OcppErrorResponseMessageDto(messageId, OcppErrorCodeEnum.InternalError)
-        return errorResponseMessage.toString()
-      }
+    const cs = DataProvider.instance.getChargingStation(uniqueIdentifier)
+    if (cs && cs.checkCredentials(username, password)) {
+      return cs
+    } else {
+      return undefined
     }
   }
 }
