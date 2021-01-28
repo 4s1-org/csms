@@ -8,8 +8,21 @@ import { OcppResponseCallDto } from '../../calls/ocpp-response-call.dto'
 import { OcppActionEnum } from '../../generated/ocpp-action.enum'
 import { CsmsCallValidationError } from '../errors/csms-call-validation-error'
 
-export abstract class CallConverter {
-  public static convert(data: unknown): OcppBaseCallDto {
+export class CallConverter {
+  private static _instance: CallConverter
+
+  private constructor() {
+    // nothing to do
+  }
+
+  public static get instance(): CallConverter {
+    if (!this._instance) {
+      this._instance = new CallConverter()
+    }
+    return this._instance
+  }
+
+  public convert(data: unknown): OcppBaseCallDto {
     if (!data) {
       throw new CsmsCallValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
     }
@@ -75,13 +88,13 @@ export abstract class CallConverter {
     }
   }
 
-  private static validateErrorDetails(messageId: string, errorDetails: any): void {
+  private validateErrorDetails(messageId: string, errorDetails: any): void {
     if (!errorDetails) {
       throw new CsmsCallValidationError(messageId, OcppErrorCodeEnum.RpcFrameworkError, 'Missing error details')
     }
   }
 
-  private static validateErrorDescription(messageId: string, errorDescription: any): void {
+  private validateErrorDescription(messageId: string, errorDescription: any): void {
     if (errorDescription === null || errorDescription === undefined) {
       throw new CsmsCallValidationError(messageId, OcppErrorCodeEnum.RpcFrameworkError, 'Missing error description')
     }
@@ -99,7 +112,7 @@ export abstract class CallConverter {
     }
   }
 
-  private static validateErrorCode(messageId: string, errorCode: any): void {
+  private validateErrorCode(messageId: string, errorCode: any): void {
     if (typeof errorCode !== 'string') {
       throw new CsmsCallValidationError(messageId, OcppErrorCodeEnum.RpcFrameworkError, 'Error code is not a string')
     }
@@ -109,7 +122,7 @@ export abstract class CallConverter {
     }
   }
 
-  private static validateMessageId(messageId: any): void {
+  private validateMessageId(messageId: any): void {
     if (typeof messageId !== 'string') {
       throw new CsmsCallValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'MessageId is not a string')
     }
@@ -119,13 +132,13 @@ export abstract class CallConverter {
     }
   }
 
-  private static validatePayload(messageId: string, payload: any): void {
+  private validatePayload(messageId: string, payload: any): void {
     if (!payload) {
       throw new CsmsCallValidationError(messageId, OcppErrorCodeEnum.RpcFrameworkError, 'Wrong payload')
     }
   }
 
-  private static validateAction(messageId: string, action: any): void {
+  private validateAction(messageId: string, action: any): void {
     if (typeof action !== 'string') {
       throw new CsmsCallValidationError(messageId, OcppErrorCodeEnum.RpcFrameworkError, 'Action is not a string')
     }
