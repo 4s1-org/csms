@@ -18,16 +18,28 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "dummy": "ts-node src/dummy.ts",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
     "pjs": "ts-node scripts/parse-json-schema/index.ts",
-    "test": "echo No tests available",
-    "test:cov": "echo No tests available"
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:watch": "jest --watch"
   },
   "prettier": "@hest-lab/eslint-config",
+  "jest": {
+    "collectCoverageFrom": ["**/*.ts"],
+    "coverageDirectory": "../coverage",
+    "moduleFileExtensions": ["js", "json", "ts"],
+    "rootDir": "src",
+    "testEnvironment": "node",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    }
+  },
   "dependencies": {
     "class-transformer": "^0.3.2",
     "jsonschema": "^1.4.0",
@@ -36,10 +48,13 @@
   },
   "devDependencies": {
     "@hest-lab/eslint-config": "^1.4.0",
+    "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
     "@types/pino": "^6.3.5",
     "eslint": "^7.18.0",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
   }

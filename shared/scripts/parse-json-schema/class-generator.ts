@@ -67,6 +67,11 @@ export class ClassGenerator {
       this.classSkeletons.filter((x) => x.isMessage).map((x) => x.name.replace('Request', '').replace('Response', '')),
     )
 
+    this._generateActionDtpMapping(
+      [__dirname, '..', '..', 'src', 'generated'],
+      this.classSkeletons.filter((x) => x.isMessage),
+    )
+
     // Muss als letztes erfolgen
     this._generateGeneratedFolderIndex([__dirname, '..', '..', 'src', 'generated'])
   }
@@ -76,8 +81,9 @@ export class ClassGenerator {
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)
     for (const file of this.generatedFolderIndex) {
-      data.push(`export { ${file[0]} } from "./${file[1]}"`)
+      data.push(`export { ${file[0]} } from './${file[1]}'`)
     }
+    data.push(``)
 
     const fileName = path.join(...folders, 'index.ts')
     fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
@@ -89,8 +95,9 @@ export class ClassGenerator {
     data.push(``)
     for (const skeleton of skeletons) {
       skeleton.writeFile(folders)
-      data.push(`export { ${skeleton.fullName} } from "./${skeleton.fileNameWithoutExt}"`)
+      data.push(`export { ${skeleton.fullName} } from './${skeleton.fileNameWithoutExt}'`)
     }
+    data.push(``)
 
     const fileName = path.join(...folders, 'index.ts')
     fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
@@ -100,19 +107,51 @@ export class ClassGenerator {
     // Make unique
     messages = [...new Set(messages)]
 
-    const className = `OcppMessageEnum`
+    const className = `OcppActionEnum`
 
     const data: string[] = []
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)
     data.push(`export enum ${className} {`)
     for (const message of messages) {
-      data.push(`  ${message} = "${message}",`)
+      data.push(`  ${message} = '${message}',`)
     }
     data.push(`}`)
     data.push(``)
 
-    const fileNameWithoutExt = `ocpp-message.enum`
+    const fileNameWithoutExt = `ocpp-action.enum`
+    const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
+    fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
+
+    this.generatedFolderIndex.push([className, fileNameWithoutExt])
+  }
+
+  private _generateActionDtpMapping(folders: string[], skeletons: ClassSkeleton[]): void {
+    const data: string[] = []
+
+    const className = `actionDtoMapping`
+
+    data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+    data.push(``)
+    data.push(`import { OcppActionEnum } from './ocpp-action.enum'`)
+    for (const skeleton of skeletons) {
+      data.push(`import { ${skeleton.name}${skeleton.nameSuffix} } from '../messages/${skeleton.fileNameWithoutExt}'`)
+    }
+
+    data.push(``)
+    data.push(`export const ${className} = [`)
+    for (const skeleton of skeletons.filter((x) => x.isRequest)) {
+      const name = skeleton.name.replace('Request', '')
+      data.push(`  {`)
+      data.push(`    action: OcppActionEnum.${name},`)
+      data.push(`    requestDto: ${name}RequestDto,`)
+      data.push(`    responseDto: ${name}ResponseDto,`)
+      data.push(`  },`)
+    }
+    data.push(`]`)
+    data.push(``)
+
+    const fileNameWithoutExt = `actionDtoMapping`
     const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
     fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
 
@@ -144,7 +183,7 @@ export class ClassGenerator {
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)
     for (const skeleton of skeletons) {
-      data.push(`import { ${skeleton.fullName} } from "../messages/${skeleton.fileNameWithoutExt}"`)
+      data.push(`import { ${skeleton.fullName} } from '../messages/${skeleton.fileNameWithoutExt}'`)
     }
     const className = `${type}MessageType`
     data.push(`export type ${className} =`)
