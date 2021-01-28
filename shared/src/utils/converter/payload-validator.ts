@@ -4,6 +4,8 @@ import path from 'path'
 import { OcppErrorCodeEnum } from '../../calls/ocpp-error-code.enum'
 import { CsmsError } from '../errors/csms-error'
 import { OcppActionEnum } from '../../generated/ocpp-action.enum'
+import { OcppRequestCallDto } from '../../calls/ocpp-request-call.dto'
+import { OcppResponseCallDto } from '../../calls/ocpp-response-call.dto'
 
 export class PayloadValidator {
   private static _instance: PayloadValidator
@@ -33,12 +35,12 @@ export class PayloadValidator {
     }
   }
 
-  public validateRequest(action: OcppActionEnum, payload: any): any {
-    this.validate(payload, this._schemas[action + 'Request'])
+  public validateRequest(call: OcppRequestCallDto): any {
+    this.validate(call.payload, this._schemas[call.action + 'Request'])
   }
 
-  public validateResponse(action: OcppActionEnum, payload: any): any {
-    this.validate(payload, this._schemas[action + 'Response'])
+  public validateResponse(call: OcppResponseCallDto, action: OcppActionEnum): any {
+    this.validate(call.payload, this._schemas[action + 'Response'])
   }
 
   private validate(data: any, schema: any): void {
