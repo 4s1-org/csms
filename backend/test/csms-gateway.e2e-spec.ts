@@ -6,18 +6,20 @@ import {
   ChargingStationDto,
   IdTokenDto,
   IdTokenEnum,
+  OcppActionEnum,
   OcppErrorCodeEnum,
-  OcppMessageEnum,
   OcppMessageTypeIdEnum,
-  OcppRequestMessageDto,
+  OcppRequestCallDto,
   UnpublishFirmwareRequestDto,
 } from '@yellowgarbagebag/csms-shared'
 import { WebSocketServer } from '../src/web-socket-server'
 
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
+  let socket: WebSocket | undefined
+
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
-    const socket = new WebSocket(`wss://localhost:3000/ocpp/LS001`, ['ocpp2.0.1'], {
+    socket = new WebSocket(`wss://localhost:3000/ocpp/LS001`, ['ocpp2.0.1'], {
       headers: {
         authorization: `Basic ${Buffer.from(`LS001:test`).toString('base64')}`,
       },
@@ -39,6 +41,9 @@ describe('CSMS Gateway', () => {
   })
 
   afterEach(() => {
+    if (socket) {
+      socket.close()
+    }
     if (server) {
       server.stopServer()
     }
@@ -55,7 +60,7 @@ describe('CSMS Gateway', () => {
             JSON.stringify([
               OcppMessageTypeIdEnum.Call,
               messageId,
-              OcppMessageEnum.BootNotification,
+              OcppActionEnum.BootNotification,
               new BootNotificationRequestDto(
                 new ChargingStationDto('SingleSocketCharger', 'VendorX'),
                 BootReasonEnum.PowerUp,
@@ -81,14 +86,14 @@ describe('CSMS Gateway', () => {
 
         socket.onopen = (): void => {
           socket.send(
-            new OcppRequestMessageDto(
+            new OcppRequestCallDto(
               messageId,
-              OcppMessageEnum.BootNotification,
+              OcppActionEnum.BootNotification,
               new BootNotificationRequestDto(
                 new ChargingStationDto('SingleSocketCharger', 'VendorX'),
                 BootReasonEnum.PowerUp,
               ),
-            ).toString(),
+            ).toCallString(),
           )
         }
 
@@ -234,7 +239,7 @@ describe('CSMS Gateway', () => {
             JSON.stringify([
               OcppMessageTypeIdEnum.Result, // Es müsste ein Call sein
               messageId,
-              OcppMessageEnum.BootNotification,
+              OcppActionEnum.BootNotification,
               new BootNotificationRequestDto(
                 new ChargingStationDto('SingleSocketCharger', 'VendorX'),
                 BootReasonEnum.PowerUp,
@@ -269,7 +274,7 @@ describe('CSMS Gateway', () => {
           JSON.stringify([
             OcppMessageTypeIdEnum.Call,
             messageId,
-            OcppMessageEnum.UnpublishFirmware, // Noch nicht implementiert
+            OcppActionEnum.UnpublishFirmware, // Noch nicht implementiert
             new UnpublishFirmwareRequestDto('abcdefg'),
           ]),
         )
@@ -315,12 +320,12 @@ describe('CSMS Gateway', () => {
 
       socket.onopen = (): void => {
         socket.send(
-          new OcppRequestMessageDto(
+          new OcppRequestCallDto(
             messageId,
-            OcppMessageEnum.BootNotification,
+            OcppActionEnum.BootNotification,
             // Payload passt nicht zur Message
             new AuthorizeRequestDto(new IdTokenDto('xxx', IdTokenEnum.eMAID)),
-          ).toString(),
+          ).toCallString(),
         )
       }
 
@@ -346,7 +351,7 @@ describe('CSMS Gateway', () => {
           JSON.stringify([
             OcppMessageTypeIdEnum.Call,
             messageId,
-            OcppMessageEnum.BootNotification,
+            OcppActionEnum.BootNotification,
             {
               chargingStation: {
                 model: 'SingleSocketCharger',
@@ -381,7 +386,7 @@ describe('CSMS Gateway', () => {
           JSON.stringify([
             OcppMessageTypeIdEnum.Call,
             messageId,
-            OcppMessageEnum.BootNotification,
+            OcppActionEnum.BootNotification,
             {
               chargingStation: {
                 model: 'SingleSocketCharger',

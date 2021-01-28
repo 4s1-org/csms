@@ -3,9 +3,7 @@ import {
   BootNotificationResponseDto,
   Logger,
   OcppErrorCodeEnum,
-  OcppMessageEnum,
   RegistrationStatusEnum,
-  toClass,
   RequestBaseDto,
   ResponseBaseDto,
   CsmsError,
@@ -20,16 +18,17 @@ import {
   IdTokenEnum,
   MeterValuesRequestDto,
   MeterValuesResponseDto,
+  OcppErrorCallDto,
+  OcppActionEnum,
+  OcppRequestCallDto,
+  IChargingStation,
 } from '@yellowgarbagebag/csms-shared'
 
-export class ChargingStation {
+export class ChargingStation implements IChargingStation {
   public readonly logger = new Logger(this.uniqueIdentifier)
+  private sendList: OcppRequestCallDto[] = []
 
-  public constructor(
-    public readonly uniqueIdentifier: string,
-    public readonly username: string,
-    public readonly password: string,
-  ) {
+  public constructor(public readonly uniqueIdentifier: string, private username: string, private password: string) {
     // nothing to do
   }
 
@@ -41,40 +40,72 @@ export class ChargingStation {
     this.logger.info('Disconnected')
   }
 
-  public messageReceived(action: OcppMessageEnum, payload: RequestBaseDto): ResponseBaseDto {
-    switch (action) {
-      case OcppMessageEnum.BootNotification:
-        return this.bootNotification(toClass(BootNotificationRequestDto, payload))
-      case OcppMessageEnum.Heartbeat:
-        return this.heartbeat(toClass(HeartbeatRequestDto, payload))
-      case OcppMessageEnum.StatusNotification:
-        return this.statusNotification(toClass(StatusNotificationRequestDto, payload))
-      case OcppMessageEnum.Authorize:
-        return this.authorize(toClass(AuthorizeRequestDto, payload))
-      case OcppMessageEnum.MeterValues:
-        return this.meterValues(toClass(MeterValuesRequestDto, payload))
-      default:
-        throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
+  public checkCredentials(username: string, password: string): boolean {
+    const result = username === this.username && password === this.password
+    if (result) {
+      this.logger.info('Login successful')
+    } else {
+      this.logger.warn('Login failed')
     }
+    return result
   }
 
-  private bootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
+  public incomingRequestCall(payload: RequestBaseDto): ResponseBaseDto {
+    if (payload instanceof BootNotificationRequestDto) {
+      return this.bootNotificationRequest(payload)
+    }
+    if (payload instanceof HeartbeatRequestDto) {
+      return this.heartbeatRequest(payload)
+    }
+    if (payload instanceof StatusNotificationRequestDto) {
+      return this.statusNotificationRequest(payload)
+    }
+    if (payload instanceof AuthorizeRequestDto) {
+      return this.authorizeRequest(payload)
+    }
+    if (payload instanceof MeterValuesRequestDto) {
+      return this.meterValuesRequest(payload)
+    }
+
+    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
+  }
+
+  public incomingResponseCall(payload: ResponseBaseDto): void {
+    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
+  }
+
+  public incomingErrorCall(error: OcppErrorCallDto): void {
+    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
+  }
+
+  public getActionToRequest(messageId: string): OcppActionEnum {
+    const request = this.sendList.find((x) => x.messageId === messageId)
+    if (request) {
+      const index = this.sendList.indexOf(request)
+      this.sendList.splice(index, 1)
+      return request.action
+    }
+
+    throw new CsmsError(OcppErrorCodeEnum.GenericError, 'Request to response not found')
+  }
+
+  private bootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
     return new BootNotificationResponseDto(new Date().toISOString(), 1, RegistrationStatusEnum.Accepted)
   }
 
-  private heartbeat(payload: HeartbeatRequestDto): HeartbeatResponseDto {
+  private heartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
     return new HeartbeatResponseDto(new Date().toISOString())
   }
 
-  private statusNotification(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
+  private statusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     return new StatusNotificationResponseDto()
   }
 
-  private meterValues(payload: MeterValuesRequestDto): MeterValuesResponseDto {
+  private meterValuesRequest(payload: MeterValuesRequestDto): MeterValuesResponseDto {
     return new MeterValuesResponseDto()
   }
 
-  private authorize(payload: AuthorizeRequestDto): AuthorizeResponseDto {
+  private authorizeRequest(payload: AuthorizeRequestDto): AuthorizeResponseDto {
     if (payload.idToken.type === IdTokenEnum.KeyCode) {
       if (payload.idToken.idToken === '1234') {
         // C04.FR.02 - alles richtig

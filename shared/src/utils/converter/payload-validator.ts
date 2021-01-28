@@ -1,14 +1,14 @@
 import { Validator } from 'jsonschema'
 import fs from 'fs'
 import path from 'path'
-import { OcppRequestMessageDto } from '../callMessages/ocpp-request-message.dto'
-import { OcppErrorCodeEnum } from '../callMessages/ocpp-error-code.enum'
-import { OcppResponseMessageDto } from '../callMessages/ocpp-response-message.dto'
-import { OcppMessageEnum } from '../generated/ocpp-message.enum'
-import { CsmsError } from './csms-error'
+import { OcppErrorCodeEnum } from '../../calls/ocpp-error-code.enum'
+import { CsmsError } from '../errors/csms-error'
+import { OcppActionEnum } from '../../generated/ocpp-action.enum'
+import { OcppRequestCallDto } from '../../calls/ocpp-request-call.dto'
+import { OcppResponseCallDto } from '../../calls/ocpp-response-call.dto'
 
-export class MessageValidator {
-  private static _instance: MessageValidator
+export class PayloadValidator {
+  private static _instance: PayloadValidator
   private _validator: Validator
   private _schemas: { [key: string]: any } = {}
 
@@ -16,16 +16,19 @@ export class MessageValidator {
     this._validator = new Validator()
   }
 
-  public static get instance(): MessageValidator {
+  public static get instance(): PayloadValidator {
     if (!this._instance) {
-      this._instance = new MessageValidator()
+      this._instance = new PayloadValidator()
       this._instance.init()
     }
     return this._instance
   }
 
   private init(): void {
-    const dir = path.join(__dirname, '..', '..', 'third-party', 'ocpp', '2.0.1')
+    const dir = path.join(__dirname, '..', '..', '..', 'third-party', 'ocpp', '2.0.1')
+    if (!fs.existsSync(dir)) {
+      throw new Error('Path to schema files not exists')
+    }
     const files = fs.readdirSync(dir)
 
     for (const file of files) {
@@ -35,12 +38,12 @@ export class MessageValidator {
     }
   }
 
-  public validateRequestPayload(request: OcppRequestMessageDto): any {
-    this.validate(request.payload, this._schemas[request.action + 'Request'])
+  public validateRequest(call: OcppRequestCallDto): any {
+    this.validate(call.payload, this._schemas[call.action + 'Request'])
   }
 
-  public validateResponsePayload(response: OcppResponseMessageDto, action: OcppMessageEnum): any {
-    this.validate(response.payload, this._schemas[action + 'Response'])
+  public validateResponse(call: OcppResponseCallDto, action: OcppActionEnum): any {
+    this.validate(call.payload, this._schemas[action + 'Response'])
   }
 
   private validate(data: any, schema: any): void {

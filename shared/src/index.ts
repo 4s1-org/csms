@@ -1,8 +1,8 @@
 import 'reflect-metadata'
 
-export * from './enumerations'
-export * from './messages'
+export * from './calls'
 export * from './datatypes'
-export * from './callMessages'
-export * from './utils'
+export * from './enumerations'
 export * from './generated'
+export * from './messages'
+export * from './utils'
