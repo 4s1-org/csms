@@ -49,11 +49,11 @@ export class WebSocketClient {
       }, 100)
 
       setTimeout(() => {
-        this.sendRequest(this.cs.sendAuthorizationRequestByPinCode())
+        this.sendRequest(this.cs.sendAuthorizationRequest_PinCode())
       }, 200)
 
       setTimeout(() => {
-        this.sendRequest(this.cs.sendAuthorizationRequestByRfid())
+        this.sendRequest(this.cs.sendAuthorizationRequest_Rfid())
       }, 300)
 
       setTimeout(() => {
@@ -63,6 +63,10 @@ export class WebSocketClient {
       setTimeout(() => {
         this.sendRequest(this.cs.sendHeartbeatRequest())
       }, 500)
+
+      setTimeout(() => {
+        this.sendRequest(this.cs.sendNotifyEventRequest_LockFailure())
+      }, 600)
     }
 
     // Handling, besonders der Fehler, wie im Backend lösen
