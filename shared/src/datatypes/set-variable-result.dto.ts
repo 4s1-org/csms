@@ -9,6 +9,9 @@ import { SetVariableStatusEnum } from '../enumerations/set-variable-status.enum'
 import { StatusInfoDto } from './status-info.dto'
 import { VariableDto } from './variable.dto'
 
+/**
+ * SetVariableResultType is used by: SetVariablesResponse
+ */
 export class SetVariableResultDto extends DatatypeBaseDto {
   public constructor(
     attributeStatus: SetVariableStatusEnum,
@@ -24,16 +27,46 @@ export class SetVariableResultDto extends DatatypeBaseDto {
   @Type(() => CustomDataDto)
   public customData!: CustomDataDto
 
+  /**
+   * Type of attribute: Actual, Target, MinSet, MaxSet. Default is Actual when omitted.
+   * Required: false
+   * AttributeEnumType
+   * 0..1
+   */
   public attributeType!: AttributeEnum
 
+  /**
+   * Result status of setting the variable.
+   * Required: true
+   * SetVariableStatusEnumType
+   * 1..1
+   */
   public attributeStatus: SetVariableStatusEnum
 
+  /**
+   * Detailed attribute status information.
+   * Required: false
+   * StatusInfoType
+   * 0..1
+   */
   @Type(() => StatusInfoDto)
   public attributeStatusInfo!: StatusInfoDto
 
+  /**
+   * The component for which result is returned.
+   * Required: true
+   * ComponentType
+   * 1..1
+   */
   @Type(() => ComponentDto)
   public component: ComponentDto
 
+  /**
+   * The variable for which the result is returned.
+   * Required: true
+   * VariableType
+   * 1..1
+   */
   @Type(() => VariableDto)
   public variable: VariableDto
 }

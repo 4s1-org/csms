@@ -1,13 +1,19 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
 /**
- * Result status of setting the variable.
+ * ---
  */
 export enum SetVariableStatusEnum {
+  /** Variable successfully set. */
   Accepted = "Accepted",
+  /** Request is rejected. */
   Rejected = "Rejected",
+  /** Component is not known. */
   UnknownComponent = "UnknownComponent",
+  /** Variable is not known. */
   UnknownVariable = "UnknownVariable",
+  /** The AttributeType is not supported. */
   NotSupportedAttributeType = "NotSupportedAttributeType",
+  /** A reboot is required. */
   RebootRequired = "RebootRequired",
 }

@@ -9,11 +9,15 @@ import { SetVariables } from './messages/SetVariables'
 import { StatusNotification } from './messages/StatusNotification'
 import { TransactionEvent } from './messages/TransactionEvent'
 import { ChargingStationType } from './types/ChargingStationType'
+import { ComponentType } from './types/ComponentType'
 import { EVSEType } from './types/EVSEType'
 import { MeterValueType } from './types/MeterValueType'
 import { ModemType } from './types/ModemType'
 import { SampledValueType } from './types/SampledValueType'
+import { SetVariableDataType } from './types/SetVariableDataType'
+import { SetVariableResultType } from './types/SetVariableResultType'
 import { StatusInfoType } from './types/StatusInfoType'
+import { VariableType } from './types/VariableType'
 
 export type classCommentFieldType = {
   fieldName: string
@@ -57,9 +61,13 @@ const comments: classCommentType[] = [
   ...TransactionEvent,
   // Types
   ChargingStationType,
+  ComponentType,
   EVSEType,
   MeterValueType,
   ModemType,
   SampledValueType,
+  SetVariableDataType,
+  SetVariableResultType,
   StatusInfoType,
+  VariableType,
 ]
