@@ -19,7 +19,7 @@
     "prebuild": "rm -rf dist/",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lbt": "npm run lint && npm run build && npm run test",
+    "lbt": "npm run lint && npm run build && npm run test && npm run test:e2e",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
     "start": "ts-node src/index.ts | pino-pretty",
@@ -51,12 +51,14 @@
   },
   "dependencies": {
     "@yellowgarbagebag/csms-shared": "file:../shared",
+    "uuid": "^8.3.2",
     "ws": "^7.4.2"
   },
   "devDependencies": {
     "@hest-lab/eslint-config": "^1.4.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
+    "@types/uuid": "^8.3.0",
     "@types/ws": "^7.4.0",
     "eslint": "^7.19.0",
     "jest": "^26.6.3",
