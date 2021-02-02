@@ -11,7 +11,7 @@ import { CsmsCallValidationError } from './errors/csms-call-validation-error'
 import { CsmsError } from './errors/csms-error'
 import { IChargingStation } from './i-charging-station'
 
-export function handleIncomingCall(cs: IChargingStation, data: any): OcppBaseCallDto | undefined {
+export function handleIncomingCall(cs: IChargingStation, data: unknown): OcppBaseCallDto | undefined {
   // Brauche im Fehlerfall
   let call: OcppBaseCallDto | undefined
 
