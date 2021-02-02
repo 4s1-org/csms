@@ -42,19 +42,31 @@ export class WebSocketClient {
       const socketId = 'foo' // request.headers['sec-websocket-key']
       this.cs.connect()
 
-      this.sendRequest(this.cs.sendBootNotification())
+      this.sendRequest(this.cs.sendBootNotificationRequest())
 
-      // setTimeout(() => {
-      //   this.sendRequest(this.cs.sendStatusNotification())
-      // }, 200)
+      setTimeout(() => {
+        this.sendRequest(this.cs.sendStatusNotificationRequest())
+      }, 100)
 
-      // setTimeout(() => {
-      //   this.sendRequest(this.cs.sendAuthorization())
-      // }, 700)
+      setTimeout(() => {
+        this.sendRequest(this.cs.sendAuthorizationRequest_PinCode())
+      }, 200)
 
-      // setTimeout(() => {
-      //   this.sendRequest(this.cs.sendMeterValue())
-      // }, 920)
+      setTimeout(() => {
+        this.sendRequest(this.cs.sendAuthorizationRequest_Rfid())
+      }, 300)
+
+      setTimeout(() => {
+        this.sendRequest(this.cs.sendMeterValueRequest())
+      }, 400)
+
+      setTimeout(() => {
+        this.sendRequest(this.cs.sendHeartbeatRequest())
+      }, 500)
+
+      setTimeout(() => {
+        this.sendRequest(this.cs.sendNotifyEventRequest_LockFailure())
+      }, 600)
     }
 
     // Handling, besonders der Fehler, wie im Backend lösen

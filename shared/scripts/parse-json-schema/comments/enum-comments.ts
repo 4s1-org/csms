@@ -1,3 +1,4 @@
+import { AuthorizationStatusEnumType } from './enumerations/AuthorizationStatusEnumType'
 import { BootReasonEnumType } from './enumerations/BootReasonEnumType'
 import { ChangeAvailabilityStatusEnumType } from './enumerations/ChangeAvailabilityStatusEnumType'
 import { ConnectorStatusEnumType } from './enumerations/ConnectorStatusEnumType'
@@ -5,6 +6,7 @@ import { IdTokenEnumType } from './enumerations/IdTokenEnumType'
 import { OperationalStatusEnumType } from './enumerations/OperationalStatusEnumType'
 import { ResetEnumType } from './enumerations/ResetEnumType'
 import { ResetStatusEnumType } from './enumerations/ResetStatusEnumType'
+import { SetVariableStatusEnumType } from './enumerations/SetVariableStatusEnumType'
 
 export type enumCommentValueType = {
   value: string
@@ -32,6 +34,7 @@ export function getCommentByEnumValue(
 }
 
 const comments: enumCommentType[] = [
+  AuthorizationStatusEnumType,
   BootReasonEnumType,
   ChangeAvailabilityStatusEnumType,
   ConnectorStatusEnumType,
@@ -39,4 +42,5 @@ const comments: enumCommentType[] = [
   OperationalStatusEnumType,
   ResetEnumType,
   ResetStatusEnumType,
+  SetVariableStatusEnumType,
 ]
