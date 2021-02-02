@@ -1,3 +1,4 @@
+import { AuthorizationStatusEnumType } from './enumerations/AuthorizationStatusEnumType'
 import { BootReasonEnumType } from './enumerations/BootReasonEnumType'
 import { ChangeAvailabilityStatusEnumType } from './enumerations/ChangeAvailabilityStatusEnumType'
 import { ConnectorStatusEnumType } from './enumerations/ConnectorStatusEnumType'
@@ -33,6 +34,7 @@ export function getCommentByEnumValue(
 }
 
 const comments: enumCommentType[] = [
+  AuthorizationStatusEnumType,
   BootReasonEnumType,
   ChangeAvailabilityStatusEnumType,
   ConnectorStatusEnumType,
