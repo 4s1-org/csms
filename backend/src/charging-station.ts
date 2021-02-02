@@ -33,6 +33,8 @@ import {
   GetVariablesRequestDto,
   GetVariableDataDto,
   GetVariablesResponseDto,
+  NotifyEventRequestDto,
+  NotifyEventResponseDto,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation implements IChargingStation {
@@ -80,6 +82,9 @@ export class ChargingStation implements IChargingStation {
     }
     if (payload instanceof MeterValuesRequestDto) {
       return this.receiveMeterValuesRequest(payload)
+    }
+    if (payload instanceof NotifyEventRequestDto) {
+      return this.receiveNotifyEventRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -210,5 +215,13 @@ export class ChargingStation implements IChargingStation {
    */
   private receiveGetVariablesResponse(payload: GetVariablesResponseDto): void {
     this.logger.silent('', payload)
+  }
+
+  /**
+   * G05 - Lock Failure
+   */
+  private receiveNotifyEventRequest(payload: NotifyEventRequestDto): NotifyEventResponseDto {
+    this.logger.silent('', payload)
+    return new NotifyEventResponseDto()
   }
 }
