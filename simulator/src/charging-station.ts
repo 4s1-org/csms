@@ -128,7 +128,6 @@ export class ChargingStation implements IChargingStation {
   }
 
   private bootNotificationResponse(payload: BootNotificationResponseDto): void {
-    console.log(payload)
     this.heartbeatInterval = payload.interval
   }
 
