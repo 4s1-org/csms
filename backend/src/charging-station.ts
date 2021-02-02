@@ -22,6 +22,11 @@ import {
   OcppActionEnum,
   OcppRequestCallDto,
   IChargingStation,
+  SetVariablesRequestDto,
+  SetVariableDataDto,
+  ComponentDto,
+  VariableDto,
+  SetVariablesResponseDto,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation implements IChargingStation {
@@ -52,29 +57,34 @@ export class ChargingStation implements IChargingStation {
 
   public incomingRequestCall(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof BootNotificationRequestDto) {
-      return this.bootNotificationRequest(payload)
+      return this.receiveBootNotificationRequest(payload)
     }
     if (payload instanceof HeartbeatRequestDto) {
-      return this.heartbeatRequest(payload)
+      return this.receiveHeartbeatRequest(payload)
     }
     if (payload instanceof StatusNotificationRequestDto) {
-      return this.statusNotificationRequest(payload)
+      return this.receiveStatusNotificationRequest(payload)
     }
     if (payload instanceof AuthorizeRequestDto) {
-      return this.authorizeRequest(payload)
+      return this.receiveAuthorizeRequest(payload)
     }
     if (payload instanceof MeterValuesRequestDto) {
-      return this.meterValuesRequest(payload)
+      return this.receiveMeterValuesRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
   public incomingResponseCall(payload: ResponseBaseDto): void {
+    if (payload instanceof SetVariablesResponseDto) {
+      return this.receiveSetVariableResponse(payload)
+    }
+
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
   public incomingErrorCall(error: OcppErrorCallDto): void {
+    this.logger.silent('', error)
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
@@ -89,23 +99,37 @@ export class ChargingStation implements IChargingStation {
     throw new CsmsError(OcppErrorCodeEnum.GenericError, 'Request to response not found')
   }
 
-  private bootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
+  /**
+   * B01 - Cold Boot Charging Station
+   * B02 - Cold Boot Charging Station - Pending
+   * B03 - Cold Boot Charging Station - Rejected
+   */
+  private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
+    this.logger.silent('', payload)
     return new BootNotificationResponseDto(new Date().toISOString(), 1, RegistrationStatusEnum.Accepted)
   }
 
-  private heartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
+  /**
+   * G02 - Heartbeat
+   */
+  private receiveHeartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
+    this.logger.silent('', payload)
     return new HeartbeatResponseDto(new Date().toISOString())
   }
 
-  private statusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
-    return new StatusNotificationResponseDto()
-  }
-
-  private meterValuesRequest(payload: MeterValuesRequestDto): MeterValuesResponseDto {
+  /**
+   * J01 - Sending Meter Values not related to a transaction
+   */
+  private receiveMeterValuesRequest(payload: MeterValuesRequestDto): MeterValuesResponseDto {
+    this.logger.silent('', payload)
     return new MeterValuesResponseDto()
   }
 
-  private authorizeRequest(payload: AuthorizeRequestDto): AuthorizeResponseDto {
+  /**
+   * C01 - EV Driver Authorization using RFID
+   * C04 - Authorization using PIN-code
+   */
+  private receiveAuthorizeRequest(payload: AuthorizeRequestDto): AuthorizeResponseDto {
     if (payload.idToken.type === IdTokenEnum.KeyCode) {
       if (payload.idToken.idToken === '1234') {
         // C04.FR.02 - alles richtig
@@ -117,5 +141,30 @@ export class ChargingStation implements IChargingStation {
     }
 
     return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Blocked))
+  }
+
+  /**
+   * B05 - Set Variables
+   */
+  public sendSetVariablesRequest(): SetVariablesRequestDto {
+    return new SetVariablesRequestDto([
+      new SetVariableDataDto('Foo', new ComponentDto('Test'), new VariableDto('yyy')),
+      new SetVariableDataDto('Bar', new ComponentDto('Test'), new VariableDto('xxx')),
+    ])
+  }
+
+  /**
+   * B05 - Set Variables
+   */
+  private receiveSetVariableResponse(payload: SetVariablesResponseDto): void {
+    this.logger.silent('', payload)
+  }
+
+  /**
+   * G01 - Status Notification
+   */
+  private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
+    this.logger.silent('', payload)
+    return new StatusNotificationResponseDto()
   }
 }
