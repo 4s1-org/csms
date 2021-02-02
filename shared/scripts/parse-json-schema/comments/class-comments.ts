@@ -14,6 +14,7 @@ import { MeterValueType } from './types/MeterValueType'
 import { ModemType } from './types/ModemType'
 import { SampledValueType } from './types/SampledValueType'
 import { SetVariableDataType } from './types/SetVariableDataType'
+import { SetVariableResultType } from './types/SetVariableResultType'
 import { StatusInfoType } from './types/StatusInfoType'
 
 export type classCommentFieldType = {
@@ -63,5 +64,6 @@ const comments: classCommentType[] = [
   ModemType,
   SampledValueType,
   SetVariableDataType,
+  SetVariableResultType,
   StatusInfoType,
 ]
