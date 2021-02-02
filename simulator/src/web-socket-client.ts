@@ -42,7 +42,7 @@ export class WebSocketClient {
       const socketId = 'foo' // request.headers['sec-websocket-key']
       this.cs.connect()
 
-      this.sendRequest(this.cs.sendBootNotification())
+      this.sendRequest(this.cs.sendBootNotificationRequest())
 
       // setTimeout(() => {
       //   this.sendRequest(this.cs.sendStatusNotification())
