@@ -4,8 +4,16 @@ import path from 'path'
 import https from 'https'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
+import { v4 as uuid } from 'uuid'
 import { ChargingStation } from './charging-station'
-import { Logger, OcppBaseCallDto, handleIncomingCall } from '@yellowgarbagebag/csms-shared'
+import {
+  Logger,
+  OcppBaseCallDto,
+  handleIncomingCall,
+  RequestBaseDto,
+  actionDtoMapping,
+  OcppRequestCallDto,
+} from '@yellowgarbagebag/csms-shared'
 import { DataProvider } from './data-provider'
 
 export class WebSocketServer {
@@ -36,6 +44,12 @@ export class WebSocketServer {
           socket.send(result.toCallString())
         }
       }
+
+      setTimeout(() => {
+        this.sendRequest(socket, cs, cs.sendChangeAvailabilityRequest())
+        this.sendRequest(socket, cs, cs.sendSetVariablesRequest())
+        this.sendRequest(socket, cs, cs.sendGetVariablesRequest())
+      }, 3000)
     })
 
     this.server = https.createServer({
@@ -67,6 +81,21 @@ export class WebSocketServer {
       this.server.close()
     }
     this.logger.info(`WebSocketServer stopped`)
+  }
+
+  private sendRequest(socket: WebSocket, cs: ChargingStation, payload: RequestBaseDto): void {
+    const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
+    if (!mapping) {
+      throw new Error('No mapping found')
+    }
+
+    const msg = new OcppRequestCallDto(uuid(), mapping.action, payload)
+    cs.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
+    cs.logger.debug('Send', msg)
+    if (socket && socket.OPEN) {
+      socket.send(msg.toCallString())
+      cs.addToSendList(msg)
+    }
   }
 
   private authenticate(request: IncomingMessage): ChargingStation | undefined {
