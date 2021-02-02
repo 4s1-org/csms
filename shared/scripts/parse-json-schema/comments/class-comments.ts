@@ -9,6 +9,7 @@ import { SetVariables } from './messages/SetVariables'
 import { StatusNotification } from './messages/StatusNotification'
 import { TransactionEvent } from './messages/TransactionEvent'
 import { ChargingStationType } from './types/ChargingStationType'
+import { ComponentType } from './types/ComponentType'
 import { EVSEType } from './types/EVSEType'
 import { MeterValueType } from './types/MeterValueType'
 import { ModemType } from './types/ModemType'
@@ -59,6 +60,7 @@ const comments: classCommentType[] = [
   ...TransactionEvent,
   // Types
   ChargingStationType,
+  ComponentType,
   EVSEType,
   MeterValueType,
   ModemType,
