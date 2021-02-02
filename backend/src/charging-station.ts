@@ -27,6 +27,12 @@ import {
   ComponentDto,
   VariableDto,
   SetVariablesResponseDto,
+  ChangeAvailabilityRequestDto,
+  OperationalStatusEnum,
+  ChangeAvailabilityResponseDto,
+  GetVariablesRequestDto,
+  GetVariableDataDto,
+  GetVariablesResponseDto,
 } from '@yellowgarbagebag/csms-shared'
 
 export class ChargingStation implements IChargingStation {
@@ -43,6 +49,10 @@ export class ChargingStation implements IChargingStation {
 
   public disconnect(): void {
     this.logger.info('Disconnected')
+  }
+
+  public addToSendList(requestCall: OcppRequestCallDto): void {
+    this.sendList.push(requestCall)
   }
 
   public checkCredentials(username: string, password: string): boolean {
@@ -78,6 +88,12 @@ export class ChargingStation implements IChargingStation {
   public incomingResponseCall(payload: ResponseBaseDto): void {
     if (payload instanceof SetVariablesResponseDto) {
       return this.receiveSetVariableResponse(payload)
+    }
+    if (payload instanceof ChangeAvailabilityResponseDto) {
+      return this.receiveChangeAvailabilityResponse(payload)
+    }
+    if (payload instanceof GetVariablesResponseDto) {
+      return this.receiveGetVariablesResponse(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -140,7 +156,7 @@ export class ChargingStation implements IChargingStation {
       }
     }
 
-    return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Blocked))
+    return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
   }
 
   /**
@@ -166,5 +182,33 @@ export class ChargingStation implements IChargingStation {
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     this.logger.silent('', payload)
     return new StatusNotificationResponseDto()
+  }
+
+  /**
+   * G03 - Change Availability EVSE/Connector
+   */
+  public sendChangeAvailabilityRequest(): ChangeAvailabilityRequestDto {
+    return new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative)
+  }
+
+  /**
+   * G03 - Change Availability EVSE/Connector
+   */
+  private receiveChangeAvailabilityResponse(payload: ChangeAvailabilityResponseDto): void {
+    this.logger.silent('', payload)
+  }
+
+  /**
+   * B06 - Get Variables
+   */
+  public sendGetVariablesRequest(): GetVariablesRequestDto {
+    return new GetVariablesRequestDto([new GetVariableDataDto(new ComponentDto('test'), new VariableDto('foo'))])
+  }
+
+  /**
+   * B06 - Get Variables
+   */
+  private receiveGetVariablesResponse(payload: GetVariablesResponseDto): void {
+    this.logger.silent('', payload)
   }
 }
