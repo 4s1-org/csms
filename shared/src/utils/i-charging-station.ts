@@ -7,9 +7,9 @@ import { Logger } from './logger'
 export interface IChargingStation {
   logger: Logger
 
-  incomingRequestCall: (payload: RequestBaseDto) => ResponseBaseDto
-  incomingResponseCall: (payload: ResponseBaseDto) => void
-  incomingErrorCall: (payload: OcppErrorCallDto) => void
+  incomingRequestCall(payload: RequestBaseDto): ResponseBaseDto
+  incomingResponseCall(payload: ResponseBaseDto): void
+  incomingErrorCall(payload: OcppErrorCallDto): void
 
-  getActionToRequest: (messageId: string) => OcppActionEnum
+  getActionToRequest(messageId: string): OcppActionEnum
 }
