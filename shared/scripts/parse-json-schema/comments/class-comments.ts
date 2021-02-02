@@ -17,6 +17,7 @@ import { SampledValueType } from './types/SampledValueType'
 import { SetVariableDataType } from './types/SetVariableDataType'
 import { SetVariableResultType } from './types/SetVariableResultType'
 import { StatusInfoType } from './types/StatusInfoType'
+import { VariableType } from './types/VariableType'
 
 export type classCommentFieldType = {
   fieldName: string
@@ -68,4 +69,5 @@ const comments: classCommentType[] = [
   SetVariableDataType,
   SetVariableResultType,
   StatusInfoType,
+  VariableType,
 ]
