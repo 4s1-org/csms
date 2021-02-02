@@ -5,6 +5,7 @@ import { IdTokenEnumType } from './enumerations/IdTokenEnumType'
 import { OperationalStatusEnumType } from './enumerations/OperationalStatusEnumType'
 import { ResetEnumType } from './enumerations/ResetEnumType'
 import { ResetStatusEnumType } from './enumerations/ResetStatusEnumType'
+import { SetVariableStatusEnumType } from './enumerations/SetVariableStatusEnumType'
 
 export type enumCommentValueType = {
   value: string
@@ -39,4 +40,5 @@ const comments: enumCommentType[] = [
   OperationalStatusEnumType,
   ResetEnumType,
   ResetStatusEnumType,
+  SetVariableStatusEnumType,
 ]
