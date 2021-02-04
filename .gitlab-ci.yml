@@ -1,6 +1,5 @@
 stages:
   - validation
-  - utils
 
 validate-all:
   stage: validation
@@ -14,22 +13,3 @@ validate-all:
     - pnpm run lbt --prefix backend
     - pnpm run lbt --prefix simulator
 
-create-pipeline-image:
-  stage: utils
-  image: docker:19
-  services:
-    - docker:19-dind
-  only:
-    refs:
-      - web
-    variables:
-      - $docker == "build"
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - docker pull $CI_REGISTRY_IMAGE:pipeline || true
-    - docker build
-      --cache-from $CI_REGISTRY_IMAGE:pipeline
-      --tag $CI_REGISTRY_IMAGE:pipeline
-      --file Dockerfile-pipeline .
-    - docker push $CI_REGISTRY_IMAGE:pipeline
