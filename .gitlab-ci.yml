@@ -2,7 +2,7 @@ stages:
   - validation
   - utils
 
-.shared:
+shared:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   except:
@@ -11,7 +11,7 @@ stages:
     - pnpm install
     - pnpm --prefix shared run lbt
 
-.backend:
+backend:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   except:
@@ -27,13 +27,6 @@ simulator:
   except:
     - web
   script:
-    - pwd
-    - ls -la /
-    - mount
-    - ls -la
-    - ls -la /builds/YellowGarbageBag
-    - ls -la /builds/YellowGarbageBag/csms
-    - echo foo
     - pnpm install
     - pnpm --prefix shared run build
     - pnpm --prefix simulator run lbt
