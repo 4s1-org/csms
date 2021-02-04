@@ -16,4 +16,6 @@ COPY shared/package.json ./shared/
 COPY pnpm-lock.yaml .
 COPY pnpm-workspace.yaml .
 
-#RUN pnpm install
+RUN pnpm install
+
+RUN cd .. && rm -rf app/
