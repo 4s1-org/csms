@@ -2,17 +2,14 @@ stages:
   - validation
   - utils
 
-.shared:
+shared:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   except:
     - web
   script:
-    - cd shared
     - pnpm install
-    - pnpm run lint
-    - pnpm run build
-    - pnpm run test
+    - pnpm --prefix shared run lbt
 
 backend:
   stage: validation
@@ -20,26 +17,19 @@ backend:
   except:
     - web
   script:
-    - cd backend
     - pnpm install
-    - ls -la node_modules/
-    - ls -la /.pnpm-store/
-    - pnpm run lint
-    - pnpm run build
-    - pnpm run test:cov
-    - pnpm run test:e2e
+    - pnpm --prefix shared run build
+    - pnpm --prefix backend run lbt
 
-.simulator:
+simulator:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   except:
     - web
   script:
-    - cd simulator
     - pnpm install
-    - pnpm run lint
-    - pnpm run build
-    - pnpm run test
+    - pnpm --prefix shared run build
+    - pnpm --prefix simulator run lbt
 
 create-pipeline-image:
   stage: utils
