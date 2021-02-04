@@ -1,39 +1,15 @@
 stages:
   - validation
 
-shared:
+validate-all:
   stage: validation
   image: node:14-alpine
+  except:
+    - web
   script:
-    - cd shared
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test
+    - npm i pnpm -g
+    - pnpm install
+    - pnpm run lbt --prefix shared
+    - pnpm run lbt --prefix backend
+    - pnpm run lbt --prefix simulator
 
-backend:
-  stage: validation
-  image: node:14-alpine
-  script:
-    - cd shared
-    - npm ci
-    - npm run build
-    - cd ../backend
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test:cov
-    - npm run test:e2e
-
-simulator:
-  stage: validation
-  image: node:14-alpine
-  script:
-    - cd shared
-    - npm ci
-    - npm run build
-    - cd ../simulator
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test
