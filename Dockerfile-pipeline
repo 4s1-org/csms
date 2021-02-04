@@ -1,21 +1,20 @@
 FROM node:14-alpine
 
-RUN mkdir -p /app /.pnpm-store/
-WORKDIR /app
+RUN mkdir -p /app
+WORKDIR /builds/YellowGarbageBag/csms
 
 RUN mkdir -p simulator/ backend/ shared/
 
 RUN npm install pnpm -g
 RUN pnpm set verify-store-integrity false
-RUN pnpm config set store-dir /.pnpm-store/
 
 COPY simulator/package.json ./simulator/
-COPY backend/package.json ./backend/
-COPY shared/package.json ./shared/
+COPY backend/package.json   ./backend/
+COPY shared/package.json    ./shared/
 
 COPY pnpm-lock.yaml .
 COPY pnpm-workspace.yaml .
 
 RUN pnpm install
 
-RUN cd / && rm -rf /app/
+RUN rm -rf simulator/ backend/ shared/
