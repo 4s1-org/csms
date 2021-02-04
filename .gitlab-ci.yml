@@ -2,7 +2,7 @@ stages:
   - validation
   - utils
 
-shared:
+.shared:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   except:
@@ -22,12 +22,14 @@ backend:
   script:
     - cd backend
     - pnpm install
+    - ls -la node_modules/
+    - ls -la /.pnpm-store/
     - pnpm run lint
     - pnpm run build
     - pnpm run test:cov
     - pnpm run test:e2e
 
-simulator:
+.simulator:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   except:
