@@ -4,10 +4,11 @@ stages:
 
 validate-all:
   stage: validation
-  image: $CI_REGISTRY_IMAGE:pipeline
+  image: node:14-alpine
   except:
     - web
   script:
+    - npm i pnpm -g
     - pnpm install
     - pnpm run lbt --prefix shared
     - pnpm run lbt --prefix backend
