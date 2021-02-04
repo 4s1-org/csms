@@ -26,8 +26,7 @@ describe('CSMS Gateway', () => {
       rejectUnauthorized: false, // wg. SelfSignedCertificate
     })
     socket.onerror = (err): void => {
-      console.error(err)
-      fail()
+      fail(err)
     }
     socket.onclose = (): void => {
       done()
@@ -35,15 +34,12 @@ describe('CSMS Gateway', () => {
     return socket
   }
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     server = new WebSocketServer()
     server.startServer()
   })
 
-  afterEach(() => {
-    if (socket) {
-      socket.close()
-    }
+  afterAll(() => {
     if (server) {
       server.stopServer()
     }
