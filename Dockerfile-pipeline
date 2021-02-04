@@ -1,4 +1,0 @@
-FROM node:14-alpine
-
-RUN npm install pnpm -g
-RUN pnpm set verify-store-integrity false
