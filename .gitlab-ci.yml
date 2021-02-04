@@ -28,6 +28,8 @@ simulator:
     - web
   script:
     - pwd
+    - ls -la /
+    - mount
     - ls -la
     - ls -la /builds/YellowGarbageBag
     - ls -la /builds/YellowGarbageBag/csms
