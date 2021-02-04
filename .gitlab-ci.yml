@@ -31,9 +31,6 @@ simulator:
     - pnpm run build
     - pnpm run test
 
-stages:
-  - utils
-
 create-pipeline-image:
   stage: utils
   image: docker:19
