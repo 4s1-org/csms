@@ -19,6 +19,8 @@ import { DataProvider } from './data-provider'
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
   private server: https.Server | undefined
+  private sockets: Set<WebSocket> = new Set<WebSocket>()
+  private tlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
 
   constructor(public readonly port: number = 3000) {
     // nothing to do
@@ -29,28 +31,30 @@ export class WebSocketServer {
       noServer: true,
       //path: '/ocpp',
     })
-    wss.on('connection', (socket: WebSocket, request: IncomingMessage, cs: ChargingStation): void => {
-      socket.onclose = (): void => {
-        cs.disconnect()
-      }
+    wss.on(
+      'connection',
+      (socket: WebSocket, tlsSocket: TLSSocket, request: IncomingMessage, cs: ChargingStation): void => {
+        this.sockets.add(socket)
+        this.tlsSockets.add(tlsSocket)
 
-      socket.onerror = (err: any): void => {
-        this.logger.error('Error' + err)
-      }
-
-      socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-        const result: OcppBaseCallDto | undefined = handleIncomingCall(cs, msg.data)
-        if (result) {
-          socket.send(result.toCallString())
+        socket.onclose = (): void => {
+          cs.disconnect()
+          this.sockets.delete(socket)
+          this.tlsSockets.delete(tlsSocket)
         }
-      }
 
-      setTimeout(() => {
-        this.sendRequest(socket, cs, cs.sendChangeAvailabilityRequest())
-        this.sendRequest(socket, cs, cs.sendSetVariablesRequest())
-        this.sendRequest(socket, cs, cs.sendGetVariablesRequest())
-      }, 3000)
-    })
+        socket.onerror = (err: any): void => {
+          this.logger.error('Error' + err)
+        }
+
+        socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+          const result: OcppBaseCallDto | undefined = handleIncomingCall(cs, msg.data)
+          if (result) {
+            socket.send(result.toCallString())
+          }
+        }
+      },
+    )
 
     this.server = https.createServer({
       cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.crt')),
@@ -68,7 +72,7 @@ export class WebSocketServer {
       }
 
       wss.handleUpgrade(request, tlsSocket, head, (socket: WebSocket, request: IncomingMessage): void => {
-        wss.emit('connection', socket, request, cs)
+        wss.emit('connection', socket, tlsSocket, request, cs)
       })
     })
 
@@ -78,6 +82,12 @@ export class WebSocketServer {
 
   public stopServer(): void {
     if (this.server) {
+      for (const socket of this.tlsSockets) {
+        socket.destroy()
+      }
+      for (const socket of this.sockets) {
+        socket.close()
+      }
       this.server.close()
     }
     this.logger.info(`WebSocketServer stopped`)
