@@ -20,6 +20,7 @@ backend:
   except:
     - web
   script:
+    - cd backend
     - pnpm install
     - pnpm run lint
     - pnpm run build
@@ -32,9 +33,8 @@ simulator:
   except:
     - web
   script:
+    - cd simulator
     - pnpm install
-    - ls -la
-    - ls .. -la
     - pnpm run lint
     - pnpm run build
     - pnpm run test
