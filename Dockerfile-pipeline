@@ -3,11 +3,14 @@ FROM node:14-alpine
 RUN mkdir -p /app
 WORKDIR /app
 
-RUN npm install pnpm -g
+RUN mkdir -p simulator/ backend/ shared/ ~/.pnpm-store
 
-RUN mkdir -p client/ server/ shared/
-COPY client/package.json ./client/
-COPY server/package.json ./server/
+RUN npm install pnpm -g
+RUN pnpm set verify-store-integrity false
+RUN pnpm config set store-dir ~/.pnpm-store
+
+COPY simulator/package.json ./simulator/
+COPY backend/package.json ./backend/
 COPY shared/package.json ./shared/
 
 COPY pnpm-lock.yaml .
