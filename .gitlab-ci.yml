@@ -2,7 +2,7 @@ stages:
   - validation
   - utils
 
-shared:
+.shared:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   script:
@@ -12,7 +12,7 @@ shared:
     - pnpm run build
     - pnpm run test
 
-backend:
+.backend:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   script:
@@ -22,7 +22,7 @@ backend:
     - pnpm run test:cov
     - pnpm run test:e2e
 
-simulator:
+.simulator:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   script:
