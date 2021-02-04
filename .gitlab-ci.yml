@@ -33,6 +33,8 @@ simulator:
     - web
   script:
     - pnpm install
+    - ls -la
+    - ls .. -la
     - pnpm run lint
     - pnpm run build
     - pnpm run test
