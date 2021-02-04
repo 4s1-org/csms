@@ -31,6 +31,7 @@ simulator:
     - ls -la
     - ls -la /builds/YellowGarbageBag
     - ls -la /builds/YellowGarbageBag/csms
+    - echo foo
     - pnpm install
     - pnpm --prefix shared run build
     - pnpm --prefix simulator run lbt
