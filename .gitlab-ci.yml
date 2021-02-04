@@ -2,34 +2,16 @@ stages:
   - validation
   - utils
 
-shared:
+validate-all:
   stage: validation
   image: $CI_REGISTRY_IMAGE:pipeline
   except:
     - web
   script:
     - pnpm install
-    - pnpm --prefix shared run lbt
-
-backend:
-  stage: validation
-  image: $CI_REGISTRY_IMAGE:pipeline
-  except:
-    - web
-  script:
-    - pnpm install
-    - pnpm --prefix shared run build
-    - pnpm --prefix backend run lbt
-
-simulator:
-  stage: validation
-  image: $CI_REGISTRY_IMAGE:pipeline
-  except:
-    - web
-  script:
-    - pnpm install
-    - pnpm --prefix shared run build
-    - pnpm --prefix simulator run lbt
+    - pnpm run lbt --prefix shared
+    - pnpm run lbt --prefix backend
+    - pnpm run lbt --prefix simulator
 
 create-pipeline-image:
   stage: utils
