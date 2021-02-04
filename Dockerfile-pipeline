@@ -18,3 +18,4 @@ COPY pnpm-workspace.yaml .
 RUN pnpm install
 
 RUN rm -rf simulator/ backend/ shared/
+
