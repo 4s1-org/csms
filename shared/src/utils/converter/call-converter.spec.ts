@@ -1,7 +1,7 @@
 import 'reflect-metadata'
-import { OcppErrorCallDto } from '../../calls/ocpp-error-call.dto'
-import { OcppRequestCallDto } from '../../calls/ocpp-request-call.dto'
-import { OcppResponseCallDto } from '../../calls/ocpp-response-call.dto'
+import { OcppErrorCallDto } from '../../calls/ocpp-error-message.dto'
+import { OcppRequestCallDto } from '../../calls/ocpp-request-message.dto'
+import { OcppResponseCallDto } from '../../calls/ocpp-response-message.dto'
 import { CallConverter } from './call-converter'
 
 describe('Call Converter', () => {

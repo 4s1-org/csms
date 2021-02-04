@@ -1,5 +1,5 @@
 import { OcppErrorCodeEnum } from '.'
-import { OcppBaseCallDto } from './ocpp-base-call.dto'
+import { OcppBaseCallDto } from './ocpp-base-message.dto'
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
 export class OcppErrorCallDto extends OcppBaseCallDto {

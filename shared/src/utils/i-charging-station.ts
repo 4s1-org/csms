@@ -1,5 +1,5 @@
-import { OcppErrorCallDto } from '../calls/ocpp-error-call.dto'
-import { OcppRequestCallDto } from '../calls/ocpp-request-call.dto'
+import { OcppErrorCallDto } from '../calls/ocpp-error-message.dto'
+import { OcppRequestCallDto } from '../calls/ocpp-request-message.dto'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ResponseBaseDto } from '../generated/response-base.dto'

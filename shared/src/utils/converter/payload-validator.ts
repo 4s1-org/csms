@@ -4,8 +4,8 @@ import path from 'path'
 import { OcppErrorCodeEnum } from '../../calls/ocpp-error-code.enum'
 import { CsmsError } from '../errors/csms-error'
 import { OcppActionEnum } from '../../generated/ocpp-action.enum'
-import { OcppRequestCallDto } from '../../calls/ocpp-request-call.dto'
-import { OcppResponseCallDto } from '../../calls/ocpp-response-call.dto'
+import { OcppRequestCallDto } from '../../calls/ocpp-request-message.dto'
+import { OcppResponseCallDto } from '../../calls/ocpp-response-message.dto'
 
 export class PayloadValidator {
   private static _instance: PayloadValidator
