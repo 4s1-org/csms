@@ -1,6 +1,6 @@
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { RequestBaseDto } from '../generated/request-base.dto'
-import { OcppBaseCallDto } from './ocpp-base-call.dto'
+import { OcppBaseCallDto } from './ocpp-base-message.dto'
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
 export class OcppRequestCallDto extends OcppBaseCallDto {
