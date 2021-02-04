@@ -1,13 +1,13 @@
 FROM node:14-alpine
 
-RUN mkdir -p /app
+RUN mkdir -p /app /.pnpm-store/
 WORKDIR /app
 
-RUN mkdir -p simulator/ backend/ shared/ ~/.pnpm-store
+RUN mkdir -p simulator/ backend/ shared/
 
 RUN npm install pnpm -g
 RUN pnpm set verify-store-integrity false
-RUN pnpm config set store-dir ~/.pnpm-store
+RUN pnpm config set store-dir /.pnpm-store/
 
 COPY simulator/package.json ./simulator/
 COPY backend/package.json ./backend/
@@ -18,4 +18,4 @@ COPY pnpm-workspace.yaml .
 
 RUN pnpm install
 
-RUN cd .. && rm -rf app/
+RUN cd / && rm -rf /app/
