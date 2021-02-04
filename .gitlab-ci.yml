@@ -1,39 +1,55 @@
 stages:
   - validation
+  - utils
 
 shared:
   stage: validation
-  image: node:14-alpine
+  image: $CI_REGISTRY_IMAGE:pipeline
   script:
     - cd shared
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test
+    - pnpm install
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
 
 backend:
   stage: validation
-  image: node:14-alpine
+  image: $CI_REGISTRY_IMAGE:pipeline
   script:
-    - cd shared
-    - npm ci
-    - npm run build
-    - cd ../backend
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test:cov
-    - npm run test:e2e
+    - pnpm install
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test:cov
+    - pnpm run test:e2e
 
 simulator:
   stage: validation
-  image: node:14-alpine
+  image: $CI_REGISTRY_IMAGE:pipeline
   script:
-    - cd shared
-    - npm ci
-    - npm run build
-    - cd ../simulator
-    - npm ci
-    - npm run lint
-    - npm run build
-    - npm run test
+    - pnpm install
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
+
+stages:
+  - utils
+
+create-pipeline-image:
+  stage: utils
+  image: docker:19
+  services:
+    - docker:19-dind
+  only:
+    refs:
+      - web
+    variables:
+      - $docker == "build"
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:pipeline || true
+    - docker build
+      --cache-from $CI_REGISTRY_IMAGE:pipeline
+      --tag $CI_REGISTRY_IMAGE:pipeline
+      --file Dockerfile-pipeline .
+    - docker push $CI_REGISTRY_IMAGE:pipeline

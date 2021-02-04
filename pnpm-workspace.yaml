@@ -1,0 +1,4 @@
+packages:
+  - "simulator/"
+  - "shared/"
+  - "backend/"
