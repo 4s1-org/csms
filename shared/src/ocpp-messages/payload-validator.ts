@@ -25,7 +25,7 @@ export class PayloadValidator {
   }
 
   private init(): void {
-    const dir = path.join(__dirname, '..', '..', '..', 'third-party', 'ocpp', '2.0.1')
+    const dir = path.join(__dirname, '..', '..', 'third-party', 'ocpp', '2.0.1')
     if (!fs.existsSync(dir)) {
       throw new Error('Path to schema files not exists')
     }
