@@ -1,8 +1,8 @@
 import { ResponseBaseDto } from '../generated/response-base.dto'
-import { OcppBaseCallDto } from './ocpp-base-message.dto'
+import { OcppBaseMessageDto } from './ocpp-base-message.dto'
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
-export class OcppResponseCallDto extends OcppBaseCallDto {
+export class OcppResponseMessageDto extends OcppBaseMessageDto {
   constructor(messageId: string, payload: ResponseBaseDto) {
     super(OcppMessageTypeIdEnum.Result, messageId)
     this.payload = payload

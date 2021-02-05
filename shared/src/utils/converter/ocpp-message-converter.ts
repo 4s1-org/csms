@@ -1,10 +1,10 @@
 import { plainToClass } from 'class-transformer'
-import { OcppBaseCallDto } from '../../calls/ocpp-base-message.dto'
-import { OcppErrorCallDto } from '../../calls/ocpp-error-message.dto'
+import { OcppBaseMessageDto } from '../../calls/ocpp-base-message.dto'
+import { OcppErrorMessageDto } from '../../calls/ocpp-error-message.dto'
 import { OcppErrorCodeEnum } from '../../calls/ocpp-error-code.enum'
 import { OcppMessageTypeIdEnum } from '../../calls/ocpp-message-type-id.enum'
-import { OcppRequestCallDto } from '../../calls/ocpp-request-message.dto'
-import { OcppResponseCallDto } from '../../calls/ocpp-response-message.dto'
+import { OcppRequestMessageDto } from '../../calls/ocpp-request-message.dto'
+import { OcppResponseMessageDto } from '../../calls/ocpp-response-message.dto'
 import { OcppActionEnum } from '../../generated/ocpp-action.enum'
 import { CsmsCallValidationError } from '../errors/csms-call-validation-error'
 
@@ -22,7 +22,7 @@ export class CallConverter {
     return this._instance
   }
 
-  public convert(data: unknown): OcppBaseCallDto {
+  public convert(data: unknown): OcppBaseMessageDto {
     if (!data) {
       throw new CsmsCallValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
     }
@@ -55,7 +55,7 @@ export class CallConverter {
       this.validateAction(messageId, action)
       this.validatePayload(messageId, payload)
 
-      return plainToClass(OcppRequestCallDto, { messageTypeId, messageId, action, payload })
+      return plainToClass(OcppRequestMessageDto, { messageTypeId, messageId, action, payload })
     } else if (messageTypeId === OcppMessageTypeIdEnum.Result && data.length === 3) {
       const messageId = data[1]
       const payload = data[2]
@@ -63,7 +63,7 @@ export class CallConverter {
       this.validateMessageId(messageId)
       this.validatePayload(messageId, payload)
 
-      return plainToClass(OcppResponseCallDto, { messageTypeId, messageId, payload })
+      return plainToClass(OcppResponseMessageDto, { messageTypeId, messageId, payload })
     } else if (messageTypeId === OcppMessageTypeIdEnum.Error && data.length === 5) {
       const messageId = data[1]
       const errorCode = data[2]
@@ -75,7 +75,7 @@ export class CallConverter {
       this.validateErrorDescription(messageId, errorDescription)
       this.validateErrorDetails(messageId, errorDetails)
 
-      return plainToClass(OcppErrorCallDto, {
+      return plainToClass(OcppErrorMessageDto, {
         messageTypeId,
         messageId,
         errorCode,

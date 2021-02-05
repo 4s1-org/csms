@@ -1,6 +1,6 @@
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
-export abstract class OcppBaseCallDto {
+export abstract class OcppBaseMessageDto {
   constructor(messageTypeId: OcppMessageTypeIdEnum, messageId: string) {
     this.messageTypeId = messageTypeId
     this.messageId = messageId

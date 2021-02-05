@@ -1,7 +1,7 @@
 import 'reflect-metadata'
-import { OcppErrorCallDto } from '../../calls/ocpp-error-message.dto'
-import { OcppRequestCallDto } from '../../calls/ocpp-request-message.dto'
-import { OcppResponseCallDto } from '../../calls/ocpp-response-message.dto'
+import { OcppErrorMessageDto } from '../../calls/ocpp-error-message.dto'
+import { OcppRequestMessageDto } from '../../calls/ocpp-request-message.dto'
+import { OcppResponseMessageDto } from '../../calls/ocpp-response-message.dto'
 import { CallConverter } from './ocpp-message-converter'
 
 describe('Call Converter', () => {
@@ -13,7 +13,7 @@ describe('Call Converter', () => {
       // Act
       const message = CallConverter.instance.convert(data)
       // Assert
-      expect(message).toBeInstanceOf(OcppRequestCallDto)
+      expect(message).toBeInstanceOf(OcppRequestMessageDto)
     })
 
     it('Response Call', () => {
@@ -22,7 +22,7 @@ describe('Call Converter', () => {
       // Act
       const message = CallConverter.instance.convert(data)
       // Assert
-      expect(message).toBeInstanceOf(OcppResponseCallDto)
+      expect(message).toBeInstanceOf(OcppResponseMessageDto)
     })
 
     it('Error Call', () => {
@@ -31,7 +31,7 @@ describe('Call Converter', () => {
       // Act
       const message = CallConverter.instance.convert(data)
       // Assert
-      expect(message).toBeInstanceOf(OcppErrorCallDto)
+      expect(message).toBeInstanceOf(OcppErrorMessageDto)
     })
   })
 })
