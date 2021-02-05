@@ -1,14 +1,14 @@
-import { OcppBaseMessageDto } from '../calls/ocpp-base-message.dto'
-import { OcppErrorMessageDto } from '../calls/ocpp-error-message.dto'
-import { OcppErrorCodeEnum } from '../calls/ocpp-error-code.enum'
-import { OcppRequestMessageDto } from '../calls/ocpp-request-message.dto'
-import { OcppResponseMessageDto } from '../calls/ocpp-response-message.dto'
+import { OcppBaseMessageDto } from '../ocpp-messages/ocpp-base-message.dto'
+import { OcppErrorMessageDto } from '../ocpp-messages/ocpp-error-message.dto'
+import { OcppErrorCodeEnum } from '../ocpp-messages/ocpp-error-code.enum'
+import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto'
+import { OcppResponseMessageDto } from '../ocpp-messages/ocpp-response-message.dto'
 import { ResponseBaseDto } from '../generated/response-base.dto'
-import { OcppMessageHandler } from './converter/ocpp-message-handler'
-import { PayloadConverter } from './converter/payload-converter'
-import { PayloadValidator } from './converter/payload-validator'
-import { CsmsCallValidationError } from './errors/csms-call-validation-error'
-import { CsmsError } from './errors/csms-error'
+import { OcppMessageHandler } from './ocpp-message-handler'
+import { PayloadConverter } from './payload-converter'
+import { PayloadValidator } from './payload-validator'
+import { OcppMessageValidationError } from './ocpp-message-validation-error'
+import { CsmsError } from '../utils/csms-error'
 import { IChargingStation } from './i-charging-station'
 
 export function handleIncomingMessage(cs: IChargingStation, data: unknown): OcppBaseMessageDto | undefined {
@@ -18,7 +18,7 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
   try {
     cs.logger.debug('Received', data)
     // Das "Array" validieren
-    call = OcppMessageHandler.instance.convert(data)
+    call = OcppMessageHandler.instance.validateAndConvert(data)
 
     if (call instanceof OcppRequestMessageDto) {
       cs.logger.info(`Incoming Request | ${call.action} | ${call.messageId}`)
@@ -63,7 +63,7 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
   } catch (err) {
     let errorCall: OcppErrorMessageDto
 
-    if (err instanceof CsmsCallValidationError) {
+    if (err instanceof OcppMessageValidationError) {
       cs.logger.warn(`Validation Error | ${err.errorCode} | ${err.errorDescription}`)
       errorCall = new OcppErrorMessageDto(err.messageId, err.errorCode, err.errorDescription)
     } else if (err instanceof CsmsError) {
