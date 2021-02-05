@@ -1,9 +1,9 @@
-import { OcppErrorMessageDto } from '../calls/ocpp-error-message.dto'
-import { OcppRequestMessageDto } from '../calls/ocpp-request-message.dto'
+import { OcppErrorMessageDto } from '../ocpp-messages/ocpp-error-message.dto'
+import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ResponseBaseDto } from '../generated/response-base.dto'
-import { Logger } from './logger'
+import { Logger } from '../utils/logger'
 
 export interface IChargingStation {
   logger: Logger
