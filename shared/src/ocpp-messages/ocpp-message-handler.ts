@@ -83,7 +83,7 @@ export class OcppMessageHandler {
         errorDetails,
       })
     } else {
-      throw new OcppMessageValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'Unknown Call')
+      throw new OcppMessageValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'Unknown Message')
     }
   }
 
