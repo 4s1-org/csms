@@ -8,11 +8,11 @@ import { Logger } from './logger'
 export interface IChargingStation {
   logger: Logger
 
-  incomingRequestCall(payload: RequestBaseDto): ResponseBaseDto
-  incomingResponseCall(payload: ResponseBaseDto): void
-  incomingErrorCall(payload: OcppErrorMessageDto): void
+  incomingRequestMessage(payload: RequestBaseDto): ResponseBaseDto
+  incomingResponseMessage(payload: ResponseBaseDto): void
+  incomingErrorMessage(payload: OcppErrorMessageDto): void
 
   getActionToRequest(messageId: string): OcppActionEnum
 
-  addToSendList(requestCall: OcppRequestMessageDto): void
+  addToSendList(requestMessage: OcppRequestMessageDto): void
 }
