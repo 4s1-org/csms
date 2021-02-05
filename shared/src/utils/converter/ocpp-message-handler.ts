@@ -8,16 +8,16 @@ import { OcppResponseMessageDto } from '../../calls/ocpp-response-message.dto'
 import { OcppActionEnum } from '../../generated/ocpp-action.enum'
 import { CsmsCallValidationError } from '../errors/csms-call-validation-error'
 
-export class CallConverter {
-  private static _instance: CallConverter
+export class OcppMessageHandler {
+  private static _instance: OcppMessageHandler
 
   private constructor() {
     // nothing to do
   }
 
-  public static get instance(): CallConverter {
+  public static get instance(): OcppMessageHandler {
     if (!this._instance) {
-      this._instance = new CallConverter()
+      this._instance = new OcppMessageHandler()
     }
     return this._instance
   }

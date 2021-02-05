@@ -4,28 +4,28 @@ import { OcppErrorCodeEnum } from '../calls/ocpp-error-code.enum'
 import { OcppRequestMessageDto } from '../calls/ocpp-request-message.dto'
 import { OcppResponseMessageDto } from '../calls/ocpp-response-message.dto'
 import { ResponseBaseDto } from '../generated/response-base.dto'
-import { CallConverter } from './converter/ocpp-message-converter'
+import { OcppMessageHandler } from './converter/ocpp-message-handler'
 import { PayloadConverter } from './converter/payload-converter'
 import { PayloadValidator } from './converter/payload-validator'
 import { CsmsCallValidationError } from './errors/csms-call-validation-error'
 import { CsmsError } from './errors/csms-error'
 import { IChargingStation } from './i-charging-station'
 
-export function handleIncomingCall(cs: IChargingStation, data: unknown): OcppBaseMessageDto | undefined {
+export function handleIncomingMessage(cs: IChargingStation, data: unknown): OcppBaseMessageDto | undefined {
   // Brauche im Fehlerfall
   let call: OcppBaseMessageDto | undefined
 
   try {
     cs.logger.debug('Received', data)
     // Das "Array" validieren
-    call = CallConverter.instance.convert(data)
+    call = OcppMessageHandler.instance.convert(data)
 
     if (call instanceof OcppRequestMessageDto) {
       cs.logger.info(`Incoming Request | ${call.action} | ${call.messageId}`)
       PayloadValidator.instance.validateRequest(call)
       PayloadConverter.instance.convertRequest(call)
       // Verarbeitung der Daten
-      const responsePayload: ResponseBaseDto = cs.incomingRequestCall(call.payload)
+      const responsePayload: ResponseBaseDto = cs.incomingRequestMessage(call.payload)
       // Antwortobjekt erstellen
       const responseCall = new OcppResponseMessageDto(call.messageId, responsePayload)
       // Anwortdaten validieren (nice to have)
@@ -47,13 +47,13 @@ export function handleIncomingCall(cs: IChargingStation, data: unknown): OcppBas
       cs.logger.info(`Incoming Response | ${action} | ${call.messageId}`)
       PayloadValidator.instance.validateResponse(call, action)
       PayloadConverter.instance.convertResponse(call, action)
-      cs.incomingResponseCall(call.payload)
+      cs.incomingResponseMessage(call.payload)
       // Auf eine Antwort wird keine Antwort gesendet
       return undefined
     } else if (call instanceof OcppErrorMessageDto) {
       const action = cs.getActionToRequest(call.messageId)
       cs.logger.info(`Incoming Error | ${action} | ${call.messageId}`)
-      cs.incomingErrorCall(call)
+      cs.incomingErrorMessage(call)
       // Auf einen Fehler wird keine Antwort gesendet
       return undefined
     } else {
