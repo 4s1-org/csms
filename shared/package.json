@@ -18,7 +18,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "build:dev": "nodemon --watch src/ -e ts --exec \"pnpm run build\"",
+    "build:watch": "nodemon --watch src/ -e ts --exec \"pnpm run build\"",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
