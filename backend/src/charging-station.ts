@@ -18,9 +18,9 @@ import {
   IdTokenEnum,
   MeterValuesRequestDto,
   MeterValuesResponseDto,
-  OcppErrorCallDto,
+  OcppErrorMessageDto,
   OcppActionEnum,
-  OcppRequestCallDto,
+  OcppRequestMessageDto,
   IChargingStation,
   SetVariablesRequestDto,
   SetVariableDataDto,
@@ -39,7 +39,7 @@ import {
 
 export class ChargingStation implements IChargingStation {
   public readonly logger = new Logger(this.uniqueIdentifier)
-  private sendList: OcppRequestCallDto[] = []
+  private sendList: OcppRequestMessageDto[] = []
 
   public constructor(public readonly uniqueIdentifier: string, private username: string, private password: string) {
     // nothing to do
@@ -53,8 +53,8 @@ export class ChargingStation implements IChargingStation {
     this.logger.info('Disconnected')
   }
 
-  public addToSendList(requestCall: OcppRequestCallDto): void {
-    this.sendList.push(requestCall)
+  public addToSendList(requestMessage: OcppRequestMessageDto): void {
+    this.sendList.push(requestMessage)
   }
 
   public checkCredentials(username: string, password: string): boolean {
@@ -67,7 +67,7 @@ export class ChargingStation implements IChargingStation {
     return result
   }
 
-  public incomingRequestCall(payload: RequestBaseDto): ResponseBaseDto {
+  public incomingRequestMessage(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof BootNotificationRequestDto) {
       return this.receiveBootNotificationRequest(payload)
     }
@@ -90,7 +90,7 @@ export class ChargingStation implements IChargingStation {
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
-  public incomingResponseCall(payload: ResponseBaseDto): void {
+  public incomingResponseMessage(payload: ResponseBaseDto): void {
     if (payload instanceof SetVariablesResponseDto) {
       return this.receiveSetVariableResponse(payload)
     }
@@ -104,7 +104,7 @@ export class ChargingStation implements IChargingStation {
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
-  public incomingErrorCall(error: OcppErrorCallDto): void {
+  public incomingErrorMessage(error: OcppErrorMessageDto): void {
     this.logger.silent('', error)
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
