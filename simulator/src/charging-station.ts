@@ -15,9 +15,9 @@ import {
   IdTokenEnum,
   MeterValuesRequestDto,
   MeterValuesResponseDto,
-  OcppErrorCallDto,
+  OcppErrorMessageDto,
   OcppActionEnum,
-  OcppRequestCallDto,
+  OcppRequestMessageDto,
   ChargingStationDto,
   BootReasonEnum,
   IdTokenDto,
@@ -45,12 +45,11 @@ import {
   VariableDto,
   NotifyEventResponseDto,
 } from '@yellowgarbagebag/csms-shared'
-import { timeStamp } from 'console'
 
 export class ChargingStation implements IChargingStation {
   public readonly logger = new Logger(this.uniqueIdentifier)
   public heartbeatInterval = 3600
-  private sendList: OcppRequestCallDto[] = []
+  private sendList: OcppRequestMessageDto[] = []
   private _username: string
   private _password: string
 
@@ -75,11 +74,11 @@ export class ChargingStation implements IChargingStation {
     this.logger.info('Disconnected')
   }
 
-  public addToSendList(requestCall: OcppRequestCallDto): void {
-    this.sendList.push(requestCall)
+  public addToSendList(requestMessage: OcppRequestMessageDto): void {
+    this.sendList.push(requestMessage)
   }
 
-  public incomingRequestCall(payload: RequestBaseDto): ResponseBaseDto {
+  public incomingRequestMessage(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof SetVariablesRequestDto) {
       return this.receiveSetVariablesRequest(payload)
     }
@@ -93,7 +92,7 @@ export class ChargingStation implements IChargingStation {
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
-  public incomingResponseCall(payload: ResponseBaseDto): void {
+  public incomingResponseMessage(payload: ResponseBaseDto): void {
     if (payload instanceof BootNotificationResponseDto) {
       return this.receiveBootNotificationResponse(payload)
     }
@@ -116,7 +115,7 @@ export class ChargingStation implements IChargingStation {
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
-  public incomingErrorCall(error: OcppErrorCallDto): void {
+  public incomingErrorMessage(error: OcppErrorMessageDto): void {
     this.logger.silent('', error)
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }

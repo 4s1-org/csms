@@ -1,9 +1,9 @@
 import {
   RequestBaseDto,
-  OcppBaseCallDto,
-  OcppRequestCallDto,
+  OcppBaseMessageDto,
+  OcppRequestMessageDto,
   actionDtoMapping,
-  handleIncomingCall,
+  handleIncomingMessage,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
 import WebSocket from 'ws'
@@ -22,11 +22,11 @@ export class WebSocketClient {
       throw new Error('No mapping found')
     }
 
-    const msg = new OcppRequestCallDto(uuid(), mapping.action, payload)
+    const msg = new OcppRequestMessageDto(uuid(), mapping.action, payload)
     this.cs.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
     this.cs.logger.debug('Send', msg)
     if (this.socket && this.socket.OPEN) {
-      this.socket.send(msg.toCallString())
+      this.socket.send(msg.toMessageString())
       this.cs.addToSendList(msg)
     }
   }
@@ -71,9 +71,9 @@ export class WebSocketClient {
 
     // Handling, besonders der Fehler, wie im Backend lösen
     this.socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-      const result: OcppBaseCallDto | undefined = handleIncomingCall(this.cs, msg.data)
+      const result: OcppBaseMessageDto | undefined = handleIncomingMessage(this.cs, msg.data)
       if (result && this.socket && this.socket.OPEN) {
-        this.socket.send(result.toCallString())
+        this.socket.send(result.toMessageString())
       }
     }
 

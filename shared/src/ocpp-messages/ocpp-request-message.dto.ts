@@ -1,9 +1,9 @@
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { RequestBaseDto } from '../generated/request-base.dto'
-import { OcppBaseCallDto } from './ocpp-base-call.dto'
+import { OcppBaseMessageDto } from './ocpp-base-message.dto'
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
-export class OcppRequestCallDto extends OcppBaseCallDto {
+export class OcppRequestMessageDto extends OcppBaseMessageDto {
   constructor(messageId: string, action: OcppActionEnum, payload: RequestBaseDto) {
     super(OcppMessageTypeIdEnum.Call, messageId)
     this.action = action
@@ -19,7 +19,7 @@ export class OcppRequestCallDto extends OcppBaseCallDto {
   /** JSON Payload of the action. */
   public payload: RequestBaseDto
 
-  public toCallString(): string {
+  public toMessageString(): string {
     return JSON.stringify([this.messageTypeId, this.messageId, this.action, this.payload])
   }
 }

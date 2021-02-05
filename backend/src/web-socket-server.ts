@@ -8,11 +8,11 @@ import { v4 as uuid } from 'uuid'
 import { ChargingStation } from './charging-station'
 import {
   Logger,
-  OcppBaseCallDto,
-  handleIncomingCall,
+  OcppBaseMessageDto,
+  handleIncomingMessage,
   RequestBaseDto,
   actionDtoMapping,
-  OcppRequestCallDto,
+  OcppRequestMessageDto,
 } from '@yellowgarbagebag/csms-shared'
 import { DataProvider } from './data-provider'
 
@@ -48,9 +48,9 @@ export class WebSocketServer {
         }
 
         socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-          const result: OcppBaseCallDto | undefined = handleIncomingCall(cs, msg.data)
+          const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
           if (result) {
-            socket.send(result.toCallString())
+            socket.send(result.toMessageString())
           }
         }
       },
@@ -99,11 +99,11 @@ export class WebSocketServer {
       throw new Error('No mapping found')
     }
 
-    const msg = new OcppRequestCallDto(uuid(), mapping.action, payload)
+    const msg = new OcppRequestMessageDto(uuid(), mapping.action, payload)
     cs.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
     cs.logger.debug('Send', msg)
     if (socket && socket.OPEN) {
-      socket.send(msg.toCallString())
+      socket.send(msg.toMessageString())
       cs.addToSendList(msg)
     }
   }

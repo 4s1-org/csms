@@ -1,4 +1,4 @@
-import { OcppErrorCodeEnum } from '../../calls/ocpp-error-code.enum'
+import { OcppErrorCodeEnum } from '../ocpp-messages/ocpp-error-code.enum'
 
 export class CsmsError extends Error {
   constructor(
