@@ -1,5 +1,5 @@
-import { OcppErrorCallDto } from '../calls/ocpp-error-message.dto'
-import { OcppRequestCallDto } from '../calls/ocpp-request-message.dto'
+import { OcppErrorMessageDto } from '../calls/ocpp-error-message.dto'
+import { OcppRequestMessageDto } from '../calls/ocpp-request-message.dto'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ResponseBaseDto } from '../generated/response-base.dto'
@@ -10,9 +10,9 @@ export interface IChargingStation {
 
   incomingRequestCall(payload: RequestBaseDto): ResponseBaseDto
   incomingResponseCall(payload: ResponseBaseDto): void
-  incomingErrorCall(payload: OcppErrorCallDto): void
+  incomingErrorCall(payload: OcppErrorMessageDto): void
 
   getActionToRequest(messageId: string): OcppActionEnum
 
-  addToSendList(requestCall: OcppRequestCallDto): void
+  addToSendList(requestCall: OcppRequestMessageDto): void
 }

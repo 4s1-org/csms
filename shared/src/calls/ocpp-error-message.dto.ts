@@ -1,8 +1,8 @@
 import { OcppErrorCodeEnum } from '.'
-import { OcppBaseCallDto } from './ocpp-base-message.dto'
+import { OcppBaseMessageDto } from './ocpp-base-message.dto'
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
-export class OcppErrorCallDto extends OcppBaseCallDto {
+export class OcppErrorMessageDto extends OcppBaseMessageDto {
   constructor(messageId: string, errorCode: OcppErrorCodeEnum, errorDescription?: string, errorDetails?: unknown) {
     super(OcppMessageTypeIdEnum.Error, messageId)
     this.errorCode = errorCode
