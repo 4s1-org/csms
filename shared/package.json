@@ -18,7 +18,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "build:watch": "nodemon --watch src/ -e ts --exec tsc",
+    "build:watch": "nodemon --delay 2.5 --watch src/ -e ts --exec tsc",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
