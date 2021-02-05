@@ -1,6 +1,6 @@
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
-export abstract class OcppBaseCallDto {
+export abstract class OcppBaseMessageDto {
   constructor(messageTypeId: OcppMessageTypeIdEnum, messageId: string) {
     this.messageTypeId = messageTypeId
     this.messageId = messageId
@@ -12,5 +12,5 @@ export abstract class OcppBaseCallDto {
   /** This is a unique identifier that will be used to match request and result */
   public readonly messageId: string
 
-  public abstract toCallString(): string
+  public abstract toMessageString(): string
 }

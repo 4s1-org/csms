@@ -1,11 +1,11 @@
 import { Validator } from 'jsonschema'
 import fs from 'fs'
 import path from 'path'
-import { OcppErrorCodeEnum } from '../../calls/ocpp-error-code.enum'
-import { CsmsError } from '../errors/csms-error'
-import { OcppActionEnum } from '../../generated/ocpp-action.enum'
-import { OcppRequestCallDto } from '../../calls/ocpp-request-call.dto'
-import { OcppResponseCallDto } from '../../calls/ocpp-response-call.dto'
+import { OcppErrorCodeEnum } from '../ocpp-messages/ocpp-error-code.enum'
+import { CsmsError } from '../utils/csms-error'
+import { OcppActionEnum } from '../generated/ocpp-action.enum'
+import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto'
+import { OcppResponseMessageDto } from '../ocpp-messages/ocpp-response-message.dto'
 
 export class PayloadValidator {
   private static _instance: PayloadValidator
@@ -25,7 +25,7 @@ export class PayloadValidator {
   }
 
   private init(): void {
-    const dir = path.join(__dirname, '..', '..', '..', 'third-party', 'ocpp', '2.0.1')
+    const dir = path.join(__dirname, '..', '..', 'third-party', 'ocpp', '2.0.1')
     if (!fs.existsSync(dir)) {
       throw new Error('Path to schema files not exists')
     }
@@ -38,11 +38,11 @@ export class PayloadValidator {
     }
   }
 
-  public validateRequest(call: OcppRequestCallDto): any {
+  public validateRequest(call: OcppRequestMessageDto): any {
     this.validate(call.payload, this._schemas[call.action + 'Request'])
   }
 
-  public validateResponse(call: OcppResponseCallDto, action: OcppActionEnum): any {
+  public validateResponse(call: OcppResponseMessageDto, action: OcppActionEnum): any {
     this.validate(call.payload, this._schemas[action + 'Response'])
   }
 
