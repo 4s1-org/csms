@@ -9,7 +9,7 @@ import {
   OcppActionEnum,
   OcppErrorCodeEnum,
   OcppMessageTypeIdEnum,
-  OcppRequestCallDto,
+  OcppRequestMessageDto,
   UnpublishFirmwareRequestDto,
 } from '@yellowgarbagebag/csms-shared'
 import { WebSocketServer } from '../src/web-socket-server'
@@ -82,14 +82,14 @@ describe('CSMS Gateway', () => {
 
         socket.onopen = (): void => {
           socket.send(
-            new OcppRequestCallDto(
+            new OcppRequestMessageDto(
               messageId,
               OcppActionEnum.BootNotification,
               new BootNotificationRequestDto(
                 new ChargingStationDto('SingleSocketCharger', 'VendorX'),
                 BootReasonEnum.PowerUp,
               ),
-            ).toCallString(),
+            ).toMessageString(),
           )
         }
 
@@ -316,12 +316,12 @@ describe('CSMS Gateway', () => {
 
       socket.onopen = (): void => {
         socket.send(
-          new OcppRequestCallDto(
+          new OcppRequestMessageDto(
             messageId,
             OcppActionEnum.BootNotification,
             // Payload passt nicht zur Message
             new AuthorizeRequestDto(new IdTokenDto('xxx', IdTokenEnum.eMAID)),
-          ).toCallString(),
+          ).toMessageString(),
         )
       }
 

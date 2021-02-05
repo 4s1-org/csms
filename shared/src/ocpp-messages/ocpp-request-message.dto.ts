@@ -19,7 +19,7 @@ export class OcppRequestMessageDto extends OcppBaseMessageDto {
   /** JSON Payload of the action. */
   public payload: RequestBaseDto
 
-  public toCallString(): string {
+  public toMessageString(): string {
     return JSON.stringify([this.messageTypeId, this.messageId, this.action, this.payload])
   }
 }
