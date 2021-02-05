@@ -74,8 +74,8 @@ export class ChargingStation implements IChargingStation {
     this.logger.info('Disconnected')
   }
 
-  public addToSendList(requestCall: OcppRequestMessageDto): void {
-    this.sendList.push(requestCall)
+  public addToSendList(requestMessage: OcppRequestMessageDto): void {
+    this.sendList.push(requestMessage)
   }
 
   public incomingRequestMessage(payload: RequestBaseDto): ResponseBaseDto {

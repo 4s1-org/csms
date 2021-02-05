@@ -6,7 +6,7 @@ import { OcppMessageHandler } from './ocpp-message-handler'
 
 describe('Ocpp Message Handler', () => {
   describe('arrayToMessage', () => {
-    it('Request Call', () => {
+    it('Request Message', () => {
       // Arrange
       const data =
         '[2,"19223201","BootNotification",{"reason":"PowerUp","chargingStation":{"model":"SingleSocketCharger","vendorName":"VendorX"}}]'
@@ -16,7 +16,7 @@ describe('Ocpp Message Handler', () => {
       expect(message).toBeInstanceOf(OcppRequestMessageDto)
     })
 
-    it('Response Call', () => {
+    it('Response Message', () => {
       // Arrange
       const data = '[3,"19223201",{"currentTime": "2013-02-01T20:53:32.486Z","interval": 300,"status": "Accepted"}]'
       // Act
@@ -25,7 +25,7 @@ describe('Ocpp Message Handler', () => {
       expect(message).toBeInstanceOf(OcppResponseMessageDto)
     })
 
-    it('Error Call', () => {
+    it('Error Message', () => {
       // Arrange
       const data = '[4,"162376037","NotSupported","SetDisplayMessageRequest not implemented",{}]'
       // Act
