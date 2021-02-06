@@ -7,7 +7,22 @@ validate-all:
   script:
     - npm i pnpm -g
     - pnpm install
-    - pnpm run lbt --prefix shared
-    - pnpm run lbt --prefix backend
-    - pnpm run lbt --prefix simulator
 
+    - cd shared
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
+    - cd ..
+
+    - cd backend
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
+    - pnpm run test:e2e
+    - cd ..
+
+    - cd simulator
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
+    - cd ..
