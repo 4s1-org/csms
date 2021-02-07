@@ -11,10 +11,28 @@ function App() {
   document.cookie = "X-Authorization=" + authToken + "; path=/";
 
   const cs = new ChargingStation("LS001", "LS001", "test");
-  const ws = new WebSocket("wss://localhost:3000/ocpp/LS001");
-  const foo = new WebSocketClient(cs, ws as any);
+  const ws = new WebSocket("wss://localhost:3000/ocpp/LS001", ["ocpp2.0.1"]);
+
+  const sendCallback = (msg: any): boolean => {
+    if (ws && ws.OPEN) {
+      ws.send(msg);
+      return true;
+    }
+    return false;
+  };
+
+  const client = new WebSocketClient(cs, sendCallback);
   ws.onopen = () => {
-    foo.sendRequest(cs.sendBootNotificationRequest());
+    client.send(cs.sendBootNotificationRequest());
+  };
+  ws.onmessage = (msg: any): void => {
+    //client.onMessage(msg.data);
+  };
+  ws.onerror = (msg: any): void => {
+    client.onError(msg);
+  };
+  ws.onclose = (): void => {
+    client.onClose();
   };
 
   return (
