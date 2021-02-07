@@ -105,7 +105,6 @@ export class ChargingStation implements IChargingStation {
   }
 
   public incomingErrorMessage(error: OcppErrorMessageDto): void {
-    this.logger.silent('', error)
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
@@ -126,7 +125,6 @@ export class ChargingStation implements IChargingStation {
    * B03 - Cold Boot Charging Station - Rejected
    */
   private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
-    this.logger.silent('', payload)
     return new BootNotificationResponseDto(new Date().toISOString(), 1, RegistrationStatusEnum.Accepted)
   }
 
@@ -134,7 +132,6 @@ export class ChargingStation implements IChargingStation {
    * G02 - Heartbeat
    */
   private receiveHeartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
-    this.logger.silent('', payload)
     return new HeartbeatResponseDto(new Date().toISOString())
   }
 
@@ -142,7 +139,6 @@ export class ChargingStation implements IChargingStation {
    * J01 - Sending Meter Values not related to a transaction
    */
   private receiveMeterValuesRequest(payload: MeterValuesRequestDto): MeterValuesResponseDto {
-    this.logger.silent('', payload)
     return new MeterValuesResponseDto()
   }
 
@@ -177,15 +173,12 @@ export class ChargingStation implements IChargingStation {
   /**
    * B05 - Set Variables
    */
-  private receiveSetVariableResponse(payload: SetVariablesResponseDto): void {
-    this.logger.silent('', payload)
-  }
+  private receiveSetVariableResponse(payload: SetVariablesResponseDto): void {}
 
   /**
    * G01 - Status Notification
    */
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
-    this.logger.silent('', payload)
     return new StatusNotificationResponseDto()
   }
 
@@ -199,9 +192,7 @@ export class ChargingStation implements IChargingStation {
   /**
    * G03 - Change Availability EVSE/Connector
    */
-  private receiveChangeAvailabilityResponse(payload: ChangeAvailabilityResponseDto): void {
-    this.logger.silent('', payload)
-  }
+  private receiveChangeAvailabilityResponse(payload: ChangeAvailabilityResponseDto): void {}
 
   /**
    * B06 - Get Variables
@@ -213,15 +204,12 @@ export class ChargingStation implements IChargingStation {
   /**
    * B06 - Get Variables
    */
-  private receiveGetVariablesResponse(payload: GetVariablesResponseDto): void {
-    this.logger.silent('', payload)
-  }
+  private receiveGetVariablesResponse(payload: GetVariablesResponseDto): void {}
 
   /**
    * G05 - Lock Failure
    */
   private receiveNotifyEventRequest(payload: NotifyEventRequestDto): NotifyEventResponseDto {
-    this.logger.silent('', payload)
     return new NotifyEventResponseDto()
   }
 }
