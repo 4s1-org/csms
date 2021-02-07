@@ -23,7 +23,7 @@
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
     "lint:fix": "pnpm run lint -- --fix",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"
