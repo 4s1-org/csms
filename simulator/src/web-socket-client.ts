@@ -6,18 +6,18 @@ import {
   handleIncomingMessage,
 } from '@yellowgarbagebag/csms-shared'
 import { v4 as uuid } from 'uuid'
-import WebSocket from 'ws'
 import { ChargingStation } from './charging-station'
+import { IWebSocket } from './i-websocket'
 
 export class WebSocketClient {
-  private socket: WebSocket
+  private socket: IWebSocket
 
-  public constructor(private readonly cs: ChargingStation, socket: WebSocket) {
+  public constructor(private readonly cs: ChargingStation, socket: IWebSocket) {
     // nothing to do
     this.socket = socket
   }
 
-  private sendRequest(payload: RequestBaseDto): void {
+  public sendRequest(payload: RequestBaseDto): void {
     const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
     if (!mapping) {
       throw new Error('No mapping found')
@@ -71,14 +71,14 @@ export class WebSocketClient {
     }
 
     // Handling, besonders der Fehler, wie im Backend lösen
-    this.socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+    this.socket.onmessage = (msg: any): void => {
       const result: OcppBaseMessageDto | undefined = handleIncomingMessage(this.cs, msg.data)
       if (result && this.socket && this.socket.OPEN) {
         this.socket.send(result.toMessageString())
       }
     }
 
-    this.socket.onerror = (err: WebSocket.ErrorEvent): void => {
+    this.socket.onerror = (err: any): void => {
       this.cs.logger.error(err.message)
     }
 
