@@ -26,7 +26,7 @@
     "start": "ts-node src/index.ts | pino-pretty",
     "start:prod": "node dist/index.js",
     "start:watch": "nodemon --watch src/ -e ts --exec \"pnpm run build && pnpm run start:prod | pino-pretty\"",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
