@@ -13,6 +13,13 @@ export class Logger {
       base: {
         hostname: null,
       },
+      browser: {
+        write: {
+          write: function (o) {
+            console.info(JSON.stringify(o))
+          },
+        },
+      },
     })
   }
 
