@@ -8,7 +8,13 @@ validate-all:
     - npm i pnpm -g
     - pnpm install
 
-    - cd shared
+    - cd common-lib
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
+    - cd ..
+
+    - cd ocpp-lib
     - pnpm run lint
     - pnpm run build
     - pnpm run test
@@ -21,7 +27,25 @@ validate-all:
     - pnpm run test:e2e
     - cd ..
 
-    - cd simulator
+    - cd backend-admin-ui
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
+    - cd ..
+
+    - cd charging-station-lib
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
+    - cd ..
+
+    - cd charging-station-ui
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
+    - cd ..
+
+    - cd charging-station-cli
     - pnpm run lint
     - pnpm run build
     - pnpm run test
