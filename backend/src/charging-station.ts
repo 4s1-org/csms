@@ -173,7 +173,9 @@ export class ChargingStation implements IChargingStation {
   /**
    * B05 - Set Variables
    */
-  private receiveSetVariableResponse(payload: SetVariablesResponseDto): void {}
+  private receiveSetVariableResponse(payload: SetVariablesResponseDto): void {
+    //
+  }
 
   /**
    * G01 - Status Notification
