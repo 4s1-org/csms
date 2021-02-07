@@ -2,7 +2,6 @@ import WebSocket from 'ws'
 import fs from 'fs'
 import path from 'path'
 import https from 'https'
-import url from 'url'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
 import { v4 as uuid } from 'uuid'
@@ -27,42 +26,55 @@ export class WebSocketServer {
     // nothing to do
   }
 
-  private customShouldHandle(request: IncomingMessage): boolean {
-    const parts = request.url?.split('/')
-    if (parts && parts[1] === 'ocpp' && parts.length === 3) {
-      return true
-    }
-    return false
-  }
-
   public startServer(): void {
-    const wss = new WebSocket.Server({
+    const wssChargingStations = new WebSocket.Server({
       noServer: true,
     })
-    wss.on(
-      'connection',
-      (socket: WebSocket, tlsSocket: TLSSocket, request: IncomingMessage, cs: ChargingStation): void => {
-        this.sockets.add(socket)
-        this.tlsSockets.add(tlsSocket)
+    const wssAdmin = new WebSocket.Server({
+      noServer: true,
+    })
 
-        socket.onclose = (): void => {
-          cs.disconnect()
-          this.sockets.delete(socket)
-          this.tlsSockets.delete(tlsSocket)
-        }
+    wssChargingStations.on('connection', (socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void => {
+      this.sockets.add(socket)
+      this.tlsSockets.add(tlsSocket)
 
-        socket.onerror = (err: any): void => {
-          this.logger.error('Error' + err)
-        }
+      socket.onclose = (): void => {
+        cs.disconnect()
+        this.sockets.delete(socket)
+        this.tlsSockets.delete(tlsSocket)
+      }
 
-        socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-          const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
-          if (result) {
-            socket.send(result.toMessageString())
-          }
+      socket.onerror = (err: any): void => {
+        this.logger.error('Error' + err)
+      }
+
+      socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+        const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
+        if (result) {
+          socket.send(result.toMessageString())
         }
-      },
-    )
+      }
+    })
+
+    wssAdmin.on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => {
+      this.sockets.add(socket)
+      this.tlsSockets.add(tlsSocket)
+
+      socket.send('Willkommen')
+
+      socket.onclose = (): void => {
+        this.sockets.delete(socket)
+        this.tlsSockets.delete(tlsSocket)
+      }
+
+      socket.onerror = (err: any): void => {
+        this.logger.error('Error' + err)
+      }
+
+      socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+        // ToDo
+      }
+    })
 
     this.server = https.createServer({
       cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.crt')),
@@ -73,35 +85,57 @@ export class WebSocketServer {
       const socketId = request.headers['sec-websocket-key']
       this.logger.info(`Client connected: ${socketId}`)
 
-      const baseURL = `http://${request.headers.host}/`
+      const [username, password] = this.getCredentials(request)
+      const baseURL = `https://${request.headers.host}/`
       const myURL = new URL(request.url || '', baseURL)
 
       if (myURL.pathname.startsWith('/ocpp/')) {
         const uniqueIdentifier = myURL.pathname.split('/')[2]
-        const b64auth = (request.headers.authorization || '').split(' ')[1] || ''
-        const [username, password] = Buffer.from(b64auth, 'base64').toString().split(':')
 
-        const cs: ChargingStation | undefined = this.authenticate(uniqueIdentifier, username, password)
+        const cs: ChargingStation | undefined = this.authenticateChargingStation(uniqueIdentifier, username, password)
 
         if (!cs) {
-          this.logger.error(`Client not accepted`)
-          tlsSocket.write('HTTP/1.1 401 Unauthorized\r\n\r\n')
-          tlsSocket.destroy()
-          return
+          return this.send401(tlsSocket)
         }
 
-        wss.handleUpgrade(request, tlsSocket, head, (socket: WebSocket, request: IncomingMessage): void => {
-          wss.emit('connection', socket, tlsSocket, request, cs)
+        wssChargingStations.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
+          wssChargingStations.emit('connection', socket, tlsSocket, cs)
+        })
+      } else if (myURL.pathname.startsWith('/admin')) {
+        if (username !== 'admin' || password !== 'admin') {
+          return this.send401(tlsSocket)
+        }
+
+        wssAdmin.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
+          wssAdmin.emit('connection', socket, tlsSocket)
         })
       } else {
-        this.logger.error(`Client not accepted`)
-        tlsSocket.write('HTTP/1.1 401 Unauthorized\r\n\r\n')
-        tlsSocket.destroy()
+        return this.send401(tlsSocket)
       }
     })
 
     this.server.listen(this.port)
     this.logger.info(`WebSocketServer is running on port ${this.port}`)
+  }
+
+  private getCredentials(request: IncomingMessage): string[] {
+    let value
+    if (request.headers.authorization) {
+      value = request.headers.authorization
+    } else if (request.headers.cookie && request.headers.cookie.startsWith('X-Authorization=')) {
+      value = `Basic ${request.headers.cookie.split('=')[1]}=`
+    }
+
+    console.log(value)
+
+    const b64auth = (value || '').split(' ')[1] || ''
+    return Buffer.from(b64auth, 'base64').toString().split(':')
+  }
+
+  private send401(tlsSocket: TLSSocket): void {
+    this.logger.error(`Client not accepted`)
+    tlsSocket.write('HTTP/1.1 401 Unauthorized\r\n\r\n')
+    tlsSocket.destroy()
   }
 
   public stopServer(): void {
@@ -117,6 +151,7 @@ export class WebSocketServer {
     this.logger.info(`WebSocketServer stopped`)
   }
 
+  // ToDo: https://gitlab.com/YellowGarbageBag/csms/-/issues/56
   private sendRequest(socket: WebSocket, cs: ChargingStation, payload: RequestBaseDto): void {
     const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
     if (!mapping) {
@@ -132,7 +167,11 @@ export class WebSocketServer {
     }
   }
 
-  private authenticate(uniqueIdentifier: string, username: string, password: string): ChargingStation | undefined {
+  private authenticateChargingStation(
+    uniqueIdentifier: string,
+    username: string,
+    password: string,
+  ): ChargingStation | undefined {
     const cs = DataProvider.instance.getChargingStation(uniqueIdentifier)
     if (cs && cs.checkCredentials(username, password)) {
       return cs
