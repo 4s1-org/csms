@@ -13,7 +13,6 @@
   },
   "license": "UNLICENSED",
   "author": "Steffen",
-  "prettier": "@hest-lab/eslint-config",
   "scripts": {
     "build": "react-scripts build",
     "eject": "react-scripts eject",
@@ -22,7 +21,7 @@
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
     "start": "react-scripts start",
-    "test": "react-scripts test"
+    "test": "echo No tests"
   },
   "browserslist": {
     "production": [
@@ -36,6 +35,7 @@
       "last 1 safari version"
     ]
   },
+  "prettier": "@hest-lab/eslint-config",
   "eslintConfig": {
     "extends": [
       "react-app",

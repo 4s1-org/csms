@@ -50,8 +50,8 @@
     }
   },
   "dependencies": {
-    "@yellowgarbagebag/csms-ocpp-lib": "workspace:*",
     "@yellowgarbagebag/csms-common-lib": "workspace:*",
+    "@yellowgarbagebag/csms-ocpp-lib": "workspace:*",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
