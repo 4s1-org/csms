@@ -1,4 +1,8 @@
 packages:
-  - "simulator/"
-  - "shared/"
+  - "charging-station-ui/"
+  - "charging-station-cli/"
+  - "charging-station-lib/"
+  - "common-lib/"
+  - "ocpp-lib/"
   - "backend/"
+  - "backend-admin-ui/"

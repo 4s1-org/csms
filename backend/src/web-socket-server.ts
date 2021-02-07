@@ -7,13 +7,13 @@ import { TLSSocket } from 'tls'
 import { v4 as uuid } from 'uuid'
 import { ChargingStation } from './charging-station'
 import {
-  Logger,
   OcppBaseMessageDto,
   handleIncomingMessage,
   RequestBaseDto,
   actionDtoMapping,
   OcppRequestMessageDto,
-} from '@yellowgarbagebag/csms-shared'
+} from '@yellowgarbagebag/csms-ocpp-lib'
+import { Logger } from '@yellowgarbagebag/csms-common-lib'
 import { DataProvider } from './data-provider'
 
 export class WebSocketServer {
