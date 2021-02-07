@@ -1,4 +1,5 @@
 packages:
+  - "charging-station-ui/"
   - "simulator/"
   - "shared/"
   - "backend/"
