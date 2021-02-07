@@ -73,11 +73,15 @@ importers:
       web-vitals: ^1.1.0
   charging-station-cli:
     dependencies:
+      '@yellowgarbagebag/csms-charging-station-lib': link:../charging-station-lib
       '@yellowgarbagebag/csms-common-lib': link:../common-lib
+      pino-pretty: 4.5.0
+      ws: 7.4.3
     devDependencies:
       '@hest-lab/eslint-config': 1.4.0_typescript@4.1.3
       '@types/jest': 26.0.20
       '@types/node': 14.14.25
+      '@types/ws': 7.4.0
       eslint: 7.19.0
       jest: 26.6.3_ts-node@9.1.1
       prettier: 2.2.1
@@ -87,12 +91,16 @@ importers:
       '@hest-lab/eslint-config': ^1.4.0
       '@types/jest': ^26.0.20
       '@types/node': ^14.14.22
+      '@types/ws': ^7.4.0
+      '@yellowgarbagebag/csms-charging-station-lib': workspace:*
       '@yellowgarbagebag/csms-common-lib': workspace:*
       eslint: ^7.19.0
       jest: ^26.6.3
+      pino-pretty: ^4.5.0
       prettier: ^2.2.1
       ts-node: ^9.1.1
       typescript: ^4.1.3
+      ws: ^7.4.3
   charging-station-lib:
     dependencies:
       '@yellowgarbagebag/csms-common-lib': link:../common-lib
@@ -2180,7 +2188,6 @@ packages:
     resolution:
       integrity: sha512-1dVNHT76Uu5N3eJNTYcvxee+jzX4Z9lfciqRRHCU27ihbUcYi+iSc2iml5Ke1LXe1SyJCLA0+14Jh4tXJgOppA==
   /@hapi/bourne/2.0.0:
-    dev: true
     resolution:
       integrity: sha512-WEezM1FWztfbzqIUbsDzFRVMxSoLy3HugVcux6KDDtTqzPsLE8NDRHfXvev66aH1i2oOKKar3/XDjbvh/OUBdg==
   /@hapi/hoek/8.5.1:
@@ -2978,7 +2985,7 @@ packages:
       integrity: sha512-7ZyTfxjCRwexh+EJFwRUM+CDB2XvgHl4vfuqf1ZKrgGvcS5BrNvPQqJh3tsZ0P6h6Aa1qClVHaJZszLPzpqHeA==
   /@types/ws/7.4.0:
     dependencies:
-      '@types/node': 14.14.24
+      '@types/node': 14.14.25
     dev: true
     resolution:
       integrity: sha512-Y29uQ3Uy+58bZrFLhX36hcI3Np37nqWE7ky5tjiDoy1GDZnIwVxS0CgF+s+1bXMzjKBFy+fqaRfb708iNzdinw==
@@ -3476,7 +3483,6 @@ packages:
       chalk: 2.4.2
       leven: 2.1.0
       mri: 1.1.4
-    dev: true
     engines:
       node: '>= 6.0.0'
     resolution:
@@ -4320,7 +4326,6 @@ packages:
     resolution:
       integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==
   /camelcase/5.0.0:
-    dev: true
     engines:
       node: '>=6'
     resolution:
@@ -5149,7 +5154,6 @@ packages:
     resolution:
       integrity: sha512-X5eWTSXO/BJmpdIKCRuKUgSCgAN0OwliVK3yPKbwIWU1Tdw5BRajxlzMidvh+gwko9AfQ9zIj52pzF91Q3YAvQ==
   /dateformat/3.0.3:
-    dev: true
     resolution:
       integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
   /debug/2.6.9:
@@ -8247,13 +8251,11 @@ packages:
     resolution:
       integrity: sha512-lGS5PXGAzR4RF7V5+XObhqz2KZIDUA1yD0DG6pBVmy10eh0ZIXQImRuzocsI/N2XZ1GrLFwTS27In2i2jlpq1Q==
   /jmespath/0.15.0:
-    dev: true
     engines:
       node: '>= 0.6.0'
     resolution:
       integrity: sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc=
   /joycon/2.2.5:
-    dev: true
     engines:
       node: '>=6'
     resolution:
@@ -8471,7 +8473,6 @@ packages:
     resolution:
       integrity: sha512-weT+r0kTkRQdCdYCNtkMwWXQTMEswKrFBkm4ckQOMVhhqhIMI1UT2hMj+1iigIhgSZm5gTmrRXBNoGUgaTY1xA==
   /leven/2.1.0:
-    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
@@ -8952,7 +8953,6 @@ packages:
     resolution:
       integrity: sha1-viwAX9oy4LKa8fBdfEszIUxwH5I=
   /mri/1.1.4:
-    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -9692,7 +9692,6 @@ packages:
       readable-stream: 3.6.0
       split2: 3.2.2
       strip-json-comments: 3.1.1
-    dev: true
     hasBin: true
     resolution:
       integrity: sha512-TtIzAq3JrPT4cYMZcXHypAXYV+MTE7ncAPUFoaz/1enVD2Loj+hV6RZsypYo85dm7SbBolW6fcIydOF28iGjsg==
@@ -11857,7 +11856,6 @@ packages:
   /split2/3.2.2:
     dependencies:
       readable-stream: 3.6.0
-    dev: true
     resolution:
       integrity: sha512-9NThjpgZnifTkJpzTZ7Eue85S49QwpNhZTq6GRJwObb6jnLFNGB7Qm73V5HewTROPyxD0C29xqmaI68bQtV+hg==
   /sprintf-js/1.0.3:

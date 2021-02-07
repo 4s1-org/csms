@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "runtimeExecutable": "/usr/bin/brave-browser-stable",
+      "request": "launch",
+      "name": "Debug Linux",
+      "url": "http://localhost:3002",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
