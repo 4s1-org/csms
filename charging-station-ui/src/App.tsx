@@ -22,7 +22,7 @@ function App() {
     client.send(cs.sendBootNotificationRequest())
   }
   ws.onmessage = (msg: any): void => {
-    //client.onMessage(msg.data);
+    client.onMessage(msg.data)
   }
   ws.onerror = (msg: any): void => {
     client.onError(msg)
