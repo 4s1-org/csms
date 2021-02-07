@@ -8,6 +8,7 @@ export class ClassGenerator {
   private enumSkeletons: EnumSkeleton[] = []
   private classSkeletons: ClassSkeleton[] = []
   private generatedFolderIndex: [string, string][] = []
+  private jsonSchemaData: [string, string][] = []
 
   private static _instance: ClassGenerator
 
@@ -20,6 +21,10 @@ export class ClassGenerator {
       ClassGenerator._instance = new ClassGenerator()
     }
     return ClassGenerator._instance
+  }
+
+  public addJsonSchema(filenameWithoutExt: string, pathWithFilename: string) {
+    this.jsonSchemaData.push([filenameWithoutExt, pathWithFilename])
   }
 
   public addClass(skeleton: ClassSkeleton): void {
@@ -72,8 +77,37 @@ export class ClassGenerator {
       this.classSkeletons.filter((x) => x.isMessage),
     )
 
+    this._generateJsonSchemaIndex([__dirname, '..', '..', 'src', 'generated'])
+
     // Muss als letztes erfolgen
     this._generateGeneratedFolderIndex([__dirname, '..', '..', 'src', 'generated'])
+  }
+
+  private _generateJsonSchemaIndex(folders: string[]): void {
+    // import AuthorizeRequest from "../third-party/ocpp/2.0.1/AuthorizeRequest.json"
+    // import AuthorizeResponse from "../third-party/ocpp/2.0.1/AuthorizeResponse.json"
+
+    // export const jsonSchemas:{ [key: string]: any } = {
+    //   "AuthorizeRequest": AuthorizeRequest,
+    //   "AuthorizeResponse": AuthorizeResponse
+    // }
+
+    const data: string[] = []
+    data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+    data.push(``)
+    for (const item of this.jsonSchemaData) {
+      data.push(`import ${item[0]} from './${item[1]}'`)
+    }
+    data.push(``)
+    data.push(`export const jsonSchemas:{ [key: string]: any } = {`)
+    for (const item of this.jsonSchemaData) {
+      data.push(`  ${item[0]},`)
+    }
+    data.push(`}`)
+    data.push(``)
+
+    const fileName = path.join(...folders, 'json-schema-imports.ts')
+    fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
   }
 
   private _generateGeneratedFolderIndex(folders: string[]): void {
