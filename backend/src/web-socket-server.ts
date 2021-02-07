@@ -126,8 +126,6 @@ export class WebSocketServer {
       value = `Basic ${request.headers.cookie.split('=')[1]}=`
     }
 
-    console.log(value)
-
     const b64auth = (value || '').split(' ')[1] || ''
     return Buffer.from(b64auth, 'base64').toString().split(':')
   }
