@@ -1,8 +1,8 @@
 {
-  "name": "@yellowgarbagebag/csms-simulator",
-  "version": "0.0.1",
+  "name": "@yellowgarbagebag/csms-ocpp-lib",
+  "version": "1.0.0",
   "private": true,
-  "description": "Charge Station Management System - Charge Station Simulator",
+  "description": "Charge Station Management System - OCPP Library",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
@@ -14,19 +14,17 @@
   "license": "UNLICENSED",
   "author": "Steffen",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
-    "prebuild": "rm -rf dist/",
+    "prebuild": "rm -rf dist",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lbt": "npm run lint && npm run build && npm run test",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
-    "lint:fix": "npm run lint -- --fix",
-    "start": "ts-node src/index.ts | pino-pretty",
-    "start:prod": "node dist/index.js",
-    "start:watch": "nodemon --watch src/ -e ts --exec \"npm run build && npm run start:prod | pino-pretty\"",
-    "test": "jest --passWithNoTests",
+    "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
+    "lbt": "pnpm run lint && pnpm run build && pnpm run test",
+    "lint": "eslint \"{src,scripts}/**/*.ts\"",
+    "lint:fix": "pnpm run lint -- --fix",
+    "pjs": "ts-node scripts/parse-json-schema/index.ts",
+    "test": "jest",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"
@@ -50,21 +48,20 @@
     }
   },
   "dependencies": {
-    "@yellowgarbagebag/csms-shared": "workspace:^1.0.0",
-    "uuid": "^8.3.2"
+    "@yellowgarbagebag/csms-common-lib": "workspace:*",
+    "class-transformer": "^0.3.2",
+    "jsonschema": "^1.4.0",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@hest-lab/eslint-config": "^1.4.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
-    "@types/uuid": "^8.3.0",
     "eslint": "^7.19.0",
     "jest": "^26.6.3",
-    "nodemon": "^2.0.7",
-    "pino-pretty": "^4.4.0",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.1",
     "ts-jest": "^26.5.0",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.5"
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
   }
 }
