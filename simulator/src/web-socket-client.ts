@@ -10,10 +10,11 @@ import WebSocket from 'ws'
 import { ChargingStation } from './charging-station'
 
 export class WebSocketClient {
-  private socket: WebSocket | undefined
+  private socket: WebSocket
 
-  public constructor(private readonly cs: ChargingStation) {
+  public constructor(private readonly cs: ChargingStation, socket: WebSocket) {
     // nothing to do
+    this.socket = socket
   }
 
   private sendRequest(payload: RequestBaseDto): void {
@@ -32,11 +33,11 @@ export class WebSocketClient {
   }
 
   public async run(): Promise<void> {
-    this.socket = new WebSocket(`wss://localhost:3000/ocpp/${this.cs.uniqueIdentifier}`, ['ocpp2.0.1'], {
-      headers: {
-        authorization: `Basic ${Buffer.from(`${this.cs.username}:${this.cs.password}`).toString('base64')}`,
-      },
-    })
+    // this.socket = new WebSocket(`wss://localhost:3000/ocpp/${this.cs.uniqueIdentifier}`, ['ocpp2.0.1'], {
+    //   headers: {
+    //     authorization: `Basic ${Buffer.from(`${this.cs.username}:${this.cs.password}`).toString('base64')}`,
+    //   },
+    // })
 
     this.socket.onopen = (): void => {
       const socketId = 'foo' // request.headers['sec-websocket-key']
