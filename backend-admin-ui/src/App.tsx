@@ -1,38 +1,18 @@
 import React from "react";
 import "./App.css";
-import {
-  WebSocketClient,
-  ChargingStation,
-} from "@yellowgarbagebag/csms-charging-station-lib";
 
 function App() {
-  var authToken = "TFMwMDE6dGVzdA="; // LS001:test
+  var authToken = "YWRtaW46YWRtaW4="; // admin:admin
   document.cookie = "X-Authorization=" + authToken + "; path=/";
 
-  const cs = new ChargingStation("LS001", "LS001", "test");
-  const ws = new WebSocket("wss://localhost:3000/ocpp/LS001", ["ocpp2.0.1"]);
+  const ws = new WebSocket("wss://localhost:3000/admin", ["ocpp2.0.1"]);
 
-  const sendCallback = (msg: any): boolean => {
-    if (ws && ws.OPEN) {
-      ws.send(msg);
-      return true;
-    }
-    return false;
-  };
-
-  const client = new WebSocketClient(cs, sendCallback);
   ws.onopen = () => {
-    client.send(cs.sendBootNotificationRequest());
+    console.log("IT WORKS");
   };
-  ws.onmessage = (msg: any): void => {
-    //client.onMessage(msg.data);
-  };
-  ws.onerror = (msg: any): void => {
-    client.onError(msg);
-  };
-  ws.onclose = (): void => {
-    client.onClose();
-  };
+  ws.onmessage = (msg: any): void => {};
+  ws.onerror = (msg: any): void => {};
+  ws.onclose = (): void => {};
 
   return (
     <div className="App">
