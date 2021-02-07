@@ -1,6 +1,6 @@
 import pino from 'pino'
 
-export type LogLevel = 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace' | 'silent'
+export type LogLevel = 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace'
 
 export class Logger {
   private _logger: pino.Logger
@@ -12,6 +12,13 @@ export class Logger {
       name,
       base: {
         hostname: null,
+      },
+      browser: {
+        write: {
+          write: (obj): void => {
+            console.info(JSON.stringify(obj))
+          },
+        },
       },
     })
   }
@@ -61,14 +68,6 @@ export class Logger {
       this._logger.trace(obj, msg)
     } else {
       this._logger.trace(msg)
-    }
-  }
-
-  public silent(msg: string, obj?: any): void {
-    if (obj !== undefined) {
-      this._logger.silent(obj, msg)
-    } else {
-      this._logger.silent(msg)
     }
   }
 }

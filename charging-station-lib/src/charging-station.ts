@@ -116,7 +116,6 @@ export class ChargingStation implements IChargingStation {
   }
 
   public incomingErrorMessage(error: OcppErrorMessageDto): void {
-    this.logger.silent('', error)
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
@@ -148,7 +147,6 @@ export class ChargingStation implements IChargingStation {
    * B03 - Cold Boot Charging Station - Rejected
    */
   private receiveBootNotificationResponse(payload: BootNotificationResponseDto): void {
-    this.logger.silent('', payload)
     this.heartbeatInterval = payload.interval
   }
 
@@ -164,7 +162,7 @@ export class ChargingStation implements IChargingStation {
    * G02 - Heartbeat
    */
   private receiveHeartbeatResponse(payload: HeartbeatResponseDto): void {
-    this.logger.silent('', payload)
+    //
   }
 
   /**
@@ -209,7 +207,7 @@ export class ChargingStation implements IChargingStation {
    * J01 - Sending Meter Values not related to a transaction
    */
   private receiveMeterValuesResponse(payload: MeterValuesResponseDto): void {
-    this.logger.silent('', payload)
+    //
   }
 
   /**
@@ -235,14 +233,13 @@ export class ChargingStation implements IChargingStation {
    * G01 - Status Notification
    */
   private receiveStatusNotificationResponse(payload: StatusNotificationResponseDto): void {
-    this.logger.silent('', payload)
+    //
   }
 
   /**
    * G03 - Change Availability EVSE/Connector
    */
   private receiveChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
-    this.logger.silent('', payload)
     return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
   }
 
@@ -287,6 +284,6 @@ export class ChargingStation implements IChargingStation {
    * G05 - Lock Failure
    */
   private receiveNotifyEventResponse(payload: NotifyEventResponseDto): void {
-    this.logger.silent('', payload)
+    //
   }
 }
