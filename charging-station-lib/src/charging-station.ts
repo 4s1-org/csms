@@ -161,7 +161,9 @@ export class ChargingStation implements IChargingStation {
   /**
    * G02 - Heartbeat
    */
-  private receiveHeartbeatResponse(payload: HeartbeatResponseDto): void {}
+  private receiveHeartbeatResponse(payload: HeartbeatResponseDto): void {
+    //
+  }
 
   /**
    * C01 - EV Driver Authorization using RFID
@@ -204,7 +206,9 @@ export class ChargingStation implements IChargingStation {
   /**
    * J01 - Sending Meter Values not related to a transaction
    */
-  private receiveMeterValuesResponse(payload: MeterValuesResponseDto): void {}
+  private receiveMeterValuesResponse(payload: MeterValuesResponseDto): void {
+    //
+  }
 
   /**
    * B05 - Set Variables
@@ -228,7 +232,9 @@ export class ChargingStation implements IChargingStation {
   /**
    * G01 - Status Notification
    */
-  private receiveStatusNotificationResponse(payload: StatusNotificationResponseDto): void {}
+  private receiveStatusNotificationResponse(payload: StatusNotificationResponseDto): void {
+    //
+  }
 
   /**
    * G03 - Change Availability EVSE/Connector
@@ -277,5 +283,7 @@ export class ChargingStation implements IChargingStation {
   /**
    * G05 - Lock Failure
    */
-  private receiveNotifyEventResponse(payload: NotifyEventResponseDto): void {}
+  private receiveNotifyEventResponse(payload: NotifyEventResponseDto): void {
+    //
+  }
 }

@@ -192,7 +192,9 @@ export class ChargingStation implements IChargingStation {
   /**
    * G03 - Change Availability EVSE/Connector
    */
-  private receiveChangeAvailabilityResponse(payload: ChangeAvailabilityResponseDto): void {}
+  private receiveChangeAvailabilityResponse(payload: ChangeAvailabilityResponseDto): void {
+    //
+  }
 
   /**
    * B06 - Get Variables
@@ -204,7 +206,9 @@ export class ChargingStation implements IChargingStation {
   /**
    * B06 - Get Variables
    */
-  private receiveGetVariablesResponse(payload: GetVariablesResponseDto): void {}
+  private receiveGetVariablesResponse(payload: GetVariablesResponseDto): void {
+    //
+  }
 
   /**
    * G05 - Lock Failure
