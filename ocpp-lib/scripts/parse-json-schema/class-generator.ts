@@ -23,7 +23,7 @@ export class ClassGenerator {
     return ClassGenerator._instance
   }
 
-  public addJsonSchema(filenameWithoutExt: string, pathWithFilename: string) {
+  public addJsonSchema(filenameWithoutExt: string, pathWithFilename: string): void {
     this.jsonSchemaData.push([filenameWithoutExt, pathWithFilename])
   }
 
