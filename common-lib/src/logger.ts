@@ -15,7 +15,7 @@ export class Logger {
       },
       browser: {
         write: {
-          write: function (o) {
+          write: function (o): void {
             console.info(JSON.stringify(o))
           },
         },
