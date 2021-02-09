@@ -4,10 +4,6 @@ import AdminComp from './admin'
 import './App.css'
 
 function App() {
-
-
-
-
   return (
     <div className="App">
       <AdminComp />
