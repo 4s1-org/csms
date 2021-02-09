@@ -29,93 +29,96 @@ export class WebSocketServer {
   public startServer(): void {
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
-    })
+    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void =>
+      this.onChargingStationConncection(socket, tlsSocket, cs),
+    )
+
     const wssAdmin = new WebSocket.Server({
       noServer: true,
-    })
+    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => this.onAdminConnection(socket, tlsSocket))
 
-    wssChargingStations.on('connection', (socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void => {
-      this.sockets.add(socket)
-      this.tlsSockets.add(tlsSocket)
+    this.server = https
+      .createServer({
+        cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.crt')),
+        key: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.key')),
+      })
+      .on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
+        const socketId = request.headers['sec-websocket-key']
+        this.logger.info(`Client connected: ${socketId}`)
 
-      socket.onclose = (): void => {
-        cs.disconnect()
-        this.sockets.delete(socket)
-        this.tlsSockets.delete(tlsSocket)
-      }
+        const [username, password] = this.getCredentials(request)
+        const baseURL = `https://${request.headers.host}/`
+        const myURL = new URL(request.url || '', baseURL)
 
-      socket.onerror = (err: any): void => {
-        this.logger.error('Error' + err)
-      }
+        if (myURL.pathname.startsWith('/ocpp/')) {
+          const uniqueIdentifier = myURL.pathname.split('/')[2]
 
-      socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-        const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
-        if (result) {
-          socket.send(result.toMessageString())
-        }
-      }
-    })
+          const cs: ChargingStation | undefined = this.authenticateChargingStation(uniqueIdentifier, username, password)
 
-    wssAdmin.on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => {
-      this.sockets.add(socket)
-      this.tlsSockets.add(tlsSocket)
+          if (!cs) {
+            return this.send401(tlsSocket)
+          }
 
-      socket.send('Willkommen')
+          wssChargingStations.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
+            wssChargingStations.emit('connection', socket, tlsSocket, cs)
+          })
+        } else if (myURL.pathname.startsWith('/admin')) {
+          if (username !== 'admin' || password !== 'admin') {
+            return this.send401(tlsSocket)
+          }
 
-      socket.onclose = (): void => {
-        this.sockets.delete(socket)
-        this.tlsSockets.delete(tlsSocket)
-      }
-
-      socket.onerror = (err: any): void => {
-        this.logger.error('Error' + err)
-      }
-
-      socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-        // ToDo
-      }
-    })
-
-    this.server = https.createServer({
-      cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.crt')),
-      key: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.key')),
-    })
-
-    this.server.on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
-      const socketId = request.headers['sec-websocket-key']
-      this.logger.info(`Client connected: ${socketId}`)
-
-      const [username, password] = this.getCredentials(request)
-      const baseURL = `https://${request.headers.host}/`
-      const myURL = new URL(request.url || '', baseURL)
-
-      if (myURL.pathname.startsWith('/ocpp/')) {
-        const uniqueIdentifier = myURL.pathname.split('/')[2]
-
-        const cs: ChargingStation | undefined = this.authenticateChargingStation(uniqueIdentifier, username, password)
-
-        if (!cs) {
+          wssAdmin.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
+            wssAdmin.emit('connection', socket, tlsSocket)
+          })
+        } else {
           return this.send401(tlsSocket)
         }
-
-        wssChargingStations.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
-          wssChargingStations.emit('connection', socket, tlsSocket, cs)
-        })
-      } else if (myURL.pathname.startsWith('/admin')) {
-        if (username !== 'admin' || password !== 'admin') {
-          return this.send401(tlsSocket)
-        }
-
-        wssAdmin.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
-          wssAdmin.emit('connection', socket, tlsSocket)
-        })
-      } else {
-        return this.send401(tlsSocket)
-      }
-    })
+      })
 
     this.server.listen(this.port)
     this.logger.info(`WebSocketServer is running on port ${this.port}`)
+  }
+
+  private onChargingStationConncection(socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void {
+    this.sockets.add(socket)
+    this.tlsSockets.add(tlsSocket)
+
+    socket.onclose = (): void => {
+      cs.disconnect()
+      this.sockets.delete(socket)
+      this.tlsSockets.delete(tlsSocket)
+    }
+
+    socket.onerror = (err: any): void => {
+      this.logger.error('Error' + err)
+    }
+
+    socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+      const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
+      if (result) {
+        socket.send(result.toMessageString())
+      }
+    }
+  }
+
+  private onAdminConnection(socket: WebSocket, tlsSocket: TLSSocket): void {
+    this.sockets.add(socket)
+    this.tlsSockets.add(tlsSocket)
+
+    socket.send('Willkommen')
+
+    socket.onclose = (): void => {
+      this.sockets.delete(socket)
+      this.tlsSockets.delete(tlsSocket)
+    }
+
+    socket.onerror = (err: any): void => {
+      this.logger.error('Error' + err)
+    }
+
+    socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+      // ToDo
+    }
   }
 
   private getCredentials(request: IncomingMessage): string[] {
