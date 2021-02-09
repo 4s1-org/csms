@@ -36,21 +36,28 @@ import {
   NotifyEventResponseDto,
 } from '@yellowgarbagebag/csms-ocpp-lib'
 import { Logger } from '@yellowgarbagebag/csms-common-lib'
+import { ChargingStationState } from './charging-station-state'
 
 export class ChargingStation implements IChargingStation {
-  public readonly logger = new Logger(this.uniqueIdentifier)
+  public readonly logger = new Logger(this.state.uniqueIdentifier)
   private sendList: OcppRequestMessageDto[] = []
 
-  public constructor(public readonly uniqueIdentifier: string, private username: string, private password: string) {
+  public constructor(private readonly state: ChargingStationState) {
     // nothing to do
+  }
+
+  public get uniqueIdentifier(): string {
+    return this.state.uniqueIdentifier
   }
 
   public connect(): void {
     this.logger.info('Connected')
+    this.state.state = 'Online'
   }
 
   public disconnect(): void {
     this.logger.info('Disconnected')
+    this.state.state = 'Offline'
   }
 
   public addToSendList(requestMessage: OcppRequestMessageDto): void {
@@ -58,7 +65,7 @@ export class ChargingStation implements IChargingStation {
   }
 
   public checkCredentials(username: string, password: string): boolean {
-    const result = username === this.username && password === this.password
+    const result = username === this.state.username && password === this.state.password
     if (result) {
       this.logger.info('Login successful')
     } else {
