@@ -30,7 +30,7 @@ export class WebSocketServer {
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
     }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void =>
-      this.onChargingStationConncection(socket, tlsSocket, cs),
+      this.onChargingStationConnection(socket, tlsSocket, cs),
     )
 
     const wssAdmin = new WebSocket.Server({
@@ -79,9 +79,10 @@ export class WebSocketServer {
     this.logger.info(`WebSocketServer is running on port ${this.port}`)
   }
 
-  private onChargingStationConncection(socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void {
+  private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void {
     this.sockets.add(socket)
     this.tlsSockets.add(tlsSocket)
+    cs.connect()
 
     socket.onclose = (): void => {
       cs.disconnect()
@@ -101,11 +102,19 @@ export class WebSocketServer {
     }
   }
 
+  private sendAdminStatus(socket: WebSocket): void {
+    socket.send(JSON.stringify(DataProvider.instance.getAllStates()))
+
+    setTimeout(() => {
+      this.sendAdminStatus(socket)
+    }, 1000)
+  }
+
   private onAdminConnection(socket: WebSocket, tlsSocket: TLSSocket): void {
     this.sockets.add(socket)
     this.tlsSockets.add(tlsSocket)
 
-    socket.send('Willkommen')
+    this.sendAdminStatus(socket)
 
     socket.onclose = (): void => {
       this.sockets.delete(socket)
@@ -173,11 +182,13 @@ export class WebSocketServer {
     username: string,
     password: string,
   ): ChargingStation | undefined {
-    const cs = DataProvider.instance.getChargingStation(uniqueIdentifier)
-    if (cs && cs.checkCredentials(username, password)) {
-      return cs
-    } else {
-      return undefined
+    const state = DataProvider.instance.findChargingStationState(uniqueIdentifier)
+    if (state) {
+      const cs = new ChargingStation(state)
+      if (cs.checkCredentials(username, password)) {
+        return cs
+      }
     }
+    return undefined
   }
 }
