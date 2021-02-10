@@ -1,4 +1,4 @@
-import { ChargingStation, WebSocketClient } from '@yellowgarbagebag/csms-charging-station-lib'
+import { ChargingStation, WebSocketClient } from '@yellowgarbagebag/css-lib'
 import WebSocket from 'ws'
 
 const cs = new ChargingStation('LS001', 'LS001', 'test')
