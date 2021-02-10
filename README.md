@@ -1,8 +1,1 @@
-# Charge Station Management System
-
-## Backend
-
-## Utils
-
-## Shared
-
+# Charging Station Management System
