@@ -4,5 +4,6 @@ packages:
   - "charging-station-lib/"
   - "common-lib/"
   - "ocpp-lib/"
+  - "backend-lib/"
   - "backend/"
   - "backend-admin-ui/"
