@@ -1,3 +1,1 @@
-# CSMS - Backend
-
-Charge Station Management System - Backend
+# Charge Station Management System - Backend

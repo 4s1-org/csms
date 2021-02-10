@@ -11,4 +11,3 @@ pnpm run build --prefix backend-ui
 pnpm run build --prefix charging-station-lib
 pnpm run build --prefix charging-station-ui
 pnpm run build --prefix charging-station-cli
-
