@@ -3,7 +3,7 @@ import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ResponseBaseDto } from '../generated/response-base.dto'
-import { Logger } from '@yellowgarbagebag/csms-common-lib'
+import { Logger } from '@yellowgarbagebag/common-lib'
 
 export interface IChargingStation {
   logger: Logger

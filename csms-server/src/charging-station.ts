@@ -34,8 +34,8 @@ import {
   GetVariablesResponseDto,
   NotifyEventRequestDto,
   NotifyEventResponseDto,
-} from '@yellowgarbagebag/csms-ocpp-lib'
-import { Logger } from '@yellowgarbagebag/csms-common-lib'
+} from '@yellowgarbagebag/ocpp-lib'
+import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationState } from './charging-station-state'
 
 export class ChargingStation implements IChargingStation {
