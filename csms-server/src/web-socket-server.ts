@@ -12,8 +12,8 @@ import {
   RequestBaseDto,
   actionDtoMapping,
   OcppRequestMessageDto,
-} from '@yellowgarbagebag/csms-ocpp-lib'
-import { Logger } from '@yellowgarbagebag/csms-common-lib'
+} from '@yellowgarbagebag/ocpp-lib'
+import { Logger } from '@yellowgarbagebag/common-lib'
 import { DataProvider } from './data-provider'
 
 export class WebSocketServer {
