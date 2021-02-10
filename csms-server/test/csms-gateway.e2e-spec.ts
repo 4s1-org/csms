@@ -11,7 +11,7 @@ import {
   OcppMessageTypeIdEnum,
   OcppRequestMessageDto,
   UnpublishFirmwareRequestDto,
-} from '@yellowgarbagebag/csms-ocpp-lib'
+} from '@yellowgarbagebag/ocpp-lib'
 import { WebSocketServer } from '../src/web-socket-server'
 
 describe('CSMS Gateway', () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { WebSocketClient, ChargingStation } from '@yellowgarbagebag/csms-charging-station-lib'
+import { WebSocketClient, ChargingStation } from '@yellowgarbagebag/css-lib'
 
 function App() {
   var authToken = 'TFMwMDE6dGVzdA=' // LS001:test

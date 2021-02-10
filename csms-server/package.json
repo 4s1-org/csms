@@ -1,8 +1,8 @@
 {
-  "name": "@yellowgarbagebag/csms-backend-core",
+  "name": "@yellowgarbagebag/csms-server",
   "version": "0.0.1",
   "private": true,
-  "description": "Charge Station Management System - Backend Core",
+  "description": "Charge Station Management System Server",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
@@ -51,9 +51,9 @@
     }
   },
   "dependencies": {
-    "@yellowgarbagebag/csms-backend-lib": "workspace:*",
-    "@yellowgarbagebag/csms-common-lib": "workspace:*",
-    "@yellowgarbagebag/csms-ocpp-lib": "workspace:*",
+    "@yellowgarbagebag/csms-lib": "workspace:*",
+    "@yellowgarbagebag/common-lib": "workspace:*",
+    "@yellowgarbagebag/ocpp-lib": "workspace:*",
     "uuid": "^8.3.2",
     "ws": "^7.4.2"
   },

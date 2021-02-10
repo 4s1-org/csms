@@ -20,38 +20,38 @@ validate-all:
     - pnpm run test
     - cd ..
 
-    - cd backend-lib
+    - cd csms-lib
     - pnpm run lint
     - pnpm run build
     - pnpm run test
     - cd ..
 
-    - cd backend-core
+    - cd csms-server
     - pnpm run lint
     - pnpm run build
     - pnpm run test
     - pnpm run test:e2e
     - cd ..
 
-    - cd backend-ui
+    - cd csms-ui
     - pnpm run lint
     - pnpm run build
     - pnpm run test
     - cd ..
 
-    - cd charging-station-lib
+    - cd css-lib
     - pnpm run lint
     - pnpm run build
     - pnpm run test
     - cd ..
 
-    - cd charging-station-ui
+    - cd css-ui
     - pnpm run lint
     - pnpm run build
     - pnpm run test
     - cd ..
 
-    - cd charging-station-cli
+    - cd css-cli
     - pnpm run lint
     - pnpm run build
     - pnpm run test

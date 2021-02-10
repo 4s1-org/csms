@@ -1,8 +1,8 @@
 {
-  "name": "@yellowgarbagebag/csms-common-lib",
+  "name": "@yellowgarbagebag/csms-lib",
   "version": "1.0.0",
   "private": true,
-  "description": "Charge Station Management System - Common Library",
+  "description": "Charge Station Management System Library",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
@@ -29,17 +29,11 @@
     "test:watch": "jest --watch"
   },
   "prettier": "@hest-lab/eslint-config",
-  "dependencies": {
-    "@yellowgarbagebag/csms-charging-station-lib": "workspace:*",
-    "@yellowgarbagebag/csms-common-lib": "workspace:*",
-    "pino-pretty": "^4.5.0",
-    "ws": "^7.4.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@hest-lab/eslint-config": "^1.4.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
-    "@types/ws": "^7.4.0",
     "eslint": "^7.19.0",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",

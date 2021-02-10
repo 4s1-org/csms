@@ -4,10 +4,10 @@ pnpm install
 pnpm run build --prefix common-lib
 pnpm run build --prefix ocpp-lib
 
-pnpm run build --prefix backend-lib
-pnpm run build --prefix backend-core
-pnpm run build --prefix backend-ui
+pnpm run build --prefix csms-lib
+pnpm run build --prefix csms-server
+pnpm run build --prefix csms-ui
 
-pnpm run build --prefix charging-station-lib
-pnpm run build --prefix charging-station-ui
-pnpm run build --prefix charging-station-cli
+pnpm run build --prefix css-lib
+pnpm run build --prefix css-ui
+pnpm run build --prefix css-cli
