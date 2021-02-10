@@ -20,6 +20,12 @@ validate-all:
     - pnpm run test
     - cd ..
 
+    - cd backend-lib
+    - pnpm run lint
+    - pnpm run build
+    - pnpm run test
+    - cd ..
+
     - cd backend
     - pnpm run lint
     - pnpm run build
