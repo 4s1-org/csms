@@ -30,8 +30,8 @@
   },
   "prettier": "@hest-lab/eslint-config",
   "dependencies": {
-    "@yellowgarbagebag/csms-charging-station-lib": "workspace:*",
-    "@yellowgarbagebag/csms-common-lib": "workspace:*",
+    "@yellowgarbagebag/css-lib": "workspace:*",
+    "@yellowgarbagebag/common-lib": "workspace:*",
     "pino-pretty": "^4.5.0",
     "ws": "^7.4.3"
   },

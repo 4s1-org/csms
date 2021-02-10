@@ -48,7 +48,7 @@
     }
   },
   "dependencies": {
-    "@yellowgarbagebag/csms-common-lib": "workspace:*",
+    "@yellowgarbagebag/common-lib": "workspace:*",
     "class-transformer": "^0.3.2",
     "jsonschema": "^1.4.0",
     "reflect-metadata": "^0.1.13"

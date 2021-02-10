@@ -4,7 +4,7 @@ import {
   OcppRequestMessageDto,
   actionDtoMapping,
   handleIncomingMessage,
-} from '@yellowgarbagebag/csms-ocpp-lib'
+} from '@yellowgarbagebag/ocpp-lib'
 import { v4 as uuid } from 'uuid'
 import { ChargingStation } from './charging-station'
 

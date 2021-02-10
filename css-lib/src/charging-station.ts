@@ -43,8 +43,8 @@ import {
   EventNotificationEnum,
   VariableDto,
   NotifyEventResponseDto,
-} from '@yellowgarbagebag/csms-ocpp-lib'
-import { Logger } from '@yellowgarbagebag/csms-common-lib'
+} from '@yellowgarbagebag/ocpp-lib'
+import { Logger } from '@yellowgarbagebag/common-lib'
 
 export class ChargingStation implements IChargingStation {
   public readonly logger = new Logger(this.uniqueIdentifier)
