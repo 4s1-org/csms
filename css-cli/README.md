@@ -1,1 +1,1 @@
-# Charge Station Management System - Common Library
+# Charging Station Simulator CLI

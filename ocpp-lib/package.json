@@ -1,8 +1,8 @@
 {
-  "name": "@yellowgarbagebag/csms-ocpp-lib",
+  "name": "@yellowgarbagebag/ocpp-lib",
   "version": "1.0.0",
   "private": true,
-  "description": "Charge Station Management System - OCPP Library",
+  "description": "OCPP Library",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"

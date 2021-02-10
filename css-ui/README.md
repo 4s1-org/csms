@@ -1,1 +1,1 @@
-# Charge Station Management System - Charging Station UI
+# Charging Station Simulator UI
