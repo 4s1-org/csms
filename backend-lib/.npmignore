@@ -1,0 +1,14 @@
+/.editorconfig
+/.eslintrc.yaml
+/.env
+/.eslintignore
+/.gitignore
+/.npmrc
+/.vscode/
+/node_modules/
+/scripts/
+/src/
+/tsconfig.eslint.json
+/tsconfig.json
+/vscode.code-workspace
+/*.tgz
