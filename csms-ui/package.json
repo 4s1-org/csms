@@ -2,7 +2,7 @@
   "name": "@yellowgarbagebag/csms-ui",
   "version": "0.0.1",
   "private": true,
-  "description": "Charge Station Management System UI",
+  "description": "Charging Station Management System UI",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
