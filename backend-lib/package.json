@@ -1,5 +1,5 @@
 {
-  "name": "@yellowgarbagebag/backend-lib",
+  "name": "@yellowgarbagebag/csms-backend-lib",
   "version": "1.0.0",
   "private": true,
   "description": "Charge Station Management System - Backend Library",
