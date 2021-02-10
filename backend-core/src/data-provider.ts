@@ -1,4 +1,3 @@
-import { ChargingStation } from './charging-station'
 import { ChargingStationState } from './charging-station-state'
 
 export class DataProvider {
