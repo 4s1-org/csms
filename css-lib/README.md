@@ -1,1 +1,1 @@
-# Charge Station Management System - Charging Station Library
+# Charging Station Simulator Library

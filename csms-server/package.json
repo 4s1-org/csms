@@ -1,8 +1,8 @@
 {
-  "name": "@yellowgarbagebag/csms-backend-core",
+  "name": "@yellowgarbagebag/csms-server",
   "version": "0.0.1",
   "private": true,
-  "description": "Charge Station Management System - Backend Core",
+  "description": "Charge Station Management System Server",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"

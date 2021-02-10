@@ -1,8 +1,8 @@
 {
-  "name": "@yellowgarbagebag/csms-charging-station-lib",
+  "name": "@yellowgarbagebag/css-lib",
   "version": "0.0.1",
   "private": true,
-  "description": "Charge Station Management System - Charging Station Library",
+  "description": "Charging Station Simulator Library",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"

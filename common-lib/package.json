@@ -1,8 +1,8 @@
 {
-  "name": "@yellowgarbagebag/csms-common-lib",
+  "name": "@yellowgarbagebag/common-lib",
   "version": "1.0.0",
   "private": true,
-  "description": "Charge Station Management System - Common Library",
+  "description": "Common Library",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
