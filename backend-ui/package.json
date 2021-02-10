@@ -1,8 +1,8 @@
 {
-  "name": "@yellowgarbagebag/csms-backend-admin-ui",
+  "name": "@yellowgarbagebag/csms-backend-ui",
   "version": "0.0.1",
   "private": true,
-  "description": "Charge Station Management System - Backend Admin UI",
+  "description": "Charge Station Management System - Backend UI",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
@@ -50,6 +50,7 @@
     "@types/node": "^12.19.16",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
+    "@yellowgarbagebag/csms-backend-lib": "workspace:*",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",

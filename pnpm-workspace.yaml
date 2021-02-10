@@ -6,4 +6,4 @@ packages:
   - "ocpp-lib/"
   - "backend-lib/"
   - "backend/"
-  - "backend-admin-ui/"
+  - "backend-ui/"

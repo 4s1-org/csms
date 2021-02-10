@@ -33,7 +33,7 @@ validate-all:
     - pnpm run test:e2e
     - cd ..
 
-    - cd backend-admin-ui
+    - cd backend-ui
     - pnpm run lint
     - pnpm run build
     - pnpm run test
