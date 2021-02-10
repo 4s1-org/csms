@@ -1,5 +1,5 @@
 {
-  "name": "@yellowgarbagebag/csms-backend",
+  "name": "@yellowgarbagebag/csms-backend-core",
   "version": "0.0.1",
   "private": true,
   "description": "Charge Station Management System - Backend",

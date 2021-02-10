@@ -26,7 +26,7 @@ validate-all:
     - pnpm run test
     - cd ..
 
-    - cd backend
+    - cd backend-core
     - pnpm run lint
     - pnpm run build
     - pnpm run test
