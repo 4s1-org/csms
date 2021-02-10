@@ -5,5 +5,5 @@ packages:
   - "common-lib/"
   - "ocpp-lib/"
   - "backend-lib/"
-  - "backend/"
+  - "backend-core/"
   - "backend-ui/"

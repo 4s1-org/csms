@@ -1,5 +1,5 @@
 importers:
-  backend:
+  backend-core:
     dependencies:
       '@yellowgarbagebag/csms-backend-lib': link:../backend-lib
       '@yellowgarbagebag/csms-common-lib': link:../common-lib
