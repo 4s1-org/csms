@@ -1,8 +1,8 @@
 {
-  "name": "@yellowgarbagebag/css-ui",
+  "name": "@yellowgarbagebag/css-web",
   "version": "0.0.1",
   "private": true,
-  "description": "Charging Station Simulator UI",
+  "description": "Charging Station Simulator Web",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
@@ -51,6 +51,7 @@
     "@types/node": "^12.19.16",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
+    "@yellowgarbagebag/common-lib": "workspace:*",
     "@yellowgarbagebag/css-lib": "workspace:*",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
