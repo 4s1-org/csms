@@ -33,7 +33,7 @@ validate-all:
     - pnpm run test:e2e
     - cd ..
 
-    - cd csms-ui
+    - cd csms-server-ui
     - pnpm run lint
     - pnpm run build
     - pnpm run test
@@ -45,7 +45,7 @@ validate-all:
     - pnpm run test
     - cd ..
 
-    - cd css-ui
+    - cd css-web
     - pnpm run lint
     - pnpm run build
     - pnpm run test

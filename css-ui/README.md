@@ -1,1 +1,0 @@
-# Charging Station Simulator UI

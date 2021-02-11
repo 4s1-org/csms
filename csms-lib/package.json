@@ -29,7 +29,9 @@
     "test:watch": "jest --watch"
   },
   "prettier": "@hest-lab/eslint-config",
-  "dependencies": {},
+  "dependencies": {
+    "@yellowgarbagebag/common-lib": "workspace:*"
+  },
   "devDependencies": {
     "@hest-lab/eslint-config": "^1.4.0",
     "@types/jest": "^26.0.20",
