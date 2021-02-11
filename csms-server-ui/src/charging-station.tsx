@@ -1,6 +1,5 @@
 import React from 'react'
 import { ChargingStationState } from '@yellowgarbagebag/csms-lib'
-import './charging-station.css'
 
 interface IState {}
 interface IProps {
