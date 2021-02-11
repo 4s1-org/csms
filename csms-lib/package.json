@@ -30,7 +30,8 @@
   },
   "prettier": "@hest-lab/eslint-config",
   "dependencies": {
-    "@yellowgarbagebag/common-lib": "workspace:*"
+    "@yellowgarbagebag/common-lib": "workspace:*",
+    "class-transformer": "^0.3.2"
   },
   "devDependencies": {
     "@hest-lab/eslint-config": "^1.4.0",

@@ -1,9 +1,10 @@
 import React from 'react'
 import './charging-station.css'
 import ChargingStationComp from './charging-station'
+import { ChargingStationState, SerializationHelper } from '@yellowgarbagebag/csms-lib'
 
 interface IState {
-  data: { _username: string; _state: string }[]
+  data: ChargingStationState[]
 }
 
 interface IProps {}
@@ -20,9 +21,7 @@ class AdminComp extends React.Component<IProps, IState> {
     await this.loadData()
   }
 
-  public async componentDidUpdate(prevProps: IProps): Promise<void> {
-    //   await this.loadData();
-  }
+  public async componentDidUpdate(prevProps: IProps): Promise<void> {}
 
   private async loadData(): Promise<void> {
     const authToken = 'YWRtaW46YWRtaW4=' // admin:admin
@@ -35,7 +34,7 @@ class AdminComp extends React.Component<IProps, IState> {
     }
     ws.onmessage = (msg: any): void => {
       this.setState({
-        data: JSON.parse(msg.data),
+        data: SerializationHelper.deserializeArray(ChargingStationState, msg.data),
       })
     }
     ws.onerror = (msg: any): void => {}
@@ -46,7 +45,7 @@ class AdminComp extends React.Component<IProps, IState> {
     return (
       <div>
         {this.state.data.map((item) => (
-          <ChargingStationComp key={item._username} name={item._username} state={item._state}></ChargingStationComp>
+          <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
         ))}
       </div>
     )

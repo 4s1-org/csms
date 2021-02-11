@@ -1,20 +1,21 @@
 import React from 'react'
+import { ChargingStationState } from '@yellowgarbagebag/csms-lib'
 import './charging-station.css'
 
 interface IState {}
-
 interface IProps {
-  name: string
-  state: string
+  data: ChargingStationState
 }
 
 class ChargingStationComp extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     return (
       <div>
-        <b> {this.props.name}</b>
+        <b> {this.props.data.uniqueIdentifier}</b>
         <br />
-        {this.props.state}
+        Status: {this.props.data.state}
+        <br />
+        Benutzername: {this.props.data.username}
       </div>
     )
   }

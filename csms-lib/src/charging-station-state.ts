@@ -1,7 +1,16 @@
+import { Expose } from 'class-transformer'
+
 export class ChargingStationState {
+  @Expose({ name: 'username' })
   private _username = ''
+
+  @Expose({ name: 'password', groups: ['hidden'] })
   private _password = ''
+
+  @Expose({ name: 'state' })
   private _state = 'Offline'
+
+  @Expose({ name: 'uniqueIdentifier' })
   private _uniqueIdentifier: string
 
   public constructor(uniqueIdentifier: string) {

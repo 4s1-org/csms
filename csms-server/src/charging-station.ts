@@ -36,7 +36,7 @@ import {
   NotifyEventResponseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationState } from './charging-station-state'
+import { ChargingStationState } from '@yellowgarbagebag/csms-lib'
 
 export class ChargingStation implements IChargingStation {
   public readonly logger = new Logger(this.state.uniqueIdentifier)
