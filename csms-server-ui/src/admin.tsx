@@ -1,8 +1,7 @@
 import React from 'react'
-import './charging-station.css'
 import ChargingStationComp from './charging-station'
 import { ChargingStationState, SerializationHelper } from '@yellowgarbagebag/csms-lib'
-
+import './admin.css'
 interface IState {
   data: ChargingStationState[]
 }
@@ -43,7 +42,7 @@ class AdminComp extends React.Component<IProps, IState> {
 
   public render(): JSX.Element {
     return (
-      <div>
+      <div className="flex-container">
         {this.state.data.map((item) => (
           <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
         ))}
