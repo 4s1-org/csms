@@ -15,18 +15,23 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { DataProvider } from './data-provider'
+import { SerializationHelper } from '@yellowgarbagebag/csms-lib'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
   private server: https.Server | undefined
-  private sockets: Set<WebSocket> = new Set<WebSocket>()
-  private tlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
+  private csSockets: Set<WebSocket> = new Set<WebSocket>()
+  private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
+  private adminSockets: Set<WebSocket> = new Set<WebSocket>()
+  private adminTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
 
   constructor(public readonly port: number = 3000) {
     // nothing to do
   }
 
   public startServer(): void {
+    DataProvider.instance.load()
+
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
     }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void =>
@@ -80,14 +85,16 @@ export class WebSocketServer {
   }
 
   private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void {
-    this.sockets.add(socket)
-    this.tlsSockets.add(tlsSocket)
+    this.csSockets.add(socket)
+    this.csTlsSockets.add(tlsSocket)
     cs.connect()
+    this.sendAdminStatusToAll()
 
     socket.onclose = (): void => {
       cs.disconnect()
-      this.sockets.delete(socket)
-      this.tlsSockets.delete(tlsSocket)
+      this.csSockets.delete(socket)
+      this.csTlsSockets.delete(tlsSocket)
+      this.sendAdminStatusToAll()
     }
 
     socket.onerror = (err: any): void => {
@@ -102,23 +109,27 @@ export class WebSocketServer {
     }
   }
 
-  private sendAdminStatus(socket: WebSocket): void {
-    socket.send(JSON.stringify(DataProvider.instance.getAllStates()))
+  private sendAdminStatusToAll(): void {
+    for (const socket of this.adminSockets) {
+      this.sendAdminStatusToSingle(socket)
+    }
+  }
 
-    setTimeout(() => {
-      this.sendAdminStatus(socket)
-    }, 1000)
+  private sendAdminStatusToSingle(socket: WebSocket): void {
+    if (socket.OPEN) {
+      socket.send(SerializationHelper.serialize(DataProvider.instance.getAllStates()))
+    }
   }
 
   private onAdminConnection(socket: WebSocket, tlsSocket: TLSSocket): void {
-    this.sockets.add(socket)
-    this.tlsSockets.add(tlsSocket)
+    this.adminSockets.add(socket)
+    this.adminTlsSockets.add(tlsSocket)
 
-    this.sendAdminStatus(socket)
+    this.sendAdminStatusToSingle(socket)
 
     socket.onclose = (): void => {
-      this.sockets.delete(socket)
-      this.tlsSockets.delete(tlsSocket)
+      this.adminSockets.delete(socket)
+      this.adminTlsSockets.delete(tlsSocket)
     }
 
     socket.onerror = (err: any): void => {
@@ -150,15 +161,16 @@ export class WebSocketServer {
 
   public stopServer(): void {
     if (this.server) {
-      for (const socket of this.tlsSockets) {
+      for (const socket of this.csTlsSockets) {
         socket.destroy()
       }
-      for (const socket of this.sockets) {
+      for (const socket of this.csSockets) {
         socket.close()
       }
       this.server.close()
     }
     this.logger.info(`WebSocketServer stopped`)
+    DataProvider.instance.save()
   }
 
   // ToDo: https://gitlab.com/YellowGarbageBag/csms/-/issues/56

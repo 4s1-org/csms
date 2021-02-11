@@ -11,6 +11,9 @@ process.on('unhandledRejection', (reason, promise) => {
 })
 
 const server = new WebSocketServer(3000)
+
+process.on('SIGINT', () => server.stopServer())
+
 try {
   server.startServer()
 } catch (err) {

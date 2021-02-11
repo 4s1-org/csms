@@ -1,5 +1,5 @@
 import { ChargingStation } from './charging-station'
-import { ChargingStationState } from './charging-station-state'
+import { ChargingStationState } from '@yellowgarbagebag/csms-lib'
 
 describe('Charging Station', () => {
   it('Dummy', () => {

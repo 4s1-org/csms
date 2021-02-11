@@ -26,6 +26,7 @@ importers:
   csms-lib:
     dependencies:
       '@yellowgarbagebag/common-lib': link:../common-lib
+      class-transformer: 0.3.2
     devDependencies:
       '@hest-lab/eslint-config': 1.4.0_typescript@4.1.3
       '@types/jest': 26.0.20
@@ -40,6 +41,7 @@ importers:
       '@types/jest': ^26.0.20
       '@types/node': ^14.14.25
       '@yellowgarbagebag/common-lib': workspace:*
+      class-transformer: ^0.3.2
       eslint: ^7.19.0
       jest: ^26.6.3
       prettier: ^2.2.1
