@@ -2,7 +2,7 @@
   "name": "@yellowgarbagebag/csms-server",
   "version": "0.0.1",
   "private": true,
-  "description": "Charge Station Management System Server",
+  "description": "Charging Station Management System Server",
   "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
