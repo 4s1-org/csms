@@ -1,9 +1,9 @@
 packages:
-  - "css-ui/"
+  - "css-web/"
   - "css-cli/"
   - "css-lib/"
   - "common-lib/"
   - "ocpp-lib/"
   - "csms-lib/"
   - "csms-server/"
-  - "csms-ui/"
+  - "csms-server-ui/"
