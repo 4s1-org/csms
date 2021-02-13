@@ -36,6 +36,13 @@ export class DataProvider {
       const state = SerializationHelper.deserialize(ChargingStationState, content)
       this.chargingStationStates.push(state)
     }
+
+    if (this.chargingStationStates.length === 0) {
+      const state = new ChargingStationState('LS001')
+      state.username = 'LS001'
+      state.password = 'test'
+      this.chargingStationStates.push(state)
+    }
   }
 
   public save(): void {
