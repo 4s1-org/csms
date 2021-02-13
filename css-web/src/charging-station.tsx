@@ -41,7 +41,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     document.cookie = 'X-Authorization=' + authToken + '; path=/'
 
     const cs = new ChargingStation(this.state.uniqueIdentifier, this.state.username, this.state.password)
-    const socket = new WebSocket('wss://localhost:3000/ocpp/LS001', ['ocpp2.0.1'])
+    const socket = new WebSocket(`wss://localhost:3000/ocpp/${this.state.uniqueIdentifier}`, ['ocpp2.0.1'])
 
     const sendCallback = (msg: any): boolean => {
       if (socket && socket.OPEN) {
@@ -107,7 +107,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
         Username:
         <input
           type="text"
-          value={this.state.uniqueIdentifier}
+          value={this.state.username}
           style={{ width: 100 }}
           onChange={this.onEdtUsernameChange}
           disabled={this.state.isConnected}
@@ -116,7 +116,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
         Password:
         <input
           type="password"
-          value={this.state.uniqueIdentifier}
+          value={this.state.password}
           style={{ width: 100 }}
           onChange={this.onEdtPasswordChange}
           disabled={this.state.isConnected}
