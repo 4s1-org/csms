@@ -19,6 +19,7 @@
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "build:watch": "tsc --watch",
+    "start:simulation1": "concurrently -k -n tsc,sim \"tsc --watch\" \"nodemon ./dist/simulation1.js | pino-pretty\"",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
@@ -30,8 +31,8 @@
   },
   "prettier": "@hest-lab/eslint-config",
   "dependencies": {
-    "@yellowgarbagebag/css-lib": "workspace:*",
     "@yellowgarbagebag/common-lib": "workspace:*",
+    "@yellowgarbagebag/css-lib": "workspace:*",
     "pino-pretty": "^4.5.0",
     "ws": "^7.4.3"
   },
@@ -40,8 +41,10 @@
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
     "@types/ws": "^7.4.0",
+    "concurrently": "^5.3.0",
     "eslint": "^7.19.0",
     "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
