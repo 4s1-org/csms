@@ -64,17 +64,16 @@ class ChargingStationComp extends React.Component<IProps, IState> {
       cs.connect()
     }
 
-    // Handling, besonders der Fehler, wie im Backend lösen
     socket.onmessage = (ev: MessageEvent<any>): void => {
       client.onMessage(ev.data)
     }
 
-    socket.onerror = (ev: Event): void => {
-      cs.logger.error('Error')
+    socket.onerror = (_ev: Event): void => {
+      client.onError('There was an error on WebSocket connection.')
     }
 
-    socket.onclose = (ev: CloseEvent): void => {
-      cs.logger.info('Connection closed')
+    socket.onclose = (): void => {
+      client.onClose()
     }
   }
 

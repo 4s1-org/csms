@@ -36,8 +36,8 @@ export class WebSocketClient {
     }
   }
 
-  public onError(data: any): void {
-    this.cs.logger.error(data)
+  public onError(msg: string): void {
+    this.cs.logger.error(msg)
   }
 
   public onClose(): void {
