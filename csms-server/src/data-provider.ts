@@ -26,6 +26,9 @@ export class DataProvider {
 
   public load(): void {
     const dir = path.join(__dirname, '..', 'data')
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir)
+    }
     const files = fs.readdirSync(dir)
 
     for (const file of files) {
