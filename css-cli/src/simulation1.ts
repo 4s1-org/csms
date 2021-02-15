@@ -48,18 +48,17 @@ socket.onopen = (): void => {
 
   setTimeout(() => {
     socket.close()
-  }, 1000)
+  }, 2000)
 }
 
-// Handling, besonders der Fehler, wie im Backend lösen
 socket.onmessage = (msg: WebSocket.MessageEvent): void => {
   client.onMessage(msg.data)
 }
 
 socket.onerror = (err: WebSocket.ErrorEvent): void => {
-  cs.logger.error(err.message)
+  client.onError(err.message)
 }
 
 socket.onclose = (): void => {
-  cs.logger.info('Connection closed')
+  client.onClose()
 }

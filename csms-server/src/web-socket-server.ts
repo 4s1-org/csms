@@ -56,6 +56,7 @@ export class WebSocketServer {
         const myURL = new URL(request.url || '', baseURL)
 
         if (myURL.pathname.startsWith('/ocpp/')) {
+          // Charging Station
           const uniqueIdentifier = myURL.pathname.split('/')[2]
 
           const cs: ChargingStation | undefined = this.authenticateChargingStation(uniqueIdentifier, username, password)
@@ -68,6 +69,7 @@ export class WebSocketServer {
             wssChargingStations.emit('connection', socket, tlsSocket, cs)
           })
         } else if (myURL.pathname.startsWith('/admin')) {
+          // Admin
           if (username !== 'admin' || password !== 'admin') {
             return this.send401(tlsSocket)
           }
