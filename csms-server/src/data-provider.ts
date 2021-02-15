@@ -26,6 +26,9 @@ export class DataProvider {
 
   public load(): void {
     const dir = path.join(__dirname, '..', 'data')
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir)
+    }
     const files = fs.readdirSync(dir)
 
     for (const file of files) {
@@ -34,6 +37,13 @@ export class DataProvider {
       const pathWithFilename = path.join(dir, file)
       const content = fs.readFileSync(pathWithFilename, { encoding: 'utf-8' })
       const state = SerializationHelper.deserialize(ChargingStationState, content)
+      this.chargingStationStates.push(state)
+    }
+
+    if (this.chargingStationStates.length === 0) {
+      const state = new ChargingStationState('LS001')
+      state.username = 'LS001'
+      state.password = 'test'
       this.chargingStationStates.push(state)
     }
   }
