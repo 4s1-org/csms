@@ -232,14 +232,14 @@ export class ChargingStation implements IChargingStation {
   /**
    * G01 - Status Notification
    */
-  private receiveStatusNotificationResponse(payload: StatusNotificationResponseDto): void {
+  private receiveStatusNotificationResponse(_payload: StatusNotificationResponseDto): void {
     //
   }
 
   /**
    * G03 - Change Availability EVSE/Connector
    */
-  private receiveChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
+  private receiveChangeAvailabilityRequest(_payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
     return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
   }
 

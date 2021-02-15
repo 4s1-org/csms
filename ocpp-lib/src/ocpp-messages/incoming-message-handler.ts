@@ -68,7 +68,7 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
       errMsg = new OcppErrorMessageDto(err.messageId, err.errorCode, err.errorDescription)
     } else if (err instanceof CsmsError) {
       const messageId: string = msg?.messageId || ''
-      cs.logger.warn(`Csms Error | ${err.errorCode} | ${err.errorDescription}`)
+      cs.logger.warn(`CSMS Error | ${err.errorCode} | ${err.errorDescription}`)
       errMsg = new OcppErrorMessageDto(messageId, err.errorCode, err.errorDescription)
     } else {
       const messageId: string = msg?.messageId || ''

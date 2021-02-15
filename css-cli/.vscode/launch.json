@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Simulation 1",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "args": ["${workspaceRoot}/src/simulation1.ts"]
+    }
+  ]
+}
