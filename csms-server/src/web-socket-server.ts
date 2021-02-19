@@ -108,6 +108,7 @@ export class WebSocketServer {
       if (result) {
         socket.send(result.toMessageString())
       }
+      this.sendAdminStatusToAll()
     }
   }
 
@@ -119,7 +120,7 @@ export class WebSocketServer {
 
   private sendAdminStatusToSingle(socket: WebSocket): void {
     if (socket.OPEN) {
-      socket.send(SerializationHelper.serialize(DataProvider.instance.getAllStates()))
+      socket.send(SerializationHelper.serialize(DataProvider.instance.getAllModels()))
     }
   }
 
@@ -196,9 +197,9 @@ export class WebSocketServer {
     username: string,
     password: string,
   ): ChargingStation | undefined {
-    const state = DataProvider.instance.findChargingStationState(uniqueIdentifier)
-    if (state) {
-      const cs = new ChargingStation(state)
+    const model = DataProvider.instance.findChargingStationModel(uniqueIdentifier)
+    if (model) {
+      const cs = new ChargingStation(model)
       if (cs.checkCredentials(username, password)) {
         return cs
       }
