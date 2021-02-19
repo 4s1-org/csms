@@ -75,6 +75,8 @@ export class ChargingStation implements IChargingStation {
   }
 
   public incomingRequestMessage(payload: RequestBaseDto): ResponseBaseDto {
+    this.model.lastContact = Date.now()
+
     if (payload instanceof BootNotificationRequestDto) {
       return this.receiveBootNotificationRequest(payload)
     }
@@ -98,6 +100,8 @@ export class ChargingStation implements IChargingStation {
   }
 
   public incomingResponseMessage(payload: ResponseBaseDto): void {
+    this.model.lastContact = Date.now()
+
     if (payload instanceof SetVariablesResponseDto) {
       return this.receiveSetVariableResponse(payload)
     }
@@ -112,6 +116,8 @@ export class ChargingStation implements IChargingStation {
   }
 
   public incomingErrorMessage(error: OcppErrorMessageDto): void {
+    this.model.lastContact = Date.now()
+
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
