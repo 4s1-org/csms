@@ -1,6 +1,12 @@
-import { Expose } from 'class-transformer'
+import { Expose, Transform } from 'class-transformer'
 
-export class ChargingStationState {
+export enum ChargingStationState {
+  Offline,
+  Schroedinger,
+  Online,
+}
+
+export class ChargingStationModel {
   @Expose({ name: 'username' })
   private _username = ''
 
@@ -8,10 +14,13 @@ export class ChargingStationState {
   private _password = ''
 
   @Expose({ name: 'state' })
-  private _state = 'Offline'
+  private _state = ChargingStationState.Offline
 
   @Expose({ name: 'uniqueIdentifier' })
   private _uniqueIdentifier: string
+
+  @Expose({ name: 'lastContact' })
+  private _lastContact = 0
 
   public constructor(uniqueIdentifier: string) {
     this._uniqueIdentifier = uniqueIdentifier
@@ -33,15 +42,23 @@ export class ChargingStationState {
     this._password = value
   }
 
-  public get state(): string {
+  public get state(): ChargingStationState {
     return this._state
   }
 
-  public set state(value: string) {
+  public set state(value: ChargingStationState) {
     this._state = value
   }
 
   public get uniqueIdentifier(): string {
     return this._uniqueIdentifier
+  }
+
+  public set lastContact(value: number) {
+    this._lastContact = value
+  }
+
+  public get lastContact(): number {
+    return this._lastContact
   }
 }
