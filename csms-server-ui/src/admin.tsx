@@ -1,9 +1,9 @@
 import React from 'react'
 import ChargingStationComp from './charging-station'
-import { ChargingStationState, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
 import './admin.css'
 interface IState {
-  data: ChargingStationState[]
+  data: ChargingStationModel[]
 }
 
 interface IProps {}
@@ -32,8 +32,9 @@ class AdminComp extends React.Component<IProps, IState> {
       console.log('IT WORKS')
     }
     ws.onmessage = (msg: any): void => {
+      const data = SerializationHelper.deserializeArray(ChargingStationModel, msg.data)
       this.setState({
-        data: SerializationHelper.deserializeArray(ChargingStationState, msg.data),
+        data,
       })
     }
     ws.onerror = (msg: any): void => {}
@@ -42,10 +43,12 @@ class AdminComp extends React.Component<IProps, IState> {
 
   public render(): JSX.Element {
     return (
-      <div className="flex-container">
-        {this.state.data.map((item) => (
-          <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
-        ))}
+      <div className="container-fluid">
+        <div className="row">
+          {this.state.data.map((item) => (
+            <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
+          ))}
+        </div>
       </div>
     )
   }
