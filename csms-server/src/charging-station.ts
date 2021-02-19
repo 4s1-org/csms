@@ -36,28 +36,28 @@ import {
   NotifyEventResponseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationState } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
 
 export class ChargingStation implements IChargingStation {
-  public readonly logger = new Logger(this.state.uniqueIdentifier)
+  public readonly logger = new Logger(this.model.uniqueIdentifier)
   private sendList: OcppRequestMessageDto[] = []
 
-  public constructor(private readonly state: ChargingStationState) {
+  public constructor(private readonly model: ChargingStationModel) {
     // nothing to do
   }
 
   public get uniqueIdentifier(): string {
-    return this.state.uniqueIdentifier
+    return this.model.uniqueIdentifier
   }
 
   public connect(): void {
     this.logger.info('Connected')
-    this.state.state = 'Online'
+    this.model.state = ChargingStationState.Schroedinger
   }
 
   public disconnect(): void {
     this.logger.info('Disconnected')
-    this.state.state = 'Offline'
+    this.model.state = ChargingStationState.Offline
   }
 
   public addToSendList(requestMessage: OcppRequestMessageDto): void {
@@ -65,7 +65,7 @@ export class ChargingStation implements IChargingStation {
   }
 
   public checkCredentials(username: string, password: string): boolean {
-    const result = username === this.state.username && password === this.state.password
+    const result = username === this.model.username && password === this.model.password
     if (result) {
       this.logger.info('Login successful')
     } else {
@@ -132,6 +132,7 @@ export class ChargingStation implements IChargingStation {
    * B03 - Cold Boot Charging Station - Rejected
    */
   private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
+    this.model.state = ChargingStationState.Online
     return new BootNotificationResponseDto(new Date().toISOString(), 1, RegistrationStatusEnum.Accepted)
   }
 

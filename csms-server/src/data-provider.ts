@@ -1,5 +1,5 @@
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationState, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
 import fs from 'fs'
 import path from 'path'
 
@@ -7,14 +7,14 @@ export class DataProvider {
   protected logger: Logger = new Logger('DataProvider')
   private static _instance: DataProvider | undefined
 
-  private chargingStationStates: ChargingStationState[] = []
+  private chargingStationModels: ChargingStationModel[] = []
 
   private constructor() {
     // nothing to do
   }
 
-  public getAllStates(): ChargingStationState[] {
-    return this.chargingStationStates
+  public getAllModels(): ChargingStationModel[] {
+    return this.chargingStationModels
   }
 
   public static get instance(): DataProvider {
@@ -36,15 +36,15 @@ export class DataProvider {
 
       const pathWithFilename = path.join(dir, file)
       const content = fs.readFileSync(pathWithFilename, { encoding: 'utf-8' })
-      const state = SerializationHelper.deserialize(ChargingStationState, content)
-      this.chargingStationStates.push(state)
+      const state = SerializationHelper.deserialize(ChargingStationModel, content)
+      this.chargingStationModels.push(state)
     }
 
-    if (this.chargingStationStates.length === 0) {
-      const state = new ChargingStationState('LS001')
-      state.username = 'LS001'
-      state.password = 'test'
-      this.chargingStationStates.push(state)
+    if (this.chargingStationModels.length === 0) {
+      const model = new ChargingStationModel('LS001')
+      model.username = 'LS001'
+      model.password = 'test'
+      this.chargingStationModels.push(model)
     }
   }
 
@@ -54,7 +54,7 @@ export class DataProvider {
       fs.mkdirSync(folder)
     }
 
-    for (const state of this.chargingStationStates) {
+    for (const state of this.chargingStationModels) {
       this.logger.info(`Save ${state.uniqueIdentifier}`)
       const json = SerializationHelper.serialize(state, ['hidden'])
       const filename = path.join(folder, `${state.uniqueIdentifier}.json`)
@@ -62,7 +62,7 @@ export class DataProvider {
     }
   }
 
-  public findChargingStationState(uniqueIdentifier: string): ChargingStationState | undefined {
-    return this.chargingStationStates.find((cs) => cs.uniqueIdentifier === uniqueIdentifier)
+  public findChargingStationModel(uniqueIdentifier: string): ChargingStationModel | undefined {
+    return this.chargingStationModels.find((cs) => cs.uniqueIdentifier === uniqueIdentifier)
   }
 }
