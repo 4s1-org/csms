@@ -20,7 +20,7 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "start:simulation1": "concurrently -k -n tsc,sim \"tsc --watch\" \"nodemon ./dist/simulation1.js | pino-pretty\"",
-    "start:simulation2": "pnpm run build && node ./dist/simulation2.js | pino-pretty",
+    "start:simulation2": "pnpm run build && concurrently \"node ./dist/simulation2a.js | pino-pretty\" \"node ./dist/simulation2b.js | pino-pretty\" \"node ./dist/simulation2c.js | pino-pretty\"",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",

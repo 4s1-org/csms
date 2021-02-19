@@ -1,2 +1,2 @@
-export { ChargingStationModel, ChargingStationState } from './charging-station-state'
+export { ChargingStationModel, ChargingStationState } from './charging-station-model'
 export { SerializationHelper } from './serialization-helper'

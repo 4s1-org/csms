@@ -108,6 +108,7 @@ export class WebSocketServer {
       if (result) {
         socket.send(result.toMessageString())
       }
+      this.sendAdminStatusToAll()
     }
   }
 
