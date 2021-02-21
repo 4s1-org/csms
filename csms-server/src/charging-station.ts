@@ -37,6 +37,7 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
+import { verifyPassword } from './config/password'
 
 export class ChargingStation implements IChargingStation {
   public readonly logger = new Logger(this.model.uniqueIdentifier)
@@ -65,7 +66,7 @@ export class ChargingStation implements IChargingStation {
   }
 
   public checkCredentials(username: string, password: string): boolean {
-    const result = username === this.model.username && password === this.model.password
+    const result = username === this.model.username && verifyPassword(password, this.model.password)
     if (result) {
       this.logger.info('Login successful')
     } else {

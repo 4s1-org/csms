@@ -5,13 +5,5 @@
 	},
 	"port": 3000,
 	"devMode": true,
-	"chargingStations": [
-		{
-			"_username": "LS001",
-			"_password": "test",
-			"_state": 0,
-			"_lastContact": 0,
-			"_uniqueIdentifier": "LS001"
-		}
-	]
+	"chargingStations": "[{\"username\":\"LS001\",\"password\":\"da9636c144caf2594c43b8db50b6e54c$720d4313968656dc5eec0164980ca4444b8a2d3cdb6f7211bd174b9c2f3bd17a\",\"state\":0,\"lastContact\":0,\"uniqueIdentifier\":\"LS001\"}]"
 }
