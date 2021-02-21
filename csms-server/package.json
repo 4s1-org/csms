@@ -24,7 +24,7 @@
     "setup": "node -r ts-node/register src/setup.ts",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "pnpm run lint -- --fix",
-    "start": "ts-node src/index.ts | pino-pretty",
+    "start": "node -r ts-node/register src/index.ts | pino-pretty",
     "start:prod": "node dist/index.js",
     "start:watch": "nodemon --watch src/ -e ts --exec \"pnpm run build && pnpm run start:prod | pino-pretty\"",
     "test": "jest --passWithNoTests",
