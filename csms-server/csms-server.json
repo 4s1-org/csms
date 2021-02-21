@@ -2,10 +2,16 @@
 	"port": 3000,
 	"adminCredentials": {
 		"username": "admin",
-		"passwordHash": "4f5aaab064143467fcb19bf3b3601701$374edfe663a8695f7c1a722209617e1dce5bbb97a55a7407947890f5fbbf8fd6"
+		"passwordHash": "66a22e7cd39fa6e21e9ebd88f6780b46$bc81603a6ef4c7fab620366ad79f4392c16e5e5452d5375b0a2ced8b5cb4ae59"
 	},
 	"devMode": true,
 	"chargingStationModels": [
-		"{\"username\":\"LS001\",\"passwordHash\":\"50482447c36fe913110fa53ce66fd51f$56da88150a890759dbc0e66baedb25c5e7f59003aec43c7c871f87624125e952\",\"state\":0,\"lastContact\":0,\"uniqueIdentifier\":\"LS001\"}"
+		"{\"username\":\"LS001\",\"passwordHash\":\"d3b6d4d0f2f736c0c24ce2fbc1a3f2cf$b9a9e72f3c603ca521ac020d27cbe8b3691a195f8909ae2004332d7b23c8c708\",\"state\":0,\"lastContact\":0,\"uniqueIdentifier\":\"LS001\"}",
+		"{\"username\":\"LS002\",\"passwordHash\":\"bf524e7db02a86a2123abaed790022ed$a6bf3354c23eabbf4c99d74c325f789c04013e5973b85d780306acbfd569e9ca\",\"state\":0,\"lastContact\":1613919507706,\"uniqueIdentifier\":\"LS002\"}",
+		"{\"username\":\"LS003\",\"passwordHash\":\"7e9807c7f5ab1807714ea7985c014499$c1751d5f6b71ac64364464cd3fe1120ccd0c3efbfa7942302a7e41ffe7ad1fef\",\"state\":0,\"lastContact\":1613919502973,\"uniqueIdentifier\":\"LS003\"}",
+		"{\"username\":\"LS004\",\"passwordHash\":\"62553e244cf85243fc6e446e890a7bbd$2bc00d43dc18a2099b36e2be664b0f6cc1992bb8cb110d23a1229f34bdd88494\",\"state\":0,\"lastContact\":1613919505402,\"uniqueIdentifier\":\"LS004\"}",
+		"{\"username\":\"LS005\",\"passwordHash\":\"b7ad22d1764b152f8452403bf0bc6406$bfbb1642e88bda0eb68d37c286881ec5e8d1674330873df0c65097358025dba0\",\"state\":0,\"lastContact\":0,\"uniqueIdentifier\":\"LS005\"}",
+		"{\"username\":\"LS006\",\"passwordHash\":\"29b5f7f88878098bbb9f30eb69ae5cc2$3c9a425bea7f9ff72424de1bfd0addc2772bd873383f6f14a8f26afca04e1509\",\"state\":0,\"lastContact\":0,\"uniqueIdentifier\":\"LS006\"}",
+		"{\"username\":\"LS007\",\"passwordHash\":\"3305b8a4e5b576bfc2320667c0668ccb$1e0fdb0a21dfd7fb3e84cea5526ab6d33c4a3d9eb76feb14a27f3bd8dc371bab\",\"state\":0,\"lastContact\":0,\"uniqueIdentifier\":\"LS007\"}"
 	]
 }

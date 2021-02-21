@@ -1,17 +1,25 @@
-import { Validator } from 'jsonschema'
 import { OcppErrorCodeEnum } from '../ocpp-messages/ocpp-error-code.enum'
 import { CsmsError } from '../utils/csms-error'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto'
 import { OcppResponseMessageDto } from '../ocpp-messages/ocpp-response-message.dto'
 import { jsonSchemas } from '../generated/json-schema-imports'
+import Ajv from 'ajv'
+import addFormats from 'ajv-formats'
+import v6 from 'ajv/lib/refs/json-schema-draft-06.json'
 
 export class PayloadValidator {
   private static _instance: PayloadValidator
-  private _validator: Validator
+  private _ajv: Ajv
 
   private constructor() {
-    this._validator = new Validator()
+    this._ajv = new Ajv()
+    addFormats(this._ajv)
+    this._ajv.addMetaSchema(v6)
+    this._ajv.addKeyword('comment')
+    this._ajv.addKeyword('javaType')
+    // Damit keine Warnung bei "additionalProperties" kommt.
+    this._ajv.opts.strictTypes = false
   }
 
   public static get instance(): PayloadValidator {
@@ -30,13 +38,11 @@ export class PayloadValidator {
   }
 
   private validate(data: any, schema: any): void {
-    const validation = this._validator.validate(data, schema, {
-      allowUnknownAttributes: false,
-      skipAttributes: ['$id', 'comment', 'definitions', 'javaType'],
-    })
+    const validate = this._ajv.compile(schema)
+    const valid = validate(data)
 
-    if (!validation.valid) {
-      const errMessage = validation.errors.map((x) => x.toString()).join('\n')
+    if (!valid) {
+      const errMessage = validate.errors?.map((x) => x.toString()).join('\n')
       throw new CsmsError(OcppErrorCodeEnum.FormatViolation, errMessage)
     }
   }

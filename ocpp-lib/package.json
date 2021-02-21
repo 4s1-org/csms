@@ -49,8 +49,9 @@
   },
   "dependencies": {
     "@yellowgarbagebag/common-lib": "workspace:*",
+    "ajv": "^7.1.1",
+    "ajv-formats": "^1.5.1",
     "class-transformer": "^0.4.0",
-    "jsonschema": "^1.4.0",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
