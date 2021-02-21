@@ -15,7 +15,7 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { DataProvider } from './config/data-provider'
-import { SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 
@@ -200,7 +200,11 @@ export class WebSocketServer {
     username: string,
     password: string,
   ): ChargingStation | undefined {
-    const model = DataProvider.instance.findChargingStationModel(uniqueIdentifier)
+    const csList = SerializationHelper.deserializeArray(ChargingStationModel, this.dataStorage.get('chargingStations'))
+    console.log('uniqueIdentifier', uniqueIdentifier)
+    console.log('csList', csList)
+    const model = csList.find((x) => x.uniqueIdentifier === uniqueIdentifier)
+    console.log('model', model)
     if (model) {
       const cs = new ChargingStation(model)
       if (cs.checkCredentials(username, password)) {
