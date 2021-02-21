@@ -1,4 +1,4 @@
-import { Expose, Transform } from 'class-transformer'
+import { Expose } from 'class-transformer'
 
 export enum ChargingStationState {
   Offline,
@@ -10,8 +10,8 @@ export class ChargingStationModel {
   @Expose({ name: 'username' })
   private _username = ''
 
-  @Expose({ name: 'password', groups: ['hidden'] })
-  private _password = ''
+  @Expose({ name: 'passwordHash', groups: ['password'] })
+  private _passwordHash = ''
 
   @Expose({ name: 'state' })
   private _state = ChargingStationState.Offline
@@ -34,12 +34,12 @@ export class ChargingStationModel {
     this._username = value
   }
 
-  public get password(): string {
-    return this._password
+  public get passwordHash(): string {
+    return this._passwordHash
   }
 
-  public set password(value: string) {
-    this._password = value
+  public set passwordHash(value: string) {
+    this._passwordHash = value
   }
 
   public get state(): ChargingStationState {
