@@ -14,8 +14,10 @@ import {
   OcppRequestMessageDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { DataProvider } from './data-provider'
-import { SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { DataStorage } from './config/data-storage'
+import { IDataStorageSchema } from './config/i-data-store-schema'
+import { verifyPassword } from './config/password'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
@@ -24,14 +26,17 @@ export class WebSocketServer {
   private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
   private adminSockets: Set<WebSocket> = new Set<WebSocket>()
   private adminTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
+  private chargingStationModels: ChargingStationModel[]
 
-  constructor(public readonly port: number = 3000) {
-    // nothing to do
+  constructor(private readonly dataStorage: DataStorage<IDataStorageSchema>) {
+    this.logger.info(`Configfile: ${dataStorage.path}`)
+
+    this.chargingStationModels = dataStorage
+      .get('chargingStationModels')
+      .map((x) => SerializationHelper.deserialize(ChargingStationModel, x))
   }
 
   public startServer(): void {
-    DataProvider.instance.load()
-
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
     }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void =>
@@ -70,7 +75,8 @@ export class WebSocketServer {
           })
         } else if (myURL.pathname.startsWith('/admin')) {
           // Admin
-          if (username !== 'admin' || password !== 'admin') {
+          const adminCredentials = this.dataStorage.get('adminCredentials')
+          if (username !== adminCredentials.username || !verifyPassword(password, adminCredentials.passwordHash)) {
             return this.send401(tlsSocket)
           }
 
@@ -82,8 +88,9 @@ export class WebSocketServer {
         }
       })
 
-    this.server.listen(this.port)
-    this.logger.info(`WebSocketServer is running on port ${this.port}`)
+    const port = this.dataStorage.get('port')
+    this.server.listen(port)
+    this.logger.info(`WebSocketServer is running on port ${port}`)
   }
 
   private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void {
@@ -120,7 +127,7 @@ export class WebSocketServer {
 
   private sendAdminStatusToSingle(socket: WebSocket): void {
     if (socket.OPEN) {
-      socket.send(SerializationHelper.serialize(DataProvider.instance.getAllModels()))
+      socket.send(SerializationHelper.serialize(this.chargingStationModels))
     }
   }
 
@@ -172,8 +179,14 @@ export class WebSocketServer {
       }
       this.server.close()
     }
+
+    // Save data
+    this.dataStorage.set(
+      'chargingStationModels',
+      this.chargingStationModels.map((x) => SerializationHelper.serialize(x, ['hidden'])),
+    )
+
     this.logger.info(`WebSocketServer stopped`)
-    DataProvider.instance.save()
   }
 
   // ToDo: https://gitlab.com/YellowGarbageBag/csms/-/issues/56
@@ -197,7 +210,7 @@ export class WebSocketServer {
     username: string,
     password: string,
   ): ChargingStation | undefined {
-    const model = DataProvider.instance.findChargingStationModel(uniqueIdentifier)
+    const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
     if (model) {
       const cs = new ChargingStation(model)
       if (cs.checkCredentials(username, password)) {
