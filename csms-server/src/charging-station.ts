@@ -66,7 +66,7 @@ export class ChargingStation implements IChargingStation {
   }
 
   public checkCredentials(username: string, password: string): boolean {
-    const result = username === this.model.username && verifyPassword(password, this.model.password)
+    const result = username === this.model.username && verifyPassword(password, this.model.passwordHash)
     if (result) {
       this.logger.info('Login successful')
     } else {
