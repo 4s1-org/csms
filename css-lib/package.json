@@ -23,7 +23,7 @@
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
-    "start": "ts-node src/index.ts | pino-pretty",
+    "start": "node -r ts-node/register src/index.ts | pino-pretty",
     "start:prod": "node dist/index.js",
     "start:watch": "nodemon --watch src/ -e ts --exec \"npm run build && npm run start:prod | pino-pretty\"",
     "test": "jest --passWithNoTests",
