@@ -28,6 +28,9 @@ pnpm run build
 scp -r dist       netcup:/srv/csms/csms-server.meinusch.eu
 scp package.json  netcup:/srv/csms/csms-server.meinusch.eu
 scp netcup-patch.sh  netcup:/srv/csms/csms-server.meinusch.eu
+scp csms-server.json  netcup:/srv/csms/csms-server.meinusch.eu
 
-ssh netcup cd /srv/csms/csms-server.meinusch.eu && chmod +x netcup-patch.sh && ./netcup-patch.sh
+scp -r third-party  netcup:/srv/csms/csms-server.meinusch.eu
+
+ssh netcup "cd /srv/csms/csms-server.meinusch.eu && chmod +x netcup-patch.sh && ./netcup-patch.sh"
 
