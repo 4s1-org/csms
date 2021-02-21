@@ -36,16 +36,26 @@ const models = dataStorage
   .get('chargingStationModels')
   .map((x) => SerializationHelper.deserialize(ChargingStationModel, x))
 
-// Wenn Es keine Ladesäule gibt, lege sie an
-if (!models.find((x) => x.uniqueIdentifier === 'LS001')) {
-  const cs = new ChargingStationModel('LS001')
-  cs.username = 'LS001'
-  cs.passwordHash = hashPassword('test')
-  cs.state = ChargingStationState.Offline
-  models.push(cs)
+function createChargeStation(uniqueIdentifier: string): void {
+  // Wenn Es keine Ladesäule gibt, lege sie an
+  if (!models.find((x) => x.uniqueIdentifier === uniqueIdentifier)) {
+    const cs = new ChargingStationModel(uniqueIdentifier)
+    cs.username = uniqueIdentifier
+    cs.passwordHash = hashPassword('test')
+    cs.state = ChargingStationState.Offline
+    models.push(cs)
 
-  dataStorage.set(
-    'chargingStationModels',
-    models.map((x) => SerializationHelper.serialize(x, ['password'])),
-  )
+    dataStorage.set(
+      'chargingStationModels',
+      models.map((x) => SerializationHelper.serialize(x, ['password'])),
+    )
+  }
 }
+
+createChargeStation('LS001')
+createChargeStation('LS002')
+createChargeStation('LS003')
+createChargeStation('LS004')
+createChargeStation('LS005')
+createChargeStation('LS006')
+createChargeStation('LS007')
