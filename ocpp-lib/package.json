@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@yellowgarbagebag/common-lib": "workspace:*",
-    "class-transformer": "^0.3.2",
+    "class-transformer": "^0.4.0",
     "jsonschema": "^1.4.0",
     "reflect-metadata": "^0.1.13"
   },
