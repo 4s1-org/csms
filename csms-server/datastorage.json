@@ -1,0 +1,17 @@
+{
+	"adminCredentials": {
+		"username": "admin",
+		"passwordHash": "3dbc3d7962ae7e3385cb3f80ef52027a$554d7b932e51146cdc20461df4e651261197d144ed93ce337b0f1b19863e7429"
+	},
+	"port": 3000,
+	"devMode": true,
+	"chargingStations": [
+		{
+			"_username": "LS001",
+			"_password": "test",
+			"_state": 0,
+			"_lastContact": 0,
+			"_uniqueIdentifier": "LS001"
+		}
+	]
+}

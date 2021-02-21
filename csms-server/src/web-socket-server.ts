@@ -14,8 +14,10 @@ import {
   OcppRequestMessageDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { DataProvider } from './data-provider'
+import { DataProvider } from './config/data-provider'
 import { SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { DataStorage } from './config/data-storage'
+import { IDataStorageSchema } from './config/i-data-store-schema'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
@@ -25,8 +27,8 @@ export class WebSocketServer {
   private adminSockets: Set<WebSocket> = new Set<WebSocket>()
   private adminTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
 
-  constructor(public readonly port: number = 3000) {
-    // nothing to do
+  constructor(private readonly dataStorage: DataStorage<IDataStorageSchema>) {
+    this.logger.info(`Configfile: ${dataStorage.path}`)
   }
 
   public startServer(): void {
@@ -82,8 +84,9 @@ export class WebSocketServer {
         }
       })
 
-    this.server.listen(this.port)
-    this.logger.info(`WebSocketServer is running on port ${this.port}`)
+    const port = this.dataStorage.get('port')
+    this.server.listen(port)
+    this.logger.info(`WebSocketServer is running on port ${port}`)
   }
 
   private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void {

@@ -52,14 +52,17 @@ importers:
       '@yellowgarbagebag/common-lib': link:../common-lib
       '@yellowgarbagebag/csms-lib': link:../csms-lib
       '@yellowgarbagebag/ocpp-lib': link:../ocpp-lib
+      configstore: 5.0.1
       uuid: 8.3.2
       ws: 7.4.3
     devDependencies:
       '@hest-lab/eslint-config': 1.4.0_typescript@4.1.5
+      '@types/configstore': 4.0.0
       '@types/jest': 26.0.20
       '@types/node': 14.14.28
       '@types/uuid': 8.3.0
       '@types/ws': 7.4.0
+      commander: 7.1.0
       eslint: 7.20.0
       jest: 26.6.3_ts-node@9.1.1
       nodemon: 2.0.7
@@ -70,6 +73,7 @@ importers:
       typescript: 4.1.5
     specifiers:
       '@hest-lab/eslint-config': ^1.4.0
+      '@types/configstore': ^4.0.0
       '@types/jest': ^26.0.20
       '@types/node': ^14.14.28
       '@types/uuid': ^8.3.0
@@ -77,6 +81,8 @@ importers:
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/csms-lib': workspace:*
       '@yellowgarbagebag/ocpp-lib': workspace:*
+      commander: ^7.1.0
+      configstore: ^5.0.1
       eslint: ^7.20.0
       jest: ^26.6.3
       nodemon: ^2.0.7
@@ -2296,6 +2302,10 @@ packages:
       '@babel/types': 7.12.13
     resolution:
       integrity: sha512-kSjgDMZONiIfSH1Nxcr5JIRMwUetDki63FSQfpTCz8ogF3Ulqm8+mr5f78dUYs6vMiB6gBusQqfQmBvHZj/lwg==
+  /@types/configstore/4.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-SvCBBPzOIe/3Tu7jTl2Q8NjITjLmq9m7obzjSyb8PXWWZ31xVK6w4T6v8fOx+lrgQnqk3Yxc00LDolFsSakKCA==
   /@types/eslint/7.2.6:
     dependencies:
       '@types/estree': 0.0.46
@@ -4091,6 +4101,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
+  /commander/7.1.0:
+    dev: true
+    engines:
+      node: '>= 10'
+    resolution:
+      integrity: sha512-pRxBna3MJe6HKnBGsDyMv8ETbptw3axEdYHoqNh7gu5oDcew8fs0xnivZGm06Ogk8zGAJ9VX+OPEr2GXEQK4dg==
   /common-tags/1.8.0:
     dev: false
     engines:
@@ -4171,7 +4187,6 @@ packages:
       unique-string: 2.0.0
       write-file-atomic: 3.0.3
       xdg-basedir: 4.0.0
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -4384,7 +4399,6 @@ packages:
     resolution:
       integrity: sha1-ojD2T1aDEOFJgAmUB5DsmVRbyn4=
   /crypto-random-string/2.0.0:
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -12243,7 +12257,6 @@ packages:
   /unique-string/2.0.0:
     dependencies:
       crypto-random-string: 2.0.0
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -12914,7 +12927,6 @@ packages:
     resolution:
       integrity: sha512-hr6vCR76GsossIRsr8OLR9acVVm1jyfEWvhbNjtgPOrfvAlKzvyeg/P6r8RuDjRyrcQoPQT7K0DGEPc7Ae6jzA==
   /xdg-basedir/4.0.0:
-    dev: true
     engines:
       node: '>=8'
     resolution:
