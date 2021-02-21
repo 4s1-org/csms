@@ -248,8 +248,9 @@ importers:
   ocpp-lib:
     dependencies:
       '@yellowgarbagebag/common-lib': link:../common-lib
+      ajv: 7.1.1
+      ajv-formats: 1.5.1
       class-transformer: 0.4.0
-      jsonschema: 1.4.0
       reflect-metadata: 0.1.13
     devDependencies:
       '@hest-lab/eslint-config': 1.4.0_typescript@4.1.5
@@ -266,10 +267,11 @@ importers:
       '@types/jest': ^26.0.20
       '@types/node': ^14.14.31
       '@yellowgarbagebag/common-lib': workspace:*
+      ajv: ^7.1.1
+      ajv-formats: ^1.5.1
       class-transformer: ^0.4.0
       eslint: ^7.20.0
       jest: ^26.6.3
-      jsonschema: ^1.4.0
       prettier: ^2.2.1
       reflect-metadata: ^0.1.13
       ts-jest: ^26.5.1
@@ -2848,6 +2850,12 @@ packages:
       ajv: '>=5.0.0'
     resolution:
       integrity: sha512-DCRfO/4nQ+89p/RK43i8Ezd41EqdGIU4ld7nGF8OQ14oc/we5rEntLCUa7+jrn3nn83BosfwZA0wb4pon2o8iQ==
+  /ajv-formats/1.5.1:
+    dependencies:
+      ajv: 7.1.1
+    dev: false
+    resolution:
+      integrity: sha512-s1RBVF4HZd2UjGkb6t6uWoXjf6o7j7dXPQIL7vprcIT/67bTD6+5ocsU0UKShS2qWxueGDWuGfKHfOxHWrlTQg==
   /ajv-keywords/3.5.2_ajv@6.12.6:
     dependencies:
       ajv: 6.12.6
@@ -7923,10 +7931,6 @@ packages:
       graceful-fs: 4.2.6
     resolution:
       integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==
-  /jsonschema/1.4.0:
-    dev: false
-    resolution:
-      integrity: sha512-/YgW6pRMr6M7C+4o8kS+B/2myEpHCrxO4PEWnqJNBFMjn7EWXqlQ4tGwL6xTHeRplwuZmcAncdvfOad1nT2yMw==
   /jsprim/1.4.1:
     dependencies:
       assert-plus: 1.0.0

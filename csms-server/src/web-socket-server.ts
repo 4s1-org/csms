@@ -183,7 +183,7 @@ export class WebSocketServer {
     // Save data
     this.dataStorage.set(
       'chargingStationModels',
-      this.chargingStationModels.map((x) => SerializationHelper.serialize(x, ['hidden'])),
+      this.chargingStationModels.map((x) => SerializationHelper.serialize(x, ['password'])),
     )
 
     this.logger.info(`WebSocketServer stopped`)
