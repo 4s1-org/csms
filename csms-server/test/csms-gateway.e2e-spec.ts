@@ -13,20 +13,26 @@ import {
   UnpublishFirmwareRequestDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { WebSocketServer } from '../src/web-socket-server'
+import { DataStorage } from '../src/config/data-storage'
+import { IDataStorageSchema } from '../src/config/i-data-store-schema'
+import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { hashPassword } from '../src/config/password'
 
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
   let socket: WebSocket | undefined
+  const csInfo = 'LS0815'
+  const port = 3009
 
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
-    socket = new WebSocket(`wss://localhost:3000/ocpp/LS001`, ['ocpp2.0.1'], {
+    socket = new WebSocket(`wss://localhost:${port}/ocpp/${csInfo}`, ['ocpp2.0.1'], {
       headers: {
-        authorization: `Basic ${Buffer.from(`LS001:test`).toString('base64')}`,
+        authorization: `Basic ${Buffer.from(`${csInfo}:${csInfo}`).toString('base64')}`,
       },
       rejectUnauthorized: false, // wg. SelfSignedCertificate
     })
     socket.onerror = (err): void => {
-      fail(err)
+      fail()
     }
     socket.onclose = (): void => {
       done()
@@ -35,7 +41,14 @@ describe('CSMS Gateway', () => {
   }
 
   beforeAll(async () => {
-    server = new WebSocketServer()
+    const model = new ChargingStationModel(csInfo)
+    model.passwordHash = hashPassword(csInfo)
+
+    const storage = new DataStorage<IDataStorageSchema>('csms-server')
+    storage.set('chargingStationModels', [SerializationHelper.serialize(model)])
+    storage.set('port', port)
+
+    server = new WebSocketServer(storage)
     server.startServer()
   })
 
@@ -47,7 +60,7 @@ describe('CSMS Gateway', () => {
 
   describe('RPC Framework tests', () => {
     describe('Valid calls', () => {
-      it('Without OcppCallDto', (done: jest.DoneCallback) => {
+      it.only('Without OcppCallDto', (done: jest.DoneCallback) => {
         const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 

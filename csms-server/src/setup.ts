@@ -4,6 +4,7 @@ import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { hashPassword } from './config/password'
 import { Command } from 'commander'
+import { ChargingStationModel, ChargingStationState, SerializationHelper } from '@yellowgarbagebag/csms-lib'
 
 const program = new Command()
 program
@@ -27,3 +28,23 @@ const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
 dataStorage.set('port', +options.port)
 dataStorage.set('adminCredentials', { username: options.username, passwordHash: hashPassword(options.password) })
 dataStorage.set('devMode', true)
+
+if (dataStorage.has('chargingStationModels')) {
+  const models = dataStorage
+    .get('chargingStationModels')
+    .map((x) => SerializationHelper.deserialize(ChargingStationModel, x))
+
+  // Wenn Es keine Ladesäule gibt, lege sie an
+  if (!models.find((x) => x.uniqueIdentifier === 'LS001')) {
+    const cs = new ChargingStationModel('LS001')
+    cs.username = 'LS001'
+    cs.passwordHash = hashPassword('test')
+    cs.state = ChargingStationState.Offline
+    models.push(cs)
+
+    dataStorage.set(
+      'chargingStationModels',
+      models.map((x) => SerializationHelper.serialize(x, ['password'])),
+    )
+  }
+}
