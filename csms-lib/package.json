@@ -31,7 +31,7 @@
   "prettier": "@hest-lab/eslint-config",
   "dependencies": {
     "@yellowgarbagebag/common-lib": "workspace:*",
-    "class-transformer": "^0.3.2"
+    "class-transformer": "^0.4.0"
   },
   "devDependencies": {
     "@hest-lab/eslint-config": "^1.4.0",
