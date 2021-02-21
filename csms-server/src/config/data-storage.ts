@@ -6,7 +6,7 @@ export class DataStorage<T> {
 
   constructor(projectName: string) {
     this.config = new Configstore(projectName, undefined, {
-      configPath: path.join(__dirname, '..', '..', 'datastorage.json'),
+      configPath: path.join(__dirname, '..', '..', `${projectName}.json`),
     })
   }
 

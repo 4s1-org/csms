@@ -32,7 +32,7 @@ describe('CSMS Gateway', () => {
       rejectUnauthorized: false, // wg. SelfSignedCertificate
     })
     socket.onerror = (err): void => {
-      fail()
+      fail(err)
     }
     socket.onclose = (): void => {
       done()
@@ -42,11 +42,14 @@ describe('CSMS Gateway', () => {
 
   beforeAll(async () => {
     const model = new ChargingStationModel(csInfo)
+    model.username = csInfo
     model.passwordHash = hashPassword(csInfo)
 
-    const storage = new DataStorage<IDataStorageSchema>('csms-server')
-    storage.set('chargingStationModels', [SerializationHelper.serialize(model)])
+    const storage = new DataStorage<IDataStorageSchema>('csms-server-test-e2e')
+    storage.set('chargingStationModels', [SerializationHelper.serialize(model, ['password'])])
     storage.set('port', port)
+
+    console.log(storage)
 
     server = new WebSocketServer(storage)
     server.startServer()
@@ -60,7 +63,7 @@ describe('CSMS Gateway', () => {
 
   describe('RPC Framework tests', () => {
     describe('Valid calls', () => {
-      it.only('Without OcppCallDto', (done: jest.DoneCallback) => {
+      it('Without OcppCallDto', (done: jest.DoneCallback) => {
         const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
