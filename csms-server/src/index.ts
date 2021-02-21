@@ -19,18 +19,27 @@ const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
 if (process.env.port) {
   dataStorage.set('port', +process.env.port)
 }
-if (!dataStorage.has('chargingStations')) {
-  dataStorage.set('chargingStations', SerializationHelper.serialize([]))
+if (!dataStorage.has('chargingStationModels')) {
+  dataStorage.set('chargingStationModels', [])
 }
 if (dataStorage.get('devMode')) {
-  let csList = SerializationHelper.deserializeArray(ChargingStationModel, dataStorage.get('chargingStations'))
-  csList = csList.filter((x) => x.uniqueIdentifier === 'LS001')
-  const cs = new ChargingStationModel('LS001')
-  cs.username = 'LS001'
-  cs.password = hashPassword('test')
-  cs.state = ChargingStationState.Offline
-  csList.push(cs)
-  dataStorage.set('chargingStations', SerializationHelper.serialize(csList, ['hidden']))
+  let csList = dataStorage
+    .get('chargingStationModels')
+    .map((x) => SerializationHelper.deserialize(ChargingStationModel, x))
+  if (!csList.find((x) => x.uniqueIdentifier === 'LS001')) {
+    csList = csList.filter((x) => x.uniqueIdentifier !== 'LS001')
+
+    const cs = new ChargingStationModel('LS001')
+    cs.username = 'LS001'
+    cs.password = hashPassword('test')
+    cs.state = ChargingStationState.Offline
+    csList.push(cs)
+
+    dataStorage.set(
+      'chargingStationModels',
+      csList.map((x) => SerializationHelper.serialize(x, ['password'])),
+    )
+  }
 }
 
 // Create server

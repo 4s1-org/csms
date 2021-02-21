@@ -1,4 +1,4 @@
-import { Expose, Transform } from 'class-transformer'
+import { Expose } from 'class-transformer'
 
 export enum ChargingStationState {
   Offline,
@@ -10,7 +10,7 @@ export class ChargingStationModel {
   @Expose({ name: 'username' })
   private _username = ''
 
-  @Expose({ name: 'password', groups: ['hidden'] })
+  @Expose({ name: 'password', groups: ['password'] })
   private _password = ''
 
   @Expose({ name: 'state' })
