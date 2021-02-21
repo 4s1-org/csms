@@ -1,0 +1,11 @@
+{
+	"port": 3000,
+	"adminCredentials": {
+		"username": "admin",
+		"passwordHash": "4f5aaab064143467fcb19bf3b3601701$374edfe663a8695f7c1a722209617e1dce5bbb97a55a7407947890f5fbbf8fd6"
+	},
+	"devMode": true,
+	"chargingStationModels": [
+		"{\"username\":\"LS001\",\"passwordHash\":\"50482447c36fe913110fa53ce66fd51f$56da88150a890759dbc0e66baedb25c5e7f59003aec43c7c871f87624125e952\",\"state\":0,\"lastContact\":0,\"uniqueIdentifier\":\"LS001\"}"
+	]
+}
