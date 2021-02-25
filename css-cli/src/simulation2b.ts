@@ -1,71 +1,46 @@
-import { ChargingStation, WebSocketClient } from '@yellowgarbagebag/css-lib'
-import WebSocket from 'ws'
+import { SimulationBase } from './simulation-base'
 
 const factor = 1.5
-const cs = new ChargingStation('LS003', 'LS003', 'test')
-
-function connect(): void {
-  const socket = new WebSocket(`wss://localhost:3000/ocpp/${cs.uniqueIdentifier}`, ['ocpp2.0.1'], {
-    headers: {
-      authorization: `Basic ${Buffer.from(`${cs.username}:${cs.password}`).toString('base64')}`,
-    },
-  })
-
-  const sendCallback = (msg: any): boolean => {
-    if (socket && socket.OPEN) {
-      socket.send(msg)
-      return true
-    }
-    return false
+class Simulation extends SimulationBase {
+  constructor() {
+    super('LS003', 'LS003', 'test')
   }
-  const client = new WebSocketClient(cs, sendCallback)
 
-  socket.onopen = (): void => {
-    cs.connect()
+  protected simulate(): void {
+    this.css.send(this.css.sendBootNotificationRequest())
 
     setTimeout(() => {
-      client.send(cs.sendBootNotificationRequest())
+      this.css.send(this.css.sendBootNotificationRequest())
     }, 1000 * factor)
 
     setTimeout(() => {
-      client.send(cs.sendHeartbeatRequest())
+      this.css.send(this.css.sendHeartbeatRequest())
     }, 1000 * factor)
 
     setTimeout(() => {
-      client.send(cs.sendHeartbeatRequest())
+      this.css.send(this.css.sendHeartbeatRequest())
     }, 3000 * factor)
 
     setTimeout(() => {
-      client.send(cs.sendHeartbeatRequest())
+      this.css.send(this.css.sendHeartbeatRequest())
     }, 5000 * factor)
 
     setTimeout(() => {
-      client.send(cs.sendHeartbeatRequest())
+      this.css.send(this.css.sendHeartbeatRequest())
     }, 7000 * factor)
 
     setTimeout(() => {
-      client.send(cs.sendHeartbeatRequest())
+      this.css.send(this.css.sendHeartbeatRequest())
     }, 9000 * factor)
 
     setTimeout(() => {
-      socket.close()
-    }, 10000 * factor)
-  }
+      this.css.disconnect()
 
-  socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-    client.onMessage(msg.data)
-  }
-
-  socket.onerror = (err: WebSocket.ErrorEvent): void => {
-    client.onError(err.message)
-  }
-
-  socket.onclose = (): void => {
-    client.onClose()
-    setTimeout(() => {
-      connect()
-    }, 3000 * factor)
+      setTimeout(() => {
+        this.simulate()
+      }, 3000 * factor)
+    }, 12000 * factor)
   }
 }
 
-connect()
+new Simulation()

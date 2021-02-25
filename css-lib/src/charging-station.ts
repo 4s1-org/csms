@@ -46,32 +46,13 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 
-export class ChargingStation implements IChargingStation {
+export abstract class ChargingStation implements IChargingStation {
   public readonly logger = new Logger(this.uniqueIdentifier)
-  public heartbeatInterval = 3600
+  private heartbeatInterval = 3600
   private sendList: OcppRequestMessageDto[] = []
-  private _username: string
-  private _password: string
 
-  public constructor(public readonly uniqueIdentifier: string, username: string, password: string) {
-    this._username = username
-    this._password = password
-  }
-
-  public get username(): string {
-    return this._username
-  }
-
-  public get password(): string {
-    return this._password
-  }
-
-  public connect(): void {
-    this.logger.info('Connected')
-  }
-
-  public disconnect(): void {
-    this.logger.info('Disconnected')
+  public constructor(public readonly uniqueIdentifier: string) {
+    // nothing to do
   }
 
   public addToSendList(requestMessage: OcppRequestMessageDto): void {
