@@ -27,6 +27,7 @@ class LoginPanelComp extends React.Component<IProps, IState> {
     this.onBtnLogoutClick = this.onBtnLogoutClick.bind(this)
 
     this.onEdtServerChange = this.onEdtServerChange.bind(this)
+    this.onEdtUniqueIdentifierChange = this.onEdtUniqueIdentifierChange.bind(this)
     this.onEdtUsernameChange = this.onEdtUsernameChange.bind(this)
     this.onEdtPasswordChange = this.onEdtPasswordChange.bind(this)
   }
