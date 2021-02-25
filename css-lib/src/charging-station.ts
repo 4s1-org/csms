@@ -96,6 +96,7 @@ export abstract class ChargingStation implements IChargingStation {
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public incomingErrorMessage(error: OcppErrorMessageDto): void {
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
@@ -142,6 +143,7 @@ export abstract class ChargingStation implements IChargingStation {
   /**
    * G02 - Heartbeat
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private receiveHeartbeatResponse(payload: HeartbeatResponseDto): void {
     //
   }
@@ -187,6 +189,7 @@ export abstract class ChargingStation implements IChargingStation {
   /**
    * J01 - Sending Meter Values not related to a transaction
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private receiveMeterValuesResponse(payload: MeterValuesResponseDto): void {
     //
   }
@@ -213,14 +216,16 @@ export abstract class ChargingStation implements IChargingStation {
   /**
    * G01 - Status Notification
    */
-  private receiveStatusNotificationResponse(_payload: StatusNotificationResponseDto): void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private receiveStatusNotificationResponse(payload: StatusNotificationResponseDto): void {
     //
   }
 
   /**
    * G03 - Change Availability EVSE/Connector
    */
-  private receiveChangeAvailabilityRequest(_payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private receiveChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
     return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
   }
 
@@ -264,6 +269,7 @@ export abstract class ChargingStation implements IChargingStation {
   /**
    * G05 - Lock Failure
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private receiveNotifyEventResponse(payload: NotifyEventResponseDto): void {
     //
   }
