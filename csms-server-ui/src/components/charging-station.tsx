@@ -8,7 +8,7 @@ interface IProps {
   data: ChargingStationModel
 }
 
-class ChargingStation extends React.Component<IProps, IState> {
+class ChargingStationComp extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     let headerColorCss = ''
     let stateStr = 'unbekannt'
@@ -47,4 +47,4 @@ class ChargingStation extends React.Component<IProps, IState> {
   }
 }
 
-export default ChargingStation
+export default ChargingStationComp
