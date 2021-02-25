@@ -67,8 +67,8 @@ export class OcppMessageHandler {
     } else if (messageTypeId === OcppMessageTypeIdEnum.Error && data.length === 5) {
       const messageId = data[1]
       const errorCode = data[2]
-      const errorDescription = data[2]
-      const errorDetails = data[3]
+      const errorDescription = data[3]
+      const errorDetails = data[4]
 
       this.validateMessageId(messageId)
       this.validateErrorCode(messageId, errorCode)
