@@ -32,7 +32,7 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
         ></LoginPanelComp>
         <br />
         <div className="container-fluid">
-          <ChargingStationComp css={this.state.css} />
+          <ChargingStationComp css={this.state.css} isConnected={this.state.isConnected} />
         </div>
       </div>
     )
