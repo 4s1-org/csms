@@ -1,5 +1,5 @@
 import React from 'react'
-import ChargingStation from './charging-station'
+import ChargingStationComp from './charging-station'
 import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
 import './admin-page.css'
 
@@ -12,7 +12,7 @@ interface IState {
 
 interface IProps {}
 
-class AdminPage extends React.Component<IProps, IState> {
+class AdminPageComp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
@@ -89,7 +89,7 @@ class AdminPage extends React.Component<IProps, IState> {
         <div className="container-fluid">
           <div className="row">
             {this.state.data.map((item) => (
-              <ChargingStation key={item.uniqueIdentifier} data={item}></ChargingStation>
+              <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
             ))}
           </div>
         </div>
@@ -129,4 +129,4 @@ class AdminPage extends React.Component<IProps, IState> {
   }
 }
 
-export default AdminPage
+export default AdminPageComp

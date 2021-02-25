@@ -1,9 +1,9 @@
-import AdminPage from './components/admin-page'
+import AdminPageComp from './components/admin-page'
 
 function App() {
   return (
     <div>
-      <AdminPage />
+      <AdminPageComp />
     </div>
   )
 }
