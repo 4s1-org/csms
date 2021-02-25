@@ -1,11 +1,7 @@
-import ChargingStationComp from './charging-station'
+import SimulatorPageComp from './components/simulator-page'
 
 function App() {
-  return (
-    <div>
-      <ChargingStationComp></ChargingStationComp>
-    </div>
-  )
+  return <SimulatorPageComp />
 }
 
 export default App
