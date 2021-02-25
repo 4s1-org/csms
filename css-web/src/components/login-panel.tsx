@@ -53,7 +53,6 @@ class LoginPanelComp extends React.Component<IProps, IState> {
             value={this.state.uniqueIdentifier}
             disabled={this.props.isConnected}
           />
-          &nbsp;
           <input
             className="form-control mr-sm-2"
             placeholder="Username"

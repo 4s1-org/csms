@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Simulation 1",
+      "name": "Debug",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceRoot}",
@@ -10,7 +10,7 @@
         "-r",
         "ts-node/register"
       ],
-      "args": ["${workspaceRoot}/src/simulation1.ts"]
+      "args": ["${workspaceRoot}/src/debug.ts"]
     }
   ]
 }
