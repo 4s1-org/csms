@@ -13,13 +13,13 @@ export class PayloadValidator {
   private _ajv: Ajv
 
   private constructor() {
-    this._ajv = new Ajv()
+    this._ajv = new Ajv({
+      meta: v6,
+      // Damit keine Warnung bei "additionalProperties" kommt.
+      strict: false,
+    })
+    // Damit "date-time" geht
     addFormats(this._ajv)
-    this._ajv.addMetaSchema(v6)
-    this._ajv.addKeyword('comment')
-    this._ajv.addKeyword('javaType')
-    // Damit keine Warnung bei "additionalProperties" kommt.
-    this._ajv.opts.strictTypes = false
   }
 
   public static get instance(): PayloadValidator {
