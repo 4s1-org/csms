@@ -25,7 +25,7 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
       PayloadValidator.instance.validateRequest(msg)
       PayloadConverter.instance.convertRequest(msg)
       // Verarbeitung der Daten
-      const responsePayload: ResponseBaseDto = cs.incomingRequestMessage(msg.payload)
+      const responsePayload: ResponseBaseDto = cs.incomingRequestMessage(msg)
       // Antwortobjekt erstellen
       const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
       // Anwortdaten validieren (nice to have)
@@ -47,7 +47,7 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
       cs.logger.info(`Incoming Response | ${action} | ${msg.messageId}`)
       PayloadValidator.instance.validateResponse(msg, action)
       PayloadConverter.instance.convertResponse(msg, action)
-      cs.incomingResponseMessage(msg.payload)
+      cs.incomingResponseMessage(msg)
       // Auf eine Antwort wird keine Antwort gesendet
       return undefined
     } else if (msg instanceof OcppErrorMessageDto) {
