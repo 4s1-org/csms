@@ -5,7 +5,7 @@ import './admin-page.css'
 import LoginPanelComp from './login-panel'
 
 interface IState {
-  data: ChargingStationModel[]
+  chargingStationModels: ChargingStationModel[]
   isConnected: boolean
   ws: WebSocket | undefined
 }
@@ -16,27 +16,33 @@ class AdminPageComp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
-      data: [],
+      chargingStationModels: [],
       isConnected: false,
       ws: undefined,
     }
 
-    this.onLoginClick = this.onLoginClick.bind(this)
-    this.onLogoutClick = this.onLogoutClick.bind(this)
+    this.login = this.login.bind(this)
+    this.logout = this.logout.bind(this)
+  }
+
+  public componentDidMount(): void {
+    if (process.env.NODE_ENV === 'development') {
+      this.login('localhost:3000', 'admin', 'admin')
+    }
   }
 
   public render(): JSX.Element {
     return (
       <div>
         <LoginPanelComp
-          onLoginClick={this.onLoginClick}
-          onLogoutClick={this.onLogoutClick}
+          onLoginClick={this.login}
+          onLogoutClick={this.logout}
           isConnected={this.state.isConnected}
         ></LoginPanelComp>
         <br />
         <div className="container-fluid">
           <div className="row">
-            {this.state.data.map((item) => (
+            {this.state.chargingStationModels.map((item) => (
               <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
             ))}
           </div>
@@ -45,39 +51,52 @@ class AdminPageComp extends React.Component<IProps, IState> {
     )
   }
 
-  private onLoginClick(server: string, username: string, password: string): void {
+  private login(server: string, username: string, password: string): void {
     var authToken = window.btoa(`${username}:${password}`)
     document.cookie = 'X-Authorization=' + authToken + '; path=/'
 
     const ws = new WebSocket(`wss://${server}/admin`, ['ocpp2.0.1'])
 
     ws.onopen = () => {
-      console.log('IT WORKS')
       this.setState({
-        ...this.state,
         ws,
         isConnected: true,
-        data: [],
+        chargingStationModels: [],
       })
     }
     ws.onmessage = (msg: any): void => {
-      const data = SerializationHelper.deserializeArray(ChargingStationModel, msg.data)
-      this.setState({
-        data,
-      })
+      const model = SerializationHelper.deserialize(ChargingStationModel, msg.data)
+      this.updateChargingStationModel(model)
     }
     ws.onerror = (msg: any): void => {}
     ws.onclose = (): void => {
       this.setState({
-        ...this.state,
         ws: undefined,
         isConnected: false,
-        data: [],
+        chargingStationModels: [],
       })
     }
   }
 
-  private onLogoutClick(): void {
+  private updateChargingStationModel(model: ChargingStationModel): void {
+    var idx = this.state.chargingStationModels.findIndex((x) => x.uniqueIdentifier === model.uniqueIdentifier)
+    if (idx === -1) {
+      this.state.chargingStationModels.push(model)
+      this.setState({
+        chargingStationModels: this.state.chargingStationModels,
+      })
+    } else {
+      this.setState({
+        chargingStationModels: [
+          ...this.state.chargingStationModels.slice(0, idx),
+          model,
+          ...this.state.chargingStationModels.slice(idx + 1),
+        ],
+      })
+    }
+  }
+
+  private logout(): void {
     if (this.state.ws) {
       this.state.ws.close()
     }
