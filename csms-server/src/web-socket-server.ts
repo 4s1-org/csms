@@ -14,7 +14,7 @@ import {
   OcppRequestMessageDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { verifyPassword } from './config/password'
@@ -127,7 +127,7 @@ export class WebSocketServer {
 
   private sendAdminStatusToSingle(socket: WebSocket, model: ChargingStationModel): void {
     if (socket.OPEN) {
-      socket.send(SerializationHelper.serialize(model))
+      socket.send(SerializationHelper.serialize(model, [ChargingStationGroupFlag.UiOnly]))
     }
   }
 
@@ -185,7 +185,7 @@ export class WebSocketServer {
     // Save data
     this.dataStorage.set(
       'chargingStationModels',
-      this.chargingStationModels.map((x) => SerializationHelper.serialize(x, ['password'])),
+      this.chargingStationModels.map((x) => SerializationHelper.serialize(x, [ChargingStationGroupFlag.ServerOnly])),
     )
 
     this.logger.info(`WebSocketServer stopped`)
