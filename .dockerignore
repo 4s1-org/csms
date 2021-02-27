@@ -5,3 +5,4 @@ build.sh
 pipeline.sh
 **/tsconfig.eslint.json
 **/*.tgz
+csms-server/csms-server.json
