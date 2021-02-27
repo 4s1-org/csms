@@ -5,7 +5,7 @@ import './admin-page.css'
 import LoginPanelComp from './login-panel'
 
 interface IState {
-  data: ChargingStationModel[]
+  chargingStationModels: ChargingStationModel[]
   isConnected: boolean
   ws: WebSocket | undefined
 }
@@ -16,7 +16,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
-      data: [],
+      chargingStationModels: [],
       isConnected: false,
       ws: undefined,
     }
@@ -36,7 +36,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
         <br />
         <div className="container-fluid">
           <div className="row">
-            {this.state.data.map((item) => (
+            {this.state.chargingStationModels.map((item) => (
               <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
             ))}
           </div>
@@ -57,13 +57,13 @@ class AdminPageComp extends React.Component<IProps, IState> {
         ...this.state,
         ws,
         isConnected: true,
-        data: [],
+        chargingStationModels: [],
       })
     }
     ws.onmessage = (msg: any): void => {
       const data = SerializationHelper.deserializeArray(ChargingStationModel, msg.data)
       this.setState({
-        data,
+        chargingStationModels: data,
       })
     }
     ws.onerror = (msg: any): void => {}
@@ -72,7 +72,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
         ...this.state,
         ws: undefined,
         isConnected: false,
-        data: [],
+        chargingStationModels: [],
       })
     }
   }
