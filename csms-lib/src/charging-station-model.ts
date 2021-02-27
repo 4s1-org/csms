@@ -2,7 +2,7 @@ import { Expose } from 'class-transformer'
 
 export enum ChargingStationState {
   Offline,
-  Schroedinger,
+  Connecting,
   Online,
 }
 
@@ -10,10 +10,10 @@ export class ChargingStationModel {
   @Expose({ name: 'username' })
   private _username = ''
 
-  @Expose({ name: 'passwordHash', groups: ['password'] })
+  @Expose({ name: 'passwordHash', groups: ['serverOnly'] })
   private _passwordHash = ''
 
-  @Expose({ name: 'state' })
+  @Expose({ name: 'state', groups: ['uiOnly'] })
   private _state = ChargingStationState.Offline
 
   @Expose({ name: 'uniqueIdentifier' })
@@ -21,6 +21,9 @@ export class ChargingStationModel {
 
   @Expose({ name: 'lastContact' })
   private _lastContact = 0
+
+  @Expose({ name: 'lastCommand', groups: ['uiOnly'] })
+  private _lastCommand = ''
 
   public constructor(uniqueIdentifier: string) {
     this._uniqueIdentifier = uniqueIdentifier
@@ -60,5 +63,13 @@ export class ChargingStationModel {
 
   public get lastContact(): number {
     return this._lastContact
+  }
+
+  public set lastCommand(value: string) {
+    this._lastCommand = value
+  }
+
+  public get lastCommand(): string {
+    return this._lastCommand
   }
 }
