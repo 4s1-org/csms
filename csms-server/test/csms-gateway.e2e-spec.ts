@@ -15,7 +15,7 @@ import {
 import { WebSocketServer } from '../src/web-socket-server'
 import { DataStorage } from '../src/config/data-storage'
 import { IDataStorageSchema } from '../src/config/i-data-store-schema'
-import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
 import { hashPassword } from '../src/config/password'
 
 describe('CSMS Gateway', () => {
@@ -46,7 +46,7 @@ describe('CSMS Gateway', () => {
     model.passwordHash = hashPassword(csInfo)
 
     const storage = new DataStorage<IDataStorageSchema>('csms-server-test-e2e')
-    storage.set('chargingStationModels', [SerializationHelper.serialize(model, ['password'])])
+    storage.set('chargingStationModels', [SerializationHelper.serialize(model, [ChargingStationGroupFlag.ServerOnly])])
     storage.set('port', port)
 
     console.log(storage)

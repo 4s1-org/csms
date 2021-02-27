@@ -4,7 +4,12 @@ import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { hashPassword } from './config/password'
 import { Command } from 'commander'
-import { ChargingStationModel, ChargingStationState, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import {
+  ChargingStationGroupFlag,
+  ChargingStationModel,
+  ChargingStationState,
+  SerializationHelper,
+} from '@yellowgarbagebag/csms-lib'
 
 const program = new Command()
 program
@@ -47,7 +52,7 @@ function createChargeStation(uniqueIdentifier: string): void {
 
     dataStorage.set(
       'chargingStationModels',
-      models.map((x) => SerializationHelper.serialize(x, ['password'])),
+      models.map((model) => SerializationHelper.serialize(model, [ChargingStationGroupFlag.ServerOnly])),
     )
   }
 }
