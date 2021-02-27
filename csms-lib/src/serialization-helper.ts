@@ -2,7 +2,7 @@ import { ClassConstructor, serialize, deserialize, deserializeArray } from 'clas
 
 export abstract class SerializationHelper {
   public static serialize<T>(value: T, groups?: string[]): string {
-    return serialize(value, { groups })
+    return serialize(value, { groups, exposeDefaultValues: true })
   }
 
   public static deserialize<T>(cls: ClassConstructor<T>, json: string, groups?: string[]): T {
