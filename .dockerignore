@@ -1,0 +1,7 @@
+**/node_modules/
+**/vscode.code-workspace
+build.sh
+**/README.md
+pipeline.sh
+**/tsconfig.eslint.json
+**/*.tgz
