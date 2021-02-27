@@ -97,13 +97,13 @@ export class WebSocketServer {
     this.csSockets.add(socket)
     this.csTlsSockets.add(tlsSocket)
     cs.connect()
-    this.sendAdminStatusToAll()
+    this.sendAdminStatusToAll(cs.model)
 
     socket.onclose = (): void => {
       cs.disconnect()
       this.csSockets.delete(socket)
       this.csTlsSockets.delete(tlsSocket)
-      this.sendAdminStatusToAll()
+      this.sendAdminStatusToAll(cs.model)
     }
 
     socket.onerror = (err: any): void => {
@@ -115,19 +115,19 @@ export class WebSocketServer {
       if (result) {
         socket.send(result.toMessageString())
       }
-      this.sendAdminStatusToAll()
+      this.sendAdminStatusToAll(cs.model)
     }
   }
 
-  private sendAdminStatusToAll(): void {
+  private sendAdminStatusToAll(model: ChargingStationModel): void {
     for (const socket of this.adminSockets) {
-      this.sendAdminStatusToSingle(socket)
+      this.sendAdminStatusToSingle(socket, model)
     }
   }
 
-  private sendAdminStatusToSingle(socket: WebSocket): void {
+  private sendAdminStatusToSingle(socket: WebSocket, model: ChargingStationModel): void {
     if (socket.OPEN) {
-      socket.send(SerializationHelper.serialize(this.chargingStationModels))
+      socket.send(SerializationHelper.serialize(model))
     }
   }
 
@@ -135,7 +135,9 @@ export class WebSocketServer {
     this.adminSockets.add(socket)
     this.adminTlsSockets.add(tlsSocket)
 
-    this.sendAdminStatusToSingle(socket)
+    for (const cs of this.chargingStationModels) {
+      this.sendAdminStatusToSingle(socket, cs)
+    }
 
     socket.onclose = (): void => {
       this.adminSockets.delete(socket)

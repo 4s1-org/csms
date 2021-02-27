@@ -43,7 +43,7 @@ export class ChargingStation implements IChargingStation {
   public readonly logger = new Logger(this.model.uniqueIdentifier)
   private sendList: OcppRequestMessageDto[] = []
 
-  public constructor(private readonly model: ChargingStationModel) {
+  public constructor(public readonly model: ChargingStationModel) {
     // nothing to do
   }
 
