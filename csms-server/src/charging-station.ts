@@ -34,6 +34,7 @@ import {
   GetVariablesResponseDto,
   NotifyEventRequestDto,
   NotifyEventResponseDto,
+  OcppResponseMessageDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
@@ -53,7 +54,7 @@ export class ChargingStation implements IChargingStation {
 
   public connect(): void {
     this.logger.info('Connected')
-    this.model.state = ChargingStationState.Schroedinger
+    this.model.state = ChargingStationState.Connecting
   }
 
   public disconnect(): void {
@@ -75,48 +76,49 @@ export class ChargingStation implements IChargingStation {
     return result
   }
 
-  public incomingRequestMessage(payload: RequestBaseDto): ResponseBaseDto {
+  public incomingRequestMessage(msg: OcppRequestMessageDto): ResponseBaseDto {
     this.model.lastContact = Date.now()
+    this.model.lastCommand = msg.action
 
-    if (payload instanceof BootNotificationRequestDto) {
-      return this.receiveBootNotificationRequest(payload)
+    if (msg.payload instanceof BootNotificationRequestDto) {
+      return this.receiveBootNotificationRequest(msg.payload)
     }
-    if (payload instanceof HeartbeatRequestDto) {
-      return this.receiveHeartbeatRequest(payload)
+    if (msg.payload instanceof HeartbeatRequestDto) {
+      return this.receiveHeartbeatRequest(msg.payload)
     }
-    if (payload instanceof StatusNotificationRequestDto) {
-      return this.receiveStatusNotificationRequest(payload)
+    if (msg.payload instanceof StatusNotificationRequestDto) {
+      return this.receiveStatusNotificationRequest(msg.payload)
     }
-    if (payload instanceof AuthorizeRequestDto) {
-      return this.receiveAuthorizeRequest(payload)
+    if (msg.payload instanceof AuthorizeRequestDto) {
+      return this.receiveAuthorizeRequest(msg.payload)
     }
-    if (payload instanceof MeterValuesRequestDto) {
-      return this.receiveMeterValuesRequest(payload)
+    if (msg.payload instanceof MeterValuesRequestDto) {
+      return this.receiveMeterValuesRequest(msg.payload)
     }
-    if (payload instanceof NotifyEventRequestDto) {
-      return this.receiveNotifyEventRequest(payload)
+    if (msg.payload instanceof NotifyEventRequestDto) {
+      return this.receiveNotifyEventRequest(msg.payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
-  public incomingResponseMessage(payload: ResponseBaseDto): void {
+  public incomingResponseMessage(msg: OcppResponseMessageDto): void {
     this.model.lastContact = Date.now()
 
-    if (payload instanceof SetVariablesResponseDto) {
-      return this.receiveSetVariableResponse(payload)
+    if (msg.payload instanceof SetVariablesResponseDto) {
+      return this.receiveSetVariableResponse(msg.payload)
     }
-    if (payload instanceof ChangeAvailabilityResponseDto) {
-      return this.receiveChangeAvailabilityResponse(payload)
+    if (msg.payload instanceof ChangeAvailabilityResponseDto) {
+      return this.receiveChangeAvailabilityResponse(msg.payload)
     }
-    if (payload instanceof GetVariablesResponseDto) {
-      return this.receiveGetVariablesResponse(payload)
+    if (msg.payload instanceof GetVariablesResponseDto) {
+      return this.receiveGetVariablesResponse(msg.payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
-  public incomingErrorMessage(error: OcppErrorMessageDto): void {
+  public incomingErrorMessage(msg: OcppErrorMessageDto): void {
     this.model.lastContact = Date.now()
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)

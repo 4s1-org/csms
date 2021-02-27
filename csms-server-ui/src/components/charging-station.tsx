@@ -12,12 +12,12 @@ class ChargingStationComp extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     let headerColorCss = ''
     let stateStr = 'unbekannt'
-    switch (this.props.data.state) {
+    switch (this.props.data.state || 0) {
       case ChargingStationState.Offline:
         headerColorCss = 'bg-danger text-white'
         stateStr = 'offline'
         break
-      case ChargingStationState.Schroedinger:
+      case ChargingStationState.Connecting:
         headerColorCss = 'bg-warning'
         stateStr = '(noch) nicht betriebsbereit'
         break
@@ -40,6 +40,8 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           <p className="card-text">Benutername: {this.props.data.username}</p>
         </div>
         <div className="card-footer">
+          <small className="text-muted">Letztes Kommando: {this.props.data.lastCommand}</small>
+          <br />
           <small className="text-muted">Letzter Kontakt: {lastContectStr}</small>
         </div>
       </div>

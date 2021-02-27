@@ -2,7 +2,6 @@ import {
   BootNotificationRequestDto,
   BootNotificationResponseDto,
   OcppErrorCodeEnum,
-  RequestBaseDto,
   ResponseBaseDto,
   CsmsError,
   HeartbeatRequestDto,
@@ -43,6 +42,7 @@ import {
   EventNotificationEnum,
   VariableDto,
   NotifyEventResponseDto,
+  OcppResponseMessageDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 
@@ -59,45 +59,45 @@ export abstract class ChargingStation implements IChargingStation {
     this.sendList.push(requestMessage)
   }
 
-  public incomingRequestMessage(payload: RequestBaseDto): ResponseBaseDto {
-    if (payload instanceof SetVariablesRequestDto) {
-      return this.receiveSetVariablesRequest(payload)
+  public incomingRequestMessage(msg: OcppRequestMessageDto): ResponseBaseDto {
+    if (msg.payload instanceof SetVariablesRequestDto) {
+      return this.receiveSetVariablesRequest(msg.payload)
     }
-    if (payload instanceof ChangeAvailabilityRequestDto) {
-      return this.receiveChangeAvailabilityRequest(payload)
+    if (msg.payload instanceof ChangeAvailabilityRequestDto) {
+      return this.receiveChangeAvailabilityRequest(msg.payload)
     }
-    if (payload instanceof GetVariablesRequestDto) {
-      return this.receiveGetVariablesRequest(payload)
+    if (msg.payload instanceof GetVariablesRequestDto) {
+      return this.receiveGetVariablesRequest(msg.payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
-  public incomingResponseMessage(payload: ResponseBaseDto): void {
-    if (payload instanceof BootNotificationResponseDto) {
-      return this.receiveBootNotificationResponse(payload)
+  public incomingResponseMessage(msg: OcppResponseMessageDto): void {
+    if (msg.payload instanceof BootNotificationResponseDto) {
+      return this.receiveBootNotificationResponse(msg.payload)
     }
-    if (payload instanceof HeartbeatResponseDto) {
-      return this.receiveHeartbeatResponse(payload)
+    if (msg.payload instanceof HeartbeatResponseDto) {
+      return this.receiveHeartbeatResponse(msg.payload)
     }
-    if (payload instanceof StatusNotificationResponseDto) {
-      return this.receiveStatusNotificationResponse(payload)
+    if (msg.payload instanceof StatusNotificationResponseDto) {
+      return this.receiveStatusNotificationResponse(msg.payload)
     }
-    if (payload instanceof AuthorizeResponseDto) {
-      return this.receiveAuthorizeResponse(payload)
+    if (msg.payload instanceof AuthorizeResponseDto) {
+      return this.receiveAuthorizeResponse(msg.payload)
     }
-    if (payload instanceof MeterValuesResponseDto) {
-      return this.receiveMeterValuesResponse(payload)
+    if (msg.payload instanceof MeterValuesResponseDto) {
+      return this.receiveMeterValuesResponse(msg.payload)
     }
-    if (payload instanceof NotifyEventResponseDto) {
-      return this.receiveNotifyEventResponse(payload)
+    if (msg.payload instanceof NotifyEventResponseDto) {
+      return this.receiveNotifyEventResponse(msg.payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public incomingErrorMessage(error: OcppErrorMessageDto): void {
+  public incomingErrorMessage(msg: OcppErrorMessageDto): void {
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
