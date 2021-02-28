@@ -6,7 +6,11 @@
 # Build
 docker build -t csms .
 
+
+
 # Start
+docker stop csms
+docker rm csms
 docker run -it \
   -p 3000:3000 \
   -p 3001:3001 \
