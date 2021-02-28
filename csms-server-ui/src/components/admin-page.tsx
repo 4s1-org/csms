@@ -27,7 +27,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
 
   public componentDidMount(): void {
     if (process.env.NODE_ENV === 'development') {
-      this.login('localhost:3000', false, 'admin', 'admin')
+      this.login(`${window.location.hostname}:3000`, false, 'admin', 'admin')
     }
   }
 
