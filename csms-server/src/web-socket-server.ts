@@ -1,6 +1,4 @@
 import WebSocket from 'ws'
-import fs from 'fs'
-import path from 'path'
 import http from 'http'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
