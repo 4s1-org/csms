@@ -2,12 +2,13 @@ import React from 'react'
 
 interface IState {
   server: string
+  secure: boolean
   username: string
   password: string
 }
 
 interface IProps {
-  onLoginClick: (server: string, username: string, password: string) => void
+  onLoginClick: (server: string, secure: boolean, username: string, password: string) => void
   onLogoutClick: () => void
   isConnected: boolean
 }
@@ -17,6 +18,7 @@ class LoginPanelComp extends React.Component<IProps, IState> {
     super(props)
     this.state = {
       server: 'localhost:3000',
+      secure: false,
       username: 'admin',
       password: 'admin',
     }
@@ -30,6 +32,7 @@ class LoginPanelComp extends React.Component<IProps, IState> {
   }
 
   public render(): JSX.Element {
+    // ToDo: Checkbox für wss/ws
     return (
       <nav className="navbar navbar-dark bg-dark flex-column flex-md-row">
         <form className="form-inline my-2 my-lg-0">
@@ -83,7 +86,7 @@ class LoginPanelComp extends React.Component<IProps, IState> {
 
   private onBtnLoginClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     e.preventDefault()
-    this.props.onLoginClick(this.state.server, this.state.username, this.state.password)
+    this.props.onLoginClick(this.state.server, this.state.secure, this.state.username, this.state.password)
   }
 
   private onBtnLogoutClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {

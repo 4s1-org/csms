@@ -1,7 +1,7 @@
 import WebSocket from 'ws'
 import fs from 'fs'
 import path from 'path'
-import https from 'https'
+import http from 'http'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
 import { v4 as uuid } from 'uuid'
@@ -21,7 +21,7 @@ import { verifyPassword } from './config/password'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
-  private server: https.Server | undefined
+  private server: http.Server | undefined
   private csSockets: Set<WebSocket> = new Set<WebSocket>()
   private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
   private adminSockets: Set<WebSocket> = new Set<WebSocket>()
@@ -47,17 +47,14 @@ export class WebSocketServer {
       noServer: true,
     }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => this.onAdminConnection(socket, tlsSocket))
 
-    this.server = https
-      .createServer({
-        cert: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.crt')),
-        key: fs.readFileSync(path.join(__dirname, '..', 'third-party', 'certificates', 'localhost.key')),
-      })
+    this.server = http
+      .createServer()
       .on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
         const socketId = request.headers['sec-websocket-key']
         this.logger.info(`Client connected: ${socketId}`)
 
         const [username, password] = this.getCredentials(request)
-        const baseURL = `https://${request.headers.host}/`
+        const baseURL = `http://${request.headers.host}/`
         const myURL = new URL(request.url || '', baseURL)
 
         if (myURL.pathname.startsWith('/ocpp/')) {

@@ -5,7 +5,7 @@ export abstract class SimulationBase {
   protected css: ChargingStationSimulator
 
   constructor(uniqueIdentifier: string, username: string, password: string, server = 'localhost:3000') {
-    const socket = new WebSocket(`wss://${server}/ocpp/${uniqueIdentifier}`, ['ocpp2.0.1'], {
+    const socket = new WebSocket(`ws://${server}/ocpp/${uniqueIdentifier}`, ['ocpp2.0.1'], {
       headers: {
         authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
       },
