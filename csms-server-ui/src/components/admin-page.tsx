@@ -27,7 +27,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
 
   public componentDidMount(): void {
     if (process.env.NODE_ENV === 'development') {
-      this.login('localhost:3000', 'admin', 'admin')
+      this.login('localhost:3000', false, 'admin', 'admin')
     }
   }
 
@@ -51,11 +51,11 @@ class AdminPageComp extends React.Component<IProps, IState> {
     )
   }
 
-  private login(server: string, username: string, password: string): void {
+  private login(server: string, secure: boolean, username: string, password: string): void {
     var authToken = window.btoa(`${username}:${password}`)
     document.cookie = 'X-Authorization=' + authToken + '; path=/'
 
-    const ws = new WebSocket(`wss://${server}/admin`, ['ocpp2.0.1'])
+    const ws = new WebSocket(`${secure ? 'ws' : 'ws'}://${server}/admin`, ['ocpp2.0.1'])
 
     ws.onopen = () => {
       this.setState({
