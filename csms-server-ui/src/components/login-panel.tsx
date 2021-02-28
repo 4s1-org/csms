@@ -17,7 +17,7 @@ class LoginPanelComp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
-      server: 'localhost:3000',
+      server: `${window.location.hostname}:3000`,
       secure: false,
       username: 'admin',
       password: 'admin',

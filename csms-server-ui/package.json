@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "description": "Charging Station Management System Server UI",
-  "homepage": "https://gitlab.com/YellowGarbageBag/csms",
   "bugs": {
     "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
   },
