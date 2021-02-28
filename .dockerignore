@@ -1,8 +1,8 @@
-**/node_modules/
-**/vscode.code-workspace
-build.sh
-**/README.md
-pipeline.sh
-**/tsconfig.eslint.json
+**/*.tar.gz
 **/*.tgz
+**/node_modules/
+**/README.md
+**/tsconfig.eslint.json
+**/vscode.code-workspace
+**/*.sh
 csms-server/csms-server.json
