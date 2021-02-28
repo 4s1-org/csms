@@ -1,7 +1,9 @@
 #!/bin/bash
 
 docker build -t csms .
+echo DOCKER SAVE
 docker save csms | gzip > docker-csms.tar.gz
+echo COPY TO NAS
 scp docker-csms.tar.gz nas:/volume1/docker/
 
 exit 0
