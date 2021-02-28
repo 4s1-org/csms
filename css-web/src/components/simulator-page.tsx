@@ -38,11 +38,17 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
     )
   }
 
-  private onLoginClick(server: string, uniqueIdentifier: string, username: string, password: string): void {
+  private onLoginClick(
+    server: string,
+    secure: boolean,
+    uniqueIdentifier: string,
+    username: string,
+    password: string,
+  ): void {
     var authToken = window.btoa(`${username}:${password}`)
     document.cookie = 'X-Authorization=' + authToken + '; path=/'
 
-    const socket = new WebSocket(`wss://${server}/ocpp/${uniqueIdentifier}`, ['ocpp2.0.1'])
+    const socket = new WebSocket(`${secure ? 'wss' : 'ws'}://${server}/ocpp/${uniqueIdentifier}`, ['ocpp2.0.1'])
 
     const sendCallback = (msg: any): boolean => {
       if (socket && socket.OPEN) {
