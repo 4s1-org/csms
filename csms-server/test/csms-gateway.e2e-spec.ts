@@ -25,7 +25,7 @@ describe('CSMS Gateway', () => {
   const port = 3009
 
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
-    socket = new WebSocket(`wss://localhost:${port}/ocpp/${csInfo}`, ['ocpp2.0.1'], {
+    socket = new WebSocket(`ws://localhost:${port}/ocpp/${csInfo}`, ['ocpp2.0.1'], {
       headers: {
         authorization: `Basic ${Buffer.from(`${csInfo}:${csInfo}`).toString('base64')}`,
       },
