@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid'
 import {
   BootNotificationRequestDto,
   BootNotificationResponseDto,
@@ -43,6 +44,9 @@ import {
   VariableDto,
   NotifyEventResponseDto,
   OcppResponseMessageDto,
+  actionDtoMapping,
+  RequestBaseDto,
+  RegistrationStatusEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 
@@ -110,6 +114,25 @@ export abstract class ChargingStation implements IChargingStation {
     }
 
     throw new CsmsError(OcppErrorCodeEnum.GenericError, 'Request to response not found')
+  }
+
+  private async send2(payload: RequestBaseDto): Promise<ResponseBaseDto> {
+    const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
+    if (!mapping) {
+      throw new Error('No action mapping found' + payload)
+    }
+
+    const msg = new OcppRequestMessageDto(uuid(), mapping.action, payload)
+    this.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
+    this.logger.debug('Send', msg)
+
+    return new BootNotificationResponseDto('', 1, RegistrationStatusEnum.Accepted)
+  }
+
+  public async sendBootNotificationRequest2(): Promise<BootNotificationResponseDto> {
+    const csDto = new ChargingStationDto('DemoCharger', 'VendorX')
+    const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.ApplicationReset)
+    return this.send2(payload) as Promise<BootNotificationResponseDto>
   }
 
   /**

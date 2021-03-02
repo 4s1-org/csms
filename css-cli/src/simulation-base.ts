@@ -1,4 +1,5 @@
 import { ChargingStationSimulator } from '@yellowgarbagebag/css-lib'
+import { RequestBaseDto, ResponseBaseDto } from '@yellowgarbagebag/ocpp-lib'
 import WebSocket from 'ws'
 
 export abstract class SimulationBase {
@@ -43,4 +44,8 @@ export abstract class SimulationBase {
   }
 
   protected abstract simulate(): Promise<void>
+
+  protected async send(payload: RequestBaseDto): Promise<ResponseBaseDto | undefined> {
+    return
+  }
 }
