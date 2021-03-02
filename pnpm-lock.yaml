@@ -141,6 +141,7 @@ importers:
     dependencies:
       '@yellowgarbagebag/common-lib': link:../common-lib
       '@yellowgarbagebag/css-lib': link:../css-lib
+      '@yellowgarbagebag/ocpp-lib': link:../ocpp-lib
       pino-pretty: 4.5.0
       ws: 7.4.3
     devDependencies:
@@ -162,6 +163,7 @@ importers:
       '@types/ws': ^7.4.0
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/css-lib': workspace:*
+      '@yellowgarbagebag/ocpp-lib': workspace:*
       concurrently: ^6.0.0
       eslint: ^7.20.0
       jest: ^26.6.3

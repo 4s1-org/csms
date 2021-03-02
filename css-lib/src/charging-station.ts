@@ -117,9 +117,9 @@ export abstract class ChargingStation implements IChargingStation {
    * B02 - Cold Boot Charging Station - Pending
    * B03 - Cold Boot Charging Station - Rejected
    */
-  public sendBootNotificationRequest(): BootNotificationRequestDto {
-    const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
-    const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
+  public sendBootNotificationRequest(reason: BootReasonEnum = BootReasonEnum.PowerUp): BootNotificationRequestDto {
+    const csDto = new ChargingStationDto('DemoCharger', 'VendorX')
+    const payload = new BootNotificationRequestDto(csDto, reason)
     return payload
   }
 
@@ -208,8 +208,11 @@ export abstract class ChargingStation implements IChargingStation {
   /**
    * G01 - Status Notification
    */
-  public sendStatusNotificationRequest(): StatusNotificationRequestDto {
-    const payload = new StatusNotificationRequestDto(new Date().toISOString(), ConnectorStatusEnum.Available, 1, 1)
+  public sendStatusNotificationRequest(
+    connectorStatus: ConnectorStatusEnum,
+    evseId: number,
+  ): StatusNotificationRequestDto {
+    const payload = new StatusNotificationRequestDto(new Date().toISOString(), connectorStatus, evseId, 1)
     return payload
   }
 

@@ -5,7 +5,7 @@ class Simulation extends SimulationBase {
     super('LS001', 'LS001', 'test')
   }
 
-  protected simulate(): void {
+  protected async simulate(): Promise<void> {
     this.css.send(this.css.sendAuthorizationRequest_Rfid())
   }
 }
