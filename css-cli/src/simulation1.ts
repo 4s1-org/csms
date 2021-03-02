@@ -1,3 +1,4 @@
+import { ConnectorStatusEnum } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './simulation-base'
 
 class Simulation extends SimulationBase {
@@ -5,11 +6,11 @@ class Simulation extends SimulationBase {
     super('LS001', 'LS001', 'test')
   }
 
-  protected simulate(): void {
+  protected async simulate(): Promise<void> {
     this.css.send(this.css.sendBootNotificationRequest())
 
     setTimeout(() => {
-      this.css.send(this.css.sendStatusNotificationRequest())
+      this.css.send(this.css.sendStatusNotificationRequest(ConnectorStatusEnum.Available, 1))
     }, 100)
 
     setTimeout(() => {

@@ -24,9 +24,9 @@ export abstract class SimulationBase {
 
     this.css = new ChargingStationSimulator(uniqueIdentifier, sendCallback, disconnectCallback)
 
-    socket.onopen = (): void => {
+    socket.onopen = async (): Promise<void> => {
       this.css.onOpen()
-      this.simulate()
+      await this.simulate()
     }
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {
@@ -42,5 +42,5 @@ export abstract class SimulationBase {
     }
   }
 
-  protected abstract simulate(): void
+  protected abstract simulate(): Promise<void>
 }
