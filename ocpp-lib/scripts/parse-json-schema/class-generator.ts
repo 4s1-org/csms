@@ -79,6 +79,11 @@ export class ClassGenerator {
 
     this._generateJsonSchemaIndex([__dirname, '..', '..', 'src', 'generated'])
 
+    this._generateRequestToResponseType(
+      [__dirname, '..', '..', 'src', 'generated'],
+      this.classSkeletons.filter((x) => x.isMessage),
+    )
+
     // Muss als letztes erfolgen
     this._generateGeneratedFolderIndex([__dirname, '..', '..', 'src', 'generated'])
   }
@@ -225,6 +230,37 @@ export class ClassGenerator {
     data.push(``)
 
     const fileNameWithoutExt = `${type.toLocaleLowerCase()}-message.type`
+    const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
+    fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
+
+    this.generatedFolderIndex.push([className, fileNameWithoutExt])
+  }
+
+  private _generateRequestToResponseType(folders: string[], skeletons: ClassSkeleton[]): void {
+    const data: string[] = []
+
+    data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+    data.push(``)
+    for (const skeleton of skeletons) {
+      data.push(`import { ${skeleton.fullName} } from '../messages/${skeleton.fileNameWithoutExt}'`)
+    }
+    data.push(``)
+
+    const className = `RequestToResponseType`
+    data.push(`export type ${className}<T> =`)
+    let isFirst = true
+    for (const skeleton of skeletons) {
+      if (skeleton.isRequest) {
+        data.push(`  ${!isFirst ? ':' : ''} T extends ${skeleton.name}Dto`)
+      } else if (skeleton.isResponse) {
+        data.push(`  ? ${skeleton.name}Dto`)
+      }
+      isFirst = false
+    }
+    data.push(`  : never`)
+    data.push(``)
+
+    const fileNameWithoutExt = `request-to-response.type`
     const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
     fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
 
