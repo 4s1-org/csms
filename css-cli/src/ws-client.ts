@@ -1,14 +1,4 @@
 import WebSocket from 'ws'
-import {
-  BootNotificationRequestDto,
-  BootNotificationResponseDto,
-  StatusNotificationRequestDto,
-  StatusNotificationResponseDto,
-  SetVariablesRequestDto,
-  SetVariablesResponseDto,
-  ChangeAvailabilityResponseDto,
-  ChangeAvailabilityRequestDto,
-} from '@yellowgarbagebag/ocpp-lib'
 import { IConnection } from './i-connection'
 import { WsClientBase } from './ws-client-base'
 export class WsClient extends WsClientBase implements IConnection {
@@ -59,14 +49,3 @@ export class WsClient extends WsClientBase implements IConnection {
     return false
   }
 }
-
-// ToDo: Generieren lassen in der OCPP Lib
-export type ObjectType<T> = T extends BootNotificationRequestDto
-  ? BootNotificationResponseDto
-  : T extends StatusNotificationRequestDto
-  ? StatusNotificationResponseDto
-  : T extends SetVariablesRequestDto
-  ? SetVariablesResponseDto
-  : T extends ChangeAvailabilityRequestDto
-  ? ChangeAvailabilityResponseDto
-  : never

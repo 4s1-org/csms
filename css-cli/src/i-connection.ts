@@ -1,7 +1,6 @@
-import { RequestBaseDto } from '@yellowgarbagebag/ocpp-lib'
-import { ObjectType } from './ws-client'
+import { RequestBaseDto, RequestToResponseType } from '@yellowgarbagebag/ocpp-lib'
 
 export interface IConnection {
-  send: <T extends RequestBaseDto>(payload: T) => Promise<ObjectType<T>>
+  send: <T extends RequestBaseDto>(payload: T) => Promise<RequestToResponseType<T>>
   disconnect: () => void
 }

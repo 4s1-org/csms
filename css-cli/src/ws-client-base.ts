@@ -16,6 +16,7 @@ import {
   SetVariablesResponseDto,
   ChangeAvailabilityResponseDto,
   ChangeAvailabilityRequestDto,
+  RequestToResponseType,
 } from '@yellowgarbagebag/ocpp-lib'
 import { v4 as uuid } from 'uuid'
 
@@ -77,7 +78,7 @@ export abstract class WsClientBase {
     throw new Error('Invalid pending promise state')
   }
 
-  public send<T extends RequestBaseDto>(payload: T): Promise<ObjectType<T>> {
+  public send<T extends RequestBaseDto>(payload: T): Promise<RequestToResponseType<T>> {
     return new Promise((resolve, reject) => {
       const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
       if (!mapping) {
@@ -94,14 +95,3 @@ export abstract class WsClientBase {
 
   protected abstract sendInternal(msg: string): boolean
 }
-
-// ToDo: Generieren lassen in der OCPP Lib
-export type ObjectType<T> = T extends BootNotificationRequestDto
-  ? BootNotificationResponseDto
-  : T extends StatusNotificationRequestDto
-  ? StatusNotificationResponseDto
-  : T extends SetVariablesRequestDto
-  ? SetVariablesResponseDto
-  : T extends ChangeAvailabilityRequestDto
-  ? ChangeAvailabilityResponseDto
-  : never
