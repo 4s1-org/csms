@@ -8,14 +8,6 @@ import {
   PayloadConverter,
   ResponseBaseDto,
   OcppErrorMessageDto,
-  BootNotificationRequestDto,
-  BootNotificationResponseDto,
-  StatusNotificationRequestDto,
-  StatusNotificationResponseDto,
-  SetVariablesRequestDto,
-  SetVariablesResponseDto,
-  ChangeAvailabilityResponseDto,
-  ChangeAvailabilityRequestDto,
   RequestToResponseType,
 } from '@yellowgarbagebag/ocpp-lib'
 import { v4 as uuid } from 'uuid'
