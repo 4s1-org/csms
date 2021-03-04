@@ -1,134 +1,134 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { AuthorizeRequestDto } from '../messages/authorize-request.dto'
-import { BootNotificationRequestDto } from '../messages/boot-notification-request.dto'
-import { CancelReservationRequestDto } from '../messages/cancel-reservation-request.dto'
-import { CertificateSignedRequestDto } from '../messages/certificate-signed-request.dto'
-import { ChangeAvailabilityRequestDto } from '../messages/change-availability-request.dto'
-import { ClearCacheRequestDto } from '../messages/clear-cache-request.dto'
-import { ClearChargingProfileRequestDto } from '../messages/clear-charging-profile-request.dto'
-import { ClearDisplayMessageRequestDto } from '../messages/clear-display-message-request.dto'
-import { ClearVariableMonitoringRequestDto } from '../messages/clear-variable-monitoring-request.dto'
-import { ClearedChargingLimitRequestDto } from '../messages/cleared-charging-limit-request.dto'
-import { CostUpdatedRequestDto } from '../messages/cost-updated-request.dto'
-import { CustomerInformationRequestDto } from '../messages/customer-information-request.dto'
-import { DataTransferRequestDto } from '../messages/data-transfer-request.dto'
-import { DeleteCertificateRequestDto } from '../messages/delete-certificate-request.dto'
-import { FirmwareStatusNotificationRequestDto } from '../messages/firmware-status-notification-request.dto'
-import { Get15118EvCertificateRequestDto } from '../messages/get15118-ev-certificate-request.dto'
-import { GetBaseReportRequestDto } from '../messages/get-base-report-request.dto'
-import { GetCertificateStatusRequestDto } from '../messages/get-certificate-status-request.dto'
-import { GetChargingProfilesRequestDto } from '../messages/get-charging-profiles-request.dto'
-import { GetCompositeScheduleRequestDto } from '../messages/get-composite-schedule-request.dto'
-import { GetDisplayMessagesRequestDto } from '../messages/get-display-messages-request.dto'
-import { GetInstalledCertificateIdsRequestDto } from '../messages/get-installed-certificate-ids-request.dto'
-import { GetLocalListVersionRequestDto } from '../messages/get-local-list-version-request.dto'
-import { GetLogRequestDto } from '../messages/get-log-request.dto'
-import { GetMonitoringReportRequestDto } from '../messages/get-monitoring-report-request.dto'
-import { GetReportRequestDto } from '../messages/get-report-request.dto'
-import { GetTransactionStatusRequestDto } from '../messages/get-transaction-status-request.dto'
-import { GetVariablesRequestDto } from '../messages/get-variables-request.dto'
-import { HeartbeatRequestDto } from '../messages/heartbeat-request.dto'
-import { InstallCertificateRequestDto } from '../messages/install-certificate-request.dto'
-import { LogStatusNotificationRequestDto } from '../messages/log-status-notification-request.dto'
-import { MeterValuesRequestDto } from '../messages/meter-values-request.dto'
-import { NotifyChargingLimitRequestDto } from '../messages/notify-charging-limit-request.dto'
-import { NotifyCustomerInformationRequestDto } from '../messages/notify-customer-information-request.dto'
-import { NotifyDisplayMessagesRequestDto } from '../messages/notify-display-messages-request.dto'
-import { NotifyEvChargingNeedsRequestDto } from '../messages/notify-ev-charging-needs-request.dto'
-import { NotifyEvChargingScheduleRequestDto } from '../messages/notify-ev-charging-schedule-request.dto'
-import { NotifyEventRequestDto } from '../messages/notify-event-request.dto'
-import { NotifyMonitoringReportRequestDto } from '../messages/notify-monitoring-report-request.dto'
-import { NotifyReportRequestDto } from '../messages/notify-report-request.dto'
-import { PublishFirmwareRequestDto } from '../messages/publish-firmware-request.dto'
-import { PublishFirmwareStatusNotificationRequestDto } from '../messages/publish-firmware-status-notification-request.dto'
-import { ReportChargingProfilesRequestDto } from '../messages/report-charging-profiles-request.dto'
-import { RequestStartTransactionRequestDto } from '../messages/request-start-transaction-request.dto'
-import { RequestStopTransactionRequestDto } from '../messages/request-stop-transaction-request.dto'
-import { ReservationStatusUpdateRequestDto } from '../messages/reservation-status-update-request.dto'
-import { ReserveNowRequestDto } from '../messages/reserve-now-request.dto'
-import { ResetRequestDto } from '../messages/reset-request.dto'
-import { SecurityEventNotificationRequestDto } from '../messages/security-event-notification-request.dto'
-import { SendLocalListRequestDto } from '../messages/send-local-list-request.dto'
-import { SetChargingProfileRequestDto } from '../messages/set-charging-profile-request.dto'
-import { SetDisplayMessageRequestDto } from '../messages/set-display-message-request.dto'
-import { SetMonitoringBaseRequestDto } from '../messages/set-monitoring-base-request.dto'
-import { SetMonitoringLevelRequestDto } from '../messages/set-monitoring-level-request.dto'
-import { SetNetworkProfileRequestDto } from '../messages/set-network-profile-request.dto'
-import { SetVariableMonitoringRequestDto } from '../messages/set-variable-monitoring-request.dto'
-import { SetVariablesRequestDto } from '../messages/set-variables-request.dto'
-import { SignCertificateRequestDto } from '../messages/sign-certificate-request.dto'
-import { StatusNotificationRequestDto } from '../messages/status-notification-request.dto'
-import { TransactionEventRequestDto } from '../messages/transaction-event-request.dto'
-import { TriggerMessageRequestDto } from '../messages/trigger-message-request.dto'
-import { UnlockConnectorRequestDto } from '../messages/unlock-connector-request.dto'
-import { UnpublishFirmwareRequestDto } from '../messages/unpublish-firmware-request.dto'
-import { UpdateFirmwareRequestDto } from '../messages/update-firmware-request.dto'
+import { AuthorizeResponseDto } from '../messages/authorize-response.dto'
+import { BootNotificationResponseDto } from '../messages/boot-notification-response.dto'
+import { CancelReservationResponseDto } from '../messages/cancel-reservation-response.dto'
+import { CertificateSignedResponseDto } from '../messages/certificate-signed-response.dto'
+import { ChangeAvailabilityResponseDto } from '../messages/change-availability-response.dto'
+import { ClearCacheResponseDto } from '../messages/clear-cache-response.dto'
+import { ClearChargingProfileResponseDto } from '../messages/clear-charging-profile-response.dto'
+import { ClearDisplayMessageResponseDto } from '../messages/clear-display-message-response.dto'
+import { ClearVariableMonitoringResponseDto } from '../messages/clear-variable-monitoring-response.dto'
+import { ClearedChargingLimitResponseDto } from '../messages/cleared-charging-limit-response.dto'
+import { CostUpdatedResponseDto } from '../messages/cost-updated-response.dto'
+import { CustomerInformationResponseDto } from '../messages/customer-information-response.dto'
+import { DataTransferResponseDto } from '../messages/data-transfer-response.dto'
+import { DeleteCertificateResponseDto } from '../messages/delete-certificate-response.dto'
+import { FirmwareStatusNotificationResponseDto } from '../messages/firmware-status-notification-response.dto'
+import { Get15118EvCertificateResponseDto } from '../messages/get15118-ev-certificate-response.dto'
+import { GetBaseReportResponseDto } from '../messages/get-base-report-response.dto'
+import { GetCertificateStatusResponseDto } from '../messages/get-certificate-status-response.dto'
+import { GetChargingProfilesResponseDto } from '../messages/get-charging-profiles-response.dto'
+import { GetCompositeScheduleResponseDto } from '../messages/get-composite-schedule-response.dto'
+import { GetDisplayMessagesResponseDto } from '../messages/get-display-messages-response.dto'
+import { GetInstalledCertificateIdsResponseDto } from '../messages/get-installed-certificate-ids-response.dto'
+import { GetLocalListVersionResponseDto } from '../messages/get-local-list-version-response.dto'
+import { GetLogResponseDto } from '../messages/get-log-response.dto'
+import { GetMonitoringReportResponseDto } from '../messages/get-monitoring-report-response.dto'
+import { GetReportResponseDto } from '../messages/get-report-response.dto'
+import { GetTransactionStatusResponseDto } from '../messages/get-transaction-status-response.dto'
+import { GetVariablesResponseDto } from '../messages/get-variables-response.dto'
+import { HeartbeatResponseDto } from '../messages/heartbeat-response.dto'
+import { InstallCertificateResponseDto } from '../messages/install-certificate-response.dto'
+import { LogStatusNotificationResponseDto } from '../messages/log-status-notification-response.dto'
+import { MeterValuesResponseDto } from '../messages/meter-values-response.dto'
+import { NotifyChargingLimitResponseDto } from '../messages/notify-charging-limit-response.dto'
+import { NotifyCustomerInformationResponseDto } from '../messages/notify-customer-information-response.dto'
+import { NotifyDisplayMessagesResponseDto } from '../messages/notify-display-messages-response.dto'
+import { NotifyEvChargingNeedsResponseDto } from '../messages/notify-ev-charging-needs-response.dto'
+import { NotifyEvChargingScheduleResponseDto } from '../messages/notify-ev-charging-schedule-response.dto'
+import { NotifyEventResponseDto } from '../messages/notify-event-response.dto'
+import { NotifyMonitoringReportResponseDto } from '../messages/notify-monitoring-report-response.dto'
+import { NotifyReportResponseDto } from '../messages/notify-report-response.dto'
+import { PublishFirmwareResponseDto } from '../messages/publish-firmware-response.dto'
+import { PublishFirmwareStatusNotificationResponseDto } from '../messages/publish-firmware-status-notification-response.dto'
+import { ReportChargingProfilesResponseDto } from '../messages/report-charging-profiles-response.dto'
+import { RequestStartTransactionResponseDto } from '../messages/request-start-transaction-response.dto'
+import { RequestStopTransactionResponseDto } from '../messages/request-stop-transaction-response.dto'
+import { ReservationStatusUpdateResponseDto } from '../messages/reservation-status-update-response.dto'
+import { ReserveNowResponseDto } from '../messages/reserve-now-response.dto'
+import { ResetResponseDto } from '../messages/reset-response.dto'
+import { SecurityEventNotificationResponseDto } from '../messages/security-event-notification-response.dto'
+import { SendLocalListResponseDto } from '../messages/send-local-list-response.dto'
+import { SetChargingProfileResponseDto } from '../messages/set-charging-profile-response.dto'
+import { SetDisplayMessageResponseDto } from '../messages/set-display-message-response.dto'
+import { SetMonitoringBaseResponseDto } from '../messages/set-monitoring-base-response.dto'
+import { SetMonitoringLevelResponseDto } from '../messages/set-monitoring-level-response.dto'
+import { SetNetworkProfileResponseDto } from '../messages/set-network-profile-response.dto'
+import { SetVariableMonitoringResponseDto } from '../messages/set-variable-monitoring-response.dto'
+import { SetVariablesResponseDto } from '../messages/set-variables-response.dto'
+import { SignCertificateResponseDto } from '../messages/sign-certificate-response.dto'
+import { StatusNotificationResponseDto } from '../messages/status-notification-response.dto'
+import { TransactionEventResponseDto } from '../messages/transaction-event-response.dto'
+import { TriggerMessageResponseDto } from '../messages/trigger-message-response.dto'
+import { UnlockConnectorResponseDto } from '../messages/unlock-connector-response.dto'
+import { UnpublishFirmwareResponseDto } from '../messages/unpublish-firmware-response.dto'
+import { UpdateFirmwareResponseDto } from '../messages/update-firmware-response.dto'
 import { ResponseBaseDto } from './response-base.dto'
 
 export const actionResponseDtoMapping: { [key: string]: { new (...args: any[]): ResponseBaseDto } } = {
-  Authorize: AuthorizeRequestDto,
-  BootNotification: BootNotificationRequestDto,
-  CancelReservation: CancelReservationRequestDto,
-  CertificateSigned: CertificateSignedRequestDto,
-  ChangeAvailability: ChangeAvailabilityRequestDto,
-  ClearCache: ClearCacheRequestDto,
-  ClearChargingProfile: ClearChargingProfileRequestDto,
-  ClearDisplayMessage: ClearDisplayMessageRequestDto,
-  ClearVariableMonitoring: ClearVariableMonitoringRequestDto,
-  ClearedChargingLimit: ClearedChargingLimitRequestDto,
-  CostUpdated: CostUpdatedRequestDto,
-  CustomerInformation: CustomerInformationRequestDto,
-  DataTransfer: DataTransferRequestDto,
-  DeleteCertificate: DeleteCertificateRequestDto,
-  FirmwareStatusNotification: FirmwareStatusNotificationRequestDto,
-  Get15118EvCertificate: Get15118EvCertificateRequestDto,
-  GetBaseReport: GetBaseReportRequestDto,
-  GetCertificateStatus: GetCertificateStatusRequestDto,
-  GetChargingProfiles: GetChargingProfilesRequestDto,
-  GetCompositeSchedule: GetCompositeScheduleRequestDto,
-  GetDisplayMessages: GetDisplayMessagesRequestDto,
-  GetInstalledCertificateIds: GetInstalledCertificateIdsRequestDto,
-  GetLocalListVersion: GetLocalListVersionRequestDto,
-  GetLog: GetLogRequestDto,
-  GetMonitoringReport: GetMonitoringReportRequestDto,
-  GetReport: GetReportRequestDto,
-  GetTransactionStatus: GetTransactionStatusRequestDto,
-  GetVariables: GetVariablesRequestDto,
-  Heartbeat: HeartbeatRequestDto,
-  InstallCertificate: InstallCertificateRequestDto,
-  LogStatusNotification: LogStatusNotificationRequestDto,
-  MeterValues: MeterValuesRequestDto,
-  NotifyChargingLimit: NotifyChargingLimitRequestDto,
-  NotifyCustomerInformation: NotifyCustomerInformationRequestDto,
-  NotifyDisplayMessages: NotifyDisplayMessagesRequestDto,
-  NotifyEvChargingNeeds: NotifyEvChargingNeedsRequestDto,
-  NotifyEvChargingSchedule: NotifyEvChargingScheduleRequestDto,
-  NotifyEvent: NotifyEventRequestDto,
-  NotifyMonitoringReport: NotifyMonitoringReportRequestDto,
-  NotifyReport: NotifyReportRequestDto,
-  PublishFirmware: PublishFirmwareRequestDto,
-  PublishFirmwareStatusNotification: PublishFirmwareStatusNotificationRequestDto,
-  ReportChargingProfiles: ReportChargingProfilesRequestDto,
-  RequestStartTransaction: RequestStartTransactionRequestDto,
-  RequestStopTransaction: RequestStopTransactionRequestDto,
-  ReservationStatusUpdate: ReservationStatusUpdateRequestDto,
-  ReserveNow: ReserveNowRequestDto,
-  Reset: ResetRequestDto,
-  SecurityEventNotification: SecurityEventNotificationRequestDto,
-  SendLocalList: SendLocalListRequestDto,
-  SetChargingProfile: SetChargingProfileRequestDto,
-  SetDisplayMessage: SetDisplayMessageRequestDto,
-  SetMonitoringBase: SetMonitoringBaseRequestDto,
-  SetMonitoringLevel: SetMonitoringLevelRequestDto,
-  SetNetworkProfile: SetNetworkProfileRequestDto,
-  SetVariableMonitoring: SetVariableMonitoringRequestDto,
-  SetVariables: SetVariablesRequestDto,
-  SignCertificate: SignCertificateRequestDto,
-  StatusNotification: StatusNotificationRequestDto,
-  TransactionEvent: TransactionEventRequestDto,
-  TriggerMessage: TriggerMessageRequestDto,
-  UnlockConnector: UnlockConnectorRequestDto,
-  UnpublishFirmware: UnpublishFirmwareRequestDto,
-  UpdateFirmware: UpdateFirmwareRequestDto,
+  Authorize: AuthorizeResponseDto,
+  BootNotification: BootNotificationResponseDto,
+  CancelReservation: CancelReservationResponseDto,
+  CertificateSigned: CertificateSignedResponseDto,
+  ChangeAvailability: ChangeAvailabilityResponseDto,
+  ClearCache: ClearCacheResponseDto,
+  ClearChargingProfile: ClearChargingProfileResponseDto,
+  ClearDisplayMessage: ClearDisplayMessageResponseDto,
+  ClearVariableMonitoring: ClearVariableMonitoringResponseDto,
+  ClearedChargingLimit: ClearedChargingLimitResponseDto,
+  CostUpdated: CostUpdatedResponseDto,
+  CustomerInformation: CustomerInformationResponseDto,
+  DataTransfer: DataTransferResponseDto,
+  DeleteCertificate: DeleteCertificateResponseDto,
+  FirmwareStatusNotification: FirmwareStatusNotificationResponseDto,
+  Get15118EvCertificate: Get15118EvCertificateResponseDto,
+  GetBaseReport: GetBaseReportResponseDto,
+  GetCertificateStatus: GetCertificateStatusResponseDto,
+  GetChargingProfiles: GetChargingProfilesResponseDto,
+  GetCompositeSchedule: GetCompositeScheduleResponseDto,
+  GetDisplayMessages: GetDisplayMessagesResponseDto,
+  GetInstalledCertificateIds: GetInstalledCertificateIdsResponseDto,
+  GetLocalListVersion: GetLocalListVersionResponseDto,
+  GetLog: GetLogResponseDto,
+  GetMonitoringReport: GetMonitoringReportResponseDto,
+  GetReport: GetReportResponseDto,
+  GetTransactionStatus: GetTransactionStatusResponseDto,
+  GetVariables: GetVariablesResponseDto,
+  Heartbeat: HeartbeatResponseDto,
+  InstallCertificate: InstallCertificateResponseDto,
+  LogStatusNotification: LogStatusNotificationResponseDto,
+  MeterValues: MeterValuesResponseDto,
+  NotifyChargingLimit: NotifyChargingLimitResponseDto,
+  NotifyCustomerInformation: NotifyCustomerInformationResponseDto,
+  NotifyDisplayMessages: NotifyDisplayMessagesResponseDto,
+  NotifyEvChargingNeeds: NotifyEvChargingNeedsResponseDto,
+  NotifyEvChargingSchedule: NotifyEvChargingScheduleResponseDto,
+  NotifyEvent: NotifyEventResponseDto,
+  NotifyMonitoringReport: NotifyMonitoringReportResponseDto,
+  NotifyReport: NotifyReportResponseDto,
+  PublishFirmware: PublishFirmwareResponseDto,
+  PublishFirmwareStatusNotification: PublishFirmwareStatusNotificationResponseDto,
+  ReportChargingProfiles: ReportChargingProfilesResponseDto,
+  RequestStartTransaction: RequestStartTransactionResponseDto,
+  RequestStopTransaction: RequestStopTransactionResponseDto,
+  ReservationStatusUpdate: ReservationStatusUpdateResponseDto,
+  ReserveNow: ReserveNowResponseDto,
+  Reset: ResetResponseDto,
+  SecurityEventNotification: SecurityEventNotificationResponseDto,
+  SendLocalList: SendLocalListResponseDto,
+  SetChargingProfile: SetChargingProfileResponseDto,
+  SetDisplayMessage: SetDisplayMessageResponseDto,
+  SetMonitoringBase: SetMonitoringBaseResponseDto,
+  SetMonitoringLevel: SetMonitoringLevelResponseDto,
+  SetNetworkProfile: SetNetworkProfileResponseDto,
+  SetVariableMonitoring: SetVariableMonitoringResponseDto,
+  SetVariables: SetVariablesResponseDto,
+  SignCertificate: SignCertificateResponseDto,
+  StatusNotification: StatusNotificationResponseDto,
+  TransactionEvent: TransactionEventResponseDto,
+  TriggerMessage: TriggerMessageResponseDto,
+  UnlockConnector: UnlockConnectorResponseDto,
+  UnpublishFirmware: UnpublishFirmwareResponseDto,
+  UpdateFirmware: UpdateFirmwareResponseDto,
 }

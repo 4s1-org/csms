@@ -72,15 +72,15 @@ export class ClassGenerator {
       this.classSkeletons.filter((x) => x.isMessage).map((x) => x.nameWithoutReqOrRes),
     )
 
-    this._generateActionDtpMapping(
+    this._generateActionDtoMapping(
       [__dirname, '..', '..', 'src', 'generated'],
       'Request',
       this.classSkeletons.filter((x) => x.isMessage && x.isRequest),
     )
-    this._generateActionDtpMapping(
+    this._generateActionDtoMapping(
       [__dirname, '..', '..', 'src', 'generated'],
       'Response',
-      this.classSkeletons.filter((x) => x.isMessage && x.isRequest),
+      this.classSkeletons.filter((x) => x.isMessage && x.isResponse),
     )
 
     this._generateJsonSchemaIndex([__dirname, '..', '..', 'src', 'generated'])
@@ -163,7 +163,7 @@ export class ClassGenerator {
     this.generatedFolderIndex.push([className, fileNameWithoutExt])
   }
 
-  private _generateActionDtpMapping(folders: string[], type: 'Request' | 'Response', skeletons: ClassSkeleton[]): void {
+  private _generateActionDtoMapping(folders: string[], type: 'Request' | 'Response', skeletons: ClassSkeleton[]): void {
     const data: string[] = []
 
     const className = `action${type}DtoMapping`
@@ -177,9 +177,9 @@ export class ClassGenerator {
 
     data.push(``)
     data.push(`export const ${className}: { [key: string]: { new (...args: any[]): ${type}BaseDto } } = {`)
-    for (const skeleton of skeletons.filter((x) => x.isRequest)) {
+    for (const skeleton of skeletons) {
       const name = skeleton.nameWithoutReqOrRes
-      data.push(`  ${name}: ${name}RequestDto,`)
+      data.push(`  ${name}: ${name}${type}Dto,`)
     }
     data.push(`}`)
     data.push(``)
@@ -199,7 +199,7 @@ export class ClassGenerator {
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)
     data.push(`export abstract class ${className} {`)
-    data.push(`  // nothing to do`)
+    data.push(`  private _baseClassName: "${className}" = "${className}"`)
     data.push(`}`)
     data.push(``)
 
