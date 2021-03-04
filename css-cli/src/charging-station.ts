@@ -42,15 +42,19 @@ import {
   VariableDto,
   NotifyEventResponseDto,
   OcppResponseMessageDto,
+  RequestBaseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
+import { ObjectType } from './ws-client'
+
+type sendCallback = <T extends RequestBaseDto>(payload: T) => Promise<ObjectType<T>>
 
 export class ChargingStation {
   public readonly logger = new Logger(this.uniqueIdentifier)
   private heartbeatInterval = 3600
   private sendList: OcppRequestMessageDto[] = []
 
-  public constructor(public readonly uniqueIdentifier: string) {
+  public constructor(public readonly uniqueIdentifier: string, private readonly send: sendCallback) {
     // nothing to do
   }
 
@@ -120,6 +124,12 @@ export class ChargingStation {
     const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
     const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
     return payload
+  }
+
+  public async sendBootNotificationRequest2(): Promise<BootNotificationResponseDto> {
+    const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
+    const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
+    return this.send(payload)
   }
 
   /**

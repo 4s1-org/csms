@@ -9,6 +9,10 @@ import {
   PayloadConverter,
   ResponseBaseDto,
   OcppErrorMessageDto,
+  BootNotificationRequestDto,
+  BootNotificationResponseDto,
+  StatusNotificationRequestDto,
+  StatusNotificationResponseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { v4 as uuid } from 'uuid'
 
@@ -17,7 +21,7 @@ class PendingPromises {
 
   constructor(
     public readonly msg: OcppRequestMessageDto,
-    public readonly resolve: (value: ResponseBaseDto) => void,
+    public readonly resolve: (value: any) => void,
     public readonly reject: (reason?: any) => void,
   ) {
     this.timestamp = Date.now()
@@ -98,7 +102,7 @@ export class WsClient {
     }
   }
 
-  public send(payload: RequestBaseDto): Promise<ResponseBaseDto> {
+  public send<T extends RequestBaseDto>(payload: T): Promise<ObjectType<T>> {
     return new Promise((resolve, reject) => {
       const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
       if (!mapping) {
@@ -115,3 +119,10 @@ export class WsClient {
     })
   }
 }
+
+// ToDo: Generieren lassen in der OCPP Lib
+export type ObjectType<T> = T extends BootNotificationRequestDto
+  ? BootNotificationResponseDto
+  : T extends StatusNotificationRequestDto
+  ? StatusNotificationResponseDto
+  : never

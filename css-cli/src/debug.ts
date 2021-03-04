@@ -4,7 +4,6 @@ import {
   OcppErrorCodeEnum,
   RequestBaseDto,
   ResponseBaseDto,
-  SetVariablesRequestDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { ChargingStation } from './charging-station'
 import { WsClient } from './ws-client'
@@ -20,9 +19,11 @@ class Simulation {
 
   public async simulate(): Promise<void> {
     await this.client.connect('LS001', 'LS001', 'test')
-    const response = await this.client.send(this.cs.sendBootNotificationRequest())
+    const payload = this.cs.sendBootNotificationRequest()
+    const response = await this.client.send(payload)
     console.log(response)
-
+    //const response2: BootNotificationResponseDto = await this.cs.sendBootNotificationRequest2()
+    //console.log(response2)
     // this.client.disconnect()
   }
 
