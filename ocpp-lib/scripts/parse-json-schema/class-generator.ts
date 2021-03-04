@@ -74,7 +74,13 @@ export class ClassGenerator {
 
     this._generateActionDtpMapping(
       [__dirname, '..', '..', 'src', 'generated'],
-      this.classSkeletons.filter((x) => x.isMessage),
+      'Request',
+      this.classSkeletons.filter((x) => x.isMessage && x.isRequest),
+    )
+    this._generateActionDtpMapping(
+      [__dirname, '..', '..', 'src', 'generated'],
+      'Response',
+      this.classSkeletons.filter((x) => x.isMessage && x.isRequest),
     )
 
     this._generateJsonSchemaIndex([__dirname, '..', '..', 'src', 'generated'])
@@ -165,32 +171,28 @@ export class ClassGenerator {
     this.generatedFolderIndex.push([className, fileNameWithoutExt])
   }
 
-  private _generateActionDtpMapping(folders: string[], skeletons: ClassSkeleton[]): void {
+  private _generateActionDtpMapping(folders: string[], type: 'Request' | 'Response', skeletons: ClassSkeleton[]): void {
     const data: string[] = []
 
-    const className = `actionDtoMapping`
+    const className = `action${type}DtoMapping`
 
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)
-    data.push(`import { OcppActionEnum } from './ocpp-action.enum'`)
     for (const skeleton of skeletons) {
       data.push(`import { ${skeleton.name}${skeleton.nameSuffix} } from '../messages/${skeleton.fileNameWithoutExt}'`)
     }
+    data.push(`import { ${type}BaseDto } from './${type.toLowerCase()}-base.dto'`)
 
     data.push(``)
-    data.push(`export const ${className} = [`)
+    data.push(`export const ${className}: { [key: string]: { new (...args: any[]): ${type}BaseDto } } = {`)
     for (const skeleton of skeletons.filter((x) => x.isRequest)) {
       const name = skeleton.nameWithoutReqOrRes
-      data.push(`  {`)
-      data.push(`    action: OcppActionEnum.${name},`)
-      data.push(`    requestDto: ${name}RequestDto,`)
-      data.push(`    responseDto: ${name}ResponseDto,`)
-      data.push(`  },`)
+      data.push(`  ${name}: ${name}RequestDto,`)
     }
-    data.push(`]`)
+    data.push(`}`)
     data.push(``)
 
-    const fileNameWithoutExt = `action-dto-mapping`
+    const fileNameWithoutExt = `action-${type.toLowerCase()}-dto-mapping`
     const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
     fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
 
