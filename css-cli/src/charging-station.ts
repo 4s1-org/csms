@@ -75,9 +75,7 @@ export class ChargingStation implements IReceiveMessage {
     const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
     const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
     const res = await this.sendMessage.send(payload)
-
-    this.heartbeatInterval = res.interval
-
+    this.receiveBootNotificationResponse(res)
     return res
   }
 
@@ -93,9 +91,11 @@ export class ChargingStation implements IReceiveMessage {
   /**
    * G02 - Heartbeat
    */
-  public sendHeartbeatRequest(): HeartbeatRequestDto {
+  public async sendHeartbeatRequest(): Promise<HeartbeatResponseDto> {
     const payload = new HeartbeatRequestDto()
-    return payload
+    const res = await this.sendMessage.send(payload)
+    this.receiveHeartbeatResponse(res)
+    return res
   }
 
   /**
@@ -109,26 +109,30 @@ export class ChargingStation implements IReceiveMessage {
   /**
    * C01 - EV Driver Authorization using RFID
    */
-  public sendAuthorizationRequest_Rfid(): AuthorizeRequestDto {
+  public async sendAuthorizationRequest_Rfid(): Promise<AuthorizeResponseDto> {
     const idTocken = new IdTokenDto('AA12345', IdTokenEnum.ISO14443)
     const payload = new AuthorizeRequestDto(idTocken)
-    return payload
+    const res = await this.sendMessage.send(payload)
+    this.receiveAuthorizeResponse(res)
+    return res
   }
 
   /**
    * C04 - Authorization using PIN-code
    */
-  public sendAuthorizationRequest_PinCode(): AuthorizeRequestDto {
+  public async sendAuthorizationRequest_PinCode(): Promise<AuthorizeResponseDto> {
     const idTocken = new IdTokenDto('1234', IdTokenEnum.KeyCode)
     const payload = new AuthorizeRequestDto(idTocken)
-    return payload
+    const res = await this.sendMessage.send(payload)
+    this.receiveAuthorizeResponse(res)
+    return res
   }
 
   /**
    * C01 - EV Driver Authorization using RFID
    * C04 - Authorization using PIN-code
    */
-  private receiveAuthorizeResponse(payload: AuthorizeResponseDto): void {
+  public receiveAuthorizeResponse(payload: AuthorizeResponseDto): void {
     if (payload.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
       this.logger.warn(`Authorization failed | ${payload.idTokenInfo.status}`)
     }
@@ -137,18 +141,20 @@ export class ChargingStation implements IReceiveMessage {
   /**
    * J01 - Sending Meter Values not related to a transaction
    */
-  public sendMeterValueRequest(): MeterValuesRequestDto {
+  public async sendMeterValueRequest(): Promise<MeterValuesResponseDto> {
     const sampleValue = new SampledValueDto(53)
     const meterValue = new MeterValueDto([sampleValue], new Date().toISOString())
     const payload = new MeterValuesRequestDto(1, [meterValue])
-    return payload
+    const res = await this.sendMessage.send(payload)
+    this.receiveMeterValuesResponse(res)
+    return res
   }
 
   /**
    * J01 - Sending Meter Values not related to a transaction
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveMeterValuesResponse(payload: MeterValuesResponseDto): void {
+  public receiveMeterValuesResponse(payload: MeterValuesResponseDto): void {
     //
   }
 
@@ -166,9 +172,11 @@ export class ChargingStation implements IReceiveMessage {
   /**
    * G01 - Status Notification
    */
-  public sendStatusNotificationRequest(): StatusNotificationRequestDto {
+  public async sendStatusNotificationRequest(): Promise<StatusNotificationResponseDto> {
     const payload = new StatusNotificationRequestDto(new Date().toISOString(), ConnectorStatusEnum.Available, 1, 1)
-    return payload
+    const res = await this.sendMessage.send(payload)
+    this.receiveStatusNotificationResponse(res)
+    return res
   }
 
   /**
@@ -201,7 +209,7 @@ export class ChargingStation implements IReceiveMessage {
   /**
    * G05 - Lock Failure
    */
-  public sendNotifyEventRequest_LockFailure(): NotifyEventRequestDto {
+  public async sendNotifyEventRequest_LockFailure(): Promise<NotifyEventRequestDto> {
     // ToDo: Das so umsetzen:
     // G05.FR.02
     // The Charging Station SHALL send a NotifyEventRequest to the CSMS for the
@@ -221,14 +229,17 @@ export class ChargingStation implements IReceiveMessage {
         new VariableDto('Problem'),
       ),
     )
-    return new NotifyEventRequestDto(new Date().toISOString(), 1, data)
+    const payload = new NotifyEventRequestDto(new Date().toISOString(), 1, data)
+    const res = await this.sendMessage.send(payload)
+    this.receiveNotifyEventResponse(res)
+    return res
   }
 
   /**
    * G05 - Lock Failure
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveNotifyEventResponse(payload: NotifyEventResponseDto): void {
+  public receiveNotifyEventResponse(payload: NotifyEventResponseDto): void {
     //
   }
 }

@@ -13,11 +13,20 @@ class Simulation {
 
   public async simulate(): Promise<void> {
     await this.client.connect(this.cs, 'LS001', 'LS001', 'test')
-
-    this.cs.receiveBootNotificationResponse(await this.cs.sendBootNotificationRequest())
-    this.cs.receiveBootNotificationResponse(await this.cs.sendBootNotificationRequest())
-
-    await sleep(2000)
+    await this.cs.sendBootNotificationRequest()
+    await sleep(200)
+    await this.cs.sendAuthorizationRequest_PinCode()
+    await sleep(200)
+    await this.cs.sendAuthorizationRequest_Rfid()
+    await sleep(200)
+    await this.cs.sendMeterValueRequest()
+    await sleep(200)
+    await this.cs.sendHeartbeatRequest()
+    await sleep(200)
+    await this.cs.sendNotifyEventRequest_LockFailure()
+    await sleep(200)
+    await this.cs.sendHeartbeatRequest()
+    await sleep(200)
     this.client.disconnect()
   }
 }
