@@ -9,7 +9,7 @@ class Simulation extends SimulationBase {
     this.css.send(this.css.sendBootNotificationRequest())
 
     setTimeout(() => {
-      this.css.send(this.css.sendStatusNotificationRequest())
+      //this.css.send(this.css.sendStatusNotificationRequest())
     }, 100)
 
     setTimeout(() => {
