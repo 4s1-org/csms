@@ -10,6 +10,8 @@ import {
   RequestBaseDto,
   actionDtoMapping,
   OcppRequestMessageDto,
+  OcppActionEnum,
+  OcppMessageTypeIdEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
@@ -109,6 +111,14 @@ export class WebSocketServer {
       const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
       if (result) {
         socket.send(result.toMessageString())
+
+        // Very dirty hack to send message from server to client
+        if (result.messageTypeId === OcppMessageTypeIdEnum.Result) {
+          setTimeout(() => {
+            const payload = cs.sendGetVariablesRequest()
+            this.sendRequest(socket, cs, payload)
+          }, 500)
+        }
       }
       this.sendAdminStatusToAll(cs.model)
     }
