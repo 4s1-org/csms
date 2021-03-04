@@ -94,7 +94,7 @@ export class ChargingStation implements IReceiveMessage {
   public async sendHeartbeatRequest(): Promise<HeartbeatResponseDto> {
     const payload = new HeartbeatRequestDto()
     const res = await this.sendMessage.send(payload)
-    this.receiveHeartbeatResponse(res)
+    //this.receiveHeartbeatResponse(res)
     return res
   }
 
