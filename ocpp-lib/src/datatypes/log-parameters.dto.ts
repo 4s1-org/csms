@@ -10,6 +10,8 @@ import { CustomDataDto } from './custom-data.dto'
  * Generic class for the configuration of logging entries.
  */
 export class LogParametersDto extends DatatypeBaseDto {
+  private _className: "LogParametersDto" = "LogParametersDto"
+
   public constructor(
     remoteLocation: string,
   ) {

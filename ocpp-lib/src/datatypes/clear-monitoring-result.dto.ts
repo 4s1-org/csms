@@ -7,6 +7,8 @@ import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearMonitoringResultDto extends DatatypeBaseDto {
+  private _className: "ClearMonitoringResultDto" = "ClearMonitoringResultDto"
+
   public constructor(
     status: ClearMonitoringStatusEnum,
     id: number,

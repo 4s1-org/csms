@@ -7,6 +7,8 @@ import { GetCertificateStatusEnum } from '../enumerations/get-certificate-status
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetCertificateStatusResponseDto extends ResponseBaseDto {
+  private _className: "GetCertificateStatusResponseDto" = "GetCertificateStatusResponseDto"
+
   public constructor(
     status: GetCertificateStatusEnum,
   ) {

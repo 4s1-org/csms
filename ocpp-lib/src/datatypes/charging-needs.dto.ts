@@ -12,6 +12,8 @@ import { EnergyTransferModeEnum } from '../enumerations/energy-transfer-mode.enu
  * urn:x-oca:ocpp:uid:2:233249
  */
 export class ChargingNeedsDto extends DatatypeBaseDto {
+  private _className: "ChargingNeedsDto" = "ChargingNeedsDto"
+
   public constructor(
     requestedEnergyTransfer: EnergyTransferModeEnum,
   ) {

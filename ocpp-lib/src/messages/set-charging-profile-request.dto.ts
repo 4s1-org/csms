@@ -6,6 +6,8 @@ import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class SetChargingProfileRequestDto extends RequestBaseDto {
+  private _className: "SetChargingProfileRequestDto" = "SetChargingProfileRequestDto"
+
   public constructor(
     evseId: number,
     chargingProfile: ChargingProfileDto,

@@ -9,6 +9,8 @@ import { DataEnum } from '../enumerations/data.enum'
  * Fixed read-only parameters of a variable.
  */
 export class VariableCharacteristicsDto extends DatatypeBaseDto {
+  private _className: "VariableCharacteristicsDto" = "VariableCharacteristicsDto"
+
   public constructor(
     dataType: DataEnum,
     supportsMonitoring: boolean,

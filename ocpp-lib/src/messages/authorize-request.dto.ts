@@ -7,6 +7,8 @@ import { IdTokenDto } from '../datatypes/id-token.dto'
 import { OcspRequestDataDto } from '../datatypes/ocsp-request-data.dto'
 
 export class AuthorizeRequestDto extends RequestBaseDto {
+  private _className: "AuthorizeRequestDto" = "AuthorizeRequestDto"
+
   public constructor(
     idToken: IdTokenDto,
   ) {

@@ -7,6 +7,8 @@ import { CustomDataDto } from './custom-data.dto'
 import { GetCertificateIdUseEnum } from '../enumerations/get-certificate-id-use.enum'
 
 export class CertificateHashDataChainDto extends DatatypeBaseDto {
+  private _className: "CertificateHashDataChainDto" = "CertificateHashDataChainDto"
+
   public constructor(
     certificateHashData: CertificateHashDataDto,
     certificateType: GetCertificateIdUseEnum,

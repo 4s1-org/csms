@@ -8,6 +8,8 @@ import { CustomDataDto } from './custom-data.dto'
  * Represents a UnitOfMeasure with a multiplier
  */
 export class UnitOfMeasureDto extends DatatypeBaseDto {
+  private _className: "UnitOfMeasureDto" = "UnitOfMeasureDto"
+
   public constructor() {
     super()
   }

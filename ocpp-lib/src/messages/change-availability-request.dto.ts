@@ -10,6 +10,8 @@ import { OperationalStatusEnum } from '../enumerations/operational-status.enum'
  * This contains the field definition of the ChangeAvailabilityRequest PDU sent by the CSMS to the Charging Station.
  */
 export class ChangeAvailabilityRequestDto extends RequestBaseDto {
+  private _className: "ChangeAvailabilityRequestDto" = "ChangeAvailabilityRequestDto"
+
   public constructor(
     operationalStatus: OperationalStatusEnum,
   ) {

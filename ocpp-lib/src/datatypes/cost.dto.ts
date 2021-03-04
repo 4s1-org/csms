@@ -10,6 +10,8 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233258
  */
 export class CostDto extends DatatypeBaseDto {
+  private _className: "CostDto" = "CostDto"
+
   public constructor(
     costKind: CostKindEnum,
     amount: number,

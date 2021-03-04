@@ -7,6 +7,8 @@ import { CustomerInformationStatusEnum } from '../enumerations/customer-informat
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class CustomerInformationResponseDto extends ResponseBaseDto {
+  private _className: "CustomerInformationResponseDto" = "CustomerInformationResponseDto"
+
   public constructor(
     status: CustomerInformationStatusEnum,
   ) {

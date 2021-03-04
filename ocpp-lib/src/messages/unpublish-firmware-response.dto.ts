@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { UnpublishFirmwareStatusEnum } from '../enumerations/unpublish-firmware-status.enum'
 
 export class UnpublishFirmwareResponseDto extends ResponseBaseDto {
+  private _className: "UnpublishFirmwareResponseDto" = "UnpublishFirmwareResponseDto"
+
   public constructor(
     status: UnpublishFirmwareStatusEnum,
   ) {

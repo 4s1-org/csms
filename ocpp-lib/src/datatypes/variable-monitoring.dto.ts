@@ -9,6 +9,8 @@ import { MonitorEnum } from '../enumerations/monitor.enum'
  * A monitoring setting for a variable.
  */
 export class VariableMonitoringDto extends DatatypeBaseDto {
+  private _className: "VariableMonitoringDto" = "VariableMonitoringDto"
+
   public constructor(
     id: number,
     transaction: boolean,

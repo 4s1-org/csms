@@ -7,6 +7,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
 export class RequestStartTransactionRequestDto extends RequestBaseDto {
+  private _className: "RequestStartTransactionRequestDto" = "RequestStartTransactionRequestDto"
+
   public constructor(
     idToken: IdTokenDto,
     remoteStartId: number,

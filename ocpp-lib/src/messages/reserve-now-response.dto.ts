@@ -7,6 +7,8 @@ import { ReserveNowStatusEnum } from '../enumerations/reserve-now-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class ReserveNowResponseDto extends ResponseBaseDto {
+  private _className: "ReserveNowResponseDto" = "ReserveNowResponseDto"
+
   public constructor(
     status: ReserveNowStatusEnum,
   ) {

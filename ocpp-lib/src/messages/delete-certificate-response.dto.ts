@@ -7,6 +7,8 @@ import { DeleteCertificateStatusEnum } from '../enumerations/delete-certificate-
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class DeleteCertificateResponseDto extends ResponseBaseDto {
+  private _className: "DeleteCertificateResponseDto" = "DeleteCertificateResponseDto"
+
   public constructor(
     status: DeleteCertificateStatusEnum,
   ) {

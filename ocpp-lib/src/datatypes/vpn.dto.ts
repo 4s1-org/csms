@@ -11,6 +11,8 @@ import { VpnEnum } from '../enumerations/vpn.enum'
  * VPN Configuration settings
  */
 export class VpnDto extends DatatypeBaseDto {
+  private _className: "VpnDto" = "VpnDto"
+
   public constructor(
     server: string,
     user: string,

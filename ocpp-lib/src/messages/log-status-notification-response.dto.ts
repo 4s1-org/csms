@@ -5,6 +5,8 @@ import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class LogStatusNotificationResponseDto extends ResponseBaseDto {
+  private _className: "LogStatusNotificationResponseDto" = "LogStatusNotificationResponseDto"
+
   public constructor() {
     super()
   }

@@ -7,6 +7,8 @@ import { GetChargingProfileStatusEnum } from '../enumerations/get-charging-profi
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetChargingProfilesResponseDto extends ResponseBaseDto {
+  private _className: "GetChargingProfilesResponseDto" = "GetChargingProfilesResponseDto"
+
   public constructor(
     status: GetChargingProfileStatusEnum,
   ) {

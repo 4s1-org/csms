@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { OcspRequestDataDto } from '../datatypes/ocsp-request-data.dto'
 
 export class GetCertificateStatusRequestDto extends RequestBaseDto {
+  private _className: "GetCertificateStatusRequestDto" = "GetCertificateStatusRequestDto"
+
   public constructor(
     ocspRequestData: OcspRequestDataDto,
   ) {

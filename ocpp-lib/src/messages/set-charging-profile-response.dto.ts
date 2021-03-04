@@ -7,6 +7,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class SetChargingProfileResponseDto extends ResponseBaseDto {
+  private _className: "SetChargingProfileResponseDto" = "SetChargingProfileResponseDto"
+
   public constructor(
     status: ChargingProfileStatusEnum,
   ) {

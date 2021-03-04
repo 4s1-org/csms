@@ -7,6 +7,8 @@ import { ComponentVariableDto } from '../datatypes/component-variable.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetReportRequestDto extends RequestBaseDto {
+  private _className: "GetReportRequestDto" = "GetReportRequestDto"
+
   public constructor(
     requestId: number,
   ) {

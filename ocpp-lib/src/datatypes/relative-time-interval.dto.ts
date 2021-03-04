@@ -9,6 +9,8 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233270
  */
 export class RelativeTimeIntervalDto extends DatatypeBaseDto {
+  private _className: "RelativeTimeIntervalDto" = "RelativeTimeIntervalDto"
+
   public constructor(
     start: number,
   ) {
