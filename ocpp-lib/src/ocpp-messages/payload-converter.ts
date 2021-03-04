@@ -2,7 +2,7 @@ import { plainToClass } from 'class-transformer'
 import { OcppErrorCodeEnum } from '../ocpp-messages/ocpp-error-code.enum'
 import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto'
 import { OcppResponseMessageDto } from '../ocpp-messages/ocpp-response-message.dto'
-import { actionDtoMapping } from '../generated/actionDtoMapping'
+import { actionDtoMapping } from '../generated/action-dto-mapping'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { CsmsError } from '../utils/csms-error'
 
