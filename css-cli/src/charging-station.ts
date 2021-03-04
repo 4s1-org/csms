@@ -51,7 +51,6 @@ export class ChargingStation implements IReceiveMessage {
     // nothing to do
   }
 
-  // ToDO: Warum ist es egal, was als Rückgabetyp steht? RequestBaseDto
   public receive(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof SetVariablesRequestDto) {
       return this.receiveSetVariablesRequest(payload)
