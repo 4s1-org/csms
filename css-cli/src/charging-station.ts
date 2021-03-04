@@ -41,17 +41,18 @@ import {
   RequestBaseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { IConnection } from './i-connection'
-export class ChargingStation {
+import { ISendMessage } from './i-send-message'
+import { IReceiveMessage } from './i-receive-message'
+export class ChargingStation implements IReceiveMessage {
   public readonly logger = new Logger(this.uniqueIdentifier)
-  private heartbeatInterval = 3600
+  public heartbeatInterval = 3600
 
-  public constructor(public readonly uniqueIdentifier: string, private readonly connection: IConnection) {
+  public constructor(public readonly uniqueIdentifier: string, private readonly sendMessage: ISendMessage) {
     // nothing to do
   }
 
   // ToDO: Warum ist es egal, was als Rückgabetyp steht? RequestBaseDto
-  public onMessage(payload: RequestBaseDto): ResponseBaseDto {
+  public receive(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof SetVariablesRequestDto) {
       return this.receiveSetVariablesRequest(payload)
     }
@@ -73,7 +74,11 @@ export class ChargingStation {
   public async sendBootNotificationRequest(): Promise<BootNotificationResponseDto> {
     const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
     const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
-    return this.connection.send(payload)
+    const res = await this.sendMessage.send(payload)
+
+    this.heartbeatInterval = res.interval
+
+    return res
   }
 
   /**
@@ -81,7 +86,7 @@ export class ChargingStation {
    * B02 - Cold Boot Charging Station - Pending
    * B03 - Cold Boot Charging Station - Rejected
    */
-  private receiveBootNotificationResponse(payload: BootNotificationResponseDto): void {
+  public receiveBootNotificationResponse(payload: BootNotificationResponseDto): void {
     this.heartbeatInterval = payload.interval
   }
 

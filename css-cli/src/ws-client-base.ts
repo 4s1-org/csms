@@ -11,6 +11,7 @@ import {
   RequestToResponseType,
 } from '@yellowgarbagebag/ocpp-lib'
 import { v4 as uuid } from 'uuid'
+import { IReceiveMessage } from './i-receive-message'
 
 class PendingPromises {
   public readonly timestamp: number
@@ -27,25 +28,26 @@ class PendingPromises {
 export abstract class WsClientBase {
   private requestList: PendingPromises[] = []
 
-  public constructor(private readonly onMsgCallback: (payload: RequestBaseDto) => ResponseBaseDto) {
+  public constructor() {
     // nothing to do
   }
 
   protected abstract connect(
+    receiveMessage: IReceiveMessage,
     uniqueIdentifier: string,
     username: string,
     password: string,
     server: string,
   ): Promise<void>
 
-  protected onMessage(data: any): void {
+  protected onMessage(data: any, receiveMessage: IReceiveMessage): void {
     const msg = OcppMessageHandler.instance.validateAndConvert(data)
 
     if (msg instanceof OcppRequestMessageDto) {
       PayloadValidator.instance.validateRequest(msg)
       PayloadConverter.instance.convertRequest(msg)
       // Verarbeitung der Daten
-      const responsePayload: ResponseBaseDto = this.onMsgCallback(msg.payload)
+      const responsePayload: ResponseBaseDto = receiveMessage.receive(msg.payload)
       // Antwortobjekt erstellen
       const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
       // Anwortdaten validieren (nice to have)
@@ -56,6 +58,8 @@ export abstract class WsClientBase {
       const pendingPromise = this.requestList[0]
       if (pendingPromise) {
         if (pendingPromise.msg.messageId === msg.messageId) {
+          const idx = this.requestList.indexOf(pendingPromise)
+          this.requestList.splice(idx, 1)
           PayloadValidator.instance.validateResponse(msg, pendingPromise.msg.action)
           PayloadConverter.instance.convertResponse(msg, pendingPromise.msg.action)
           pendingPromise.resolve(msg.payload)
