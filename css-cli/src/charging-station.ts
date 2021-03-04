@@ -94,7 +94,7 @@ export class ChargingStation implements IReceiveMessage {
   public async sendHeartbeatRequest(): Promise<HeartbeatResponseDto> {
     const payload = new HeartbeatRequestDto()
     const res = await this.sendMessage.send(payload)
-    //this.receiveHeartbeatResponse(res)
+    this.receiveHeartbeatResponse(res)
     return res
   }
 
@@ -209,7 +209,7 @@ export class ChargingStation implements IReceiveMessage {
   /**
    * G05 - Lock Failure
    */
-  public async sendNotifyEventRequest_LockFailure(): Promise<NotifyEventRequestDto> {
+  public async sendNotifyEventRequest_LockFailure(): Promise<NotifyEventResponseDto> {
     // ToDo: Das so umsetzen:
     // G05.FR.02
     // The Charging Station SHALL send a NotifyEventRequest to the CSMS for the
