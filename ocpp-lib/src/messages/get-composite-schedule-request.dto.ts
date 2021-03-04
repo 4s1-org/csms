@@ -6,6 +6,8 @@ import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetCompositeScheduleRequestDto extends RequestBaseDto {
+  private _className: "GetCompositeScheduleRequestDto" = "GetCompositeScheduleRequestDto"
+
   public constructor(
     duration: number,
     evseId: number,

@@ -7,6 +7,8 @@ import { GenericStatusEnum } from '../enumerations/generic-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class NotifyEvChargingScheduleResponseDto extends ResponseBaseDto {
+  private _className: "NotifyEvChargingScheduleResponseDto" = "NotifyEvChargingScheduleResponseDto"
+
   public constructor(
     status: GenericStatusEnum,
   ) {

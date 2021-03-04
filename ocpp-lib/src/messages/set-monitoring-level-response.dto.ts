@@ -7,6 +7,8 @@ import { GenericStatusEnum } from '../enumerations/generic-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class SetMonitoringLevelResponseDto extends ResponseBaseDto {
+  private _className: "SetMonitoringLevelResponseDto" = "SetMonitoringLevelResponseDto"
+
   public constructor(
     status: GenericStatusEnum,
   ) {

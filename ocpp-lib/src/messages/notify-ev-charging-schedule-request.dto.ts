@@ -6,6 +6,8 @@ import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyEvChargingScheduleRequestDto extends RequestBaseDto {
+  private _className: "NotifyEvChargingScheduleRequestDto" = "NotifyEvChargingScheduleRequestDto"
+
   public constructor(
     timeBase: string,
     chargingSchedule: ChargingScheduleDto,

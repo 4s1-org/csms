@@ -8,6 +8,8 @@ import { GenericStatusEnum } from '../enumerations/generic-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetCompositeScheduleResponseDto extends ResponseBaseDto {
+  private _className: "GetCompositeScheduleResponseDto" = "GetCompositeScheduleResponseDto"
+
   public constructor(
     status: GenericStatusEnum,
   ) {

@@ -9,6 +9,8 @@ import { GetVariableResultDto } from '../datatypes/get-variable-result.dto'
  * This contains the field definition of the GetVariablesResponse PDU sent by the CSMS to the Charging Station in response to GetVariablesRequest.
  */
 export class GetVariablesResponseDto extends ResponseBaseDto {
+  private _className: "GetVariablesResponseDto" = "GetVariablesResponseDto"
+
   public constructor(
     getVariableResult: GetVariableResultDto[],
   ) {

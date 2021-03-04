@@ -5,6 +5,8 @@ import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetTransactionStatusResponseDto extends ResponseBaseDto {
+  private _className: "GetTransactionStatusResponseDto" = "GetTransactionStatusResponseDto"
+
   public constructor(
     messagesInQueue: boolean,
   ) {

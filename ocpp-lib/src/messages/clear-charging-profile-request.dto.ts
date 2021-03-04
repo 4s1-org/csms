@@ -6,6 +6,8 @@ import { ClearChargingProfileDto } from '../datatypes/clear-charging-profile.dto
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearChargingProfileRequestDto extends RequestBaseDto {
+  private _className: "ClearChargingProfileRequestDto" = "ClearChargingProfileRequestDto"
+
   public constructor() {
     super()
   }

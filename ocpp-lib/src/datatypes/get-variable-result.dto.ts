@@ -13,6 +13,8 @@ import { VariableDto } from './variable.dto'
  * Class to hold results of GetVariables request.
  */
 export class GetVariableResultDto extends DatatypeBaseDto {
+  private _className: "GetVariableResultDto" = "GetVariableResultDto"
+
   public constructor(
     attributeStatus: GetVariableStatusEnum,
     component: ComponentDto,

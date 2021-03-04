@@ -7,6 +7,8 @@ import { GenericDeviceModelStatusEnum } from '../enumerations/generic-device-mod
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetMonitoringReportResponseDto extends ResponseBaseDto {
+  private _className: "GetMonitoringReportResponseDto" = "GetMonitoringReportResponseDto"
+
   public constructor(
     status: GenericDeviceModelStatusEnum,
   ) {

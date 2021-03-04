@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { UploadLogStatusEnum } from '../enumerations/upload-log-status.enum'
 
 export class LogStatusNotificationRequestDto extends RequestBaseDto {
+  private _className: "LogStatusNotificationRequestDto" = "LogStatusNotificationRequestDto"
+
   public constructor(
     status: UploadLogStatusEnum,
   ) {

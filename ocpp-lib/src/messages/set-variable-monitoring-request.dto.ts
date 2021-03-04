@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { SetMonitoringDataDto } from '../datatypes/set-monitoring-data.dto'
 
 export class SetVariableMonitoringRequestDto extends RequestBaseDto {
+  private _className: "SetVariableMonitoringRequestDto" = "SetVariableMonitoringRequestDto"
+
   public constructor(
     setMonitoringData: SetMonitoringDataDto[],
   ) {

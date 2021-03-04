@@ -10,6 +10,8 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
  * This contains the field definition of the ChangeAvailabilityResponse PDU sent by the Charging Station to the CSMS.
  */
 export class ChangeAvailabilityResponseDto extends ResponseBaseDto {
+  private _className: "ChangeAvailabilityResponseDto" = "ChangeAvailabilityResponseDto"
+
   public constructor(
     status: ChangeAvailabilityStatusEnum,
   ) {

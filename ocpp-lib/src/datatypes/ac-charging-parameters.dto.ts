@@ -10,6 +10,8 @@ import { CustomDataDto } from './custom-data.dto'
  * EV AC charging parameters.
  */
 export class AcChargingParametersDto extends DatatypeBaseDto {
+  private _className: "AcChargingParametersDto" = "AcChargingParametersDto"
+
   public constructor(
     energyAmount: number,
     evMinCurrent: number,

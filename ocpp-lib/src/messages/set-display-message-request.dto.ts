@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MessageInfoDto } from '../datatypes/message-info.dto'
 
 export class SetDisplayMessageRequestDto extends RequestBaseDto {
+  private _className: "SetDisplayMessageRequestDto" = "SetDisplayMessageRequestDto"
+
   public constructor(
     message: MessageInfoDto,
   ) {

@@ -95,14 +95,6 @@ export class ClassGenerator {
   }
 
   private _generateJsonSchemaIndex(folders: string[]): void {
-    // import AuthorizeRequest from "../third-party/ocpp/2.0.1/AuthorizeRequest.json"
-    // import AuthorizeResponse from "../third-party/ocpp/2.0.1/AuthorizeResponse.json"
-
-    // export const jsonSchemas:{ [key: string]: any } = {
-    //   "AuthorizeRequest": AuthorizeRequest,
-    //   "AuthorizeResponse": AuthorizeResponse
-    // }
-
     const data: string[] = []
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)

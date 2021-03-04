@@ -6,6 +6,8 @@ import { ChargingProfileCriterionDto } from '../datatypes/charging-profile-crite
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetChargingProfilesRequestDto extends RequestBaseDto {
+  private _className: "GetChargingProfilesRequestDto" = "GetChargingProfilesRequestDto"
+
   public constructor(
     requestId: number,
     chargingProfile: ChargingProfileCriterionDto,

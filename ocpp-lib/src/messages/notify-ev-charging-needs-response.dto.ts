@@ -7,6 +7,8 @@ import { NotifyEvChargingNeedsStatusEnum } from '../enumerations/notify-ev-charg
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class NotifyEvChargingNeedsResponseDto extends ResponseBaseDto {
+  private _className: "NotifyEvChargingNeedsResponseDto" = "NotifyEvChargingNeedsResponseDto"
+
   public constructor(
     status: NotifyEvChargingNeedsStatusEnum,
   ) {

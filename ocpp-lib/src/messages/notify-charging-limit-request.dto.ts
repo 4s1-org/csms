@@ -7,6 +7,8 @@ import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyChargingLimitRequestDto extends RequestBaseDto {
+  private _className: "NotifyChargingLimitRequestDto" = "NotifyChargingLimitRequestDto"
+
   public constructor(
     chargingLimit: ChargingLimitDto,
   ) {

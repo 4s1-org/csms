@@ -7,6 +7,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class CertificateSignedResponseDto extends ResponseBaseDto {
+  private _className: "CertificateSignedResponseDto" = "CertificateSignedResponseDto"
+
   public constructor(
     status: CertificateSignedStatusEnum,
   ) {

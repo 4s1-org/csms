@@ -7,6 +7,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
 export class ReserveNowRequestDto extends RequestBaseDto {
+  private _className: "ReserveNowRequestDto" = "ReserveNowRequestDto"
+
   public constructor(
     id: number,
     expiryDateTime: string,

@@ -7,6 +7,8 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 import { UnlockStatusEnum } from '../enumerations/unlock-status.enum'
 
 export class UnlockConnectorResponseDto extends ResponseBaseDto {
+  private _className: "UnlockConnectorResponseDto" = "UnlockConnectorResponseDto"
+
   public constructor(
     status: UnlockStatusEnum,
   ) {

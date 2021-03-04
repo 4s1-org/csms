@@ -14,6 +14,8 @@ import { TriggerReasonEnum } from '../enumerations/trigger-reason.enum'
  * This section contains the field definition of the TransactionEventRequest PDU sent by the Charging Station to the CSMS. For each of the eventTypes; Started, Updated and Ended, the corresponding cardinality is specified.
  */
 export class TransactionEventRequestDto extends RequestBaseDto {
+  private _className: "TransactionEventRequestDto" = "TransactionEventRequestDto"
+
   public constructor(
     eventType: TransactionEventEnum,
     timestamp: string,

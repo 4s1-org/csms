@@ -7,6 +7,8 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 import { TriggerMessageStatusEnum } from '../enumerations/trigger-message-status.enum'
 
 export class TriggerMessageResponseDto extends ResponseBaseDto {
+  private _className: "TriggerMessageResponseDto" = "TriggerMessageResponseDto"
+
   public constructor(
     status: TriggerMessageStatusEnum,
   ) {
