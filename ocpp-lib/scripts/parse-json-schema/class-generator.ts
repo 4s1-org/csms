@@ -185,7 +185,7 @@ export class ClassGenerator {
     data.push(`]`)
     data.push(``)
 
-    const fileNameWithoutExt = `actionDtoMapping`
+    const fileNameWithoutExt = `action-dto-mapping`
     const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
     fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
 
