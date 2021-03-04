@@ -1,4 +1,6 @@
+import { sleep } from '@yellowgarbagebag/common-lib'
 import {
+  BootNotificationResponseDto,
   CsmsError,
   GetVariablesRequestDto,
   OcppErrorCodeEnum,
@@ -13,18 +15,18 @@ class Simulation {
   private client: WsClient
 
   constructor() {
-    this.cs = new ChargingStation('LS001')
     this.client = new WsClient((payload: RequestBaseDto): ResponseBaseDto => this.onMessage(payload))
+    this.cs = new ChargingStation('LS001', this.client)
   }
 
   public async simulate(): Promise<void> {
     await this.client.connect('LS001', 'LS001', 'test')
-    const payload = this.cs.sendBootNotificationRequest()
-    const response = await this.client.send(payload)
+
+    const response: BootNotificationResponseDto = await this.cs.sendBootNotificationRequest()
     console.log(response)
-    //const response2: BootNotificationResponseDto = await this.cs.sendBootNotificationRequest2()
-    //console.log(response2)
-    // this.client.disconnect()
+
+    await sleep(2000)
+    this.client.disconnect()
   }
 
   private onMessage(payload: RequestBaseDto): ResponseBaseDto {

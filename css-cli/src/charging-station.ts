@@ -41,78 +41,31 @@ import {
   EventNotificationEnum,
   VariableDto,
   NotifyEventResponseDto,
-  OcppResponseMessageDto,
   RequestBaseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ObjectType } from './ws-client'
-
-type sendCallback = <T extends RequestBaseDto>(payload: T) => Promise<ObjectType<T>>
-
+import { IConnection } from './i-connection'
 export class ChargingStation {
   public readonly logger = new Logger(this.uniqueIdentifier)
   private heartbeatInterval = 3600
-  private sendList: OcppRequestMessageDto[] = []
 
-  public constructor(public readonly uniqueIdentifier: string, private readonly send: sendCallback) {
+  public constructor(public readonly uniqueIdentifier: string, private readonly connection: IConnection) {
     // nothing to do
   }
 
-  public addToSendList(requestMessage: OcppRequestMessageDto): void {
-    this.sendList.push(requestMessage)
-  }
-
-  public incomingRequestMessage(msg: OcppRequestMessageDto): ResponseBaseDto {
-    if (msg.payload instanceof SetVariablesRequestDto) {
-      return this.receiveSetVariablesRequest(msg.payload)
+  // ToDO: Warum ist es egal, was als Rückgabetyp steht? RequestBaseDto
+  public onMessage(payload: RequestBaseDto): ResponseBaseDto {
+    if (payload instanceof SetVariablesRequestDto) {
+      return this.receiveSetVariablesRequest(payload)
     }
-    if (msg.payload instanceof ChangeAvailabilityRequestDto) {
-      return this.receiveChangeAvailabilityRequest(msg.payload)
+    if (payload instanceof ChangeAvailabilityRequestDto) {
+      return this.receiveChangeAvailabilityRequest(payload)
     }
-    if (msg.payload instanceof GetVariablesRequestDto) {
-      return this.receiveGetVariablesRequest(msg.payload)
+    if (payload instanceof GetVariablesRequestDto) {
+      return this.receiveGetVariablesRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
-  }
-
-  public incomingResponseMessage(msg: OcppResponseMessageDto): void {
-    if (msg.payload instanceof BootNotificationResponseDto) {
-      return this.receiveBootNotificationResponse(msg.payload)
-    }
-    if (msg.payload instanceof HeartbeatResponseDto) {
-      return this.receiveHeartbeatResponse(msg.payload)
-    }
-    if (msg.payload instanceof StatusNotificationResponseDto) {
-      return this.receiveStatusNotificationResponse(msg.payload)
-    }
-    if (msg.payload instanceof AuthorizeResponseDto) {
-      return this.receiveAuthorizeResponse(msg.payload)
-    }
-    if (msg.payload instanceof MeterValuesResponseDto) {
-      return this.receiveMeterValuesResponse(msg.payload)
-    }
-    if (msg.payload instanceof NotifyEventResponseDto) {
-      return this.receiveNotifyEventResponse(msg.payload)
-    }
-
-    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public incomingErrorMessage(msg: OcppErrorMessageDto): void {
-    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
-  }
-
-  public getActionToRequest(messageId: string): OcppActionEnum {
-    const request = this.sendList.find((x) => x.messageId === messageId)
-    if (request) {
-      const index = this.sendList.indexOf(request)
-      this.sendList.splice(index, 1)
-      return request.action
-    }
-
-    throw new CsmsError(OcppErrorCodeEnum.GenericError, 'Request to response not found')
   }
 
   /**
@@ -120,16 +73,10 @@ export class ChargingStation {
    * B02 - Cold Boot Charging Station - Pending
    * B03 - Cold Boot Charging Station - Rejected
    */
-  public sendBootNotificationRequest(): BootNotificationRequestDto {
+  public async sendBootNotificationRequest(): Promise<BootNotificationResponseDto> {
     const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
     const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
-    return payload
-  }
-
-  public async sendBootNotificationRequest2(): Promise<BootNotificationResponseDto> {
-    const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
-    const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
-    return this.send(payload)
+    return this.connection.send(payload)
   }
 
   /**
