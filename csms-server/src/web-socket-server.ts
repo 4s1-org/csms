@@ -201,7 +201,6 @@ export class WebSocketServer {
     const action = Object.keys(actionRequestDtoMapping).find(
       (key) => payload instanceof actionRequestDtoMapping[key],
     ) as OcppActionEnum
-    console.log(action)
     if (!action) {
       throw new Error('No action mapping found' + payload)
     }
