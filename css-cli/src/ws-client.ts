@@ -1,10 +1,16 @@
 import WebSocket from 'ws'
-import { IConnection } from './i-connection'
+import { IReceiveMessage } from './i-receive-message'
+import { ISendMessage } from './i-send-message'
 import { WsClientBase } from './ws-client-base'
-export class WsClient extends WsClientBase implements IConnection {
+export class WsClient extends WsClientBase implements ISendMessage {
   private socket: WebSocket | undefined
 
+  public constructor() {
+    super()
+  }
+
   public connect(
+    receiveMessage: IReceiveMessage,
     uniqueIdentifier: string,
     username: string,
     password: string,
@@ -22,7 +28,7 @@ export class WsClient extends WsClientBase implements IConnection {
       }
 
       this.socket.onmessage = (data: WebSocket.MessageEvent): void => {
-        this.onMessage(data.data)
+        this.onMessage(data.data, receiveMessage)
       }
 
       this.socket.onerror = (err: WebSocket.ErrorEvent): void => {

@@ -1,6 +1,5 @@
 import { RequestBaseDto, RequestToResponseType } from '@yellowgarbagebag/ocpp-lib'
 
-export interface IConnection {
+export interface ISendMessage {
   send: <T extends RequestBaseDto>(payload: T) => Promise<RequestToResponseType<T>>
-  disconnect: () => void
 }
