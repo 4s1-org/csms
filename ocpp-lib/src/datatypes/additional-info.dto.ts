@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -8,6 +8,7 @@ import { CustomDataDto } from './custom-data.dto'
  * Contains a case insensitive identifier to use for the authorization and the type of authorization to support multiple forms of identifiers.
  */
 export class AdditionalInfoDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "AdditionalInfoDto" = "AdditionalInfoDto"
 
   public constructor(

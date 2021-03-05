@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AuthorizationStatusEnum } from '../enumerations/authorization-status.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -14,6 +14,7 @@ import { MessageContentDto } from './message-content.dto'
  * It is advised to not stop charging for a token that expires during charging, as ExpiryDate is only used for caching purposes. If ExpiryDate is not given, the status has no end date.
  */
 export class IdTokenInfoDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "IdTokenInfoDto" = "IdTokenInfoDto"
 
   public constructor(

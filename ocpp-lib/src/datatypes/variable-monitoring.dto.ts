@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { MonitorEnum } from '../enumerations/monitor.enum'
@@ -9,6 +9,7 @@ import { MonitorEnum } from '../enumerations/monitor.enum'
  * A monitoring setting for a variable.
  */
 export class VariableMonitoringDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "VariableMonitoringDto" = "VariableMonitoringDto"
 
   public constructor(

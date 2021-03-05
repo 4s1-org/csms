@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { MessageFormatEnum } from '../enumerations/message-format.enum'
@@ -11,6 +11,7 @@ import { MessageFormatEnum } from '../enumerations/message-format.enum'
  * Contains message details, for a message to be displayed on a Charging Station.
  */
 export class MessageContentDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "MessageContentDto" = "MessageContentDto"
 
   public constructor(

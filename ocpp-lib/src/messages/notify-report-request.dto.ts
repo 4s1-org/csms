@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { ReportDataDto } from '../datatypes/report-data.dto'
@@ -9,6 +9,7 @@ import { ReportDataDto } from '../datatypes/report-data.dto'
  * This contains the field definition of the NotifyReportRequest PDU sent by the Charging Station to the CSMS.
  */
 export class NotifyReportRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "NotifyReportRequestDto" = "NotifyReportRequestDto"
 
   public constructor(

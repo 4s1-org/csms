@@ -1,12 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CertificateHashDataDto } from '../datatypes/certificate-hash-data.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
 export class CustomerInformationRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "CustomerInformationRequestDto" = "CustomerInformationRequestDto"
 
   public constructor(

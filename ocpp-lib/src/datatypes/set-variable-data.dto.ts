@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AttributeEnum } from '../enumerations/attribute.enum'
 import { ComponentDto } from './component.dto'
@@ -11,6 +11,7 @@ import { VariableDto } from './variable.dto'
  * SetVariableDataType is used by: SetVariablesRequest
  */
 export class SetVariableDataDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "SetVariableDataDto" = "SetVariableDataDto"
 
   public constructor(

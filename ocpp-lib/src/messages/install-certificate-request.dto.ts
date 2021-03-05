@@ -1,11 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { InstallCertificateUseEnum } from '../enumerations/install-certificate-use.enum'
 
 export class InstallCertificateRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "InstallCertificateRequestDto" = "InstallCertificateRequestDto"
 
   public constructor(

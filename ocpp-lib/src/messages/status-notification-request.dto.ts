@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ConnectorStatusEnum } from '../enumerations/connector-status.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -9,6 +9,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  * ---
  */
 export class StatusNotificationRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "StatusNotificationRequestDto" = "StatusNotificationRequestDto"
 
   public constructor(

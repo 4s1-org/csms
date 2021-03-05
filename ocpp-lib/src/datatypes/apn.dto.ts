@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ApnAuthenticationEnum } from '../enumerations/apn-authentication.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -13,6 +13,7 @@ import { CustomDataDto } from './custom-data.dto'
  * NOTE: When asking a GSM modem to dial in, it is possible to specify which mobile operator should be used. This can be done with the mobile country code (MCC) in combination with a mobile network code (MNC). Example: If your preferred network is Vodafone Netherlands, the MCC=204 and the MNC=04 which means the key PreferredNetwork = 20404 Some modems allows to specify a preferred network, which means, if this network is not available, a different network is used. If you specify UseOnlyPreferredNetwork and this network is not available, the modem will not dial in.
  */
 export class ApnDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "ApnDto" = "ApnDto"
 
   public constructor(
