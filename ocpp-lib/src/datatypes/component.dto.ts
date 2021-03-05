@@ -9,6 +9,8 @@ import { EvseDto } from './evse.dto'
  * A physical or logical component
  */
 export class ComponentDto extends DatatypeBaseDto {
+  private _className: "ComponentDto" = "ComponentDto"
+
   public constructor(
     name: string,
   ) {

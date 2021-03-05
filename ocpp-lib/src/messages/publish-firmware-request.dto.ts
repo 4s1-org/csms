@@ -5,6 +5,8 @@ import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class PublishFirmwareRequestDto extends RequestBaseDto {
+  private _className: "PublishFirmwareRequestDto" = "PublishFirmwareRequestDto"
+
   public constructor(
     location: string,
     checksum: string,

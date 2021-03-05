@@ -10,6 +10,8 @@ import { IdTokenInfoDto } from './id-token-info.dto'
  * Contains the identifier to use for authorization.
  */
 export class AuthorizationDataDto extends DatatypeBaseDto {
+  private _className: "AuthorizationDataDto" = "AuthorizationDataDto"
+
   public constructor(
     idToken: IdTokenDto,
   ) {

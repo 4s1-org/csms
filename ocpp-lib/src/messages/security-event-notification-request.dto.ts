@@ -5,6 +5,8 @@ import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class SecurityEventNotificationRequestDto extends RequestBaseDto {
+  private _className: "SecurityEventNotificationRequestDto" = "SecurityEventNotificationRequestDto"
+
   public constructor(
     type: string,
     timestamp: string,

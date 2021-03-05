@@ -10,6 +10,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  * This contains the field definition of the BootNotificationRequest PDU sent by the Charging Station to the CSMS.
  */
 export class BootNotificationRequestDto extends RequestBaseDto {
+  private _className: "BootNotificationRequestDto" = "BootNotificationRequestDto"
+
   public constructor(
     chargingStation: ChargingStationDto,
     reason: BootReasonEnum,

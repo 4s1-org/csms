@@ -5,6 +5,8 @@ import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyEventResponseDto extends ResponseBaseDto {
+  private _className: "NotifyEventResponseDto" = "NotifyEventResponseDto"
+
   public constructor() {
     super()
   }

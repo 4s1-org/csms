@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { ReservationUpdateStatusEnum } from '../enumerations/reservation-update-status.enum'
 
 export class ReservationStatusUpdateRequestDto extends RequestBaseDto {
+  private _className: "ReservationStatusUpdateRequestDto" = "ReservationStatusUpdateRequestDto"
+
   public constructor(
     reservationId: number,
     reservationUpdateStatus: ReservationUpdateStatusEnum,

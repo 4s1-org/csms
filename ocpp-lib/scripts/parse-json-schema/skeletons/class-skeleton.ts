@@ -137,6 +137,9 @@ export class ClassSkeleton extends SkeletonBase {
     }
     result.push(`export class ${this.name}${this.nameSuffix} ${markerInterface}{`)
 
+    result.push(`  private _className: "${this.name}${this.nameSuffix}" = "${this.name}${this.nameSuffix}"`)
+    result.push(``)
+
     // Constructor
     const requiredProperties = this._properties.filter((x) => x.isRequired)
     if (requiredProperties.length) {

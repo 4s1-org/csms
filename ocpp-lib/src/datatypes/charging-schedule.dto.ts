@@ -13,6 +13,8 @@ import { SalesTariffDto } from './sales-tariff.dto'
  * Charging schedule structure defines a list of charging periods, as used in: GetCompositeSchedule.conf and ChargingProfile.
  */
 export class ChargingScheduleDto extends DatatypeBaseDto {
+  private _className: "ChargingScheduleDto" = "ChargingScheduleDto"
+
   public constructor(
     id: number,
     chargingRateUnit: ChargingRateUnitEnum,

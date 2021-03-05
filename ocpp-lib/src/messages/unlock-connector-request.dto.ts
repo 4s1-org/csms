@@ -5,6 +5,8 @@ import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class UnlockConnectorRequestDto extends RequestBaseDto {
+  private _className: "UnlockConnectorRequestDto" = "UnlockConnectorRequestDto"
+
   public constructor(
     evseId: number,
     connectorId: number,

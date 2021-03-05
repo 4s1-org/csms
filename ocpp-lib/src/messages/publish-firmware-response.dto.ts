@@ -7,6 +7,8 @@ import { GenericStatusEnum } from '../enumerations/generic-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class PublishFirmwareResponseDto extends ResponseBaseDto {
+  private _className: "PublishFirmwareResponseDto" = "PublishFirmwareResponseDto"
+
   public constructor(
     status: GenericStatusEnum,
   ) {

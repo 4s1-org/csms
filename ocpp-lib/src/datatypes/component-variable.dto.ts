@@ -10,6 +10,8 @@ import { VariableDto } from './variable.dto'
  * Class to report components, variables and variable attributes and characteristics.
  */
 export class ComponentVariableDto extends DatatypeBaseDto {
+  private _className: "ComponentVariableDto" = "ComponentVariableDto"
+
   public constructor(
     component: ComponentDto,
   ) {

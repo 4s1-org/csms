@@ -8,6 +8,8 @@ import { CustomDataDto } from './custom-data.dto'
  * Element providing more information about the status.
  */
 export class StatusInfoDto extends DatatypeBaseDto {
+  private _className: "StatusInfoDto" = "StatusInfoDto"
+
   public constructor(
     reasonCode: string,
   ) {

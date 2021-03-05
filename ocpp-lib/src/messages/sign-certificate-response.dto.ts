@@ -7,6 +7,8 @@ import { GenericStatusEnum } from '../enumerations/generic-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class SignCertificateResponseDto extends ResponseBaseDto {
+  private _className: "SignCertificateResponseDto" = "SignCertificateResponseDto"
+
   public constructor(
     status: GenericStatusEnum,
   ) {

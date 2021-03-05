@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MonitoringBaseEnum } from '../enumerations/monitoring-base.enum'
 
 export class SetMonitoringBaseRequestDto extends RequestBaseDto {
+  private _className: "SetMonitoringBaseRequestDto" = "SetMonitoringBaseRequestDto"
+
   public constructor(
     monitoringBase: MonitoringBaseEnum,
   ) {

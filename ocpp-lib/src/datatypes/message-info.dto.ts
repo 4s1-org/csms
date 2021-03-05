@@ -14,6 +14,8 @@ import { MessageStateEnum } from '../enumerations/message-state.enum'
  * Contains message details, for a message to be displayed on a Charging Station.
  */
 export class MessageInfoDto extends DatatypeBaseDto {
+  private _className: "MessageInfoDto" = "MessageInfoDto"
+
   public constructor(
     id: number,
     priority: MessagePriorityEnum,

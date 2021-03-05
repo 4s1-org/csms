@@ -7,6 +7,8 @@ import { SetNetworkProfileStatusEnum } from '../enumerations/set-network-profile
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class SetNetworkProfileResponseDto extends ResponseBaseDto {
+  private _className: "SetNetworkProfileResponseDto" = "SetNetworkProfileResponseDto"
+
   public constructor(
     status: SetNetworkProfileStatusEnum,
   ) {

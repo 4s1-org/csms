@@ -7,6 +7,8 @@ import { GetDisplayMessagesStatusEnum } from '../enumerations/get-display-messag
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetDisplayMessagesResponseDto extends ResponseBaseDto {
+  private _className: "GetDisplayMessagesResponseDto" = "GetDisplayMessagesResponseDto"
+
   public constructor(
     status: GetDisplayMessagesStatusEnum,
   ) {

@@ -11,6 +11,8 @@ import { RelativeTimeIntervalDto } from './relative-time-interval.dto'
  * urn:x-oca:ocpp:uid:2:233271
  */
 export class SalesTariffEntryDto extends DatatypeBaseDto {
+  private _className: "SalesTariffEntryDto" = "SalesTariffEntryDto"
+
   public constructor(
     relativeTimeInterval: RelativeTimeIntervalDto,
   ) {

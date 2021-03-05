@@ -11,6 +11,8 @@ import { VariableDto } from './variable.dto'
  * Class to hold parameters of SetVariableMonitoring request.
  */
 export class SetMonitoringDataDto extends DatatypeBaseDto {
+  private _className: "SetMonitoringDataDto" = "SetMonitoringDataDto"
+
   public constructor(
     value: number,
     type: MonitorEnum,

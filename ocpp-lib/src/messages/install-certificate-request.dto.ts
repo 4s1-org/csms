@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { InstallCertificateUseEnum } from '../enumerations/install-certificate-use.enum'
 
 export class InstallCertificateRequestDto extends RequestBaseDto {
+  private _className: "InstallCertificateRequestDto" = "InstallCertificateRequestDto"
+
   public constructor(
     certificateType: InstallCertificateUseEnum,
     certificate: string,

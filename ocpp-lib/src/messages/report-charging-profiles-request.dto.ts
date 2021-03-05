@@ -7,6 +7,8 @@ import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ReportChargingProfilesRequestDto extends RequestBaseDto {
+  private _className: "ReportChargingProfilesRequestDto" = "ReportChargingProfilesRequestDto"
+
   public constructor(
     requestId: number,
     chargingLimitSource: ChargingLimitSourceEnum,

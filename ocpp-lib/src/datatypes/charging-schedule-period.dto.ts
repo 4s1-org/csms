@@ -10,6 +10,8 @@ import { CustomDataDto } from './custom-data.dto'
  * Charging schedule period structure defines a time period in a charging schedule.
  */
 export class ChargingSchedulePeriodDto extends DatatypeBaseDto {
+  private _className: "ChargingSchedulePeriodDto" = "ChargingSchedulePeriodDto"
+
   public constructor(
     startPeriod: number,
     limit: number,

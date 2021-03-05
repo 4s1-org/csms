@@ -11,6 +11,8 @@ import { ReasonEnum } from '../enumerations/reason.enum'
  * urn:x-oca:ocpp:uid:2:233318
  */
 export class TransactionDto extends DatatypeBaseDto {
+  private _className: "TransactionDto" = "TransactionDto"
+
   public constructor(
     transactionId: string,
   ) {

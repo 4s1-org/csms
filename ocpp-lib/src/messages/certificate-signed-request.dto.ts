@@ -6,6 +6,8 @@ import { CertificateSigningUseEnum } from '../enumerations/certificate-signing-u
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class CertificateSignedRequestDto extends RequestBaseDto {
+  private _className: "CertificateSignedRequestDto" = "CertificateSignedRequestDto"
+
   public constructor(
     certificateChain: string,
   ) {

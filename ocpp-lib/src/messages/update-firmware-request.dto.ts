@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { FirmwareDto } from '../datatypes/firmware.dto'
 
 export class UpdateFirmwareRequestDto extends RequestBaseDto {
+  private _className: "UpdateFirmwareRequestDto" = "UpdateFirmwareRequestDto"
+
   public constructor(
     requestId: number,
     firmware: FirmwareDto,

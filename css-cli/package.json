@@ -18,6 +18,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
+    "debug": "tsc && node dist/debug.js",
     "build:watch": "tsc --watch",
     "start:simulation1": "pnpm run build && node ./dist/simulation1.js | pino-pretty",
     "start:simulation2": "pnpm run build && concurrently \"node ./dist/simulation2a.js | pino-pretty\" \"node ./dist/simulation2b.js | pino-pretty\" \"node ./dist/simulation2c.js | pino-pretty\"",
@@ -34,7 +35,9 @@
   "dependencies": {
     "@yellowgarbagebag/common-lib": "workspace:*",
     "@yellowgarbagebag/css-lib": "workspace:*",
+    "@yellowgarbagebag/ocpp-lib": "workspace:*",
     "pino-pretty": "^4.5.0",
+    "uuid": "^8.3.2",
     "ws": "^7.4.3"
   },
   "devDependencies": {
