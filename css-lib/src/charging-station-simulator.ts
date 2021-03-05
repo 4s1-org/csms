@@ -36,7 +36,7 @@ export class ChargingStationSimulator extends ChargingStation {
   public onMessage(data: any): void {
     const result: OcppBaseMessageDto | undefined = handleIncomingMessage(this, data)
     if (result) {
-      this.send(result.toMessageString())
+      //this.send(result.toMessageString())
     }
   }
 
