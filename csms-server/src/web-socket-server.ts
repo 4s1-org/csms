@@ -8,10 +8,9 @@ import {
   OcppBaseMessageDto,
   handleIncomingMessage,
   RequestBaseDto,
+  actionDtoMapping,
   OcppRequestMessageDto,
-  OcppActionEnum,
   OcppMessageTypeIdEnum,
-  actionRequestDtoMapping,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
@@ -198,14 +197,12 @@ export class WebSocketServer {
 
   // ToDo: https://gitlab.com/YellowGarbageBag/csms/-/issues/56
   private sendRequest(socket: WebSocket, cs: ChargingStation, payload: RequestBaseDto): void {
-    const action = Object.keys(actionRequestDtoMapping).find(
-      (key) => payload instanceof actionRequestDtoMapping[key],
-    ) as OcppActionEnum
-    if (!action) {
-      throw new Error('No action mapping found' + payload)
+    const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
+    if (!mapping) {
+      throw new Error('No mapping found')
     }
 
-    const msg = new OcppRequestMessageDto(uuid(), action, payload)
+    const msg = new OcppRequestMessageDto(uuid(), mapping.action, payload)
     cs.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
     cs.logger.debug('Send', msg)
     if (socket && socket.OPEN) {
