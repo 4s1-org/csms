@@ -7,6 +7,8 @@ import { LogEnum } from '../enumerations/log.enum'
 import { LogParametersDto } from '../datatypes/log-parameters.dto'
 
 export class GetLogRequestDto extends RequestBaseDto {
+  private _className: "GetLogRequestDto" = "GetLogRequestDto"
+
   public constructor(
     log: LogParametersDto,
     logType: LogEnum,

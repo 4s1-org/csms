@@ -7,6 +7,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenInfoDto } from '../datatypes/id-token-info.dto'
 
 export class AuthorizeResponseDto extends ResponseBaseDto {
+  private _className: "AuthorizeResponseDto" = "AuthorizeResponseDto"
+
   public constructor(
     idTokenInfo: IdTokenInfoDto,
   ) {

@@ -7,6 +7,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { UpdateEnum } from '../enumerations/update.enum'
 
 export class SendLocalListRequestDto extends RequestBaseDto {
+  private _className: "SendLocalListRequestDto" = "SendLocalListRequestDto"
+
   public constructor(
     versionNumber: number,
     updateType: UpdateEnum,

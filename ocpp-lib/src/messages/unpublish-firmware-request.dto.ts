@@ -5,6 +5,8 @@ import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class UnpublishFirmwareRequestDto extends RequestBaseDto {
+  private _className: "UnpublishFirmwareRequestDto" = "UnpublishFirmwareRequestDto"
+
   public constructor(
     checksum: string,
   ) {

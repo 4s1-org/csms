@@ -10,6 +10,8 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-enexis:ecdm:uid:2:234489
  */
 export class ChargingLimitDto extends DatatypeBaseDto {
+  private _className: "ChargingLimitDto" = "ChargingLimitDto"
+
   public constructor(
     chargingLimitSource: ChargingLimitSourceEnum,
   ) {

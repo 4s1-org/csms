@@ -14,6 +14,8 @@ import { RecurrencyKindEnum } from '../enumerations/recurrency-kind.enum'
  * A ChargingProfile consists of ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
 export class ChargingProfileDto extends DatatypeBaseDto {
+  private _className: "ChargingProfileDto" = "ChargingProfileDto"
+
   public constructor(
     id: number,
     stackLevel: number,

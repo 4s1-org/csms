@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { FirmwareStatusEnum } from '../enumerations/firmware-status.enum'
 
 export class FirmwareStatusNotificationRequestDto extends RequestBaseDto {
+  private _className: "FirmwareStatusNotificationRequestDto" = "FirmwareStatusNotificationRequestDto"
+
   public constructor(
     status: FirmwareStatusEnum,
   ) {

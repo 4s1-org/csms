@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GetCertificateIdUseEnum } from '../enumerations/get-certificate-id-use.enum'
 
 export class GetInstalledCertificateIdsRequestDto extends RequestBaseDto {
+  private _className: "GetInstalledCertificateIdsRequestDto" = "GetInstalledCertificateIdsRequestDto"
+
   public constructor() {
     super()
   }

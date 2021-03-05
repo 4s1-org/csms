@@ -8,6 +8,8 @@ import { CustomDataDto } from './custom-data.dto'
  * Defines parameters required for initiating and maintaining wireless communication with other devices.
  */
 export class ModemDto extends DatatypeBaseDto {
+  private _className: "ModemDto" = "ModemDto"
+
   public constructor() {
     super()
   }

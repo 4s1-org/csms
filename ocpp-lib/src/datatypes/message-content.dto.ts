@@ -11,6 +11,8 @@ import { MessageFormatEnum } from '../enumerations/message-format.enum'
  * Contains message details, for a message to be displayed on a Charging Station.
  */
 export class MessageContentDto extends DatatypeBaseDto {
+  private _className: "MessageContentDto" = "MessageContentDto"
+
   public constructor(
     format: MessageFormatEnum,
     content: string,

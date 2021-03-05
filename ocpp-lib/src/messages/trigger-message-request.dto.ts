@@ -7,6 +7,8 @@ import { EvseDto } from '../datatypes/evse.dto'
 import { MessageTriggerEnum } from '../enumerations/message-trigger.enum'
 
 export class TriggerMessageRequestDto extends RequestBaseDto {
+  private _className: "TriggerMessageRequestDto" = "TriggerMessageRequestDto"
+
   public constructor(
     requestedMessage: MessageTriggerEnum,
   ) {

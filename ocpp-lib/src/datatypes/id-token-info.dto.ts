@@ -14,6 +14,8 @@ import { MessageContentDto } from './message-content.dto'
  * It is advised to not stop charging for a token that expires during charging, as ExpiryDate is only used for caching purposes. If ExpiryDate is not given, the status has no end date.
  */
 export class IdTokenInfoDto extends DatatypeBaseDto {
+  private _className: "IdTokenInfoDto" = "IdTokenInfoDto"
+
   public constructor(
     status: AuthorizationStatusEnum,
   ) {

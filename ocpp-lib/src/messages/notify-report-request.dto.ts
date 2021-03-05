@@ -9,6 +9,8 @@ import { ReportDataDto } from '../datatypes/report-data.dto'
  * This contains the field definition of the NotifyReportRequest PDU sent by the Charging Station to the CSMS.
  */
 export class NotifyReportRequestDto extends RequestBaseDto {
+  private _className: "NotifyReportRequestDto" = "NotifyReportRequestDto"
+
   public constructor(
     requestId: number,
     generatedAt: string,

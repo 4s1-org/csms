@@ -11,6 +11,8 @@ import { VariableDto } from './variable.dto'
  * SetVariableDataType is used by: SetVariablesRequest
  */
 export class SetVariableDataDto extends DatatypeBaseDto {
+  private _className: "SetVariableDataDto" = "SetVariableDataDto"
+
   public constructor(
     attributeValue: string,
     component: ComponentDto,

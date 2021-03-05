@@ -10,6 +10,8 @@ import { MutabilityEnum } from '../enumerations/mutability.enum'
  * Attribute data of a variable.
  */
 export class VariableAttributeDto extends DatatypeBaseDto {
+  private _className: "VariableAttributeDto" = "VariableAttributeDto"
+
   public constructor() {
     super()
   }

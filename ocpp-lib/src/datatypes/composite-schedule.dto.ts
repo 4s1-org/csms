@@ -11,6 +11,8 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233362
  */
 export class CompositeScheduleDto extends DatatypeBaseDto {
+  private _className: "CompositeScheduleDto" = "CompositeScheduleDto"
+
   public constructor(
     chargingSchedulePeriod: ChargingSchedulePeriodDto[],
     evseId: number,

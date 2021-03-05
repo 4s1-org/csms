@@ -7,6 +7,8 @@ import { DataTransferStatusEnum } from '../enumerations/data-transfer-status.enu
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class DataTransferResponseDto extends ResponseBaseDto {
+  private _className: "DataTransferResponseDto" = "DataTransferResponseDto"
+
   public constructor(
     status: DataTransferStatusEnum,
   ) {

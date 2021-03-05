@@ -7,6 +7,8 @@ import { InstallCertificateStatusEnum } from '../enumerations/install-certificat
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class InstallCertificateResponseDto extends ResponseBaseDto {
+  private _className: "InstallCertificateResponseDto" = "InstallCertificateResponseDto"
+
   public constructor(
     status: InstallCertificateStatusEnum,
   ) {

@@ -9,6 +9,8 @@ import { ReportBaseEnum } from '../enumerations/report-base.enum'
  * This contains the field definition of the GetBaseReportRequest PDU sent by the CSMS to the Charging Station.
  */
 export class GetBaseReportRequestDto extends RequestBaseDto {
+  private _className: "GetBaseReportRequestDto" = "GetBaseReportRequestDto"
+
   public constructor(
     requestId: number,
     reportBase: ReportBaseEnum,

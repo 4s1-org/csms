@@ -10,6 +10,8 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
  * This contains the field definition of the BootNotificationResponse PDU sent by the CSMS to the Charging Station in response to a BootNotificationRequest.
  */
 export class BootNotificationResponseDto extends ResponseBaseDto {
+  private _className: "BootNotificationResponseDto" = "BootNotificationResponseDto"
+
   public constructor(
     currentTime: string,
     interval: number,

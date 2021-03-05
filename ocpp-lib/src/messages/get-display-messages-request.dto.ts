@@ -7,6 +7,8 @@ import { MessagePriorityEnum } from '../enumerations/message-priority.enum'
 import { MessageStateEnum } from '../enumerations/message-state.enum'
 
 export class GetDisplayMessagesRequestDto extends RequestBaseDto {
+  private _className: "GetDisplayMessagesRequestDto" = "GetDisplayMessagesRequestDto"
+
   public constructor(
     requestId: number,
   ) {

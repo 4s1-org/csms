@@ -13,6 +13,8 @@ import { VariableDto } from './variable.dto'
  * SetVariableResultType is used by: SetVariablesResponse
  */
 export class SetVariableResultDto extends DatatypeBaseDto {
+  private _className: "SetVariableResultDto" = "SetVariableResultDto"
+
   public constructor(
     attributeStatus: SetVariableStatusEnum,
     component: ComponentDto,

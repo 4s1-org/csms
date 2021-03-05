@@ -1,6 +1,5 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { OcppActionEnum } from './ocpp-action.enum'
 import { AuthorizeRequestDto } from '../messages/authorize-request.dto'
 import { AuthorizeResponseDto } from '../messages/authorize-response.dto'
 import { BootNotificationRequestDto } from '../messages/boot-notification-request.dto'
@@ -130,325 +129,69 @@ import { UnpublishFirmwareResponseDto } from '../messages/unpublish-firmware-res
 import { UpdateFirmwareRequestDto } from '../messages/update-firmware-request.dto'
 import { UpdateFirmwareResponseDto } from '../messages/update-firmware-response.dto'
 
-export const actionDtoMapping = [
-  {
-    action: OcppActionEnum.Authorize,
-    requestDto: AuthorizeRequestDto,
-    responseDto: AuthorizeResponseDto,
-  },
-  {
-    action: OcppActionEnum.BootNotification,
-    requestDto: BootNotificationRequestDto,
-    responseDto: BootNotificationResponseDto,
-  },
-  {
-    action: OcppActionEnum.CancelReservation,
-    requestDto: CancelReservationRequestDto,
-    responseDto: CancelReservationResponseDto,
-  },
-  {
-    action: OcppActionEnum.CertificateSigned,
-    requestDto: CertificateSignedRequestDto,
-    responseDto: CertificateSignedResponseDto,
-  },
-  {
-    action: OcppActionEnum.ChangeAvailability,
-    requestDto: ChangeAvailabilityRequestDto,
-    responseDto: ChangeAvailabilityResponseDto,
-  },
-  {
-    action: OcppActionEnum.ClearCache,
-    requestDto: ClearCacheRequestDto,
-    responseDto: ClearCacheResponseDto,
-  },
-  {
-    action: OcppActionEnum.ClearChargingProfile,
-    requestDto: ClearChargingProfileRequestDto,
-    responseDto: ClearChargingProfileResponseDto,
-  },
-  {
-    action: OcppActionEnum.ClearDisplayMessage,
-    requestDto: ClearDisplayMessageRequestDto,
-    responseDto: ClearDisplayMessageResponseDto,
-  },
-  {
-    action: OcppActionEnum.ClearVariableMonitoring,
-    requestDto: ClearVariableMonitoringRequestDto,
-    responseDto: ClearVariableMonitoringResponseDto,
-  },
-  {
-    action: OcppActionEnum.ClearedChargingLimit,
-    requestDto: ClearedChargingLimitRequestDto,
-    responseDto: ClearedChargingLimitResponseDto,
-  },
-  {
-    action: OcppActionEnum.CostUpdated,
-    requestDto: CostUpdatedRequestDto,
-    responseDto: CostUpdatedResponseDto,
-  },
-  {
-    action: OcppActionEnum.CustomerInformation,
-    requestDto: CustomerInformationRequestDto,
-    responseDto: CustomerInformationResponseDto,
-  },
-  {
-    action: OcppActionEnum.DataTransfer,
-    requestDto: DataTransferRequestDto,
-    responseDto: DataTransferResponseDto,
-  },
-  {
-    action: OcppActionEnum.DeleteCertificate,
-    requestDto: DeleteCertificateRequestDto,
-    responseDto: DeleteCertificateResponseDto,
-  },
-  {
-    action: OcppActionEnum.FirmwareStatusNotification,
-    requestDto: FirmwareStatusNotificationRequestDto,
-    responseDto: FirmwareStatusNotificationResponseDto,
-  },
-  {
-    action: OcppActionEnum.Get15118EvCertificate,
-    requestDto: Get15118EvCertificateRequestDto,
-    responseDto: Get15118EvCertificateResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetBaseReport,
-    requestDto: GetBaseReportRequestDto,
-    responseDto: GetBaseReportResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetCertificateStatus,
-    requestDto: GetCertificateStatusRequestDto,
-    responseDto: GetCertificateStatusResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetChargingProfiles,
-    requestDto: GetChargingProfilesRequestDto,
-    responseDto: GetChargingProfilesResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetCompositeSchedule,
-    requestDto: GetCompositeScheduleRequestDto,
-    responseDto: GetCompositeScheduleResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetDisplayMessages,
-    requestDto: GetDisplayMessagesRequestDto,
-    responseDto: GetDisplayMessagesResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetInstalledCertificateIds,
-    requestDto: GetInstalledCertificateIdsRequestDto,
-    responseDto: GetInstalledCertificateIdsResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetLocalListVersion,
-    requestDto: GetLocalListVersionRequestDto,
-    responseDto: GetLocalListVersionResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetLog,
-    requestDto: GetLogRequestDto,
-    responseDto: GetLogResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetMonitoringReport,
-    requestDto: GetMonitoringReportRequestDto,
-    responseDto: GetMonitoringReportResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetReport,
-    requestDto: GetReportRequestDto,
-    responseDto: GetReportResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetTransactionStatus,
-    requestDto: GetTransactionStatusRequestDto,
-    responseDto: GetTransactionStatusResponseDto,
-  },
-  {
-    action: OcppActionEnum.GetVariables,
-    requestDto: GetVariablesRequestDto,
-    responseDto: GetVariablesResponseDto,
-  },
-  {
-    action: OcppActionEnum.Heartbeat,
-    requestDto: HeartbeatRequestDto,
-    responseDto: HeartbeatResponseDto,
-  },
-  {
-    action: OcppActionEnum.InstallCertificate,
-    requestDto: InstallCertificateRequestDto,
-    responseDto: InstallCertificateResponseDto,
-  },
-  {
-    action: OcppActionEnum.LogStatusNotification,
-    requestDto: LogStatusNotificationRequestDto,
-    responseDto: LogStatusNotificationResponseDto,
-  },
-  {
-    action: OcppActionEnum.MeterValues,
-    requestDto: MeterValuesRequestDto,
-    responseDto: MeterValuesResponseDto,
-  },
-  {
-    action: OcppActionEnum.NotifyChargingLimit,
-    requestDto: NotifyChargingLimitRequestDto,
-    responseDto: NotifyChargingLimitResponseDto,
-  },
-  {
-    action: OcppActionEnum.NotifyCustomerInformation,
-    requestDto: NotifyCustomerInformationRequestDto,
-    responseDto: NotifyCustomerInformationResponseDto,
-  },
-  {
-    action: OcppActionEnum.NotifyDisplayMessages,
-    requestDto: NotifyDisplayMessagesRequestDto,
-    responseDto: NotifyDisplayMessagesResponseDto,
-  },
-  {
-    action: OcppActionEnum.NotifyEvChargingNeeds,
-    requestDto: NotifyEvChargingNeedsRequestDto,
-    responseDto: NotifyEvChargingNeedsResponseDto,
-  },
-  {
-    action: OcppActionEnum.NotifyEvChargingSchedule,
-    requestDto: NotifyEvChargingScheduleRequestDto,
-    responseDto: NotifyEvChargingScheduleResponseDto,
-  },
-  {
-    action: OcppActionEnum.NotifyEvent,
-    requestDto: NotifyEventRequestDto,
-    responseDto: NotifyEventResponseDto,
-  },
-  {
-    action: OcppActionEnum.NotifyMonitoringReport,
-    requestDto: NotifyMonitoringReportRequestDto,
-    responseDto: NotifyMonitoringReportResponseDto,
-  },
-  {
-    action: OcppActionEnum.NotifyReport,
-    requestDto: NotifyReportRequestDto,
-    responseDto: NotifyReportResponseDto,
-  },
-  {
-    action: OcppActionEnum.PublishFirmware,
-    requestDto: PublishFirmwareRequestDto,
-    responseDto: PublishFirmwareResponseDto,
-  },
-  {
-    action: OcppActionEnum.PublishFirmwareStatusNotification,
-    requestDto: PublishFirmwareStatusNotificationRequestDto,
-    responseDto: PublishFirmwareStatusNotificationResponseDto,
-  },
-  {
-    action: OcppActionEnum.ReportChargingProfiles,
-    requestDto: ReportChargingProfilesRequestDto,
-    responseDto: ReportChargingProfilesResponseDto,
-  },
-  {
-    action: OcppActionEnum.RequestStartTransaction,
-    requestDto: RequestStartTransactionRequestDto,
-    responseDto: RequestStartTransactionResponseDto,
-  },
-  {
-    action: OcppActionEnum.RequestStopTransaction,
-    requestDto: RequestStopTransactionRequestDto,
-    responseDto: RequestStopTransactionResponseDto,
-  },
-  {
-    action: OcppActionEnum.ReservationStatusUpdate,
-    requestDto: ReservationStatusUpdateRequestDto,
-    responseDto: ReservationStatusUpdateResponseDto,
-  },
-  {
-    action: OcppActionEnum.ReserveNow,
-    requestDto: ReserveNowRequestDto,
-    responseDto: ReserveNowResponseDto,
-  },
-  {
-    action: OcppActionEnum.Reset,
-    requestDto: ResetRequestDto,
-    responseDto: ResetResponseDto,
-  },
-  {
-    action: OcppActionEnum.SecurityEventNotification,
-    requestDto: SecurityEventNotificationRequestDto,
-    responseDto: SecurityEventNotificationResponseDto,
-  },
-  {
-    action: OcppActionEnum.SendLocalList,
-    requestDto: SendLocalListRequestDto,
-    responseDto: SendLocalListResponseDto,
-  },
-  {
-    action: OcppActionEnum.SetChargingProfile,
-    requestDto: SetChargingProfileRequestDto,
-    responseDto: SetChargingProfileResponseDto,
-  },
-  {
-    action: OcppActionEnum.SetDisplayMessage,
-    requestDto: SetDisplayMessageRequestDto,
-    responseDto: SetDisplayMessageResponseDto,
-  },
-  {
-    action: OcppActionEnum.SetMonitoringBase,
-    requestDto: SetMonitoringBaseRequestDto,
-    responseDto: SetMonitoringBaseResponseDto,
-  },
-  {
-    action: OcppActionEnum.SetMonitoringLevel,
-    requestDto: SetMonitoringLevelRequestDto,
-    responseDto: SetMonitoringLevelResponseDto,
-  },
-  {
-    action: OcppActionEnum.SetNetworkProfile,
-    requestDto: SetNetworkProfileRequestDto,
-    responseDto: SetNetworkProfileResponseDto,
-  },
-  {
-    action: OcppActionEnum.SetVariableMonitoring,
-    requestDto: SetVariableMonitoringRequestDto,
-    responseDto: SetVariableMonitoringResponseDto,
-  },
-  {
-    action: OcppActionEnum.SetVariables,
-    requestDto: SetVariablesRequestDto,
-    responseDto: SetVariablesResponseDto,
-  },
-  {
-    action: OcppActionEnum.SignCertificate,
-    requestDto: SignCertificateRequestDto,
-    responseDto: SignCertificateResponseDto,
-  },
-  {
-    action: OcppActionEnum.StatusNotification,
-    requestDto: StatusNotificationRequestDto,
-    responseDto: StatusNotificationResponseDto,
-  },
-  {
-    action: OcppActionEnum.TransactionEvent,
-    requestDto: TransactionEventRequestDto,
-    responseDto: TransactionEventResponseDto,
-  },
-  {
-    action: OcppActionEnum.TriggerMessage,
-    requestDto: TriggerMessageRequestDto,
-    responseDto: TriggerMessageResponseDto,
-  },
-  {
-    action: OcppActionEnum.UnlockConnector,
-    requestDto: UnlockConnectorRequestDto,
-    responseDto: UnlockConnectorResponseDto,
-  },
-  {
-    action: OcppActionEnum.UnpublishFirmware,
-    requestDto: UnpublishFirmwareRequestDto,
-    responseDto: UnpublishFirmwareResponseDto,
-  },
-  {
-    action: OcppActionEnum.UpdateFirmware,
-    requestDto: UpdateFirmwareRequestDto,
-    responseDto: UpdateFirmwareResponseDto,
-  },
-]
+export type RequestToResponseType<T> =
+  T extends AuthorizeRequestDto ? AuthorizeResponseDto :
+  T extends BootNotificationRequestDto ? BootNotificationResponseDto :
+  T extends CancelReservationRequestDto ? CancelReservationResponseDto :
+  T extends CertificateSignedRequestDto ? CertificateSignedResponseDto :
+  T extends ChangeAvailabilityRequestDto ? ChangeAvailabilityResponseDto :
+  T extends ClearCacheRequestDto ? ClearCacheResponseDto :
+  T extends ClearChargingProfileRequestDto ? ClearChargingProfileResponseDto :
+  T extends ClearDisplayMessageRequestDto ? ClearDisplayMessageResponseDto :
+  T extends ClearVariableMonitoringRequestDto ? ClearVariableMonitoringResponseDto :
+  T extends ClearedChargingLimitRequestDto ? ClearedChargingLimitResponseDto :
+  T extends CostUpdatedRequestDto ? CostUpdatedResponseDto :
+  T extends CustomerInformationRequestDto ? CustomerInformationResponseDto :
+  T extends DataTransferRequestDto ? DataTransferResponseDto :
+  T extends DeleteCertificateRequestDto ? DeleteCertificateResponseDto :
+  T extends FirmwareStatusNotificationRequestDto ? FirmwareStatusNotificationResponseDto :
+  T extends Get15118EvCertificateRequestDto ? Get15118EvCertificateResponseDto :
+  T extends GetBaseReportRequestDto ? GetBaseReportResponseDto :
+  T extends GetCertificateStatusRequestDto ? GetCertificateStatusResponseDto :
+  T extends GetChargingProfilesRequestDto ? GetChargingProfilesResponseDto :
+  T extends GetCompositeScheduleRequestDto ? GetCompositeScheduleResponseDto :
+  T extends GetDisplayMessagesRequestDto ? GetDisplayMessagesResponseDto :
+  T extends GetInstalledCertificateIdsRequestDto ? GetInstalledCertificateIdsResponseDto :
+  T extends GetLocalListVersionRequestDto ? GetLocalListVersionResponseDto :
+  T extends GetLogRequestDto ? GetLogResponseDto :
+  T extends GetMonitoringReportRequestDto ? GetMonitoringReportResponseDto :
+  T extends GetReportRequestDto ? GetReportResponseDto :
+  T extends GetTransactionStatusRequestDto ? GetTransactionStatusResponseDto :
+  T extends GetVariablesRequestDto ? GetVariablesResponseDto :
+  T extends HeartbeatRequestDto ? HeartbeatResponseDto :
+  T extends InstallCertificateRequestDto ? InstallCertificateResponseDto :
+  T extends LogStatusNotificationRequestDto ? LogStatusNotificationResponseDto :
+  T extends MeterValuesRequestDto ? MeterValuesResponseDto :
+  T extends NotifyChargingLimitRequestDto ? NotifyChargingLimitResponseDto :
+  T extends NotifyCustomerInformationRequestDto ? NotifyCustomerInformationResponseDto :
+  T extends NotifyDisplayMessagesRequestDto ? NotifyDisplayMessagesResponseDto :
+  T extends NotifyEvChargingNeedsRequestDto ? NotifyEvChargingNeedsResponseDto :
+  T extends NotifyEvChargingScheduleRequestDto ? NotifyEvChargingScheduleResponseDto :
+  T extends NotifyEventRequestDto ? NotifyEventResponseDto :
+  T extends NotifyMonitoringReportRequestDto ? NotifyMonitoringReportResponseDto :
+  T extends NotifyReportRequestDto ? NotifyReportResponseDto :
+  T extends PublishFirmwareRequestDto ? PublishFirmwareResponseDto :
+  T extends PublishFirmwareStatusNotificationRequestDto ? PublishFirmwareStatusNotificationResponseDto :
+  T extends ReportChargingProfilesRequestDto ? ReportChargingProfilesResponseDto :
+  T extends RequestStartTransactionRequestDto ? RequestStartTransactionResponseDto :
+  T extends RequestStopTransactionRequestDto ? RequestStopTransactionResponseDto :
+  T extends ReservationStatusUpdateRequestDto ? ReservationStatusUpdateResponseDto :
+  T extends ReserveNowRequestDto ? ReserveNowResponseDto :
+  T extends ResetRequestDto ? ResetResponseDto :
+  T extends SecurityEventNotificationRequestDto ? SecurityEventNotificationResponseDto :
+  T extends SendLocalListRequestDto ? SendLocalListResponseDto :
+  T extends SetChargingProfileRequestDto ? SetChargingProfileResponseDto :
+  T extends SetDisplayMessageRequestDto ? SetDisplayMessageResponseDto :
+  T extends SetMonitoringBaseRequestDto ? SetMonitoringBaseResponseDto :
+  T extends SetMonitoringLevelRequestDto ? SetMonitoringLevelResponseDto :
+  T extends SetNetworkProfileRequestDto ? SetNetworkProfileResponseDto :
+  T extends SetVariableMonitoringRequestDto ? SetVariableMonitoringResponseDto :
+  T extends SetVariablesRequestDto ? SetVariablesResponseDto :
+  T extends SignCertificateRequestDto ? SignCertificateResponseDto :
+  T extends StatusNotificationRequestDto ? StatusNotificationResponseDto :
+  T extends TransactionEventRequestDto ? TransactionEventResponseDto :
+  T extends TriggerMessageRequestDto ? TriggerMessageResponseDto :
+  T extends UnlockConnectorRequestDto ? UnlockConnectorResponseDto :
+  T extends UnpublishFirmwareRequestDto ? UnpublishFirmwareResponseDto :
+  T extends UpdateFirmwareRequestDto ? UpdateFirmwareResponseDto :
+  never

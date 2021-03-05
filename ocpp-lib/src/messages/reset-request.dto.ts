@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { ResetEnum } from '../enumerations/reset.enum'
 
 export class ResetRequestDto extends RequestBaseDto {
+  private _className: "ResetRequestDto" = "ResetRequestDto"
+
   public constructor(
     type: ResetEnum,
   ) {

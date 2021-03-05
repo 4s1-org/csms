@@ -10,6 +10,8 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
  * This contains the field definition of the GetBaseReportResponse PDU sent by the Charging Station to the CSMS.
  */
 export class GetBaseReportResponseDto extends ResponseBaseDto {
+  private _className: "GetBaseReportResponseDto" = "GetBaseReportResponseDto"
+
   public constructor(
     status: GenericDeviceModelStatusEnum,
   ) {

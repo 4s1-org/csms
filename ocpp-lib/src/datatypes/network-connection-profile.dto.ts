@@ -15,6 +15,8 @@ import { VpnDto } from './vpn.dto'
  * The NetworkConnectionProfile defines the functional and technical parameters of a communication link.
  */
 export class NetworkConnectionProfileDto extends DatatypeBaseDto {
+  private _className: "NetworkConnectionProfileDto" = "NetworkConnectionProfileDto"
+
   public constructor(
     ocppVersion: OcppVersionEnum,
     ocppTransport: OcppTransportEnum,

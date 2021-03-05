@@ -6,6 +6,8 @@ import { CustomDataDto } from './custom-data.dto'
 import { HashAlgorithmEnum } from '../enumerations/hash-algorithm.enum'
 
 export class OcspRequestDataDto extends DatatypeBaseDto {
+  private _className: "OcspRequestDataDto" = "OcspRequestDataDto"
+
   public constructor(
     hashAlgorithm: HashAlgorithmEnum,
     issuerNameHash: string,

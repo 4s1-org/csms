@@ -5,6 +5,8 @@ import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyCustomerInformationRequestDto extends RequestBaseDto {
+  private _className: "NotifyCustomerInformationRequestDto" = "NotifyCustomerInformationRequestDto"
+
   public constructor(
     data: string,
     seqNo: number,

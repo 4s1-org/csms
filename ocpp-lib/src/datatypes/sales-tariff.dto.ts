@@ -11,6 +11,8 @@ import { SalesTariffEntryDto } from './sales-tariff-entry.dto'
  * NOTE: This dataType is based on dataTypes from <<ref-ISOIEC15118-2,ISO 15118-2>>.
  */
 export class SalesTariffDto extends DatatypeBaseDto {
+  private _className: "SalesTariffDto" = "SalesTariffDto"
+
   public constructor(
     id: number,
     salesTariffEntry: SalesTariffEntryDto[],

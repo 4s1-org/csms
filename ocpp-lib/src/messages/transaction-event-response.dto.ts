@@ -10,6 +10,8 @@ import { MessageContentDto } from '../datatypes/message-content.dto'
  * This contains the field definition of the TransactionEventResponse PDU sent by the CSMS to the Charging Station in response to a TransactionEventRequest.
  */
 export class TransactionEventResponseDto extends ResponseBaseDto {
+  private _className: "TransactionEventResponseDto" = "TransactionEventResponseDto"
+
   public constructor() {
     super()
   }

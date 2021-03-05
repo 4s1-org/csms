@@ -12,6 +12,8 @@ import { CustomDataDto } from './custom-data.dto'
  * A ChargingProfile consists of ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
 export class ChargingProfileCriterionDto extends DatatypeBaseDto {
+  private _className: "ChargingProfileCriterionDto" = "ChargingProfileCriterionDto"
+
   public constructor() {
     super()
   }

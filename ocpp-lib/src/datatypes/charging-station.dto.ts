@@ -9,6 +9,8 @@ import { ModemDto } from './modem.dto'
  * The physical system where an Electrical Vehicle (EV) can be charged.
  */
 export class ChargingStationDto extends DatatypeBaseDto {
+  private _className: "ChargingStationDto" = "ChargingStationDto"
+
   public constructor(
     model: string,
     vendorName: string,

@@ -9,6 +9,8 @@ import { SetVariableDataDto } from '../datatypes/set-variable-data.dto'
  * This contains the field definition of the SetVariablesRequest PDU sent by the CSMS to the Charging Station.
  */
 export class SetVariablesRequestDto extends RequestBaseDto {
+  private _className: "SetVariablesRequestDto" = "SetVariablesRequestDto"
+
   public constructor(
     setVariableData: SetVariableDataDto[],
   ) {

@@ -72,26 +72,23 @@ export class ClassGenerator {
       this.classSkeletons.filter((x) => x.isMessage).map((x) => x.nameWithoutReqOrRes),
     )
 
-    this._generateActionDtpMapping(
+    this._generateActionDtoMapping(
       [__dirname, '..', '..', 'src', 'generated'],
       this.classSkeletons.filter((x) => x.isMessage),
     )
 
     this._generateJsonSchemaIndex([__dirname, '..', '..', 'src', 'generated'])
 
+    this._generateRequestToResponseType(
+      [__dirname, '..', '..', 'src', 'generated'],
+      this.classSkeletons.filter((x) => x.isMessage),
+    )
+
     // Muss als letztes erfolgen
     this._generateGeneratedFolderIndex([__dirname, '..', '..', 'src', 'generated'])
   }
 
   private _generateJsonSchemaIndex(folders: string[]): void {
-    // import AuthorizeRequest from "../third-party/ocpp/2.0.1/AuthorizeRequest.json"
-    // import AuthorizeResponse from "../third-party/ocpp/2.0.1/AuthorizeResponse.json"
-
-    // export const jsonSchemas:{ [key: string]: any } = {
-    //   "AuthorizeRequest": AuthorizeRequest,
-    //   "AuthorizeResponse": AuthorizeResponse
-    // }
-
     const data: string[] = []
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)
@@ -160,7 +157,7 @@ export class ClassGenerator {
     this.generatedFolderIndex.push([className, fileNameWithoutExt])
   }
 
-  private _generateActionDtpMapping(folders: string[], skeletons: ClassSkeleton[]): void {
+  private _generateActionDtoMapping(folders: string[], skeletons: ClassSkeleton[]): void {
     const data: string[] = []
 
     const className = `actionDtoMapping`
@@ -171,9 +168,15 @@ export class ClassGenerator {
     for (const skeleton of skeletons) {
       data.push(`import { ${skeleton.name}${skeleton.nameSuffix} } from '../messages/${skeleton.fileNameWithoutExt}'`)
     }
+    data.push(`import { RequestBaseDto } from './request-base.dto'`)
+    data.push(`import { ResponseBaseDto } from './response-base.dto'`)
 
     data.push(``)
-    data.push(`export const ${className} = [`)
+    data.push(`export const ${className}: {`)
+    data.push(`  action: OcppActionEnum`)
+    data.push(`  requestDto: { new (...args: any[]): RequestBaseDto }`)
+    data.push(`  responseDto: { new (...args: any[]): ResponseBaseDto }`)
+    data.push(`}[] = [`)
     for (const skeleton of skeletons.filter((x) => x.isRequest)) {
       const name = skeleton.nameWithoutReqOrRes
       data.push(`  {`)
@@ -185,7 +188,7 @@ export class ClassGenerator {
     data.push(`]`)
     data.push(``)
 
-    const fileNameWithoutExt = `actionDtoMapping`
+    const fileNameWithoutExt = `action-dto-mapping`
     const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
     fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
 
@@ -200,7 +203,7 @@ export class ClassGenerator {
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)
     data.push(`export abstract class ${className} {`)
-    data.push(`  // nothing to do`)
+    data.push(`  private _baseClassName: "${className}" = "${className}"`)
     data.push(`}`)
     data.push(``)
 
@@ -225,6 +228,31 @@ export class ClassGenerator {
     data.push(``)
 
     const fileNameWithoutExt = `${type.toLocaleLowerCase()}-message.type`
+    const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
+    fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
+
+    this.generatedFolderIndex.push([className, fileNameWithoutExt])
+  }
+
+  private _generateRequestToResponseType(folders: string[], skeletons: ClassSkeleton[]): void {
+    const data: string[] = []
+
+    data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
+    data.push(``)
+    for (const skeleton of skeletons) {
+      data.push(`import { ${skeleton.fullName} } from '../messages/${skeleton.fileNameWithoutExt}'`)
+    }
+    data.push(``)
+
+    const className = `RequestToResponseType`
+    data.push(`export type ${className}<T> =`)
+    for (const skeleton of skeletons.filter((x) => x.isRequest)) {
+      data.push(`  T extends ${skeleton.name}Dto ? ${skeleton.nameWithoutReqOrRes}ResponseDto :`)
+    }
+    data.push(`  never`)
+    data.push(``)
+
+    const fileNameWithoutExt = `request-to-response.type`
     const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
     fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
 

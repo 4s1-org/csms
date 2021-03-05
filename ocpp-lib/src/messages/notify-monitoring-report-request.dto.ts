@@ -6,6 +6,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MonitoringDataDto } from '../datatypes/monitoring-data.dto'
 
 export class NotifyMonitoringReportRequestDto extends RequestBaseDto {
+  private _className: "NotifyMonitoringReportRequestDto" = "NotifyMonitoringReportRequestDto"
+
   public constructor(
     requestId: number,
     seqNo: number,

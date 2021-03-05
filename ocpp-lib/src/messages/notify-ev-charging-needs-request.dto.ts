@@ -6,6 +6,8 @@ import { ChargingNeedsDto } from '../datatypes/charging-needs.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyEvChargingNeedsRequestDto extends RequestBaseDto {
+  private _className: "NotifyEvChargingNeedsRequestDto" = "NotifyEvChargingNeedsRequestDto"
+
   public constructor(
     chargingNeeds: ChargingNeedsDto,
     evseId: number,
