@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
 import { ChargingSchedulePeriodDto } from './charging-schedule-period.dto'
@@ -11,6 +11,7 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233362
  */
 export class CompositeScheduleDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "CompositeScheduleDto" = "CompositeScheduleDto"
 
   public constructor(

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { BootReasonEnum } from '../enumerations/boot-reason.enum'
 import { ChargingStationDto } from '../datatypes/charging-station.dto'
@@ -10,6 +10,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  * This contains the field definition of the BootNotificationRequest PDU sent by the Charging Station to the CSMS.
  */
 export class BootNotificationRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "BootNotificationRequestDto" = "BootNotificationRequestDto"
 
   public constructor(

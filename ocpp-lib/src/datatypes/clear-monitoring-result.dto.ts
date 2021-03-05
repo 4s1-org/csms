@@ -1,12 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ClearMonitoringStatusEnum } from '../enumerations/clear-monitoring-status.enum'
 import { CustomDataDto } from './custom-data.dto'
 import { StatusInfoDto } from './status-info.dto'
 
 export class ClearMonitoringResultDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "ClearMonitoringResultDto" = "ClearMonitoringResultDto"
 
   public constructor(

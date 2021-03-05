@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 
@@ -8,6 +8,7 @@ import { CustomDataDto } from './custom-data.dto'
  * Defines parameters required for initiating and maintaining wireless communication with other devices.
  */
 export class ModemDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "ModemDto" = "ModemDto"
 
   public constructor() {

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AttributeEnum } from '../enumerations/attribute.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -10,6 +10,7 @@ import { MutabilityEnum } from '../enumerations/mutability.enum'
  * Attribute data of a variable.
  */
 export class VariableAttributeDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "VariableAttributeDto" = "VariableAttributeDto"
 
   public constructor() {

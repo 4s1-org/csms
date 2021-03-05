@@ -1,12 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { AuthorizationDataDto } from '../datatypes/authorization-data.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { UpdateEnum } from '../enumerations/update.enum'
 
 export class SendLocalListRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "SendLocalListRequestDto" = "SendLocalListRequestDto"
 
   public constructor(
