@@ -1,10 +1,10 @@
 import React from 'react'
-import { ChargingStationSimulator } from '@yellowgarbagebag/css-lib'
+import { ChargingStation } from '@yellowgarbagebag/css-lib'
 
 interface IState {}
 
 interface IProps {
-  css: ChargingStationSimulator | undefined
+  cs: ChargingStation | undefined
   isConnected: boolean
 }
 
@@ -63,51 +63,39 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     )
   }
 
-  private send(payload: any | undefined): void {
-    const css = this.props.css
-
-    if (css && payload) {
-      try {
-        css.send(payload)
-      } catch (err) {
-        console.error(err)
-      }
-    }
+  private async sendBootNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+    e.preventDefault()
+    await this.props.cs?.sendBootNotificationRequest()
   }
 
-  private sendBootNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  private async sendHeartbeatRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    this.send(this.props.css?.sendBootNotificationRequest() || undefined)
+    await this.props.cs?.sendHeartbeatRequest()
   }
 
-  private sendHeartbeatRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  private async sendAuthorizationRequest_PinCode(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    this.send(this.props.css?.sendHeartbeatRequest() || undefined)
+    await this.props.cs?.sendAuthorizationRequest_PinCode()
   }
 
-  private sendAuthorizationRequest_PinCode(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  private async sendAuthorizationRequest_Rfid(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    this.send(this.props.css?.sendAuthorizationRequest_PinCode() || undefined)
+    await this.props.cs?.sendAuthorizationRequest_Rfid()
   }
 
-  private sendAuthorizationRequest_Rfid(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  private async sendMeterValueRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    this.send(this.props.css?.sendAuthorizationRequest_Rfid() || undefined)
+    await this.props.cs?.sendMeterValueRequest()
   }
 
-  private sendMeterValueRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  private async sendStatusNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    this.send(this.props.css?.sendMeterValueRequest() || undefined)
+    await this.props.cs?.sendStatusNotificationRequest()
   }
 
-  private sendStatusNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  private async sendNotifyEventRequest_LockFailure(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    this.send(this.props.css?.sendStatusNotificationRequest() || undefined)
-  }
-
-  private sendNotifyEventRequest_LockFailure(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    e.preventDefault()
-    this.send(this.props.css?.sendNotifyEventRequest_LockFailure() || undefined)
+    await this.props.cs?.sendNotifyEventRequest_LockFailure()
   }
 }
 

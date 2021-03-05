@@ -1,11 +1,13 @@
 import React from 'react'
-import { ChargingStationSimulator } from '@yellowgarbagebag/css-lib'
+import { ChargingStation } from '@yellowgarbagebag/css-lib'
 import LoginPanelComp from './login-panel'
 import ChargingStationComp from './charging-station'
+import { WsClient } from '../ws-client'
 
 interface IState {
   isConnected: boolean
-  css: ChargingStationSimulator | undefined
+  cs: ChargingStation | undefined
+  client: WsClient | undefined
 }
 
 interface IProps {}
@@ -15,7 +17,8 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
     super(props)
     this.state = {
       isConnected: false,
-      css: undefined,
+      cs: undefined,
+      client: undefined,
     }
 
     this.onLoginClick = this.onLoginClick.bind(this)
@@ -32,75 +35,33 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
         ></LoginPanelComp>
         <br />
         <div className="container-fluid">
-          <ChargingStationComp css={this.state.css} isConnected={this.state.isConnected} />
+          <ChargingStationComp cs={this.state.cs} isConnected={this.state.isConnected} />
         </div>
       </div>
     )
   }
 
-  private onLoginClick(
+  private async onLoginClick(
     server: string,
     secure: boolean,
     uniqueIdentifier: string,
     username: string,
     password: string,
-  ): void {
-    var authToken = window.btoa(`${username}:${password}`)
-    document.cookie = 'X-Authorization=' + authToken + '; path=/'
+  ): Promise<void> {
+    const client = new WsClient()
+    const cs = new ChargingStation(uniqueIdentifier, client)
+    await client.connect(cs, uniqueIdentifier, username, password, server)
 
-    const socket = new WebSocket(`${secure ? 'wss' : 'ws'}://${server}/ocpp/${uniqueIdentifier}`, ['ocpp2.0.1'])
-
-    const sendCallback = (msg: any): boolean => {
-      if (socket && socket.OPEN) {
-        socket.send(msg)
-        return true
-      }
-      return false
-    }
-    const disconnectCallback = (): void => {
-      socket.close()
-    }
-
-    const css = new ChargingStationSimulator(uniqueIdentifier, sendCallback, disconnectCallback)
-
-    socket.onopen = (): void => {
-      this.setState({
-        ...this.state,
-        css,
-        isConnected: true,
-      })
-
-      css.onOpen()
-    }
-
-    socket.onmessage = (ev: MessageEvent<any>): void => {
-      css.onMessage(ev.data)
-    }
-
-    socket.onerror = (_ev: Event): void => {
-      css.onError('There was an error on WebSocket connection.')
-
-      this.setState({
-        ...this.state,
-        isConnected: false,
-        css: undefined,
-      })
-    }
-
-    socket.onclose = (): void => {
-      css.onClose()
-
-      this.setState({
-        ...this.state,
-        isConnected: false,
-        css: undefined,
-      })
-    }
+    this.setState({
+      cs,
+      client,
+      isConnected: true,
+    })
   }
 
   private onLogoutClick(): void {
-    if (this.state.css) {
-      this.state.css.disconnect()
+    if (this.state.client) {
+      this.state.client.disconnect()
     }
   }
 }
