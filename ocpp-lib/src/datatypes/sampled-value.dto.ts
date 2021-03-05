@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { LocationEnum } from '../enumerations/location.enum'
@@ -14,6 +14,7 @@ import { UnitOfMeasureDto } from './unit-of-measure.dto'
  * Single sampled value in MeterValues. Each value can be accompanied by optional fields. To save on mobile data usage, default values of all of the optional fields are such that. The value without any additional fields will be interpreted, as a register reading of active import energy in Wh (Watt-hour) units.
  */
 export class SampledValueDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "SampledValueDto" = "SampledValueDto"
 
   public constructor(

@@ -1,12 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MessagePriorityEnum } from '../enumerations/message-priority.enum'
 import { MessageStateEnum } from '../enumerations/message-state.enum'
 
 export class GetDisplayMessagesRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "GetDisplayMessagesRequestDto" = "GetDisplayMessagesRequestDto"
 
   public constructor(

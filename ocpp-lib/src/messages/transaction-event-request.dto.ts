@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { EvseDto } from '../datatypes/evse.dto'
@@ -14,6 +14,7 @@ import { TriggerReasonEnum } from '../enumerations/trigger-reason.enum'
  * This section contains the field definition of the TransactionEventRequest PDU sent by the Charging Station to the CSMS. For each of the eventTypes; Started, Updated and Ended, the corresponding cardinality is specified.
  */
 export class TransactionEventRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "TransactionEventRequestDto" = "TransactionEventRequestDto"
 
   public constructor(

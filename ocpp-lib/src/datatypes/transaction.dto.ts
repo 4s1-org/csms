@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingStateEnum } from '../enumerations/charging-state.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -11,6 +11,7 @@ import { ReasonEnum } from '../enumerations/reason.enum'
  * urn:x-oca:ocpp:uid:2:233318
  */
 export class TransactionDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "TransactionDto" = "TransactionDto"
 
   public constructor(

@@ -1,3 +1,4 @@
+import { classToPlain } from 'class-transformer'
 import { OcppErrorCodeEnum } from '.'
 import { OcppBaseMessageDto } from './ocpp-base-message.dto'
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
@@ -25,7 +26,7 @@ export class OcppErrorMessageDto extends OcppBaseMessageDto {
       this.messageId,
       this.errorCode,
       this.errorDescription,
-      this.errorDetails,
+      classToPlain(this.errorDetails),
     ])
   }
 }

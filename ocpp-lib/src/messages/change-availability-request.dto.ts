@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { EvseDto } from '../datatypes/evse.dto'
@@ -10,6 +10,7 @@ import { OperationalStatusEnum } from '../enumerations/operational-status.enum'
  * This contains the field definition of the ChangeAvailabilityRequest PDU sent by the CSMS to the Charging Station.
  */
 export class ChangeAvailabilityRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "ChangeAvailabilityRequestDto" = "ChangeAvailabilityRequestDto"
 
   public constructor(

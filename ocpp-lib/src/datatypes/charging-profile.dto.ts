@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingProfileKindEnum } from '../enumerations/charging-profile-kind.enum'
 import { ChargingProfilePurposeEnum } from '../enumerations/charging-profile-purpose.enum'
@@ -14,6 +14,7 @@ import { RecurrencyKindEnum } from '../enumerations/recurrency-kind.enum'
  * A ChargingProfile consists of ChargingSchedule, describing the amount of power or current that can be delivered per time interval.
  */
 export class ChargingProfileDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "ChargingProfileDto" = "ChargingProfileDto"
 
   public constructor(

@@ -202,7 +202,10 @@ export class ClassGenerator {
 
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)
+    data.push(`import { Exclude } from 'class-transformer'`)
+    data.push(``)
     data.push(`export abstract class ${className} {`)
+    data.push(`  @Exclude()`)
     data.push(`  private _baseClassName: "${className}" = "${className}"`)
     data.push(`}`)
     data.push(``)

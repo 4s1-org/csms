@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { SalesTariffEntryDto } from './sales-tariff-entry.dto'
@@ -11,6 +11,7 @@ import { SalesTariffEntryDto } from './sales-tariff-entry.dto'
  * NOTE: This dataType is based on dataTypes from <<ref-ISOIEC15118-2,ISO 15118-2>>.
  */
 export class SalesTariffDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "SalesTariffDto" = "SalesTariffDto"
 
   public constructor(

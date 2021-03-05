@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ApnDto } from './apn.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -15,6 +15,7 @@ import { VpnDto } from './vpn.dto'
  * The NetworkConnectionProfile defines the functional and technical parameters of a communication link.
  */
 export class NetworkConnectionProfileDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "NetworkConnectionProfileDto" = "NetworkConnectionProfileDto"
 
   public constructor(

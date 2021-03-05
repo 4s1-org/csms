@@ -1,10 +1,11 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class SecurityEventNotificationResponseDto extends ResponseBaseDto {
+  @Exclude()
   private _className: "SecurityEventNotificationResponseDto" = "SecurityEventNotificationResponseDto"
 
   public constructor() {

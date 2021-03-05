@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
@@ -8,6 +8,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  * This contains the field definition of the HeartbeatResponse PDU sent by the CSMS to the Charging Station in response to a HeartbeatRequest.
  */
 export class HeartbeatResponseDto extends ResponseBaseDto {
+  @Exclude()
   private _className: "HeartbeatResponseDto" = "HeartbeatResponseDto"
 
   public constructor(

@@ -1,11 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { MonitoringDataDto } from '../datatypes/monitoring-data.dto'
 
 export class NotifyMonitoringReportRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "NotifyMonitoringReportRequestDto" = "NotifyMonitoringReportRequestDto"
 
   public constructor(

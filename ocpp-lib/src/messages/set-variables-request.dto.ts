@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { SetVariableDataDto } from '../datatypes/set-variable-data.dto'
@@ -9,6 +9,7 @@ import { SetVariableDataDto } from '../datatypes/set-variable-data.dto'
  * This contains the field definition of the SetVariablesRequest PDU sent by the CSMS to the Charging Station.
  */
 export class SetVariablesRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "SetVariablesRequestDto" = "SetVariablesRequestDto"
 
   public constructor(
