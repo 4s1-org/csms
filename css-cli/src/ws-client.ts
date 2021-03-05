@@ -1,7 +1,6 @@
 import WebSocket from 'ws'
-import { IReceiveMessage } from './i-receive-message'
-import { ISendMessage } from './i-send-message'
-import { WsClientBase } from './ws-client-base'
+import { WsClientBase, ISendMessage, IReceiveMessage } from '@yellowgarbagebag/css-lib'
+
 export class WsClient extends WsClientBase implements ISendMessage {
   private socket: WebSocket | undefined
 
