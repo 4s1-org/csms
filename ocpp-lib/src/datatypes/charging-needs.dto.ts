@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { AcChargingParametersDto } from './ac-charging-parameters.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -12,6 +12,7 @@ import { EnergyTransferModeEnum } from '../enumerations/energy-transfer-mode.enu
  * urn:x-oca:ocpp:uid:2:233249
  */
 export class ChargingNeedsDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "ChargingNeedsDto" = "ChargingNeedsDto"
 
   public constructor(

@@ -1,12 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CertificateSignedStatusEnum } from '../enumerations/certificate-signed-status.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class CertificateSignedResponseDto extends ResponseBaseDto {
+  @Exclude()
   private _className: "CertificateSignedResponseDto" = "CertificateSignedResponseDto"
 
   public constructor(

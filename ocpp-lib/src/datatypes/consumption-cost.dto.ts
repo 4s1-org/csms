@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CostDto } from './cost.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -10,6 +10,7 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-oca:ocpp:uid:2:233259
  */
 export class ConsumptionCostDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "ConsumptionCostDto" = "ConsumptionCostDto"
 
   public constructor(

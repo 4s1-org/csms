@@ -1,12 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CertificateHashDataDto } from './certificate-hash-data.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { GetCertificateIdUseEnum } from '../enumerations/get-certificate-id-use.enum'
 
 export class CertificateHashDataChainDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "CertificateHashDataChainDto" = "CertificateHashDataChainDto"
 
   public constructor(

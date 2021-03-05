@@ -1,11 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingRateUnitEnum } from '../enumerations/charging-rate-unit.enum'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetCompositeScheduleRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "GetCompositeScheduleRequestDto" = "GetCompositeScheduleRequestDto"
 
   public constructor(

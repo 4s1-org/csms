@@ -1,12 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
 import { ChargingProfileDto } from '../datatypes/charging-profile.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ReportChargingProfilesRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "ReportChargingProfilesRequestDto" = "ReportChargingProfilesRequestDto"
 
   public constructor(
