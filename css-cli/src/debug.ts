@@ -1,5 +1,5 @@
 import { sleep } from '@yellowgarbagebag/common-lib'
-import { ChargingStation } from './charging-station'
+import { ChargingStation } from '@yellowgarbagebag/css-lib'
 import { WsClient } from './ws-client'
 
 class Simulation {
