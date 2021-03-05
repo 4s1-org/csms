@@ -130,132 +130,68 @@ import { UpdateFirmwareRequestDto } from '../messages/update-firmware-request.dt
 import { UpdateFirmwareResponseDto } from '../messages/update-firmware-response.dto'
 
 export type RequestToResponseType<T> =
-   T extends AuthorizeRequestDto
-  ? AuthorizeResponseDto
-  : T extends BootNotificationRequestDto
-  ? BootNotificationResponseDto
-  : T extends CancelReservationRequestDto
-  ? CancelReservationResponseDto
-  : T extends CertificateSignedRequestDto
-  ? CertificateSignedResponseDto
-  : T extends ChangeAvailabilityRequestDto
-  ? ChangeAvailabilityResponseDto
-  : T extends ClearCacheRequestDto
-  ? ClearCacheResponseDto
-  : T extends ClearChargingProfileRequestDto
-  ? ClearChargingProfileResponseDto
-  : T extends ClearDisplayMessageRequestDto
-  ? ClearDisplayMessageResponseDto
-  : T extends ClearVariableMonitoringRequestDto
-  ? ClearVariableMonitoringResponseDto
-  : T extends ClearedChargingLimitRequestDto
-  ? ClearedChargingLimitResponseDto
-  : T extends CostUpdatedRequestDto
-  ? CostUpdatedResponseDto
-  : T extends CustomerInformationRequestDto
-  ? CustomerInformationResponseDto
-  : T extends DataTransferRequestDto
-  ? DataTransferResponseDto
-  : T extends DeleteCertificateRequestDto
-  ? DeleteCertificateResponseDto
-  : T extends FirmwareStatusNotificationRequestDto
-  ? FirmwareStatusNotificationResponseDto
-  : T extends Get15118EvCertificateRequestDto
-  ? Get15118EvCertificateResponseDto
-  : T extends GetBaseReportRequestDto
-  ? GetBaseReportResponseDto
-  : T extends GetCertificateStatusRequestDto
-  ? GetCertificateStatusResponseDto
-  : T extends GetChargingProfilesRequestDto
-  ? GetChargingProfilesResponseDto
-  : T extends GetCompositeScheduleRequestDto
-  ? GetCompositeScheduleResponseDto
-  : T extends GetDisplayMessagesRequestDto
-  ? GetDisplayMessagesResponseDto
-  : T extends GetInstalledCertificateIdsRequestDto
-  ? GetInstalledCertificateIdsResponseDto
-  : T extends GetLocalListVersionRequestDto
-  ? GetLocalListVersionResponseDto
-  : T extends GetLogRequestDto
-  ? GetLogResponseDto
-  : T extends GetMonitoringReportRequestDto
-  ? GetMonitoringReportResponseDto
-  : T extends GetReportRequestDto
-  ? GetReportResponseDto
-  : T extends GetTransactionStatusRequestDto
-  ? GetTransactionStatusResponseDto
-  : T extends GetVariablesRequestDto
-  ? GetVariablesResponseDto
-  : T extends HeartbeatRequestDto
-  ? HeartbeatResponseDto
-  : T extends InstallCertificateRequestDto
-  ? InstallCertificateResponseDto
-  : T extends LogStatusNotificationRequestDto
-  ? LogStatusNotificationResponseDto
-  : T extends MeterValuesRequestDto
-  ? MeterValuesResponseDto
-  : T extends NotifyChargingLimitRequestDto
-  ? NotifyChargingLimitResponseDto
-  : T extends NotifyCustomerInformationRequestDto
-  ? NotifyCustomerInformationResponseDto
-  : T extends NotifyDisplayMessagesRequestDto
-  ? NotifyDisplayMessagesResponseDto
-  : T extends NotifyEvChargingNeedsRequestDto
-  ? NotifyEvChargingNeedsResponseDto
-  : T extends NotifyEvChargingScheduleRequestDto
-  ? NotifyEvChargingScheduleResponseDto
-  : T extends NotifyEventRequestDto
-  ? NotifyEventResponseDto
-  : T extends NotifyMonitoringReportRequestDto
-  ? NotifyMonitoringReportResponseDto
-  : T extends NotifyReportRequestDto
-  ? NotifyReportResponseDto
-  : T extends PublishFirmwareRequestDto
-  ? PublishFirmwareResponseDto
-  : T extends PublishFirmwareStatusNotificationRequestDto
-  ? PublishFirmwareStatusNotificationResponseDto
-  : T extends ReportChargingProfilesRequestDto
-  ? ReportChargingProfilesResponseDto
-  : T extends RequestStartTransactionRequestDto
-  ? RequestStartTransactionResponseDto
-  : T extends RequestStopTransactionRequestDto
-  ? RequestStopTransactionResponseDto
-  : T extends ReservationStatusUpdateRequestDto
-  ? ReservationStatusUpdateResponseDto
-  : T extends ReserveNowRequestDto
-  ? ReserveNowResponseDto
-  : T extends ResetRequestDto
-  ? ResetResponseDto
-  : T extends SecurityEventNotificationRequestDto
-  ? SecurityEventNotificationResponseDto
-  : T extends SendLocalListRequestDto
-  ? SendLocalListResponseDto
-  : T extends SetChargingProfileRequestDto
-  ? SetChargingProfileResponseDto
-  : T extends SetDisplayMessageRequestDto
-  ? SetDisplayMessageResponseDto
-  : T extends SetMonitoringBaseRequestDto
-  ? SetMonitoringBaseResponseDto
-  : T extends SetMonitoringLevelRequestDto
-  ? SetMonitoringLevelResponseDto
-  : T extends SetNetworkProfileRequestDto
-  ? SetNetworkProfileResponseDto
-  : T extends SetVariableMonitoringRequestDto
-  ? SetVariableMonitoringResponseDto
-  : T extends SetVariablesRequestDto
-  ? SetVariablesResponseDto
-  : T extends SignCertificateRequestDto
-  ? SignCertificateResponseDto
-  : T extends StatusNotificationRequestDto
-  ? StatusNotificationResponseDto
-  : T extends TransactionEventRequestDto
-  ? TransactionEventResponseDto
-  : T extends TriggerMessageRequestDto
-  ? TriggerMessageResponseDto
-  : T extends UnlockConnectorRequestDto
-  ? UnlockConnectorResponseDto
-  : T extends UnpublishFirmwareRequestDto
-  ? UnpublishFirmwareResponseDto
-  : T extends UpdateFirmwareRequestDto
-  ? UpdateFirmwareResponseDto
-  : never
+  T extends AuthorizeRequestDto ? AuthorizeResponseDto :
+  T extends BootNotificationRequestDto ? BootNotificationResponseDto :
+  T extends CancelReservationRequestDto ? CancelReservationResponseDto :
+  T extends CertificateSignedRequestDto ? CertificateSignedResponseDto :
+  T extends ChangeAvailabilityRequestDto ? ChangeAvailabilityResponseDto :
+  T extends ClearCacheRequestDto ? ClearCacheResponseDto :
+  T extends ClearChargingProfileRequestDto ? ClearChargingProfileResponseDto :
+  T extends ClearDisplayMessageRequestDto ? ClearDisplayMessageResponseDto :
+  T extends ClearVariableMonitoringRequestDto ? ClearVariableMonitoringResponseDto :
+  T extends ClearedChargingLimitRequestDto ? ClearedChargingLimitResponseDto :
+  T extends CostUpdatedRequestDto ? CostUpdatedResponseDto :
+  T extends CustomerInformationRequestDto ? CustomerInformationResponseDto :
+  T extends DataTransferRequestDto ? DataTransferResponseDto :
+  T extends DeleteCertificateRequestDto ? DeleteCertificateResponseDto :
+  T extends FirmwareStatusNotificationRequestDto ? FirmwareStatusNotificationResponseDto :
+  T extends Get15118EvCertificateRequestDto ? Get15118EvCertificateResponseDto :
+  T extends GetBaseReportRequestDto ? GetBaseReportResponseDto :
+  T extends GetCertificateStatusRequestDto ? GetCertificateStatusResponseDto :
+  T extends GetChargingProfilesRequestDto ? GetChargingProfilesResponseDto :
+  T extends GetCompositeScheduleRequestDto ? GetCompositeScheduleResponseDto :
+  T extends GetDisplayMessagesRequestDto ? GetDisplayMessagesResponseDto :
+  T extends GetInstalledCertificateIdsRequestDto ? GetInstalledCertificateIdsResponseDto :
+  T extends GetLocalListVersionRequestDto ? GetLocalListVersionResponseDto :
+  T extends GetLogRequestDto ? GetLogResponseDto :
+  T extends GetMonitoringReportRequestDto ? GetMonitoringReportResponseDto :
+  T extends GetReportRequestDto ? GetReportResponseDto :
+  T extends GetTransactionStatusRequestDto ? GetTransactionStatusResponseDto :
+  T extends GetVariablesRequestDto ? GetVariablesResponseDto :
+  T extends HeartbeatRequestDto ? HeartbeatResponseDto :
+  T extends InstallCertificateRequestDto ? InstallCertificateResponseDto :
+  T extends LogStatusNotificationRequestDto ? LogStatusNotificationResponseDto :
+  T extends MeterValuesRequestDto ? MeterValuesResponseDto :
+  T extends NotifyChargingLimitRequestDto ? NotifyChargingLimitResponseDto :
+  T extends NotifyCustomerInformationRequestDto ? NotifyCustomerInformationResponseDto :
+  T extends NotifyDisplayMessagesRequestDto ? NotifyDisplayMessagesResponseDto :
+  T extends NotifyEvChargingNeedsRequestDto ? NotifyEvChargingNeedsResponseDto :
+  T extends NotifyEvChargingScheduleRequestDto ? NotifyEvChargingScheduleResponseDto :
+  T extends NotifyEventRequestDto ? NotifyEventResponseDto :
+  T extends NotifyMonitoringReportRequestDto ? NotifyMonitoringReportResponseDto :
+  T extends NotifyReportRequestDto ? NotifyReportResponseDto :
+  T extends PublishFirmwareRequestDto ? PublishFirmwareResponseDto :
+  T extends PublishFirmwareStatusNotificationRequestDto ? PublishFirmwareStatusNotificationResponseDto :
+  T extends ReportChargingProfilesRequestDto ? ReportChargingProfilesResponseDto :
+  T extends RequestStartTransactionRequestDto ? RequestStartTransactionResponseDto :
+  T extends RequestStopTransactionRequestDto ? RequestStopTransactionResponseDto :
+  T extends ReservationStatusUpdateRequestDto ? ReservationStatusUpdateResponseDto :
+  T extends ReserveNowRequestDto ? ReserveNowResponseDto :
+  T extends ResetRequestDto ? ResetResponseDto :
+  T extends SecurityEventNotificationRequestDto ? SecurityEventNotificationResponseDto :
+  T extends SendLocalListRequestDto ? SendLocalListResponseDto :
+  T extends SetChargingProfileRequestDto ? SetChargingProfileResponseDto :
+  T extends SetDisplayMessageRequestDto ? SetDisplayMessageResponseDto :
+  T extends SetMonitoringBaseRequestDto ? SetMonitoringBaseResponseDto :
+  T extends SetMonitoringLevelRequestDto ? SetMonitoringLevelResponseDto :
+  T extends SetNetworkProfileRequestDto ? SetNetworkProfileResponseDto :
+  T extends SetVariableMonitoringRequestDto ? SetVariableMonitoringResponseDto :
+  T extends SetVariablesRequestDto ? SetVariablesResponseDto :
+  T extends SignCertificateRequestDto ? SignCertificateResponseDto :
+  T extends StatusNotificationRequestDto ? StatusNotificationResponseDto :
+  T extends TransactionEventRequestDto ? TransactionEventResponseDto :
+  T extends TriggerMessageRequestDto ? TriggerMessageResponseDto :
+  T extends UnlockConnectorRequestDto ? UnlockConnectorResponseDto :
+  T extends UnpublishFirmwareRequestDto ? UnpublishFirmwareResponseDto :
+  T extends UpdateFirmwareRequestDto ? UpdateFirmwareResponseDto :
+  never
