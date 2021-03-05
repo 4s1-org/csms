@@ -8,6 +8,8 @@ import { CustomDataDto } from './custom-data.dto'
  * Reference key to a component-variable.
  */
 export class VariableDto extends DatatypeBaseDto {
+  private _className: "VariableDto" = "VariableDto"
+
   public constructor(
     name: string,
   ) {

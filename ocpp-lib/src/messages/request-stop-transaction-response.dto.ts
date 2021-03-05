@@ -7,6 +7,8 @@ import { RequestStartStopStatusEnum } from '../enumerations/request-start-stop-s
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class RequestStopTransactionResponseDto extends ResponseBaseDto {
+  private _className: "RequestStopTransactionResponseDto" = "RequestStopTransactionResponseDto"
+
   public constructor(
     status: RequestStartStopStatusEnum,
   ) {

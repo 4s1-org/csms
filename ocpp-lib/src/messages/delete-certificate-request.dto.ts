@@ -6,6 +6,8 @@ import { CertificateHashDataDto } from '../datatypes/certificate-hash-data.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class DeleteCertificateRequestDto extends RequestBaseDto {
+  private _className: "DeleteCertificateRequestDto" = "DeleteCertificateRequestDto"
+
   public constructor(
     certificateHashData: CertificateHashDataDto,
   ) {

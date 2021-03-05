@@ -5,6 +5,8 @@ import { RequestBaseDto } from '../generated/request-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearDisplayMessageRequestDto extends RequestBaseDto {
+  private _className: "ClearDisplayMessageRequestDto" = "ClearDisplayMessageRequestDto"
+
   public constructor(
     id: number,
   ) {

@@ -8,6 +8,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  * This contains the field definition of the HeartbeatResponse PDU sent by the CSMS to the Charging Station in response to a HeartbeatRequest.
  */
 export class HeartbeatResponseDto extends ResponseBaseDto {
+  private _className: "HeartbeatResponseDto" = "HeartbeatResponseDto"
+
   public constructor(
     currentTime: string,
   ) {

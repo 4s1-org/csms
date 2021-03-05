@@ -9,6 +9,8 @@ import { SetVariableResultDto } from '../datatypes/set-variable-result.dto'
  * This contains the field definition of the SetVariablesResponse PDU sent by the Charging Station to the CSMS in response to a SetVariablesRequest.
  */
 export class SetVariablesResponseDto extends ResponseBaseDto {
+  private _className: "SetVariablesResponseDto" = "SetVariablesResponseDto"
+
   public constructor(
     setVariableResult: SetVariableResultDto[],
   ) {

@@ -7,6 +7,8 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 import { UpdateFirmwareStatusEnum } from '../enumerations/update-firmware-status.enum'
 
 export class UpdateFirmwareResponseDto extends ResponseBaseDto {
+  private _className: "UpdateFirmwareResponseDto" = "UpdateFirmwareResponseDto"
+
   public constructor(
     status: UpdateFirmwareStatusEnum,
   ) {

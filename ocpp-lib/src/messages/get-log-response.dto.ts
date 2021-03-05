@@ -7,6 +7,8 @@ import { LogStatusEnum } from '../enumerations/log-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetLogResponseDto extends ResponseBaseDto {
+  private _className: "GetLogResponseDto" = "GetLogResponseDto"
+
   public constructor(
     status: LogStatusEnum,
   ) {

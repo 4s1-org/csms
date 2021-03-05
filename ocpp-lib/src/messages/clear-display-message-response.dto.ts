@@ -7,6 +7,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class ClearDisplayMessageResponseDto extends ResponseBaseDto {
+  private _className: "ClearDisplayMessageResponseDto" = "ClearDisplayMessageResponseDto"
+
   public constructor(
     status: ClearMessageStatusEnum,
   ) {

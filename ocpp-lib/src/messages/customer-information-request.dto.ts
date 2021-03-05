@@ -7,6 +7,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { IdTokenDto } from '../datatypes/id-token.dto'
 
 export class CustomerInformationRequestDto extends RequestBaseDto {
+  private _className: "CustomerInformationRequestDto" = "CustomerInformationRequestDto"
+
   public constructor(
     requestId: number,
     report: boolean,

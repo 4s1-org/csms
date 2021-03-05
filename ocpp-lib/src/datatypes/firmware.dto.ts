@@ -10,6 +10,8 @@ import { CustomDataDto } from './custom-data.dto'
  * Represents a copy of the firmware that can be loaded/updated on the Charging Station.
  */
 export class FirmwareDto extends DatatypeBaseDto {
+  private _className: "FirmwareDto" = "FirmwareDto"
+
   public constructor(
     location: string,
     retrieveDateTime: string,

@@ -1,41 +1,30 @@
+import { sleep } from '@yellowgarbagebag/common-lib'
 import { SimulationBase } from './simulation-base'
 
 class Simulation extends SimulationBase {
   constructor() {
-    super('LS001', 'LS001', 'test')
+    super('LS002', 'LS002', 'test')
   }
 
-  protected simulate(): void {
-    this.css.send(this.css.sendBootNotificationRequest())
+  public async simulate(): Promise<void> {
+    await this.connect()
 
-    setTimeout(() => {
-      this.css.send(this.css.sendStatusNotificationRequest())
-    }, 100)
-
-    setTimeout(() => {
-      this.css.send(this.css.sendAuthorizationRequest_PinCode())
-    }, 200)
-
-    setTimeout(() => {
-      this.css.send(this.css.sendAuthorizationRequest_Rfid())
-    }, 300)
-
-    setTimeout(() => {
-      this.css.send(this.css.sendMeterValueRequest())
-    }, 400)
-
-    setTimeout(() => {
-      this.css.send(this.css.sendHeartbeatRequest())
-    }, 500)
-
-    setTimeout(() => {
-      this.css.send(this.css.sendNotifyEventRequest_LockFailure())
-    }, 600)
-
-    setTimeout(() => {
-      this.css.disconnect()
-    }, 2000)
+    await this.cs.sendBootNotificationRequest()
+    await sleep(200)
+    await this.cs.sendAuthorizationRequest_PinCode()
+    await sleep(200)
+    await this.cs.sendAuthorizationRequest_Rfid()
+    await sleep(200)
+    await this.cs.sendMeterValueRequest()
+    await sleep(200)
+    await this.cs.sendHeartbeatRequest()
+    await sleep(200)
+    await this.cs.sendNotifyEventRequest_LockFailure()
+    await sleep(200)
+    await this.cs.sendHeartbeatRequest()
+    await sleep(200)
+    this.client.disconnect()
   }
 }
 
-new Simulation()
+new Simulation().simulate()

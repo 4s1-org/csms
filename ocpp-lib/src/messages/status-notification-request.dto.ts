@@ -9,6 +9,8 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  * ---
  */
 export class StatusNotificationRequestDto extends RequestBaseDto {
+  private _className: "StatusNotificationRequestDto" = "StatusNotificationRequestDto"
+
   public constructor(
     timestamp: string,
     connectorStatus: ConnectorStatusEnum,

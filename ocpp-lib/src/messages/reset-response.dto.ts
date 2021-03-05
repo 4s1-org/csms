@@ -7,6 +7,8 @@ import { ResetStatusEnum } from '../enumerations/reset-status.enum'
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class ResetResponseDto extends ResponseBaseDto {
+  private _className: "ResetResponseDto" = "ResetResponseDto"
+
   public constructor(
     status: ResetStatusEnum,
   ) {

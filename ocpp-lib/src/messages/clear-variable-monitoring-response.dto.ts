@@ -6,6 +6,8 @@ import { ClearMonitoringResultDto } from '../datatypes/clear-monitoring-result.d
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearVariableMonitoringResponseDto extends ResponseBaseDto {
+  private _className: "ClearVariableMonitoringResponseDto" = "ClearVariableMonitoringResponseDto"
+
   public constructor(
     clearMonitoringResult: ClearMonitoringResultDto[],
   ) {

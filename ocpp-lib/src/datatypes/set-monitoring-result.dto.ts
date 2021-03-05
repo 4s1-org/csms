@@ -13,6 +13,8 @@ import { VariableDto } from './variable.dto'
  * Class to hold result of SetVariableMonitoring request.
  */
 export class SetMonitoringResultDto extends DatatypeBaseDto {
+  private _className: "SetMonitoringResultDto" = "SetMonitoringResultDto"
+
   public constructor(
     status: SetMonitoringStatusEnum,
     type: MonitorEnum,

@@ -10,6 +10,8 @@ import { CustomDataDto } from './custom-data.dto'
  * Electric Vehicle Supply Equipment
  */
 export class EvseDto extends DatatypeBaseDto {
+  private _className: "EvseDto" = "EvseDto"
+
   public constructor(
     id: number,
   ) {

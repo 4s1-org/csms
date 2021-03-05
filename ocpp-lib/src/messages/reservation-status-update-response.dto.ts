@@ -5,6 +5,8 @@ import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ReservationStatusUpdateResponseDto extends ResponseBaseDto {
+  private _className: "ReservationStatusUpdateResponseDto" = "ReservationStatusUpdateResponseDto"
+
   public constructor() {
     super()
   }

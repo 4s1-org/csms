@@ -6,6 +6,8 @@ import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.e
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearedChargingLimitRequestDto extends RequestBaseDto {
+  private _className: "ClearedChargingLimitRequestDto" = "ClearedChargingLimitRequestDto"
+
   public constructor(
     chargingLimitSource: ChargingLimitSourceEnum,
   ) {

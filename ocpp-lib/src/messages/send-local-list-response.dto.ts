@@ -7,6 +7,8 @@ import { SendLocalListStatusEnum } from '../enumerations/send-local-list-status.
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class SendLocalListResponseDto extends ResponseBaseDto {
+  private _className: "SendLocalListResponseDto" = "SendLocalListResponseDto"
+
   public constructor(
     status: SendLocalListStatusEnum,
   ) {
