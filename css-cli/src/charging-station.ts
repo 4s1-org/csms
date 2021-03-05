@@ -74,17 +74,8 @@ export class ChargingStation implements IReceiveMessage {
     const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
     const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
     const res = await this.sendMessage.send(payload)
-    this.receiveBootNotificationResponse(res)
+    this.heartbeatInterval = res.interval
     return res
-  }
-
-  /**
-   * B01 - Cold Boot Charging Station
-   * B02 - Cold Boot Charging Station - Pending
-   * B03 - Cold Boot Charging Station - Rejected
-   */
-  public receiveBootNotificationResponse(payload: BootNotificationResponseDto): void {
-    this.heartbeatInterval = payload.interval
   }
 
   /**
@@ -93,16 +84,8 @@ export class ChargingStation implements IReceiveMessage {
   public async sendHeartbeatRequest(): Promise<HeartbeatResponseDto> {
     const payload = new HeartbeatRequestDto()
     const res = await this.sendMessage.send(payload)
-    this.receiveHeartbeatResponse(res)
+    // ToDo Handling
     return res
-  }
-
-  /**
-   * G02 - Heartbeat
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveHeartbeatResponse(payload: HeartbeatResponseDto): void {
-    //
   }
 
   /**
@@ -112,7 +95,11 @@ export class ChargingStation implements IReceiveMessage {
     const idTocken = new IdTokenDto('AA12345', IdTokenEnum.ISO14443)
     const payload = new AuthorizeRequestDto(idTocken)
     const res = await this.sendMessage.send(payload)
-    this.receiveAuthorizeResponse(res)
+
+    if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
+      this.logger.warn(`Authorization failed | ${res.idTokenInfo.status}`)
+    }
+
     return res
   }
 
@@ -123,18 +110,12 @@ export class ChargingStation implements IReceiveMessage {
     const idTocken = new IdTokenDto('1234', IdTokenEnum.KeyCode)
     const payload = new AuthorizeRequestDto(idTocken)
     const res = await this.sendMessage.send(payload)
-    this.receiveAuthorizeResponse(res)
-    return res
-  }
 
-  /**
-   * C01 - EV Driver Authorization using RFID
-   * C04 - Authorization using PIN-code
-   */
-  public receiveAuthorizeResponse(payload: AuthorizeResponseDto): void {
-    if (payload.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
-      this.logger.warn(`Authorization failed | ${payload.idTokenInfo.status}`)
+    if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
+      this.logger.warn(`Authorization failed | ${res.idTokenInfo.status}`)
     }
+
+    return res
   }
 
   /**
@@ -145,22 +126,14 @@ export class ChargingStation implements IReceiveMessage {
     const meterValue = new MeterValueDto([sampleValue], new Date().toISOString())
     const payload = new MeterValuesRequestDto(1, [meterValue])
     const res = await this.sendMessage.send(payload)
-    this.receiveMeterValuesResponse(res)
+    // ToDo Handling
     return res
-  }
-
-  /**
-   * J01 - Sending Meter Values not related to a transaction
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public receiveMeterValuesResponse(payload: MeterValuesResponseDto): void {
-    //
   }
 
   /**
    * B05 - Set Variables
    */
-  public receiveSetVariablesRequest(payload: SetVariablesRequestDto): SetVariablesResponseDto {
+  private receiveSetVariablesRequest(payload: SetVariablesRequestDto): SetVariablesResponseDto {
     const result: SetVariableResultDto[] = []
     for (const x of payload.setVariableData) {
       result.push(new SetVariableResultDto(SetVariableStatusEnum.Accepted, x.component, x.variable))
@@ -174,16 +147,8 @@ export class ChargingStation implements IReceiveMessage {
   public async sendStatusNotificationRequest(): Promise<StatusNotificationResponseDto> {
     const payload = new StatusNotificationRequestDto(new Date().toISOString(), ConnectorStatusEnum.Available, 1, 1)
     const res = await this.sendMessage.send(payload)
-    this.receiveStatusNotificationResponse(res)
+    // ToDo Handling
     return res
-  }
-
-  /**
-   * G01 - Status Notification
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveStatusNotificationResponse(payload: StatusNotificationResponseDto): void {
-    //
   }
 
   /**
@@ -197,7 +162,7 @@ export class ChargingStation implements IReceiveMessage {
   /**
    * B06 - Get Variables
    */
-  public receiveGetVariablesRequest(payload: GetVariablesRequestDto): GetVariablesResponseDto {
+  private receiveGetVariablesRequest(payload: GetVariablesRequestDto): GetVariablesResponseDto {
     const result: GetVariableResultDto[] = []
     for (const x of payload.getVariableData) {
       result.push(new GetVariableResultDto(GetVariableStatusEnum.Accepted, x.component, x.variable))
@@ -230,15 +195,7 @@ export class ChargingStation implements IReceiveMessage {
     )
     const payload = new NotifyEventRequestDto(new Date().toISOString(), 1, data)
     const res = await this.sendMessage.send(payload)
-    this.receiveNotifyEventResponse(res)
+    // ToDo Handling
     return res
-  }
-
-  /**
-   * G05 - Lock Failure
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public receiveNotifyEventResponse(payload: NotifyEventResponseDto): void {
-    //
   }
 }
