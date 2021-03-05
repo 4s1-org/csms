@@ -129,8 +129,14 @@ import { UnpublishFirmwareRequestDto } from '../messages/unpublish-firmware-requ
 import { UnpublishFirmwareResponseDto } from '../messages/unpublish-firmware-response.dto'
 import { UpdateFirmwareRequestDto } from '../messages/update-firmware-request.dto'
 import { UpdateFirmwareResponseDto } from '../messages/update-firmware-response.dto'
+import { RequestBaseDto } from './request-base.dto'
+import { ResponseBaseDto } from './response-base.dto'
 
-export const actionDtoMapping = [
+export const actionDtoMapping: {
+  action: OcppActionEnum
+  requestDto: { new (...args: any[]): RequestBaseDto }
+  responseDto: { new (...args: any[]): ResponseBaseDto }
+}[] = [
   {
     action: OcppActionEnum.Authorize,
     requestDto: AuthorizeRequestDto,

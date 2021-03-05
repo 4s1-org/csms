@@ -168,9 +168,15 @@ export class ClassGenerator {
     for (const skeleton of skeletons) {
       data.push(`import { ${skeleton.name}${skeleton.nameSuffix} } from '../messages/${skeleton.fileNameWithoutExt}'`)
     }
+    data.push(`import { RequestBaseDto } from './request-base.dto'`)
+    data.push(`import { ResponseBaseDto } from './response-base.dto'`)
 
     data.push(``)
-    data.push(`export const ${className} = [`)
+    data.push(`export const ${className}: {`)
+    data.push(`  action: OcppActionEnum`)
+    data.push(`  requestDto: { new (...args: any[]): RequestBaseDto }`)
+    data.push(`  responseDto: { new (...args: any[]): ResponseBaseDto }`)
+    data.push(`}[] = [`)
     for (const skeleton of skeletons.filter((x) => x.isRequest)) {
       const name = skeleton.nameWithoutReqOrRes
       data.push(`  {`)
