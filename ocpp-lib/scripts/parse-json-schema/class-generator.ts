@@ -242,16 +242,10 @@ export class ClassGenerator {
 
     const className = `RequestToResponseType`
     data.push(`export type ${className}<T> =`)
-    let isFirst = true
-    for (const skeleton of skeletons) {
-      if (skeleton.isRequest) {
-        data.push(`  ${!isFirst ? ':' : ''} T extends ${skeleton.name}Dto`)
-      } else if (skeleton.isResponse) {
-        data.push(`  ? ${skeleton.name}Dto`)
-      }
-      isFirst = false
+    for (const skeleton of skeletons.filter((x) => x.isRequest)) {
+      data.push(`  T extends ${skeleton.name}Dto ? ${skeleton.nameWithoutReqOrRes}ResponseDto :`)
     }
-    data.push(`  : never`)
+    data.push(`  never`)
     data.push(``)
 
     const fileNameWithoutExt = `request-to-response.type`
