@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ChargingLimitSourceEnum } from '../enumerations/charging-limit-source.enum'
 import { CustomDataDto } from './custom-data.dto'
@@ -10,6 +10,7 @@ import { CustomDataDto } from './custom-data.dto'
  * urn:x-enexis:ecdm:uid:2:234489
  */
 export class ChargingLimitDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "ChargingLimitDto" = "ChargingLimitDto"
 
   public constructor(

@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { ComponentDto } from './component.dto'
 import { CustomDataDto } from './custom-data.dto'
@@ -12,6 +12,7 @@ import { VariableDto } from './variable.dto'
  * Class to report an event notification for a component-variable.
  */
 export class EventDataDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "EventDataDto" = "EventDataDto"
 
   public constructor(

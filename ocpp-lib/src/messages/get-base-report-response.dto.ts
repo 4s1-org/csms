@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 import { GenericDeviceModelStatusEnum } from '../enumerations/generic-device-model-status.enum'
@@ -10,6 +10,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
  * This contains the field definition of the GetBaseReportResponse PDU sent by the Charging Station to the CSMS.
  */
 export class GetBaseReportResponseDto extends ResponseBaseDto {
+  @Exclude()
   private _className: "GetBaseReportResponseDto" = "GetBaseReportResponseDto"
 
   public constructor(

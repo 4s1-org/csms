@@ -13,16 +13,12 @@ import {
   IdTokenEnum,
   MeterValuesRequestDto,
   MeterValuesResponseDto,
-  OcppErrorMessageDto,
-  OcppActionEnum,
-  OcppRequestMessageDto,
   ChargingStationDto,
   BootReasonEnum,
   IdTokenDto,
   MeterValueDto,
   ConnectorStatusEnum,
   SampledValueDto,
-  IChargingStation,
   SetVariablesRequestDto,
   SetVariablesResponseDto,
   SetVariableResultDto,
@@ -42,74 +38,31 @@ import {
   EventNotificationEnum,
   VariableDto,
   NotifyEventResponseDto,
-  OcppResponseMessageDto,
+  RequestBaseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-
-export abstract class ChargingStation implements IChargingStation {
+import { ISendMessage } from './i-send-message'
+import { IReceiveMessage } from './i-receive-message'
+export class ChargingStation implements IReceiveMessage {
   public readonly logger = new Logger(this.uniqueIdentifier)
-  private heartbeatInterval = 3600
-  private sendList: OcppRequestMessageDto[] = []
+  public heartbeatInterval = 3600
 
-  public constructor(public readonly uniqueIdentifier: string) {
+  public constructor(public readonly uniqueIdentifier: string, private readonly sendMessage: ISendMessage) {
     // nothing to do
   }
 
-  public addToSendList(requestMessage: OcppRequestMessageDto): void {
-    this.sendList.push(requestMessage)
-  }
-
-  public incomingRequestMessage(msg: OcppRequestMessageDto): ResponseBaseDto {
-    if (msg.payload instanceof SetVariablesRequestDto) {
-      return this.receiveSetVariablesRequest(msg.payload)
+  public receive(payload: RequestBaseDto): ResponseBaseDto {
+    if (payload instanceof SetVariablesRequestDto) {
+      return this.receiveSetVariablesRequest(payload)
     }
-    if (msg.payload instanceof ChangeAvailabilityRequestDto) {
-      return this.receiveChangeAvailabilityRequest(msg.payload)
+    if (payload instanceof ChangeAvailabilityRequestDto) {
+      return this.receiveChangeAvailabilityRequest(payload)
     }
-    if (msg.payload instanceof GetVariablesRequestDto) {
-      return this.receiveGetVariablesRequest(msg.payload)
+    if (payload instanceof GetVariablesRequestDto) {
+      return this.receiveGetVariablesRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
-  }
-
-  public incomingResponseMessage(msg: OcppResponseMessageDto): void {
-    if (msg.payload instanceof BootNotificationResponseDto) {
-      return this.receiveBootNotificationResponse(msg.payload)
-    }
-    if (msg.payload instanceof HeartbeatResponseDto) {
-      return this.receiveHeartbeatResponse(msg.payload)
-    }
-    if (msg.payload instanceof StatusNotificationResponseDto) {
-      return this.receiveStatusNotificationResponse(msg.payload)
-    }
-    if (msg.payload instanceof AuthorizeResponseDto) {
-      return this.receiveAuthorizeResponse(msg.payload)
-    }
-    if (msg.payload instanceof MeterValuesResponseDto) {
-      return this.receiveMeterValuesResponse(msg.payload)
-    }
-    if (msg.payload instanceof NotifyEventResponseDto) {
-      return this.receiveNotifyEventResponse(msg.payload)
-    }
-
-    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public incomingErrorMessage(msg: OcppErrorMessageDto): void {
-    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
-  }
-
-  public getActionToRequest(messageId: string): OcppActionEnum {
-    const request = this.sendList.find((x) => x.messageId === messageId)
-    if (request) {
-      const index = this.sendList.indexOf(request)
-      this.sendList.splice(index, 1)
-      return request.action
-    }
-
-    throw new CsmsError(OcppErrorCodeEnum.GenericError, 'Request to response not found')
   }
 
   /**
@@ -117,81 +70,64 @@ export abstract class ChargingStation implements IChargingStation {
    * B02 - Cold Boot Charging Station - Pending
    * B03 - Cold Boot Charging Station - Rejected
    */
-  public sendBootNotificationRequest(): BootNotificationRequestDto {
+  public async sendBootNotificationRequest(): Promise<BootNotificationResponseDto> {
     const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
     const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
-    return payload
-  }
-
-  /**
-   * B01 - Cold Boot Charging Station
-   * B02 - Cold Boot Charging Station - Pending
-   * B03 - Cold Boot Charging Station - Rejected
-   */
-  private receiveBootNotificationResponse(payload: BootNotificationResponseDto): void {
-    this.heartbeatInterval = payload.interval
+    const res = await this.sendMessage.send(payload)
+    this.heartbeatInterval = res.interval
+    return res
   }
 
   /**
    * G02 - Heartbeat
    */
-  public sendHeartbeatRequest(): HeartbeatRequestDto {
+  public async sendHeartbeatRequest(): Promise<HeartbeatResponseDto> {
     const payload = new HeartbeatRequestDto()
-    return payload
-  }
-
-  /**
-   * G02 - Heartbeat
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveHeartbeatResponse(payload: HeartbeatResponseDto): void {
-    //
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
   }
 
   /**
    * C01 - EV Driver Authorization using RFID
    */
-  public sendAuthorizationRequest_Rfid(): AuthorizeRequestDto {
+  public async sendAuthorizationRequest_Rfid(): Promise<AuthorizeResponseDto> {
     const idTocken = new IdTokenDto('AA12345', IdTokenEnum.ISO14443)
     const payload = new AuthorizeRequestDto(idTocken)
-    return payload
+    const res = await this.sendMessage.send(payload)
+
+    if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
+      this.logger.warn(`Authorization failed | ${res.idTokenInfo.status}`)
+    }
+
+    return res
   }
 
   /**
    * C04 - Authorization using PIN-code
    */
-  public sendAuthorizationRequest_PinCode(): AuthorizeRequestDto {
+  public async sendAuthorizationRequest_PinCode(): Promise<AuthorizeResponseDto> {
     const idTocken = new IdTokenDto('1234', IdTokenEnum.KeyCode)
     const payload = new AuthorizeRequestDto(idTocken)
-    return payload
-  }
+    const res = await this.sendMessage.send(payload)
 
-  /**
-   * C01 - EV Driver Authorization using RFID
-   * C04 - Authorization using PIN-code
-   */
-  private receiveAuthorizeResponse(payload: AuthorizeResponseDto): void {
-    if (payload.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
-      this.logger.warn(`Authorization failed | ${payload.idTokenInfo.status}`)
+    if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
+      this.logger.warn(`Authorization failed | ${res.idTokenInfo.status}`)
     }
+
+    return res
   }
 
   /**
    * J01 - Sending Meter Values not related to a transaction
    */
-  public sendMeterValueRequest(): MeterValuesRequestDto {
+  public async sendMeterValueRequest(): Promise<MeterValuesResponseDto> {
     const sampleValue = new SampledValueDto(53)
     const meterValue = new MeterValueDto([sampleValue], new Date().toISOString())
     const payload = new MeterValuesRequestDto(1, [meterValue])
-    return payload
-  }
-
-  /**
-   * J01 - Sending Meter Values not related to a transaction
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveMeterValuesResponse(payload: MeterValuesResponseDto): void {
-    //
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
   }
 
   /**
@@ -208,17 +144,11 @@ export abstract class ChargingStation implements IChargingStation {
   /**
    * G01 - Status Notification
    */
-  public sendStatusNotificationRequest(): StatusNotificationRequestDto {
+  public async sendStatusNotificationRequest(): Promise<StatusNotificationResponseDto> {
     const payload = new StatusNotificationRequestDto(new Date().toISOString(), ConnectorStatusEnum.Available, 1, 1)
-    return payload
-  }
-
-  /**
-   * G01 - Status Notification
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveStatusNotificationResponse(payload: StatusNotificationResponseDto): void {
-    //
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
   }
 
   /**
@@ -243,7 +173,7 @@ export abstract class ChargingStation implements IChargingStation {
   /**
    * G05 - Lock Failure
    */
-  public sendNotifyEventRequest_LockFailure(): NotifyEventRequestDto {
+  public async sendNotifyEventRequest_LockFailure(): Promise<NotifyEventResponseDto> {
     // ToDo: Das so umsetzen:
     // G05.FR.02
     // The Charging Station SHALL send a NotifyEventRequest to the CSMS for the
@@ -263,14 +193,9 @@ export abstract class ChargingStation implements IChargingStation {
         new VariableDto('Problem'),
       ),
     )
-    return new NotifyEventRequestDto(new Date().toISOString(), 1, data)
-  }
-
-  /**
-   * G05 - Lock Failure
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveNotifyEventResponse(payload: NotifyEventResponseDto): void {
-    //
+    const payload = new NotifyEventRequestDto(new Date().toISOString(), 1, data)
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
   }
 }

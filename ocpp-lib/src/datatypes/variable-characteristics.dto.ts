@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { DatatypeBaseDto } from '../generated/datatype-base.dto'
 import { CustomDataDto } from './custom-data.dto'
 import { DataEnum } from '../enumerations/data.enum'
@@ -9,6 +9,7 @@ import { DataEnum } from '../enumerations/data.enum'
  * Fixed read-only parameters of a variable.
  */
 export class VariableCharacteristicsDto extends DatatypeBaseDto {
+  @Exclude()
   private _className: "VariableCharacteristicsDto" = "VariableCharacteristicsDto"
 
   public constructor(

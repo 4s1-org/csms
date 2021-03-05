@@ -1,12 +1,13 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingLimitDto } from '../datatypes/charging-limit.dto'
 import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyChargingLimitRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "NotifyChargingLimitRequestDto" = "NotifyChargingLimitRequestDto"
 
   public constructor(

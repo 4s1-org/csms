@@ -1,11 +1,12 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ChargingScheduleDto } from '../datatypes/charging-schedule.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyEvChargingScheduleRequestDto extends RequestBaseDto {
+  @Exclude()
   private _className: "NotifyEvChargingScheduleRequestDto" = "NotifyEvChargingScheduleRequestDto"
 
   public constructor(

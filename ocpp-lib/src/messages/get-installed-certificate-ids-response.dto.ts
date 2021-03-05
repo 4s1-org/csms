@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { Type } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { CertificateHashDataChainDto } from '../datatypes/certificate-hash-data-chain.dto'
 import { CustomDataDto } from '../datatypes/custom-data.dto'
@@ -8,6 +8,7 @@ import { GetInstalledCertificateStatusEnum } from '../enumerations/get-installed
 import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetInstalledCertificateIdsResponseDto extends ResponseBaseDto {
+  @Exclude()
   private _className: "GetInstalledCertificateIdsResponseDto" = "GetInstalledCertificateIdsResponseDto"
 
   public constructor(
