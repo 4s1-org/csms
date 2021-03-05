@@ -1,5 +1,6 @@
 import {
   RequestBaseDto,
+  actionDtoMapping,
   OcppRequestMessageDto,
   OcppMessageHandler,
   OcppResponseMessageDto,
@@ -8,8 +9,6 @@ import {
   ResponseBaseDto,
   OcppErrorMessageDto,
   RequestToResponseType,
-  actionRequestDtoMapping,
-  OcppActionEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { v4 as uuid } from 'uuid'
 import { IReceiveMessage } from './i-receive-message'
@@ -77,14 +76,12 @@ export abstract class WsClientBase {
 
   public send<T extends RequestBaseDto>(payload: T): Promise<RequestToResponseType<T>> {
     return new Promise((resolve, reject) => {
-      const action = Object.keys(actionRequestDtoMapping).find(
-        (key) => payload instanceof actionRequestDtoMapping[key],
-      ) as OcppActionEnum
-      if (!action) {
+      const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
+      if (!mapping) {
         throw new Error('No action mapping found' + payload)
       }
 
-      const msg = new OcppRequestMessageDto(uuid(), action, payload)
+      const msg = new OcppRequestMessageDto(uuid(), mapping.action, payload)
       this.requestList.push(new PendingPromises(msg, resolve, reject))
       if (!this.sendInternal(msg.toMessageString())) {
         reject('Socket not open')
