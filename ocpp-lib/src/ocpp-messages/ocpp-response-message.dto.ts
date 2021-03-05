@@ -1,3 +1,4 @@
+import { classToPlain } from 'class-transformer'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 import { OcppBaseMessageDto } from './ocpp-base-message.dto'
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
@@ -12,6 +13,6 @@ export class OcppResponseMessageDto extends OcppBaseMessageDto {
   public payload: ResponseBaseDto
 
   public toMessageString(): string {
-    return JSON.stringify([this.messageTypeId, this.messageId, this.payload])
+    return JSON.stringify([this.messageTypeId, this.messageId, classToPlain(this.payload)])
   }
 }
