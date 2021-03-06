@@ -40,7 +40,7 @@ import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
 import { verifyPassword } from './config/password'
 
-export class ChargingStation implements IChargingStation {
+export class ChargingStationOld implements IChargingStation {
   public readonly logger = new Logger(this.model.uniqueIdentifier)
   private sendList: OcppRequestMessageDto[] = []
 
