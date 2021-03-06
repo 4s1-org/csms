@@ -112,12 +112,12 @@ export class WebSocketServer {
         socket.send(result.toMessageString())
 
         // Very dirty hack to send message from server to client
-        if (result.messageTypeId === OcppMessageTypeIdEnum.Result) {
-          setTimeout(() => {
-            const payload = cs.sendGetVariablesRequest()
-            this.sendRequest(socket, cs, payload)
-          }, 500)
-        }
+        //if (result.messageTypeId === OcppMessageTypeIdEnum.Result) {
+        //  setTimeout(() => {
+        //    const payload = cs.sendGetVariablesRequest()
+        //    this.sendRequest(socket, cs, payload)
+        //  }, 500)
+        //}
       }
       this.sendAdminStatusToAll(cs.model)
     }
