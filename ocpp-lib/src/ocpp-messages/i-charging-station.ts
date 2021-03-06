@@ -5,6 +5,9 @@ import { ResponseBaseDto } from '../generated/response-base.dto'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { OcppResponseMessageDto } from './ocpp-response-message.dto'
 
+/**
+ * @deprecated
+ */
 export interface IChargingStation {
   logger: Logger
 

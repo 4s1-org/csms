@@ -20,7 +20,7 @@ export class PayloadConverter {
     return this._instance
   }
 
-  public convertRequest(msg: OcppRequestMessageDto): void {
+  public convertRequestPayload(msg: OcppRequestMessageDto): void {
     const mapping = actionDtoMapping.find((x) => x.action === msg.action)
     if (!mapping) {
       throw new CsmsError(OcppErrorCodeEnum.NotSupported, msg.action)
@@ -28,7 +28,7 @@ export class PayloadConverter {
     msg.payload = plainToClass(mapping.requestDto, msg.payload)
   }
 
-  public convertResponse(msg: OcppResponseMessageDto, action: OcppActionEnum): void {
+  public convertResponsePayload(msg: OcppResponseMessageDto, action: OcppActionEnum): void {
     const mapping = actionDtoMapping.find((x) => x.action === action)
     if (!mapping) {
       throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
