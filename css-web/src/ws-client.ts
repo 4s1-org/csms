@@ -3,13 +3,8 @@ import { WsClientBase, ISendMessage, IReceiveMessage } from '@yellowgarbagebag/c
 export class WsClient extends WsClientBase implements ISendMessage {
   private socket: WebSocket | undefined
 
-  public constructor() {
-    super()
-  }
-
   public connect(
     receiveMessage: IReceiveMessage,
-    uniqueIdentifier: string,
     username: string,
     password: string,
     server = 'localhost:3000',
@@ -20,7 +15,7 @@ export class WsClient extends WsClientBase implements ISendMessage {
       var authToken = window.btoa(`${username}:${password}`)
       document.cookie = 'X-Authorization=' + authToken + '; path=/'
 
-      this.socket = new WebSocket(`${secure ? 'wss' : 'ws'}://${server}/ocpp/${uniqueIdentifier}`, ['ocpp2.0.1'])
+      this.socket = new WebSocket(`${secure ? 'wss' : 'ws'}://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1'])
 
       this.socket.onopen = (): void => {
         resolve()

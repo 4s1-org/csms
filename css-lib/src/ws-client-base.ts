@@ -1,3 +1,4 @@
+import { Logger } from '@yellowgarbagebag/common-lib'
 import {
   RequestBaseDto,
   actionDtoMapping,
@@ -27,14 +28,14 @@ class PendingPromises {
 
 export abstract class WsClientBase {
   private requestList: PendingPromises[] = []
+  public readonly logger = new Logger(this.uniqueIdentifier)
 
-  public constructor() {
+  public constructor(protected readonly uniqueIdentifier: string) {
     // nothing to do
   }
 
   protected abstract connect(
     receiveMessage: IReceiveMessage,
-    uniqueIdentifier: string,
     username: string,
     password: string,
     server: string,
@@ -44,6 +45,7 @@ export abstract class WsClientBase {
     const msg = OcppMessageHandler.instance.validateAndConvert(data)
 
     if (msg instanceof OcppRequestMessageDto) {
+      this.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
       PayloadValidator.instance.validateRequest(msg)
       PayloadConverter.instance.convertRequest(msg)
       // Verarbeitung der Daten
@@ -52,6 +54,7 @@ export abstract class WsClientBase {
       const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
       // Anwortdaten validieren (nice to have)
       PayloadValidator.instance.validateResponse(responseCall, msg.action)
+      this.logger.info(`Outgoing Response | ${msg.action} | ${msg.messageId}`)
       this.sendInternal(responseCall.toMessageString())
       return
     } else if (msg instanceof OcppResponseMessageDto) {
@@ -60,6 +63,7 @@ export abstract class WsClientBase {
         if (pendingPromise.msg.messageId === msg.messageId) {
           const idx = this.requestList.indexOf(pendingPromise)
           this.requestList.splice(idx, 1)
+          this.logger.info(`Incoming Response | ${pendingPromise.msg.action} | ${msg.messageId}`)
           PayloadValidator.instance.validateResponse(msg, pendingPromise.msg.action)
           PayloadConverter.instance.convertResponse(msg, pendingPromise.msg.action)
           pendingPromise.resolve(msg.payload)
@@ -82,6 +86,7 @@ export abstract class WsClientBase {
       }
 
       const msg = new OcppRequestMessageDto(uuid(), mapping.action, payload)
+      this.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
       this.requestList.push(new PendingPromises(msg, resolve, reject))
       if (!this.sendInternal(msg.toMessageString())) {
         reject('Socket not open')

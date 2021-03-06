@@ -18,7 +18,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "debug": "tsc && node dist/debug.js",
+    "debug": "tsc && node dist/debug.js | pino-pretty",
     "build:watch": "tsc --watch",
     "start:simulation1": "pnpm run build && node ./dist/simulation1.js | pino-pretty",
     "start:simulation2": "pnpm run build && concurrently \"node ./dist/simulation2a.js | pino-pretty\" \"node ./dist/simulation2b.js | pino-pretty\" \"node ./dist/simulation2c.js | pino-pretty\"",

@@ -10,12 +10,12 @@ export abstract class SimulationBase {
     protected readonly username: string,
     protected readonly password: string,
   ) {
-    this.client = new WsClient()
+    this.client = new WsClient(this.uniqueIdentifier)
     this.cs = new ChargingStation(this.uniqueIdentifier, this.client)
   }
 
   protected async connect(): Promise<void> {
-    await this.client.connect(this.cs, 'LS001', 'LS001', 'test')
+    await this.client.connect(this.cs, 'LS001', 'test')
   }
 
   protected abstract simulate(): Promise<void>
