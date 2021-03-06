@@ -56,7 +56,6 @@
     "@yellowgarbagebag/csms-lib": "workspace:*",
     "@yellowgarbagebag/ocpp-lib": "workspace:*",
     "configstore": "^5.0.1",
-    "uuid": "^8.3.2",
     "ws": "^7.4.3"
   },
   "devDependencies": {
@@ -64,7 +63,6 @@
     "@types/configstore": "^4.0.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.31",
-    "@types/uuid": "^8.3.0",
     "@types/ws": "^7.4.0",
     "commander": "^7.1.0",
     "eslint": "^7.20.0",

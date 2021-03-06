@@ -53,14 +53,12 @@ importers:
       '@yellowgarbagebag/csms-lib': link:../csms-lib
       '@yellowgarbagebag/ocpp-lib': link:../ocpp-lib
       configstore: 5.0.1
-      uuid: 8.3.2
       ws: 7.4.3
     devDependencies:
       '@hest-lab/eslint-config': 1.5.0_f6339eb86f12c2a6fe1ebfd912be66e8
       '@types/configstore': 4.0.0
       '@types/jest': 26.0.20
       '@types/node': 14.14.31
-      '@types/uuid': 8.3.0
       '@types/ws': 7.4.0
       commander: 7.1.0
       eslint: 7.20.0
@@ -76,7 +74,6 @@ importers:
       '@types/configstore': ^4.0.0
       '@types/jest': ^26.0.20
       '@types/node': ^14.14.31
-      '@types/uuid': ^8.3.0
       '@types/ws': ^7.4.0
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/csms-lib': workspace:*
@@ -91,7 +88,6 @@ importers:
       ts-jest: ^26.5.1
       ts-node: ^9.1.1
       typescript: ^4.1.5
-      uuid: ^8.3.2
       ws: ^7.4.3
   csms-server-ui:
     dependencies:
@@ -143,7 +139,6 @@ importers:
       '@yellowgarbagebag/css-lib': link:../css-lib
       '@yellowgarbagebag/ocpp-lib': link:../ocpp-lib
       pino-pretty: 4.5.0
-      uuid: 8.3.2
       ws: 7.4.3
     devDependencies:
       '@hest-lab/eslint-config': 1.5.0_f6339eb86f12c2a6fe1ebfd912be66e8
@@ -173,18 +168,15 @@ importers:
       prettier: ^2.2.1
       ts-node: ^9.1.1
       typescript: ^4.1.5
-      uuid: ^8.3.2
       ws: ^7.4.3
   css-lib:
     dependencies:
       '@yellowgarbagebag/common-lib': link:../common-lib
       '@yellowgarbagebag/ocpp-lib': link:../ocpp-lib
-      uuid: 8.3.2
     devDependencies:
       '@hest-lab/eslint-config': 1.5.0_f6339eb86f12c2a6fe1ebfd912be66e8
       '@types/jest': 26.0.20
       '@types/node': 14.14.31
-      '@types/uuid': 8.3.0
       eslint: 7.20.0
       jest: 26.6.3_ts-node@9.1.1
       nodemon: 2.0.7
@@ -197,7 +189,6 @@ importers:
       '@hest-lab/eslint-config': ^1.5.0
       '@types/jest': ^26.0.20
       '@types/node': ^14.14.31
-      '@types/uuid': ^8.3.0
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/ocpp-lib': workspace:*
       eslint: ^7.20.0
@@ -208,7 +199,6 @@ importers:
       ts-jest: ^26.5.1
       ts-node: ^9.1.1
       typescript: ^4.1.5
-      uuid: ^8.3.2
   css-web:
     dependencies:
       '@testing-library/dom': 7.29.6
@@ -221,6 +211,7 @@ importers:
       '@types/react-dom': 17.0.1
       '@yellowgarbagebag/common-lib': link:../common-lib
       '@yellowgarbagebag/css-lib': link:../css-lib
+      '@yellowgarbagebag/ocpp-lib': link:../ocpp-lib
       bootstrap: 4.6.0
       react: 17.0.1
       react-dom: 17.0.1_react@17.0.1
@@ -243,6 +234,7 @@ importers:
       '@types/react-dom': ^17.0.1
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/css-lib': workspace:*
+      '@yellowgarbagebag/ocpp-lib': workspace:*
       bootstrap: ^4.6.0
       eslint: ^7.20.0
       prettier: ^2.2.1
@@ -258,6 +250,7 @@ importers:
       ajv-formats: 1.5.1
       class-transformer: 0.4.0
       reflect-metadata: 0.1.13
+      uuid: 8.3.2
     devDependencies:
       '@hest-lab/eslint-config': 1.5.0_f6339eb86f12c2a6fe1ebfd912be66e8
       '@types/jest': 26.0.20
@@ -283,6 +276,7 @@ importers:
       ts-jest: ^26.5.1
       ts-node: ^9.1.1
       typescript: ^4.1.5
+      uuid: ^8.3.2
 lockfileVersion: 5.2
 packages:
   /@babel/code-frame/7.10.4:
@@ -2488,10 +2482,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-sYAF+CF9XZ5cvEBkI7RtrG9g2GtMBkviTnBxYYyq+8BWvO4QtXfwwR6a2LFwCi4evMKZfpv6U43ViYvv17Wz3Q==
-  /@types/uuid/8.3.0:
-    dev: true
-    resolution:
-      integrity: sha512-eQ9qFW/fhfGJF8WKHGEHZEyVWfZxrT+6CLIJGBcZPfxUh/+BnEj+UCGYMlr9qZuX/2AltsvwrGqp0LhEW8D0zQ==
   /@types/webpack-sources/2.1.0:
     dependencies:
       '@types/node': 14.14.31

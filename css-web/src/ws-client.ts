@@ -1,6 +1,5 @@
-import { WsClientBase, ISendMessage, IReceiveMessage } from '@yellowgarbagebag/css-lib'
-
-export class WsClient extends WsClientBase implements ISendMessage {
+import { WsClientBase, IReceiveMessage } from '@yellowgarbagebag/ocpp-lib'
+export class WsClient extends WsClientBase {
   private socket: WebSocket | undefined
 
   public connect(
