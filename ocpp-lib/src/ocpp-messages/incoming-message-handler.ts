@@ -11,6 +11,9 @@ import { OcppMessageValidationError } from './ocpp-message-validation-error'
 import { CsmsError } from '../utils/csms-error'
 import { IChargingStation } from './i-charging-station'
 
+/**
+ * @deprecated
+ */
 export function handleIncomingMessage(cs: IChargingStation, data: unknown): OcppBaseMessageDto | undefined {
   // Brauche im Fehlerfall
   let msg: OcppBaseMessageDto | undefined
@@ -22,15 +25,15 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
 
     if (msg instanceof OcppRequestMessageDto) {
       cs.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
-      PayloadValidator.instance.validateRequestPayload(msg.payload, msg.action)
-      PayloadConverter.instance.convertRequest(msg)
+      PayloadValidator.instance.validateRequestPayload(msg)
+      PayloadConverter.instance.convertRequestPayload(msg)
       // Verarbeitung der Daten
       const responsePayload: ResponseBaseDto = cs.incomingRequestMessage(msg)
       // Antwortobjekt erstellen
       const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
       // Anwortdaten validieren (nice to have)
       try {
-        PayloadValidator.instance.validateResponsePayload(responseCall.payload, msg.action)
+        PayloadValidator.instance.validateResponsePayload(responseCall, msg.action)
       } catch (err) {
         if (err instanceof CsmsError) {
           cs.logger.error(`Server send invalid data | ${err.errorCode} | ${err.errorDescription}`)
@@ -45,8 +48,8 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
     } else if (msg instanceof OcppResponseMessageDto) {
       const action = cs.getActionToRequest(msg.messageId)
       cs.logger.info(`Incoming Response | ${action} | ${msg.messageId}`)
-      PayloadValidator.instance.validateResponsePayload(msg.payload, action)
-      PayloadConverter.instance.convertResponse(msg, action)
+      PayloadValidator.instance.validateResponsePayload(msg, action)
+      PayloadConverter.instance.convertResponsePayload(msg, action)
       cs.incomingResponseMessage(msg)
       // Auf eine Antwort wird keine Antwort gesendet
       return undefined

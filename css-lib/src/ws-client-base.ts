@@ -13,18 +13,7 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { v4 as uuid } from 'uuid'
 import { IReceiveMessage } from './i-receive-message'
-
-class PendingPromises {
-  public readonly timestamp: number
-
-  constructor(
-    public readonly msg: OcppRequestMessageDto,
-    public readonly resolve: (value: any) => void,
-    public readonly reject: (reason?: any) => void,
-  ) {
-    this.timestamp = Date.now()
-  }
-}
+import { PendingPromises } from './pending-promises'
 
 export abstract class WsClientBase {
   private requestList: PendingPromises[] = []
@@ -46,14 +35,14 @@ export abstract class WsClientBase {
 
     if (msg instanceof OcppRequestMessageDto) {
       this.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
-      PayloadValidator.instance.validateRequest(msg)
-      PayloadConverter.instance.convertRequest(msg)
+      PayloadValidator.instance.validateRequestPayload(msg)
+      PayloadConverter.instance.convertRequestPayload(msg)
       // Verarbeitung der Daten
       const responsePayload: ResponseBaseDto = receiveMessage.receive(msg.payload, msg.action)
       // Antwortobjekt erstellen
       const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
       // Anwortdaten validieren (nice to have)
-      PayloadValidator.instance.validateResponse(responseCall, msg.action)
+      PayloadValidator.instance.validateResponsePayload(responseCall, msg.action)
       this.logger.info(`Outgoing Response | ${msg.action} | ${msg.messageId}`)
       this.sendInternal(responseCall.toMessageString())
       return
@@ -64,8 +53,8 @@ export abstract class WsClientBase {
           const idx = this.requestList.indexOf(pendingPromise)
           this.requestList.splice(idx, 1)
           this.logger.info(`Incoming Response | ${pendingPromise.msg.action} | ${msg.messageId}`)
-          PayloadValidator.instance.validateResponse(msg, pendingPromise.msg.action)
-          PayloadConverter.instance.convertResponse(msg, pendingPromise.msg.action)
+          PayloadValidator.instance.validateResponsePayload(msg, pendingPromise.msg.action)
+          PayloadConverter.instance.convertResponsePayload(msg, pendingPromise.msg.action)
           pendingPromise.resolve(msg.payload)
           return
         }
