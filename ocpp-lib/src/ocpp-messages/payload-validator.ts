@@ -5,9 +5,9 @@ import { jsonSchemas } from '../generated/json-schema-imports'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 import v6 from 'ajv/lib/refs/json-schema-draft-06.json'
-import { ResponseBaseDto } from '../generated/response-base.dto'
-import { RequestBaseDto } from '../generated'
 import { classToPlain } from 'class-transformer'
+import { OcppRequestMessageDto } from './ocpp-request-message.dto'
+import { OcppResponseMessageDto } from './ocpp-response-message.dto'
 
 export class PayloadValidator {
   private static _instance: PayloadValidator
@@ -30,12 +30,12 @@ export class PayloadValidator {
     return this._instance
   }
 
-  public validateRequestPayload(payload: RequestBaseDto, action: OcppActionEnum): any {
-    this.validate(classToPlain(payload), jsonSchemas[action + 'Request'])
+  public validateRequestPayload(msg: OcppRequestMessageDto): any {
+    this.validate(classToPlain(msg.payload), jsonSchemas[msg.action + 'Request'])
   }
 
-  public validateResponsePayload(payload: ResponseBaseDto, action: OcppActionEnum): any {
-    this.validate(classToPlain(payload), jsonSchemas[action + 'Response'])
+  public validateResponsePayload(msg: OcppResponseMessageDto, action: OcppActionEnum): any {
+    this.validate(classToPlain(msg.payload), jsonSchemas[action + 'Response'])
   }
 
   private validate(data: any, schema: any): void {
