@@ -3,7 +3,7 @@ import http from 'http'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
 import { v4 as uuid } from 'uuid'
-import { ChargingStation } from './charging-station'
+import { ChargingStationOld } from './charging-station'
 import {
   OcppBaseMessageDto,
   handleIncomingMessage,
@@ -13,10 +13,18 @@ import {
   OcppMessageTypeIdEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
+import {
+  ChargingStationModel,
+  SerializationHelper,
+  ChargingStationGroupFlag,
+  ChargingStationState,
+} from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { verifyPassword } from './config/password'
+import { ChargingStation } from './cs/charging-station'
+import { WsClientBase } from './cs/ws-client-base'
+import { WsClient } from './cs/ws-client'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
@@ -38,8 +46,8 @@ export class WebSocketServer {
   public startServer(): void {
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
-    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void =>
-      this.onChargingStationConnection(socket, tlsSocket, cs),
+    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void =>
+      this.onChargingStationConnection(socket, tlsSocket, model),
     )
 
     const wssAdmin = new WebSocket.Server({
@@ -52,7 +60,7 @@ export class WebSocketServer {
         const socketId = request.headers['sec-websocket-key']
         this.logger.info(`Client connected: ${socketId}`)
 
-        const [username, password] = this.getCredentials(request)
+        const [username, passwordHash] = this.getCredentials(request)
         const baseURL = `http://${request.headers.host}/`
         const myURL = new URL(request.url || '', baseURL)
 
@@ -60,19 +68,19 @@ export class WebSocketServer {
           // Charging Station
           const uniqueIdentifier = myURL.pathname.split('/')[2]
 
-          const cs: ChargingStation | undefined = this.authenticateChargingStation(uniqueIdentifier, username, password)
-
-          if (!cs) {
+          const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
+          if (!model || model.username !== username || model.passwordHash !== passwordHash) {
+            this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
             return this.send401(tlsSocket)
           }
 
           wssChargingStations.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
-            wssChargingStations.emit('connection', socket, tlsSocket, cs)
+            wssChargingStations.emit('connection', socket, tlsSocket, model)
           })
         } else if (myURL.pathname.startsWith('/admin')) {
           // Admin
           const adminCredentials = this.dataStorage.get('adminCredentials')
-          if (username !== adminCredentials.username || !verifyPassword(password, adminCredentials.passwordHash)) {
+          if (username !== adminCredentials.username || !verifyPassword(passwordHash, adminCredentials.passwordHash)) {
             return this.send401(tlsSocket)
           }
 
@@ -89,7 +97,10 @@ export class WebSocketServer {
     this.logger.info(`WebSocketServer is running on port ${port}`)
   }
 
-  private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void {
+  private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void {
+    const client = new WsClient(uniqueIdentifier)
+    const cs = new ChargingStation(model, client)
+
     this.csSockets.add(socket)
     this.csTlsSockets.add(tlsSocket)
     cs.connect()
@@ -196,7 +207,7 @@ export class WebSocketServer {
   }
 
   // ToDo: https://gitlab.com/YellowGarbageBag/csms/-/issues/56
-  private sendRequest(socket: WebSocket, cs: ChargingStation, payload: RequestBaseDto): void {
+  private sendRequest(socket: WebSocket, cs: ChargingStationOld, payload: RequestBaseDto): void {
     const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
     if (!mapping) {
       throw new Error('No mapping found')
@@ -209,20 +220,5 @@ export class WebSocketServer {
       socket.send(msg.toMessageString())
       cs.addToSendList(msg)
     }
-  }
-
-  private authenticateChargingStation(
-    uniqueIdentifier: string,
-    username: string,
-    password: string,
-  ): ChargingStation | undefined {
-    const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
-    if (model) {
-      const cs = new ChargingStation(model)
-      if (cs.checkCredentials(username, password)) {
-        return cs
-      }
-    }
-    return undefined
   }
 }
