@@ -62,6 +62,11 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
   private onLogoutClick(): void {
     if (this.state.client) {
       this.state.client.disconnect()
+      this.setState({
+        cs: undefined,
+        client: undefined,
+        isConnected: false,
+      })
     }
   }
 }

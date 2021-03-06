@@ -1,59 +1,42 @@
-import { Logger } from '@yellowgarbagebag/common-lib'
-import {
-  RequestBaseDto,
-  actionDtoMapping,
-  OcppRequestMessageDto,
-  OcppMessageHandler,
-  OcppResponseMessageDto,
-  PayloadValidator,
-  PayloadConverter,
-  ResponseBaseDto,
-  OcppErrorMessageDto,
-  RequestToResponseType,
-} from '@yellowgarbagebag/ocpp-lib'
 import { v4 as uuid } from 'uuid'
+import { Logger } from '@yellowgarbagebag/common-lib'
 import { IReceiveMessage } from './i-receive-message'
+import { PendingPromises } from './pending-promises'
+import { ISendMessage } from './i-send-message'
+import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto'
+import { OcppMessageHandler } from '../ocpp-messages/ocpp-message-handler'
+import { PayloadValidator } from '../ocpp-messages/payload-validator'
+import { PayloadConverter } from '../ocpp-messages/payload-converter'
+import { ResponseBaseDto } from '../generated/response-base.dto'
+import { OcppResponseMessageDto } from '../ocpp-messages/ocpp-response-message.dto'
+import { OcppErrorMessageDto } from '../ocpp-messages/ocpp-error-message.dto'
+import { RequestToResponseType } from '../generated/request-to-response.type'
+import { RequestBaseDto } from '../generated/request-base.dto'
+import { actionDtoMapping } from '../generated/action-dto-mapping'
 
-class PendingPromises {
-  public readonly timestamp: number
-
-  constructor(
-    public readonly msg: OcppRequestMessageDto,
-    public readonly resolve: (value: any) => void,
-    public readonly reject: (reason?: any) => void,
-  ) {
-    this.timestamp = Date.now()
-  }
-}
-
-export abstract class WsClientBase {
+export abstract class WsClientBase implements ISendMessage {
   private requestList: PendingPromises[] = []
   public readonly logger = new Logger(this.uniqueIdentifier)
 
-  public constructor(protected readonly uniqueIdentifier: string) {
+  constructor(protected readonly uniqueIdentifier: string) {
     // nothing to do
   }
 
-  protected abstract connect(
-    receiveMessage: IReceiveMessage,
-    username: string,
-    password: string,
-    server: string,
-  ): Promise<void>
+  public abstract disconnect(): void
 
-  protected onMessage(data: any, receiveMessage: IReceiveMessage): void {
+  public onMessage(data: any, receiveMessage: IReceiveMessage): void {
     const msg = OcppMessageHandler.instance.validateAndConvert(data)
 
     if (msg instanceof OcppRequestMessageDto) {
       this.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
-      PayloadValidator.instance.validateRequest(msg)
-      PayloadConverter.instance.convertRequest(msg)
+      PayloadValidator.instance.validateRequestPayload(msg)
+      PayloadConverter.instance.convertRequestPayload(msg)
       // Verarbeitung der Daten
-      const responsePayload: ResponseBaseDto = receiveMessage.receive(msg.payload)
+      const responsePayload: ResponseBaseDto = receiveMessage.receive(msg.payload, msg.action)
       // Antwortobjekt erstellen
       const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
       // Anwortdaten validieren (nice to have)
-      PayloadValidator.instance.validateResponse(responseCall, msg.action)
+      PayloadValidator.instance.validateResponsePayload(responseCall, msg.action)
       this.logger.info(`Outgoing Response | ${msg.action} | ${msg.messageId}`)
       this.sendInternal(responseCall.toMessageString())
       return
@@ -64,8 +47,8 @@ export abstract class WsClientBase {
           const idx = this.requestList.indexOf(pendingPromise)
           this.requestList.splice(idx, 1)
           this.logger.info(`Incoming Response | ${pendingPromise.msg.action} | ${msg.messageId}`)
-          PayloadValidator.instance.validateResponse(msg, pendingPromise.msg.action)
-          PayloadConverter.instance.convertResponse(msg, pendingPromise.msg.action)
+          PayloadValidator.instance.validateResponsePayload(msg, pendingPromise.msg.action)
+          PayloadConverter.instance.convertResponsePayload(msg, pendingPromise.msg.action)
           pendingPromise.resolve(msg.payload)
           return
         }

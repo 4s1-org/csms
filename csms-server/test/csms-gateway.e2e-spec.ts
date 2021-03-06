@@ -18,7 +18,7 @@ import { IDataStorageSchema } from '../src/config/i-data-store-schema'
 import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
 import { hashPassword } from '../src/config/password'
 
-describe('CSMS Gateway', () => {
+describe.skip('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
   let socket: WebSocket | undefined
   const csInfo = 'LS0815'
