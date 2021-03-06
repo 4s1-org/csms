@@ -255,6 +255,7 @@ importers:
       '@hest-lab/eslint-config': 1.5.0_f6339eb86f12c2a6fe1ebfd912be66e8
       '@types/jest': 26.0.20
       '@types/node': 14.14.31
+      '@types/uuid': 8.3.0
       eslint: 7.20.0
       jest: 26.6.3_ts-node@9.1.1
       prettier: 2.2.1
@@ -265,6 +266,7 @@ importers:
       '@hest-lab/eslint-config': ^1.5.0
       '@types/jest': ^26.0.20
       '@types/node': ^14.14.31
+      '@types/uuid': ^8.3.0
       '@yellowgarbagebag/common-lib': workspace:*
       ajv: ^7.1.1
       ajv-formats: ^1.5.1
@@ -2482,6 +2484,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-sYAF+CF9XZ5cvEBkI7RtrG9g2GtMBkviTnBxYYyq+8BWvO4QtXfwwR6a2LFwCi4evMKZfpv6U43ViYvv17Wz3Q==
+  /@types/uuid/8.3.0:
+    dev: true
+    resolution:
+      integrity: sha512-eQ9qFW/fhfGJF8WKHGEHZEyVWfZxrT+6CLIJGBcZPfxUh/+BnEj+UCGYMlr9qZuX/2AltsvwrGqp0LhEW8D0zQ==
   /@types/webpack-sources/2.1.0:
     dependencies:
       '@types/node': 14.14.31
