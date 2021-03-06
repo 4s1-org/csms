@@ -1,4 +1,4 @@
-import { OcppRequestMessageDto } from '@yellowgarbagebag/ocpp-lib'
+import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto'
 
 export class PendingPromises {
   public readonly timestamp: number
