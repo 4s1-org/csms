@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 
+export * from './communication'
 export * from './datatypes'
 export * from './enumerations'
 export * from './generated'

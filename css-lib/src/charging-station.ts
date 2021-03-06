@@ -39,10 +39,10 @@ import {
   VariableDto,
   NotifyEventResponseDto,
   RequestBaseDto,
+  IReceiveMessage,
+  ISendMessage,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ISendMessage } from './i-send-message'
-import { IReceiveMessage } from './i-receive-message'
 export class ChargingStation implements IReceiveMessage {
   public readonly logger = new Logger(this.uniqueIdentifier)
   public heartbeatInterval = 3600

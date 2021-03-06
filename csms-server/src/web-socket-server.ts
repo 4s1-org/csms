@@ -2,21 +2,13 @@ import WebSocket from 'ws'
 import http from 'http'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
-import { v4 as uuid } from 'uuid'
-import { ChargingStation } from './charging-station'
-import {
-  OcppBaseMessageDto,
-  handleIncomingMessage,
-  RequestBaseDto,
-  actionDtoMapping,
-  OcppRequestMessageDto,
-  OcppMessageTypeIdEnum,
-} from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { verifyPassword } from './config/password'
+import { ChargingStation } from './charging-station'
+import { WsClient } from './ws-client'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
@@ -38,8 +30,8 @@ export class WebSocketServer {
   public startServer(): void {
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
-    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void =>
-      this.onChargingStationConnection(socket, tlsSocket, cs),
+    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void =>
+      this.onChargingStationConnection(socket, tlsSocket, model),
     )
 
     const wssAdmin = new WebSocket.Server({
@@ -60,14 +52,14 @@ export class WebSocketServer {
           // Charging Station
           const uniqueIdentifier = myURL.pathname.split('/')[2]
 
-          const cs: ChargingStation | undefined = this.authenticateChargingStation(uniqueIdentifier, username, password)
-
-          if (!cs) {
+          const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
+          if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
+            this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
             return this.send401(tlsSocket)
           }
 
           wssChargingStations.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
-            wssChargingStations.emit('connection', socket, tlsSocket, cs)
+            wssChargingStations.emit('connection', socket, tlsSocket, model)
           })
         } else if (myURL.pathname.startsWith('/admin')) {
           // Admin
@@ -89,14 +81,18 @@ export class WebSocketServer {
     this.logger.info(`WebSocketServer is running on port ${port}`)
   }
 
-  private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, cs: ChargingStation): void {
+  private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void {
     this.csSockets.add(socket)
     this.csTlsSockets.add(tlsSocket)
-    cs.connect()
+
+    const client = new WsClient(model.uniqueIdentifier, socket)
+    const cs = new ChargingStation(model, client)
+
+    //cs.connect()
     this.sendAdminStatusToAll(cs.model)
 
     socket.onclose = (): void => {
-      cs.disconnect()
+      //cs.disconnect()
       this.csSockets.delete(socket)
       this.csTlsSockets.delete(tlsSocket)
       this.sendAdminStatusToAll(cs.model)
@@ -106,19 +102,21 @@ export class WebSocketServer {
       this.logger.error('Error' + err)
     }
 
-    socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-      const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
-      if (result) {
-        socket.send(result.toMessageString())
+    socket.onmessage = (data: WebSocket.MessageEvent): void => {
+      client.onMessage(data.data, cs)
 
-        // Very dirty hack to send message from server to client
-        if (result.messageTypeId === OcppMessageTypeIdEnum.Result) {
-          setTimeout(() => {
-            const payload = cs.sendGetVariablesRequest()
-            this.sendRequest(socket, cs, payload)
-          }, 500)
-        }
-      }
+      // const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
+      // if (result) {
+      //   socket.send(result.toMessageString())
+
+      //   // Very dirty hack to send message from server to client
+      //   //if (result.messageTypeId === OcppMessageTypeIdEnum.Result) {
+      //   //  setTimeout(() => {
+      //   //    const payload = cs.sendGetVariablesRequest()
+      //   //    this.sendRequest(socket, cs, payload)
+      //   //  }, 500)
+      //   //}
+      // }
       this.sendAdminStatusToAll(cs.model)
     }
   }
@@ -193,36 +191,5 @@ export class WebSocketServer {
     )
 
     this.logger.info(`WebSocketServer stopped`)
-  }
-
-  // ToDo: https://gitlab.com/YellowGarbageBag/csms/-/issues/56
-  private sendRequest(socket: WebSocket, cs: ChargingStation, payload: RequestBaseDto): void {
-    const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
-    if (!mapping) {
-      throw new Error('No mapping found')
-    }
-
-    const msg = new OcppRequestMessageDto(uuid(), mapping.action, payload)
-    cs.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
-    cs.logger.debug('Send', msg)
-    if (socket && socket.OPEN) {
-      socket.send(msg.toMessageString())
-      cs.addToSendList(msg)
-    }
-  }
-
-  private authenticateChargingStation(
-    uniqueIdentifier: string,
-    username: string,
-    password: string,
-  ): ChargingStation | undefined {
-    const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
-    if (model) {
-      const cs = new ChargingStation(model)
-      if (cs.checkCredentials(username, password)) {
-        return cs
-      }
-    }
-    return undefined
   }
 }

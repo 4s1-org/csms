@@ -2,8 +2,6 @@ import {
   BootNotificationRequestDto,
   BootNotificationResponseDto,
   OcppErrorCodeEnum,
-  RegistrationStatusEnum,
-  RequestBaseDto,
   ResponseBaseDto,
   CsmsError,
   HeartbeatRequestDto,
@@ -12,127 +10,65 @@ import {
   StatusNotificationResponseDto,
   AuthorizeRequestDto,
   AuthorizeResponseDto,
-  IdTokenInfoDto,
-  AuthorizationStatusEnum,
   IdTokenEnum,
   MeterValuesRequestDto,
   MeterValuesResponseDto,
-  OcppErrorMessageDto,
-  OcppActionEnum,
-  OcppRequestMessageDto,
-  IChargingStation,
   SetVariablesRequestDto,
-  SetVariableDataDto,
-  ComponentDto,
-  VariableDto,
   SetVariablesResponseDto,
   ChangeAvailabilityRequestDto,
-  OperationalStatusEnum,
   ChangeAvailabilityResponseDto,
+  AuthorizationStatusEnum,
   GetVariablesRequestDto,
-  GetVariableDataDto,
   GetVariablesResponseDto,
   NotifyEventRequestDto,
+  ComponentDto,
+  VariableDto,
   NotifyEventResponseDto,
-  OcppResponseMessageDto,
+  RequestBaseDto,
+  RegistrationStatusEnum,
+  IdTokenInfoDto,
+  SetVariableDataDto,
+  OperationalStatusEnum,
+  GetVariableDataDto,
+  OcppActionEnum,
+  IReceiveMessage,
+  ISendMessage,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
-import { verifyPassword } from './config/password'
 
-export class ChargingStation implements IChargingStation {
+export class ChargingStation implements IReceiveMessage {
   public readonly logger = new Logger(this.model.uniqueIdentifier)
-  private sendList: OcppRequestMessageDto[] = []
+  public heartbeatInterval = 3600
 
-  public constructor(public readonly model: ChargingStationModel) {
+  public constructor(public readonly model: ChargingStationModel, private readonly sendMessage: ISendMessage) {
     // nothing to do
   }
 
-  public get uniqueIdentifier(): string {
-    return this.model.uniqueIdentifier
-  }
-
-  public connect(): void {
-    this.logger.info('Connected')
-    this.model.state = ChargingStationState.Connecting
-  }
-
-  public disconnect(): void {
-    this.logger.info('Disconnected')
-    this.model.state = ChargingStationState.Offline
-  }
-
-  public addToSendList(requestMessage: OcppRequestMessageDto): void {
-    this.sendList.push(requestMessage)
-  }
-
-  public checkCredentials(username: string, password: string): boolean {
-    const result = username === this.model.username && verifyPassword(password, this.model.passwordHash)
-    if (result) {
-      this.logger.info('Login successful')
-    } else {
-      this.logger.warn('Login failed')
-    }
-    return result
-  }
-
-  public incomingRequestMessage(msg: OcppRequestMessageDto): ResponseBaseDto {
+  public receive(payload: RequestBaseDto, action: OcppActionEnum): ResponseBaseDto {
     this.model.lastContact = Date.now()
-    this.model.lastCommand = msg.action
+    this.model.lastCommand = action
 
-    if (msg.payload instanceof BootNotificationRequestDto) {
-      return this.receiveBootNotificationRequest(msg.payload)
+    if (payload instanceof BootNotificationRequestDto) {
+      return this.receiveBootNotificationRequest(payload)
     }
-    if (msg.payload instanceof HeartbeatRequestDto) {
-      return this.receiveHeartbeatRequest(msg.payload)
+    if (payload instanceof HeartbeatRequestDto) {
+      return this.receiveHeartbeatRequest(payload)
     }
-    if (msg.payload instanceof StatusNotificationRequestDto) {
-      return this.receiveStatusNotificationRequest(msg.payload)
+    if (payload instanceof StatusNotificationRequestDto) {
+      return this.receiveStatusNotificationRequest(payload)
     }
-    if (msg.payload instanceof AuthorizeRequestDto) {
-      return this.receiveAuthorizeRequest(msg.payload)
+    if (payload instanceof AuthorizeRequestDto) {
+      return this.receiveAuthorizeRequest(payload)
     }
-    if (msg.payload instanceof MeterValuesRequestDto) {
-      return this.receiveMeterValuesRequest(msg.payload)
+    if (payload instanceof MeterValuesRequestDto) {
+      return this.receiveMeterValuesRequest(payload)
     }
-    if (msg.payload instanceof NotifyEventRequestDto) {
-      return this.receiveNotifyEventRequest(msg.payload)
+    if (payload instanceof NotifyEventRequestDto) {
+      return this.receiveNotifyEventRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
-  }
-
-  public incomingResponseMessage(msg: OcppResponseMessageDto): void {
-    this.model.lastContact = Date.now()
-
-    if (msg.payload instanceof SetVariablesResponseDto) {
-      return this.receiveSetVariableResponse(msg.payload)
-    }
-    if (msg.payload instanceof ChangeAvailabilityResponseDto) {
-      return this.receiveChangeAvailabilityResponse(msg.payload)
-    }
-    if (msg.payload instanceof GetVariablesResponseDto) {
-      return this.receiveGetVariablesResponse(msg.payload)
-    }
-
-    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
-  }
-
-  public incomingErrorMessage(msg: OcppErrorMessageDto): void {
-    this.model.lastContact = Date.now()
-
-    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
-  }
-
-  public getActionToRequest(messageId: string): OcppActionEnum {
-    const request = this.sendList.find((x) => x.messageId === messageId)
-    if (request) {
-      const index = this.sendList.indexOf(request)
-      this.sendList.splice(index, 1)
-      return request.action
-    }
-
-    throw new CsmsError(OcppErrorCodeEnum.GenericError, 'Request to response not found')
   }
 
   /**
@@ -178,23 +114,6 @@ export class ChargingStation implements IChargingStation {
   }
 
   /**
-   * B05 - Set Variables
-   */
-  public sendSetVariablesRequest(): SetVariablesRequestDto {
-    return new SetVariablesRequestDto([
-      new SetVariableDataDto('Foo', new ComponentDto('Test'), new VariableDto('yyy')),
-      new SetVariableDataDto('Bar', new ComponentDto('Test'), new VariableDto('xxx')),
-    ])
-  }
-
-  /**
-   * B05 - Set Variables
-   */
-  private receiveSetVariableResponse(payload: SetVariablesResponseDto): void {
-    //
-  }
-
-  /**
    * G01 - Status Notification
    */
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
@@ -202,37 +121,44 @@ export class ChargingStation implements IChargingStation {
   }
 
   /**
-   * G03 - Change Availability EVSE/Connector
-   */
-  public sendChangeAvailabilityRequest(): ChangeAvailabilityRequestDto {
-    return new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative)
-  }
-
-  /**
-   * G03 - Change Availability EVSE/Connector
-   */
-  private receiveChangeAvailabilityResponse(payload: ChangeAvailabilityResponseDto): void {
-    //
-  }
-
-  /**
-   * B06 - Get Variables
-   */
-  public sendGetVariablesRequest(): GetVariablesRequestDto {
-    return new GetVariablesRequestDto([new GetVariableDataDto(new ComponentDto('test'), new VariableDto('foo'))])
-  }
-
-  /**
-   * B06 - Get Variables
-   */
-  private receiveGetVariablesResponse(payload: GetVariablesResponseDto): void {
-    //
-  }
-
-  /**
    * G05 - Lock Failure
    */
   private receiveNotifyEventRequest(payload: NotifyEventRequestDto): NotifyEventResponseDto {
     return new NotifyEventResponseDto()
+  }
+
+  /**
+   * B05 - Set Variables
+   */
+  public async sendSetVariablesRequest(): Promise<SetVariablesResponseDto> {
+    const payload = new SetVariablesRequestDto([
+      new SetVariableDataDto('Foo', new ComponentDto('Test'), new VariableDto('yyy')),
+      new SetVariableDataDto('Bar', new ComponentDto('Test'), new VariableDto('xxx')),
+    ])
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * G03 - Change Availability EVSE/Connector
+   */
+  public async sendChangeAvailabilityRequest(): Promise<ChangeAvailabilityResponseDto> {
+    const payload = new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative)
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * B06 - Get Variables
+   */
+  public async sendGetVariablesRequest(): Promise<GetVariablesResponseDto> {
+    const payload = new GetVariablesRequestDto([
+      new GetVariableDataDto(new ComponentDto('test'), new VariableDto('foo')),
+    ])
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
   }
 }
