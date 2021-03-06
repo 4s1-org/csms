@@ -4,20 +4,15 @@ import { WsClientBase, ISendMessage, IReceiveMessage } from '@yellowgarbagebag/c
 export class WsClient extends WsClientBase implements ISendMessage {
   private socket: WebSocket | undefined
 
-  public constructor() {
-    super()
-  }
-
   public connect(
     receiveMessage: IReceiveMessage,
-    uniqueIdentifier: string,
     username: string,
     password: string,
     server = 'localhost:3000',
   ): Promise<void> {
     return new Promise((resolve, reject) => {
       const secure = false
-      this.socket = new WebSocket(`${secure ? 'wss' : 'ws'}://${server}/ocpp/${uniqueIdentifier}`, ['ocpp2.0.1'], {
+      this.socket = new WebSocket(`${secure ? 'wss' : 'ws'}://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1'], {
         headers: {
           authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
         },

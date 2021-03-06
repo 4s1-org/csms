@@ -48,9 +48,9 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
     username: string,
     password: string,
   ): Promise<void> {
-    const client = new WsClient()
+    const client = new WsClient(uniqueIdentifier)
     const cs = new ChargingStation(uniqueIdentifier, client)
-    await client.connect(cs, uniqueIdentifier, username, password, server)
+    await client.connect(cs, username, password, server)
 
     this.setState({
       cs,
