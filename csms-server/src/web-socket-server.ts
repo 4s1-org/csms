@@ -5,26 +5,24 @@ import { TLSSocket } from 'tls'
 import { v4 as uuid } from 'uuid'
 import { ChargingStationOld } from './charging-station'
 import {
-  OcppBaseMessageDto,
-  handleIncomingMessage,
   RequestBaseDto,
   actionDtoMapping,
   OcppRequestMessageDto,
-  OcppMessageTypeIdEnum,
+  OcppErrorMessageDto,
+  OcppMessageHandler,
+  OcppResponseMessageDto,
+  PayloadConverter,
+  PayloadValidator,
+  ResponseBaseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import {
-  ChargingStationModel,
-  SerializationHelper,
-  ChargingStationGroupFlag,
-  ChargingStationState,
-} from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { verifyPassword } from './config/password'
 import { ChargingStation } from './cs/charging-station'
-import { WsClientBase } from './cs/ws-client-base'
-import { WsClient } from './cs/ws-client'
+import { PendingPromises } from './cs/pending-promises'
+import { WsClient } from './ws-client'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
@@ -60,7 +58,7 @@ export class WebSocketServer {
         const socketId = request.headers['sec-websocket-key']
         this.logger.info(`Client connected: ${socketId}`)
 
-        const [username, passwordHash] = this.getCredentials(request)
+        const [username, password] = this.getCredentials(request)
         const baseURL = `http://${request.headers.host}/`
         const myURL = new URL(request.url || '', baseURL)
 
@@ -69,7 +67,7 @@ export class WebSocketServer {
           const uniqueIdentifier = myURL.pathname.split('/')[2]
 
           const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
-          if (!model || model.username !== username || model.passwordHash !== passwordHash) {
+          if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
             this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
             return this.send401(tlsSocket)
           }
@@ -80,7 +78,7 @@ export class WebSocketServer {
         } else if (myURL.pathname.startsWith('/admin')) {
           // Admin
           const adminCredentials = this.dataStorage.get('adminCredentials')
-          if (username !== adminCredentials.username || !verifyPassword(passwordHash, adminCredentials.passwordHash)) {
+          if (username !== adminCredentials.username || !verifyPassword(password, adminCredentials.passwordHash)) {
             return this.send401(tlsSocket)
           }
 
@@ -98,16 +96,17 @@ export class WebSocketServer {
   }
 
   private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void {
-    const client = new WsClient(uniqueIdentifier)
-    const cs = new ChargingStation(model, client)
-
     this.csSockets.add(socket)
     this.csTlsSockets.add(tlsSocket)
-    cs.connect()
+
+    const client = new WsClient(model.uniqueIdentifier, socket)
+    const cs = new ChargingStation(model, client)
+
+    //cs.connect()
     this.sendAdminStatusToAll(cs.model)
 
     socket.onclose = (): void => {
-      cs.disconnect()
+      //cs.disconnect()
       this.csSockets.delete(socket)
       this.csTlsSockets.delete(tlsSocket)
       this.sendAdminStatusToAll(cs.model)
@@ -117,19 +116,21 @@ export class WebSocketServer {
       this.logger.error('Error' + err)
     }
 
-    socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-      const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
-      if (result) {
-        socket.send(result.toMessageString())
+    socket.onmessage = (data: WebSocket.MessageEvent): void => {
+      client.onMessage(data.data, cs)
 
-        // Very dirty hack to send message from server to client
-        //if (result.messageTypeId === OcppMessageTypeIdEnum.Result) {
-        //  setTimeout(() => {
-        //    const payload = cs.sendGetVariablesRequest()
-        //    this.sendRequest(socket, cs, payload)
-        //  }, 500)
-        //}
-      }
+      // const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
+      // if (result) {
+      //   socket.send(result.toMessageString())
+
+      //   // Very dirty hack to send message from server to client
+      //   //if (result.messageTypeId === OcppMessageTypeIdEnum.Result) {
+      //   //  setTimeout(() => {
+      //   //    const payload = cs.sendGetVariablesRequest()
+      //   //    this.sendRequest(socket, cs, payload)
+      //   //  }, 500)
+      //   //}
+      // }
       this.sendAdminStatusToAll(cs.model)
     }
   }
