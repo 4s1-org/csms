@@ -3,25 +3,13 @@ import http from 'http'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
 import { v4 as uuid } from 'uuid'
-import { ChargingStationOld } from './charging-station'
-import {
-  RequestBaseDto,
-  actionDtoMapping,
-  OcppRequestMessageDto,
-  OcppErrorMessageDto,
-  OcppMessageHandler,
-  OcppResponseMessageDto,
-  PayloadConverter,
-  PayloadValidator,
-  ResponseBaseDto,
-} from '@yellowgarbagebag/ocpp-lib'
+import { RequestBaseDto, actionDtoMapping, OcppRequestMessageDto } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { verifyPassword } from './config/password'
-import { ChargingStation } from './cs/charging-station'
-import { PendingPromises } from './cs/pending-promises'
+import { ChargingStation } from './charging-station'
 import { WsClient } from './ws-client'
 
 export class WebSocketServer {
@@ -205,21 +193,5 @@ export class WebSocketServer {
     )
 
     this.logger.info(`WebSocketServer stopped`)
-  }
-
-  // ToDo: https://gitlab.com/YellowGarbageBag/csms/-/issues/56
-  private sendRequest(socket: WebSocket, cs: ChargingStationOld, payload: RequestBaseDto): void {
-    const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
-    if (!mapping) {
-      throw new Error('No mapping found')
-    }
-
-    const msg = new OcppRequestMessageDto(uuid(), mapping.action, payload)
-    cs.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
-    cs.logger.debug('Send', msg)
-    if (socket && socket.OPEN) {
-      socket.send(msg.toMessageString())
-      cs.addToSendList(msg)
-    }
   }
 }

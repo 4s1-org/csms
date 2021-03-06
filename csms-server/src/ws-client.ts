@@ -1,5 +1,6 @@
 import WebSocket from 'ws'
 import { Logger } from '@yellowgarbagebag/common-lib'
+import { WsClientBase } from '@yellowgarbagebag/ocpp-lib'
 
 export class WsClient extends WsClientBase {
   public readonly logger = new Logger(this.uniqueIdentifier)
