@@ -7,12 +7,12 @@ class Simulation {
   private client: WsClient
 
   constructor() {
-    this.client = new WsClient()
+    this.client = new WsClient('LS001')
     this.cs = new ChargingStation('LS001', this.client)
   }
 
   public async simulate(): Promise<void> {
-    await this.client.connect(this.cs, 'LS001', 'LS001', 'test')
+    await this.client.connect(this.cs, 'LS001', 'test')
     await this.cs.sendBootNotificationRequest()
     await sleep(200)
     await this.cs.sendAuthorizationRequest_PinCode()
