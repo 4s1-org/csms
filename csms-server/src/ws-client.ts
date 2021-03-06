@@ -1,59 +1,49 @@
-import { Logger } from '@yellowgarbagebag/common-lib'
+import WebSocket from 'ws'
+import { v4 as uuid } from 'uuid'
 import {
   RequestBaseDto,
+  RequestToResponseType,
   actionDtoMapping,
   OcppRequestMessageDto,
+  OcppErrorMessageDto,
   OcppMessageHandler,
   OcppResponseMessageDto,
-  PayloadValidator,
   PayloadConverter,
+  PayloadValidator,
   ResponseBaseDto,
-  OcppErrorMessageDto,
-  RequestToResponseType,
 } from '@yellowgarbagebag/ocpp-lib'
-import { v4 as uuid } from 'uuid'
-import { IReceiveMessage } from './i-receive-message'
+import { ISendMessage } from './cs/i-send-message'
+import { PendingPromises } from './cs/pending-promises'
+import { Logger } from '@yellowgarbagebag/common-lib'
+import { IReceiveMessage } from './cs/i-receive-message'
 
-class PendingPromises {
-  public readonly timestamp: number
-
-  constructor(
-    public readonly msg: OcppRequestMessageDto,
-    public readonly resolve: (value: any) => void,
-    public readonly reject: (reason?: any) => void,
-  ) {
-    this.timestamp = Date.now()
-  }
-}
-
-export abstract class WsClientBase {
+export class WsClient implements ISendMessage {
   private requestList: PendingPromises[] = []
   public readonly logger = new Logger(this.uniqueIdentifier)
 
-  public constructor(protected readonly uniqueIdentifier: string) {
+  constructor(protected readonly uniqueIdentifier: string, private readonly socket: WebSocket) {
     // nothing to do
   }
 
-  protected abstract connect(
-    receiveMessage: IReceiveMessage,
-    username: string,
-    password: string,
-    server: string,
-  ): Promise<void>
+  public disconnect(): void {
+    if (this.socket) {
+      this.socket.close()
+    }
+  }
 
-  protected onMessage(data: any, receiveMessage: IReceiveMessage): void {
+  public onMessage(data: any, receiveMessage: IReceiveMessage): void {
     const msg = OcppMessageHandler.instance.validateAndConvert(data)
 
     if (msg instanceof OcppRequestMessageDto) {
       this.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
-      PayloadValidator.instance.validateRequest(msg)
-      PayloadConverter.instance.convertRequest(msg)
+      PayloadValidator.instance.validateRequestPayload(msg)
+      PayloadConverter.instance.convertRequestPayload(msg)
       // Verarbeitung der Daten
       const responsePayload: ResponseBaseDto = receiveMessage.receive(msg.payload, msg.action)
       // Antwortobjekt erstellen
       const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
       // Anwortdaten validieren (nice to have)
-      PayloadValidator.instance.validateResponse(responseCall, msg.action)
+      PayloadValidator.instance.validateResponsePayload(responseCall, msg.action)
       this.logger.info(`Outgoing Response | ${msg.action} | ${msg.messageId}`)
       this.sendInternal(responseCall.toMessageString())
       return
@@ -64,8 +54,8 @@ export abstract class WsClientBase {
           const idx = this.requestList.indexOf(pendingPromise)
           this.requestList.splice(idx, 1)
           this.logger.info(`Incoming Response | ${pendingPromise.msg.action} | ${msg.messageId}`)
-          PayloadValidator.instance.validateResponse(msg, pendingPromise.msg.action)
-          PayloadConverter.instance.convertResponse(msg, pendingPromise.msg.action)
+          PayloadValidator.instance.validateResponsePayload(msg, pendingPromise.msg.action)
+          PayloadConverter.instance.convertResponsePayload(msg, pendingPromise.msg.action)
           pendingPromise.resolve(msg.payload)
           return
         }
@@ -94,5 +84,11 @@ export abstract class WsClientBase {
     })
   }
 
-  protected abstract sendInternal(msg: string): boolean
+  protected sendInternal(msg: string): boolean {
+    if (this.socket && this.socket.OPEN) {
+      this.socket.send(msg)
+      return true
+    }
+    return false
+  }
 }
