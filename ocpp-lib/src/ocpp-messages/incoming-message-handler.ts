@@ -22,7 +22,7 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
 
     if (msg instanceof OcppRequestMessageDto) {
       cs.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
-      PayloadValidator.instance.validateRequest(msg)
+      PayloadValidator.instance.validateRequestPayload(msg.payload, msg.action)
       PayloadConverter.instance.convertRequest(msg)
       // Verarbeitung der Daten
       const responsePayload: ResponseBaseDto = cs.incomingRequestMessage(msg)
@@ -30,7 +30,7 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
       const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
       // Anwortdaten validieren (nice to have)
       try {
-        PayloadValidator.instance.validateResponse(responseCall, msg.action)
+        PayloadValidator.instance.validateResponsePayload(responseCall.payload, msg.action)
       } catch (err) {
         if (err instanceof CsmsError) {
           cs.logger.error(`Server send invalid data | ${err.errorCode} | ${err.errorDescription}`)
@@ -45,7 +45,7 @@ export function handleIncomingMessage(cs: IChargingStation, data: unknown): Ocpp
     } else if (msg instanceof OcppResponseMessageDto) {
       const action = cs.getActionToRequest(msg.messageId)
       cs.logger.info(`Incoming Response | ${action} | ${msg.messageId}`)
-      PayloadValidator.instance.validateResponse(msg, action)
+      PayloadValidator.instance.validateResponsePayload(msg.payload, action)
       PayloadConverter.instance.convertResponse(msg, action)
       cs.incomingResponseMessage(msg)
       // Auf eine Antwort wird keine Antwort gesendet
