@@ -93,11 +93,11 @@ export class WebSocketServer {
     const client = new WsClient(model.uniqueIdentifier, socket)
     const cs = new ChargingStation(model, client)
 
-    //cs.connect()
+    cs.connect()
     this.sendAdminStatusToAll(cs.model)
 
     socket.onclose = (): void => {
-      //cs.disconnect()
+      cs.disconnect()
       this.csSockets.delete(socket)
       this.csTlsSockets.delete(tlsSocket)
       this.sendAdminStatusToAll(cs.model)
