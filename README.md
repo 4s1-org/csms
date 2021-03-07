@@ -6,8 +6,6 @@
 # Build
 docker build -t csms .
 
-
-
 # Start
 docker stop csms
 docker rm csms

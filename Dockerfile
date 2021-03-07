@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Install dependencies
 RUN apk add --no-cache bash supervisor
-RUN npm i pnpm serve -g
+RUN npm i pnpm http-server -g
 
 COPY . .
 RUN pnpm install
