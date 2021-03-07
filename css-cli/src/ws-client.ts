@@ -10,8 +10,7 @@ export class WsClient extends WsClientBase {
     server = 'localhost:3000',
   ): Promise<void> {
     return new Promise((resolve, reject) => {
-      const secure = false
-      this.socket = new WebSocket(`${secure ? 'wss' : 'ws'}://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1'], {
+      this.socket = new WebSocket(`wss://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1'], {
         headers: {
           authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
         },
