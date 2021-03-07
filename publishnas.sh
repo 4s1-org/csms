@@ -5,6 +5,7 @@ echo DOCKER SAVE
 docker save csms | gzip > docker-csms.tar.gz
 echo COPY TO NAS
 scp docker-csms.tar.gz nas:/volume1/docker/
+#scp docker-csms.tar.gz azure:~
 
 exit 0
 
