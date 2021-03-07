@@ -42,8 +42,8 @@ export class WebSocketServer {
 
     this.server = https
       .createServer({
-        cert: fs.readFileSync(path.join(__dirname, '..', '..', 'localhost.crt')),
-        key: fs.readFileSync(path.join(__dirname, '..', '..', 'localhost.key')),
+        cert: fs.readFileSync(path.join(__dirname, '..', '..', 'dev.crt')),
+        key: fs.readFileSync(path.join(__dirname, '..', '..', 'dev.key')),
       })
       .on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
         const socketId = request.headers['sec-websocket-key']
