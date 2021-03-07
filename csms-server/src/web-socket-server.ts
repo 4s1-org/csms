@@ -1,5 +1,7 @@
 import WebSocket from 'ws'
-import http from 'http'
+import https from 'https'
+import fs from 'fs'
+import path from 'path'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
 import { Logger } from '@yellowgarbagebag/common-lib'
@@ -12,7 +14,7 @@ import { WsClient } from './ws-client'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
-  private server: http.Server | undefined
+  private server: https.Server | undefined
   private csSockets: Set<WebSocket> = new Set<WebSocket>()
   private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
   private adminSockets: Set<WebSocket> = new Set<WebSocket>()
@@ -38,8 +40,11 @@ export class WebSocketServer {
       noServer: true,
     }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => this.onAdminConnection(socket, tlsSocket))
 
-    this.server = http
-      .createServer()
+    this.server = https
+      .createServer({
+        cert: fs.readFileSync(path.join(__dirname, '..', 'cert', 'localhost.crt')),
+        key: fs.readFileSync(path.join(__dirname, '..', 'cert', 'localhost.key')),
+      })
       .on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
         const socketId = request.headers['sec-websocket-key']
         this.logger.info(`Client connected: ${socketId}`)

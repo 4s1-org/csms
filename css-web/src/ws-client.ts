@@ -9,7 +9,7 @@ export class WsClient extends WsClientBase {
     server = 'localhost:3000',
   ): Promise<void> {
     return new Promise((resolve, reject) => {
-      const secure = false
+      const secure = true
 
       var authToken = window.btoa(`${username}:${password}`)
       document.cookie = 'X-Authorization=' + authToken + '; path=/'
