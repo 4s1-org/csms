@@ -71,6 +71,16 @@ export class ChargingStation implements IReceiveMessage {
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
+  public connect(): void {
+    this.logger.info('Connected')
+    this.model.state = ChargingStationState.Connecting
+  }
+
+  public disconnect(): void {
+    this.logger.info('Disconnected')
+    this.model.state = ChargingStationState.Offline
+  }
+
   /**
    * B01 - Cold Boot Charging Station
    * B02 - Cold Boot Charging Station - Pending
