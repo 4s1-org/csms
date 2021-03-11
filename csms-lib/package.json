@@ -15,6 +15,20 @@
   "author": "Steffen",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
+    "lbt": "pnpm run lint && pnpm run build && pnpm run test",
+    "lint": "eslint \"{src,scripts}/**/*.ts\"",
+    "lint:fix": "pnpm run lint -- --fix",
+    "test": "jest --passWithNoTests",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:watch": "jest --watch"
+  },
+  "prettier": "@hest-lab/eslint-config",
   "jest": {
     "collectCoverageFrom": [
       "**/*.ts"
@@ -32,20 +46,6 @@
       "^.+\\.ts$": "ts-jest"
     }
   },
-  "scripts": {
-    "prebuild": "rm -rf dist",
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
-    "lbt": "pnpm run lint && pnpm run build && pnpm run test",
-    "lint": "eslint \"{src,scripts}/**/*.ts\"",
-    "lint:fix": "pnpm run lint -- --fix",
-    "test": "jest --passWithNoTests",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:watch": "jest --watch"
-  },
-  "prettier": "@hest-lab/eslint-config",
   "dependencies": {
     "@yellowgarbagebag/common-lib": "workspace:*",
     "class-transformer": "^0.4.0"
