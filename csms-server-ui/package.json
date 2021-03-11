@@ -13,14 +13,14 @@
   "license": "UNLICENSED",
   "author": "Steffen",
   "scripts": {
-    "build": "react-scripts build",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
-    "lint:fix": "npm run lint -- --fix",
-    "start": "react-scripts start",
-    "test": "echo No tests"
+    "lint:fix": "npm run lint -- --fix"
   },
   "browserslist": {
     "production": [
@@ -42,6 +42,7 @@
     ]
   },
   "dependencies": {
+    "@craco/craco": "^6.1.1",
     "@testing-library/dom": "^7.29.6",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -62,7 +63,11 @@
   },
   "devDependencies": {
     "@hest-lab/eslint-config": "^1.5.0",
+    "@tailwindcss/postcss7-compat": "^2.0.3",
+    "autoprefixer": "^9",
     "eslint": "^7.20.0",
-    "prettier": "^2.2.1"
+    "postcss": "^7",
+    "prettier": "^2.2.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   }
 }
