@@ -37,10 +37,11 @@ class LoginPanelComp extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     return (
       // ToDo: Checkbox für wss/ws
-      <nav className="navbar navbar-dark bg-dark flex-column flex-md-row">
-        <form className="form-inline my-2 my-lg-0">
+      <nav className="navbar navbar-dark bg-dark flex-column flex-sm-row">
+        <form className="form-inline">
           <input
-            className="form-control mr-sm-2"
+            className="form-control form-control-sm mr-sm-1"
+            style={{ width: '240px' }}
             placeholder="Server"
             aria-label="Server"
             type="text"
@@ -49,7 +50,8 @@ class LoginPanelComp extends React.Component<IProps, IState> {
             disabled={this.props.isConnected}
           />
           <input
-            className="form-control mr-sm-2"
+            className="form-control form-control-sm mr-sm-1"
+            style={{ width: '80px' }}
             placeholder="Unique Identifier"
             aria-label="Unique Identifier"
             type="text"
@@ -58,7 +60,8 @@ class LoginPanelComp extends React.Component<IProps, IState> {
             disabled={this.props.isConnected}
           />
           <input
-            className="form-control mr-sm-2"
+            className="form-control form-control-sm mr-sm-1"
+            style={{ width: '80px' }}
             placeholder="Username"
             aria-label="Username"
             type="text"
@@ -67,7 +70,8 @@ class LoginPanelComp extends React.Component<IProps, IState> {
             disabled={this.props.isConnected}
           />
           <input
-            className="form-control mr-sm-2"
+            className="form-control form-control-sm mr-sm-1"
+            style={{ width: '80px' }}
             placeholder="Password"
             aria-label="Password"
             type="password"
@@ -76,7 +80,7 @@ class LoginPanelComp extends React.Component<IProps, IState> {
             disabled={this.props.isConnected}
           />
           <button
-            className="btn mr-sm-2 bg-light"
+            className="btn btn-sm mr-sm-1 bg-light"
             type="submit"
             onClick={this.onBtnLoginClick}
             disabled={this.props.isConnected}
@@ -84,7 +88,7 @@ class LoginPanelComp extends React.Component<IProps, IState> {
             Login
           </button>
           <button
-            className="btn mr-sm-2 bg-light"
+            className="btn btn-sm mr-sm-1 bg-light"
             type="submit"
             onClick={this.onBtnLogoutClick}
             disabled={!this.props.isConnected}
