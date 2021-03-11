@@ -32,53 +32,51 @@ class LoginPanelComp extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     // ToDo: Checkbox für wss/ws
     return (
-      <nav className="navbar navbar-dark bg-dark flex-column flex-md-row">
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-2"
-            placeholder="Server"
-            aria-label="Server"
-            type="text"
-            onChange={this.onEdtServerChange}
-            value={this.state.server}
-            disabled={this.props.isConnected}
-          />
-          <input
-            className="form-control mr-sm-2"
-            placeholder="Username"
-            aria-label="Username"
-            type="text"
-            onChange={this.onEdtUsernameChange}
-            value={this.state.username}
-            disabled={this.props.isConnected}
-          />
-          <input
-            className="form-control mr-sm-2"
-            placeholder="Password"
-            aria-label="Password"
-            type="password"
-            onChange={this.onEdtPasswordChange}
-            value={this.state.password}
-            disabled={this.props.isConnected}
-          />
-          <button
-            className="btn mr-sm-2 bg-light"
-            type="submit"
-            onClick={this.onBtnLoginClick}
-            disabled={this.props.isConnected}
-          >
-            Login
-          </button>
-          <button
-            className="btn mr-sm-2 bg-light"
-            type="submit"
-            onClick={this.onBtnLogoutClick}
-            disabled={!this.props.isConnected}
-          >
-            Logout
-          </button>
-        </form>
-      </nav>
+      <form className="form-inline my-2 my-lg-0">
+        <input
+          className="form-control mr-sm-2"
+          placeholder="Server"
+          aria-label="Server"
+          type="text"
+          onChange={this.onEdtServerChange}
+          value={this.state.server}
+          disabled={this.props.isConnected}
+        />
+        <input
+          className="form-control mr-sm-2"
+          placeholder="Username"
+          aria-label="Username"
+          type="text"
+          onChange={this.onEdtUsernameChange}
+          value={this.state.username}
+          disabled={this.props.isConnected}
+        />
+        <input
+          className="form-control mr-sm-2"
+          placeholder="Password"
+          aria-label="Password"
+          type="password"
+          onChange={this.onEdtPasswordChange}
+          value={this.state.password}
+          disabled={this.props.isConnected}
+        />
+        <button
+          className="btn mr-sm-2 bg-light"
+          type="submit"
+          onClick={this.onBtnLoginClick}
+          disabled={this.props.isConnected}
+        >
+          Login
+        </button>
+        <button
+          className="btn mr-sm-2 bg-light"
+          type="submit"
+          onClick={this.onBtnLogoutClick}
+          disabled={!this.props.isConnected}
+        >
+          Logout
+        </button>
+      </form>
     )
   }
 

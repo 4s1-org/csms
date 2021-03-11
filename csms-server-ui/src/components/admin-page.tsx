@@ -33,20 +33,20 @@ class AdminPageComp extends React.Component<IProps, IState> {
 
   public render(): JSX.Element {
     return (
-      <div>
-        <LoginPanelComp
-          onLoginClick={this.login}
-          onLogoutClick={this.logout}
-          isConnected={this.state.isConnected}
-        ></LoginPanelComp>
-        <br />
-        <div className="container-fluid">
-          <div className="row">
-            {this.state.chargingStationModels.map((item) => (
-              <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
-            ))}
-          </div>
-        </div>
+      <div className="flex flex-col h-screen">
+        <header className="py-2 bg-purple-700 text-white text-center">
+          <LoginPanelComp
+            onLoginClick={this.login}
+            onLogoutClick={this.logout}
+            isConnected={this.state.isConnected}
+          ></LoginPanelComp>
+        </header>
+        <main className="flex-1 overflow-y-auto p-5">
+          {this.state.chargingStationModels.map((item) => (
+            <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
+          ))}
+        </main>
+        <footer className="py-1 bg-gray-700 text-center text-white">&copy; 2021 CSMS by Steffen</footer>
       </div>
     )
   }

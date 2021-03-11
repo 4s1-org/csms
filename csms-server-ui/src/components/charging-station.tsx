@@ -33,16 +33,21 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     }
 
     return (
-      <div className="card h-100">
-        <h5 className={'card-header ' + headerColorCss}>{this.props.data.uniqueIdentifier}</h5>
-        <div className="card-body">
-          <h6 className="card-subtitle mb-2">Status: {stateStr}</h6>
-          <p className="card-text">Benutzername: {this.props.data.username}</p>
-        </div>
-        <div className="card-footer">
-          <small className="text-muted">Letztes Kommando: {this.props.data.lastCommand}</small>
-          <br />
-          <small className="text-muted">Letzter Kontakt: {lastContectStr}</small>
+      <div className="bg-blue w-100 p-8 flex font-sans">
+        <div className="rounded bg-grey-light w-64 p-2">
+          <div className="flex justify-between py-1">
+            <h3 className="text-sm">{this.props.data.uniqueIdentifier}</h3>
+          </div>
+          <div className="text-sm mt-2">
+            <div className="bg-white p-2 rounded mt-1 border-b border-grey cursor-pointer hover:bg-grey-lighter">
+              Status: {stateStr}
+            </div>
+            <div className="bg-white p-2 rounded mt-1 border-b border-grey cursor-pointer hover:bg-grey-lighter">
+              Benutzername: {this.props.data.username}
+            </div>
+          </div>
+          <p className="mt-3 text-grey-dark">Letztes Kommando: {this.props.data.lastCommand}</p>
+          <p className="mt-3 text-grey-dark">Letzter Kontakt: {lastContectStr}</p>
         </div>
       </div>
     )
