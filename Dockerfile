@@ -27,6 +27,8 @@ COPY --from=builder /app/dev.crt .
 COPY --from=builder /app/dev.key .
 COPY --from=builder /app/supervisord.conf .
 
+COPY --from=builder /app/csms-server/csms-server.json  ./csms-server/
+
 COPY --from=builder /app/common-lib/package.json   ./common-lib/
 COPY --from=builder /app/common-lib/dist/          ./common-lib/dist/
 COPY --from=builder /app/csms-lib/package.json     ./csms-lib/
@@ -40,9 +42,11 @@ COPY --from=builder /app/css-lib/dist/             ./css-lib/dist/
 COPY --from=builder /app/ocpp-lib/package.json     ./ocpp-lib/
 COPY --from=builder /app/ocpp-lib/dist/            ./ocpp-lib/dist/
 
-COPY --from=builder /app/csms-server-ui/public/    ./csms-server-ui/public/
-COPY --from=builder /app/css-web/public/           ./css-web/public/
+COPY --from=builder /app/csms-server-ui/build/    ./csms-server-ui/build/
+COPY --from=builder /app/css-web/build/           ./css-web/build/
 
-RUN pnpm install -r
+#RUN pnpm install --prod --shamefully-hoist
+
+
 
 CMD ["supervisord", "-c", "/app/supervisord.conf"]

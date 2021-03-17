@@ -18,3 +18,4 @@
 csms-server/csms-server.json
 Dockerfile
 **/*.tgz
+*.tar.gz
