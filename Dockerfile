@@ -6,8 +6,8 @@ WORKDIR /app
 RUN npm i pnpm -g
 
 COPY . .
-RUN pnpm install -r
-RUN pnpm recursive exec pnpm run build
+RUN pnpm install
+RUN pnpm -r exec -- pnpm run build
 
 # CONFIG
 RUN node csms-server/dist/setup.js -u admin -p admin -o 3000
@@ -27,26 +27,29 @@ COPY --from=builder /app/dev.crt .
 COPY --from=builder /app/dev.key .
 COPY --from=builder /app/supervisord.conf .
 
-COPY --from=builder /app/csms-server/csms-server.json  ./csms-server/
-
 COPY --from=builder /app/common-lib/package.json   ./common-lib/
 COPY --from=builder /app/common-lib/dist/          ./common-lib/dist/
+
 COPY --from=builder /app/csms-lib/package.json     ./csms-lib/
 COPY --from=builder /app/csms-lib/dist/            ./csms-lib/dist/
+
 COPY --from=builder /app/csms-server/package.json  ./csms-server/
 COPY --from=builder /app/csms-server/dist/         ./csms-server/dist/
+COPY --from=builder /app/csms-server/csms-server.json  ./csms-server/
+
 COPY --from=builder /app/css-cli/package.json      ./css-cli/
 COPY --from=builder /app/css-cli/dist/             ./css-cli/dist/
+
 COPY --from=builder /app/css-lib/package.json      ./css-lib/
 COPY --from=builder /app/css-lib/dist/             ./css-lib/dist/
+
 COPY --from=builder /app/ocpp-lib/package.json     ./ocpp-lib/
 COPY --from=builder /app/ocpp-lib/dist/            ./ocpp-lib/dist/
 
 COPY --from=builder /app/csms-server-ui/build/    ./csms-server-ui/build/
+
 COPY --from=builder /app/css-web/build/           ./css-web/build/
 
-#RUN pnpm install --prod --shamefully-hoist
-
-
+RUN pnpm install
 
 CMD ["supervisord", "-c", "/app/supervisord.conf"]
