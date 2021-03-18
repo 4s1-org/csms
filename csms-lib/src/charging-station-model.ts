@@ -39,6 +39,12 @@ export class ChargingStationModel {
    */
   public lastCommand = ''
 
+  @Expose({ name: '_evse', groups: [ChargingStationGroupFlag.UiOnly] })
+  /**
+   * Only at UI
+   */
+  public evse: { evseId: number; user: string }[] = []
+
   public constructor(uniqueIdentifier: string) {
     this.uniqueIdentifier = uniqueIdentifier
   }
