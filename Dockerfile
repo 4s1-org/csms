@@ -9,9 +9,6 @@ COPY . .
 RUN pnpm install
 RUN pnpm -r exec -- pnpm run build
 
-# CONFIG
-RUN node csms-server/dist/setup.js -u admin -p admin -o 3000
-
 # -----------------------------
 FROM node:14-alpine
 
@@ -50,7 +47,5 @@ COPY --from=builder /app/csms-server-ui/build/    ./csms-server-ui/build/
 COPY --from=builder /app/css-web/build/           ./css-web/build/
 
 RUN pnpm install
-
-
 
 CMD ["supervisord", "-c", "/app/supervisord.conf"]

@@ -5,5 +5,4 @@ export interface IDataStorageSchema {
     passwordHash: string
   }
   chargingStationModels: string[]
-  devMode: boolean
 }
