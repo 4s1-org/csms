@@ -68,7 +68,9 @@ class AdminPageComp extends React.Component<IProps, IState> {
       const model = SerializationHelper.deserialize(ChargingStationModel, msg.data)
       this.updateChargingStationModel(model)
     }
-    ws.onerror = (msg: any): void => {}
+    ws.onerror = (msg: any): void => {
+      console.error(msg)
+    }
     ws.onclose = (): void => {
       this.setState({
         ws: undefined,
