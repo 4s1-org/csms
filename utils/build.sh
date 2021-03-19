@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ..
+
 pnpm install
 pnpm run build --prefix common-lib
 pnpm run build --prefix ocpp-lib

@@ -3,6 +3,7 @@
 set -x
 set -e
 
+cd ..
 pnpm install
 
 cd common-lib

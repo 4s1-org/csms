@@ -32,7 +32,6 @@ const options = program.opts()
 const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
 dataStorage.set('port', +options.port)
 dataStorage.set('adminCredentials', { username: options.username, passwordHash: hashPassword(options.password) })
-dataStorage.set('devMode', true)
 
 if (!dataStorage.has('chargingStationModels')) {
   dataStorage.set('chargingStationModels', [])
