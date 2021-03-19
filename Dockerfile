@@ -23,8 +23,6 @@ RUN npm i pnpm http-server -g
 
 COPY --from=builder /app/pnpm-lock.yaml .
 COPY --from=builder /app/pnpm-workspace.yaml .
-COPY --from=builder /app/dev.crt .
-COPY --from=builder /app/dev.key .
 COPY --from=builder /app/supervisord.conf .
 
 COPY --from=builder /app/common-lib/package.json   ./common-lib/
@@ -34,6 +32,8 @@ COPY --from=builder /app/csms-lib/package.json     ./csms-lib/
 COPY --from=builder /app/csms-lib/dist/            ./csms-lib/dist/
 
 RUN mkdir -p /app/csms-server/data
+COPY --from=builder /app/csms-server/cert-dev.crt  ./csms-server/
+COPY --from=builder /app/csms-server/cert-dev.key  ./csms-server/
 COPY --from=builder /app/csms-server/package.json  ./csms-server/
 COPY --from=builder /app/csms-server/dist/         ./csms-server/dist/
 
