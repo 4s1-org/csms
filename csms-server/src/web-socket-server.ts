@@ -40,17 +40,19 @@ export class WebSocketServer {
       noServer: true,
     }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => this.onAdminConnection(socket, tlsSocket))
 
+    const { certPath, certKeyPath } = this.getCertificates()
+
     this.server = https
       .createServer({
-        cert: fs.readFileSync(path.join(__dirname, '..', '..', 'dev.crt')),
-        key: fs.readFileSync(path.join(__dirname, '..', '..', 'dev.key')),
+        cert: fs.readFileSync(certPath),
+        key: fs.readFileSync(certKeyPath),
       })
       .on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
         const socketId = request.headers['sec-websocket-key']
         this.logger.info(`Client connected: ${socketId}`)
 
         const [username, password] = this.getCredentials(request)
-        const baseURL = `http://${request.headers.host}/`
+        const baseURL = `https://${request.headers.host}/`
         const myURL = new URL(request.url || '', baseURL)
 
         if (myURL.pathname.startsWith('/ocpp/')) {
@@ -84,6 +86,28 @@ export class WebSocketServer {
     const port = this.dataStorage.get('port')
     this.server.listen(port)
     this.logger.info(`WebSocketServer is running on port ${port}`)
+  }
+
+  private getCertificates(): { certPath: string; certKeyPath: string } {
+    const devCertPath = path.join(__dirname, '..', 'cert-dev.crt')
+    const devCertKeyPath = path.join(__dirname, '..', 'cert-dev.key')
+
+    const prodCertPath = path.join(__dirname, '..', 'data', 'cert.crt')
+    const prodCertKeyPath = path.join(__dirname, '..', 'data', 'cert.key')
+
+    if (fs.existsSync(prodCertPath) && fs.existsSync(prodCertKeyPath)) {
+      this.logger.info('Using production certificates')
+      return {
+        certPath: prodCertPath,
+        certKeyPath: prodCertKeyPath,
+      }
+    } else {
+      this.logger.info('Using development certificates')
+      return {
+        certPath: devCertPath,
+        certKeyPath: devCertKeyPath,
+      }
+    }
   }
 
   private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void {
