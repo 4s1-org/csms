@@ -17,8 +17,8 @@ class LoginPanelComp extends React.Component<IProps, IState> {
     super(props)
     this.state = {
       server: `${window.location.hostname}:3000`,
-      username: 'admin',
-      password: 'admin',
+      username: process.env.NODE_ENV === 'development' ? 'admin' : '',
+      password: process.env.NODE_ENV === 'development' ? 'admin' : '',
     }
 
     this.onBtnLoginClick = this.onBtnLoginClick.bind(this)
@@ -30,7 +30,6 @@ class LoginPanelComp extends React.Component<IProps, IState> {
   }
 
   public render(): JSX.Element {
-    // ToDo: Checkbox für wss/ws
     return (
       <nav className="navbar navbar-dark bg-dark flex-column flex-sm-row">
         <form className="form-inline">
