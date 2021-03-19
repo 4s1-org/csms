@@ -35,7 +35,6 @@ COPY --from=builder /app/csms-lib/dist/            ./csms-lib/dist/
 
 COPY --from=builder /app/csms-server/package.json  ./csms-server/
 COPY --from=builder /app/csms-server/dist/         ./csms-server/dist/
-COPY --from=builder /app/csms-server/csms-server.json  ./csms-server/
 
 COPY --from=builder /app/css-cli/package.json      ./css-cli/
 COPY --from=builder /app/css-cli/dist/             ./css-cli/dist/
@@ -51,5 +50,8 @@ COPY --from=builder /app/csms-server-ui/build/    ./csms-server-ui/build/
 COPY --from=builder /app/css-web/build/           ./css-web/build/
 
 RUN pnpm install
+
+# CONFIG
+RUN node csms-server/dist/setup.js -u admin -p adminprod -o 3000
 
 CMD ["supervisord", "-c", "/app/supervisord.conf"]
