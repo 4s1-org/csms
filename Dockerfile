@@ -18,6 +18,8 @@ FROM node:14-alpine
 RUN mkdir -p /app
 WORKDIR /app
 
+RUN mkdir -p /app/data
+
 RUN apk add --no-cache bash supervisor
 RUN npm i pnpm http-server -g
 
@@ -31,9 +33,6 @@ COPY --from=builder /app/common-lib/dist/          ./common-lib/dist/
 COPY --from=builder /app/csms-lib/package.json     ./csms-lib/
 COPY --from=builder /app/csms-lib/dist/            ./csms-lib/dist/
 
-RUN mkdir -p /app/csms-server/data
-COPY --from=builder /app/csms-server/cert-dev.crt  ./csms-server/
-COPY --from=builder /app/csms-server/cert-dev.key  ./csms-server/
 COPY --from=builder /app/csms-server/package.json  ./csms-server/
 COPY --from=builder /app/csms-server/dist/         ./csms-server/dist/
 
