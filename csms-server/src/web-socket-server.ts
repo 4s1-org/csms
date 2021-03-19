@@ -42,15 +42,15 @@ export class WebSocketServer {
 
     this.server = https
       .createServer({
-        cert: fs.readFileSync(path.join(__dirname, '..', '..', 'dev.crt')),
-        key: fs.readFileSync(path.join(__dirname, '..', '..', 'dev.key')),
+        cert: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.crt')),
+        key: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.key')),
       })
       .on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
         const socketId = request.headers['sec-websocket-key']
         this.logger.info(`Client connected: ${socketId}`)
 
         const [username, password] = this.getCredentials(request)
-        const baseURL = `http://${request.headers.host}/`
+        const baseURL = `https://${request.headers.host}/`
         const myURL = new URL(request.url || '', baseURL)
 
         if (myURL.pathname.startsWith('/ocpp/')) {
@@ -109,19 +109,6 @@ export class WebSocketServer {
 
     socket.onmessage = (data: WebSocket.MessageEvent): void => {
       client.onMessage(data.data, cs)
-
-      // const result: OcppBaseMessageDto | undefined = handleIncomingMessage(cs, msg.data)
-      // if (result) {
-      //   socket.send(result.toMessageString())
-
-      //   // Very dirty hack to send message from server to client
-      //   //if (result.messageTypeId === OcppMessageTypeIdEnum.Result) {
-      //   //  setTimeout(() => {
-      //   //    const payload = cs.sendGetVariablesRequest()
-      //   //    this.sendRequest(socket, cs, payload)
-      //   //  }, 500)
-      //   //}
-      // }
       this.sendAdminStatusToAll(cs.model)
     }
   }
