@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker build -t csms .
+cd ..
+docker build -t csms  .
