@@ -1,4 +1,6 @@
 import { WsClientBase, IReceiveMessage } from '@yellowgarbagebag/ocpp-lib'
+import { toBase64 } from '@yellowgarbagebag/common-lib'
+
 export class WsClient extends WsClientBase {
   private socket: WebSocket | undefined
 
@@ -9,10 +11,9 @@ export class WsClient extends WsClientBase {
     server = 'localhost:3000',
   ): Promise<void> {
     return new Promise((resolve, reject) => {
-      var authToken = window.btoa(`${username}:${password}`)
-      document.cookie = 'X-Authorization=' + authToken + '; path=/'
+      var authToken = toBase64(username, password)
 
-      this.socket = new WebSocket(`wss://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1'])
+      this.socket = new WebSocket(`wss://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1', `Auth.${authToken}`])
 
       this.socket.onopen = (): void => {
         resolve()
