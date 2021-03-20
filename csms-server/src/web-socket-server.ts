@@ -50,6 +50,7 @@ export class WebSocketServer {
         key: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.key')),
       })
       .on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
+        this.logger.info('upgrade connection')
         const socketId = request.headers['sec-websocket-key']
         this.logger.info(`Client connected: ${socketId}`)
 
@@ -59,6 +60,7 @@ export class WebSocketServer {
 
         if (myURL.pathname.startsWith('/ocpp/')) {
           // Charging Station
+          this.logger.info('upgrade connection for ChargingStation')
           const uniqueIdentifier = myURL.pathname.split('/')[2]
 
           const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
@@ -72,6 +74,7 @@ export class WebSocketServer {
           })
         } else if (myURL.pathname.startsWith('/admin')) {
           // Admin
+          this.logger.info('upgrade connection for Admin')
           const adminCredentials = this.dataStorage.get('adminCredentials')
           if (username !== adminCredentials.username || !verifyPassword(password, adminCredentials.passwordHash)) {
             return this.send401(tlsSocket)
