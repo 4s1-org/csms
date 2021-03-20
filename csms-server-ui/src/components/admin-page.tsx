@@ -3,6 +3,7 @@ import ChargingStationComp from './charging-station'
 import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
 import './admin-page.css'
 import LoginPanelComp from './login-panel'
+import { toBase64 } from '@yellowgarbagebag/common-lib'
 
 interface IState {
   chargingStationModels: ChargingStationModel[]
@@ -52,10 +53,9 @@ class AdminPageComp extends React.Component<IProps, IState> {
   }
 
   private login(server: string, username: string, password: string): void {
-    var authToken = window.btoa(`${username}:${password}`)
-    document.cookie = 'X-Authorization=' + authToken + '; path=/'
+    var authToken = toBase64(username, password)
 
-    const ws = new WebSocket(`wss://${server}/admin`, ['ocpp2.0.1'])
+    const ws = new WebSocket(`wss://${server}/admin`, ['ocpp2.0.1', `Auth.${authToken}`])
 
     ws.onopen = () => {
       this.setState({

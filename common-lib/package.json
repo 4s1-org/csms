@@ -47,6 +47,7 @@
     }
   },
   "dependencies": {
+    "base64url": "^3.0.1",
     "pino": "^6.11.1"
   },
   "devDependencies": {
