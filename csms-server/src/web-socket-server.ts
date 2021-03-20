@@ -32,13 +32,17 @@ export class WebSocketServer {
   public startServer(): void {
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
-    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void =>
-      this.onChargingStationConnection(socket, tlsSocket, model),
-    )
+    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void => {
+      this.logger.info('ChargingStation-Socket-Connection established')
+      this.onChargingStationConnection(socket, tlsSocket, model)
+    })
 
     const wssAdmin = new WebSocket.Server({
       noServer: true,
-    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => this.onAdminConnection(socket, tlsSocket))
+    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => {
+      this.logger.info('Admin-Socket-Connection established')
+      this.onAdminConnection(socket, tlsSocket)
+    })
 
     this.server = https
       .createServer({
@@ -153,6 +157,9 @@ export class WebSocketServer {
       value = request.headers.authorization
     } else if (request.headers.cookie && request.headers.cookie.startsWith('X-Authorization=')) {
       value = `Basic ${request.headers.cookie.split('=')[1]}=`
+    } else {
+      this.logger.warn('Connection without credentials')
+      return []
     }
 
     const b64auth = (value || '').split(' ')[1] || ''
