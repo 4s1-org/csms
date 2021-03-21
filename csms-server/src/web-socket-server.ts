@@ -18,7 +18,7 @@ type HeaderType = {
 }
 
 export class WebSocketServer {
-  protected logger: Logger = new Logger('Core')
+  protected logger: Logger = new Logger('Server')
   private server: https.Server | undefined
   private csSockets: Set<WebSocket> = new Set<WebSocket>()
   private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
