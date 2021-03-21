@@ -4,7 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
-import { fromBase64Array, Logger } from '@yellowgarbagebag/common-lib'
+import { fromBase64, fromBase64Array, Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
@@ -55,7 +55,7 @@ export class WebSocketServer {
         const protocols = request.headers['sec-websocket-protocol'] || ''
         this.logger.info(`Client connected: ${socketId} [${protocols}]`)
 
-        const [username, password] = this.getCredentials(request, protocols.split(', '))
+        const { username, password } = this.getCredentials(request, protocols.split(', '))
         const baseURL = `https://${request.headers.host}/`
         const myURL = new URL(request.url || '', baseURL)
 
@@ -155,26 +155,33 @@ export class WebSocketServer {
     }
   }
 
-  private getCredentials(request: IncomingMessage, protocols: string[]): string[] {
-    let value
-    if (request.headers.authorization) {
-      value = request.headers.authorization
-    } else if (request.headers.cookie && request.headers.cookie.startsWith('X-Authorization=')) {
-      // ToDo: Das muss man auch mal prüfen, wg. der =
-      value = `Basic ${request.headers.cookie.split('=')[1]}`
-    } else if (protocols.length > 1) {
-      // ToDo: Startswith Auth:
-      const foo = protocols[1].substring(5) // cut "Auth:"
-      const res = fromBase64Array(foo)
-      return res
-    } else {
-      this.logger.warn('Connection without credentials')
-      return []
+  private getCredentials(request: IncomingMessage, protocols: string[]): { username: string; password: string } {
+    if (request.headers.authorization && request.headers.authorization.startsWith('Basic ')) {
+      const b64auth = request.headers.authorization.substring(6)
+      const parts = Buffer.from(b64auth, 'base64').toString().split(':') // cut "Basic "
+      if (parts.length === 2) {
+        return {
+          username: parts[0],
+          password: parts[1],
+        }
+      }
+    } else if (protocols.length > 0) {
+      for (const protocol of protocols) {
+        if (protocol.startsWith('Auth:')) {
+          const b64auth = protocol.substring(5) // cut "Auth:"
+          const parts = fromBase64(b64auth).split(':')
+          if (parts.length === 2) {
+            return {
+              username: parts[0],
+              password: parts[1],
+            }
+          }
+        }
+      }
     }
 
-    const b64auth = (value || '').split(' ')[1] || ''
-    const res = Buffer.from(b64auth, 'base64').toString().split(':')
-    return res
+    this.logger.warn('No credentials found or invalid')
+    return { username: '', password: '' }
   }
 
   private send401(tlsSocket: TLSSocket): void {
