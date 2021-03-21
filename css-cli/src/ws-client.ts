@@ -14,6 +14,7 @@ export class WsClient extends WsClientBase {
         headers: {
           authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
         },
+        rejectUnauthorized: false,
       })
 
       this.socket.onopen = (): void => {
