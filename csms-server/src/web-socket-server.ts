@@ -167,8 +167,8 @@ export class WebSocketServer {
       }
     } else if (protocols.length > 0) {
       for (const protocol of protocols) {
-        if (protocol.startsWith('Auth:')) {
-          const b64auth = protocol.substring(5) // cut "Auth:"
+        if (protocol.startsWith('Auth.')) {
+          const b64auth = protocol.substring(5) // cut "Auth."
           const parts = fromBase64(b64auth).split(':')
           if (parts.length === 2) {
             return {
