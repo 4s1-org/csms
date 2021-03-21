@@ -11,8 +11,7 @@ export class WsClient extends WsClientBase {
     server = 'localhost:3000',
   ): Promise<void> {
     return new Promise((resolve, reject) => {
-      var authToken = toBase64(username, password)
-
+      const authToken = toBase64([username, password].join(':'))
       this.socket = new WebSocket(`wss://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1', `Auth.${authToken}`])
 
       this.socket.onopen = (): void => {
