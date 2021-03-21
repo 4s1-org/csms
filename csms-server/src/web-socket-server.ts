@@ -2,15 +2,20 @@ import WebSocket from 'ws'
 import https from 'https'
 import fs from 'fs'
 import path from 'path'
-import { IncomingMessage } from 'http'
+import { IncomingHttpHeaders, IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
-import { fromBase64, fromBase64Array, Logger } from '@yellowgarbagebag/common-lib'
+import { fromBase64, Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { verifyPassword } from './config/password'
 import { ChargingStation } from './charging-station'
 import { WsClient } from './ws-client'
+
+type HeaderType = {
+  secWebsocketKey: string
+  secWebsocketProtocol: string[]
+}
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Core')
@@ -51,13 +56,11 @@ export class WebSocketServer {
       })
       .on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
         this.logger.info('upgrade connection')
-        const socketId = request.headers['sec-websocket-key'] || '<no socket id in header>'
-        const protocols = request.headers['sec-websocket-protocol'] || ''
-        this.logger.info(`Client connected: ${socketId} [${protocols}]`)
+        const header = this.parseHeaders(request.headers)
+        this.logger.info(`Client connected: ${header.secWebsocketKey} [${header.secWebsocketProtocol}]`)
 
-        const { username, password } = this.getCredentials(request, protocols.split(', '))
-        const baseURL = `https://${request.headers.host}/`
-        const myURL = new URL(request.url || '', baseURL)
+        const { username, password } = this.getCredentials(request, header)
+        const myURL = new URL(request.url || '', 'http://localhosts') // Domain ist egal
 
         if (myURL.pathname.startsWith('/ocpp/')) {
           // Charging Station
@@ -92,6 +95,23 @@ export class WebSocketServer {
     const port = this.dataStorage.get('port')
     this.server.listen(port)
     this.logger.info(`WebSocketServer is running on port ${port}`)
+  }
+
+  private parseHeaders(headers: IncomingHttpHeaders): HeaderType {
+    const res: HeaderType = {
+      secWebsocketKey: '',
+      secWebsocketProtocol: [],
+    }
+
+    if (headers['sec-websocket-key']) {
+      res.secWebsocketKey = headers['sec-websocket-key']
+    }
+    if (headers['sec-websocket-protocol']) {
+      const parts = headers['sec-websocket-protocol'].split(', ')
+      res.secWebsocketProtocol = parts
+    }
+
+    return res
   }
 
   private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void {
@@ -155,7 +175,7 @@ export class WebSocketServer {
     }
   }
 
-  private getCredentials(request: IncomingMessage, protocols: string[]): { username: string; password: string } {
+  private getCredentials(request: IncomingMessage, header: HeaderType): { username: string; password: string } {
     if (request.headers.authorization && request.headers.authorization.startsWith('Basic ')) {
       const b64auth = request.headers.authorization.substring(6)
       const parts = Buffer.from(b64auth, 'base64').toString().split(':') // cut "Basic "
@@ -165,8 +185,8 @@ export class WebSocketServer {
           password: parts[1],
         }
       }
-    } else if (protocols.length > 0) {
-      for (const protocol of protocols) {
+    } else if (header.secWebsocketProtocol.length > 0) {
+      for (const protocol of header.secWebsocketProtocol) {
         if (protocol.startsWith('Auth.')) {
           const b64auth = protocol.substring(5) // cut "Auth."
           const parts = fromBase64(b64auth).split(':')
