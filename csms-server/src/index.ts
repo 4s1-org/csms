@@ -18,7 +18,7 @@ if (!dataStorage.has('chargingStationModels')) {
 const server = new WebSocketServer(dataStorage)
 server.startServer()
 
-function closeGracefully(signal: string): Promise<void> {
+function closeGracefully(signal: string): void {
   logger.warn(`Received signal to terminate: ${signal}`)
   server.stopServer()
   logger.info('gracefull shutdown successfully')
