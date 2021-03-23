@@ -25,6 +25,7 @@
     "lint:fix": "pnpm run lint -- --fix",
     "test": "jest --passWithNoTests",
     "test:cov": "jest --coverage",
+    "preinstall": "npx only-allow pnpm",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"
   },
