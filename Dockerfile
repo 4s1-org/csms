@@ -4,6 +4,7 @@ RUN mkdir -p /app
 WORKDIR /app
 
 RUN npm i pnpm -g
+RUN pnpm config set store-dir /app/.pnpm-store
 
 COPY . .
 RUN pnpm install
@@ -19,10 +20,12 @@ RUN mkdir -p /app/data
 
 RUN apk add --no-cache bash supervisor
 RUN npm i pnpm http-server -g
+RUN pnpm config set store-dir /app/.pnpm-store
 
-COPY --from=builder /app/pnpm-lock.yaml .
+COPY --from=builder /app/.pnpm-store/        ./.pnpm-store/
+COPY --from=builder /app/pnpm-lock.yaml      .
 COPY --from=builder /app/pnpm-workspace.yaml .
-COPY --from=builder /app/supervisord.conf .
+COPY --from=builder /app/supervisord.conf    .
 
 COPY --from=builder /app/common-lib/package.json   ./common-lib/
 COPY --from=builder /app/common-lib/dist/          ./common-lib/dist/
@@ -46,6 +49,6 @@ COPY --from=builder /app/csms-server-ui/build/    ./csms-server-ui/build/
 
 COPY --from=builder /app/css-web/build/           ./css-web/build/
 
-RUN pnpm install
+RUN pnpm install --offline
 
 CMD ["supervisord", "-c", "/app/supervisord.conf"]
