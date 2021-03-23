@@ -49,6 +49,6 @@ COPY --from=builder /app/csms-server-ui/build/    ./csms-server-ui/build/
 
 COPY --from=builder /app/css-web/build/           ./css-web/build/
 
-RUN pnpm install --offline
+RUN pnpm install
 
 CMD ["supervisord", "-c", "/app/supervisord.conf"]
