@@ -19,6 +19,7 @@
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
+    "preinstall": "npx only-allow pnpm",
     "start": "react-scripts start",
     "test": "echo No tests"
   },

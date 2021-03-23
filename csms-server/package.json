@@ -20,6 +20,7 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "preinstall": "npx only-allow pnpm",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test && pnpm run test:e2e",
     "setup": "node -r ts-node/register src/setup.ts",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",

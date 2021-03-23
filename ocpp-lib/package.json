@@ -19,6 +19,7 @@
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "build:watch": "tsc --watch",
+    "preinstall": "npx only-allow pnpm",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
