@@ -127,6 +127,12 @@ export class ChargingStation implements IReceiveMessage {
    * G01 - Status Notification
    */
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
+    this.model.evse = []
+    this.model.evse.push({
+      evseId: payload.evseId,
+      user: '<free>',
+    })
+
     return new StatusNotificationResponseDto()
   }
 
