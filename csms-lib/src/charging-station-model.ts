@@ -15,16 +15,16 @@ export class ChargingStationModel {
   @Expose({ name: '_username' })
   public username = ''
 
-  @Expose({ name: '_passwordHash', groups: [ChargingStationGroupFlag.ServerOnly] })
   /**
    * Only at Server
    */
+  @Expose({ name: '_passwordHash', groups: [ChargingStationGroupFlag.ServerOnly] })
   public passwordHash = ''
 
-  @Expose({ name: '_state', groups: [ChargingStationGroupFlag.UiOnly] })
   /**
    * Only at UI
    */
+  @Expose({ name: '_state', groups: [ChargingStationGroupFlag.UiOnly] })
   public state = ChargingStationState.Offline
 
   @Expose({ name: '_uniqueIdentifier' })
@@ -33,16 +33,16 @@ export class ChargingStationModel {
   @Expose({ name: '_lastContact' })
   public lastContact = 0
 
-  @Expose({ name: '_lastCommand', groups: [ChargingStationGroupFlag.UiOnly] })
   /**
    * Only at UI
    */
+  @Expose({ name: '_lastCommand', groups: [ChargingStationGroupFlag.UiOnly] })
   public lastCommand = ''
 
-  @Expose({ name: '_evse', groups: [ChargingStationGroupFlag.UiOnly] })
   /**
    * Only at UI
    */
+  @Expose({ name: '_evse', groups: [ChargingStationGroupFlag.UiOnly] })
   public evse: { evseId: number; user: string }[] = []
 
   public constructor(uniqueIdentifier: string) {
