@@ -130,7 +130,7 @@ export class ChargingStation implements IReceiveMessage {
     this.model.evse = []
     this.model.evse.push({
       evseId: payload.evseId,
-      user: '<free>',
+      user: '---',
     })
 
     return new StatusNotificationResponseDto()
