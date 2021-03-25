@@ -44,6 +44,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           <p className="card-text">Benutzername: {this.props.data.username}</p>
           <div className="card-text">
             EVSE:
+            {this.props.data.evse.length === 0 && <div className="d-inline p-2 m-1 bg-dark text-white">-?-</div>}
             {this.props.data.evse.map((evse) => (
               <div key={evse.evseId} className="d-inline p-2 m-1 bg-success text-white">
                 {evse.user}
