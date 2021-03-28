@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "description": "Charging Station Management System Library",
-  "homepage": "https://gitlab.com/YellowGarbageBag/csms",
+  "homepage": "https://gitlab.com/yellow-garbage-group/csms",
   "bugs": {
-    "url": "https://gitlab.com/YellowGarbageBag/csms/issues"
+    "url": "https://gitlab.com/yellow-garbage-group/csms/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com:YellowGarbageBag/csms.git"
+    "url": "git@gitlab.com:yellow-garbage-group/csms.git"
   },
   "license": "UNLICENSED",
   "author": "Steffen",
