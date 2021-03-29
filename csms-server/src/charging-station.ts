@@ -227,6 +227,7 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * G03 - Change Availability EVSE/Connector
+   * G04 - Change Availability Charging Station
    */
   public async sendChangeAvailabilityRequest(): Promise<ChangeAvailabilityResponseDto> {
     const payload = new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative)
