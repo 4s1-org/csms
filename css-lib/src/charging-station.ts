@@ -126,6 +126,21 @@ export class ChargingStation implements IReceiveMessage {
   }
 
   /**
+   * C02 - Authorization using a start button
+   */
+  public async sendAuthorizationRequest_StartButton(): Promise<AuthorizeResponseDto> {
+    const idTocken = new IdTokenDto('', IdTokenEnum.NoAuthorization)
+    const payload = new AuthorizeRequestDto(idTocken)
+    const res = await this.sendMessage.send(payload)
+
+    if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
+      this.logger.warn(`Authorization failed | ${res.idTokenInfo.status}`)
+    }
+
+    return res
+  }
+
+  /**
    * C04 - Authorization using PIN-code
    */
   public async sendAuthorizationRequest_PinCode(): Promise<AuthorizeResponseDto> {
@@ -156,6 +171,7 @@ export class ChargingStation implements IReceiveMessage {
    * E01 - Start Transaction options
    * Mentioned in:
    * B12 - Reset - With Ongoing Transaction
+   * C02 - Authorization using a start button
    */
   public async sendTransactionEventRequest(): Promise<TransactionEventResponseDto> {
     const transaction = new TransactionDto('foobar')
@@ -187,6 +203,7 @@ export class ChargingStation implements IReceiveMessage {
    * Mentioned in:
    * B01 - Cold Boot Charging Station
    * B04 - Offline Behavior Idle Charging Station
+   * C02 - Authorization using a start button
    */
   public async sendStatusNotificationRequest(): Promise<StatusNotificationResponseDto> {
     const payload = new StatusNotificationRequestDto(new Date().toISOString(), ConnectorStatusEnum.Available, 1, 1)
