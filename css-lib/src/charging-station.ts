@@ -290,6 +290,28 @@ export class ChargingStation implements IReceiveMessage {
       new EventDataDto(
         1,
         new Date().toISOString(),
+        EventTriggerEnum.Delta,
+        'foo',
+        new ComponentDto('ConnectorPlugRetentionLock'),
+        EventNotificationEnum.HardWiredMonitor,
+        new VariableDto('Problem'),
+      ),
+    )
+    const payload = new NotifyEventRequestDto(new Date().toISOString(), 1, data)
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * N07 - Alert Event
+   */
+  public async sendNotifyEventRequest_AlertEvent(): Promise<NotifyEventResponseDto> {
+    const data: EventDataDto[] = []
+    data.push(
+      new EventDataDto(
+        1,
+        new Date().toISOString(),
         EventTriggerEnum.Alerting,
         'foo',
         new ComponentDto('ConnectorPlugRetentionLock'),
