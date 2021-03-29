@@ -41,6 +41,11 @@ import {
   RequestBaseDto,
   IReceiveMessage,
   ISendMessage,
+  GetBaseReportRequestDto,
+  GetBaseReportResponseDto,
+  GenericDeviceModelStatusEnum,
+  NotifyReportResponseDto,
+  NotifyReportRequestDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 export class ChargingStation implements IReceiveMessage {
@@ -60,6 +65,9 @@ export class ChargingStation implements IReceiveMessage {
     }
     if (payload instanceof GetVariablesRequestDto) {
       return this.receiveGetVariablesRequest(payload)
+    }
+    if (payload instanceof GetBaseReportRequestDto) {
+      return this.receiveGetBaseReportRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -152,11 +160,28 @@ export class ChargingStation implements IReceiveMessage {
   }
 
   /**
+   * Part of:
+   * B07 - Get Base Report
+   */
+  public async sendNotifyReportRequest(): Promise<NotifyReportResponseDto> {
+    const payload = new NotifyReportRequestDto(1, new Date().toISOString(), 1)
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
    * G03 - Change Availability EVSE/Connector
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private receiveChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
     return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
+  }
+
+  /**
+   * B07 - Get Base Report
+   */
+  private receiveGetBaseReportRequest(payload: GetBaseReportRequestDto): GetBaseReportResponseDto {
+    return new GetBaseReportResponseDto(GenericDeviceModelStatusEnum.Accepted)
   }
 
   /**

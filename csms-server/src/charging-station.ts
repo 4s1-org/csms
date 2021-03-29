@@ -33,6 +33,11 @@ import {
   OcppActionEnum,
   IReceiveMessage,
   ISendMessage,
+  GetBaseReportResponseDto,
+  GetBaseReportRequestDto,
+  ReportBaseEnum,
+  NotifyReportRequestDto,
+  NotifyReportResponseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
@@ -66,6 +71,9 @@ export class ChargingStation implements IReceiveMessage {
     }
     if (payload instanceof NotifyEventRequestDto) {
       return this.receiveNotifyEventRequest(payload)
+    }
+    if (payload instanceof NotifyReportRequestDto) {
+      return this.receiveNotifyReportRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -144,6 +152,14 @@ export class ChargingStation implements IReceiveMessage {
   }
 
   /**
+   * Part of:
+   * B07 - Get Base Report
+   */
+  private receiveNotifyReportRequest(payload: NotifyReportRequestDto): NotifyReportResponseDto {
+    return new NotifyReportResponseDto()
+  }
+
+  /**
    * B05 - Set Variables
    */
   public async sendSetVariablesRequest(): Promise<SetVariablesResponseDto> {
@@ -151,6 +167,16 @@ export class ChargingStation implements IReceiveMessage {
       new SetVariableDataDto('Foo', new ComponentDto('Test'), new VariableDto('yyy')),
       new SetVariableDataDto('Bar', new ComponentDto('Test'), new VariableDto('xxx')),
     ])
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * B07 - Get Base Report
+   */
+  public async sendGetBaseReportRequest(): Promise<GetBaseReportResponseDto> {
+    const payload = new GetBaseReportRequestDto(1, ReportBaseEnum.SummaryInventory)
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
