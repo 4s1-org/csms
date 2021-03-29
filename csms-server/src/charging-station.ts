@@ -112,6 +112,7 @@ export class ChargingStation implements IReceiveMessage {
    * Mentioned in:
    * B01 - Cold Boot Charging Station
    * B04 - Offline Behavior Idle Charging Station
+   * E12 - Inform CSMS of an Offline Occurred Transaction
    */
   private receiveHeartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
     return new HeartbeatResponseDto(new Date().toISOString())
@@ -149,6 +150,14 @@ export class ChargingStation implements IReceiveMessage {
    * B01 - Cold Boot Charging Station
    * B04 - Offline Behavior Idle Charging Station
    * C02 - Authorization using a start button
+   * E02 - Start Transaction - Cable Plugin First
+   * E03 - Start Transaction - IdToken First
+   * E07 - Transaction locally stopped by IdToken
+   * E09 - When cable disconnected on EV-side: Stop Transaction
+   * E10 - When cable disconnected on EV-side: Suspend Transaction
+   * E11 - Connection Loss During Transaction
+   * E12 - Inform CSMS of an Offline Occurred Transaction
+   * E13 - Transaction-related message not accepted by CSMS
    */
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     this.model.evse = []
@@ -177,6 +186,14 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * E01 - Start Transaction options
+   * E02 - Start Transaction - Cable Plugin First
+   * E03 - Start Transaction - IdToken First
+   * E05 - Start Transaction - Id not Accepted
+   * E06 - Stop Transaction options
+   * E07 - Transaction locally stopped by IdToken
+   * E08 - Transaction stopped while Charging Station is offline
+   * E09 - When cable disconnected on EV-side: Stop Transaction
+   * E10 - When cable disconnected on EV-side: Suspend Transaction
    * Mentioned in:
    * B12 - Reset - With Ongoing Transaction
    * C02 - Authorization using a start button
