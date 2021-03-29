@@ -195,6 +195,7 @@ export class ChargingStation implements IReceiveMessage {
    * E08 - Transaction stopped while Charging Station is offline
    * E09 - When cable disconnected on EV-side: Stop Transaction
    * E10 - When cable disconnected on EV-side: Suspend Transaction
+   * J02 - Sending transaction related Meter Values
    * Mentioned in:
    * B12 - Reset - With Ongoing Transaction
    * C02 - Authorization using a start button

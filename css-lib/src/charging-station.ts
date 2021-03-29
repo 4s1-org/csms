@@ -181,6 +181,7 @@ export class ChargingStation implements IReceiveMessage {
    * E11 - Connection Loss During Transaction
    * E12 - Inform CSMS of an Offline Occurred Transaction
    * E13 - Transaction-related message not accepted by CSMS
+   * J02 - Sending transaction related Meter Values
    * Mentioned in:
    * B12 - Reset - With Ongoing Transaction
    * C02 - Authorization using a start button
