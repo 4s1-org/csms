@@ -38,6 +38,9 @@ import {
   ReportBaseEnum,
   NotifyReportRequestDto,
   NotifyReportResponseDto,
+  ResetRequestDto,
+  ResetEnum,
+  ResetResponseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
@@ -205,6 +208,16 @@ export class ChargingStation implements IReceiveMessage {
     const payload = new GetVariablesRequestDto([
       new GetVariableDataDto(new ComponentDto('test'), new VariableDto('foo')),
     ])
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * B11 - Reset - Without Ongoing Transaction
+   */
+  public async sendRequestResetRequest(): Promise<ResetResponseDto> {
+    const payload = new ResetRequestDto(ResetEnum.Immediate)
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res

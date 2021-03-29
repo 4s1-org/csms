@@ -46,6 +46,9 @@ import {
   GenericDeviceModelStatusEnum,
   NotifyReportResponseDto,
   NotifyReportRequestDto,
+  ResetRequestDto,
+  ResetResponseDto,
+  ResetStatusEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 export class ChargingStation implements IReceiveMessage {
@@ -68,6 +71,9 @@ export class ChargingStation implements IReceiveMessage {
     }
     if (payload instanceof GetBaseReportRequestDto) {
       return this.receiveGetBaseReportRequest(payload)
+    }
+    if (payload instanceof ResetRequestDto) {
+      return this.receiveRequestResetRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -199,6 +205,13 @@ export class ChargingStation implements IReceiveMessage {
       result.push(new GetVariableResultDto(GetVariableStatusEnum.Accepted, x.component, x.variable))
     }
     return new GetVariablesResponseDto(result)
+  }
+
+  /**
+   * B11 - Reset - Without Ongoing Transaction
+   */
+  private receiveRequestResetRequest(payload: ResetRequestDto): ResetResponseDto {
+    return new ResetResponseDto(ResetStatusEnum.Accepted)
   }
 
   /**
