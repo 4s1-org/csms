@@ -13,6 +13,10 @@ import { OcppErrorMessageDto } from '../ocpp-messages/ocpp-error-message.dto'
 import { RequestToResponseType } from '../generated/request-to-response.type'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { actionDtoMapping } from '../generated/action-dto-mapping'
+import { OcppMessageValidationError } from '../ocpp-messages/ocpp-message-validation-error'
+import { CsmsError } from '../utils/csms-error'
+import { OcppErrorCodeEnum } from '../ocpp-messages/ocpp-error-code.enum'
+import { OcppBaseMessageDto } from '../ocpp-messages/ocpp-base-message.dto'
 
 export abstract class WsClientBase implements ISendMessage {
   private requestList: PendingPromises[] = []
@@ -25,40 +29,67 @@ export abstract class WsClientBase implements ISendMessage {
   public abstract disconnect(): void
 
   public onMessage(data: any, receiveMessage: IReceiveMessage): void {
-    const msg = OcppMessageHandler.instance.validateAndConvert(data)
+    // Für den Fehlerfall
+    let msg: OcppBaseMessageDto | undefined
 
-    if (msg instanceof OcppRequestMessageDto) {
-      this.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
-      PayloadValidator.instance.validateRequestPayload(msg)
-      PayloadConverter.instance.convertRequestPayload(msg)
-      // Verarbeitung der Daten
-      const responsePayload: ResponseBaseDto = receiveMessage.receive(msg.payload, msg.action)
-      // Antwortobjekt erstellen
-      const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
-      // Anwortdaten validieren (nice to have)
-      PayloadValidator.instance.validateResponsePayload(responseCall, msg.action)
-      this.logger.info(`Outgoing Response | ${msg.action} | ${msg.messageId}`)
-      this.sendInternal(responseCall.toMessageString())
-      return
-    } else if (msg instanceof OcppResponseMessageDto) {
-      const pendingPromise = this.requestList[0]
-      if (pendingPromise) {
-        if (pendingPromise.msg.messageId === msg.messageId) {
-          const idx = this.requestList.indexOf(pendingPromise)
-          this.requestList.splice(idx, 1)
-          this.logger.info(`Incoming Response | ${pendingPromise.msg.action} | ${msg.messageId}`)
-          PayloadValidator.instance.validateResponsePayload(msg, pendingPromise.msg.action)
-          PayloadConverter.instance.convertResponsePayload(msg, pendingPromise.msg.action)
-          pendingPromise.resolve(msg.payload)
-          return
+    try {
+      this.logger.debug('Incoming data', data)
+      msg = OcppMessageHandler.instance.validateAndConvert(data)
+
+      if (msg instanceof OcppRequestMessageDto) {
+        this.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
+        PayloadValidator.instance.validateRequestPayload(msg)
+        PayloadConverter.instance.convertRequestPayload(msg)
+        // Verarbeitung der Daten
+        const responsePayload: ResponseBaseDto = receiveMessage.receive(msg.payload, msg.action)
+        // Antwortobjekt erstellen
+        const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
+        // Anwortdaten validieren (nice to have)
+        PayloadValidator.instance.validateResponsePayload(responseCall, msg.action)
+        this.logger.info(`Outgoing Response | ${msg.action} | ${msg.messageId}`)
+        this.sendInternal(responseCall.toMessageString())
+        return
+      } else if (msg instanceof OcppResponseMessageDto) {
+        const pendingPromise = this.requestList[0]
+        if (pendingPromise) {
+          if (pendingPromise.msg.messageId === msg.messageId) {
+            const idx = this.requestList.indexOf(pendingPromise)
+            this.requestList.splice(idx, 1)
+            this.logger.info(`Incoming Response | ${pendingPromise.msg.action} | ${msg.messageId}`)
+            PayloadValidator.instance.validateResponsePayload(msg, pendingPromise.msg.action)
+            PayloadConverter.instance.convertResponsePayload(msg, pendingPromise.msg.action)
+            pendingPromise.resolve(msg.payload)
+            return
+          }
+          pendingPromise.reject()
         }
-        pendingPromise.reject()
+      } else if (msg instanceof OcppErrorMessageDto) {
+        // ToDo
+        return
       }
-    } else if (msg instanceof OcppErrorMessageDto) {
-      // ToDo
-      return
+      throw new Error('Invalid pending promise state')
+    } catch (err) {
+      let errMsg: OcppErrorMessageDto
+
+      if (err instanceof OcppMessageValidationError) {
+        this.logger.warn(`Validation Error | ${err.errorCode} | ${err.errorDescription}`)
+        errMsg = new OcppErrorMessageDto(err.messageId, err.errorCode, err.errorDescription)
+      } else if (err instanceof CsmsError) {
+        const messageId: string = msg?.messageId || ''
+        this.logger.warn(`CSMS Error | ${err.errorCode} | ${err.errorDescription}`)
+        errMsg = new OcppErrorMessageDto(messageId, err.errorCode, err.errorDescription)
+      } else {
+        const messageId: string = msg?.messageId || ''
+        this.logger.fatal('Internal Server Error')
+        this.logger.fatal(err)
+        errMsg = new OcppErrorMessageDto(messageId, OcppErrorCodeEnum.InternalError)
+      }
+      // Niemals auf einen Fehler mit einem neuen Fehler Antworten um PingPong zu vermeiden
+      if (msg instanceof OcppErrorMessageDto) {
+        return undefined
+      }
+      this.sendInternal(errMsg.toMessageString())
     }
-    throw new Error('Invalid pending promise state')
   }
 
   public send<T extends RequestBaseDto>(payload: T): Promise<RequestToResponseType<T>> {
