@@ -126,6 +126,7 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * C01 - EV Driver Authorization using RFID
+   * C02 - Authorization using a start button
    * C04 - Authorization using PIN-code
    */
   private receiveAuthorizeRequest(payload: AuthorizeRequestDto): AuthorizeResponseDto {
@@ -147,6 +148,7 @@ export class ChargingStation implements IReceiveMessage {
    * Mentioned in:
    * B01 - Cold Boot Charging Station
    * B04 - Offline Behavior Idle Charging Station
+   * C02 - Authorization using a start button
    */
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     this.model.evse = []
@@ -177,6 +179,7 @@ export class ChargingStation implements IReceiveMessage {
    * E01 - Start Transaction options
    * Mentioned in:
    * B12 - Reset - With Ongoing Transaction
+   * C02 - Authorization using a start button
    */
   private receiveTransactionEventRequest(payload: TransactionEventRequestDto): TransactionEventResponseDto {
     return new TransactionEventResponseDto()
