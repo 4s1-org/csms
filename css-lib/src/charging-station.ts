@@ -54,6 +54,9 @@ import {
   TriggerReasonEnum,
   TransactionDto,
   TransactionEventResponseDto,
+  DataTransferResponseDto,
+  DataTransferStatusEnum,
+  DataTransferRequestDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 export class ChargingStation implements IReceiveMessage {
@@ -79,6 +82,9 @@ export class ChargingStation implements IReceiveMessage {
     }
     if (payload instanceof ResetRequestDto) {
       return this.receiveRequestResetRequest(payload)
+    }
+    if (payload instanceof DataTransferRequestDto) {
+      return this.receiveDataTransferRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -273,6 +279,14 @@ export class ChargingStation implements IReceiveMessage {
    */
   private receiveRequestResetRequest(payload: ResetRequestDto): ResetResponseDto {
     return new ResetResponseDto(ResetStatusEnum.Accepted)
+  }
+
+  /**
+   * P01 - Data Transfer to the Charging Station
+   * P02 - Data Transfer to the CSMS
+   */
+  private receiveDataTransferRequest(payload: DataTransferRequestDto): DataTransferResponseDto {
+    return new DataTransferResponseDto(DataTransferStatusEnum.Rejected)
   }
 
   /**
