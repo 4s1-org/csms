@@ -248,48 +248,6 @@ export class ChargingStation implements IReceiveMessage {
   }
 
   /**
-   * G03 - Change Availability EVSE/Connector
-   * G04 - Change Availability Charging Station
-   */
-  private receiveChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
-    return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
-  }
-
-  /**
-   * B07 - Get Base Report
-   */
-  private receiveGetBaseReportRequest(payload: GetBaseReportRequestDto): GetBaseReportResponseDto {
-    return new GetBaseReportResponseDto(GenericDeviceModelStatusEnum.Accepted)
-  }
-
-  /**
-   * B06 - Get Variables
-   */
-  private receiveGetVariablesRequest(payload: GetVariablesRequestDto): GetVariablesResponseDto {
-    const result: GetVariableResultDto[] = []
-    for (const x of payload.getVariableData) {
-      result.push(new GetVariableResultDto(GetVariableStatusEnum.Accepted, x.component, x.variable))
-    }
-    return new GetVariablesResponseDto(result)
-  }
-
-  /**
-   * B11 - Reset - Without Ongoing Transaction
-   * B12 - Reset - With Ongoing Transaction
-   */
-  private receiveRequestResetRequest(payload: ResetRequestDto): ResetResponseDto {
-    return new ResetResponseDto(ResetStatusEnum.Accepted)
-  }
-
-  /**
-   * P01 - Data Transfer to the Charging Station
-   * P02 - Data Transfer to the CSMS
-   */
-  private receiveDataTransferRequest(payload: DataTransferRequestDto): DataTransferResponseDto {
-    return new DataTransferResponseDto(DataTransferStatusEnum.Rejected)
-  }
-
-  /**
    * G05 - Lock Failure
    */
   public async sendNotifyEventRequest_LockFailure(): Promise<NotifyEventResponseDto> {
@@ -338,5 +296,47 @@ export class ChargingStation implements IReceiveMessage {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
+  }
+
+  /**
+   * G03 - Change Availability EVSE/Connector
+   * G04 - Change Availability Charging Station
+   */
+  private receiveChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
+    return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
+  }
+
+  /**
+   * B07 - Get Base Report
+   */
+  private receiveGetBaseReportRequest(payload: GetBaseReportRequestDto): GetBaseReportResponseDto {
+    return new GetBaseReportResponseDto(GenericDeviceModelStatusEnum.Accepted)
+  }
+
+  /**
+   * B06 - Get Variables
+   */
+  private receiveGetVariablesRequest(payload: GetVariablesRequestDto): GetVariablesResponseDto {
+    const result: GetVariableResultDto[] = []
+    for (const x of payload.getVariableData) {
+      result.push(new GetVariableResultDto(GetVariableStatusEnum.Accepted, x.component, x.variable))
+    }
+    return new GetVariablesResponseDto(result)
+  }
+
+  /**
+   * B11 - Reset - Without Ongoing Transaction
+   * B12 - Reset - With Ongoing Transaction
+   */
+  private receiveRequestResetRequest(payload: ResetRequestDto): ResetResponseDto {
+    return new ResetResponseDto(ResetStatusEnum.Accepted)
+  }
+
+  /**
+   * P01 - Data Transfer to the Charging Station
+   * P02 - Data Transfer to the CSMS
+   */
+  private receiveDataTransferRequest(payload: DataTransferRequestDto): DataTransferResponseDto {
+    return new DataTransferResponseDto(DataTransferStatusEnum.Rejected)
   }
 }

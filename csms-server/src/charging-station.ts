@@ -100,6 +100,74 @@ export class ChargingStation implements IReceiveMessage {
   }
 
   /**
+   * B05 - Set Variables
+   */
+  public async sendSetVariablesRequest(): Promise<SetVariablesResponseDto> {
+    const payload = new SetVariablesRequestDto([
+      new SetVariableDataDto('Foo', new ComponentDto('Test'), new VariableDto('yyy')),
+      new SetVariableDataDto('Bar', new ComponentDto('Test'), new VariableDto('xxx')),
+    ])
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * B07 - Get Base Report
+   */
+  public async sendGetBaseReportRequest(): Promise<GetBaseReportResponseDto> {
+    const payload = new GetBaseReportRequestDto(1, ReportBaseEnum.SummaryInventory)
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * G03 - Change Availability EVSE/Connector
+   * G04 - Change Availability Charging Station
+   */
+  public async sendChangeAvailabilityRequest(): Promise<ChangeAvailabilityResponseDto> {
+    const payload = new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative)
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * B06 - Get Variables
+   */
+  public async sendGetVariablesRequest(): Promise<GetVariablesResponseDto> {
+    const payload = new GetVariablesRequestDto([
+      new GetVariableDataDto(new ComponentDto('test'), new VariableDto('foo')),
+    ])
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * B11 - Reset - Without Ongoing Transaction
+   * B12 - Reset - With Ongoing Transaction
+   */
+  public async sendRequestResetRequest(): Promise<ResetResponseDto> {
+    const payload = new ResetRequestDto(ResetEnum.Immediate)
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * P01 - Data Transfer to the Charging Station
+   * P02 - Data Transfer to the CSMS
+   */
+  public async sendDataTransferRequest(): Promise<DataTransferResponseDto> {
+    const payload = new DataTransferRequestDto('foobar')
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
    * B01 - Cold Boot Charging Station
    * B02 - Cold Boot Charging Station - Pending
    * B03 - Cold Boot Charging Station - Rejected
@@ -204,73 +272,5 @@ export class ChargingStation implements IReceiveMessage {
    */
   private receiveTransactionEventRequest(payload: TransactionEventRequestDto): TransactionEventResponseDto {
     return new TransactionEventResponseDto()
-  }
-
-  /**
-   * B05 - Set Variables
-   */
-  public async sendSetVariablesRequest(): Promise<SetVariablesResponseDto> {
-    const payload = new SetVariablesRequestDto([
-      new SetVariableDataDto('Foo', new ComponentDto('Test'), new VariableDto('yyy')),
-      new SetVariableDataDto('Bar', new ComponentDto('Test'), new VariableDto('xxx')),
-    ])
-    const res = await this.sendMessage.send(payload)
-    // ToDo Handling
-    return res
-  }
-
-  /**
-   * B07 - Get Base Report
-   */
-  public async sendGetBaseReportRequest(): Promise<GetBaseReportResponseDto> {
-    const payload = new GetBaseReportRequestDto(1, ReportBaseEnum.SummaryInventory)
-    const res = await this.sendMessage.send(payload)
-    // ToDo Handling
-    return res
-  }
-
-  /**
-   * G03 - Change Availability EVSE/Connector
-   * G04 - Change Availability Charging Station
-   */
-  public async sendChangeAvailabilityRequest(): Promise<ChangeAvailabilityResponseDto> {
-    const payload = new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative)
-    const res = await this.sendMessage.send(payload)
-    // ToDo Handling
-    return res
-  }
-
-  /**
-   * B06 - Get Variables
-   */
-  public async sendGetVariablesRequest(): Promise<GetVariablesResponseDto> {
-    const payload = new GetVariablesRequestDto([
-      new GetVariableDataDto(new ComponentDto('test'), new VariableDto('foo')),
-    ])
-    const res = await this.sendMessage.send(payload)
-    // ToDo Handling
-    return res
-  }
-
-  /**
-   * B11 - Reset - Without Ongoing Transaction
-   * B12 - Reset - With Ongoing Transaction
-   */
-  public async sendRequestResetRequest(): Promise<ResetResponseDto> {
-    const payload = new ResetRequestDto(ResetEnum.Immediate)
-    const res = await this.sendMessage.send(payload)
-    // ToDo Handling
-    return res
-  }
-
-  /**
-   * P01 - Data Transfer to the Charging Station
-   * P02 - Data Transfer to the CSMS
-   */
-  public async sendDataTransferRequest(): Promise<DataTransferResponseDto> {
-    const payload = new DataTransferRequestDto('foobar')
-    const res = await this.sendMessage.send(payload)
-    // ToDo Handling
-    return res
   }
 }
