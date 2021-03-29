@@ -242,6 +242,7 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * G03 - Change Availability EVSE/Connector
+   * G04 - Change Availability Charging Station
    */
   private receiveChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
     return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
