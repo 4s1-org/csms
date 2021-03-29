@@ -171,6 +171,7 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * G05 - Lock Failure
+   * N07 - Alert Event
    */
   private receiveNotifyEventRequest(payload: NotifyEventRequestDto): NotifyEventResponseDto {
     return new NotifyEventResponseDto()
