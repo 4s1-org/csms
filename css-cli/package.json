@@ -15,19 +15,23 @@
   "author": "Steffen",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md"
+  ],
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "debug": "tsc && node dist/debug.js | pino-pretty",
     "build:watch": "tsc --watch",
-    "start:simulation1": "pnpm run build && node ./dist/simulation1.js | pino-pretty",
-    "start:simulation2": "pnpm run build && concurrently \"node ./dist/simulation2a.js | pino-pretty\" \"node ./dist/simulation2b.js | pino-pretty\" \"node ./dist/simulation2c.js | pino-pretty\"",
+    "debug": "tsc && node dist/debug.js | pino-pretty",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
+    "preinstall": "npx only-allow pnpm",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
     "lint:fix": "pnpm run lint -- --fix",
+    "start:simulation1": "pnpm run build && node ./dist/simulation1.js | pino-pretty",
+    "start:simulation2": "pnpm run build && concurrently \"node ./dist/simulation2a.js | pino-pretty\" \"node ./dist/simulation2b.js | pino-pretty\" \"node ./dist/simulation2c.js | pino-pretty\"",
     "test": "jest --passWithNoTests",
-    "preinstall": "npx only-allow pnpm",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"
