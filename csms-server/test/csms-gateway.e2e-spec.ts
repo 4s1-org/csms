@@ -18,7 +18,7 @@ import { IDataStorageSchema } from '../src/config/i-data-store-schema'
 import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
 import { hashPassword } from '../src/config/password'
 
-describe.skip('CSMS Gateway', () => {
+describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
   let socket: WebSocket | undefined
   const csInfo = 'LS0815'
@@ -63,23 +63,21 @@ describe.skip('CSMS Gateway', () => {
 
   describe('RPC Framework tests', () => {
     describe('Valid calls', () => {
-      // ToDo: Test muss wieder laufen
-      it.skip('Without OcppCallDto', (done: jest.DoneCallback) => {
+      it('Without OcppRequestMessageDto instance (just selfmade)', (done: jest.DoneCallback) => {
         const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
         socket.onopen = (): void => {
-          socket.send(
-            JSON.stringify([
-              OcppMessageTypeIdEnum.Call,
-              messageId,
-              OcppActionEnum.BootNotification,
-              new BootNotificationRequestDto(
-                new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-                BootReasonEnum.PowerUp,
-              ),
-            ]),
+          const payload = new BootNotificationRequestDto(
+            new ChargingStationDto('SingleSocketCharger', 'VendorX'),
+            BootReasonEnum.PowerUp,
           )
+          delete payload['_baseClassName']
+          delete payload['_className']
+          delete payload.chargingStation['_baseClassName']
+          delete payload.chargingStation['_className']
+          const data = JSON.stringify([OcppMessageTypeIdEnum.Call, messageId, OcppActionEnum.BootNotification, payload])
+          socket.send(data)
         }
 
         socket.onmessage = (msg: WebSocket.MessageEvent): void => {
@@ -93,8 +91,7 @@ describe.skip('CSMS Gateway', () => {
         }
       })
 
-      // ToDo: Test muss wieder laufen
-      it.skip('With OcppCallDto', (done: jest.DoneCallback) => {
+      it('With OcppCallDto', (done: jest.DoneCallback) => {
         const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
@@ -279,18 +276,20 @@ describe.skip('CSMS Gateway', () => {
   })
 
   describe('Format validation tests', () => {
-    // ToDo: Test muss wieder laufen
-    it.skip('Call a not implemented action', (done: jest.DoneCallback) => {
+    it('Call a not implemented action', (done: jest.DoneCallback) => {
       const socket = connectToSocket(done)
       const messageId = Math.random().toString()
 
       socket.onopen = (): void => {
+        const payload = new UnpublishFirmwareRequestDto('abcdefg')
+        delete payload['_baseClassName']
+        delete payload['_className']
         socket.send(
           JSON.stringify([
             OcppMessageTypeIdEnum.Call,
             messageId,
             OcppActionEnum.UnpublishFirmware, // Noch nicht implementiert
-            new UnpublishFirmwareRequestDto('abcdefg'),
+            payload,
           ]),
         )
       }
