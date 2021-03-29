@@ -101,6 +101,9 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * G02 - Heartbeat
+   * Mentioned in:
+   * B01 - Cold Boot Charging Station
+   * B04 - Offline Behavior Idle Charging Station
    */
   private receiveHeartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
     return new HeartbeatResponseDto(new Date().toISOString())
@@ -133,6 +136,9 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * G01 - Status Notification
+   * Mentioned in:
+   * B01 - Cold Boot Charging Station
+   * B04 - Offline Behavior Idle Charging Station
    */
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     this.model.evse = []
@@ -152,7 +158,7 @@ export class ChargingStation implements IReceiveMessage {
   }
 
   /**
-   * Part of:
+   * Mentioned in:
    * B07 - Get Base Report
    */
   private receiveNotifyReportRequest(payload: NotifyReportRequestDto): NotifyReportResponseDto {

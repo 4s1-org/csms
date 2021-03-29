@@ -88,6 +88,9 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * G02 - Heartbeat
+   * Mentioned in:
+   * B01 - Cold Boot Charging Station
+   * B04 - Offline Behavior Idle Charging Station
    */
   public async sendHeartbeatRequest(): Promise<HeartbeatResponseDto> {
     const payload = new HeartbeatRequestDto()
@@ -151,6 +154,9 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * G01 - Status Notification
+   * Mentioned in:
+   * B01 - Cold Boot Charging Station
+   * B04 - Offline Behavior Idle Charging Station
    */
   public async sendStatusNotificationRequest(): Promise<StatusNotificationResponseDto> {
     const payload = new StatusNotificationRequestDto(new Date().toISOString(), ConnectorStatusEnum.Available, 1, 1)
@@ -160,7 +166,7 @@ export class ChargingStation implements IReceiveMessage {
   }
 
   /**
-   * Part of:
+   * Mentioned in:
    * B07 - Get Base Report
    */
   public async sendNotifyReportRequest(): Promise<NotifyReportResponseDto> {
