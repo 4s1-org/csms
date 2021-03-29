@@ -49,6 +49,11 @@ import {
   ResetRequestDto,
   ResetResponseDto,
   ResetStatusEnum,
+  TransactionEventRequestDto,
+  TransactionEventEnum,
+  TriggerReasonEnum,
+  TransactionDto,
+  TransactionEventResponseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 export class ChargingStation implements IReceiveMessage {
@@ -148,6 +153,25 @@ export class ChargingStation implements IReceiveMessage {
   }
 
   /**
+   * E01 - Start Transaction options
+   * Mentioned in:
+   * B12 - Reset - With Ongoing Transaction
+   */
+  public async sendTransactionEventRequest(): Promise<TransactionEventResponseDto> {
+    const transaction = new TransactionDto('foobar')
+    const payload = new TransactionEventRequestDto(
+      TransactionEventEnum.Started,
+      new Date().toISOString(),
+      TriggerReasonEnum.CablePluggedIn,
+      1,
+      transaction,
+    )
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
    * B05 - Set Variables
    */
   private receiveSetVariablesRequest(payload: SetVariablesRequestDto): SetVariablesResponseDto {
@@ -209,6 +233,7 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * B11 - Reset - Without Ongoing Transaction
+   * B12 - Reset - With Ongoing Transaction
    */
   private receiveRequestResetRequest(payload: ResetRequestDto): ResetResponseDto {
     return new ResetResponseDto(ResetStatusEnum.Accepted)

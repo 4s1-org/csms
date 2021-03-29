@@ -41,6 +41,8 @@ import {
   ResetRequestDto,
   ResetEnum,
   ResetResponseDto,
+  TransactionEventRequestDto,
+  TransactionEventResponseDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
@@ -77,6 +79,9 @@ export class ChargingStation implements IReceiveMessage {
     }
     if (payload instanceof NotifyReportRequestDto) {
       return this.receiveNotifyReportRequest(payload)
+    }
+    if (payload instanceof TransactionEventRequestDto) {
+      return this.receiveTransactionEventRequest(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -169,6 +174,15 @@ export class ChargingStation implements IReceiveMessage {
   }
 
   /**
+   * E01 - Start Transaction options
+   * Mentioned in:
+   * B12 - Reset - With Ongoing Transaction
+   */
+  private receiveTransactionEventRequest(payload: TransactionEventRequestDto): TransactionEventResponseDto {
+    return new TransactionEventResponseDto()
+  }
+
+  /**
    * B05 - Set Variables
    */
   public async sendSetVariablesRequest(): Promise<SetVariablesResponseDto> {
@@ -215,6 +229,7 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * B11 - Reset - Without Ongoing Transaction
+   * B12 - Reset - With Ongoing Transaction
    */
   public async sendRequestResetRequest(): Promise<ResetResponseDto> {
     const payload = new ResetRequestDto(ResetEnum.Immediate)
