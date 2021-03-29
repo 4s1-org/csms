@@ -43,6 +43,8 @@ import {
   ResetResponseDto,
   TransactionEventRequestDto,
   TransactionEventResponseDto,
+  DataTransferResponseDto,
+  DataTransferRequestDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
@@ -256,6 +258,17 @@ export class ChargingStation implements IReceiveMessage {
    */
   public async sendRequestResetRequest(): Promise<ResetResponseDto> {
     const payload = new ResetRequestDto(ResetEnum.Immediate)
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * P01 - Data Transfer to the Charging Station
+   * P02 - Data Transfer to the CSMS
+   */
+  public async sendDataTransferRequest(): Promise<DataTransferResponseDto> {
+    const payload = new DataTransferRequestDto('foobar')
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
