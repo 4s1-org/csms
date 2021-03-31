@@ -43,6 +43,8 @@ import {
   TransactionEventResponseDto,
   DataTransferResponseDto,
   DataTransferRequestDto,
+  OcppErrorCodeEnum,
+  CsmsError,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger, NotSupportedError } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
@@ -84,7 +86,7 @@ export class ChargingStation implements IReceiveMessage {
       return this.receiveTransactionEventRequest(payload)
     }
 
-    throw new NotSupportedError()
+    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
   }
 
   public connect(): void {
