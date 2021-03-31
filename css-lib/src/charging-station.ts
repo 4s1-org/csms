@@ -1,7 +1,6 @@
 import {
   BootNotificationRequestDto,
   BootNotificationResponseDto,
-  OcppErrorCodeEnum,
   ResponseBaseDto,
   CsmsError,
   HeartbeatRequestDto,
@@ -57,6 +56,7 @@ import {
   DataTransferResponseDto,
   DataTransferStatusEnum,
   DataTransferRequestDto,
+  OcppErrorCodeEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 export class ChargingStation implements IReceiveMessage {

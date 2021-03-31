@@ -1,9 +1,7 @@
 import {
   BootNotificationRequestDto,
   BootNotificationResponseDto,
-  OcppErrorCodeEnum,
   ResponseBaseDto,
-  CsmsError,
   HeartbeatRequestDto,
   HeartbeatResponseDto,
   StatusNotificationRequestDto,
@@ -45,6 +43,8 @@ import {
   TransactionEventResponseDto,
   DataTransferResponseDto,
   DataTransferRequestDto,
+  OcppErrorCodeEnum,
+  CsmsError,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
