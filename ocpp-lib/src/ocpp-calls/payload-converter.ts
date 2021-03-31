@@ -1,7 +1,7 @@
 import { plainToClass } from 'class-transformer'
-import { OcppErrorCodeEnum } from '../ocpp-messages/ocpp-error-code.enum'
-import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto'
-import { OcppResponseMessageDto } from '../ocpp-messages/ocpp-response-message.dto'
+import { OcppErrorCodeEnum } from './ocpp-error-code.enum'
+import { OcppCallDto } from './ocpp-call.dto'
+import { OcppCallresultDto } from './ocpp-callresult.dto'
 import { actionDtoMapping } from '../generated/action-dto-mapping'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { CsmsError } from '../utils/csms-error'
@@ -20,7 +20,7 @@ export class PayloadConverter {
     return this._instance
   }
 
-  public convertRequestPayload(msg: OcppRequestMessageDto): void {
+  public convertRequestPayload(msg: OcppCallDto): void {
     const mapping = actionDtoMapping.find((x) => x.action === msg.action)
     if (!mapping) {
       throw new CsmsError(OcppErrorCodeEnum.NotSupported, msg.action)
@@ -28,7 +28,7 @@ export class PayloadConverter {
     msg.payload = plainToClass(mapping.requestDto, msg.payload)
   }
 
-  public convertResponsePayload(msg: OcppResponseMessageDto, action: OcppActionEnum): void {
+  public convertResponsePayload(msg: OcppCallresultDto, action: OcppActionEnum): void {
     const mapping = actionDtoMapping.find((x) => x.action === action)
     if (!mapping) {
       throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)

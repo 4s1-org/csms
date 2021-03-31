@@ -1,7 +1,7 @@
 import { OcppErrorCodeEnum } from './ocpp-error-code.enum'
 import { CsmsError } from '../utils/csms-error'
 
-export class OcppMessageValidationError extends CsmsError {
+export class OcppRpcValidationError extends CsmsError {
   constructor(
     public readonly messageId: string,
     errorCode: OcppErrorCodeEnum,
