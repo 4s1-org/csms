@@ -7,9 +7,9 @@ import {
   IdTokenDto,
   IdTokenEnum,
   OcppActionEnum,
+  OcppCallDto,
   OcppErrorCodeEnum,
   OcppMessageTypeIdEnum,
-  OcppRequestMessageDto,
   UnpublishFirmwareRequestDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { WebSocketServer } from '../src/web-socket-server'
@@ -63,7 +63,7 @@ describe('CSMS Gateway', () => {
 
   describe('RPC Framework tests', () => {
     describe('Valid calls', () => {
-      it('Without OcppRequestMessageDto instance (just selfmade)', (done: jest.DoneCallback) => {
+      it('Without OcppCallDto instance (just selfmade)', (done: jest.DoneCallback) => {
         const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
@@ -97,7 +97,7 @@ describe('CSMS Gateway', () => {
 
         socket.onopen = (): void => {
           socket.send(
-            new OcppRequestMessageDto(
+            new OcppCallDto(
               messageId,
               OcppActionEnum.BootNotification,
               new BootNotificationRequestDto(
@@ -334,7 +334,7 @@ describe('CSMS Gateway', () => {
 
       socket.onopen = (): void => {
         socket.send(
-          new OcppRequestMessageDto(
+          new OcppCallDto(
             messageId,
             OcppActionEnum.BootNotification,
             // Payload passt nicht zur Message
