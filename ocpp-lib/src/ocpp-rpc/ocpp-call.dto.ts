@@ -1,10 +1,10 @@
 import { classToPlain } from 'class-transformer'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { RequestBaseDto } from '../generated/request-base.dto'
-import { OcppBaseMessageDto } from './ocpp-base-message.dto'
+import { OcppRpcBaseDto } from './ocpp-rpc-base.dto'
 import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
 
-export class OcppRequestMessageDto extends OcppBaseMessageDto {
+export class OcppCallDto extends OcppRpcBaseDto {
   constructor(messageId: string, action: OcppActionEnum, payload: RequestBaseDto) {
     super(OcppMessageTypeIdEnum.Call, messageId)
     this.action = action

@@ -1,4 +1,3 @@
-import { OcppErrorCodeEnum } from '../ocpp-messages/ocpp-error-code.enum'
 import { CsmsError } from '../utils/csms-error'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { jsonSchemas } from '../generated/json-schema-imports'
@@ -6,9 +5,9 @@ import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 import v6 from 'ajv/lib/refs/json-schema-draft-06.json'
 import { classToPlain } from 'class-transformer'
-import { OcppRequestMessageDto } from './ocpp-request-message.dto'
-import { OcppResponseMessageDto } from './ocpp-response-message.dto'
-
+import { OcppCallDto } from './ocpp-call.dto'
+import { OcppCallresultDto } from './ocpp-callresult.dto'
+import { OcppErrorCodeEnum } from './ocpp-error-code.enum'
 export class PayloadValidator {
   private static _instance: PayloadValidator
   private _ajv: Ajv
@@ -30,11 +29,11 @@ export class PayloadValidator {
     return this._instance
   }
 
-  public validateRequestPayload(msg: OcppRequestMessageDto): any {
+  public validateRequestPayload(msg: OcppCallDto): any {
     this.validate(classToPlain(msg.payload), jsonSchemas[msg.action + 'Request'])
   }
 
-  public validateResponsePayload(msg: OcppResponseMessageDto, action: OcppActionEnum): any {
+  public validateResponsePayload(msg: OcppCallresultDto, action: OcppActionEnum): any {
     this.validate(classToPlain(msg.payload), jsonSchemas[action + 'Response'])
   }
 
