@@ -1,7 +1,6 @@
 import {
   BootNotificationRequestDto,
   BootNotificationResponseDto,
-  OcppErrorCodeEnum,
   ResponseBaseDto,
   CsmsError,
   HeartbeatRequestDto,
@@ -58,7 +57,7 @@ import {
   DataTransferStatusEnum,
   DataTransferRequestDto,
 } from '@yellowgarbagebag/ocpp-lib'
-import { Logger } from '@yellowgarbagebag/common-lib'
+import { Logger, NotSupportedError } from '@yellowgarbagebag/common-lib'
 export class ChargingStation implements IReceiveMessage {
   public readonly logger = new Logger(this.uniqueIdentifier)
   public heartbeatInterval = 3600
@@ -87,7 +86,7 @@ export class ChargingStation implements IReceiveMessage {
       return this.receiveDataTransferRequest(payload)
     }
 
-    throw new CsmsError(OcppErrorCodeEnum.NotSupported)
+    throw new NotSupportedError()
   }
 
   /**

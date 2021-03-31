@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import { Logger } from '@yellowgarbagebag/common-lib'
+import { Logger, NotSupportedError } from '@yellowgarbagebag/common-lib'
 import { IReceiveMessage } from './i-receive-message'
 import { PendingPromises } from './pending-promises'
 import { ISendMessage } from './i-send-message'
@@ -71,7 +71,11 @@ export abstract class WsClientBase implements ISendMessage {
     } catch (err) {
       let errMsg: OcppCallerrorDto
 
-      if (err instanceof OcppRpcValidationError) {
+      if (err instanceof NotSupportedError) {
+        this.logger.warn(`Not supported Error | ${err.message}`)
+        const messageId: string = msg?.messageId || ''
+        errMsg = new OcppCallerrorDto(messageId, OcppErrorCodeEnum.NotSupported)
+      } else if (err instanceof OcppRpcValidationError) {
         this.logger.warn(`Validation Error | ${err.errorCode} | ${err.errorDescription}`)
         errMsg = new OcppCallerrorDto(err.messageId, err.errorCode, err.errorDescription)
       } else if (err instanceof CsmsError) {
