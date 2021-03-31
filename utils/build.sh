@@ -11,5 +11,5 @@ pnpm run build --prefix csms-server
 pnpm run build --prefix csms-server-ui
 
 pnpm run build --prefix css-lib
-pnpm run build --prefix css-web
+pnpm run build --prefix css-ui
 pnpm run build --prefix css-cli

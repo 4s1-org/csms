@@ -45,9 +45,9 @@ COPY --from=builder /app/css-lib/dist/             ./css-lib/dist/
 COPY --from=builder /app/ocpp-lib/package.json     ./ocpp-lib/
 COPY --from=builder /app/ocpp-lib/dist/            ./ocpp-lib/dist/
 
-COPY --from=builder /app/csms-server-ui/build/    ./csms-server-ui/build/
+COPY --from=builder /app/csms-server-ui/build/     ./csms-server-ui/build/
 
-COPY --from=builder /app/css-web/build/           ./css-web/build/
+COPY --from=builder /app/css-ui/build/             ./css-ui/build/
 
 RUN pnpm install
 
