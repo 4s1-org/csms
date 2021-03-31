@@ -1,5 +1,5 @@
 packages:
-  - "css-web/"
+  - "css-ui/"
   - "css-cli/"
   - "css-lib/"
   - "common-lib/"
