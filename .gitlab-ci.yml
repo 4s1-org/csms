@@ -48,7 +48,7 @@ validate-all:
     - pnpm run test
     - cd ..
 
-    - cd css-web
+    - cd css-ui
     - pnpm run lint
     - pnpm run build
     - pnpm run test
