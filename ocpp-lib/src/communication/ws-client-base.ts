@@ -3,20 +3,20 @@ import { Logger } from '@yellowgarbagebag/common-lib'
 import { IReceiveMessage } from './i-receive-message'
 import { PendingPromises } from './pending-promises'
 import { ISendMessage } from './i-send-message'
-import { OcppRequestMessageDto } from '../ocpp-messages/ocpp-request-message.dto'
-import { OcppMessageHandler } from '../ocpp-messages/ocpp-message-handler'
-import { PayloadValidator } from '../ocpp-messages/payload-validator'
-import { PayloadConverter } from '../ocpp-messages/payload-converter'
+import { OcppCallDto } from '../ocpp-calls/ocpp-call.dto'
+import { OcppRpcHandler } from '../ocpp-calls/ocpp-rpc-handler'
+import { PayloadValidator } from '../ocpp-calls/payload-validator'
+import { PayloadConverter } from '../ocpp-calls/payload-converter'
 import { ResponseBaseDto } from '../generated/response-base.dto'
-import { OcppResponseMessageDto } from '../ocpp-messages/ocpp-response-message.dto'
-import { OcppErrorMessageDto } from '../ocpp-messages/ocpp-error-message.dto'
+import { OcppCallresultDto } from '../ocpp-calls/ocpp-callresult.dto'
+import { OcppCallerrorDto } from '../ocpp-calls/ocpp-callerror.dto'
 import { RequestToResponseType } from '../generated/request-to-response.type'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { actionDtoMapping } from '../generated/action-dto-mapping'
-import { OcppMessageValidationError } from '../ocpp-messages/ocpp-message-validation-error'
+import { OcppRpcValidationError } from '../ocpp-calls/ocpp-rpc-validation-error'
 import { CsmsError } from '../utils/csms-error'
-import { OcppErrorCodeEnum } from '../ocpp-messages/ocpp-error-code.enum'
-import { OcppBaseMessageDto } from '../ocpp-messages/ocpp-base-message.dto'
+import { OcppErrorCodeEnum } from '../ocpp-calls/ocpp-error-code.enum'
+import { OcppRpcBaseDto } from '../ocpp-calls/ocpp-rpc-base.dto'
 
 export abstract class WsClientBase implements ISendMessage {
   private requestList: PendingPromises[] = []
@@ -30,26 +30,26 @@ export abstract class WsClientBase implements ISendMessage {
 
   public onMessage(data: any, receiveMessage: IReceiveMessage): void {
     // Für den Fehlerfall
-    let msg: OcppBaseMessageDto | undefined
+    let msg: OcppRpcBaseDto | undefined
 
     try {
       this.logger.debug('Incoming data', data)
-      msg = OcppMessageHandler.instance.validateAndConvert(data)
+      msg = OcppRpcHandler.instance.validateAndConvert(data)
 
-      if (msg instanceof OcppRequestMessageDto) {
+      if (msg instanceof OcppCallDto) {
         this.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
         PayloadValidator.instance.validateRequestPayload(msg)
         PayloadConverter.instance.convertRequestPayload(msg)
         // Verarbeitung der Daten
         const responsePayload: ResponseBaseDto = receiveMessage.receive(msg.payload, msg.action)
         // Antwortobjekt erstellen
-        const responseCall = new OcppResponseMessageDto(msg.messageId, responsePayload)
+        const responseCall = new OcppCallresultDto(msg.messageId, responsePayload)
         // Anwortdaten validieren (nice to have)
         PayloadValidator.instance.validateResponsePayload(responseCall, msg.action)
         this.logger.info(`Outgoing Response | ${msg.action} | ${msg.messageId}`)
         this.sendInternal(responseCall.toMessageString())
         return
-      } else if (msg instanceof OcppResponseMessageDto) {
+      } else if (msg instanceof OcppCallresultDto) {
         const pendingPromise = this.requestList[0]
         if (pendingPromise) {
           if (pendingPromise.msg.messageId === msg.messageId) {
@@ -63,29 +63,29 @@ export abstract class WsClientBase implements ISendMessage {
           }
           pendingPromise.reject()
         }
-      } else if (msg instanceof OcppErrorMessageDto) {
+      } else if (msg instanceof OcppCallerrorDto) {
         // ToDo
         return
       }
       throw new Error('Invalid pending promise state')
     } catch (err) {
-      let errMsg: OcppErrorMessageDto
+      let errMsg: OcppCallerrorDto
 
-      if (err instanceof OcppMessageValidationError) {
+      if (err instanceof OcppRpcValidationError) {
         this.logger.warn(`Validation Error | ${err.errorCode} | ${err.errorDescription}`)
-        errMsg = new OcppErrorMessageDto(err.messageId, err.errorCode, err.errorDescription)
+        errMsg = new OcppCallerrorDto(err.messageId, err.errorCode, err.errorDescription)
       } else if (err instanceof CsmsError) {
         const messageId: string = msg?.messageId || ''
         this.logger.warn(`CSMS Error | ${err.errorCode} | ${err.errorDescription}`)
-        errMsg = new OcppErrorMessageDto(messageId, err.errorCode, err.errorDescription)
+        errMsg = new OcppCallerrorDto(messageId, err.errorCode, err.errorDescription)
       } else {
         const messageId: string = msg?.messageId || ''
         this.logger.fatal('Internal Server Error')
         this.logger.fatal(err)
-        errMsg = new OcppErrorMessageDto(messageId, OcppErrorCodeEnum.InternalError)
+        errMsg = new OcppCallerrorDto(messageId, OcppErrorCodeEnum.InternalError)
       }
       // Niemals auf einen Fehler mit einem neuen Fehler Antworten um PingPong zu vermeiden
-      if (msg instanceof OcppErrorMessageDto) {
+      if (msg instanceof OcppCallerrorDto) {
         return undefined
       }
       this.sendInternal(errMsg.toMessageString())
@@ -99,7 +99,7 @@ export abstract class WsClientBase implements ISendMessage {
         throw new Error('No action mapping found' + payload)
       }
 
-      const msg = new OcppRequestMessageDto(uuid(), mapping.action, payload)
+      const msg = new OcppCallDto(uuid(), mapping.action, payload)
       this.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
       this.requestList.push(new PendingPromises(msg, resolve, reject))
       if (!this.sendInternal(msg.toMessageString())) {
