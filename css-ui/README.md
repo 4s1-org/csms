@@ -1,1 +1,1 @@
-# Charging Station Simulator Web
+# Charging Station Simulator UI
