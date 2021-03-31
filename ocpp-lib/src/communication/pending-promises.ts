@@ -1,4 +1,4 @@
-import { OcppCallDto } from '../ocpp-calls/ocpp-call.dto'
+import { OcppCallDto } from '../ocpp-rpc/ocpp-call.dto'
 
 export class PendingPromises {
   public readonly timestamp: number
