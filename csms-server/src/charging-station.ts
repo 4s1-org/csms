@@ -46,7 +46,7 @@ import {
   OcppErrorCodeEnum,
   CsmsError,
 } from '@yellowgarbagebag/ocpp-lib'
-import { Logger, NotSupportedError } from '@yellowgarbagebag/common-lib'
+import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
 
 export class ChargingStation implements IReceiveMessage {
