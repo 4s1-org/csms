@@ -40,36 +40,27 @@ export class OcppRpcHandler {
       throw new OcppRpcValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'No array received')
     }
 
-    if (typeof data[0] !== 'number') {
+    const [messageTypeId] = data
+
+    if (typeof messageTypeId !== 'number') {
       throw new OcppRpcValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'MessageTypeId is not a number')
     }
 
-    const messageTypeId = +data[0]
-
     if (messageTypeId === OcppMessageTypeIdEnum.Call && data.length === 4) {
-      const messageId = data[1]
-      const action = data[2]
-      const payload = data[3]
-
+      const [messageTypeId, messageId, action, payload] = data
       this.validateMessageId(messageId)
       this.validateAction(messageId, action)
       this.validatePayload(messageId, payload)
 
       return plainToClass(OcppCallDto, { messageTypeId, messageId, action, payload })
     } else if (messageTypeId === OcppMessageTypeIdEnum.Result && data.length === 3) {
-      const messageId = data[1]
-      const payload = data[2]
-
+      const [messageTypeId, messageId, payload] = data
       this.validateMessageId(messageId)
       this.validatePayload(messageId, payload)
 
       return plainToClass(OcppCallresultDto, { messageTypeId, messageId, payload })
     } else if (messageTypeId === OcppMessageTypeIdEnum.Error && data.length === 5) {
-      const messageId = data[1]
-      const errorCode = data[2]
-      const errorDescription = data[3]
-      const errorDetails = data[4]
-
+      const [messageTypeId, messageId, errorCode, errorDescription, errorDetails] = data
       this.validateMessageId(messageId)
       this.validateErrorCode(messageId, errorCode)
       this.validateErrorDescription(messageId, errorDescription)
