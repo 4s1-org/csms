@@ -20,7 +20,7 @@
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
-    "start": "PORT=3002 react-scripts start",
+    "start": "PORT=3002 SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "test": "echo No tests"
   },
   "browserslist": {
