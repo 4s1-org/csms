@@ -1,24 +1,24 @@
 import pino from 'pino'
 
-export type LogLevel = 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace'
+export enum LogLevelEnum {
+  fatal = 'fatal',
+  error = 'error',
+  warn = 'warn',
+  info = 'info',
+  debug = 'debug',
+  trace = 'trace',
+}
 
 export class Logger {
   private _logger: pino.Logger
 
-  public constructor(public readonly name: string, logLevel: LogLevel = 'info') {
+  public constructor(public readonly name: string, logLevel?: LogLevelEnum) {
     this._logger = pino({
       enabled: process.env.NODE_ENV !== 'test',
-      level: logLevel,
+      level: logLevel || process.env.LOG_LEVEL || process.env.REACT_APP_LOG_LEVEL || LogLevelEnum.info,
       name,
       base: {
         hostname: null,
-      },
-      browser: {
-        write: {
-          write: (obj): void => {
-            console.info(JSON.stringify(obj))
-          },
-        },
       },
     })
   }

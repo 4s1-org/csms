@@ -1,3 +1,4 @@
+import { Logger } from '@yellowgarbagebag/common-lib'
 import React from 'react'
 
 interface IState {
@@ -13,6 +14,8 @@ interface IProps {
 }
 
 class LoginPanelComp extends React.Component<IProps, IState> {
+  private logger: Logger = new Logger('Login Panel')
+
   constructor(props: IProps) {
     super(props)
     this.state = {
