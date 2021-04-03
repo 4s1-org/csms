@@ -2,6 +2,8 @@ import { Logger } from '@yellowgarbagebag/common-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { WebSocketServer } from './web-socket-server'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const logger = new Logger('Core')
 
