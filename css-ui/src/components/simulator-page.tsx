@@ -43,7 +43,6 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
 
   private async onLoginClick(
     server: string,
-    secure: boolean,
     uniqueIdentifier: string,
     username: string,
     password: string,

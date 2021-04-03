@@ -2,14 +2,13 @@ import React from 'react'
 
 interface IState {
   server: string
-  secure: boolean
   uniqueIdentifier: string
   username: string
   password: string
 }
 
 interface IProps {
-  onLoginClick: (server: string, secure: boolean, uniqueIdentifier: string, username: string, password: string) => void
+  onLoginClick: (server: string, uniqueIdentifier: string, username: string, password: string) => void
   onLogoutClick: () => void
   isConnected: boolean
 }
@@ -19,7 +18,6 @@ class LoginPanelComp extends React.Component<IProps, IState> {
     super(props)
     this.state = {
       server: process.env.REACT_APP_SERVER || `${window.location.hostname}:3000`,
-      secure: false,
       uniqueIdentifier: process.env.REACT_APP_UNIQUE_IDENTIFIER || '',
       username: process.env.REACT_APP_USERNAME || '',
       password: process.env.REACT_APP_PASSWORD || '',
@@ -101,13 +99,7 @@ class LoginPanelComp extends React.Component<IProps, IState> {
 
   private onBtnLoginClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     e.preventDefault()
-    this.props.onLoginClick(
-      this.state.server,
-      this.state.secure,
-      this.state.uniqueIdentifier,
-      this.state.username,
-      this.state.password,
-    )
+    this.props.onLoginClick(this.state.server, this.state.uniqueIdentifier, this.state.username, this.state.password)
   }
 
   private onBtnLogoutClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
