@@ -1,2 +1,2 @@
-export { Logger, LogLevel } from './logger'
+export { Logger, LogLevelEnum } from './logger'
 export { sleep, fromBase64, toBase64 } from './utils'

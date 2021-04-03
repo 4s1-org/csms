@@ -13,23 +13,12 @@ export class Logger {
   private _logger: pino.Logger
 
   public constructor(public readonly name: string, logLevel?: LogLevelEnum) {
-    if (process.env.LOG_LEVEL && !(process.env.LOG_LEVEL in LogLevelEnum)) {
-      console.warn(`Invalid log level on process.env: ${process.env.LOG_LEVEL}`)
-    }
-
     this._logger = pino({
       enabled: process.env.NODE_ENV !== 'test',
-      level: logLevel || process.env.LOG_LEVEL || LogLevelEnum.info,
+      level: logLevel || process.env.LOG_LEVEL || process.env.REACT_APP_LOG_LEVEL || LogLevelEnum.info,
       name,
       base: {
         hostname: null,
-      },
-      browser: {
-        write: {
-          write: (obj): void => {
-            console.info(JSON.stringify(obj))
-          },
-        },
       },
     })
   }
