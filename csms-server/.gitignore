@@ -5,4 +5,4 @@
 /data/
 /csms-server.json
 /csms-server-test-e2e.json
-
+/.env
