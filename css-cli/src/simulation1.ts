@@ -3,7 +3,7 @@ import { SimulationBase } from './simulation-base'
 
 class Simulation extends SimulationBase {
   constructor() {
-    super('LS001', 'LS001', 'test')
+    super()
   }
 
   public async simulate(): Promise<void> {
