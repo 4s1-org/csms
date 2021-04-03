@@ -19,3 +19,4 @@ csms-server/data/
 Dockerfile
 **/*.tgz
 *.tar.gz
+**/.env

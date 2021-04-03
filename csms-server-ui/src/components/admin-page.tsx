@@ -26,11 +26,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
     this.logout = this.logout.bind(this)
   }
 
-  public componentDidMount(): void {
-    if (process.env.NODE_ENV === 'development') {
-      this.login(`${window.location.hostname}:3000`, 'admin', 'admin')
-    }
-  }
+  public componentDidMount(): void {}
 
   public render(): JSX.Element {
     return (

@@ -6,12 +6,7 @@ dotenv.config()
 export class WsClient extends WsClientBase {
   private socket: WebSocket | undefined
 
-  public connect(
-    receiveMessage: IReceiveMessage,
-    username: string,
-    password: string,
-    server = 'localhost:3000',
-  ): Promise<void> {
+  public connect(receiveMessage: IReceiveMessage, server: string, username: string, password: string): Promise<void> {
     return new Promise((resolve, reject) => {
       this.socket = new WebSocket(`wss://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1'], {
         headers: {
