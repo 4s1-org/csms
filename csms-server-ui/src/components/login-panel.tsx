@@ -24,17 +24,6 @@ class LoginPanelComp extends React.Component<IProps, IState> {
       password: process.env.NODE_ENV === 'development' ? 'admin' : '',
     }
 
-    this.logger.info('info')
-    this.logger.debug('debug')
-    this.logger.debug('debug')
-    this.logger.debug('debug')
-    this.logger.debug('debug')
-    this.logger.debug('debug')
-    this.logger.warn('warn')
-    this.logger.error('error')
-
-    console.log(process.env)
-
     this.onBtnLoginClick = this.onBtnLoginClick.bind(this)
     this.onBtnLogoutClick = this.onBtnLogoutClick.bind(this)
 

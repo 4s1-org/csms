@@ -2,3 +2,4 @@
 /data/
 *.tgz
 *.tar.gz
+.env
