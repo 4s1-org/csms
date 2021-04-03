@@ -1,3 +1,4 @@
+import { Logger } from '@yellowgarbagebag/common-lib'
 import React from 'react'
 
 interface IState {
@@ -13,6 +14,8 @@ interface IProps {
 }
 
 class LoginPanelComp extends React.Component<IProps, IState> {
+  private logger: Logger = new Logger('Login Panel')
+
   constructor(props: IProps) {
     super(props)
     this.state = {
@@ -20,6 +23,17 @@ class LoginPanelComp extends React.Component<IProps, IState> {
       username: process.env.NODE_ENV === 'development' ? 'admin' : '',
       password: process.env.NODE_ENV === 'development' ? 'admin' : '',
     }
+
+    this.logger.info('info')
+    this.logger.debug('debug')
+    this.logger.debug('debug')
+    this.logger.debug('debug')
+    this.logger.debug('debug')
+    this.logger.debug('debug')
+    this.logger.warn('warn')
+    this.logger.error('error')
+
+    console.log(process.env)
 
     this.onBtnLoginClick = this.onBtnLoginClick.bind(this)
     this.onBtnLogoutClick = this.onBtnLogoutClick.bind(this)
