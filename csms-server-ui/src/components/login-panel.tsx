@@ -19,9 +19,9 @@ class LoginPanelComp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
-      server: `${window.location.hostname}:3000`,
-      username: process.env.NODE_ENV === 'development' ? 'admin' : '',
-      password: process.env.NODE_ENV === 'development' ? 'admin' : '',
+      server: process.env.REACT_APP_SERVER || `${window.location.hostname}:3000`,
+      username: process.env.REACT_APP_USERNAME || '',
+      password: process.env.REACT_APP_PASSWORD || '',
     }
 
     this.onBtnLoginClick = this.onBtnLoginClick.bind(this)
