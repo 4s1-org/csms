@@ -2,15 +2,14 @@ import { Logger } from '@yellowgarbagebag/common-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { WebSocketServer } from './web-socket-server'
-import dotenv from 'dotenv'
-dotenv.config()
+import { ProcessEnv } from './process-env'
 
-const logger = new Logger('Core')
+const logger = new Logger('Core', ProcessEnv.LOG_LEVEL)
 
 // Config
 const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
 if (process.env.port) {
-  dataStorage.set('port', +process.env.port)
+  dataStorage.set('port', ProcessEnv.port)
 }
 if (!dataStorage.has('chargingStationModels')) {
   dataStorage.set('chargingStationModels', [])
