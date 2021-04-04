@@ -1,5 +1,6 @@
 import { Logger } from '@yellowgarbagebag/common-lib'
 import React from 'react'
+import { ProcessEnv } from '../process-env'
 
 interface IState {
   server: string
@@ -14,14 +15,14 @@ interface IProps {
 }
 
 class LoginPanelComp extends React.Component<IProps, IState> {
-  private logger: Logger = new Logger('Login Panel')
+  private logger: Logger = new Logger('Login Panel', ProcessEnv.LOG_LEVEL)
 
   constructor(props: IProps) {
     super(props)
     this.state = {
-      server: process.env.REACT_APP_SERVER || `${window.location.hostname}:3000`,
-      username: process.env.REACT_APP_USERNAME || '',
-      password: process.env.REACT_APP_PASSWORD || '',
+      server: ProcessEnv.SERVER || `${window.location.hostname}:3000`,
+      username: ProcessEnv.USERNAME || '',
+      password: ProcessEnv.PASSWORD || '',
     }
 
     this.onBtnLoginClick = this.onBtnLoginClick.bind(this)

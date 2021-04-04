@@ -1,9 +1,10 @@
 import WebSocket from 'ws'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { WsClientBase } from '@yellowgarbagebag/ocpp-lib'
+import { ProcessEnv } from './process-env'
 
 export class WsClient extends WsClientBase {
-  public readonly logger = new Logger(this.uniqueIdentifier)
+  public readonly logger = new Logger(this.uniqueIdentifier, ProcessEnv.LOG_LEVEL)
 
   constructor(uniqueIdentifier: string, private readonly socket: WebSocket) {
     super(uniqueIdentifier)
