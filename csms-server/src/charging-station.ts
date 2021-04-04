@@ -48,9 +48,10 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
+import { ProcessEnv } from './process-env'
 
 export class ChargingStation implements IReceiveMessage {
-  public readonly logger = new Logger(this.model.uniqueIdentifier)
+  public readonly logger = new Logger(this.model.uniqueIdentifier, ProcessEnv.LOG_LEVEL)
   public heartbeatInterval = 3600
 
   public constructor(public readonly model: ChargingStationModel, private readonly sendMessage: ISendMessage) {
