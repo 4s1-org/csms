@@ -31,6 +31,11 @@ class LoginPanelComp extends React.Component<IProps, IState> {
     this.onEdtUniqueIdentifierChange = this.onEdtUniqueIdentifierChange.bind(this)
     this.onEdtUsernameChange = this.onEdtUsernameChange.bind(this)
     this.onEdtPasswordChange = this.onEdtPasswordChange.bind(this)
+
+    // Auto login
+    if (ProcessEnv.NODE_ENV === 'development') {
+      this.onBtnLoginClick({ preventDefault: () => null } as any)
+    }
   }
 
   public render(): JSX.Element {
