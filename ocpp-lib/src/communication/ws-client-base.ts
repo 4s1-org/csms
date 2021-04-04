@@ -20,9 +20,8 @@ import { OcppRpcBaseDto } from '../ocpp-rpc/ocpp-rpc-base.dto'
 
 export abstract class WsClientBase implements ISendMessage {
   private requestList: PendingPromises[] = []
-  public readonly logger = new Logger(this.uniqueIdentifier)
 
-  constructor(protected readonly uniqueIdentifier: string) {
+  public constructor(protected readonly uniqueIdentifier: string, protected readonly logger: Logger) {
     // nothing to do
   }
 
