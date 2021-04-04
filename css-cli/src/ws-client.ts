@@ -1,8 +1,14 @@
 import WebSocket from 'ws'
 import { IReceiveMessage, WsClientBase } from '@yellowgarbagebag/ocpp-lib'
+import { ProcessEnv } from './process-env'
+import { Logger } from '@yellowgarbagebag/common-lib'
 
 export class WsClient extends WsClientBase {
   private socket: WebSocket | undefined
+
+  public constructor(uniqueIdentifier: string) {
+    super(uniqueIdentifier, new Logger(uniqueIdentifier, ProcessEnv.LOG_LEVEL))
+  }
 
   public connect(receiveMessage: IReceiveMessage, server: string, username: string, password: string): Promise<void> {
     return new Promise((resolve, reject) => {
