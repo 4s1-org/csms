@@ -1,7 +1,5 @@
 import WebSocket from 'ws'
 import { IReceiveMessage, WsClientBase } from '@yellowgarbagebag/ocpp-lib'
-import dotenv from 'dotenv'
-dotenv.config()
 
 export class WsClient extends WsClientBase {
   private socket: WebSocket | undefined

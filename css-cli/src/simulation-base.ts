@@ -1,4 +1,5 @@
 import { ChargingStation } from '@yellowgarbagebag/css-lib'
+import { ProcessEnv } from './process-env'
 import { WsClient } from './ws-client'
 
 export abstract class SimulationBase {
@@ -6,10 +7,10 @@ export abstract class SimulationBase {
   protected client: WsClient
 
   constructor(
-    protected readonly server: string = process.env.SERVER || '',
-    protected readonly uniqueIdentifier: string = process.env.UNIQUE_IDENTIFIER || '',
-    protected readonly username: string = process.env.USERNAME || '',
-    protected readonly password: string = process.env.PASSWORD || '',
+    protected readonly server: string = ProcessEnv.SERVER,
+    protected readonly uniqueIdentifier: string = ProcessEnv.UNIQUE_IDENTIFIER,
+    protected readonly username: string = ProcessEnv.USERNAME,
+    protected readonly password: string = ProcessEnv.PASSWORD,
   ) {
     this.client = new WsClient(this.uniqueIdentifier)
     this.cs = new ChargingStation(this.uniqueIdentifier, this.client)

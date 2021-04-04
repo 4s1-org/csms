@@ -11,6 +11,7 @@ import { IDataStorageSchema } from './config/i-data-store-schema'
 import { verifyPassword } from './config/password'
 import { ChargingStation } from './charging-station'
 import { WsClient } from './ws-client'
+import { ProcessEnv } from './process-env'
 
 type HeaderType = {
   secWebsocketKey: string
@@ -18,7 +19,7 @@ type HeaderType = {
 }
 
 export class WebSocketServer {
-  protected logger: Logger = new Logger('Server')
+  protected logger: Logger = new Logger('Server', ProcessEnv.LOG_LEVEL)
   private server: https.Server | undefined
   private csSockets: Set<WebSocket> = new Set<WebSocket>()
   private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
