@@ -60,10 +60,13 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 export class ChargingStation implements IReceiveMessage {
-  public readonly logger = new Logger(this.uniqueIdentifier)
   public heartbeatInterval = 3600
 
-  public constructor(public readonly uniqueIdentifier: string, private readonly sendMessage: ISendMessage) {
+  public constructor(
+    public readonly uniqueIdentifier: string,
+    private readonly sendMessage: ISendMessage,
+    private readonly logger: Logger,
+  ) {
     // nothing to do
   }
 

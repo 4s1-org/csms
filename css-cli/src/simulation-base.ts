@@ -1,3 +1,4 @@
+import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStation } from '@yellowgarbagebag/css-lib'
 import { ProcessEnv } from './process-env'
 import { WsClient } from './ws-client'
@@ -13,7 +14,11 @@ export abstract class SimulationBase {
     protected readonly password: string = ProcessEnv.PASSWORD,
   ) {
     this.client = new WsClient(this.uniqueIdentifier)
-    this.cs = new ChargingStation(this.uniqueIdentifier, this.client)
+    this.cs = new ChargingStation(
+      this.uniqueIdentifier,
+      this.client,
+      new Logger(uniqueIdentifier, ProcessEnv.LOG_LEVEL),
+    )
   }
 
   protected async connect(): Promise<void> {
