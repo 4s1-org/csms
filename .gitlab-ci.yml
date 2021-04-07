@@ -3,7 +3,7 @@ stages:
 
 validate-all:
   stage: validation
-  image: $CI_REGISTRY_IMAGE:cache
+  image: node:14-alpine
   tags:
     - Yellow
   script:
