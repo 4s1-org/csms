@@ -49,8 +49,6 @@ describe('CSMS Gateway', () => {
     storage.set('chargingStationModels', [SerializationHelper.serialize(model, [ChargingStationGroupFlag.ServerOnly])])
     storage.set('port', port)
 
-    console.log(storage)
-
     server = new WebSocketServer(storage)
     server.startServer()
   })
