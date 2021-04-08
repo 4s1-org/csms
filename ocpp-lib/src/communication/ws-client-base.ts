@@ -17,6 +17,8 @@ import { OcppRpcValidationError } from '../ocpp-rpc/ocpp-rpc-validation-error'
 import { CsmsError } from '../utils/csms-error'
 import { OcppErrorCodeEnum } from '../ocpp-rpc/ocpp-error-code.enum'
 import { OcppRpcBaseDto } from '../ocpp-rpc/ocpp-rpc-base.dto'
+import { HeartbeatRequestDto, HeartbeatResponseDto } from '../messages'
+import { OcppActionEnum } from '../generated/ocpp-action.enum'
 
 export abstract class WsClientBase implements ISendMessage {
   private requestList: PendingPromises[] = []
@@ -92,6 +94,18 @@ export abstract class WsClientBase implements ISendMessage {
   }
 
   public send<T extends RequestBaseDto>(payload: T): Promise<RequestToResponseType<T>> {
+    // Falls ein Request bereits läuft, darf kein weitere Request gestellt werden.
+    // Damit aber der Heartbeat als Schleife laufen kann, wir für ihn einen Sonderbehandlung umgesetzt.
+    if (this.requestList.length > 0 && payload instanceof HeartbeatRequestDto) {
+      this.logger.info(`Fake Heartbeat response due to pending request`)
+      this.logger.info(this.requestList[0].msg.toMessageString())
+      return new Promise((resolve, reject) => {
+        const msg = new OcppCallDto(uuid(), OcppActionEnum.Heartbeat, payload)
+        const foo = new PendingPromises(msg, resolve, reject)
+        foo.resolve(new HeartbeatResponseDto(new Date().toISOString()))
+      })
+    }
+
     return new Promise((resolve, reject) => {
       const mapping = actionDtoMapping.find((x) => payload instanceof x.requestDto)
       if (!mapping) {
