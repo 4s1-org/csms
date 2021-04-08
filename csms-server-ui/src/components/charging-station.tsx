@@ -1,7 +1,8 @@
 import React from 'react'
-import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, ColorState } from '@yellowgarbagebag/csms-lib'
 import './charging-station.css'
 import dayjs from 'dayjs'
+import EvseStateComp from './evse-state'
 
 interface IState {}
 interface IProps {
@@ -13,17 +14,17 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     let headerColorCss = ''
     let stateStr = 'unbekannt'
     switch (this.props.data.state || 0) {
-      case ChargingStationState.Offline:
-        headerColorCss = 'bg-danger text-white'
-        stateStr = 'offline'
-        break
-      case ChargingStationState.Connecting:
+      case ColorState.Yellow:
         headerColorCss = 'bg-warning'
         stateStr = '(noch) nicht betriebsbereit'
         break
-      case ChargingStationState.Online:
+      case ColorState.Green:
         headerColorCss = 'bg-success text-white'
         stateStr = 'online'
+        break
+      default:
+        headerColorCss = 'bg-danger text-white'
+        stateStr = 'offline'
         break
     }
 
@@ -41,14 +42,13 @@ class ChargingStationComp extends React.Component<IProps, IState> {
         <h5 className={'card-header ' + headerColorCss}>{this.props.data.uniqueIdentifier}</h5>
         <div className="card-body">
           <h6 className="card-subtitle mb-2">Status: {stateStr}</h6>
-          <p className="card-text">Benutzername: {this.props.data.username}</p>
+          <div className="card-text">Benutzername: {this.props.data.username}</div>
+          <div className="card-text">Wattstunden: {this.props.data.wattHours} kWh</div>
+          <br />
           <div className="card-text">
             EVSE:
-            {this.props.data.evse.length === 0 && <div className="d-inline p-2 m-1 bg-dark text-white">-?-</div>}
             {this.props.data.evse.map((evse) => (
-              <div key={evse.evseId} className="d-inline p-2 m-1 bg-success text-white">
-                {evse.user}
-              </div>
+              <EvseStateComp data={evse} />
             ))}
           </div>
         </div>
