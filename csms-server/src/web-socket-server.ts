@@ -120,7 +120,7 @@ export class WebSocketServer {
     this.csTlsSockets.add(tlsSocket)
 
     const client = new WsClient(model.uniqueIdentifier, socket)
-    const cs = new ChargingStation(model, client)
+    const cs = new ChargingStation(model, client, this.dataStorage.get('validUsers'))
 
     cs.connect()
     this.sendAdminStatusToAll(cs.model)

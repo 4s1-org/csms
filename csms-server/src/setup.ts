@@ -7,7 +7,7 @@ import { Command } from 'commander'
 import {
   ChargingStationGroupFlag,
   ChargingStationModel,
-  ChargingStationState,
+  ColorState,
   SerializationHelper,
 } from '@yellowgarbagebag/csms-lib'
 
@@ -33,6 +33,11 @@ const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
 dataStorage.set('port', +options.port)
 dataStorage.set('adminCredentials', { username: options.username, passwordHash: hashPassword(options.password) })
 
+dataStorage.set('validUsers', [
+  { name: 'Anton Aarbinger', rfid: 'aaa' },
+  { name: 'Bernd Brotzeitholer', rfid: 'bbb' },
+])
+
 if (!dataStorage.has('chargingStationModels')) {
   dataStorage.set('chargingStationModels', [])
 }
@@ -46,7 +51,7 @@ function createChargeStation(uniqueIdentifier: string): void {
     const cs = new ChargingStationModel(uniqueIdentifier)
     cs.username = uniqueIdentifier
     cs.passwordHash = hashPassword('test')
-    cs.state = ChargingStationState.Offline
+    cs.state = ColorState.Red
     models.push(cs)
 
     dataStorage.set(

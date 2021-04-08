@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 /*
-LOG_LEVEL=debug
+LOG_LEVEL=info
 PORT=3000
 */
 

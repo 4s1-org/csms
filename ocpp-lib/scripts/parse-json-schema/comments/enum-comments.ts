@@ -3,6 +3,7 @@ import { BootReasonEnumType } from './enumerations/BootReasonEnumType'
 import { ChangeAvailabilityStatusEnumType } from './enumerations/ChangeAvailabilityStatusEnumType'
 import { ConnectorStatusEnumType } from './enumerations/ConnectorStatusEnumType'
 import { IdTokenEnumType } from './enumerations/IdTokenEnumType'
+import { MeasurandEnumType } from './enumerations/MeasurandEnumType'
 import { OperationalStatusEnumType } from './enumerations/OperationalStatusEnumType'
 import { ResetEnumType } from './enumerations/ResetEnumType'
 import { ResetStatusEnumType } from './enumerations/ResetStatusEnumType'
@@ -39,6 +40,7 @@ const comments: enumCommentType[] = [
   ChangeAvailabilityStatusEnumType,
   ConnectorStatusEnumType,
   IdTokenEnumType,
+  MeasurandEnumType,
   OperationalStatusEnumType,
   ResetEnumType,
   ResetStatusEnumType,
