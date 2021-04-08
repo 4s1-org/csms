@@ -9,14 +9,9 @@ import {
   StatusNotificationResponseDto,
   AuthorizeRequestDto,
   AuthorizeResponseDto,
-  IdTokenEnum,
   MeterValuesRequestDto,
   MeterValuesResponseDto,
-  ChargingStationDto,
-  BootReasonEnum,
-  IdTokenDto,
   MeterValueDto,
-  ConnectorStatusEnum,
   SampledValueDto,
   SetVariablesRequestDto,
   SetVariablesResponseDto,
@@ -49,9 +44,6 @@ import {
   ResetResponseDto,
   ResetStatusEnum,
   TransactionEventRequestDto,
-  TransactionEventEnum,
-  TriggerReasonEnum,
-  TransactionDto,
   TransactionEventResponseDto,
   DataTransferResponseDto,
   DataTransferStatusEnum,
@@ -59,6 +51,7 @@ import {
   OcppErrorCodeEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
+
 export class ChargingStation implements IReceiveMessage {
   public heartbeatInterval = 3600
 
@@ -68,6 +61,10 @@ export class ChargingStation implements IReceiveMessage {
     private readonly logger: Logger,
   ) {
     // nothing to do
+  }
+
+  public get currentTime(): string {
+    return new Date().toISOString()
   }
 
   public receive(payload: RequestBaseDto): ResponseBaseDto {
@@ -98,9 +95,7 @@ export class ChargingStation implements IReceiveMessage {
    * B02 - Cold Boot Charging Station - Pending
    * B03 - Cold Boot Charging Station - Rejected
    */
-  public async sendBootNotificationRequest(): Promise<BootNotificationResponseDto> {
-    const csDto = new ChargingStationDto('SingleSocketCharger', 'VendorX')
-    const payload = new BootNotificationRequestDto(csDto, BootReasonEnum.PowerUp)
+  public async sendBootNotificationRequest(payload: BootNotificationRequestDto): Promise<BootNotificationResponseDto> {
     const res = await this.sendMessage.send(payload)
     this.heartbeatInterval = res.interval
     return res
@@ -122,40 +117,10 @@ export class ChargingStation implements IReceiveMessage {
 
   /**
    * C01 - EV Driver Authorization using RFID
-   */
-  public async sendAuthorizationRequest_Rfid(): Promise<AuthorizeResponseDto> {
-    const idTocken = new IdTokenDto('AA12345', IdTokenEnum.ISO14443)
-    const payload = new AuthorizeRequestDto(idTocken)
-    const res = await this.sendMessage.send(payload)
-
-    if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
-      this.logger.warn(`Authorization failed | ${res.idTokenInfo.status}`)
-    }
-
-    return res
-  }
-
-  /**
    * C02 - Authorization using a start button
-   */
-  public async sendAuthorizationRequest_StartButton(): Promise<AuthorizeResponseDto> {
-    const idTocken = new IdTokenDto('', IdTokenEnum.NoAuthorization)
-    const payload = new AuthorizeRequestDto(idTocken)
-    const res = await this.sendMessage.send(payload)
-
-    if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
-      this.logger.warn(`Authorization failed | ${res.idTokenInfo.status}`)
-    }
-
-    return res
-  }
-
-  /**
    * C04 - Authorization using PIN-code
    */
-  public async sendAuthorizationRequest_PinCode(): Promise<AuthorizeResponseDto> {
-    const idTocken = new IdTokenDto('1234', IdTokenEnum.KeyCode)
-    const payload = new AuthorizeRequestDto(idTocken)
+  public async sendAuthorizationRequest(payload: AuthorizeRequestDto): Promise<AuthorizeResponseDto> {
     const res = await this.sendMessage.send(payload)
 
     if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
@@ -195,15 +160,7 @@ export class ChargingStation implements IReceiveMessage {
    * B12 - Reset - With Ongoing Transaction
    * C02 - Authorization using a start button
    */
-  public async sendTransactionEventRequest(): Promise<TransactionEventResponseDto> {
-    const transaction = new TransactionDto('foobar')
-    const payload = new TransactionEventRequestDto(
-      TransactionEventEnum.Started,
-      new Date().toISOString(),
-      TriggerReasonEnum.CablePluggedIn,
-      1,
-      transaction,
-    )
+  public async sendTransactionEventRequest(payload: TransactionEventRequestDto): Promise<TransactionEventResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -232,10 +189,10 @@ export class ChargingStation implements IReceiveMessage {
    * E09 - When cable disconnected on EV-side: Stop Transaction
    * E10 - When cable disconnected on EV-side: Suspend Transaction
    */
-  public async sendStatusNotificationRequest(): Promise<StatusNotificationResponseDto> {
-    const payload = new StatusNotificationRequestDto(new Date().toISOString(), ConnectorStatusEnum.Available, 1, 1)
+  public async sendStatusNotificationRequest(
+    payload: StatusNotificationRequestDto,
+  ): Promise<StatusNotificationResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
     return res
   }
 
