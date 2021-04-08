@@ -23,7 +23,7 @@
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "debug": "tsc && node dist/debug.js | pino-pretty",
+    "debug": "pnpm run build && && node dist/debug.js | pino-pretty",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "preinstall": "npx only-allow pnpm",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
