@@ -52,10 +52,14 @@ import { ProcessEnv } from './process-env'
 
 export class ChargingStation implements IReceiveMessage {
   public readonly logger = new Logger(this.model.uniqueIdentifier, ProcessEnv.LOG_LEVEL)
-  public heartbeatInterval = 3600
+  public readonly heartbeatInterval = 3
 
   public constructor(public readonly model: ChargingStationModel, private readonly sendMessage: ISendMessage) {
     // nothing to do
+  }
+
+  public get currentTime(): string {
+    return new Date().toISOString()
   }
 
   public receive(payload: RequestBaseDto, action: OcppActionEnum): ResponseBaseDto {
@@ -175,7 +179,7 @@ export class ChargingStation implements IReceiveMessage {
    */
   private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
     this.model.state = ChargingStationState.Online
-    return new BootNotificationResponseDto(new Date().toISOString(), 1, RegistrationStatusEnum.Accepted)
+    return new BootNotificationResponseDto(this.currentTime, this.heartbeatInterval, RegistrationStatusEnum.Accepted)
   }
 
   /**
@@ -185,8 +189,10 @@ export class ChargingStation implements IReceiveMessage {
    * B04 - Offline Behavior Idle Charging Station
    * E12 - Inform CSMS of an Offline Occurred Transaction
    */
-  private receiveHeartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
-    return new HeartbeatResponseDto(new Date().toISOString())
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private receiveHeartbeatRequest(_payload: HeartbeatRequestDto): HeartbeatResponseDto {
+    // Payload not required
+    return new HeartbeatResponseDto(this.currentTime)
   }
 
   /**
