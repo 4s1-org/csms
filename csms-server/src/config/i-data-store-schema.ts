@@ -4,5 +4,6 @@ export interface IDataStorageSchema {
     username: string
     passwordHash: string
   }
+  validUsers: Array<{ name: string; rfid: string }>
   chargingStationModels: string[]
 }
