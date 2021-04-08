@@ -109,7 +109,8 @@ class ChargingStationComp extends React.Component<IProps, IState> {
 
   private async sendMeterValueRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendMeterValueRequest()
+    // ToDo
+    //await this.props.cs?.sendMeterValueRequest()
   }
 
   private async sendStatusNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
