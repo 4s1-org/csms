@@ -53,7 +53,7 @@ import {
   TransactionEventEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationModel, ColorState } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, ColorState, Evse } from '@yellowgarbagebag/csms-lib'
 import { ProcessEnv } from './process-env'
 import { IValidUser } from './config/i-data-store-schema'
 
@@ -114,7 +114,10 @@ export class ChargingStation implements IReceiveMessage {
   public disconnect(): void {
     this.logger.info('Disconnected')
     this.model.state = ColorState.Red
-    this.model.evse = []
+    for (const evse of this.model.evseList) {
+      evse.state = ColorState.Red
+      evse.currentUser = '---'
+    }
   }
 
   /**
@@ -212,6 +215,24 @@ export class ChargingStation implements IReceiveMessage {
    * J01 - Sending Meter Values not related to a transaction
    */
   private receiveMeterValuesRequest(payload: MeterValuesRequestDto): MeterValuesResponseDto {
+    if (payload.meterValue) {
+      for (const meterValue of payload.meterValue) {
+        if (meterValue.sampledValue) {
+          for (const sampledValue of meterValue.sampledValue) {
+            this.setDefaultValuesForSampledValue(sampledValue)
+            if (
+              sampledValue.context === ReadingContextEnum['Sample.Periodic'] &&
+              sampledValue.measurand === MeasurandEnum['Energy.Active.Import.Register']
+            ) {
+              const evse = this.model.evseList.find((x) => x.id === payload.evseId)
+              if (evse) {
+                evse.wattHours = sampledValue.value
+              }
+            }
+          }
+        }
+      }
+    }
     return new MeterValuesResponseDto()
   }
 
@@ -237,7 +258,7 @@ export class ChargingStation implements IReceiveMessage {
           transaction.rfid = users.rfid
           transaction.currentUser = users.name
 
-          const evse = this.model.evse.find((x) => x.evseId === transaction.evseId)
+          const evse = this.model.evseList.find((x) => x.id === transaction.evseId)
           if (evse) {
             evse.currentUser = transaction.currentUser
           }
@@ -281,17 +302,12 @@ export class ChargingStation implements IReceiveMessage {
         break
     }
 
-    const evses = this.model.evse.filter((x) => x.evseId === payload.evseId)
-    if (evses.length === 0) {
-      this.model.evse.push({
-        evseId: payload.evseId,
-        status: colorState,
-        currentUser: '---',
-      })
-    } else {
-      const evse = evses[0]
-      evse.status = colorState
+    const evse = this.model.evseList.find((x) => x.id === payload.evseId)
+    if (evse) {
+      evse.state = colorState
       evse.currentUser = '---'
+    } else {
+      this.model.evseList.push(new Evse(payload.evseId, 0, colorState, '---'))
     }
 
     return new StatusNotificationResponseDto()
@@ -338,7 +354,13 @@ export class ChargingStation implements IReceiveMessage {
               sampledValue.context === ReadingContextEnum['Sample.Periodic'] &&
               sampledValue.measurand === MeasurandEnum['Energy.Active.Import.Register']
             ) {
-              this.model.wattHours = sampledValue.value
+              const transaction = this.transactions.find((x) => (x.id = payload.transactionInfo.transactionId))
+              if (transaction && transaction.evseId) {
+                const evse = this.model.evseList.find((x) => x.id === transaction.evseId)
+                if (evse) {
+                  evse.wattHours = sampledValue.value
+                }
+              }
             }
           }
         }

@@ -133,10 +133,7 @@ export class ChargingStation implements IReceiveMessage {
   /**
    * J01 - Sending Meter Values not related to a transaction
    */
-  public async sendMeterValueRequest(): Promise<MeterValuesResponseDto> {
-    const sampleValue = new SampledValueDto(53)
-    const meterValue = new MeterValueDto([sampleValue], new Date().toISOString())
-    const payload = new MeterValuesRequestDto(1, [meterValue])
+  public async sendMeterValueRequest(payload: MeterValuesRequestDto): Promise<MeterValuesResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res

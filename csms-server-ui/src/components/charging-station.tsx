@@ -33,22 +33,18 @@ class ChargingStationComp extends React.Component<IProps, IState> {
       lastContectStr = `${dayjs(this.props.data.lastContact).format('DD.MM.YYYY HH:mm:ss')} Uhr`
     }
 
-    if (!this.props.data.evse) {
-      this.props.data.evse = []
-    }
-
     return (
       <div className="card h-100">
         <h5 className={'card-header ' + headerColorCss}>{this.props.data.uniqueIdentifier}</h5>
         <div className="card-body">
           <h6 className="card-subtitle mb-2">Status: {stateStr}</h6>
           <div className="card-text">Benutzername: {this.props.data.username}</div>
-          <div className="card-text">Wattstunden: {this.props.data.wattHours} kWh</div>
           <br />
           <div className="card-text">
-            EVSE:
-            {this.props.data.evse.map((evse) => (
-              <EvseStateComp data={evse} />
+            {this.props.data.evseList.map((evse) => (
+              <p>
+                <EvseStateComp data={evse} />
+              </p>
             ))}
           </div>
         </div>
