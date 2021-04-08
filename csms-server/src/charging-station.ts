@@ -45,17 +45,33 @@ import {
   DataTransferRequestDto,
   OcppErrorCodeEnum,
   CsmsError,
+  ConnectorStatusEnum,
+  ReadingContextEnum,
+  SampledValueDto,
+  LocationEnum,
+  MeasurandEnum,
+  TransactionEventEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, ColorState, Evse } from '@yellowgarbagebag/csms-lib'
 import { ProcessEnv } from './process-env'
+import { IValidUser } from './config/i-data-store-schema'
 
 export class ChargingStation implements IReceiveMessage {
   public readonly logger = new Logger(this.model.uniqueIdentifier, ProcessEnv.LOG_LEVEL)
-  public heartbeatInterval = 3600
+  public readonly heartbeatInterval = 3
+  private transactions: { rfid: string; currentUser: string; id: string; evseId: number }[] = []
 
-  public constructor(public readonly model: ChargingStationModel, private readonly sendMessage: ISendMessage) {
+  public constructor(
+    public readonly model: ChargingStationModel,
+    private readonly sendMessage: ISendMessage,
+    private readonly validUser: IValidUser[] = [],
+  ) {
     // nothing to do
+  }
+
+  public get currentTime(): string {
+    return new Date().toISOString()
   }
 
   public receive(payload: RequestBaseDto, action: OcppActionEnum): ResponseBaseDto {
@@ -92,12 +108,16 @@ export class ChargingStation implements IReceiveMessage {
 
   public connect(): void {
     this.logger.info('Connected')
-    this.model.state = ChargingStationState.Connecting
+    this.model.state = ColorState.Yellow
   }
 
   public disconnect(): void {
     this.logger.info('Disconnected')
-    this.model.state = ChargingStationState.Offline
+    this.model.state = ColorState.Red
+    for (const evse of this.model.evseList) {
+      evse.state = ColorState.Red
+      evse.currentUser = '---'
+    }
   }
 
   /**
@@ -174,8 +194,8 @@ export class ChargingStation implements IReceiveMessage {
    * B03 - Cold Boot Charging Station - Rejected
    */
   private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
-    this.model.state = ChargingStationState.Online
-    return new BootNotificationResponseDto(new Date().toISOString(), 1, RegistrationStatusEnum.Accepted)
+    this.model.state = ColorState.Green
+    return new BootNotificationResponseDto(this.currentTime, this.heartbeatInterval, RegistrationStatusEnum.Accepted)
   }
 
   /**
@@ -185,14 +205,34 @@ export class ChargingStation implements IReceiveMessage {
    * B04 - Offline Behavior Idle Charging Station
    * E12 - Inform CSMS of an Offline Occurred Transaction
    */
-  private receiveHeartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
-    return new HeartbeatResponseDto(new Date().toISOString())
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private receiveHeartbeatRequest(_payload: HeartbeatRequestDto): HeartbeatResponseDto {
+    // Payload not required
+    return new HeartbeatResponseDto(this.currentTime)
   }
 
   /**
    * J01 - Sending Meter Values not related to a transaction
    */
   private receiveMeterValuesRequest(payload: MeterValuesRequestDto): MeterValuesResponseDto {
+    if (payload.meterValue) {
+      for (const meterValue of payload.meterValue) {
+        if (meterValue.sampledValue) {
+          for (const sampledValue of meterValue.sampledValue) {
+            this.setDefaultValuesForSampledValue(sampledValue)
+            if (
+              sampledValue.context === ReadingContextEnum['Sample.Periodic'] &&
+              sampledValue.measurand === MeasurandEnum['Energy.Active.Import.Register']
+            ) {
+              const evse = this.model.evseList.find((x) => x.id === payload.evseId)
+              if (evse) {
+                evse.wattHours = sampledValue.value
+              }
+            }
+          }
+        }
+      }
+    }
     return new MeterValuesResponseDto()
   }
 
@@ -209,6 +249,21 @@ export class ChargingStation implements IReceiveMessage {
       } else {
         // C04.FR.01 - PIN falsch
         return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
+      }
+    } else if (payload.idToken.type === IdTokenEnum.ISO14443 || payload.idToken.type === IdTokenEnum.ISO15693) {
+      const users = this.validUser.find((x) => x.rfid === payload.idToken.idToken)
+      if (users) {
+        const transaction = this.transactions.find((x) => !x.rfid)
+        if (transaction) {
+          transaction.rfid = users.rfid
+          transaction.currentUser = users.name
+
+          const evse = this.model.evseList.find((x) => x.id === transaction.evseId)
+          if (evse) {
+            evse.currentUser = transaction.currentUser
+          }
+        }
+        return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
       }
     }
 
@@ -231,11 +286,29 @@ export class ChargingStation implements IReceiveMessage {
    * E13 - Transaction-related message not accepted by CSMS
    */
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
-    this.model.evse = []
-    this.model.evse.push({
-      evseId: payload.evseId,
-      user: '---',
-    })
+    let colorState: ColorState = ColorState.Unknown
+    switch (payload.connectorStatus) {
+      case ConnectorStatusEnum.Available:
+        colorState = ColorState.Green
+        break
+      case ConnectorStatusEnum.Occupied:
+      case ConnectorStatusEnum.Reserved:
+        colorState = ColorState.Yellow
+        break
+      case ConnectorStatusEnum.Unavailable:
+      case ConnectorStatusEnum.Faulted:
+      default:
+        colorState = ColorState.Red
+        break
+    }
+
+    const evse = this.model.evseList.find((x) => x.id === payload.evseId)
+    if (evse) {
+      evse.state = colorState
+      evse.currentUser = '---'
+    } else {
+      this.model.evseList.push(new Evse(payload.evseId, 0, colorState, '---'))
+    }
 
     return new StatusNotificationResponseDto()
   }
@@ -272,6 +345,51 @@ export class ChargingStation implements IReceiveMessage {
    * C02 - Authorization using a start button
    */
   private receiveTransactionEventRequest(payload: TransactionEventRequestDto): TransactionEventResponseDto {
+    if (payload.meterValue) {
+      for (const meterValue of payload.meterValue) {
+        if (meterValue.sampledValue) {
+          for (const sampledValue of meterValue.sampledValue) {
+            this.setDefaultValuesForSampledValue(sampledValue)
+            if (
+              sampledValue.context === ReadingContextEnum['Sample.Periodic'] &&
+              sampledValue.measurand === MeasurandEnum['Energy.Active.Import.Register']
+            ) {
+              const transaction = this.transactions.find((x) => (x.id = payload.transactionInfo.transactionId))
+              if (transaction && transaction.evseId) {
+                const evse = this.model.evseList.find((x) => x.id === transaction.evseId)
+                if (evse) {
+                  evse.wattHours = sampledValue.value
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    switch (payload.eventType) {
+      case TransactionEventEnum.Started:
+        this.transactions.push({
+          currentUser: '',
+          rfid: '',
+          id: payload.transactionInfo.transactionId,
+          evseId: payload.evse.id,
+        })
+        break
+      case TransactionEventEnum.Ended:
+        this.transactions = this.transactions.filter((x) => x.id !== payload.transactionInfo.transactionId)
+        break
+      case TransactionEventEnum.Updated:
+      default:
+        break
+    }
+
     return new TransactionEventResponseDto()
+  }
+
+  private setDefaultValuesForSampledValue(sampledValue: SampledValueDto): void {
+    sampledValue.context = sampledValue.context || ReadingContextEnum['Sample.Periodic']
+    sampledValue.location = sampledValue.location || LocationEnum.Outlet
+    sampledValue.measurand = sampledValue.measurand || MeasurandEnum['Energy.Active.Import.Register']
   }
 }

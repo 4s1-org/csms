@@ -5,15 +5,43 @@ export enum ChargingStationGroupFlag {
   UiOnly = 'uiOnly',
 }
 
-export enum ChargingStationState {
-  Offline,
-  Connecting,
-  Online,
+export enum ColorState {
+  Unknown,
+  Red,
+  Yellow,
+  Green,
+  Blue,
+  Black,
 }
 
 export class Evse {
-  public constructor(public readonly evseId: number, public readonly user: string) {
-    // nothing to do
+  @Expose({ name: '_id', groups: [ChargingStationGroupFlag.UiOnly] })
+  @Transform(({ value }) => value || 0, { toClassOnly: true })
+  public id = 0
+
+  @Expose({ name: '_wattHours', groups: [ChargingStationGroupFlag.UiOnly] })
+  @Transform(({ value }) => value || 0, { toClassOnly: true })
+  public wattHours = 0
+
+  /**
+   * Only at UI
+   */
+  @Expose({ name: '_state', groups: [ChargingStationGroupFlag.UiOnly] })
+  @Transform(({ value }) => value || ColorState.Unknown, { toClassOnly: true })
+  public state = ColorState.Unknown
+
+  /**
+   * Only at UI
+   */
+  @Expose({ name: '_currentUser', groups: [ChargingStationGroupFlag.UiOnly] })
+  @Transform(({ value }) => value || '', { toClassOnly: true })
+  public currentUser = ''
+
+  public constructor(id: number, wattHours: number, state: ColorState, currentUser: string) {
+    this.id = id
+    this.wattHours = wattHours
+    this.state = state
+    this.currentUser = currentUser
   }
 }
 
@@ -33,8 +61,8 @@ export class ChargingStationModel {
    * Only at UI
    */
   @Expose({ name: '_state', groups: [ChargingStationGroupFlag.UiOnly] })
-  @Transform(({ value }) => value || ChargingStationState.Offline, { toClassOnly: true })
-  public state = ChargingStationState.Offline
+  @Transform(({ value }) => value || ColorState.Unknown, { toClassOnly: true })
+  public state = ColorState.Unknown
 
   @Expose({ name: '_uniqueIdentifier' })
   @Transform(({ value }) => value || '', { toClassOnly: true })
@@ -57,7 +85,7 @@ export class ChargingStationModel {
   @Expose({ name: '_evse', groups: [ChargingStationGroupFlag.UiOnly] })
   @Transform(({ value }) => value || [], { toClassOnly: true })
   @Type(() => Evse)
-  public evse: Evse[] = []
+  public evseList: Evse[] = []
 
   public constructor(uniqueIdentifier: string) {
     this.uniqueIdentifier = uniqueIdentifier
