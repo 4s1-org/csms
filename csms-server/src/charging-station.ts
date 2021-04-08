@@ -45,9 +45,14 @@ import {
   DataTransferRequestDto,
   OcppErrorCodeEnum,
   CsmsError,
+  ConnectorStatusEnum,
+  ReadingContextEnum,
+  SampledValueDto,
+  LocationEnum,
+  MeasurandEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationModel, ChargingStationState } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, ColorState } from '@yellowgarbagebag/csms-lib'
 import { ProcessEnv } from './process-env'
 
 export class ChargingStation implements IReceiveMessage {
@@ -96,12 +101,13 @@ export class ChargingStation implements IReceiveMessage {
 
   public connect(): void {
     this.logger.info('Connected')
-    this.model.state = ChargingStationState.Connecting
+    this.model.state = ColorState.Yellow
   }
 
   public disconnect(): void {
     this.logger.info('Disconnected')
-    this.model.state = ChargingStationState.Offline
+    this.model.state = ColorState.Red
+    this.model.evse = []
   }
 
   /**
@@ -178,7 +184,7 @@ export class ChargingStation implements IReceiveMessage {
    * B03 - Cold Boot Charging Station - Rejected
    */
   private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
-    this.model.state = ChargingStationState.Online
+    this.model.state = ColorState.Green
     return new BootNotificationResponseDto(this.currentTime, this.heartbeatInterval, RegistrationStatusEnum.Accepted)
   }
 
@@ -237,11 +243,34 @@ export class ChargingStation implements IReceiveMessage {
    * E13 - Transaction-related message not accepted by CSMS
    */
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
-    this.model.evse = []
-    this.model.evse.push({
-      evseId: payload.evseId,
-      user: '---',
-    })
+    let colorState: ColorState = ColorState.Unknown
+    switch (payload.connectorStatus) {
+      case ConnectorStatusEnum.Available:
+        colorState = ColorState.Green
+        break
+      case ConnectorStatusEnum.Occupied:
+      case ConnectorStatusEnum.Reserved:
+        colorState = ColorState.Yellow
+        break
+      case ConnectorStatusEnum.Unavailable:
+      case ConnectorStatusEnum.Faulted:
+      default:
+        colorState = ColorState.Red
+        break
+    }
+
+    const evses = this.model.evse.filter((x) => x.evseId === payload.evseId)
+    if (evses.length === 0) {
+      this.model.evse.push({
+        evseId: payload.evseId,
+        status: colorState,
+        currentUser: '---',
+      })
+    } else {
+      const evse = evses[0]
+      evse.status = colorState
+      evse.currentUser = '---'
+    }
 
     return new StatusNotificationResponseDto()
   }
@@ -278,6 +307,27 @@ export class ChargingStation implements IReceiveMessage {
    * C02 - Authorization using a start button
    */
   private receiveTransactionEventRequest(payload: TransactionEventRequestDto): TransactionEventResponseDto {
+    if (payload.meterValue) {
+      for (const meterValue of payload.meterValue) {
+        if (meterValue.sampledValue) {
+          for (const sampledValue of meterValue.sampledValue) {
+            this.setDefaultValuesForSampledValue(sampledValue)
+            if (
+              sampledValue.context === ReadingContextEnum['Sample.Periodic'] &&
+              sampledValue.measurand === MeasurandEnum['Energy.Active.Import.Register']
+            ) {
+              this.model.wattHours = sampledValue.value
+            }
+          }
+        }
+      }
+    }
     return new TransactionEventResponseDto()
+  }
+
+  private setDefaultValuesForSampledValue(sampledValue: SampledValueDto): void {
+    sampledValue.context = sampledValue.context || ReadingContextEnum['Sample.Periodic']
+    sampledValue.location = sampledValue.location || LocationEnum.Outlet
+    sampledValue.measurand = sampledValue.measurand || MeasurandEnum['Energy.Active.Import.Register']
   }
 }

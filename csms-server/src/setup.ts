@@ -7,7 +7,7 @@ import { Command } from 'commander'
 import {
   ChargingStationGroupFlag,
   ChargingStationModel,
-  ChargingStationState,
+  ColorState,
   SerializationHelper,
 } from '@yellowgarbagebag/csms-lib'
 
@@ -51,7 +51,7 @@ function createChargeStation(uniqueIdentifier: string): void {
     const cs = new ChargingStationModel(uniqueIdentifier)
     cs.username = uniqueIdentifier
     cs.passwordHash = hashPassword('test')
-    cs.state = ChargingStationState.Offline
+    cs.state = ColorState.Red
     models.push(cs)
 
     dataStorage.set(

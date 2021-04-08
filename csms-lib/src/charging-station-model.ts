@@ -5,14 +5,17 @@ export enum ChargingStationGroupFlag {
   UiOnly = 'uiOnly',
 }
 
-export enum ChargingStationState {
-  Offline,
-  Connecting,
-  Online,
+export enum ColorState {
+  Unknown,
+  Red,
+  Yellow,
+  Green,
+  Blue,
+  Black,
 }
 
 export class Evse {
-  public constructor(public readonly evseId: number, public readonly user: string) {
+  public constructor(public readonly evseId: number, public status: ColorState, public currentUser: string) {
     // nothing to do
   }
 }
@@ -33,8 +36,8 @@ export class ChargingStationModel {
    * Only at UI
    */
   @Expose({ name: '_state', groups: [ChargingStationGroupFlag.UiOnly] })
-  @Transform(({ value }) => value || ChargingStationState.Offline, { toClassOnly: true })
-  public state = ChargingStationState.Offline
+  @Transform(({ value }) => value || ColorState.Unknown, { toClassOnly: true })
+  public state = ColorState.Unknown
 
   @Expose({ name: '_uniqueIdentifier' })
   @Transform(({ value }) => value || '', { toClassOnly: true })
@@ -43,6 +46,10 @@ export class ChargingStationModel {
   @Expose({ name: '_lastContact' })
   @Transform(({ value }) => value || 0, { toClassOnly: true })
   public lastContact = 0
+
+  @Expose({ name: '_wattHours' })
+  @Transform(({ value }) => value || 0, { toClassOnly: true })
+  public wattHours = 0
 
   /**
    * Only at UI
