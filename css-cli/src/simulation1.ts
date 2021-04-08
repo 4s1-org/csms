@@ -10,6 +10,7 @@ import {
   IdTokenDto,
   IdTokenEnum,
   MeterValueDto,
+  MeterValuesRequestDto,
   ReasonEnum,
   SampledValueDto,
   StatusNotificationRequestDto,
@@ -26,6 +27,13 @@ class Simulation extends SimulationBase {
   }
 
   public async simulate(): Promise<void> {
+    let seqNo = 0
+    const transactionId = `x${Date.now()}`
+    const evseId = 2
+    const connectorId = 1
+    const idToken = new IdTokenDto('aaa', IdTokenEnum.ISO14443)
+    let wattHours = Date.now() - 1617886310013
+
     await this.connect()
 
     // B01 - Cold Boot Charging Station
@@ -50,21 +58,37 @@ class Simulation extends SimulationBase {
     )
     await sleep(200)
 
+    // Aktuelle Zählerstande mitteilen (ist nicht vorgegeben)
+    {
+      const sampleValue = new SampledValueDto(0)
+      const meterValue = new MeterValueDto([sampleValue], this.cs.currentTime)
+      const payload = new MeterValuesRequestDto(1, [meterValue])
+      await this.cs.sendMeterValueRequest(payload)
+      await sleep(150)
+    }
+
+    {
+      const sampleValue = new SampledValueDto(wattHours)
+      const meterValue = new MeterValueDto([sampleValue], this.cs.currentTime)
+      const payload = new MeterValuesRequestDto(2, [meterValue])
+      await this.cs.sendMeterValueRequest(payload)
+      await sleep(150)
+    }
+
+    {
+      const sampleValue = new SampledValueDto(0)
+      const meterValue = new MeterValueDto([sampleValue], this.cs.currentTime)
+      const payload = new MeterValuesRequestDto(3, [meterValue])
+      await this.cs.sendMeterValueRequest(payload)
+      await sleep(150)
+    }
+
     // G02 - Heartbeat
     // Heartbeat regelmässig senden
     const immediateObj = setInterval(async () => {
       await this.cs.sendHeartbeatRequest()
     }, this.cs.heartbeatInterval * 1000)
     await sleep(3000)
-
-    // -- Los gehts --
-
-    let seqNo = 0
-    const transactionId = `x${Date.now()}`
-    const evseId = 2
-    const connectorId = 1
-    const idToken = new IdTokenDto('aaa', IdTokenEnum.ISO14443)
-    let wattHours = Date.now() - 1617886310013
 
     // -- Kabel wird vom Fahrer gesteckt --
     // E02 - Start Transaction - Cable Plugin First

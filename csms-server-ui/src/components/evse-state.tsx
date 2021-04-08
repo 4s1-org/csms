@@ -10,7 +10,7 @@ interface IProps {
 class EvseStateComp extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     let ccsClass = ''
-    switch (this.props.data.status) {
+    switch (this.props.data.state) {
       case ColorState.Yellow:
         ccsClass = 'bg-warning text-white'
         break
@@ -25,8 +25,8 @@ class EvseStateComp extends React.Component<IProps, IState> {
     }
 
     return (
-      <div key={this.props.data.evseId} className={'d-inline p-2 m-1 ' + ccsClass}>
-        {this.props.data.currentUser}
+      <div key={this.props.data.id} className={'d-inline p-2 m-1 ' + ccsClass}>
+        {this.props.data.id}: {this.props.data.currentUser} ({this.props.data.wattHours} kWh)
       </div>
     )
   }

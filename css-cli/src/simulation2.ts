@@ -13,7 +13,7 @@ class Simulation extends SimulationBase {
     await sleep(200)
     //await this.cs.sendAuthorizationRequest()
     await sleep(200)
-    await this.cs.sendMeterValueRequest()
+    //await this.cs.sendMeterValueRequest()
     await sleep(200)
     await this.cs.sendHeartbeatRequest()
     await sleep(200)
