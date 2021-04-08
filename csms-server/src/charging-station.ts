@@ -50,16 +50,23 @@ import {
   SampledValueDto,
   LocationEnum,
   MeasurandEnum,
+  TransactionEventEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ColorState } from '@yellowgarbagebag/csms-lib'
 import { ProcessEnv } from './process-env'
+import { IValidUser } from './config/i-data-store-schema'
 
 export class ChargingStation implements IReceiveMessage {
   public readonly logger = new Logger(this.model.uniqueIdentifier, ProcessEnv.LOG_LEVEL)
   public readonly heartbeatInterval = 3
+  private transactions: { rfid: string; currentUser: string; id: string; evseId: number }[] = []
 
-  public constructor(public readonly model: ChargingStationModel, private readonly sendMessage: ISendMessage) {
+  public constructor(
+    public readonly model: ChargingStationModel,
+    private readonly sendMessage: ISendMessage,
+    private readonly validUser: IValidUser[] = [],
+  ) {
     // nothing to do
   }
 
@@ -222,6 +229,21 @@ export class ChargingStation implements IReceiveMessage {
         // C04.FR.01 - PIN falsch
         return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
       }
+    } else if (payload.idToken.type === IdTokenEnum.ISO14443 || payload.idToken.type === IdTokenEnum.ISO15693) {
+      const users = this.validUser.find((x) => x.rfid === payload.idToken.idToken)
+      if (users) {
+        const transaction = this.transactions.find((x) => !x.rfid)
+        if (transaction) {
+          transaction.rfid = users.rfid
+          transaction.currentUser = users.name
+
+          const evse = this.model.evse.find((x) => x.evseId === transaction.evseId)
+          if (evse) {
+            evse.currentUser = transaction.currentUser
+          }
+        }
+        return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
+      }
     }
 
     return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
@@ -322,6 +344,24 @@ export class ChargingStation implements IReceiveMessage {
         }
       }
     }
+
+    switch (payload.eventType) {
+      case TransactionEventEnum.Started:
+        this.transactions.push({
+          currentUser: '',
+          rfid: '',
+          id: payload.transactionInfo.transactionId,
+          evseId: payload.evse.id,
+        })
+        break
+      case TransactionEventEnum.Ended:
+        this.transactions = this.transactions.filter((x) => x.id !== payload.transactionInfo.transactionId)
+        break
+      case TransactionEventEnum.Updated:
+      default:
+        break
+    }
+
     return new TransactionEventResponseDto()
   }
 
