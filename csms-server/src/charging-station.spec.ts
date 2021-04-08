@@ -110,7 +110,7 @@ describe('Charging Station', () => {
       it('TransactionEventRequest', () => {
         // Arrange
         const payload = new TransactionEventRequestDto(
-          TransactionEventEnum.Started,
+          TransactionEventEnum.Updated,
           dtNow,
           TriggerReasonEnum.Deauthorized,
           1,

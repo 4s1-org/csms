@@ -1,5 +1,19 @@
 import React from 'react'
 import { ChargingStation } from '@yellowgarbagebag/css-lib'
+import {
+  AuthorizeRequestDto,
+  BootNotificationRequestDto,
+  BootReasonEnum,
+  ChargingStationDto,
+  ConnectorStatusEnum,
+  IdTokenDto,
+  IdTokenEnum,
+  StatusNotificationRequestDto,
+  TransactionDto,
+  TransactionEventEnum,
+  TransactionEventRequestDto,
+  TriggerReasonEnum,
+} from '@yellowgarbagebag/ocpp-lib'
 
 interface IState {}
 
@@ -14,11 +28,12 @@ class ChargingStationComp extends React.Component<IProps, IState> {
 
     this.sendBootNotificationRequest = this.sendBootNotificationRequest.bind(this)
     this.sendHeartbeatRequest = this.sendHeartbeatRequest.bind(this)
-    this.sendStatusNotificationRequest = this.sendStatusNotificationRequest.bind(this)
     this.sendAuthorizationRequest_PinCode = this.sendAuthorizationRequest_PinCode.bind(this)
     this.sendAuthorizationRequest_Rfid = this.sendAuthorizationRequest_Rfid.bind(this)
+    this.sendStatusNotificationRequest = this.sendStatusNotificationRequest.bind(this)
     this.sendMeterValueRequest = this.sendMeterValueRequest.bind(this)
     this.sendNotifyEventRequest_LockFailure = this.sendNotifyEventRequest_LockFailure.bind(this)
+    this.sendTransactionEventRequest = this.sendTransactionEventRequest.bind(this)
   }
 
   public render(): JSX.Element {
@@ -59,13 +74,22 @@ class ChargingStationComp extends React.Component<IProps, IState> {
             Send NotifyEvent (LockFailure)
           </button>
         </li>
+        <li className="list-group-item">
+          <button type="button" onClick={this.sendTransactionEventRequest} disabled={!this.props.isConnected}>
+            Send TransactionEvent
+          </button>
+        </li>
       </ul>
     )
   }
 
   private async sendBootNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendBootNotificationRequest()
+    const payload = new BootNotificationRequestDto(
+      new ChargingStationDto('SimulatorX', 'CSS-UI'),
+      BootReasonEnum.PowerUp,
+    )
+    await this.props.cs?.sendBootNotificationRequest(payload)
   }
 
   private async sendHeartbeatRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
@@ -75,27 +99,45 @@ class ChargingStationComp extends React.Component<IProps, IState> {
 
   private async sendAuthorizationRequest_PinCode(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendAuthorizationRequest_PinCode()
+    await this.props.cs?.sendAuthorizationRequest(new AuthorizeRequestDto(new IdTokenDto('234', IdTokenEnum.KeyCode)))
   }
 
   private async sendAuthorizationRequest_Rfid(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendAuthorizationRequest_Rfid()
+    await this.props.cs?.sendAuthorizationRequest(new AuthorizeRequestDto(new IdTokenDto('bbb', IdTokenEnum.ISO14443)))
   }
 
   private async sendMeterValueRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendMeterValueRequest()
+    // ToDo
+    //await this.props.cs?.sendMeterValueRequest()
   }
 
   private async sendStatusNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendStatusNotificationRequest()
+    await this.props.cs?.sendStatusNotificationRequest(
+      new StatusNotificationRequestDto(this.props.cs?.currentTime, ConnectorStatusEnum.Available, 1, 1),
+    )
+    await this.props.cs?.sendStatusNotificationRequest(
+      new StatusNotificationRequestDto(this.props.cs?.currentTime, ConnectorStatusEnum.Available, 2, 1),
+    )
   }
 
   private async sendNotifyEventRequest_LockFailure(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
     await this.props.cs?.sendNotifyEventRequest_LockFailure()
+  }
+
+  private async sendTransactionEventRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+    e.preventDefault()
+    const payload = new TransactionEventRequestDto(
+      TransactionEventEnum.Started,
+      this.props.cs?.currentTime!,
+      TriggerReasonEnum.CablePluggedIn,
+      1,
+      new TransactionDto('x'),
+    )
+    await this.props.cs?.sendTransactionEventRequest(payload)
   }
 }
 
