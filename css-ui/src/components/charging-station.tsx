@@ -14,6 +14,7 @@ import {
   TransactionEventRequestDto,
   TriggerReasonEnum,
 } from '@yellowgarbagebag/ocpp-lib'
+import Simulation1 from './simulation1'
 
 interface IState {}
 
@@ -79,6 +80,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
             Send TransactionEvent
           </button>
         </li>
+        <li className="list-group-item">{this.props.cs && <Simulation1 cs={this.props.cs}></Simulation1>}</li>
       </ul>
     )
   }
