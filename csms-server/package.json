@@ -13,11 +13,8 @@
   },
   "license": "UNLICENSED",
   "author": "Steffen",
-  "exports": "./index.js",
   "type": "module",
-  "engines": {
-    "node": ">=14"
-  },
+  "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "prebuild": "rm -rf dist/",
@@ -78,5 +75,8 @@
     "ts-jest": "^26.5.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
+  },
+  "engines": {
+    "node": ">=14"
   }
 }
