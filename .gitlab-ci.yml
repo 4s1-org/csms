@@ -32,8 +32,8 @@ validate-all:
     - pnpm run lint
     - pnpm run build
     - pnpm run test
-    - mkdir -p ../data && cp ../utils/certs/certificate.* ../data/
-    - pnpm run test:e2e
+    #- mkdir -p ../data && cp ../utils/certs/certificate.* ../data/
+    #- pnpm run test:e2e
     - cd ..
 
     - cd csms-server-ui
