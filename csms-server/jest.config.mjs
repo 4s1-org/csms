@@ -3,7 +3,15 @@
  * https://jestjs.io/docs/en/configuration.html
  */
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 module.exports = {
+=======
+export default {
+>>>>>>> 49c436d (Jest config)
+=======
+module.exports = {
+>>>>>>> 03efa9f (Rename files after rebase)
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
