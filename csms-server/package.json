@@ -30,27 +30,10 @@
     "test": "jest --passWithNoTests",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config jest.e2e.config.js",
     "test:watch": "jest --watch"
   },
   "prettier": "@hest-lab/eslint-config",
-  "jest": {
-    "collectCoverageFrom": [
-      "**/*.ts"
-    ],
-    "coverageDirectory": "../coverage",
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testEnvironment": "node",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.ts$": "ts-jest"
-    }
-  },
   "dependencies": {
     "@yellowgarbagebag/common-lib": "workspace:*",
     "@yellowgarbagebag/csms-lib": "workspace:*",
