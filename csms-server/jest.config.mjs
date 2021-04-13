@@ -4,10 +4,14 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module.exports = {
 =======
 export default {
 >>>>>>> 49c436d (Jest config)
+=======
+module.exports = {
+>>>>>>> 03efa9f (Rename files after rebase)
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -118,10 +122,7 @@ export default {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
-<<<<<<< HEAD
   // rootDir: undefined,
-=======
->>>>>>> 49c436d (Jest config)
   rootDir: 'src',
 
   // A list of paths to directories that Jest should use to search for files in
@@ -165,10 +166,7 @@ export default {
   // ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
-<<<<<<< HEAD
   // testRegex: [],
-=======
->>>>>>> 49c436d (Jest config)
   testRegex: ['.*\\.spec\\.ts$'],
 
   // This option allows the use of a custom results processor
