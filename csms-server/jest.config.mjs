@@ -3,7 +3,11 @@
  * https://jestjs.io/docs/en/configuration.html
  */
 
+<<<<<<< HEAD
 module.exports = {
+=======
+export default {
+>>>>>>> 49c436d (Jest config)
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -114,7 +118,10 @@ module.exports = {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
+<<<<<<< HEAD
   // rootDir: undefined,
+=======
+>>>>>>> 49c436d (Jest config)
   rootDir: 'src',
 
   // A list of paths to directories that Jest should use to search for files in
@@ -158,7 +165,10 @@ module.exports = {
   // ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
+<<<<<<< HEAD
   // testRegex: [],
+=======
+>>>>>>> 49c436d (Jest config)
   testRegex: ['.*\\.spec\\.ts$'],
 
   // This option allows the use of a custom results processor
