@@ -1,5 +1,3 @@
 root: true
 extends:
   - "@hest-lab/eslint-config/.eslintrc.yaml"
-parserOptions:
-  project: "tsconfig.eslint.json"
