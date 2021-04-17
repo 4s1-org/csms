@@ -10,9 +10,10 @@ export class WsClient extends WsClientBase {
     super(uniqueIdentifier, new Logger(uniqueIdentifier, ProcessEnv.LOG_LEVEL))
   }
 
-  public connect(receiveMessage: IReceiveMessage, server: string, username: string, password: string): Promise<void> {
+  public connect(receiveMessage: IReceiveMessage, https: boolean, server: string, username: string, password: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.socket = new WebSocket(`wss://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1'], {
+      const prot = https ? 'wss' : 'ws'
+      this.socket = new WebSocket(`${prot}://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1'], {
         headers: {
           authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
         },

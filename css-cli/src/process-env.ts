@@ -4,8 +4,8 @@ dotenv.config()
 /*
 LOG_LEVEL=info
 SERVER=sphazure.westeurope.cloudapp.azure.com:3000
-UNIQUE_IDENTIFIER=LS001
-USERNAME=LS001
+UNIQUE_IDENTIFIER=CS1
+USERNAME=CS1
 PASSWORD=test
 */
 
@@ -16,6 +16,10 @@ export abstract class ProcessEnv {
 
   public static get LOG_LEVEL(): string {
     return process.env.LOG_LEVEL || 'info'
+  }
+
+  public static get HTTPS(): boolean {
+    return process.env.HTTPS === 'false' ? false : true
   }
 
   public static get SERVER(): string {
