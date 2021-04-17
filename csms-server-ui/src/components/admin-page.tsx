@@ -44,9 +44,10 @@ class AdminPageComp extends React.Component<IProps, IState> {
     )
   }
 
-  private login(server: string, username: string, password: string): void {
+  private login(https: boolean, server: string, username: string, password: string): void {
     const authToken = toBase64([username, password].join(':'))
-    const ws = new WebSocket(`ws://${server}/admin`, ['ocpp2.0.1', `Auth.${authToken}`])
+    const prot = https ? 'wss' : 'ws'
+    const ws = new WebSocket(`${prot}://${server}/admin`, ['ocpp2.0.1', `Auth.${authToken}`])
 
     ws.onopen = () => {
       this.setState({

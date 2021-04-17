@@ -1,10 +1,10 @@
 /*
 REACT_APP_LOG_LEVEL=info
-REACT_APP_SERVER=sphazure.westeurope.cloudapp.azure.com:3000
-REACT_APP_UNIQUE_IDENTIFIER=LS001
-REACT_APP_USERNAME=LS001
-REACT_APP_PASSWORD=test
 REACT_APP_HTTPS=true
+REACT_APP_SERVER=sphazure.westeurope.cloudapp.azure.com:3000
+REACT_APP_UNIQUE_IDENTIFIER=CS1
+REACT_APP_USERNAME=CS1
+REACT_APP_PASSWORD=test
 */
 
 export abstract class ProcessEnv {
@@ -14,6 +14,10 @@ export abstract class ProcessEnv {
 
   public static get LOG_LEVEL(): string {
     return process.env.REACT_APP_LOG_LEVEL || 'info'
+  }
+
+  public static get HTTPS(): boolean {
+    return process.env.REACT_APP_HTTPS === 'false' ? false : true
   }
 
   public static get SERVER(): string {
@@ -30,9 +34,5 @@ export abstract class ProcessEnv {
 
   public static get PASSWORD(): string {
     return process.env.REACT_APP_PASSWORD || ''
-  }
-
-  public static get HTTPS(): boolean {
-    return process.env.REACT_APP_HTTPS === 'true' || true
   }
 }

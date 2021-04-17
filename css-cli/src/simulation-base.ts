@@ -8,21 +8,18 @@ export abstract class SimulationBase {
   protected client: WsClient
 
   constructor(
+    protected readonly https: boolean = ProcessEnv.HTTPS,
     protected readonly server: string = ProcessEnv.SERVER,
     protected readonly uniqueIdentifier: string = ProcessEnv.UNIQUE_IDENTIFIER,
     protected readonly username: string = ProcessEnv.USERNAME,
     protected readonly password: string = ProcessEnv.PASSWORD,
   ) {
     this.client = new WsClient(this.uniqueIdentifier)
-    this.cs = new ChargingStation(
-      this.uniqueIdentifier,
-      this.client,
-      new Logger(uniqueIdentifier, ProcessEnv.LOG_LEVEL),
-    )
+    this.cs = new ChargingStation(this.uniqueIdentifier, this.client, new Logger(uniqueIdentifier, ProcessEnv.LOG_LEVEL))
   }
 
   protected async connect(): Promise<void> {
-    await this.client.connect(this.cs, this.server, this.username, this.password)
+    await this.client.connect(this.cs, this.https, this.server, this.username, this.password)
   }
 
   protected abstract simulate(): Promise<void>
