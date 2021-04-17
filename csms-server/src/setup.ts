@@ -3,49 +3,66 @@
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { hashPassword } from './config/password'
-import { Command } from 'commander'
-import {
-  ChargingStationGroupFlag,
-  ChargingStationModel,
-  ColorState,
-  SerializationHelper,
-} from '@yellowgarbagebag/csms-lib'
+import { ChargingStationGroupFlag, ChargingStationModel, ColorState, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import prompts, { PromptObject } from 'prompts'
 
-const program = new Command()
-program
-  .version('0.0.1')
-  .description('Setup for CSMS server')
-  .usage('npm run setup -- -u foo -p bar -o 3000')
-  .requiredOption('-u, --username [type]', 'Admin username')
-  .requiredOption('-p, --password [type]', 'Admin password')
-  .requiredOption('-o, --port [type]', 'Server port')
+async function main(): Promise<void> {
+  const questions: PromptObject[] = [
+    {
+      type: 'text',
+      name: 'username',
+      message: 'Admin username?',
+      initial: 'admin',
+    },
+    {
+      type: 'password',
+      name: 'password',
+      message: 'Admin password?',
+      initial: 'admin',
+    },
+    {
+      type: 'number',
+      name: 'port',
+      message: 'Port',
+      initial: 3000,
+    },
+    {
+      type: 'confirm',
+      name: 'https',
+      message: 'Use HTTPS',
+      initial: true,
+    },
+    {
+      type: 'number',
+      name: 'csCount',
+      message: 'How many charging stations',
+      initial: 5,
+    },
+  ]
 
-if (!process.argv.slice(2).length) {
-  program.outputHelp()
-  process.exit(0)
+  const response = await prompts(questions)
+
+  const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
+  dataStorage.set('port', response.port)
+  dataStorage.set('https', response.https)
+  dataStorage.set('adminCredentials', { username: response.username, passwordHash: hashPassword(response.password) })
+
+  dataStorage.set('validUsers', [
+    { name: 'Anton Aarbinger', rfid: 'aaa' },
+    { name: 'Bernd Brotzeitholer', rfid: 'bbb' },
+  ])
+
+  if (!dataStorage.has('chargingStationModels')) {
+    dataStorage.set('chargingStationModels', [])
+  }
+
+  for (let i = 1; i <= response.csCount; i++) {
+    createChargeStation(dataStorage, `CS${i}`)
+  }
 }
 
-program.parse(process.argv)
-
-const options = program.opts()
-
-const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
-dataStorage.set('port', +options.port)
-dataStorage.set('adminCredentials', { username: options.username, passwordHash: hashPassword(options.password) })
-
-dataStorage.set('validUsers', [
-  { name: 'Anton Aarbinger', rfid: 'aaa' },
-  { name: 'Bernd Brotzeitholer', rfid: 'bbb' },
-])
-
-if (!dataStorage.has('chargingStationModels')) {
-  dataStorage.set('chargingStationModels', [])
-}
-const models = dataStorage
-  .get('chargingStationModels')
-  .map((x) => SerializationHelper.deserialize(ChargingStationModel, x))
-
-function createChargeStation(uniqueIdentifier: string): void {
+function createChargeStation(dataStorage: DataStorage<IDataStorageSchema>, uniqueIdentifier: string): void {
+  const models = dataStorage.get('chargingStationModels').map((x) => SerializationHelper.deserialize(ChargingStationModel, x))
   // Wenn Es keine Ladesäule gibt, lege sie an
   if (!models.find((x) => x.uniqueIdentifier === uniqueIdentifier)) {
     const cs = new ChargingStationModel(uniqueIdentifier)
@@ -61,10 +78,4 @@ function createChargeStation(uniqueIdentifier: string): void {
   }
 }
 
-createChargeStation('LS001')
-createChargeStation('LS002')
-createChargeStation('LS003')
-createChargeStation('LS004')
-createChargeStation('LS005')
-createChargeStation('LS006')
-createChargeStation('LS007')
+main().then().catch(console.error)
