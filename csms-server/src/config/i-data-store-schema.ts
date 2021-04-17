@@ -5,6 +5,7 @@ export interface IValidUser {
 
 export interface IDataStorageSchema {
   port: number
+  https: boolean
   adminCredentials: {
     username: string
     passwordHash: string
