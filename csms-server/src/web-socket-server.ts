@@ -52,15 +52,15 @@ export class WebSocketServer {
       this.onAdminConnection(socket, tlsSocket)
     })
 
-    if (this.dataStorage.get('https')) {
+    if (this.dataStorage.get('https') === false) {
+      this.logger.info('Use http')
+      this.server = http.createServer()
+    } else {
       this.logger.info('Use https')
       this.server = https.createServer({
         cert: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.crt')),
         key: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.key')),
       })
-    } else {
-      this.logger.info('Use http')
-      this.server = http.createServer()
     }
     this.server.on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
       this.logger.info('upgrade connection')
