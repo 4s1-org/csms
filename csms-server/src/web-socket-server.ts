@@ -1,5 +1,6 @@
 import WebSocket from 'ws'
 import https from 'https'
+import http from 'http'
 import fs from 'fs'
 import path from 'path'
 import { URL } from 'url'
@@ -21,7 +22,7 @@ type HeaderType = {
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Server', ProcessEnv.LOG_LEVEL)
-  private server: https.Server | undefined
+  private server: https.Server | http.Server | undefined
   private csSockets: Set<WebSocket> = new Set<WebSocket>()
   private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
   private adminSockets: Set<WebSocket> = new Set<WebSocket>()
@@ -51,48 +52,53 @@ export class WebSocketServer {
       this.onAdminConnection(socket, tlsSocket)
     })
 
-    this.server = https
-      .createServer({
+    if (this.dataStorage.get('https')) {
+      this.logger.info('Use https')
+      this.server = https.createServer({
         cert: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.crt')),
         key: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.key')),
       })
-      .on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
-        this.logger.info('upgrade connection')
-        const header = this.parseHeaders(request.headers)
-        this.logger.info(`Client connected: ${header.secWebsocketKey} [${header.secWebsocketProtocol}]`)
+    } else {
+      this.logger.info('Use http')
+      this.server = http.createServer()
+    }
+    this.server.on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
+      this.logger.info('upgrade connection')
+      const header = this.parseHeaders(request.headers)
+      this.logger.info(`Client connected: ${header.secWebsocketKey} [${header.secWebsocketProtocol}]`)
 
-        const { username, password } = this.getCredentials(request, header)
-        const myURL = new URL(request.url || '', 'http://localhosts') // Domain ist egal
+      const { username, password } = this.getCredentials(request, header)
+      const myURL = new URL(request.url || '', 'http://localhosts') // Domain ist egal
 
-        if (myURL.pathname.startsWith('/ocpp/')) {
-          // Charging Station
-          this.logger.info('upgrade connection for ChargingStation')
-          const uniqueIdentifier = myURL.pathname.split('/')[2]
+      if (myURL.pathname.startsWith('/ocpp/')) {
+        // Charging Station
+        this.logger.info('upgrade connection for ChargingStation')
+        const uniqueIdentifier = myURL.pathname.split('/')[2]
 
-          const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
-          if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
-            this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
-            return this.send401(tlsSocket)
-          }
-
-          wssChargingStations.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
-            wssChargingStations.emit('connection', socket, tlsSocket, model)
-          })
-        } else if (myURL.pathname.startsWith('/admin')) {
-          // Admin
-          this.logger.info('upgrade connection for Admin')
-          const adminCredentials = this.dataStorage.get('adminCredentials')
-          if (username !== adminCredentials.username || !verifyPassword(password, adminCredentials.passwordHash)) {
-            return this.send401(tlsSocket)
-          }
-
-          wssAdmin.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
-            wssAdmin.emit('connection', socket, tlsSocket)
-          })
-        } else {
+        const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
+        if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
+          this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
           return this.send401(tlsSocket)
         }
-      })
+
+        wssChargingStations.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
+          wssChargingStations.emit('connection', socket, tlsSocket, model)
+        })
+      } else if (myURL.pathname.startsWith('/admin')) {
+        // Admin
+        this.logger.info('upgrade connection for Admin')
+        const adminCredentials = this.dataStorage.get('adminCredentials')
+        if (username !== adminCredentials.username || !verifyPassword(password, adminCredentials.passwordHash)) {
+          return this.send401(tlsSocket)
+        }
+
+        wssAdmin.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
+          wssAdmin.emit('connection', socket, tlsSocket)
+        })
+      } else {
+        return this.send401(tlsSocket)
+      }
+    })
 
     const port = this.dataStorage.get('port')
     this.server.listen(port)
