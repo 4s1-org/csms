@@ -66,11 +66,11 @@ importers:
       '@types/configstore': ^5.0.0
       '@types/jest': ^26.0.22
       '@types/node': ^14.14.41
+      '@types/prompts': ^2.0.10
       '@types/ws': ^7.4.1
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/csms-lib': workspace:*
       '@yellowgarbagebag/ocpp-lib': workspace:*
-      commander: ^7.2.0
       configstore: ^5.0.1
       dotenv: ^8.2.0
       eslint: ^7.24.0
@@ -78,6 +78,7 @@ importers:
       nodemon: ^2.0.7
       pino-pretty: ^4.7.1
       prettier: ^2.2.1
+      prompts: ^2.4.1
       ts-jest: ^26.5.5
       ts-node: ^9.1.1
       typescript: ^4.2.4
@@ -87,14 +88,15 @@ importers:
       '@yellowgarbagebag/csms-lib': link:../csms-lib
       '@yellowgarbagebag/ocpp-lib': link:../ocpp-lib
       configstore: 5.0.1
+      prompts: 2.4.1
       ws: 7.4.4
     devDependencies:
       '@hest-lab/eslint-config': 1.6.1_980800e9dd52e0cffee9d1b5847827f5
       '@types/configstore': 5.0.0
       '@types/jest': 26.0.22
       '@types/node': 14.14.41
+      '@types/prompts': 2.0.10
       '@types/ws': 7.4.1
-      commander: 7.2.0
       dotenv: 8.2.0
       eslint: 7.24.0
       jest: 26.6.3_ts-node@9.1.1
@@ -2486,6 +2488,12 @@ packages:
   /@types/prettier/2.2.3:
     resolution: {integrity: sha512-PijRCG/K3s3w1We6ynUKdxEc5AcuuH3NBmMDP8uvKVp6X43UY7NQlTzczakXP3DJR0F4dfNQIGjU2cUeRYs2AA==}
 
+  /@types/prompts/2.0.10:
+    resolution: {integrity: sha512-W3PEl3l4vmxdgfY6LUG7ysh+mLJOTOFYmSpiLe6MCo1OdEm8b5s6ZJfuTQgEpYNwcMiiaRzJespPS5Py2tqLlQ==}
+    dependencies:
+      '@types/node': 14.14.41
+    dev: true
+
   /@types/prop-types/15.7.3:
     resolution: {integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==}
     dev: false
@@ -4169,11 +4177,6 @@ packages:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
     dev: false
-
-  /commander/7.2.0:
-    resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
-    engines: {node: '>= 10'}
-    dev: true
 
   /common-tags/1.8.0:
     resolution: {integrity: sha512-6P6g0uetGpW/sdyUy/iQQCbFF0kWVMSIVSyYz7Zgjcgh8mgw8PQzDNZeyZ5DQ2gM7LBoZPHmnjz8rUthkBG5tw==}
