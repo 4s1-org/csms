@@ -3,6 +3,8 @@ dotenv.config()
 
 /*
 LOG_LEVEL=info
+HTTPS=true
+#SERVER=localhost:3000
 SERVER=sphazure.westeurope.cloudapp.azure.com:3000
 UNIQUE_IDENTIFIER=CS1
 USERNAME=CS1
