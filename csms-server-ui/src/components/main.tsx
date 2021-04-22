@@ -6,7 +6,7 @@ import { toBase64 } from '@yellowgarbagebag/common-lib'
 import MainOverview from './overview/main-overview'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
-import MainStations from './stations/main-stations'
+import MainChargingStations from './stations/main-stations'
 import MainUsers from './users/main-users'
 
 interface IState {
@@ -54,7 +54,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
             <MainOverview models={this.state.csStates}></MainOverview>
           </TabPanel>
           <TabPanel>
-            <MainStations models={this.state.csList}></MainStations>
+            <MainChargingStations models={this.state.csList}></MainChargingStations>
           </TabPanel>
           <TabPanel>
             <MainUsers models={this.state.userList} send={this.state.send}></MainUsers>

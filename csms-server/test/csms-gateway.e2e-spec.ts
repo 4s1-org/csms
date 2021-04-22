@@ -16,7 +16,7 @@ import { WebSocketServer } from '../src/web-socket-server'
 import { DataStorage } from '../src/config/data-storage'
 import { IDataStorageSchema } from '../src/config/i-data-store-schema'
 import { ChargingStationModel } from '@yellowgarbagebag/csms-lib'
-import { hashPassword } from '../src/config/password'
+import { hashPassword } from '@yellowgarbagebag/common-lib'
 
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
