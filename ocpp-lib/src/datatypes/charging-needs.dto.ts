@@ -13,7 +13,7 @@ import { EnergyTransferModeEnum } from '../enumerations/energy-transfer-mode.enu
  */
 export class ChargingNeedsDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ChargingNeedsDto" = "ChargingNeedsDto"
+  private _className: 'ChargingNeedsDto' = 'ChargingNeedsDto'
 
   public constructor(
     requestedEnergyTransfer: EnergyTransferModeEnum,

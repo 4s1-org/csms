@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetTransactionStatusResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "GetTransactionStatusResponseDto" = "GetTransactionStatusResponseDto"
+  private _className: 'GetTransactionStatusResponseDto' = 'GetTransactionStatusResponseDto'
 
   public constructor(
     messagesInQueue: boolean,

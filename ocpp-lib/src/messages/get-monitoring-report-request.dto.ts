@@ -8,7 +8,7 @@ import { MonitoringCriterionEnum } from '../enumerations/monitoring-criterion.en
 
 export class GetMonitoringReportRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetMonitoringReportRequestDto" = "GetMonitoringReportRequestDto"
+  private _className: 'GetMonitoringReportRequestDto' = 'GetMonitoringReportRequestDto'
 
   public constructor(
     requestId: number,

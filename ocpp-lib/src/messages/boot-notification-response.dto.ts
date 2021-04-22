@@ -11,7 +11,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
  */
 export class BootNotificationResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "BootNotificationResponseDto" = "BootNotificationResponseDto"
+  private _className: 'BootNotificationResponseDto' = 'BootNotificationResponseDto'
 
   public constructor(
     currentTime: string,

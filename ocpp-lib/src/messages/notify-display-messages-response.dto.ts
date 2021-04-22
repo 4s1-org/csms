@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyDisplayMessagesResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "NotifyDisplayMessagesResponseDto" = "NotifyDisplayMessagesResponseDto"
+  private _className: 'NotifyDisplayMessagesResponseDto' = 'NotifyDisplayMessagesResponseDto'
 
   public constructor() {
     super()

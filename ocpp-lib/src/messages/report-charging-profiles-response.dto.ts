@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ReportChargingProfilesResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "ReportChargingProfilesResponseDto" = "ReportChargingProfilesResponseDto"
+  private _className: 'ReportChargingProfilesResponseDto' = 'ReportChargingProfilesResponseDto'
 
   public constructor() {
     super()

@@ -7,7 +7,7 @@ import { ReservationUpdateStatusEnum } from '../enumerations/reservation-update-
 
 export class ReservationStatusUpdateRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "ReservationStatusUpdateRequestDto" = "ReservationStatusUpdateRequestDto"
+  private _className: 'ReservationStatusUpdateRequestDto' = 'ReservationStatusUpdateRequestDto'
 
   public constructor(
     reservationId: number,

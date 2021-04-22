@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class FirmwareStatusNotificationResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "FirmwareStatusNotificationResponseDto" = "FirmwareStatusNotificationResponseDto"
+  private _className: 'FirmwareStatusNotificationResponseDto' = 'FirmwareStatusNotificationResponseDto'
 
   public constructor() {
     super()

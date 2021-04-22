@@ -8,7 +8,7 @@ import { IdTokenDto } from '../datatypes/id-token.dto'
 
 export class CustomerInformationRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "CustomerInformationRequestDto" = "CustomerInformationRequestDto"
+  private _className: 'CustomerInformationRequestDto' = 'CustomerInformationRequestDto'
 
   public constructor(
     requestId: number,

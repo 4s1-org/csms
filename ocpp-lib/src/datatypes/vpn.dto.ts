@@ -12,7 +12,7 @@ import { VpnEnum } from '../enumerations/vpn.enum'
  */
 export class VpnDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "VpnDto" = "VpnDto"
+  private _className: 'VpnDto' = 'VpnDto'
 
   public constructor(
     server: string,

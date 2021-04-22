@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetChargingProfilesResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "GetChargingProfilesResponseDto" = "GetChargingProfilesResponseDto"
+  private _className: 'GetChargingProfilesResponseDto' = 'GetChargingProfilesResponseDto'
 
   public constructor(
     status: GetChargingProfileStatusEnum,

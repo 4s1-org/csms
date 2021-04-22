@@ -7,7 +7,7 @@ import { ResetEnum } from '../enumerations/reset.enum'
 
 export class ResetRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "ResetRequestDto" = "ResetRequestDto"
+  private _className: 'ResetRequestDto' = 'ResetRequestDto'
 
   public constructor(
     type: ResetEnum,

@@ -10,7 +10,7 @@ import { MonitorEnum } from '../enumerations/monitor.enum'
  */
 export class VariableMonitoringDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "VariableMonitoringDto" = "VariableMonitoringDto"
+  private _className: 'VariableMonitoringDto' = 'VariableMonitoringDto'
 
   public constructor(
     id: number,

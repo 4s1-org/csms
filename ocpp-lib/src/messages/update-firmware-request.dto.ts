@@ -7,7 +7,7 @@ import { FirmwareDto } from '../datatypes/firmware.dto'
 
 export class UpdateFirmwareRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "UpdateFirmwareRequestDto" = "UpdateFirmwareRequestDto"
+  private _className: 'UpdateFirmwareRequestDto' = 'UpdateFirmwareRequestDto'
 
   public constructor(
     requestId: number,

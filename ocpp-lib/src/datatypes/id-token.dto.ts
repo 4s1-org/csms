@@ -11,7 +11,7 @@ import { IdTokenEnum } from '../enumerations/id-token.enum'
  */
 export class IdTokenDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "IdTokenDto" = "IdTokenDto"
+  private _className: 'IdTokenDto' = 'IdTokenDto'
 
   public constructor(
     idToken: string,

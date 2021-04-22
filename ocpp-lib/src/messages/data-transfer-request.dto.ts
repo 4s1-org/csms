@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class DataTransferRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "DataTransferRequestDto" = "DataTransferRequestDto"
+  private _className: 'DataTransferRequestDto' = 'DataTransferRequestDto'
 
   public constructor(
     vendorId: string,

@@ -7,7 +7,7 @@ import { HashAlgorithmEnum } from '../enumerations/hash-algorithm.enum'
 
 export class OcspRequestDataDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "OcspRequestDataDto" = "OcspRequestDataDto"
+  private _className: 'OcspRequestDataDto' = 'OcspRequestDataDto'
 
   public constructor(
     hashAlgorithm: HashAlgorithmEnum,

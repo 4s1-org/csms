@@ -9,7 +9,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class VariableDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "VariableDto" = "VariableDto"
+  private _className: 'VariableDto' = 'VariableDto'
 
   public constructor(
     name: string,

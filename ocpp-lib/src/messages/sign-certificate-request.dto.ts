@@ -7,7 +7,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class SignCertificateRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "SignCertificateRequestDto" = "SignCertificateRequestDto"
+  private _className: 'SignCertificateRequestDto' = 'SignCertificateRequestDto'
 
   public constructor(
     csr: string,

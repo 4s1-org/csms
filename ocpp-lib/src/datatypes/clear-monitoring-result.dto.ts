@@ -8,7 +8,7 @@ import { StatusInfoDto } from './status-info.dto'
 
 export class ClearMonitoringResultDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ClearMonitoringResultDto" = "ClearMonitoringResultDto"
+  private _className: 'ClearMonitoringResultDto' = 'ClearMonitoringResultDto'
 
   public constructor(
     status: ClearMonitoringStatusEnum,

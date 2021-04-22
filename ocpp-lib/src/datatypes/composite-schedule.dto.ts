@@ -12,7 +12,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class CompositeScheduleDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "CompositeScheduleDto" = "CompositeScheduleDto"
+  private _className: 'CompositeScheduleDto' = 'CompositeScheduleDto'
 
   public constructor(
     chargingSchedulePeriod: ChargingSchedulePeriodDto[],

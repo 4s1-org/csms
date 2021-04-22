@@ -8,7 +8,7 @@ import { TriggerMessageStatusEnum } from '../enumerations/trigger-message-status
 
 export class TriggerMessageResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "TriggerMessageResponseDto" = "TriggerMessageResponseDto"
+  private _className: 'TriggerMessageResponseDto' = 'TriggerMessageResponseDto'
 
   public constructor(
     status: TriggerMessageStatusEnum,

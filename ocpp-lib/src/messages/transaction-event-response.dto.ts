@@ -11,7 +11,7 @@ import { MessageContentDto } from '../datatypes/message-content.dto'
  */
 export class TransactionEventResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "TransactionEventResponseDto" = "TransactionEventResponseDto"
+  private _className: 'TransactionEventResponseDto' = 'TransactionEventResponseDto'
 
   public constructor() {
     super()

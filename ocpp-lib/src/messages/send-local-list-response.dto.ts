@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class SendLocalListResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "SendLocalListResponseDto" = "SendLocalListResponseDto"
+  private _className: 'SendLocalListResponseDto' = 'SendLocalListResponseDto'
 
   public constructor(
     status: SendLocalListStatusEnum,

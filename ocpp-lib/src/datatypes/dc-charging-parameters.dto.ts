@@ -11,7 +11,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class DcChargingParametersDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "DcChargingParametersDto" = "DcChargingParametersDto"
+  private _className: 'DcChargingParametersDto' = 'DcChargingParametersDto'
 
   public constructor(
     evMaxCurrent: number,
