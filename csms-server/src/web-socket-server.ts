@@ -233,8 +233,11 @@ export class WebSocketServer {
                   const cs = this.chargingStations.find((x) => x.uniqueIdentifier === payload.uniqueIdentifier)
                   if (cs) {
                     cs.username = payload.username
-                    cs.passwordHash = payload.passwordHash
                     cs.enabled = payload.enabled
+                    // Passwort wird nur aktualisiert, wenn auch von der UI eines gesendet wurde.
+                    if (payload.passwordHash) {
+                      cs.passwordHash = payload.passwordHash
+                    }
                     this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
                   }
                 }

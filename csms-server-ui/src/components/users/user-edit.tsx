@@ -1,9 +1,7 @@
 import React from 'react'
 import { UserModel } from '@yellowgarbagebag/csms-lib'
 
-interface IState {
-  originalModel: UserModel
-}
+interface IState {}
 
 interface IProps {
   model: UserModel
@@ -14,9 +12,7 @@ class UserEdit extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
 
-    this.state = {
-      originalModel: JSON.parse(JSON.stringify(this.props.model)),
-    }
+    this.state = {}
 
     this.onRfidChange = this.onRfidChange.bind(this)
     this.onLastNameChange = this.onLastNameChange.bind(this)
@@ -29,42 +25,27 @@ class UserEdit extends React.Component<IProps, IState> {
       <form>
         {!this.props.editMode && (
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">RFID</label>
-            <div className="col-sm-5">
+            <label className="col-sm-4 col-form-label">RFID</label>
+            <div className="col-sm-8">
               <input type="text" className="form-control" value={this.props.model.rfid} onChange={this.onRfidChange} />
             </div>
           </div>
         )}
         <div className="form-group row">
-          <label className="col-sm-2 col-form-label">Last name</label>
-          {this.props.editMode && (
-            <div className="col-sm-5">
-              <input type="text" className="form-control" value={this.state.originalModel.lastName} readOnly />
-            </div>
-          )}
-          <div className="col-sm-5">
+          <label className="col-sm-4 col-form-label">Last name</label>
+          <div className="col-sm-8">
             <input type="text" className="form-control" value={this.props.model.lastName} onChange={this.onLastNameChange} />
           </div>
         </div>
         <div className="form-group row">
-          <label className="col-sm-2 col-form-label">First name</label>
-          {this.props.editMode && (
-            <div className="col-sm-5">
-              <input type="text" className="form-control" value={this.state.originalModel.firstName} readOnly />
-            </div>
-          )}
-          <div className="col-sm-5">
+          <label className="col-sm-4 col-form-label">First name</label>
+          <div className="col-sm-8">
             <input type="text" className="form-control" value={this.props.model.firstName} onChange={this.onFirstNameChange} />
           </div>
         </div>
         <div className="form-group row">
-          <label className="col-sm-2 col-form-label">Company</label>
-          {this.props.editMode && (
-            <div className="col-sm-5">
-              <input type="text" className="form-control" value={this.state.originalModel.companyName} readOnly />
-            </div>
-          )}
-          <div className="col-sm-5">
+          <label className="col-sm-4 col-form-label">Company</label>
+          <div className="col-sm-8">
             <input type="text" className="form-control" value={this.props.model.companyName} onChange={this.onCompanyChange} />
           </div>
         </div>

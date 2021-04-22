@@ -5,6 +5,7 @@ import { faEdit, faPlus, faThumbsDown, faThumbsUp, faToggleOff, faToggleOn, faTr
 import Dialog from '../dialog'
 import ChargingStationEdit from './charging-station-edit'
 import { DialogButtonEnum } from '../dialog-button.enum'
+import { hashPassword } from '@yellowgarbagebag/common-lib'
 
 interface IState {
   showDeleteDialog: boolean
@@ -149,16 +150,21 @@ class MainChargingStations extends React.Component<IProps, IState> {
 
   private onBtnEditClick(model: ChargingStationModel, e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     e.preventDefault()
+    const modelClone = Object.assign({}, model)
+    modelClone.passwordHash = ''
 
     this.setState({
       ...this.state,
-      selectedModel: Object.assign({}, model),
+      selectedModel: modelClone,
       showEditDialog: true,
     })
   }
 
   private async onEditDialogClose(btn: DialogButtonEnum): Promise<void> {
     if (this.state.selectedModel && btn === DialogButtonEnum.save) {
+      if (this.state.selectedModel.passwordHash) {
+        this.state.selectedModel.passwordHash = hashPassword(this.state.selectedModel.passwordHash)
+      }
       this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.csCmd, UiToCsmsCsSubCmdEnum.edit, this.state.selectedModel))
     }
     this.setState({
@@ -170,6 +176,9 @@ class MainChargingStations extends React.Component<IProps, IState> {
 
   private async onAddDialogClose(btn: DialogButtonEnum): Promise<void> {
     if (this.state.selectedModel && btn === DialogButtonEnum.save) {
+      if (this.state.selectedModel.passwordHash) {
+        this.state.selectedModel.passwordHash = hashPassword(this.state.selectedModel.passwordHash)
+      }
       this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.csCmd, UiToCsmsCsSubCmdEnum.add, this.state.selectedModel))
     }
 
