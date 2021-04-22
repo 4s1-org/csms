@@ -1,11 +1,7 @@
 import React from 'react'
 import { ChargingStationModel } from '@yellowgarbagebag/csms-lib'
-import { hashPassword } from '@yellowgarbagebag/common-lib'
 
-interface IState {
-  originalModel: ChargingStationModel
-  starPassword: string
-}
+interface IState {}
 
 interface IProps {
   model: ChargingStationModel
@@ -16,10 +12,7 @@ class ChargingStationEdit extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
 
-    this.state = {
-      originalModel: JSON.parse(JSON.stringify(this.props.model)),
-      starPassword: '******',
-    }
+    this.state = {}
 
     this.onUniqueIdentifierChange = this.onUniqueIdentifierChange.bind(this)
     this.onUsernameChange = this.onUsernameChange.bind(this)
@@ -31,8 +24,8 @@ class ChargingStationEdit extends React.Component<IProps, IState> {
       <form>
         {!this.props.editMode && (
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Unique identifier</label>
-            <div className="col-sm-5">
+            <label className="col-sm-4 col-form-label">Unique identifier</label>
+            <div className="col-sm-8">
               <input
                 type="text"
                 className="form-control"
@@ -43,25 +36,15 @@ class ChargingStationEdit extends React.Component<IProps, IState> {
           </div>
         )}
         <div className="form-group row">
-          <label className="col-sm-2 col-form-label">Username</label>
-          {this.props.editMode && (
-            <div className="col-sm-5">
-              <input type="text" className="form-control" value={this.state.originalModel.username} readOnly />
-            </div>
-          )}
-          <div className="col-sm-5">
+          <label className="col-sm-4 col-form-label">Username</label>
+          <div className="col-sm-8">
             <input type="text" className="form-control" value={this.props.model.username} onChange={this.onUsernameChange} />
           </div>
         </div>
         <div className="form-group row">
-          <label className="col-sm-2 col-form-label">Password</label>
-          {this.props.editMode && (
-            <div className="col-sm-5">
-              <input type="password" className="form-control" value={this.state.originalModel.passwordHash ? '******' : ''} readOnly />
-            </div>
-          )}
-          <div className="col-sm-5">
-            <input type="password" className="form-control" value={this.state.starPassword} onChange={this.onPasswordChange} />
+          <label className="col-sm-4 col-form-label">Password</label>
+          <div className="col-sm-8">
+            <input type="password" className="form-control" value={this.props.model.passwordHash} onChange={this.onPasswordChange} />
           </div>
         </div>
       </form>
@@ -84,7 +67,7 @@ class ChargingStationEdit extends React.Component<IProps, IState> {
     e.preventDefault()
     this.setState({ ...this.state })
 
-    this.props.model.passwordHash = hashPassword(e.currentTarget.value)
+    this.props.model.passwordHash = e.currentTarget.value
   }
 }
 
