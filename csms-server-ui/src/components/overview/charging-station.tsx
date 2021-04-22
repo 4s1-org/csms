@@ -42,9 +42,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           <br />
           <div className="card-text">
             {this.props.model.evseList.map((evse) => (
-              <p>
-                <EvseStateComp data={evse} />
-              </p>
+              <EvseStateComp key={evse.id} data={evse} />
             ))}
           </div>
         </div>
