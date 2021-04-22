@@ -8,7 +8,7 @@ import { UnlockStatusEnum } from '../enumerations/unlock-status.enum'
 
 export class UnlockConnectorResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "UnlockConnectorResponseDto" = "UnlockConnectorResponseDto"
+  private _className: 'UnlockConnectorResponseDto' = 'UnlockConnectorResponseDto'
 
   public constructor(
     status: UnlockStatusEnum,

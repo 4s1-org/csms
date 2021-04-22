@@ -7,7 +7,7 @@ import { MonitoringBaseEnum } from '../enumerations/monitoring-base.enum'
 
 export class SetMonitoringBaseRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "SetMonitoringBaseRequestDto" = "SetMonitoringBaseRequestDto"
+  private _className: 'SetMonitoringBaseRequestDto' = 'SetMonitoringBaseRequestDto'
 
   public constructor(
     monitoringBase: MonitoringBaseEnum,

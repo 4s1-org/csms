@@ -7,7 +7,7 @@ import { EventDataDto } from '../datatypes/event-data.dto'
 
 export class NotifyEventRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "NotifyEventRequestDto" = "NotifyEventRequestDto"
+  private _className: 'NotifyEventRequestDto' = 'NotifyEventRequestDto'
 
   public constructor(
     generatedAt: string,

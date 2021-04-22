@@ -7,7 +7,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetCompositeScheduleRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetCompositeScheduleRequestDto" = "GetCompositeScheduleRequestDto"
+  private _className: 'GetCompositeScheduleRequestDto' = 'GetCompositeScheduleRequestDto'
 
   public constructor(
     duration: number,

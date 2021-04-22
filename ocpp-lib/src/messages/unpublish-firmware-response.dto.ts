@@ -7,7 +7,7 @@ import { UnpublishFirmwareStatusEnum } from '../enumerations/unpublish-firmware-
 
 export class UnpublishFirmwareResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "UnpublishFirmwareResponseDto" = "UnpublishFirmwareResponseDto"
+  private _className: 'UnpublishFirmwareResponseDto' = 'UnpublishFirmwareResponseDto'
 
   public constructor(
     status: UnpublishFirmwareStatusEnum,

@@ -12,7 +12,7 @@ import { VariableMonitoringDto } from './variable-monitoring.dto'
  */
 export class MonitoringDataDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "MonitoringDataDto" = "MonitoringDataDto"
+  private _className: 'MonitoringDataDto' = 'MonitoringDataDto'
 
   public constructor(
     component: ComponentDto,

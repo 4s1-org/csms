@@ -7,7 +7,7 @@ import { GetCertificateIdUseEnum } from '../enumerations/get-certificate-id-use.
 
 export class GetInstalledCertificateIdsRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetInstalledCertificateIdsRequestDto" = "GetInstalledCertificateIdsRequestDto"
+  private _className: 'GetInstalledCertificateIdsRequestDto' = 'GetInstalledCertificateIdsRequestDto'
 
   public constructor() {
     super()

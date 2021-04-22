@@ -8,7 +8,7 @@ import { IdTokenDto } from '../datatypes/id-token.dto'
 
 export class RequestStartTransactionRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "RequestStartTransactionRequestDto" = "RequestStartTransactionRequestDto"
+  private _className: 'RequestStartTransactionRequestDto' = 'RequestStartTransactionRequestDto'
 
   public constructor(
     idToken: IdTokenDto,

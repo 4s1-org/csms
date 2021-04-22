@@ -15,7 +15,7 @@ import { MessageContentDto } from './message-content.dto'
  */
 export class IdTokenInfoDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "IdTokenInfoDto" = "IdTokenInfoDto"
+  private _className: 'IdTokenInfoDto' = 'IdTokenInfoDto'
 
   public constructor(
     status: AuthorizationStatusEnum,

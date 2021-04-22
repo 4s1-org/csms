@@ -8,7 +8,7 @@ import { GetCertificateIdUseEnum } from '../enumerations/get-certificate-id-use.
 
 export class CertificateHashDataChainDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "CertificateHashDataChainDto" = "CertificateHashDataChainDto"
+  private _className: 'CertificateHashDataChainDto' = 'CertificateHashDataChainDto'
 
   public constructor(
     certificateHashData: CertificateHashDataDto,

@@ -7,7 +7,7 @@ import { HashAlgorithmEnum } from '../enumerations/hash-algorithm.enum'
 
 export class CertificateHashDataDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "CertificateHashDataDto" = "CertificateHashDataDto"
+  private _className: 'CertificateHashDataDto' = 'CertificateHashDataDto'
 
   public constructor(
     hashAlgorithm: HashAlgorithmEnum,

@@ -10,7 +10,7 @@ import { DataEnum } from '../enumerations/data.enum'
  */
 export class VariableCharacteristicsDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "VariableCharacteristicsDto" = "VariableCharacteristicsDto"
+  private _className: 'VariableCharacteristicsDto' = 'VariableCharacteristicsDto'
 
   public constructor(
     dataType: DataEnum,

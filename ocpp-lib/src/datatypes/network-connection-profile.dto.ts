@@ -16,7 +16,7 @@ import { VpnDto } from './vpn.dto'
  */
 export class NetworkConnectionProfileDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "NetworkConnectionProfileDto" = "NetworkConnectionProfileDto"
+  private _className: 'NetworkConnectionProfileDto' = 'NetworkConnectionProfileDto'
 
   public constructor(
     ocppVersion: OcppVersionEnum,

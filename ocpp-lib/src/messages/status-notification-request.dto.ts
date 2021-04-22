@@ -10,7 +10,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  */
 export class StatusNotificationRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "StatusNotificationRequestDto" = "StatusNotificationRequestDto"
+  private _className: 'StatusNotificationRequestDto' = 'StatusNotificationRequestDto'
 
   public constructor(
     timestamp: string,

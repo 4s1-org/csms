@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class ReserveNowResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "ReserveNowResponseDto" = "ReserveNowResponseDto"
+  private _className: 'ReserveNowResponseDto' = 'ReserveNowResponseDto'
 
   public constructor(
     status: ReserveNowStatusEnum,

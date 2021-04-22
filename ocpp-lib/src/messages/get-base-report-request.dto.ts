@@ -10,7 +10,7 @@ import { ReportBaseEnum } from '../enumerations/report-base.enum'
  */
 export class GetBaseReportRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetBaseReportRequestDto" = "GetBaseReportRequestDto"
+  private _className: 'GetBaseReportRequestDto' = 'GetBaseReportRequestDto'
 
   public constructor(
     requestId: number,

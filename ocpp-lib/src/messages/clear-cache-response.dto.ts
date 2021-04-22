@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class ClearCacheResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "ClearCacheResponseDto" = "ClearCacheResponseDto"
+  private _className: 'ClearCacheResponseDto' = 'ClearCacheResponseDto'
 
   public constructor(
     status: ClearCacheStatusEnum,

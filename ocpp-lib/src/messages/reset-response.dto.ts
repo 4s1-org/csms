@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class ResetResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "ResetResponseDto" = "ResetResponseDto"
+  private _className: 'ResetResponseDto' = 'ResetResponseDto'
 
   public constructor(
     status: ResetStatusEnum,

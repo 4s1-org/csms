@@ -7,7 +7,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearVariableMonitoringResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "ClearVariableMonitoringResponseDto" = "ClearVariableMonitoringResponseDto"
+  private _className: 'ClearVariableMonitoringResponseDto' = 'ClearVariableMonitoringResponseDto'
 
   public constructor(
     clearMonitoringResult: ClearMonitoringResultDto[],

@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class SignCertificateResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "SignCertificateResponseDto" = "SignCertificateResponseDto"
+  private _className: 'SignCertificateResponseDto' = 'SignCertificateResponseDto'
 
   public constructor(
     status: GenericStatusEnum,

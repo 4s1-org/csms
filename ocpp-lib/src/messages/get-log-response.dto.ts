@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetLogResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "GetLogResponseDto" = "GetLogResponseDto"
+  private _className: 'GetLogResponseDto' = 'GetLogResponseDto'
 
   public constructor(
     status: LogStatusEnum,

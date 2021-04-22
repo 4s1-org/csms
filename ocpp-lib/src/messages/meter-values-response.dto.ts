@@ -9,7 +9,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  */
 export class MeterValuesResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "MeterValuesResponseDto" = "MeterValuesResponseDto"
+  private _className: 'MeterValuesResponseDto' = 'MeterValuesResponseDto'
 
   public constructor() {
     super()

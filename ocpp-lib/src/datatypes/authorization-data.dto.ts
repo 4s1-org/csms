@@ -11,7 +11,7 @@ import { IdTokenInfoDto } from './id-token-info.dto'
  */
 export class AuthorizationDataDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "AuthorizationDataDto" = "AuthorizationDataDto"
+  private _className: 'AuthorizationDataDto' = 'AuthorizationDataDto'
 
   public constructor(
     idToken: IdTokenDto,

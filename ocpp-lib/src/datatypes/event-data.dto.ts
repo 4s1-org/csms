@@ -13,7 +13,7 @@ import { VariableDto } from './variable.dto'
  */
 export class EventDataDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "EventDataDto" = "EventDataDto"
+  private _className: 'EventDataDto' = 'EventDataDto'
 
   public constructor(
     eventId: number,

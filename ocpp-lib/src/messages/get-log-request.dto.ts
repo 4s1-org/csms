@@ -8,7 +8,7 @@ import { LogParametersDto } from '../datatypes/log-parameters.dto'
 
 export class GetLogRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetLogRequestDto" = "GetLogRequestDto"
+  private _className: 'GetLogRequestDto' = 'GetLogRequestDto'
 
   public constructor(
     log: LogParametersDto,

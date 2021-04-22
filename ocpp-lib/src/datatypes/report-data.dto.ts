@@ -13,7 +13,7 @@ import { VariableDto } from './variable.dto'
  */
 export class ReportDataDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ReportDataDto" = "ReportDataDto"
+  private _className: 'ReportDataDto' = 'ReportDataDto'
 
   public constructor(
     component: ComponentDto,

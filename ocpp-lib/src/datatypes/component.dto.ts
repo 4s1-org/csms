@@ -10,7 +10,7 @@ import { EvseDto } from './evse.dto'
  */
 export class ComponentDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ComponentDto" = "ComponentDto"
+  private _className: 'ComponentDto' = 'ComponentDto'
 
   public constructor(
     name: string,
