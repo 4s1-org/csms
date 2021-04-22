@@ -6,10 +6,7 @@ export class ChargingStationModel {
   public lastAction = ''
   public evseList: EvseModel[] = []
   public state = ColorStateEnum.Unknown
+  public uniqueIdentifier = ''
   public username = ''
   public passwordHash = ''
-
-  public constructor(public readonly uniqueIdentifier: string) {
-    // nothing to do
-  }
 }

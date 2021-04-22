@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStationModel, CsmsToUiCmdEnum, CsmsToUiMsg } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, CsmsToUiCmdEnum, CsmsToUiMsg, UiToCsmsMsg, UserModel } from '@yellowgarbagebag/csms-lib'
 import './main.css'
 import LoginPanelComp from './login-panel'
 import { toBase64 } from '@yellowgarbagebag/common-lib'
@@ -10,9 +10,12 @@ import MainStations from './stations/main-stations'
 import MainUsers from './users/main-users'
 
 interface IState {
-  chargingStations: ChargingStationModel[]
+  csStates: ChargingStationModel[]
+  csList: ChargingStationModel[]
+  userList: UserModel[]
   isConnected: boolean
-  ws: WebSocket | undefined
+  ws?: WebSocket
+  send: (msg: UiToCsmsMsg) => void
 }
 
 interface IProps {}
@@ -21,9 +24,12 @@ class AdminPageComp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
-      chargingStations: [],
+      csStates: [],
+      csList: [],
+      userList: [],
       isConnected: false,
       ws: undefined,
+      send: (msg: UiToCsmsMsg) => {},
     }
 
     this.login = this.login.bind(this)
@@ -45,13 +51,13 @@ class AdminPageComp extends React.Component<IProps, IState> {
           </TabList>
 
           <TabPanel>
-            <MainOverview models={this.state.chargingStations}></MainOverview>
+            <MainOverview models={this.state.csStates}></MainOverview>
           </TabPanel>
           <TabPanel>
-            <MainStations></MainStations>
+            <MainStations models={this.state.csList}></MainStations>
           </TabPanel>
           <TabPanel>
-            <MainUsers></MainUsers>
+            <MainUsers models={this.state.userList} send={this.state.send}></MainUsers>
           </TabPanel>
         </Tabs>
       </div>
@@ -67,13 +73,28 @@ class AdminPageComp extends React.Component<IProps, IState> {
       this.setState({
         ws,
         isConnected: true,
-        chargingStations: [],
+        csStates: [],
+        send: (msg: UiToCsmsMsg) => ws.send(JSON.stringify(msg)),
       })
     }
     ws.onmessage = (msg: any): void => {
       const data: CsmsToUiMsg = JSON.parse(msg.data)
-      if (data.cmd === CsmsToUiCmdEnum.csState) {
-        this.updateChargingStationModel(data.payload as ChargingStationModel)
+      switch (data.cmd) {
+        case CsmsToUiCmdEnum.csList:
+          this.setState({
+            ...this.state,
+            csList: data.payload as ChargingStationModel[],
+          })
+          break
+        case CsmsToUiCmdEnum.userList:
+          this.setState({
+            ...this.state,
+            userList: data.payload as UserModel[],
+          })
+          break
+        case CsmsToUiCmdEnum.csState:
+          this.updateChargingStationModel(data.payload as ChargingStationModel)
+          break
       }
     }
     ws.onerror = (msg: any): void => {
@@ -83,21 +104,21 @@ class AdminPageComp extends React.Component<IProps, IState> {
       this.setState({
         ws: undefined,
         isConnected: false,
-        chargingStations: [],
+        csStates: [],
       })
     }
   }
 
   private updateChargingStationModel(model: ChargingStationModel): void {
-    var idx = this.state.chargingStations.findIndex((x) => x.uniqueIdentifier === model.uniqueIdentifier)
+    var idx = this.state.csStates.findIndex((x) => x.uniqueIdentifier === model.uniqueIdentifier)
     if (idx === -1) {
-      this.state.chargingStations.push(model)
+      this.state.csStates.push(model)
       this.setState({
-        chargingStations: this.state.chargingStations,
+        csStates: this.state.csStates,
       })
     } else {
       this.setState({
-        chargingStations: [...this.state.chargingStations.slice(0, idx), model, ...this.state.chargingStations.slice(idx + 1)],
+        csStates: [...this.state.csStates.slice(0, idx), model, ...this.state.csStates.slice(idx + 1)],
       })
     }
   }

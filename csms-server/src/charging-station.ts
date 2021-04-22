@@ -304,7 +304,8 @@ export class ChargingStation implements IReceiveMessage {
       evse.state = colorState
       evse.currentUser = undefined
     } else {
-      const evse = new EvseModel(payload.evseId)
+      const evse = new EvseModel()
+      evse.id = payload.evseId
       evse.state = colorState
       evse.wattHours = 0
       this.model.evseList.push(evse)

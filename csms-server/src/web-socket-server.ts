@@ -7,7 +7,15 @@ import { URL } from 'url'
 import { IncomingHttpHeaders, IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
 import { fromBase64, Logger } from '@yellowgarbagebag/common-lib'
-import { CsmsToUiMsg, CsmsToUiCmdEnum, ChargingStationModel, UserModel } from '@yellowgarbagebag/csms-lib'
+import {
+  CsmsToUiMsg,
+  CsmsToUiCmdEnum,
+  ChargingStationModel,
+  UserModel,
+  UiToCsmsMsg,
+  UiToCsmsCmdEnum,
+  UiToCsmsUserSubCmdEnum,
+} from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { verifyPassword } from './config/password'
@@ -181,7 +189,42 @@ export class WebSocketServer {
     }
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {
-      // ToDo
+      const data: UiToCsmsMsg = JSON.parse(msg.data.toString())
+
+      this.logger.info(`Admin UI | ${data.cmd} | ${data.subCmd}`)
+
+      switch (data.cmd) {
+        case UiToCsmsCmdEnum.userCmd:
+          const payload = data.payload as UserModel
+
+          switch (data.subCmd) {
+            case UiToCsmsUserSubCmdEnum.edit:
+              {
+                const user = this.users.find((x) => x.rfid === payload.rfid)
+                if (user) {
+                  Object.assign(user, payload)
+                }
+              }
+              break
+            case UiToCsmsUserSubCmdEnum.delete:
+              this.users = this.users.filter((x) => x.rfid !== payload.rfid)
+              break
+            case UiToCsmsUserSubCmdEnum.add:
+              {
+                const user = this.users.find((x) => x.rfid === payload.rfid)
+                if (!user) {
+                  this.users.push(payload)
+                }
+              }
+              break
+          }
+
+          this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.userList, this.users))
+          this.dataStorage.set('users', this.users)
+          break
+        case UiToCsmsCmdEnum.csCmd:
+          break
+      }
     }
   }
 
