@@ -7,7 +7,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyEvChargingScheduleRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "NotifyEvChargingScheduleRequestDto" = "NotifyEvChargingScheduleRequestDto"
+  private _className: 'NotifyEvChargingScheduleRequestDto' = 'NotifyEvChargingScheduleRequestDto'
 
   public constructor(
     timeBase: string,

@@ -7,7 +7,7 @@ import { InstallCertificateUseEnum } from '../enumerations/install-certificate-u
 
 export class InstallCertificateRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "InstallCertificateRequestDto" = "InstallCertificateRequestDto"
+  private _className: 'InstallCertificateRequestDto' = 'InstallCertificateRequestDto'
 
   public constructor(
     certificateType: InstallCertificateUseEnum,

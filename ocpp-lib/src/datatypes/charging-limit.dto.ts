@@ -11,7 +11,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class ChargingLimitDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ChargingLimitDto" = "ChargingLimitDto"
+  private _className: 'ChargingLimitDto' = 'ChargingLimitDto'
 
   public constructor(
     chargingLimitSource: ChargingLimitSourceEnum,

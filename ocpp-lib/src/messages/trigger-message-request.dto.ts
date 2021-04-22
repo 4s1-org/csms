@@ -8,7 +8,7 @@ import { MessageTriggerEnum } from '../enumerations/message-trigger.enum'
 
 export class TriggerMessageRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "TriggerMessageRequestDto" = "TriggerMessageRequestDto"
+  private _className: 'TriggerMessageRequestDto' = 'TriggerMessageRequestDto'
 
   public constructor(
     requestedMessage: MessageTriggerEnum,

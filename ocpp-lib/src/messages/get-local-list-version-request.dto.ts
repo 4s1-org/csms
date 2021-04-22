@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetLocalListVersionRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetLocalListVersionRequestDto" = "GetLocalListVersionRequestDto"
+  private _className: 'GetLocalListVersionRequestDto' = 'GetLocalListVersionRequestDto'
 
   public constructor() {
     super()

@@ -11,7 +11,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class AcChargingParametersDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "AcChargingParametersDto" = "AcChargingParametersDto"
+  private _className: 'AcChargingParametersDto' = 'AcChargingParametersDto'
 
   public constructor(
     energyAmount: number,

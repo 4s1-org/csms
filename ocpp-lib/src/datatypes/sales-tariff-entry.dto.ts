@@ -12,7 +12,7 @@ import { RelativeTimeIntervalDto } from './relative-time-interval.dto'
  */
 export class SalesTariffEntryDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "SalesTariffEntryDto" = "SalesTariffEntryDto"
+  private _className: 'SalesTariffEntryDto' = 'SalesTariffEntryDto'
 
   public constructor(
     relativeTimeInterval: RelativeTimeIntervalDto,

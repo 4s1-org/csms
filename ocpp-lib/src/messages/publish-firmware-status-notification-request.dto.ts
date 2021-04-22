@@ -7,7 +7,7 @@ import { PublishFirmwareStatusEnum } from '../enumerations/publish-firmware-stat
 
 export class PublishFirmwareStatusNotificationRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "PublishFirmwareStatusNotificationRequestDto" = "PublishFirmwareStatusNotificationRequestDto"
+  private _className: 'PublishFirmwareStatusNotificationRequestDto' = 'PublishFirmwareStatusNotificationRequestDto'
 
   public constructor(
     status: PublishFirmwareStatusEnum,

@@ -8,7 +8,7 @@ import { OcspRequestDataDto } from '../datatypes/ocsp-request-data.dto'
 
 export class AuthorizeRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "AuthorizeRequestDto" = "AuthorizeRequestDto"
+  private _className: 'AuthorizeRequestDto' = 'AuthorizeRequestDto'
 
   public constructor(
     idToken: IdTokenDto,

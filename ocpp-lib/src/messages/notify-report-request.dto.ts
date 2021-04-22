@@ -10,7 +10,7 @@ import { ReportDataDto } from '../datatypes/report-data.dto'
  */
 export class NotifyReportRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "NotifyReportRequestDto" = "NotifyReportRequestDto"
+  private _className: 'NotifyReportRequestDto' = 'NotifyReportRequestDto'
 
   public constructor(
     requestId: number,

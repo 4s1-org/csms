@@ -10,7 +10,7 @@ import { MeterValueDto } from '../datatypes/meter-value.dto'
  */
 export class MeterValuesRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "MeterValuesRequestDto" = "MeterValuesRequestDto"
+  private _className: 'MeterValuesRequestDto' = 'MeterValuesRequestDto'
 
   public constructor(
     evseId: number,

@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class SetNetworkProfileResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "SetNetworkProfileResponseDto" = "SetNetworkProfileResponseDto"
+  private _className: 'SetNetworkProfileResponseDto' = 'SetNetworkProfileResponseDto'
 
   public constructor(
     status: SetNetworkProfileStatusEnum,

@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class PublishFirmwareResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "PublishFirmwareResponseDto" = "PublishFirmwareResponseDto"
+  private _className: 'PublishFirmwareResponseDto' = 'PublishFirmwareResponseDto'
 
   public constructor(
     status: GenericStatusEnum,

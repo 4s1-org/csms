@@ -7,7 +7,7 @@ import { MessageInfoDto } from '../datatypes/message-info.dto'
 
 export class NotifyDisplayMessagesRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "NotifyDisplayMessagesRequestDto" = "NotifyDisplayMessagesRequestDto"
+  private _className: 'NotifyDisplayMessagesRequestDto' = 'NotifyDisplayMessagesRequestDto'
 
   public constructor(
     requestId: number,

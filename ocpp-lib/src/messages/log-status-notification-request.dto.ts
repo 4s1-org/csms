@@ -7,7 +7,7 @@ import { UploadLogStatusEnum } from '../enumerations/upload-log-status.enum'
 
 export class LogStatusNotificationRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "LogStatusNotificationRequestDto" = "LogStatusNotificationRequestDto"
+  private _className: 'LogStatusNotificationRequestDto' = 'LogStatusNotificationRequestDto'
 
   public constructor(
     status: UploadLogStatusEnum,

@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearDisplayMessageRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "ClearDisplayMessageRequestDto" = "ClearDisplayMessageRequestDto"
+  private _className: 'ClearDisplayMessageRequestDto' = 'ClearDisplayMessageRequestDto'
 
   public constructor(
     id: number,

@@ -12,7 +12,7 @@ import { VariableDto } from './variable.dto'
  */
 export class SetVariableDataDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "SetVariableDataDto" = "SetVariableDataDto"
+  private _className: 'SetVariableDataDto' = 'SetVariableDataDto'
 
   public constructor(
     attributeValue: string,

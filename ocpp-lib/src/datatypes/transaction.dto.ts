@@ -12,7 +12,7 @@ import { ReasonEnum } from '../enumerations/reason.enum'
  */
 export class TransactionDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "TransactionDto" = "TransactionDto"
+  private _className: 'TransactionDto' = 'TransactionDto'
 
   public constructor(
     transactionId: string,

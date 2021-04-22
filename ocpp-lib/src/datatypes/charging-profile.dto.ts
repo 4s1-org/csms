@@ -15,7 +15,7 @@ import { RecurrencyKindEnum } from '../enumerations/recurrency-kind.enum'
  */
 export class ChargingProfileDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ChargingProfileDto" = "ChargingProfileDto"
+  private _className: 'ChargingProfileDto' = 'ChargingProfileDto'
 
   public constructor(
     id: number,

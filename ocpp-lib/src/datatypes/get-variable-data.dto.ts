@@ -12,7 +12,7 @@ import { VariableDto } from './variable.dto'
  */
 export class GetVariableDataDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "GetVariableDataDto" = "GetVariableDataDto"
+  private _className: 'GetVariableDataDto' = 'GetVariableDataDto'
 
   public constructor(
     component: ComponentDto,

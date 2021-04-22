@@ -9,7 +9,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  */
 export class HeartbeatRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "HeartbeatRequestDto" = "HeartbeatRequestDto"
+  private _className: 'HeartbeatRequestDto' = 'HeartbeatRequestDto'
 
   public constructor() {
     super()

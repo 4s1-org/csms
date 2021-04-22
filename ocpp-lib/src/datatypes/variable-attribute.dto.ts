@@ -11,7 +11,7 @@ import { MutabilityEnum } from '../enumerations/mutability.enum'
  */
 export class VariableAttributeDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "VariableAttributeDto" = "VariableAttributeDto"
+  private _className: 'VariableAttributeDto' = 'VariableAttributeDto'
 
   public constructor() {
     super()

@@ -7,7 +7,7 @@ import { NetworkConnectionProfileDto } from '../datatypes/network-connection-pro
 
 export class SetNetworkProfileRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "SetNetworkProfileRequestDto" = "SetNetworkProfileRequestDto"
+  private _className: 'SetNetworkProfileRequestDto' = 'SetNetworkProfileRequestDto'
 
   public constructor(
     configurationSlot: number,

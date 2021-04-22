@@ -8,7 +8,7 @@ import { UpdateEnum } from '../enumerations/update.enum'
 
 export class SendLocalListRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "SendLocalListRequestDto" = "SendLocalListRequestDto"
+  private _className: 'SendLocalListRequestDto' = 'SendLocalListRequestDto'
 
   public constructor(
     versionNumber: number,
