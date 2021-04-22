@@ -35,7 +35,10 @@ class ChargingStationComp extends React.Component<IProps, IState> {
 
     return (
       <div className="card h-100">
-        <h5 className={'card-header ' + headerColorCss}>{this.props.model.uniqueIdentifier}</h5>
+        <h5 className={'card-header ' + headerColorCss}>
+          {this.props.model.uniqueIdentifier}
+          {!this.props.model.enabled ? ' (disabled)' : ''}
+        </h5>
         <div className="card-body">
           <h6 className="card-subtitle mb-2">State: {stateStr}</h6>
           <div className="card-text">Username: {this.props.model.username}</div>

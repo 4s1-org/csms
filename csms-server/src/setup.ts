@@ -77,6 +77,7 @@ function createChargeStation(dataStorage: DataStorage<IDataStorageSchema>, uniqu
     cs.uniqueIdentifier = uniqueIdentifier
     cs.username = uniqueIdentifier
     cs.passwordHash = hashPassword('test')
+    cs.enabled = true
     models.push(cs)
   }
   dataStorage.set('chargingStations', models)

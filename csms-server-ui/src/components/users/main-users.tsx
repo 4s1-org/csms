@@ -90,17 +90,27 @@ class MainUsers extends React.Component<IProps, IState> {
           </tbody>
         </table>
         {this.state.showDeleteDialog && this.state.selectedModel && (
-          <Dialog title="Delete" dialogCloseCallback={this.onDeleteDialogClose} showBtnYes={true} showBtnNo={true}>
-            Would you like to delete the user with RFID "{this.state.selectedModel.rfid}"?
+          <Dialog
+            title={`Delete - ${this.state.selectedModel.rfid}`}
+            dialogCloseCallback={this.onDeleteDialogClose}
+            showBtnYes={true}
+            showBtnNo={true}
+          >
+            Are you sure?
           </Dialog>
         )}
         {this.state.showEditDialog && this.state.selectedModel && (
-          <Dialog title="Edit" dialogCloseCallback={this.onEditDialogClose} showBtnSave={true} showBtnAbort={true}>
+          <Dialog
+            title={`Edit - ${this.state.selectedModel.rfid}`}
+            dialogCloseCallback={this.onEditDialogClose}
+            showBtnSave={true}
+            showBtnAbort={true}
+          >
             <UserEdit model={this.state.selectedModel} editMode={true} />
           </Dialog>
         )}
         {this.state.showAddDialog && this.state.selectedModel && (
-          <Dialog title="Edit" dialogCloseCallback={this.onAddDialogClose} showBtnSave={true} showBtnAbort={true}>
+          <Dialog title="Add" dialogCloseCallback={this.onAddDialogClose} showBtnSave={true} showBtnAbort={true}>
             <UserEdit model={this.state.selectedModel} editMode={false} />
           </Dialog>
         )}

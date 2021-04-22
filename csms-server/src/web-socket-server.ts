@@ -194,34 +194,69 @@ export class WebSocketServer {
 
       switch (data.cmd) {
         case UiToCsmsCmdEnum.userCmd:
-          const payload = data.payload as UserModel
+          {
+            const payload = data.payload as UserModel
 
-          switch (data.subCmd) {
-            case UiToCsmsUserSubCmdEnum.edit:
-              {
-                const user = this.users.find((x) => x.rfid === payload.rfid)
-                if (user) {
-                  Object.assign(user, payload)
+            switch (data.subCmd) {
+              case UiToCsmsUserSubCmdEnum.edit:
+                {
+                  const user = this.users.find((x) => x.rfid === payload.rfid)
+                  if (user) {
+                    Object.assign(user, payload)
+                  }
                 }
-              }
-              break
-            case UiToCsmsUserSubCmdEnum.delete:
-              this.users = this.users.filter((x) => x.rfid !== payload.rfid)
-              break
-            case UiToCsmsUserSubCmdEnum.add:
-              {
-                const user = this.users.find((x) => x.rfid === payload.rfid)
-                if (!user) {
-                  this.users.push(payload)
+                break
+              case UiToCsmsUserSubCmdEnum.delete:
+                this.users = this.users.filter((x) => x.rfid !== payload.rfid)
+                break
+              case UiToCsmsUserSubCmdEnum.add:
+                {
+                  const user = this.users.find((x) => x.rfid === payload.rfid)
+                  if (!user) {
+                    this.users.push(payload)
+                  }
                 }
-              }
-              break
+                break
+            }
+
+            this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.userList, this.users))
+            this.dataStorage.set('users', this.users)
           }
-
-          this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.userList, this.users))
-          this.dataStorage.set('users', this.users)
           break
         case UiToCsmsCmdEnum.csCmd:
+          {
+            const payload = data.payload as ChargingStationModel
+
+            switch (data.subCmd) {
+              case UiToCsmsUserSubCmdEnum.edit:
+                {
+                  const cs = this.chargingStations.find((x) => x.uniqueIdentifier === payload.uniqueIdentifier)
+                  if (cs) {
+                    cs.username = payload.username
+                    cs.passwordHash = payload.passwordHash
+                    cs.enabled = payload.enabled
+                    this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
+                  }
+                }
+                break
+              case UiToCsmsUserSubCmdEnum.delete:
+                this.chargingStations = this.chargingStations.filter((x) => x.uniqueIdentifier !== payload.uniqueIdentifier)
+                this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
+                break
+              case UiToCsmsUserSubCmdEnum.add:
+                {
+                  const user = this.chargingStations.find((x) => x.uniqueIdentifier === payload.uniqueIdentifier)
+                  if (!user) {
+                    this.chargingStations.push(payload)
+                    this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
+                  }
+                }
+                break
+            }
+
+            this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStations))
+            this.dataStorage.set('chargingStations', this.chargingStations)
+          }
           break
       }
     }

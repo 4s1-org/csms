@@ -54,7 +54,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
             <MainOverview models={this.state.csStates}></MainOverview>
           </TabPanel>
           <TabPanel>
-            <MainChargingStations models={this.state.csList}></MainChargingStations>
+            <MainChargingStations models={this.state.csList} send={this.state.send}></MainChargingStations>
           </TabPanel>
           <TabPanel>
             <MainUsers models={this.state.userList} send={this.state.send}></MainUsers>
