@@ -4,6 +4,10 @@ import './main.css'
 import LoginPanelComp from './login-panel'
 import { toBase64 } from '@yellowgarbagebag/common-lib'
 import MainOverview from './overview/main-overview'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
+import MainStations from './stations/main-stations'
+import MainUsers from './users/main-users'
 
 interface IState {
   chargingStationModels: ChargingStationModel[]
@@ -32,8 +36,24 @@ class AdminPageComp extends React.Component<IProps, IState> {
     return (
       <div>
         <LoginPanelComp onLoginClick={this.login} onLogoutClick={this.logout} isConnected={this.state.isConnected}></LoginPanelComp>
-        <br />
-        <MainOverview models={this.state.chargingStationModels}></MainOverview>
+
+        <Tabs>
+          <TabList>
+            <Tab>Overview</Tab>
+            <Tab>Charging Stations</Tab>
+            <Tab>Users</Tab>
+          </TabList>
+
+          <TabPanel>
+            <MainOverview models={this.state.chargingStationModels}></MainOverview>
+          </TabPanel>
+          <TabPanel>
+            <MainStations></MainStations>
+          </TabPanel>
+          <TabPanel>
+            <MainUsers></MainUsers>
+          </TabPanel>
+        </Tabs>
       </div>
     )
   }

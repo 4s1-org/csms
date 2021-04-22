@@ -37,8 +37,8 @@ class ChargingStationComp extends React.Component<IProps, IState> {
       <div className="card h-100">
         <h5 className={'card-header ' + headerColorCss}>{this.props.model.uniqueIdentifier}</h5>
         <div className="card-body">
-          <h6 className="card-subtitle mb-2">Status: {stateStr}</h6>
-          <div className="card-text">Benutzername: {this.props.model.username}</div>
+          <h6 className="card-subtitle mb-2">State: {stateStr}</h6>
+          <div className="card-text">Username: {this.props.model.username}</div>
           <br />
           <div className="card-text">
             {this.props.model.evseList.map((evse) => (
@@ -47,9 +47,9 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           </div>
         </div>
         <div className="card-footer">
-          <small className="text-muted">Letztes Kommando: {this.props.model.lastCommand}</small>
+          <small className="text-muted">Last command: {this.props.model.lastCommand}</small>
           <br />
-          <small className="text-muted">Letzter Kontakt: {lastContectStr}</small>
+          <small className="text-muted">Last contact: {lastContectStr}</small>
         </div>
       </div>
     )
