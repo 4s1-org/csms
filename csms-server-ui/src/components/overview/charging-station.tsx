@@ -39,7 +39,6 @@ class ChargingStationComp extends React.Component<IProps, IState> {
         <div className="card-body">
           <h6 className="card-subtitle mb-2">State: {stateStr}</h6>
           <div className="card-text">Username: {this.props.model.username}</div>
-          <br />
           <div className="card-text">
             {this.props.model.evseList.map((evse) => (
               <EvseStateComp key={evse.id} data={evse} />
