@@ -50,9 +50,11 @@ async function main(): Promise<void> {
   const userA = new UserModel('aaa')
   userA.lastName = 'Aarbinger'
   userA.firstName = 'Anton'
+  userA.enabled = true
   const userB = new UserModel('bbb')
   userB.lastName = 'Brotzeitholer'
   userB.firstName = 'Bernd'
+  userB.enabled = true
   dataStorage.set('users', [userA, userB])
 
   if (!dataStorage.has('chargingStations')) {
@@ -68,7 +70,9 @@ function createChargeStation(dataStorage: DataStorage<IDataStorageSchema>, uniqu
   const models = dataStorage.get('chargingStations')
   // Wenn Es keine Ladesäule gibt, lege sie an
   if (!models.find((x) => x.uniqueIdentifier === uniqueIdentifier)) {
-    const cs = new ChargingStationModel(uniqueIdentifier, uniqueIdentifier, hashPassword('test'))
+    const cs = new ChargingStationModel(uniqueIdentifier)
+    cs.username = uniqueIdentifier
+    cs.passwordHash = hashPassword('test')
     models.push(cs)
   }
   dataStorage.set('chargingStations', models)
