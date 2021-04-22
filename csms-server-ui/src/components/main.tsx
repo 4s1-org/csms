@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, CsmsToUiCmdEnum, CsmsToUiMsg } from '@yellowgarbagebag/csms-lib'
 import './main.css'
 import LoginPanelComp from './login-panel'
 import { toBase64 } from '@yellowgarbagebag/common-lib'
@@ -10,7 +10,7 @@ import MainStations from './stations/main-stations'
 import MainUsers from './users/main-users'
 
 interface IState {
-  chargingStationModels: ChargingStationModel[]
+  chargingStations: ChargingStationModel[]
   isConnected: boolean
   ws: WebSocket | undefined
 }
@@ -21,7 +21,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
-      chargingStationModels: [],
+      chargingStations: [],
       isConnected: false,
       ws: undefined,
     }
@@ -45,7 +45,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
           </TabList>
 
           <TabPanel>
-            <MainOverview models={this.state.chargingStationModels}></MainOverview>
+            <MainOverview models={this.state.chargingStations}></MainOverview>
           </TabPanel>
           <TabPanel>
             <MainStations></MainStations>
@@ -67,12 +67,14 @@ class AdminPageComp extends React.Component<IProps, IState> {
       this.setState({
         ws,
         isConnected: true,
-        chargingStationModels: [],
+        chargingStations: [],
       })
     }
     ws.onmessage = (msg: any): void => {
-      const model = SerializationHelper.deserialize(ChargingStationModel, msg.data)
-      this.updateChargingStationModel(model)
+      const data: CsmsToUiMsg = JSON.parse(msg.data)
+      if (data.cmd === CsmsToUiCmdEnum.csState) {
+        this.updateChargingStationModel(data.payload as ChargingStationModel)
+      }
     }
     ws.onerror = (msg: any): void => {
       console.error(msg)
@@ -81,25 +83,21 @@ class AdminPageComp extends React.Component<IProps, IState> {
       this.setState({
         ws: undefined,
         isConnected: false,
-        chargingStationModels: [],
+        chargingStations: [],
       })
     }
   }
 
   private updateChargingStationModel(model: ChargingStationModel): void {
-    var idx = this.state.chargingStationModels.findIndex((x) => x.uniqueIdentifier === model.uniqueIdentifier)
+    var idx = this.state.chargingStations.findIndex((x) => x.uniqueIdentifier === model.uniqueIdentifier)
     if (idx === -1) {
-      this.state.chargingStationModels.push(model)
+      this.state.chargingStations.push(model)
       this.setState({
-        chargingStationModels: this.state.chargingStationModels,
+        chargingStations: this.state.chargingStations,
       })
     } else {
       this.setState({
-        chargingStationModels: [
-          ...this.state.chargingStationModels.slice(0, idx),
-          model,
-          ...this.state.chargingStationModels.slice(idx + 1),
-        ],
+        chargingStations: [...this.state.chargingStations.slice(0, idx), model, ...this.state.chargingStations.slice(idx + 1)],
       })
     }
   }

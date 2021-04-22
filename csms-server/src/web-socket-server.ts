@@ -7,7 +7,7 @@ import { URL } from 'url'
 import { IncomingHttpHeaders, IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
 import { fromBase64, Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
+import { CsmsToUiMsg, CsmsToUiCmdEnum, ChargingStationModel, UserModel } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { verifyPassword } from './config/password'
@@ -27,14 +27,14 @@ export class WebSocketServer {
   private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
   private adminSockets: Set<WebSocket> = new Set<WebSocket>()
   private adminTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
-  private chargingStationModels: ChargingStationModel[]
+  private chargingStations: ChargingStationModel[]
+  private users: UserModel[]
 
   constructor(private readonly dataStorage: DataStorage<IDataStorageSchema>) {
     this.logger.info(`Configfile: ${dataStorage.path}`)
 
-    this.chargingStationModels = dataStorage
-      .get('chargingStationModels')
-      .map((x) => SerializationHelper.deserialize(ChargingStationModel, x))
+    this.chargingStations = dataStorage.get('chargingStations')
+    this.users = dataStorage.get('users')
   }
 
   public startServer(): void {
@@ -75,7 +75,7 @@ export class WebSocketServer {
         this.logger.info('upgrade connection for ChargingStation')
         const uniqueIdentifier = myURL.pathname.split('/')[2]
 
-        const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
+        const model = this.chargingStations.find((x) => x.uniqueIdentifier === uniqueIdentifier)
         if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
           this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
           return this.send401(tlsSocket)
@@ -127,16 +127,16 @@ export class WebSocketServer {
     this.csTlsSockets.add(tlsSocket)
 
     const client = new WsClient(model.uniqueIdentifier, socket)
-    const cs = new ChargingStation(model, client, this.dataStorage.get('validUsers'))
+    const cs = new ChargingStation(model, client, this.dataStorage.get('users'))
 
     cs.connect()
-    this.sendAdminStatusToAll(cs.model)
+    this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
 
     socket.onclose = (): void => {
       cs.disconnect()
       this.csSockets.delete(socket)
       this.csTlsSockets.delete(tlsSocket)
-      this.sendAdminStatusToAll(cs.model)
+      this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
     }
 
     socket.onerror = (err: any): void => {
@@ -145,19 +145,19 @@ export class WebSocketServer {
 
     socket.onmessage = (data: WebSocket.MessageEvent): void => {
       client.onMessage(data.data, cs)
-      this.sendAdminStatusToAll(cs.model)
+      this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
     }
   }
 
-  private sendAdminStatusToAll(model: ChargingStationModel): void {
+  private sendToUiAll(msg: CsmsToUiMsg): void {
     for (const socket of this.adminSockets) {
-      this.sendAdminStatusToSingle(socket, model)
+      this.sendToUiSingle(socket, msg)
     }
   }
 
-  private sendAdminStatusToSingle(socket: WebSocket, model: ChargingStationModel): void {
+  private sendToUiSingle(socket: WebSocket, msg: CsmsToUiMsg): void {
     if (socket.OPEN) {
-      socket.send(SerializationHelper.serialize(model, [ChargingStationGroupFlag.UiOnly]))
+      socket.send(JSON.stringify(msg))
     }
   }
 
@@ -165,8 +165,8 @@ export class WebSocketServer {
     this.adminSockets.add(socket)
     this.adminTlsSockets.add(tlsSocket)
 
-    for (const cs of this.chargingStationModels) {
-      this.sendAdminStatusToSingle(socket, cs)
+    for (const dto of this.chargingStations) {
+      this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.csState, dto))
     }
 
     socket.onclose = (): void => {
@@ -230,10 +230,8 @@ export class WebSocketServer {
     }
 
     // Save data
-    this.dataStorage.set(
-      'chargingStationModels',
-      this.chargingStationModels.map((x) => SerializationHelper.serialize(x, [ChargingStationGroupFlag.ServerOnly])),
-    )
+    this.dataStorage.set('chargingStations', this.chargingStations)
+    this.dataStorage.set('users', this.users)
 
     this.logger.info(`WebSocketServer stopped`)
   }

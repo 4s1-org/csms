@@ -1,7 +1,9 @@
-import { ChargingStationModel } from '../charging-station-model'
-import { UserModel } from '../user-model'
+import { ChargingStationModel } from '../datastructs/charging-station.model'
+import { UserModel } from '../datastructs/user.model'
 import { CsmsToUiCmdEnum } from './csms-to-ui-cmd.enum'
 
 export class CsmsToUiMsg {
-  constructor(public readonly cmd: CsmsToUiCmdEnum, public readonly data: ChargingStationModel | UserModel) {}
+  constructor(public readonly cmd: CsmsToUiCmdEnum, public readonly payload: ChargingStationModel | UserModel) {
+    // nothing to do
+  }
 }

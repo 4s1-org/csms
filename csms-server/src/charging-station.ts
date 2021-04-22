@@ -53,19 +53,18 @@ import {
   TransactionEventEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { Logger } from '@yellowgarbagebag/common-lib'
-import { ChargingStationModel, ColorState, Evse } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, ColorStateEnum, EvseModel, UserModel } from '@yellowgarbagebag/csms-lib'
 import { ProcessEnv } from './process-env'
-import { IValidUser } from './config/i-data-store-schema'
 
 export class ChargingStation implements IReceiveMessage {
   public readonly logger = new Logger(this.model.uniqueIdentifier, ProcessEnv.LOG_LEVEL)
   public readonly heartbeatInterval = 3
-  private transactions: { rfid: string; currentUser: string; id: string; evseId: number }[] = []
+  private transactions: { rfid: string | null; currentUser: UserModel | null; id: string; evseId: number }[] = []
 
   public constructor(
     public readonly model: ChargingStationModel,
     private readonly sendMessage: ISendMessage,
-    private readonly validUser: IValidUser[] = [],
+    private readonly users: UserModel[] = [],
   ) {
     // nothing to do
   }
@@ -108,15 +107,15 @@ export class ChargingStation implements IReceiveMessage {
 
   public connect(): void {
     this.logger.info('Connected')
-    this.model.state = ColorState.Yellow
+    this.model.state = ColorStateEnum.Yellow
   }
 
   public disconnect(): void {
     this.logger.info('Disconnected')
-    this.model.state = ColorState.Red
+    this.model.state = ColorStateEnum.Red
     for (const evse of this.model.evseList) {
-      evse.state = ColorState.Red
-      evse.currentUser = '---'
+      evse.state = ColorStateEnum.Red
+      evse.currentUser = undefined
     }
   }
 
@@ -192,7 +191,7 @@ export class ChargingStation implements IReceiveMessage {
    * B03 - Cold Boot Charging Station - Rejected
    */
   private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
-    this.model.state = ColorState.Green
+    this.model.state = ColorStateEnum.Green
     return new BootNotificationResponseDto(this.currentTime, this.heartbeatInterval, RegistrationStatusEnum.Accepted)
   }
 
@@ -249,12 +248,12 @@ export class ChargingStation implements IReceiveMessage {
         return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
       }
     } else if (payload.idToken.type === IdTokenEnum.ISO14443 || payload.idToken.type === IdTokenEnum.ISO15693) {
-      const users = this.validUser.find((x) => x.rfid === payload.idToken.idToken)
-      if (users) {
+      const user = this.users.find((x) => x.rfid === payload.idToken.idToken)
+      if (user) {
         const transaction = this.transactions.find((x) => !x.rfid)
         if (transaction) {
-          transaction.rfid = users.rfid
-          transaction.currentUser = users.name
+          transaction.rfid = user.rfid
+          transaction.currentUser = user
 
           const evse = this.model.evseList.find((x) => x.id === transaction.evseId)
           if (evse) {
@@ -284,28 +283,31 @@ export class ChargingStation implements IReceiveMessage {
    * E13 - Transaction-related message not accepted by CSMS
    */
   private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
-    let colorState: ColorState = ColorState.Unknown
+    let colorState: ColorStateEnum = ColorStateEnum.Unknown
     switch (payload.connectorStatus) {
       case ConnectorStatusEnum.Available:
-        colorState = ColorState.Green
+        colorState = ColorStateEnum.Green
         break
       case ConnectorStatusEnum.Occupied:
       case ConnectorStatusEnum.Reserved:
-        colorState = ColorState.Yellow
+        colorState = ColorStateEnum.Yellow
         break
       case ConnectorStatusEnum.Unavailable:
       case ConnectorStatusEnum.Faulted:
       default:
-        colorState = ColorState.Red
+        colorState = ColorStateEnum.Red
         break
     }
 
     const evse = this.model.evseList.find((x) => x.id === payload.evseId)
     if (evse) {
       evse.state = colorState
-      evse.currentUser = '---'
+      evse.currentUser = undefined
     } else {
-      this.model.evseList.push(new Evse(payload.evseId, 0, colorState, '---'))
+      const evse = new EvseModel(payload.evseId)
+      evse.state = colorState
+      evse.wattHours = 0
+      this.model.evseList.push(evse)
     }
 
     return new StatusNotificationResponseDto()
@@ -368,8 +370,8 @@ export class ChargingStation implements IReceiveMessage {
     switch (payload.eventType) {
       case TransactionEventEnum.Started:
         this.transactions.push({
-          currentUser: '',
-          rfid: '',
+          rfid: null,
+          currentUser: null,
           id: payload.transactionInfo.transactionId,
           evseId: payload.evse.id,
         })

@@ -32,7 +32,7 @@ class Simulation extends SimulationBase {
     const evseId = 2
     const connectorId = 1
     const idToken = new IdTokenDto('aaa', IdTokenEnum.ISO14443)
-    let wattHours = Date.now() - 1617886310013
+    let wattHours = Math.round((Date.now() - 1619091965663) / 1000)
 
     await this.connect()
 
@@ -45,17 +45,11 @@ class Simulation extends SimulationBase {
 
     // G01 - Status Notification
     // n-Connectoren anmelden
-    await this.cs.sendStatusNotificationRequest(
-      new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 1, 1),
-    )
+    await this.cs.sendStatusNotificationRequest(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 1, 1))
     await sleep(200)
-    await this.cs.sendStatusNotificationRequest(
-      new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 2, 1),
-    )
+    await this.cs.sendStatusNotificationRequest(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 2, 1))
     await sleep(200)
-    await this.cs.sendStatusNotificationRequest(
-      new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 3, 1),
-    )
+    await this.cs.sendStatusNotificationRequest(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 3, 1))
     await sleep(200)
 
     // Aktuelle Zählerstande mitteilen (ist nicht vorgegeben)

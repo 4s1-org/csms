@@ -1,5 +1,5 @@
-import { ChargingStationModel } from '../charging-station-model'
-import { UserModel } from '../user-model'
+import { ChargingStationModel } from '../datastructs'
+import { UserModel } from '../datastructs/user.model'
 import { UiToCsmsCmdEnum } from './ui-to-csms-cmd.enum'
 import { UiToCsmsCsSubCmdEnum } from './ui-to-csms-cs-sub-cmd.enum'
 import { UiToCsmsUserSubCmdEnum } from './ui-to-csms-user-sub-cmd.enum'
@@ -8,6 +8,6 @@ export class UiToCsmsMsg {
   constructor(
     public readonly cmd: UiToCsmsCmdEnum,
     public readonly subCmd: UiToCsmsCsSubCmdEnum | UiToCsmsUserSubCmdEnum,
-    public readonly data: ChargingStationModel | UserModel,
+    public readonly payload: ChargingStationModel | UserModel,
   ) {}
 }
