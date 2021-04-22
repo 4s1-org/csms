@@ -5,8 +5,5 @@ export class EvseModel {
   public wattHours = 0
   public state = ColorStateEnum.Unknown
   public currentUser: UserModel | undefined
-
-  public constructor(public readonly id: number) {
-    // nothing to do
-  }
+  public id = 0
 }
