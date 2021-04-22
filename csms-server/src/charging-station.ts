@@ -248,7 +248,7 @@ export class ChargingStation implements IReceiveMessage {
         return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
       }
     } else if (payload.idToken.type === IdTokenEnum.ISO14443 || payload.idToken.type === IdTokenEnum.ISO15693) {
-      const user = this.users.find((x) => x.rfid === payload.idToken.idToken)
+      const user = this.users.find((x) => x.rfid === payload.idToken.idToken && x.enabled)
       if (user) {
         const transaction = this.transactions.find((x) => !x.rfid)
         if (transaction) {

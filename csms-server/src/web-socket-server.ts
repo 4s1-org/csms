@@ -82,7 +82,7 @@ export class WebSocketServer {
         this.logger.info('upgrade connection for ChargingStation')
         const uniqueIdentifier = myURL.pathname.split('/')[2]
 
-        const model = this.chargingStations.find((x) => x.uniqueIdentifier === uniqueIdentifier)
+        const model = this.chargingStations.find((x) => x.uniqueIdentifier === uniqueIdentifier && x.enabled)
         if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
           this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
           return this.send401(tlsSocket)
