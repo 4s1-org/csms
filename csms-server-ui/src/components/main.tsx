@@ -1,9 +1,9 @@
 import React from 'react'
-import ChargingStationComp from './charging-station'
 import { ChargingStationModel, SerializationHelper } from '@yellowgarbagebag/csms-lib'
-import './admin-page.css'
+import './main.css'
 import LoginPanelComp from './login-panel'
 import { toBase64 } from '@yellowgarbagebag/common-lib'
+import MainOverview from './overview/main-overview'
 
 interface IState {
   chargingStationModels: ChargingStationModel[]
@@ -33,13 +33,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
       <div>
         <LoginPanelComp onLoginClick={this.login} onLogoutClick={this.logout} isConnected={this.state.isConnected}></LoginPanelComp>
         <br />
-        <div className="container-fluid">
-          <div className="row">
-            {this.state.chargingStationModels.map((item) => (
-              <ChargingStationComp key={item.uniqueIdentifier} data={item}></ChargingStationComp>
-            ))}
-          </div>
-        </div>
+        <MainOverview models={this.state.chargingStationModels}></MainOverview>
       </div>
     )
   }
