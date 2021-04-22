@@ -1,4 +1,6 @@
 import 'reflect-metadata'
 
-export { ChargingStationModel, ColorState, ChargingStationGroupFlag, Evse } from './charging-station-model'
-export { SerializationHelper } from './serialization-helper'
+export * from './communication'
+export * from './datastructs'
+
+//export { SerializationHelper } from './serialization-helper'
