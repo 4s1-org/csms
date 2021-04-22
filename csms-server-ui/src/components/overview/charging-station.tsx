@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStationModel, ColorState } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, ColorStateEnum } from '@yellowgarbagebag/csms-lib'
 import './charging-station.css'
 import dayjs from 'dayjs'
 import EvseStateComp from './evse-state'
@@ -14,11 +14,11 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     let headerColorCss = ''
     let stateStr = 'unbekannt'
     switch (this.props.model.state || 0) {
-      case ColorState.Yellow:
+      case ColorStateEnum.Yellow:
         headerColorCss = 'bg-warning'
         stateStr = '(noch) nicht betriebsbereit'
         break
-      case ColorState.Green:
+      case ColorStateEnum.Green:
         headerColorCss = 'bg-success text-white'
         stateStr = 'online'
         break
@@ -28,9 +28,9 @@ class ChargingStationComp extends React.Component<IProps, IState> {
         break
     }
 
-    let lastContectStr = 'unbekannt'
+    let lastContectStr = 'unknown'
     if (this.props.model.lastContact) {
-      lastContectStr = `${dayjs(this.props.model.lastContact).format('DD.MM.YYYY HH:mm:ss')} Uhr`
+      lastContectStr = `${dayjs(this.props.model.lastContact).format('DD.MM.YYYY HH:mm:ss')}`
     }
 
     return (
@@ -41,7 +41,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           <div className="card-text">Username: {this.props.model.username}</div>
           <div className="card-text">
             {this.props.model.evseList.map((evse) => (
-              <EvseStateComp key={evse.id} data={evse} />
+              <EvseStateComp key={evse.id} model={evse} />
             ))}
           </div>
         </div>
