@@ -10,7 +10,7 @@ import { SetVariableResultDto } from '../datatypes/set-variable-result.dto'
  */
 export class SetVariablesResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "SetVariablesResponseDto" = "SetVariablesResponseDto"
+  private _className: 'SetVariablesResponseDto' = 'SetVariablesResponseDto'
 
   public constructor(
     setVariableResult: SetVariableResultDto[],

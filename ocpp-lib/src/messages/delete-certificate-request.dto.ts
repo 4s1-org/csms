@@ -7,7 +7,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class DeleteCertificateRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "DeleteCertificateRequestDto" = "DeleteCertificateRequestDto"
+  private _className: 'DeleteCertificateRequestDto' = 'DeleteCertificateRequestDto'
 
   public constructor(
     certificateHashData: CertificateHashDataDto,

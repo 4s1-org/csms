@@ -7,7 +7,7 @@ import { MonitoringDataDto } from '../datatypes/monitoring-data.dto'
 
 export class NotifyMonitoringReportRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "NotifyMonitoringReportRequestDto" = "NotifyMonitoringReportRequestDto"
+  private _className: 'NotifyMonitoringReportRequestDto' = 'NotifyMonitoringReportRequestDto'
 
   public constructor(
     requestId: number,

@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class SecurityEventNotificationResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "SecurityEventNotificationResponseDto" = "SecurityEventNotificationResponseDto"
+  private _className: 'SecurityEventNotificationResponseDto' = 'SecurityEventNotificationResponseDto'
 
   public constructor() {
     super()

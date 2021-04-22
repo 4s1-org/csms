@@ -9,7 +9,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetCompositeScheduleResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "GetCompositeScheduleResponseDto" = "GetCompositeScheduleResponseDto"
+  private _className: 'GetCompositeScheduleResponseDto' = 'GetCompositeScheduleResponseDto'
 
   public constructor(
     status: GenericStatusEnum,

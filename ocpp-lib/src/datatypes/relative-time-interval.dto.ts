@@ -10,7 +10,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class RelativeTimeIntervalDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "RelativeTimeIntervalDto" = "RelativeTimeIntervalDto"
+  private _className: 'RelativeTimeIntervalDto' = 'RelativeTimeIntervalDto'
 
   public constructor(
     start: number,

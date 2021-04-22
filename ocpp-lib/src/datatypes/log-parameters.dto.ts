@@ -11,7 +11,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class LogParametersDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "LogParametersDto" = "LogParametersDto"
+  private _className: 'LogParametersDto' = 'LogParametersDto'
 
   public constructor(
     remoteLocation: string,

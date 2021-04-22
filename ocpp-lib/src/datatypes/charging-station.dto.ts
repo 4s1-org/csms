@@ -10,7 +10,7 @@ import { ModemDto } from './modem.dto'
  */
 export class ChargingStationDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ChargingStationDto" = "ChargingStationDto"
+  private _className: 'ChargingStationDto' = 'ChargingStationDto'
 
   public constructor(
     model: string,

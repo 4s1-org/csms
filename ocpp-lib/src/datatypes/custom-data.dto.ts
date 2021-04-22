@@ -8,7 +8,7 @@ import { DatatypeBaseDto } from '../generated/datatype-base.dto'
  */
 export class CustomDataDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "CustomDataDto" = "CustomDataDto"
+  private _className: 'CustomDataDto' = 'CustomDataDto'
 
   public constructor(
     vendorId: string,

@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class CostUpdatedResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "CostUpdatedResponseDto" = "CostUpdatedResponseDto"
+  private _className: 'CostUpdatedResponseDto' = 'CostUpdatedResponseDto'
 
   public constructor() {
     super()

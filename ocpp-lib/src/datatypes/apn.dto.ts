@@ -14,7 +14,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class ApnDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ApnDto" = "ApnDto"
+  private _className: 'ApnDto' = 'ApnDto'
 
   public constructor(
     apn: string,

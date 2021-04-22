@@ -8,7 +8,7 @@ import { UpdateFirmwareStatusEnum } from '../enumerations/update-firmware-status
 
 export class UpdateFirmwareResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "UpdateFirmwareResponseDto" = "UpdateFirmwareResponseDto"
+  private _className: 'UpdateFirmwareResponseDto' = 'UpdateFirmwareResponseDto'
 
   public constructor(
     status: UpdateFirmwareStatusEnum,

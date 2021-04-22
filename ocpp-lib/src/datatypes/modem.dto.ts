@@ -9,7 +9,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class ModemDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ModemDto" = "ModemDto"
+  private _className: 'ModemDto' = 'ModemDto'
 
   public constructor() {
     super()

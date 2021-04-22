@@ -15,7 +15,7 @@ import { TriggerReasonEnum } from '../enumerations/trigger-reason.enum'
  */
 export class TransactionEventRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "TransactionEventRequestDto" = "TransactionEventRequestDto"
+  private _className: 'TransactionEventRequestDto' = 'TransactionEventRequestDto'
 
   public constructor(
     eventType: TransactionEventEnum,

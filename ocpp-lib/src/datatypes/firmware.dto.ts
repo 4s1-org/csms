@@ -11,7 +11,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class FirmwareDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "FirmwareDto" = "FirmwareDto"
+  private _className: 'FirmwareDto' = 'FirmwareDto'
 
   public constructor(
     location: string,

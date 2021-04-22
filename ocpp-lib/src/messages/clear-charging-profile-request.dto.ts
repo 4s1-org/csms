@@ -7,7 +7,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearChargingProfileRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "ClearChargingProfileRequestDto" = "ClearChargingProfileRequestDto"
+  private _className: 'ClearChargingProfileRequestDto' = 'ClearChargingProfileRequestDto'
 
   public constructor() {
     super()

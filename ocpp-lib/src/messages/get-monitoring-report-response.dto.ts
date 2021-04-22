@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetMonitoringReportResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "GetMonitoringReportResponseDto" = "GetMonitoringReportResponseDto"
+  private _className: 'GetMonitoringReportResponseDto' = 'GetMonitoringReportResponseDto'
 
   public constructor(
     status: GenericDeviceModelStatusEnum,

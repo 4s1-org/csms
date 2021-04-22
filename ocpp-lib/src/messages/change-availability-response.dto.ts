@@ -11,7 +11,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
  */
 export class ChangeAvailabilityResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "ChangeAvailabilityResponseDto" = "ChangeAvailabilityResponseDto"
+  private _className: 'ChangeAvailabilityResponseDto' = 'ChangeAvailabilityResponseDto'
 
   public constructor(
     status: ChangeAvailabilityStatusEnum,

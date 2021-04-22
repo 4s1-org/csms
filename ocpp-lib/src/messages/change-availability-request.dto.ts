@@ -11,7 +11,7 @@ import { OperationalStatusEnum } from '../enumerations/operational-status.enum'
  */
 export class ChangeAvailabilityRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "ChangeAvailabilityRequestDto" = "ChangeAvailabilityRequestDto"
+  private _className: 'ChangeAvailabilityRequestDto' = 'ChangeAvailabilityRequestDto'
 
   public constructor(
     operationalStatus: OperationalStatusEnum,

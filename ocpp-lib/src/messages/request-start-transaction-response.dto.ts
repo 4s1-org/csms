@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class RequestStartTransactionResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "RequestStartTransactionResponseDto" = "RequestStartTransactionResponseDto"
+  private _className: 'RequestStartTransactionResponseDto' = 'RequestStartTransactionResponseDto'
 
   public constructor(
     status: RequestStartStopStatusEnum,

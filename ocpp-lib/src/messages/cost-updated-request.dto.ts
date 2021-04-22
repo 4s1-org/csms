@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class CostUpdatedRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "CostUpdatedRequestDto" = "CostUpdatedRequestDto"
+  private _className: 'CostUpdatedRequestDto' = 'CostUpdatedRequestDto'
 
   public constructor(
     totalCost: number,

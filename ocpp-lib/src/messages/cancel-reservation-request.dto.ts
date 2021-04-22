@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class CancelReservationRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "CancelReservationRequestDto" = "CancelReservationRequestDto"
+  private _className: 'CancelReservationRequestDto' = 'CancelReservationRequestDto'
 
   public constructor(
     reservationId: number,

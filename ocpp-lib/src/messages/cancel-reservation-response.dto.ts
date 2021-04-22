@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class CancelReservationResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "CancelReservationResponseDto" = "CancelReservationResponseDto"
+  private _className: 'CancelReservationResponseDto' = 'CancelReservationResponseDto'
 
   public constructor(
     status: CancelReservationStatusEnum,

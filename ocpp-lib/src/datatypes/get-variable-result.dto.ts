@@ -14,7 +14,7 @@ import { VariableDto } from './variable.dto'
  */
 export class GetVariableResultDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "GetVariableResultDto" = "GetVariableResultDto"
+  private _className: 'GetVariableResultDto' = 'GetVariableResultDto'
 
   public constructor(
     attributeStatus: GetVariableStatusEnum,

@@ -9,7 +9,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class AdditionalInfoDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "AdditionalInfoDto" = "AdditionalInfoDto"
+  private _className: 'AdditionalInfoDto' = 'AdditionalInfoDto'
 
   public constructor(
     additionalIdToken: string,

@@ -11,7 +11,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class ConsumptionCostDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ConsumptionCostDto" = "ConsumptionCostDto"
+  private _className: 'ConsumptionCostDto' = 'ConsumptionCostDto'
 
   public constructor(
     startValue: number,

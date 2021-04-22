@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class UnlockConnectorRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "UnlockConnectorRequestDto" = "UnlockConnectorRequestDto"
+  private _className: 'UnlockConnectorRequestDto' = 'UnlockConnectorRequestDto'
 
   public constructor(
     evseId: number,

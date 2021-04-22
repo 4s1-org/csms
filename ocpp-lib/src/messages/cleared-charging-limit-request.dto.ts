@@ -7,7 +7,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearedChargingLimitRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "ClearedChargingLimitRequestDto" = "ClearedChargingLimitRequestDto"
+  private _className: 'ClearedChargingLimitRequestDto' = 'ClearedChargingLimitRequestDto'
 
   public constructor(
     chargingLimitSource: ChargingLimitSourceEnum,

@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class SetMonitoringLevelRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "SetMonitoringLevelRequestDto" = "SetMonitoringLevelRequestDto"
+  private _className: 'SetMonitoringLevelRequestDto' = 'SetMonitoringLevelRequestDto'
 
   public constructor(
     severity: number,

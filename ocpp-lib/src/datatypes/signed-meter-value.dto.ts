@@ -9,7 +9,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class SignedMeterValueDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "SignedMeterValueDto" = "SignedMeterValueDto"
+  private _className: 'SignedMeterValueDto' = 'SignedMeterValueDto'
 
   public constructor(
     signedMeterData: string,

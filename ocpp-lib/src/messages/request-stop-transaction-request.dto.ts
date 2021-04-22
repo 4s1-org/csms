@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class RequestStopTransactionRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "RequestStopTransactionRequestDto" = "RequestStopTransactionRequestDto"
+  private _className: 'RequestStopTransactionRequestDto' = 'RequestStopTransactionRequestDto'
 
   public constructor(
     transactionId: string,

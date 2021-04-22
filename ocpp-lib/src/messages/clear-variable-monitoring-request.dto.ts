@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class ClearVariableMonitoringRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "ClearVariableMonitoringRequestDto" = "ClearVariableMonitoringRequestDto"
+  private _className: 'ClearVariableMonitoringRequestDto' = 'ClearVariableMonitoringRequestDto'
 
   public constructor(
     id: number[],
