@@ -42,6 +42,7 @@ describe('CSMS Gateway', () => {
 
   beforeAll(async () => {
     const model = new ChargingStationModel()
+    model.enabled = true
     model.uniqueIdentifier = csInfo
     model.username = csInfo
     model.passwordHash = hashPassword(csInfo)
