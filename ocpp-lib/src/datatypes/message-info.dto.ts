@@ -15,7 +15,7 @@ import { MessageStateEnum } from '../enumerations/message-state.enum'
  */
 export class MessageInfoDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "MessageInfoDto" = "MessageInfoDto"
+  private _className: 'MessageInfoDto' = 'MessageInfoDto'
 
   public constructor(
     id: number,

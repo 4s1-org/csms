@@ -7,7 +7,7 @@ import { OcspRequestDataDto } from '../datatypes/ocsp-request-data.dto'
 
 export class GetCertificateStatusRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetCertificateStatusRequestDto" = "GetCertificateStatusRequestDto"
+  private _className: 'GetCertificateStatusRequestDto' = 'GetCertificateStatusRequestDto'
 
   public constructor(
     ocspRequestData: OcspRequestDataDto,

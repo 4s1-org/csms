@@ -10,7 +10,7 @@ import { SampledValueDto } from './sampled-value.dto'
  */
 export class MeterValueDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "MeterValueDto" = "MeterValueDto"
+  private _className: 'MeterValueDto' = 'MeterValueDto'
 
   public constructor(
     sampledValue: SampledValueDto[],

@@ -9,7 +9,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  */
 export class HeartbeatResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "HeartbeatResponseDto" = "HeartbeatResponseDto"
+  private _className: 'HeartbeatResponseDto' = 'HeartbeatResponseDto'
 
   public constructor(
     currentTime: string,

@@ -10,7 +10,7 @@ import { GetVariableDataDto } from '../datatypes/get-variable-data.dto'
  */
 export class GetVariablesRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetVariablesRequestDto" = "GetVariablesRequestDto"
+  private _className: 'GetVariablesRequestDto' = 'GetVariablesRequestDto'
 
   public constructor(
     getVariableData: GetVariableDataDto[],

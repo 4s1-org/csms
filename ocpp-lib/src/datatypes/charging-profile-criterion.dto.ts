@@ -13,7 +13,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class ChargingProfileCriterionDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ChargingProfileCriterionDto" = "ChargingProfileCriterionDto"
+  private _className: 'ChargingProfileCriterionDto' = 'ChargingProfileCriterionDto'
 
   public constructor() {
     super()

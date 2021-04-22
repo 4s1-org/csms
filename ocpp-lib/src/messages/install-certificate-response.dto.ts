@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class InstallCertificateResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "InstallCertificateResponseDto" = "InstallCertificateResponseDto"
+  private _className: 'InstallCertificateResponseDto' = 'InstallCertificateResponseDto'
 
   public constructor(
     status: InstallCertificateStatusEnum,

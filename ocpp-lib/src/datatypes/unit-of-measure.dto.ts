@@ -9,7 +9,7 @@ import { CustomDataDto } from './custom-data.dto'
  */
 export class UnitOfMeasureDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "UnitOfMeasureDto" = "UnitOfMeasureDto"
+  private _className: 'UnitOfMeasureDto' = 'UnitOfMeasureDto'
 
   public constructor() {
     super()

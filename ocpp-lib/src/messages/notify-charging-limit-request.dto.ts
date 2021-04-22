@@ -8,7 +8,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyChargingLimitRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "NotifyChargingLimitRequestDto" = "NotifyChargingLimitRequestDto"
+  private _className: 'NotifyChargingLimitRequestDto' = 'NotifyChargingLimitRequestDto'
 
   public constructor(
     chargingLimit: ChargingLimitDto,

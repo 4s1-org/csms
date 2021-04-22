@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class GetDisplayMessagesResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "GetDisplayMessagesResponseDto" = "GetDisplayMessagesResponseDto"
+  private _className: 'GetDisplayMessagesResponseDto' = 'GetDisplayMessagesResponseDto'
 
   public constructor(
     status: GetDisplayMessagesStatusEnum,

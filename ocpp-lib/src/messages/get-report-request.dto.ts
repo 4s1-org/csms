@@ -8,7 +8,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetReportRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetReportRequestDto" = "GetReportRequestDto"
+  private _className: 'GetReportRequestDto' = 'GetReportRequestDto'
 
   public constructor(
     requestId: number,

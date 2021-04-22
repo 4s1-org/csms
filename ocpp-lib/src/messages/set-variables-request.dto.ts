@@ -10,7 +10,7 @@ import { SetVariableDataDto } from '../datatypes/set-variable-data.dto'
  */
 export class SetVariablesRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "SetVariablesRequestDto" = "SetVariablesRequestDto"
+  private _className: 'SetVariablesRequestDto' = 'SetVariablesRequestDto'
 
   public constructor(
     setVariableData: SetVariableDataDto[],

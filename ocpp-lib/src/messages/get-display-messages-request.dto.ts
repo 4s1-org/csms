@@ -8,7 +8,7 @@ import { MessageStateEnum } from '../enumerations/message-state.enum'
 
 export class GetDisplayMessagesRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "GetDisplayMessagesRequestDto" = "GetDisplayMessagesRequestDto"
+  private _className: 'GetDisplayMessagesRequestDto' = 'GetDisplayMessagesRequestDto'
 
   public constructor(
     requestId: number,

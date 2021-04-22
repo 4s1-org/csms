@@ -15,7 +15,7 @@ import { UnitOfMeasureDto } from './unit-of-measure.dto'
  */
 export class SampledValueDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "SampledValueDto" = "SampledValueDto"
+  private _className: 'SampledValueDto' = 'SampledValueDto'
 
   public constructor(
     value: number,

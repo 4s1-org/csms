@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class LogStatusNotificationResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "LogStatusNotificationResponseDto" = "LogStatusNotificationResponseDto"
+  private _className: 'LogStatusNotificationResponseDto' = 'LogStatusNotificationResponseDto'
 
   public constructor() {
     super()

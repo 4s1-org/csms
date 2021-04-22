@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class NotifyCustomerInformationRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "NotifyCustomerInformationRequestDto" = "NotifyCustomerInformationRequestDto"
+  private _className: 'NotifyCustomerInformationRequestDto' = 'NotifyCustomerInformationRequestDto'
 
   public constructor(
     data: string,

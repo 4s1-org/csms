@@ -12,7 +12,7 @@ import { MessageFormatEnum } from '../enumerations/message-format.enum'
  */
 export class MessageContentDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "MessageContentDto" = "MessageContentDto"
+  private _className: 'MessageContentDto' = 'MessageContentDto'
 
   public constructor(
     format: MessageFormatEnum,

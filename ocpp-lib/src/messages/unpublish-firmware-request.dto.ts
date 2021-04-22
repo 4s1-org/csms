@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class UnpublishFirmwareRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "UnpublishFirmwareRequestDto" = "UnpublishFirmwareRequestDto"
+  private _className: 'UnpublishFirmwareRequestDto' = 'UnpublishFirmwareRequestDto'
 
   public constructor(
     checksum: string,

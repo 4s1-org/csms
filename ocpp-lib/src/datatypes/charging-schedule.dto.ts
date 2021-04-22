@@ -14,7 +14,7 @@ import { SalesTariffDto } from './sales-tariff.dto'
  */
 export class ChargingScheduleDto extends DatatypeBaseDto {
   @Exclude()
-  private _className: "ChargingScheduleDto" = "ChargingScheduleDto"
+  private _className: 'ChargingScheduleDto' = 'ChargingScheduleDto'
 
   public constructor(
     id: number,

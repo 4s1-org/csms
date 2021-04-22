@@ -11,7 +11,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
  */
 export class BootNotificationRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "BootNotificationRequestDto" = "BootNotificationRequestDto"
+  private _className: 'BootNotificationRequestDto' = 'BootNotificationRequestDto'
 
   public constructor(
     chargingStation: ChargingStationDto,

@@ -6,7 +6,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class GetLocalListVersionResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "GetLocalListVersionResponseDto" = "GetLocalListVersionResponseDto"
+  private _className: 'GetLocalListVersionResponseDto' = 'GetLocalListVersionResponseDto'
 
   public constructor(
     versionNumber: number,

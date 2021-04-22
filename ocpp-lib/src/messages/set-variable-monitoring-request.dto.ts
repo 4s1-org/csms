@@ -7,7 +7,7 @@ import { SetMonitoringDataDto } from '../datatypes/set-monitoring-data.dto'
 
 export class SetVariableMonitoringRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "SetVariableMonitoringRequestDto" = "SetVariableMonitoringRequestDto"
+  private _className: 'SetVariableMonitoringRequestDto' = 'SetVariableMonitoringRequestDto'
 
   public constructor(
     setMonitoringData: SetMonitoringDataDto[],

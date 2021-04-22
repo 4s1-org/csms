@@ -7,7 +7,7 @@ import { CustomDataDto } from '../datatypes/custom-data.dto'
 
 export class Get15118EvCertificateRequestDto extends RequestBaseDto {
   @Exclude()
-  private _className: "Get15118EvCertificateRequestDto" = "Get15118EvCertificateRequestDto"
+  private _className: 'Get15118EvCertificateRequestDto' = 'Get15118EvCertificateRequestDto'
 
   public constructor(
     iso15118SchemaVersion: string,

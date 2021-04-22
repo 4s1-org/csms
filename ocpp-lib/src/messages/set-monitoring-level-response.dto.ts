@@ -8,7 +8,7 @@ import { StatusInfoDto } from '../datatypes/status-info.dto'
 
 export class SetMonitoringLevelResponseDto extends ResponseBaseDto {
   @Exclude()
-  private _className: "SetMonitoringLevelResponseDto" = "SetMonitoringLevelResponseDto"
+  private _className: 'SetMonitoringLevelResponseDto' = 'SetMonitoringLevelResponseDto'
 
   public constructor(
     status: GenericStatusEnum,
