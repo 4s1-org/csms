@@ -168,6 +168,8 @@ export class WebSocketServer {
     for (const dto of this.chargingStations) {
       this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.csState, dto))
     }
+    this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStations))
+    this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.userList, this.users))
 
     socket.onclose = (): void => {
       this.adminSockets.delete(socket)
