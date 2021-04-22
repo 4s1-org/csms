@@ -9,4 +9,5 @@ export class ChargingStationModel {
   public uniqueIdentifier = ''
   public username = ''
   public passwordHash = ''
+  public enabled = false
 }
