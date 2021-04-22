@@ -15,8 +15,8 @@ import {
 import { WebSocketServer } from '../src/web-socket-server'
 import { DataStorage } from '../src/config/data-storage'
 import { IDataStorageSchema } from '../src/config/i-data-store-schema'
-import { ChargingStationModel, SerializationHelper, ChargingStationGroupFlag } from '@yellowgarbagebag/csms-lib'
-import { hashPassword } from '../src/config/password'
+import { ChargingStationModel } from '@yellowgarbagebag/csms-lib'
+import { hashPassword } from '@yellowgarbagebag/common-lib'
 
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
@@ -41,12 +41,14 @@ describe('CSMS Gateway', () => {
   }
 
   beforeAll(async () => {
-    const model = new ChargingStationModel(csInfo)
+    const model = new ChargingStationModel()
+    model.enabled = true
+    model.uniqueIdentifier = csInfo
     model.username = csInfo
     model.passwordHash = hashPassword(csInfo)
 
     const storage = new DataStorage<IDataStorageSchema>('csms-server-test-e2e')
-    storage.set('chargingStationModels', [SerializationHelper.serialize(model, [ChargingStationGroupFlag.ServerOnly])])
+    storage.set('chargingStations', [model])
     storage.set('port', port)
 
     server = new WebSocketServer(storage)
@@ -66,10 +68,7 @@ describe('CSMS Gateway', () => {
         const messageId = Math.random().toString()
 
         socket.onopen = (): void => {
-          const payload = new BootNotificationRequestDto(
-            new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-            BootReasonEnum.PowerUp,
-          )
+          const payload = new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp)
           delete payload['_baseClassName']
           delete payload['_className']
           delete payload.chargingStation['_baseClassName']
@@ -98,10 +97,7 @@ describe('CSMS Gateway', () => {
             new OcppCallDto(
               messageId,
               OcppActionEnum.BootNotification,
-              new BootNotificationRequestDto(
-                new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-                BootReasonEnum.PowerUp,
-              ),
+              new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
             ).toMessageString(),
           )
         }
@@ -249,10 +245,7 @@ describe('CSMS Gateway', () => {
               OcppMessageTypeIdEnum.Result, // Es müsste ein Call sein
               messageId,
               OcppActionEnum.BootNotification,
-              new BootNotificationRequestDto(
-                new ChargingStationDto('SingleSocketCharger', 'VendorX'),
-                BootReasonEnum.PowerUp,
-              ),
+              new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
             ]),
           )
         }

@@ -2,9 +2,9 @@
 
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
-import { hashPassword } from './config/password'
-import { ChargingStationGroupFlag, ChargingStationModel, ColorState, SerializationHelper } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, UserModel } from '@yellowgarbagebag/csms-lib'
 import prompts, { PromptObject } from 'prompts'
+import { hashPassword } from '@yellowgarbagebag/common-lib'
 
 async function main(): Promise<void> {
   const questions: PromptObject[] = [
@@ -47,13 +47,21 @@ async function main(): Promise<void> {
   dataStorage.set('https', response.https)
   dataStorage.set('adminCredentials', { username: response.username, passwordHash: hashPassword(response.password) })
 
-  dataStorage.set('validUsers', [
-    { name: 'Anton Aarbinger', rfid: 'aaa' },
-    { name: 'Bernd Brotzeitholer', rfid: 'bbb' },
-  ])
+  const userA = new UserModel()
+  userA.rfid = 'aaa'
+  userA.lastName = 'Aarbinger'
+  userA.firstName = 'Anton'
+  userA.enabled = true
+  const userB = new UserModel()
+  userB.rfid = 'bbb'
+  userB.lastName = 'Brotzeitholer'
+  userB.firstName = 'Bernd'
+  userB.enabled = true
 
-  if (!dataStorage.has('chargingStationModels')) {
-    dataStorage.set('chargingStationModels', [])
+  dataStorage.set('users', [userA, userB])
+
+  if (!dataStorage.has('chargingStations')) {
+    dataStorage.set('chargingStations', [])
   }
 
   for (let i = 1; i <= response.csCount; i++) {
@@ -62,20 +70,17 @@ async function main(): Promise<void> {
 }
 
 function createChargeStation(dataStorage: DataStorage<IDataStorageSchema>, uniqueIdentifier: string): void {
-  const models = dataStorage.get('chargingStationModels').map((x) => SerializationHelper.deserialize(ChargingStationModel, x))
+  const models = dataStorage.get('chargingStations')
   // Wenn Es keine Ladesäule gibt, lege sie an
   if (!models.find((x) => x.uniqueIdentifier === uniqueIdentifier)) {
-    const cs = new ChargingStationModel(uniqueIdentifier)
+    const cs = new ChargingStationModel()
+    cs.uniqueIdentifier = uniqueIdentifier
     cs.username = uniqueIdentifier
     cs.passwordHash = hashPassword('test')
-    cs.state = ColorState.Red
+    cs.enabled = true
     models.push(cs)
-
-    dataStorage.set(
-      'chargingStationModels',
-      models.map((model) => SerializationHelper.serialize(model, [ChargingStationGroupFlag.ServerOnly])),
-    )
   }
+  dataStorage.set('chargingStations', models)
 }
 
 main().then().catch(console.error)

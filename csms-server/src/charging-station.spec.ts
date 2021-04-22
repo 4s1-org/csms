@@ -40,7 +40,7 @@ describe('Charging Station', () => {
       it('BootNotificationRequest', () => {
         // Arrange
         const payload = new BootNotificationRequestDto(new ChargingStationDto('x', 'y'), BootReasonEnum.Unknown)
-        const cs = new ChargingStation(new ChargingStationModel('foo'), sendMessageStub)
+        const cs = new ChargingStation(new ChargingStationModel(), sendMessageStub)
         // Act
         const res = cs.receive(payload, OcppActionEnum.BootNotification)
         // Assert
@@ -50,7 +50,7 @@ describe('Charging Station', () => {
       it('HeartbeatRequest', () => {
         // Arrange
         const payload = new HeartbeatRequestDto()
-        const cs = new ChargingStation(new ChargingStationModel('foo'), sendMessageStub)
+        const cs = new ChargingStation(new ChargingStationModel(), sendMessageStub)
         // Act
         const res = cs.receive(payload, OcppActionEnum.BootNotification)
         // Assert
@@ -60,7 +60,7 @@ describe('Charging Station', () => {
       it('StatusNotificationRequest', () => {
         // Arrange
         const payload = new StatusNotificationRequestDto(dtNow, ConnectorStatusEnum.Available, 1, 1)
-        const cs = new ChargingStation(new ChargingStationModel('foo'), sendMessageStub)
+        const cs = new ChargingStation(new ChargingStationModel(), sendMessageStub)
         // Act
         const res = cs.receive(payload, OcppActionEnum.BootNotification)
         // Assert
@@ -70,7 +70,7 @@ describe('Charging Station', () => {
       it('AuthorizeRequest', () => {
         // Arrange
         const payload = new AuthorizeRequestDto(new IdTokenDto('x', IdTokenEnum.NoAuthorization))
-        const cs = new ChargingStation(new ChargingStationModel('foo'), sendMessageStub)
+        const cs = new ChargingStation(new ChargingStationModel(), sendMessageStub)
         // Act
         const res = cs.receive(payload, OcppActionEnum.BootNotification)
         // Assert
@@ -80,7 +80,7 @@ describe('Charging Station', () => {
       it('MeterValuesRequest', () => {
         // Arrange
         const payload = new MeterValuesRequestDto(1, [])
-        const cs = new ChargingStation(new ChargingStationModel('foo'), sendMessageStub)
+        const cs = new ChargingStation(new ChargingStationModel(), sendMessageStub)
         // Act
         const res = cs.receive(payload, OcppActionEnum.BootNotification)
         // Assert
@@ -90,7 +90,7 @@ describe('Charging Station', () => {
       it('NotifyEventRequest', () => {
         // Arrange
         const payload = new NotifyEventRequestDto(dtNow, 1, [])
-        const cs = new ChargingStation(new ChargingStationModel('foo'), sendMessageStub)
+        const cs = new ChargingStation(new ChargingStationModel(), sendMessageStub)
         // Act
         const res = cs.receive(payload, OcppActionEnum.BootNotification)
         // Assert
@@ -100,7 +100,7 @@ describe('Charging Station', () => {
       it('NotifyReportRequest', () => {
         // Arrange
         const payload = new NotifyReportRequestDto(1, dtNow, 1)
-        const cs = new ChargingStation(new ChargingStationModel('foo'), sendMessageStub)
+        const cs = new ChargingStation(new ChargingStationModel(), sendMessageStub)
         // Act
         const res = cs.receive(payload, OcppActionEnum.BootNotification)
         // Assert
@@ -116,7 +116,7 @@ describe('Charging Station', () => {
           1,
           new TransactionDto('x'),
         )
-        const cs = new ChargingStation(new ChargingStationModel('foo'), sendMessageStub)
+        const cs = new ChargingStation(new ChargingStationModel(), sendMessageStub)
         // Act
         const res = cs.receive(payload, OcppActionEnum.BootNotification)
         // Assert
@@ -126,7 +126,7 @@ describe('Charging Station', () => {
       it('UpdateFirmwareRequest (not implemented)', () => {
         // Arrange
         const payload = new UpdateFirmwareRequestDto(1, new FirmwareDto('x', dtNow))
-        const cs = new ChargingStation(new ChargingStationModel('foo'), sendMessageStub)
+        const cs = new ChargingStation(new ChargingStationModel(), sendMessageStub)
         // Act + Assert
         expect(() => cs.receive(payload, OcppActionEnum.BootNotification)).toThrow()
       })

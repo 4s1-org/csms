@@ -11,8 +11,8 @@ const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
 if (process.env.port) {
   dataStorage.set('port', ProcessEnv.port)
 }
-if (!dataStorage.has('chargingStationModels')) {
-  dataStorage.set('chargingStationModels', [])
+if (!dataStorage.has('chargingStations')) {
+  dataStorage.set('chargingStations', [])
 }
 
 // Create server
