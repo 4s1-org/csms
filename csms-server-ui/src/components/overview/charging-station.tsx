@@ -6,14 +6,14 @@ import EvseStateComp from './evse-state'
 
 interface IState {}
 interface IProps {
-  data: ChargingStationModel
+  model: ChargingStationModel
 }
 
 class ChargingStationComp extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     let headerColorCss = ''
     let stateStr = 'unbekannt'
-    switch (this.props.data.state || 0) {
+    switch (this.props.model.state || 0) {
       case ColorState.Yellow:
         headerColorCss = 'bg-warning'
         stateStr = '(noch) nicht betriebsbereit'
@@ -29,19 +29,19 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     }
 
     let lastContectStr = 'unbekannt'
-    if (this.props.data.lastContact) {
-      lastContectStr = `${dayjs(this.props.data.lastContact).format('DD.MM.YYYY HH:mm:ss')} Uhr`
+    if (this.props.model.lastContact) {
+      lastContectStr = `${dayjs(this.props.model.lastContact).format('DD.MM.YYYY HH:mm:ss')} Uhr`
     }
 
     return (
       <div className="card h-100">
-        <h5 className={'card-header ' + headerColorCss}>{this.props.data.uniqueIdentifier}</h5>
+        <h5 className={'card-header ' + headerColorCss}>{this.props.model.uniqueIdentifier}</h5>
         <div className="card-body">
           <h6 className="card-subtitle mb-2">Status: {stateStr}</h6>
-          <div className="card-text">Benutzername: {this.props.data.username}</div>
+          <div className="card-text">Benutzername: {this.props.model.username}</div>
           <br />
           <div className="card-text">
-            {this.props.data.evseList.map((evse) => (
+            {this.props.model.evseList.map((evse) => (
               <p>
                 <EvseStateComp data={evse} />
               </p>
@@ -49,7 +49,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           </div>
         </div>
         <div className="card-footer">
-          <small className="text-muted">Letztes Kommando: {this.props.data.lastCommand}</small>
+          <small className="text-muted">Letztes Kommando: {this.props.model.lastCommand}</small>
           <br />
           <small className="text-muted">Letzter Kontakt: {lastContectStr}</small>
         </div>
