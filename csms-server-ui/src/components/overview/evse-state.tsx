@@ -25,7 +25,7 @@ class EvseStateComp extends React.Component<IProps, IState> {
     }
 
     return (
-      <div key={this.props.data.id} className={'d-inline p-2 m-1 ' + ccsClass}>
+      <div className={'d-inline-block p-2 m-1 ' + ccsClass}>
         {this.props.data.id}: {this.props.data.currentUser} ({this.props.data.wattHours} kWh)
       </div>
     )
