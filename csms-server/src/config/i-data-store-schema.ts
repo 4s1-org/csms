@@ -1,7 +1,4 @@
-export interface IValidUser {
-  name: string
-  rfid: string
-}
+import { ChargingStationModel, UserModel } from '@yellowgarbagebag/csms-lib'
 
 export interface IDataStorageSchema {
   port: number
@@ -10,6 +7,6 @@ export interface IDataStorageSchema {
     username: string
     passwordHash: string
   }
-  validUsers: IValidUser[]
-  chargingStationModels: string[]
+  users: UserModel[]
+  chargingStations: ChargingStationModel[]
 }
