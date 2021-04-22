@@ -76,7 +76,7 @@ export class ChargingStation implements IReceiveMessage {
 
   public receive(payload: RequestBaseDto, action: OcppActionEnum): ResponseBaseDto {
     this.model.lastContact = Date.now()
-    this.model.lastCommand = action
+    this.model.lastAction = action
 
     if (payload instanceof BootNotificationRequestDto) {
       return this.receiveBootNotificationRequest(payload)
@@ -158,9 +158,7 @@ export class ChargingStation implements IReceiveMessage {
    * B06 - Get Variables
    */
   public async sendGetVariablesRequest(): Promise<GetVariablesResponseDto> {
-    const payload = new GetVariablesRequestDto([
-      new GetVariableDataDto(new ComponentDto('test'), new VariableDto('foo')),
-    ])
+    const payload = new GetVariablesRequestDto([new GetVariableDataDto(new ComponentDto('test'), new VariableDto('foo'))])
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res

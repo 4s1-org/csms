@@ -75,9 +75,9 @@ export class ChargingStationModel {
   /**
    * Only at UI
    */
-  @Expose({ name: '_lastCommand', groups: [ChargingStationGroupFlag.UiOnly] })
+  @Expose({ name: '_lastAction', groups: [ChargingStationGroupFlag.UiOnly] })
   @Transform(({ value }) => value || '', { toClassOnly: true })
-  public lastCommand = ''
+  public lastAction = ''
 
   /**
    * Only at UI

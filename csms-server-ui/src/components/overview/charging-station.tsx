@@ -46,7 +46,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           </div>
         </div>
         <div className="card-footer">
-          <small className="text-muted">Last command: {this.props.model.lastCommand}</small>
+          <small className="text-muted">Last action: {this.props.model.lastAction}</small>
           <br />
           <small className="text-muted">Last contact: {lastContectStr}</small>
         </div>
