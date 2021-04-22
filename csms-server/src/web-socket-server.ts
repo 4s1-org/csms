@@ -6,7 +6,7 @@ import path from 'path'
 import { URL } from 'url'
 import { IncomingHttpHeaders, IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
-import { fromBase64, Logger } from '@yellowgarbagebag/common-lib'
+import { fromBase64, Logger, verifyPassword } from '@yellowgarbagebag/common-lib'
 import {
   CsmsToUiMsg,
   CsmsToUiCmdEnum,
@@ -18,7 +18,6 @@ import {
 } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
-import { verifyPassword } from './config/password'
 import { ChargingStation } from './charging-station'
 import { WsClient } from './ws-client'
 import { ProcessEnv } from './process-env'
