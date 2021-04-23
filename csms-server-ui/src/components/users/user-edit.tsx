@@ -5,7 +5,6 @@ interface IState {}
 
 interface IProps {
   model: UserModel
-  editMode: boolean
 }
 
 class UserEdit extends React.Component<IProps, IState> {
