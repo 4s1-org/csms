@@ -22,19 +22,17 @@ class ChargingStationEdit extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     return (
       <form>
-        {!this.props.editMode && (
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label">Unique identifier</label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                className="form-control"
-                value={this.props.model.uniqueIdentifier}
-                onChange={this.onUniqueIdentifierChange}
-              />
-            </div>
+        <div className="form-group row">
+          <label className="col-sm-4 col-form-label">Unique identifier</label>
+          <div className="col-sm-8">
+            <input
+              type="text"
+              className="form-control"
+              value={this.props.model.uniqueIdentifier}
+              onChange={this.onUniqueIdentifierChange}
+            />
           </div>
-        )}
+        </div>
         <div className="form-group row">
           <label className="col-sm-4 col-form-label">Username</label>
           <div className="col-sm-8">
