@@ -2,6 +2,7 @@ import { ColorStateEnum } from './color-state.enum'
 import { EvseModel } from './evse.model'
 
 export class ChargingStationModel {
+  public id = ''
   public lastContact = 0
   public lastAction = ''
   public evseList: EvseModel[] = []
