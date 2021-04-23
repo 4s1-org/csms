@@ -200,18 +200,18 @@ export class WebSocketServer {
             switch (data.subCmd) {
               case UiToCsmsUserSubCmdEnum.edit:
                 {
-                  const user = this.users.find((x) => x.rfid === payload.rfid)
+                  const user = this.users.find((x) => x.id === payload.id)
                   if (user) {
                     Object.assign(user, payload)
                   }
                 }
                 break
               case UiToCsmsUserSubCmdEnum.delete:
-                this.users = this.users.filter((x) => x.rfid !== payload.rfid)
+                this.users = this.users.filter((x) => x.id !== payload.id)
                 break
               case UiToCsmsUserSubCmdEnum.add:
                 {
-                  const user = this.users.find((x) => x.rfid === payload.rfid)
+                  const user = this.users.find((x) => x.id === payload.id)
                   if (!user) {
                     this.users.push(payload)
                   }
@@ -230,8 +230,9 @@ export class WebSocketServer {
             switch (data.subCmd) {
               case UiToCsmsUserSubCmdEnum.edit:
                 {
-                  const cs = this.chargingStations.find((x) => x.uniqueIdentifier === payload.uniqueIdentifier)
+                  const cs = this.chargingStations.find((x) => x.id === payload.id)
                   if (cs) {
+                    cs.uniqueIdentifier = payload.uniqueIdentifier
                     cs.username = payload.username
                     cs.enabled = payload.enabled
                     // Passwort wird nur aktualisiert, wenn auch von der UI eines gesendet wurde.
@@ -243,12 +244,12 @@ export class WebSocketServer {
                 }
                 break
               case UiToCsmsUserSubCmdEnum.delete:
-                this.chargingStations = this.chargingStations.filter((x) => x.uniqueIdentifier !== payload.uniqueIdentifier)
+                this.chargingStations = this.chargingStations.filter((x) => x.id !== payload.id)
                 this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
                 break
               case UiToCsmsUserSubCmdEnum.add:
                 {
-                  const user = this.chargingStations.find((x) => x.uniqueIdentifier === payload.uniqueIdentifier)
+                  const user = this.chargingStations.find((x) => x.id === payload.id)
                   if (!user) {
                     this.chargingStations.push(payload)
                     this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))

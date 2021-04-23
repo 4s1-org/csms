@@ -6,6 +6,7 @@ import Dialog from '../dialog'
 import ChargingStationEdit from './charging-station-edit'
 import { DialogButtonEnum } from '../dialog-button.enum'
 import { hashPassword } from '@yellowgarbagebag/common-lib'
+import { v4 as uuid } from 'uuid'
 
 interface IState {
   showDeleteDialog: boolean
@@ -122,9 +123,12 @@ class MainChargingStations extends React.Component<IProps, IState> {
   private async onBtnAddClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
 
+    const model = new ChargingStationModel()
+    model.id = uuid()
+
     this.setState({
       ...this.state,
-      selectedModel: new ChargingStationModel(),
+      selectedModel: model,
       showAddDialog: true,
     })
   }
