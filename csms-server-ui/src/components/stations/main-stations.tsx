@@ -108,12 +108,12 @@ class MainChargingStations extends React.Component<IProps, IState> {
             showBtnSave={true}
             showBtnAbort={true}
           >
-            <ChargingStationEdit model={this.state.selectedModel} editMode={true} />
+            <ChargingStationEdit model={this.state.selectedModel} />
           </Dialog>
         )}
         {this.state.showAddDialog && this.state.selectedModel && (
           <Dialog title="Add" dialogCloseCallback={this.onAddDialogClose} showBtnSave={true} showBtnAbort={true}>
-            <ChargingStationEdit model={this.state.selectedModel} editMode={false} />
+            <ChargingStationEdit model={this.state.selectedModel} />
           </Dialog>
         )}
       </div>

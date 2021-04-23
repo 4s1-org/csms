@@ -107,12 +107,12 @@ class MainUsers extends React.Component<IProps, IState> {
             showBtnSave={true}
             showBtnAbort={true}
           >
-            <UserEdit model={this.state.selectedModel} editMode={true} />
+            <UserEdit model={this.state.selectedModel} />
           </Dialog>
         )}
         {this.state.showAddDialog && this.state.selectedModel && (
           <Dialog title="Add" dialogCloseCallback={this.onAddDialogClose} showBtnSave={true} showBtnAbort={true}>
-            <UserEdit model={this.state.selectedModel} editMode={false} />
+            <UserEdit model={this.state.selectedModel} />
           </Dialog>
         )}
       </div>

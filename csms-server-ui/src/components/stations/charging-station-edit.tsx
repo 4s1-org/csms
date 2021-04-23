@@ -5,7 +5,6 @@ interface IState {}
 
 interface IProps {
   model: ChargingStationModel
-  editMode: boolean
 }
 
 class ChargingStationEdit extends React.Component<IProps, IState> {
