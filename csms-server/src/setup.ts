@@ -48,11 +48,13 @@ async function main(): Promise<void> {
   dataStorage.set('adminCredentials', { username: response.username, passwordHash: hashPassword(response.password) })
 
   const userA = new UserModel()
+  userA.id = 'aaa'
   userA.rfid = 'aaa'
   userA.lastName = 'Aarbinger'
   userA.firstName = 'Anton'
   userA.enabled = true
   const userB = new UserModel()
+  userB.id = 'bbb'
   userB.rfid = 'bbb'
   userB.lastName = 'Brotzeitholer'
   userB.firstName = 'Bernd'
@@ -74,6 +76,7 @@ function createChargeStation(dataStorage: DataStorage<IDataStorageSchema>, uniqu
   // Wenn Es keine Ladesäule gibt, lege sie an
   if (!models.find((x) => x.uniqueIdentifier === uniqueIdentifier)) {
     const cs = new ChargingStationModel()
+    cs.id = `id_${uniqueIdentifier}`
     cs.uniqueIdentifier = uniqueIdentifier
     cs.username = uniqueIdentifier
     cs.passwordHash = hashPassword('test')
