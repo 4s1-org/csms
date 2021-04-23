@@ -1,4 +1,5 @@
 export class UserModel {
+  public id = ''
   public rfid = ''
   public firstName = ''
   public lastName = ''

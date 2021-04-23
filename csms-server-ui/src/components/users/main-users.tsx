@@ -5,6 +5,7 @@ import { faEdit, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesom
 import Dialog from '../dialog'
 import UserEdit from './user-edit'
 import { DialogButtonEnum } from '../dialog-button.enum'
+import { v4 as uuid } from 'uuid'
 
 interface IState {
   showDeleteDialog: boolean
@@ -121,9 +122,12 @@ class MainUsers extends React.Component<IProps, IState> {
   private async onBtnAddClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
 
+    const model = new UserModel()
+    model.id = uuid()
+
     this.setState({
       ...this.state,
-      selectedModel: new UserModel(),
+      selectedModel: model,
       showAddDialog: true,
     })
   }

@@ -23,14 +23,12 @@ class UserEdit extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     return (
       <form>
-        {!this.props.editMode && (
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label">RFID</label>
-            <div className="col-sm-8">
-              <input type="text" className="form-control" value={this.props.model.rfid} onChange={this.onRfidChange} />
-            </div>
+        <div className="form-group row">
+          <label className="col-sm-4 col-form-label">RFID</label>
+          <div className="col-sm-8">
+            <input type="text" className="form-control" value={this.props.model.rfid} onChange={this.onRfidChange} />
           </div>
-        )}
+        </div>
         <div className="form-group row">
           <label className="col-sm-4 col-form-label">Last name</label>
           <div className="col-sm-8">
