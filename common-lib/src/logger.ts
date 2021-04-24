@@ -12,7 +12,7 @@ export enum LogLevelEnum {
 export class Logger {
   private _logger: pino.Logger
 
-  public constructor(public readonly name: string, logLevel: LogLevelEnum | string) {
+  public constructor(public readonly name: string, logLevel: LogLevelEnum) {
     this._logger = pino({
       enabled: process.env.NODE_ENV !== 'test',
       level: logLevel,
