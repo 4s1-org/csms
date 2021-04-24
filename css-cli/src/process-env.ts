@@ -1,3 +1,4 @@
+import { LogLevelEnum } from '@yellowgarbagebag/common-lib'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -16,8 +17,8 @@ export abstract class ProcessEnv {
     return process.env.NODE_ENV || ''
   }
 
-  public static get LOG_LEVEL(): string {
-    return process.env.LOG_LEVEL || 'info'
+  public static get LOG_LEVEL(): LogLevelEnum {
+    return (process.env.LOG_LEVEL as LogLevelEnum) || LogLevelEnum.info
   }
 
   public static get HTTPS(): boolean {

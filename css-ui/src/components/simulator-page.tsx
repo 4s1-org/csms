@@ -3,7 +3,6 @@ import { ChargingStation } from '@yellowgarbagebag/css-lib'
 import LoginPanelComp from './login-panel'
 import ChargingStationComp from './charging-station'
 import { WsClient } from '../ws-client'
-import { Logger } from '@yellowgarbagebag/common-lib'
 import { ProcessEnv } from '../process-env'
 
 interface IState {
@@ -45,7 +44,7 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
 
   private async onLoginClick(https: boolean, server: string, uniqueIdentifier: string, username: string, password: string): Promise<void> {
     const client = new WsClient(uniqueIdentifier)
-    const cs = new ChargingStation(uniqueIdentifier, client, new Logger(uniqueIdentifier, ProcessEnv.LOG_LEVEL))
+    const cs = new ChargingStation(uniqueIdentifier, client, ProcessEnv.LOG_LEVEL)
     await client.connect(cs, username, password, https, server)
 
     this.setState({

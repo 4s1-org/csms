@@ -51,22 +51,16 @@ import {
   LocationEnum,
   MeasurandEnum,
   TransactionEventEnum,
+  ChargingStationBase,
 } from '@yellowgarbagebag/ocpp-lib'
-import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStationModel, ColorStateEnum, EvseModel, UserModel } from '@yellowgarbagebag/csms-lib'
 import { ProcessEnv } from './process-env'
 
-export class ChargingStation implements IReceiveMessage {
-  public readonly logger = new Logger(this.model.uniqueIdentifier, ProcessEnv.LOG_LEVEL)
-  public readonly heartbeatInterval = 3
+export class ChargingStation extends ChargingStationBase implements IReceiveMessage {
   private transactions: { rfid: string | null; currentUser: UserModel | null; id: string; evseId: number }[] = []
 
-  public constructor(
-    public readonly model: ChargingStationModel,
-    private readonly sendMessage: ISendMessage,
-    private readonly users: UserModel[] = [],
-  ) {
-    // nothing to do
+  public constructor(public readonly model: ChargingStationModel, sendMessage: ISendMessage, private readonly users: UserModel[] = []) {
+    super(model.uniqueIdentifier, sendMessage, ProcessEnv.LOG_LEVEL)
   }
 
   public get currentTime(): string {
