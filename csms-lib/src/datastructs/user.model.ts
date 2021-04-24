@@ -1,3 +1,6 @@
+/**
+ *  Model for an User
+ */
 export class UserModel {
   public id = ''
   public rfid = ''
