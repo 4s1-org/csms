@@ -3,7 +3,6 @@ import { ChargingStation } from '@yellowgarbagebag/css-lib'
 import LoginPanelComp from './login-panel'
 import ChargingStationComp from './charging-station'
 import { WsClient } from '../ws-client'
-import { Logger } from '@yellowgarbagebag/common-lib'
 import { ProcessEnv } from '../process-env'
 
 interface IState {
