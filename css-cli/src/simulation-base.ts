@@ -15,7 +15,7 @@ export abstract class SimulationBase {
     protected readonly password: string = ProcessEnv.PASSWORD,
   ) {
     this.client = new WsClient(this.uniqueIdentifier)
-    this.cs = new ChargingStation(this.uniqueIdentifier, this.client, new Logger(uniqueIdentifier, ProcessEnv.LOG_LEVEL))
+    this.cs = new ChargingStation(this.uniqueIdentifier, this.client, ProcessEnv.LOG_LEVEL)
   }
 
   protected async connect(): Promise<void> {
