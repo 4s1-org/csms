@@ -5,6 +5,9 @@ import { OcppActionEnum } from '../generated/ocpp-action.enum'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { ResponseBaseDto } from '../generated/response-base.dto'
 
+/**
+ * Baseclass for a charging station.
+ */
 export abstract class ChargingStationBase implements IReceiveMessage {
   protected heartbeatInterval = 3600
   public readonly logger
