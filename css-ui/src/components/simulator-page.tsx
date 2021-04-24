@@ -45,7 +45,7 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
 
   private async onLoginClick(https: boolean, server: string, uniqueIdentifier: string, username: string, password: string): Promise<void> {
     const client = new WsClient(uniqueIdentifier)
-    const cs = new ChargingStation(uniqueIdentifier, client, new Logger(uniqueIdentifier, ProcessEnv.LOG_LEVEL))
+    const cs = new ChargingStation(uniqueIdentifier, client, ProcessEnv.LOG_LEVEL)
     await client.connect(cs, username, password, https, server)
 
     this.setState({
