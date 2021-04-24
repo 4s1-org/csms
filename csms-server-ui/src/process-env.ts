@@ -8,13 +8,15 @@ REACT_APP_USERNAME=admin
 REACT_APP_PASSWORD=admin
 */
 
+import { LogLevelEnum } from '@yellowgarbagebag/common-lib'
+
 export abstract class ProcessEnv {
   public static get NODE_ENV(): string {
     return process.env.NODE_ENV || ''
   }
 
-  public static get LOG_LEVEL(): string {
-    return process.env.REACT_APP_LOG_LEVEL || 'info'
+  public static get LOG_LEVEL(): LogLevelEnum {
+    return (process.env.REACT_APP_LOG_LEVEL as LogLevelEnum) || LogLevelEnum.info
   }
 
   public static get HTTPS(): boolean {

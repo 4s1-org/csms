@@ -11,8 +11,6 @@ import {
   AuthorizeResponseDto,
   MeterValuesRequestDto,
   MeterValuesResponseDto,
-  MeterValueDto,
-  SampledValueDto,
   SetVariablesRequestDto,
   SetVariablesResponseDto,
   SetVariableResultDto,
@@ -49,18 +47,15 @@ import {
   DataTransferStatusEnum,
   DataTransferRequestDto,
   OcppErrorCodeEnum,
+  ChargingStationBase,
 } from '@yellowgarbagebag/ocpp-lib'
-import { Logger } from '@yellowgarbagebag/common-lib'
+import { LogLevelEnum } from '@yellowgarbagebag/common-lib'
 
-export class ChargingStation implements IReceiveMessage {
+export class ChargingStation extends ChargingStationBase implements IReceiveMessage {
   public heartbeatInterval = 3600
 
-  public constructor(
-    public readonly uniqueIdentifier: string,
-    private readonly sendMessage: ISendMessage,
-    private readonly logger: Logger,
-  ) {
-    // nothing to do
+  public constructor(uniqueIdentifier: string, sendMessage: ISendMessage, logLevel: LogLevelEnum) {
+    super(uniqueIdentifier, sendMessage, logLevel)
   }
 
   public get currentTime(): string {
@@ -186,9 +181,7 @@ export class ChargingStation implements IReceiveMessage {
    * E09 - When cable disconnected on EV-side: Stop Transaction
    * E10 - When cable disconnected on EV-side: Suspend Transaction
    */
-  public async sendStatusNotificationRequest(
-    payload: StatusNotificationRequestDto,
-  ): Promise<StatusNotificationResponseDto> {
+  public async sendStatusNotificationRequest(payload: StatusNotificationRequestDto): Promise<StatusNotificationResponseDto> {
     const res = await this.sendMessage.send(payload)
     return res
   }
