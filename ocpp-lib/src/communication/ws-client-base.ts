@@ -20,6 +20,9 @@ import { OcppRpcBaseDto } from '../ocpp-rpc/ocpp-rpc-base.dto'
 import { HeartbeatRequestDto, HeartbeatResponseDto } from '../messages'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
 
+/**
+ * Baseclass for a websocket client.
+ */
 export abstract class WsClientBase implements ISendMessage {
   private requestList: PendingPromises[] = []
 
@@ -27,8 +30,14 @@ export abstract class WsClientBase implements ISendMessage {
     // nothing to do
   }
 
+  /**
+   * Disconnect the client.
+   */
   public abstract disconnect(): void
 
+  /**
+   * A message was received.
+   */
   public onMessage(data: any, receiveMessage: IReceiveMessage): void {
     // Für den Fehlerfall
     let msg: OcppRpcBaseDto | undefined
@@ -93,6 +102,9 @@ export abstract class WsClientBase implements ISendMessage {
     }
   }
 
+  /**
+   * A message should be send
+   */
   public send<T extends RequestBaseDto>(payload: T): Promise<RequestToResponseType<T>> {
     // Falls ein Request bereits läuft, darf kein weitere Request gestellt werden.
     // Damit aber der Heartbeat als Schleife laufen kann, wir für ihn einen Sonderbehandlung umgesetzt.
@@ -121,5 +133,8 @@ export abstract class WsClientBase implements ISendMessage {
     })
   }
 
+  /**
+   * Internal implementation to send a message.
+   */
   protected abstract sendInternal(msg: string): boolean
 }

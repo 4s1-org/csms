@@ -1,5 +1,8 @@
 import { OcppErrorCodeEnum } from '../ocpp-rpc/ocpp-error-code.enum'
 
+/**
+ * Common Error in the CSMS.
+ */
 export class CsmsError extends Error {
   constructor(
     public readonly errorCode: OcppErrorCodeEnum,
