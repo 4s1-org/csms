@@ -1,5 +1,8 @@
 import { OcppCallDto } from '../ocpp-rpc/ocpp-call.dto'
 
+/**
+ * Helperclass for promises, which are pending.
+ */
 export class PendingPromises {
   public readonly timestamp: number
 
