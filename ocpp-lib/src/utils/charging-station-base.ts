@@ -12,11 +12,7 @@ export abstract class ChargingStationBase implements IReceiveMessage {
   protected heartbeatInterval = 3600
   public readonly logger
 
-  public constructor(
-    public readonly uniqueIdentifier: string,
-    protected readonly sendMessage: ISendMessage,
-    private readonly logLevel: LogLevelEnum,
-  ) {
+  public constructor(public readonly uniqueIdentifier: string, protected readonly sendMessage: ISendMessage, logLevel: LogLevelEnum) {
     this.logger = new Logger(uniqueIdentifier, logLevel)
   }
 
