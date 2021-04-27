@@ -1,4 +1,3 @@
-import { Logger } from '@yellowgarbagebag/common-lib'
 import { ChargingStation } from '@yellowgarbagebag/css-lib'
 import { ProcessEnv } from './process-env'
 import { WsClient } from './ws-client'
