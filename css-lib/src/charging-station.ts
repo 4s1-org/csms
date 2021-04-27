@@ -52,8 +52,6 @@ import {
 import { LogLevelEnum } from '@yellowgarbagebag/common-lib'
 
 export class ChargingStation extends ChargingStationBase implements IReceiveMessage {
-  public heartbeatInterval = 3600
-
   public constructor(uniqueIdentifier: string, sendMessage: ISendMessage, logLevel: LogLevelEnum) {
     super(uniqueIdentifier, sendMessage, logLevel)
   }
