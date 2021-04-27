@@ -9,11 +9,15 @@ import { ResponseBaseDto } from '../generated/response-base.dto'
  * Baseclass for a charging station.
  */
 export abstract class ChargingStationBase implements IReceiveMessage {
-  protected heartbeatInterval = 3600
+  protected _heartbeatInterval = 3600
   public readonly logger
 
   public constructor(public readonly uniqueIdentifier: string, protected readonly sendMessage: ISendMessage, logLevel: LogLevelEnum) {
     this.logger = new Logger(uniqueIdentifier, logLevel)
+  }
+
+  public get heartbeatInterval(): number {
+    return this._heartbeatInterval
   }
 
   public get currentTime(): string {
