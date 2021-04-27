@@ -58,10 +58,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     super(uniqueIdentifier, sendMessage, logLevel)
   }
 
-  public get currentTime(): string {
-    return new Date().toISOString()
-  }
-
   public receive(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof SetVariablesRequestDto) {
       return this.receiveSetVariablesRequest(payload)

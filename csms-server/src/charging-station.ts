@@ -63,10 +63,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     super(model.uniqueIdentifier, sendMessage, ProcessEnv.LOG_LEVEL)
   }
 
-  public get currentTime(): string {
-    return new Date().toISOString()
-  }
-
   public receive(payload: RequestBaseDto, action: OcppActionEnum): ResponseBaseDto {
     this.model.lastContact = Date.now()
     this.model.lastAction = action
