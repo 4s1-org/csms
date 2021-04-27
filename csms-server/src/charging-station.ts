@@ -182,7 +182,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
     this.model.state = ColorStateEnum.Green
-    return new BootNotificationResponseDto(this.currentTime, this.heartbeatInterval, RegistrationStatusEnum.Accepted)
+    return new BootNotificationResponseDto(this.currentTime, this._heartbeatInterval, RegistrationStatusEnum.Accepted)
   }
 
   /**

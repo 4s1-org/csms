@@ -86,7 +86,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendBootNotificationRequest(payload: BootNotificationRequestDto): Promise<BootNotificationResponseDto> {
     const res = await this.sendMessage.send(payload)
-    this.heartbeatInterval = res.interval
+    this._heartbeatInterval = res.interval
     return res
   }
 
