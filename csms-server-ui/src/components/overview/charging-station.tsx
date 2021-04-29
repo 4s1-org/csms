@@ -12,11 +12,11 @@ interface IProps {
 class ChargingStationComp extends React.Component<IProps, IState> {
   public render(): JSX.Element {
     let headerColorCss = ''
-    let stateStr = 'unbekannt'
+    let stateStr = ''
     switch (this.props.model.state || 0) {
       case ColorStateEnum.Yellow:
         headerColorCss = 'bg-warning'
-        stateStr = '(noch) nicht betriebsbereit'
+        stateStr = 'warming up'
         break
       case ColorStateEnum.Green:
         headerColorCss = 'bg-success text-white'
@@ -40,7 +40,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           {!this.props.model.enabled ? ' (disabled)' : ''}
         </h5>
         <div className="card-body">
-          <h6 className="card-subtitle mb-2">State: {stateStr}</h6>
+          <h6 className="card-subtitle mb-2">State: {stateStr || 'unknown'}</h6>
           <div className="card-text">Username: {this.props.model.username}</div>
           <div className="card-text">
             {this.props.model.evseList.map((evse) => (
