@@ -291,7 +291,7 @@ describe('CSMS Gateway', () => {
         expect(data.length).toBe(5)
         expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
         expect(data[1]).toBe(messageId)
-        expect(data[2]).toBe(OcppErrorCodeEnum.NotSupported)
+        expect(data[2]).toBe(OcppErrorCodeEnum.SecurityError)
         expect(data[3]).toBeDefined()
         expect(data[4]).toBeDefined()
         socket.close()
