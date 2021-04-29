@@ -59,7 +59,6 @@ class Simulation1 extends React.Component<IProps, IState> {
     this.sendMsg10 = this.sendMsg10.bind(this)
     this.sendMsg11 = this.sendMsg11.bind(this)
     this.sendMsg12 = this.sendMsg12.bind(this)
-    this.sendMsg15 = this.sendMsg15.bind(this)
     this.sendMsg16 = this.sendMsg16.bind(this)
     this.sendMsg17 = this.sendMsg17.bind(this)
     this.sendMsg18 = this.sendMsg18.bind(this)
@@ -130,11 +129,6 @@ class Simulation1 extends React.Component<IProps, IState> {
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg15}>
-              Fahrer meldet sich wieder an
-            </button>
-          </li>
-          <li className="list-group-item">
             <button type="button" onClick={this.sendMsg16}>
               Transaktion beenden
             </button>
@@ -156,10 +150,7 @@ class Simulation1 extends React.Component<IProps, IState> {
 
   private async sendMsg1(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    const payload = new BootNotificationRequestDto(
-      new ChargingStationDto('SimulatorX', 'CSS-UI'),
-      BootReasonEnum.PowerUp,
-    )
+    const payload = new BootNotificationRequestDto(new ChargingStationDto('SimulatorX', 'CSS-UI'), BootReasonEnum.PowerUp)
     await this.props.cs?.sendBootNotificationRequest(payload)
   }
 
@@ -214,12 +205,7 @@ class Simulation1 extends React.Component<IProps, IState> {
   private async sendMsg8(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
     await this.props.cs.sendStatusNotificationRequest(
-      new StatusNotificationRequestDto(
-        this.props.cs.currentTime,
-        ConnectorStatusEnum.Occupied,
-        this.state.evseId,
-        this.state.connectorId,
-      ),
+      new StatusNotificationRequestDto(this.props.cs.currentTime, ConnectorStatusEnum.Occupied, this.state.evseId, this.state.connectorId),
     )
   }
 
@@ -299,13 +285,6 @@ class Simulation1 extends React.Component<IProps, IState> {
     await this.props.cs.sendTransactionEventRequest(payload)
   }
 
-  private async sendMsg15(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
-    e.preventDefault()
-
-    const payload = new AuthorizeRequestDto(this.state.idToken)
-    await this.props.cs.sendAuthorizationRequest(payload)
-  }
-
   private async sendMsg16(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
 
@@ -332,12 +311,7 @@ class Simulation1 extends React.Component<IProps, IState> {
     e.preventDefault()
 
     await this.props.cs.sendStatusNotificationRequest(
-      new StatusNotificationRequestDto(
-        this.props.cs.currentTime,
-        ConnectorStatusEnum.Available,
-        this.state.evseId,
-        this.state.connectorId,
-      ),
+      new StatusNotificationRequestDto(this.props.cs.currentTime, ConnectorStatusEnum.Available, this.state.evseId, this.state.connectorId),
     )
   }
 
