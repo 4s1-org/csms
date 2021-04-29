@@ -5,18 +5,9 @@ export const ConnectorStatusEnumType: enumCommentType = {
   description:
     'A status can be reported for the Connector of an EVSE of a Charging Station. States considered Operative are: Available, Reserved and Occupied. States considered Inoperative are: Unavailable, Faulted.',
   values: [
-    {
-      value: 'Available',
-      description: 'When a Connector becomes available for a new User (Operative)',
-    },
-    {
-      value: 'Occupied',
-      description: 'When a Connector becomes occupied, so it is not available for a new EV driver. (Operative)',
-    },
-    {
-      value: 'Reserved',
-      description: 'When a Connector becomes reserved as a result of ReserveNow command (Operative)',
-    },
+    { value: 'Available', description: 'When a Connector becomes available for a new User (Operative)' },
+    { value: 'Occupied', description: 'When a Connector becomes occupied, so it is not available for a new EV driver. (Operative)' },
+    { value: 'Reserved', description: 'When a Connector becomes reserved as a result of ReserveNow command (Operative)' },
     {
       value: 'Unavailable',
       description:
