@@ -28,7 +28,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
         break
     }
 
-    let lastContectStr = 'unknown'
+    let lastContectStr = ''
     if (this.props.model.lastContact) {
       lastContectStr = `${dayjs(this.props.model.lastContact).format('DD.MM.YYYY HH:mm:ss')}`
     }
@@ -49,9 +49,9 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           </div>
         </div>
         <div className="card-footer">
-          <small className="text-muted">Last action: {this.props.model.lastAction}</small>
+          <small className="text-muted">Last action: {this.props.model.lastAction || 'unknown'}</small>
           <br />
-          <small className="text-muted">Last contact: {lastContectStr}</small>
+          <small className="text-muted">Last contact: {lastContectStr || 'unknown'}</small>
         </div>
       </div>
     )
