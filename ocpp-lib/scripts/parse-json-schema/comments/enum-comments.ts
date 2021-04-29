@@ -8,6 +8,7 @@ import { OperationalStatusEnumType } from './enumerations/OperationalStatusEnumT
 import { ResetEnumType } from './enumerations/ResetEnumType'
 import { ResetStatusEnumType } from './enumerations/ResetStatusEnumType'
 import { SetVariableStatusEnumType } from './enumerations/SetVariableStatusEnumType'
+import { TriggerReasonEnumType } from './enumerations/TriggerReasonEnumType'
 
 export type enumCommentValueType = {
   value: string
@@ -24,10 +25,7 @@ export function getCommentByEnum(enumName: string): enumCommentType | undefined 
   return comments.find((x) => x.name === enumName || x.name === enumName + 'EnumType')
 }
 
-export function getCommentByEnumValue(
-  enumComment: enumCommentType | undefined,
-  valueName: string,
-): enumCommentValueType | undefined {
+export function getCommentByEnumValue(enumComment: enumCommentType | undefined, valueName: string): enumCommentValueType | undefined {
   if (!enumComment) {
     return undefined
   }
@@ -45,4 +43,5 @@ const comments: enumCommentType[] = [
   ResetEnumType,
   ResetStatusEnumType,
   SetVariableStatusEnumType,
+  TriggerReasonEnumType,
 ]
