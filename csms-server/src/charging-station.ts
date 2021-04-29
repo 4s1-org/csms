@@ -28,7 +28,6 @@ import {
   SetVariableDataDto,
   OperationalStatusEnum,
   GetVariableDataDto,
-  OcppActionEnum,
   IReceiveMessage,
   ISendMessage,
   GetBaseReportResponseDto,
@@ -63,9 +62,9 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     super(model.uniqueIdentifier, sendMessage, ProcessEnv.LOG_LEVEL)
   }
 
-  public receive(payload: RequestBaseDto, action: OcppActionEnum): ResponseBaseDto {
+  public receive(payload: RequestBaseDto): ResponseBaseDto {
     this.model.lastContact = Date.now()
-    this.model.lastAction = action
+    this.model.lastAction = payload.constructor.name.replace('Dto', '')
 
     if (payload instanceof BootNotificationRequestDto) {
       return this.receiveBootNotificationRequest(payload)
@@ -192,6 +191,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B03 - Cold Boot Charging Station - Rejected
    */
   private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
+    this.logger.info(`Boot reason: ${payload.reason}`)
     this.model.state = ColorStateEnum.Green
     return new BootNotificationResponseDto(this.currentTime, this._heartbeatInterval, RegistrationStatusEnum.Accepted)
   }
