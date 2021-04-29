@@ -217,13 +217,6 @@ class Simulation extends SimulationBase {
     // -- Fahrer möchte weiter fahren und hält die RFID Karte erneut vor den Leser --
 
     // E07 - Transaction locally stopped by IdToken
-    // C01 - EV Driver Authorization using RFID
-    // Authorisierung
-    {
-      const payload = new AuthorizeRequestDto(idToken)
-      await this.cs.sendAuthorizationRequest(payload)
-      await sleep(200)
-    }
 
     // -- Kabel kann entfernt werden (unlock) --
 
