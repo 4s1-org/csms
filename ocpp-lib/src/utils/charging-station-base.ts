@@ -24,5 +24,5 @@ export abstract class ChargingStationBase implements IReceiveMessage {
     return new Date().toISOString()
   }
 
-  public abstract receive(payload: RequestBaseDto, action: OcppActionEnum): ResponseBaseDto
+  public abstract receive(payload: RequestBaseDto): ResponseBaseDto
 }

@@ -138,7 +138,7 @@ export abstract class WsClientBase implements ISendMessage {
     // Verarbeitung der Daten
     let responsePayload: ResponseBaseDto
     try {
-      responsePayload = receiveMessage.receive(msg.payload, msg.action)
+      responsePayload = receiveMessage.receive(msg.payload)
     } catch (err) {
       if (err instanceof CsmsError) {
         this.logger.warn(`CS doesn't like the message`)
@@ -197,7 +197,9 @@ export abstract class WsClientBase implements ISendMessage {
     const pendingPromise = this.requestList[0]
     if (pendingPromise) {
       if (pendingPromise.msg.messageId === msg.messageId) {
-        this.logger.warn(`Incoming Callerror | ${pendingPromise.msg.action} | ${msg.messageId} | ${msg.errorCode}`)
+        this.logger.warn(
+          `Incoming Callerror | ${pendingPromise.msg.action} | ${msg.messageId} | ${msg.errorCode} | ${msg.errorDescription}`,
+        )
         pendingPromise.reject(new Error(`${msg.errorCode} | ${msg.errorDescription || '---'}`))
       }
       pendingPromise.reject()
@@ -205,7 +207,7 @@ export abstract class WsClientBase implements ISendMessage {
   }
 
   private sendError(msg: OcppCallerrorDto): void {
-    this.logger.info(`Outgoing Callerror | ${msg.messageId}`)
+    this.logger.info(`Outgoing Callerror | ${msg.messageId} | ${msg.errorCode} | ${msg.errorDescription}`)
     this.sendInternal(msg.toMessageString())
   }
 }
