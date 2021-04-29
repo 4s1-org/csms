@@ -44,60 +44,39 @@ export abstract class WsClientBase implements ISendMessage {
 
     try {
       this.logger.debug('Incoming data', data)
-      msg = OcppRpcHandler.instance.validateAndConvert(data)
+
+      // Typ der eingehenden Daten bestimmen.
+      try {
+        msg = OcppRpcHandler.instance.validateAndConvert(data)
+      } catch (err) {
+        if (err instanceof OcppRpcValidationError) {
+          this.logger.warn(`OcppRpcValidationError in received data`)
+          this.sendError(new OcppCallerrorDto(err.messageId, err.errorCode, err.errorDescription))
+          return
+        }
+        throw err
+      }
 
       if (msg instanceof OcppCallDto) {
-        this.logger.info(`Incoming Request | ${msg.action} | ${msg.messageId}`)
-        PayloadValidator.instance.validateRequestPayload(msg)
-        PayloadConverter.instance.convertRequestPayload(msg)
-        // Verarbeitung der Daten
-        const responsePayload: ResponseBaseDto = receiveMessage.receive(msg.payload, msg.action)
-        // Antwortobjekt erstellen
-        const responseCall = new OcppCallresultDto(msg.messageId, responsePayload)
-        // Anwortdaten validieren (nice to have)
-        PayloadValidator.instance.validateResponsePayload(responseCall, msg.action)
-        this.logger.info(`Outgoing Response | ${msg.action} | ${msg.messageId}`)
-        this.sendInternal(responseCall.toMessageString())
-        return
+        this.handleCall(msg, receiveMessage)
       } else if (msg instanceof OcppCallresultDto) {
-        const pendingPromise = this.requestList[0]
-        if (pendingPromise) {
-          if (pendingPromise.msg.messageId === msg.messageId) {
-            const idx = this.requestList.indexOf(pendingPromise)
-            this.requestList.splice(idx, 1)
-            this.logger.info(`Incoming Response | ${pendingPromise.msg.action} | ${msg.messageId}`)
-            PayloadValidator.instance.validateResponsePayload(msg, pendingPromise.msg.action)
-            PayloadConverter.instance.convertResponsePayload(msg, pendingPromise.msg.action)
-            pendingPromise.resolve(msg.payload)
-            return
-          }
-          pendingPromise.reject()
-        }
+        this.handleCallresult(msg)
       } else if (msg instanceof OcppCallerrorDto) {
-        // ToDo
-        return
-      }
-      throw new Error('Invalid pending promise state')
-    } catch (err) {
-      let errMsg: OcppCallerrorDto
-
-      if (err instanceof OcppRpcValidationError) {
-        this.logger.warn(`Validation Error | ${err.errorCode} | ${err.errorDescription}`)
-        errMsg = new OcppCallerrorDto(err.messageId, err.errorCode, err.errorDescription)
-      } else if (err instanceof CsmsError) {
-        const messageId: string = msg?.messageId || ''
-        this.logger.warn(`CSMS Error | ${err.errorCode} | ${err.errorDescription}`)
-        errMsg = new OcppCallerrorDto(messageId, err.errorCode, err.errorDescription)
+        this.handleCallerror(msg)
       } else {
-        const messageId: string = msg?.messageId || ''
-        this.logger.fatal('Internal Server Error')
-        this.logger.fatal(err)
-        errMsg = new OcppCallerrorDto(messageId, OcppErrorCodeEnum.InternalError)
+        throw new Error('Invalid RPC message type')
       }
+    } catch (err) {
+      this.logger.fatal('Internal Server Error')
+      this.logger.fatal(err)
+
       // Niemals auf einen Fehler mit einem neuen Fehler Antworten um PingPong zu vermeiden
       if (msg instanceof OcppCallerrorDto) {
-        return undefined
+        return
       }
+
+      const messageId: string = msg?.messageId || ''
+      const errMsg = new OcppCallerrorDto(messageId, OcppErrorCodeEnum.InternalError)
       this.sendInternal(errMsg.toMessageString())
     }
   }
@@ -125,7 +104,7 @@ export abstract class WsClientBase implements ISendMessage {
       }
 
       const msg = new OcppCallDto(uuid(), mapping.action, payload)
-      this.logger.info(`Outgoing Request | ${msg.action} | ${msg.messageId}`)
+      this.logger.info(`Outgoing Call | ${msg.action} | ${msg.messageId}`)
       this.requestList.push(new PendingPromises(msg, resolve, reject))
       if (!this.sendInternal(msg.toMessageString())) {
         reject('Socket not open')
@@ -137,4 +116,96 @@ export abstract class WsClientBase implements ISendMessage {
    * Internal implementation to send a message.
    */
   protected abstract sendInternal(msg: string): boolean
+
+  /**
+   * Behandelt eine eingehende Anfrage.
+   */
+  private handleCall(msg: OcppCallDto, receiveMessage: IReceiveMessage): void {
+    this.logger.info(`Incoming Call | ${msg.action} | ${msg.messageId}`)
+    // Payload validieren und konvertieren
+    try {
+      PayloadValidator.instance.validateRequestPayload(msg)
+      PayloadConverter.instance.convertRequestPayload(msg)
+    } catch (err) {
+      if (err instanceof CsmsError) {
+        this.logger.warn(`Payload is invalid`)
+        this.sendError(new OcppCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
+        return
+      }
+      throw err
+    }
+
+    // Verarbeitung der Daten
+    let responsePayload: ResponseBaseDto
+    try {
+      responsePayload = receiveMessage.receive(msg.payload, msg.action)
+    } catch (err) {
+      if (err instanceof CsmsError) {
+        this.logger.warn(`CS doesn't like the message`)
+        this.sendError(new OcppCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
+        return
+      }
+      throw err
+    }
+
+    // Antwortobjekt erstellen
+    const responseCall = new OcppCallresultDto(msg.messageId, responsePayload)
+
+    // Anwortdaten validieren (nice to have)
+    try {
+      PayloadValidator.instance.validateResponsePayload(responseCall, msg.action)
+    } catch (err) {
+      // Hier soll es auch bei einem Fehler weiter gehen.
+      if (err instanceof CsmsError) {
+        this.logger.warn(`Server send an invalid payload back | ${err.errorCode} | ${err.errorDescription}`)
+      }
+    }
+
+    this.logger.info(`Outgoing Callresult | ${msg.action} | ${msg.messageId}`)
+    this.sendInternal(responseCall.toMessageString())
+  }
+
+  /**
+   * Behandelt eine eingehende Anwort auf eine Anfrage.
+   */
+  private handleCallresult(msg: OcppCallresultDto): void {
+    const pendingPromise = this.requestList[0]
+    if (pendingPromise) {
+      if (pendingPromise.msg.messageId !== msg.messageId) {
+        pendingPromise.reject()
+        return
+      }
+      const idx = this.requestList.indexOf(pendingPromise)
+      this.requestList.splice(idx, 1)
+      this.logger.info(`Incoming Callresult | ${pendingPromise.msg.action} | ${msg.messageId}`)
+      try {
+        PayloadValidator.instance.validateResponsePayload(msg, pendingPromise.msg.action)
+        PayloadConverter.instance.convertResponsePayload(msg, pendingPromise.msg.action)
+        pendingPromise.resolve(msg.payload)
+      } catch (err) {
+        if (err instanceof CsmsError) {
+          this.logger.warn(`Payload is invalid`)
+          this.sendError(new OcppCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
+        }
+        pendingPromise.resolve(null)
+        throw err
+      }
+    }
+  }
+
+  private handleCallerror(msg: OcppCallerrorDto): void {
+    const pendingPromise = this.requestList[0]
+    if (pendingPromise) {
+      if (pendingPromise.msg.messageId === msg.messageId) {
+        this.logger.warn(`Incoming Callerror | ${pendingPromise.msg.action} | ${msg.messageId} | ${msg.errorCode}`)
+        pendingPromise.reject(new Error(`${msg.errorCode} | ${msg.errorDescription || '---'}`))
+      }
+      pendingPromise.reject()
+    }
+  }
+
+  private sendError(msg: OcppCallerrorDto): void {
+    this.logger.info(`Outgoing Callerror | ${msg.messageId}`)
+    this.sendInternal(msg.toMessageString())
+  }
 }

@@ -9,17 +9,11 @@ class Simulation extends SimulationBase {
   public async simulate(): Promise<void> {
     await this.connect()
 
-    //await this.cs.sendBootNotificationRequest()
+    try {
+      await this.cs.sendHeartbeatRequest()
+    } catch (err) {}
+
     await sleep(200)
-    //await this.cs.sendAuthorizationRequest()
-    await sleep(200)
-    //await this.cs.sendMeterValueRequest()
-    await sleep(200)
-    await this.cs.sendHeartbeatRequest()
-    await sleep(200)
-    await this.cs.sendNotifyEventRequest_LockFailure()
-    await sleep(200)
-    await this.cs.sendHeartbeatRequest()
     await sleep(200)
     this.client.disconnect()
   }
