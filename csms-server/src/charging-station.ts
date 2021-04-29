@@ -70,6 +70,17 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     if (payload instanceof BootNotificationRequestDto) {
       return this.receiveBootNotificationRequest(payload)
     }
+
+    // B01.FR.10
+    // Before die CS aktzeptiert wurde sind nur folgende vier Kommandos erlaubt
+    // - BootNotificationRequest
+    // - TriggerMessageRequest
+    // - GetBaseReportRequest
+    // - GetReportRequest
+    if (this.model.state !== ColorStateEnum.Green) {
+      throw new CsmsError(OcppErrorCodeEnum.SecurityError, 'Charging Station is not accepted yet')
+    }
+
     if (payload instanceof HeartbeatRequestDto) {
       return this.receiveHeartbeatRequest(payload)
     }
