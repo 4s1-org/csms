@@ -61,8 +61,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           <button type="button" onClick={this.sendAuthorizationRequest_PinCode} disabled={!this.props.isConnected}>
             Send Authorization (with Pin Code)
           </button>
-        </li>
-        <li className="list-group-item">
+          &nspb;
           <button type="button" onClick={this.sendAuthorizationRequest_Rfid} disabled={!this.props.isConnected}>
             Send Authorization (with RFID)
           </button>
