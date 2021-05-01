@@ -6,6 +6,7 @@ import {
   BootReasonEnum,
   ChargingStationDto,
   ConnectorStatusEnum,
+  HeartbeatRequestDto,
   IdTokenDto,
   IdTokenEnum,
   StatusNotificationRequestDto,
@@ -87,16 +88,13 @@ class ChargingStationComp extends React.Component<IProps, IState> {
 
   private async sendBootNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    const payload = new BootNotificationRequestDto(
-      new ChargingStationDto('SimulatorX', 'CSS-UI'),
-      BootReasonEnum.PowerUp,
-    )
+    const payload = new BootNotificationRequestDto(new ChargingStationDto('SimulatorX', 'CSS-UI'), BootReasonEnum.PowerUp)
     await this.props.cs?.sendBootNotificationRequest(payload)
   }
 
   private async sendHeartbeatRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendHeartbeatRequest()
+    await this.props.cs?.sendHeartbeatRequest(new HeartbeatRequestDto())
   }
 
   private async sendAuthorizationRequest_PinCode(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
