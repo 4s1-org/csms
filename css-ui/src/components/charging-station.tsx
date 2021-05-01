@@ -6,8 +6,10 @@ import {
   BootReasonEnum,
   ChargingStationDto,
   ConnectorStatusEnum,
+  HeartbeatRequestDto,
   IdTokenDto,
   IdTokenEnum,
+  NotifyReportRequestDto,
   StatusNotificationRequestDto,
   TransactionDto,
   TransactionEventEnum,
@@ -33,7 +35,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     this.sendAuthorizationRequest_Rfid = this.sendAuthorizationRequest_Rfid.bind(this)
     this.sendStatusNotificationRequest = this.sendStatusNotificationRequest.bind(this)
     this.sendMeterValueRequest = this.sendMeterValueRequest.bind(this)
-    this.sendNotifyEventRequest_LockFailure = this.sendNotifyEventRequest_LockFailure.bind(this)
+    this.sendNotifyReportRequest = this.sendNotifyReportRequest.bind(this)
     this.sendTransactionEventRequest = this.sendTransactionEventRequest.bind(this)
   }
 
@@ -59,8 +61,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           <button type="button" onClick={this.sendAuthorizationRequest_PinCode} disabled={!this.props.isConnected}>
             Send Authorization (with Pin Code)
           </button>
-        </li>
-        <li className="list-group-item">
+          &nspb;
           <button type="button" onClick={this.sendAuthorizationRequest_Rfid} disabled={!this.props.isConnected}>
             Send Authorization (with RFID)
           </button>
@@ -71,8 +72,8 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendNotifyEventRequest_LockFailure} disabled={!this.props.isConnected}>
-            Send NotifyEvent (LockFailure)
+          <button type="button" onClick={this.sendNotifyReportRequest} disabled={!this.props.isConnected}>
+            Send NotifyReport
           </button>
         </li>
         <li className="list-group-item">
@@ -87,16 +88,13 @@ class ChargingStationComp extends React.Component<IProps, IState> {
 
   private async sendBootNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    const payload = new BootNotificationRequestDto(
-      new ChargingStationDto('SimulatorX', 'CSS-UI'),
-      BootReasonEnum.PowerUp,
-    )
+    const payload = new BootNotificationRequestDto(new ChargingStationDto('SimulatorX', 'CSS-UI'), BootReasonEnum.PowerUp)
     await this.props.cs?.sendBootNotificationRequest(payload)
   }
 
   private async sendHeartbeatRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendHeartbeatRequest()
+    await this.props.cs?.sendHeartbeatRequest(new HeartbeatRequestDto())
   }
 
   private async sendAuthorizationRequest_PinCode(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
@@ -125,9 +123,10 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     )
   }
 
-  private async sendNotifyEventRequest_LockFailure(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendNotifyReportRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendNotifyEventRequest_LockFailure()
+    const payload = new NotifyReportRequestDto(1, this.props.cs?.currentTime || '', 34)
+    await this.props.cs?.sendNotifyReportRequest(payload)
   }
 
   private async sendTransactionEventRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
