@@ -122,11 +122,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   /**
    * B05 - Set Variables
    */
-  public async sendSetVariablesRequest(): Promise<SetVariablesResponseDto> {
-    const payload = new SetVariablesRequestDto([
-      new SetVariableDataDto('Foo', new ComponentDto('Test'), new VariableDto('yyy')),
-      new SetVariableDataDto('Bar', new ComponentDto('Test'), new VariableDto('xxx')),
-    ])
+  public async sendSetVariablesRequest(payload: SetVariablesRequestDto): Promise<SetVariablesResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -135,8 +131,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   /**
    * B07 - Get Base Report
    */
-  public async sendGetBaseReportRequest(): Promise<GetBaseReportResponseDto> {
-    const payload = new GetBaseReportRequestDto(1, ReportBaseEnum.SummaryInventory)
+  public async sendGetBaseReportRequest(payload: GetBaseReportRequestDto): Promise<GetBaseReportResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -146,8 +141,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * G03 - Change Availability EVSE/Connector
    * G04 - Change Availability Charging Station
    */
-  public async sendChangeAvailabilityRequest(): Promise<ChangeAvailabilityResponseDto> {
-    const payload = new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative)
+  public async sendChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): Promise<ChangeAvailabilityResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -156,8 +150,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   /**
    * B06 - Get Variables
    */
-  public async sendGetVariablesRequest(): Promise<GetVariablesResponseDto> {
-    const payload = new GetVariablesRequestDto([new GetVariableDataDto(new ComponentDto('test'), new VariableDto('foo'))])
+  public async sendGetVariablesRequest(payload: GetVariablesRequestDto): Promise<GetVariablesResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -167,8 +160,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B11 - Reset - Without Ongoing Transaction
    * B12 - Reset - With Ongoing Transaction
    */
-  public async sendRequestResetRequest(): Promise<ResetResponseDto> {
-    const payload = new ResetRequestDto(ResetEnum.Immediate)
+  public async sendRequestResetRequest(payload: ResetRequestDto): Promise<ResetResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -178,8 +170,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * P01 - Data Transfer to the Charging Station
    * P02 - Data Transfer to the CSMS
    */
-  public async sendDataTransferRequest(): Promise<DataTransferResponseDto> {
-    const payload = new DataTransferRequestDto('foobar')
+  public async sendDataTransferRequest(payload: DataTransferRequestDto): Promise<DataTransferResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -204,7 +195,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * E12 - Inform CSMS of an Offline Occurred Transaction
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveHeartbeatRequest(_payload: HeartbeatRequestDto): HeartbeatResponseDto {
+  private receiveHeartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
     // Payload not required
     return new HeartbeatResponseDto(this.currentTime)
   }

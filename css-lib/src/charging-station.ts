@@ -97,8 +97,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B04 - Offline Behavior Idle Charging Station
    * E12 - Inform CSMS of an Offline Occurred Transaction
    */
-  public async sendHeartbeatRequest(): Promise<HeartbeatResponseDto> {
-    const payload = new HeartbeatRequestDto()
+  public async sendHeartbeatRequest(payload: HeartbeatRequestDto): Promise<HeartbeatResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -184,59 +183,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * Mentioned in:
    * B07 - Get Base Report
    */
-  public async sendNotifyReportRequest(): Promise<NotifyReportResponseDto> {
-    const payload = new NotifyReportRequestDto(1, new Date().toISOString(), 1)
-    const res = await this.sendMessage.send(payload)
-    // ToDo Handling
-    return res
-  }
-
-  /**
-   * G05 - Lock Failure
-   */
-  public async sendNotifyEventRequest_LockFailure(): Promise<NotifyEventResponseDto> {
-    // ToDo: Das so umsetzen:
-    // G05.FR.02
-    // The Charging Station SHALL send a NotifyEventRequest to the CSMS for the
-    // ConnectorPlugRetentionLock component with
-    // variable = Problem,
-    // Value = True.
-
-    const data: EventDataDto[] = []
-    data.push(
-      new EventDataDto(
-        1,
-        new Date().toISOString(),
-        EventTriggerEnum.Delta,
-        'foo',
-        new ComponentDto('ConnectorPlugRetentionLock'),
-        EventNotificationEnum.HardWiredMonitor,
-        new VariableDto('Problem'),
-      ),
-    )
-    const payload = new NotifyEventRequestDto(new Date().toISOString(), 1, data)
-    const res = await this.sendMessage.send(payload)
-    // ToDo Handling
-    return res
-  }
-
-  /**
-   * N07 - Alert Event
-   */
-  public async sendNotifyEventRequest_AlertEvent(): Promise<NotifyEventResponseDto> {
-    const data: EventDataDto[] = []
-    data.push(
-      new EventDataDto(
-        1,
-        new Date().toISOString(),
-        EventTriggerEnum.Alerting,
-        'foo',
-        new ComponentDto('ConnectorPlugRetentionLock'),
-        EventNotificationEnum.HardWiredMonitor,
-        new VariableDto('Problem'),
-      ),
-    )
-    const payload = new NotifyEventRequestDto(new Date().toISOString(), 1, data)
+  public async sendNotifyReportRequest(payload: NotifyReportRequestDto): Promise<NotifyReportResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res

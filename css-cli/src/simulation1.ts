@@ -7,6 +7,7 @@ import {
   ChargingStationDto,
   ConnectorStatusEnum,
   EvseDto,
+  HeartbeatRequestDto,
   IdTokenDto,
   IdTokenEnum,
   MeterValueDto,
@@ -80,7 +81,7 @@ class Simulation extends SimulationBase {
     // G02 - Heartbeat
     // Heartbeat regelmässig senden
     const immediateObj = setInterval(async () => {
-      await this.cs.sendHeartbeatRequest()
+      await this.cs.sendHeartbeatRequest(new HeartbeatRequestDto())
     }, this.cs.heartbeatInterval * 1000)
     await sleep(3000)
 

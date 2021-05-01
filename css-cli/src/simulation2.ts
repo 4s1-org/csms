@@ -1,4 +1,5 @@
 import { sleep } from '@yellowgarbagebag/common-lib'
+import { HeartbeatRequestDto } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './simulation-base'
 
 class Simulation extends SimulationBase {
@@ -15,11 +16,7 @@ class Simulation extends SimulationBase {
     await sleep(200)
     //await this.cs.sendMeterValueRequest()
     await sleep(200)
-    await this.cs.sendHeartbeatRequest()
-    await sleep(200)
-    await this.cs.sendNotifyEventRequest_LockFailure()
-    await sleep(200)
-    await this.cs.sendHeartbeatRequest()
+    await this.cs.sendHeartbeatRequest(new HeartbeatRequestDto())
     await sleep(200)
     this.client.disconnect()
   }
