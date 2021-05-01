@@ -67,7 +67,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     this.model.lastAction = payload.constructor.name.replace('Dto', '')
 
     if (payload instanceof BootNotificationRequestDto) {
-      return this.receiveBootNotificationRequest(payload)
+      return this.receiveBootNotification(payload)
     }
 
     // B01.FR.10
@@ -81,25 +81,25 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     }
 
     if (payload instanceof HeartbeatRequestDto) {
-      return this.receiveHeartbeatRequest(payload)
+      return this.receiveHeartbeat(payload)
     }
     if (payload instanceof StatusNotificationRequestDto) {
-      return this.receiveStatusNotificationRequest(payload)
+      return this.receiveStatusNotification(payload)
     }
     if (payload instanceof AuthorizeRequestDto) {
-      return this.receiveAuthorizeRequest(payload)
+      return this.receiveAuthorize(payload)
     }
     if (payload instanceof MeterValuesRequestDto) {
-      return this.receiveMeterValuesRequest(payload)
+      return this.receiveMeterValues(payload)
     }
     if (payload instanceof NotifyEventRequestDto) {
-      return this.receiveNotifyEventRequest(payload)
+      return this.receiveNotifyEvent(payload)
     }
     if (payload instanceof NotifyReportRequestDto) {
-      return this.receiveNotifyReportRequest(payload)
+      return this.receiveNotifyReport(payload)
     }
     if (payload instanceof TransactionEventRequestDto) {
-      return this.receiveTransactionEventRequest(payload)
+      return this.receiveTransactionEvent(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -122,7 +122,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   /**
    * B05 - Set Variables
    */
-  public async sendSetVariablesRequest(payload: SetVariablesRequestDto): Promise<SetVariablesResponseDto> {
+  public async sendSetVariables(payload: SetVariablesRequestDto): Promise<SetVariablesResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -131,7 +131,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   /**
    * B07 - Get Base Report
    */
-  public async sendGetBaseReportRequest(payload: GetBaseReportRequestDto): Promise<GetBaseReportResponseDto> {
+  public async sendGetBaseReport(payload: GetBaseReportRequestDto): Promise<GetBaseReportResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -141,7 +141,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * G03 - Change Availability EVSE/Connector
    * G04 - Change Availability Charging Station
    */
-  public async sendChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): Promise<ChangeAvailabilityResponseDto> {
+  public async sendChangeAvailability(payload: ChangeAvailabilityRequestDto): Promise<ChangeAvailabilityResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -150,7 +150,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   /**
    * B06 - Get Variables
    */
-  public async sendGetVariablesRequest(payload: GetVariablesRequestDto): Promise<GetVariablesResponseDto> {
+  public async sendGetVariables(payload: GetVariablesRequestDto): Promise<GetVariablesResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -160,7 +160,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B11 - Reset - Without Ongoing Transaction
    * B12 - Reset - With Ongoing Transaction
    */
-  public async sendRequestResetRequest(payload: ResetRequestDto): Promise<ResetResponseDto> {
+  public async sendRequestReset(payload: ResetRequestDto): Promise<ResetResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -170,7 +170,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * P01 - Data Transfer to the Charging Station
    * P02 - Data Transfer to the CSMS
    */
-  public async sendDataTransferRequest(payload: DataTransferRequestDto): Promise<DataTransferResponseDto> {
+  public async sendDataTransfer(payload: DataTransferRequestDto): Promise<DataTransferResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -181,7 +181,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B02 - Cold Boot Charging Station - Pending
    * B03 - Cold Boot Charging Station - Rejected
    */
-  private receiveBootNotificationRequest(payload: BootNotificationRequestDto): BootNotificationResponseDto {
+  private receiveBootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
     this.logger.info(`Boot reason: ${payload.reason}`)
     this.model.state = ColorStateEnum.Green
     return new BootNotificationResponseDto(this.currentTime, this._heartbeatInterval, RegistrationStatusEnum.Accepted)
@@ -195,7 +195,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * E12 - Inform CSMS of an Offline Occurred Transaction
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private receiveHeartbeatRequest(payload: HeartbeatRequestDto): HeartbeatResponseDto {
+  private receiveHeartbeat(payload: HeartbeatRequestDto): HeartbeatResponseDto {
     // Payload not required
     return new HeartbeatResponseDto(this.currentTime)
   }
@@ -203,7 +203,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   /**
    * J01 - Sending Meter Values not related to a transaction
    */
-  private receiveMeterValuesRequest(payload: MeterValuesRequestDto): MeterValuesResponseDto {
+  private receiveMeterValues(payload: MeterValuesRequestDto): MeterValuesResponseDto {
     if (payload.meterValue) {
       for (const meterValue of payload.meterValue) {
         if (meterValue.sampledValue) {
@@ -230,7 +230,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * C02 - Authorization using a start button
    * C04 - Authorization using PIN-code
    */
-  private receiveAuthorizeRequest(payload: AuthorizeRequestDto): AuthorizeResponseDto {
+  private receiveAuthorize(payload: AuthorizeRequestDto): AuthorizeResponseDto {
     if (payload.idToken.type === IdTokenEnum.KeyCode) {
       if (payload.idToken.idToken === '1234') {
         // C04.FR.02 - alles richtig
@@ -274,7 +274,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * E12 - Inform CSMS of an Offline Occurred Transaction
    * E13 - Transaction-related message not accepted by CSMS
    */
-  private receiveStatusNotificationRequest(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
+  private receiveStatusNotification(payload: StatusNotificationRequestDto): StatusNotificationResponseDto {
     let colorState: ColorStateEnum = ColorStateEnum.Unknown
     switch (payload.connectorStatus) {
       case ConnectorStatusEnum.Available:
@@ -310,7 +310,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * G05 - Lock Failure
    * N07 - Alert Event
    */
-  private receiveNotifyEventRequest(payload: NotifyEventRequestDto): NotifyEventResponseDto {
+  private receiveNotifyEvent(payload: NotifyEventRequestDto): NotifyEventResponseDto {
     return new NotifyEventResponseDto()
   }
 
@@ -318,7 +318,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * Mentioned in:
    * B07 - Get Base Report
    */
-  private receiveNotifyReportRequest(payload: NotifyReportRequestDto): NotifyReportResponseDto {
+  private receiveNotifyReport(payload: NotifyReportRequestDto): NotifyReportResponseDto {
     return new NotifyReportResponseDto()
   }
 
@@ -337,7 +337,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B12 - Reset - With Ongoing Transaction
    * C02 - Authorization using a start button
    */
-  private receiveTransactionEventRequest(payload: TransactionEventRequestDto): TransactionEventResponseDto {
+  private receiveTransactionEvent(payload: TransactionEventRequestDto): TransactionEventResponseDto {
     if (payload.meterValue) {
       for (const meterValue of payload.meterValue) {
         if (meterValue.sampledValue) {

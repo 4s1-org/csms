@@ -58,22 +58,22 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
 
   public receive(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof SetVariablesRequestDto) {
-      return this.receiveSetVariablesRequest(payload)
+      return this.receiveSetVariables(payload)
     }
     if (payload instanceof ChangeAvailabilityRequestDto) {
-      return this.receiveChangeAvailabilityRequest(payload)
+      return this.receiveChangeAvailability(payload)
     }
     if (payload instanceof GetVariablesRequestDto) {
-      return this.receiveGetVariablesRequest(payload)
+      return this.receiveGetVariables(payload)
     }
     if (payload instanceof GetBaseReportRequestDto) {
-      return this.receiveGetBaseReportRequest(payload)
+      return this.receiveGetBaseReport(payload)
     }
     if (payload instanceof ResetRequestDto) {
-      return this.receiveRequestResetRequest(payload)
+      return this.receiveRequestReset(payload)
     }
     if (payload instanceof DataTransferRequestDto) {
-      return this.receiveDataTransferRequest(payload)
+      return this.receiveDataTransfer(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -84,7 +84,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B02 - Cold Boot Charging Station - Pending
    * B03 - Cold Boot Charging Station - Rejected
    */
-  public async sendBootNotificationRequest(payload: BootNotificationRequestDto): Promise<BootNotificationResponseDto> {
+  public async sendBootNotification(payload: BootNotificationRequestDto): Promise<BootNotificationResponseDto> {
     const res = await this.sendMessage.send(payload)
     this._heartbeatInterval = res.interval
     return res
@@ -97,7 +97,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B04 - Offline Behavior Idle Charging Station
    * E12 - Inform CSMS of an Offline Occurred Transaction
    */
-  public async sendHeartbeatRequest(payload: HeartbeatRequestDto): Promise<HeartbeatResponseDto> {
+  public async sendHeartbeat(payload: HeartbeatRequestDto): Promise<HeartbeatResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -108,7 +108,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * C02 - Authorization using a start button
    * C04 - Authorization using PIN-code
    */
-  public async sendAuthorizationRequest(payload: AuthorizeRequestDto): Promise<AuthorizeResponseDto> {
+  public async sendAuthorization(payload: AuthorizeRequestDto): Promise<AuthorizeResponseDto> {
     const res = await this.sendMessage.send(payload)
 
     if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
@@ -121,7 +121,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   /**
    * J01 - Sending Meter Values not related to a transaction
    */
-  public async sendMeterValueRequest(payload: MeterValuesRequestDto): Promise<MeterValuesResponseDto> {
+  public async sendMeterValue(payload: MeterValuesRequestDto): Promise<MeterValuesResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -145,7 +145,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B12 - Reset - With Ongoing Transaction
    * C02 - Authorization using a start button
    */
-  public async sendTransactionEventRequest(payload: TransactionEventRequestDto): Promise<TransactionEventResponseDto> {
+  public async sendTransactionEvent(payload: TransactionEventRequestDto): Promise<TransactionEventResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -154,7 +154,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   /**
    * B05 - Set Variables
    */
-  private receiveSetVariablesRequest(payload: SetVariablesRequestDto): SetVariablesResponseDto {
+  private receiveSetVariables(payload: SetVariablesRequestDto): SetVariablesResponseDto {
     const result: SetVariableResultDto[] = []
     for (const x of payload.setVariableData) {
       result.push(new SetVariableResultDto(SetVariableStatusEnum.Accepted, x.component, x.variable))
@@ -174,7 +174,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * E09 - When cable disconnected on EV-side: Stop Transaction
    * E10 - When cable disconnected on EV-side: Suspend Transaction
    */
-  public async sendStatusNotificationRequest(payload: StatusNotificationRequestDto): Promise<StatusNotificationResponseDto> {
+  public async sendStatusNotification(payload: StatusNotificationRequestDto): Promise<StatusNotificationResponseDto> {
     const res = await this.sendMessage.send(payload)
     return res
   }
@@ -183,7 +183,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * Mentioned in:
    * B07 - Get Base Report
    */
-  public async sendNotifyReportRequest(payload: NotifyReportRequestDto): Promise<NotifyReportResponseDto> {
+  public async sendNotifyReport(payload: NotifyReportRequestDto): Promise<NotifyReportResponseDto> {
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
@@ -193,21 +193,21 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * G03 - Change Availability EVSE/Connector
    * G04 - Change Availability Charging Station
    */
-  private receiveChangeAvailabilityRequest(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
+  private receiveChangeAvailability(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
     return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
   }
 
   /**
    * B07 - Get Base Report
    */
-  private receiveGetBaseReportRequest(payload: GetBaseReportRequestDto): GetBaseReportResponseDto {
+  private receiveGetBaseReport(payload: GetBaseReportRequestDto): GetBaseReportResponseDto {
     return new GetBaseReportResponseDto(GenericDeviceModelStatusEnum.Accepted)
   }
 
   /**
    * B06 - Get Variables
    */
-  private receiveGetVariablesRequest(payload: GetVariablesRequestDto): GetVariablesResponseDto {
+  private receiveGetVariables(payload: GetVariablesRequestDto): GetVariablesResponseDto {
     const result: GetVariableResultDto[] = []
     for (const x of payload.getVariableData) {
       result.push(new GetVariableResultDto(GetVariableStatusEnum.Accepted, x.component, x.variable))
@@ -219,7 +219,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B11 - Reset - Without Ongoing Transaction
    * B12 - Reset - With Ongoing Transaction
    */
-  private receiveRequestResetRequest(payload: ResetRequestDto): ResetResponseDto {
+  private receiveRequestReset(payload: ResetRequestDto): ResetResponseDto {
     return new ResetResponseDto(ResetStatusEnum.Accepted)
   }
 
@@ -227,7 +227,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * P01 - Data Transfer to the Charging Station
    * P02 - Data Transfer to the CSMS
    */
-  private receiveDataTransferRequest(payload: DataTransferRequestDto): DataTransferResponseDto {
+  private receiveDataTransfer(payload: DataTransferRequestDto): DataTransferResponseDto {
     return new DataTransferResponseDto(DataTransferStatusEnum.Rejected)
   }
 }

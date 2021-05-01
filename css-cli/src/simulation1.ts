@@ -39,18 +39,18 @@ class Simulation extends SimulationBase {
 
     // B01 - Cold Boot Charging Station
     // Verfügbarkeit der Ladesäule signalisieren
-    await this.cs.sendBootNotificationRequest(
+    await this.cs.sendBootNotification(
       new BootNotificationRequestDto(new ChargingStationDto('Simulator1', 'CSS-CLI'), BootReasonEnum.PowerUp),
     )
     await sleep(1000)
 
     // G01 - Status Notification
     // n-Connectoren anmelden
-    await this.cs.sendStatusNotificationRequest(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 1, 1))
+    await this.cs.sendStatusNotification(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 1, 1))
     await sleep(200)
-    await this.cs.sendStatusNotificationRequest(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 2, 1))
+    await this.cs.sendStatusNotification(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 2, 1))
     await sleep(200)
-    await this.cs.sendStatusNotificationRequest(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 3, 1))
+    await this.cs.sendStatusNotification(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 3, 1))
     await sleep(200)
 
     // Aktuelle Zählerstande mitteilen (ist nicht vorgegeben)
@@ -58,7 +58,7 @@ class Simulation extends SimulationBase {
       const sampleValue = new SampledValueDto(0)
       const meterValue = new MeterValueDto([sampleValue], this.cs.currentTime)
       const payload = new MeterValuesRequestDto(1, [meterValue])
-      await this.cs.sendMeterValueRequest(payload)
+      await this.cs.sendMeterValue(payload)
       await sleep(150)
     }
 
@@ -66,7 +66,7 @@ class Simulation extends SimulationBase {
       const sampleValue = new SampledValueDto(wattHours)
       const meterValue = new MeterValueDto([sampleValue], this.cs.currentTime)
       const payload = new MeterValuesRequestDto(2, [meterValue])
-      await this.cs.sendMeterValueRequest(payload)
+      await this.cs.sendMeterValue(payload)
       await sleep(150)
     }
 
@@ -74,14 +74,14 @@ class Simulation extends SimulationBase {
       const sampleValue = new SampledValueDto(0)
       const meterValue = new MeterValueDto([sampleValue], this.cs.currentTime)
       const payload = new MeterValuesRequestDto(3, [meterValue])
-      await this.cs.sendMeterValueRequest(payload)
+      await this.cs.sendMeterValue(payload)
       await sleep(150)
     }
 
     // G02 - Heartbeat
     // Heartbeat regelmässig senden
     const immediateObj = setInterval(async () => {
-      await this.cs.sendHeartbeatRequest(new HeartbeatRequestDto())
+      await this.cs.sendHeartbeat(new HeartbeatRequestDto())
     }, this.cs.heartbeatInterval * 1000)
     await sleep(3000)
 
@@ -89,7 +89,7 @@ class Simulation extends SimulationBase {
     // E02 - Start Transaction - Cable Plugin First
 
     // StatusNotificationRequest(Occupied)
-    await this.cs.sendStatusNotificationRequest(
+    await this.cs.sendStatusNotification(
       new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Occupied, evseId, connectorId),
     )
     await sleep(500)
@@ -119,7 +119,7 @@ class Simulation extends SimulationBase {
       )
       payload.evse = evse
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
-      await this.cs.sendTransactionEventRequest(payload)
+      await this.cs.sendTransactionEvent(payload)
       await sleep(5000)
     }
 
@@ -127,7 +127,7 @@ class Simulation extends SimulationBase {
     // Authorisierung
     {
       const payload = new AuthorizeRequestDto(idToken)
-      await this.cs.sendAuthorizationRequest(payload)
+      await this.cs.sendAuthorization(payload)
       await sleep(500)
     }
 
@@ -185,31 +185,31 @@ class Simulation extends SimulationBase {
       wattHours += 1212
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
-      await this.cs.sendTransactionEventRequest(payload)
+      await this.cs.sendTransactionEvent(payload)
       await sleep(2000)
 
       wattHours += 1574
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
-      await this.cs.sendTransactionEventRequest(payload)
+      await this.cs.sendTransactionEvent(payload)
       await sleep(2000)
 
       wattHours += 3132
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
-      await this.cs.sendTransactionEventRequest(payload)
+      await this.cs.sendTransactionEvent(payload)
       await sleep(2000)
 
       wattHours += 3215
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
-      await this.cs.sendTransactionEventRequest(payload)
+      await this.cs.sendTransactionEvent(payload)
       await sleep(2000)
 
       wattHours += 1672
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
-      await this.cs.sendTransactionEventRequest(payload)
+      await this.cs.sendTransactionEvent(payload)
       await sleep(2000)
 
       wattHours += 963
@@ -244,14 +244,14 @@ class Simulation extends SimulationBase {
       )
       payload.idToken = idToken
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
-      await this.cs.sendTransactionEventRequest(payload)
+      await this.cs.sendTransactionEvent(payload)
       await sleep(200)
     }
 
     // -- Kabel wird vom Fahrer entfernt --
 
     // StatusNotificationRequest(Available)
-    await this.cs.sendStatusNotificationRequest(
+    await this.cs.sendStatusNotification(
       new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, evseId, connectorId),
     )
 
@@ -277,7 +277,7 @@ class Simulation extends SimulationBase {
         transaction,
       )
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
-      await this.cs.sendTransactionEventRequest(payload)
+      await this.cs.sendTransactionEvent(payload)
       await sleep(2000)
     }
 

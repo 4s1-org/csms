@@ -29,55 +29,55 @@ class ChargingStationComp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
 
-    this.sendBootNotificationRequest = this.sendBootNotificationRequest.bind(this)
-    this.sendHeartbeatRequest = this.sendHeartbeatRequest.bind(this)
-    this.sendAuthorizationRequest_PinCode = this.sendAuthorizationRequest_PinCode.bind(this)
-    this.sendAuthorizationRequest_Rfid = this.sendAuthorizationRequest_Rfid.bind(this)
-    this.sendStatusNotificationRequest = this.sendStatusNotificationRequest.bind(this)
-    this.sendMeterValueRequest = this.sendMeterValueRequest.bind(this)
-    this.sendNotifyReportRequest = this.sendNotifyReportRequest.bind(this)
-    this.sendTransactionEventRequest = this.sendTransactionEventRequest.bind(this)
+    this.sendBootNotification = this.sendBootNotification.bind(this)
+    this.sendHeartbeat = this.sendHeartbeat.bind(this)
+    this.sendAuthorization_PinCode = this.sendAuthorization_PinCode.bind(this)
+    this.sendAuthorization_Rfid = this.sendAuthorization_Rfid.bind(this)
+    this.sendStatusNotification = this.sendStatusNotification.bind(this)
+    this.sendMeterValue = this.sendMeterValue.bind(this)
+    this.sendNotifyReport = this.sendNotifyReport.bind(this)
+    this.sendTransactionEvent = this.sendTransactionEvent.bind(this)
   }
 
   public render(): JSX.Element {
     return (
       <ul className="list-group">
         <li className="list-group-item">
-          <button type="button" onClick={this.sendBootNotificationRequest} disabled={!this.props.isConnected}>
+          <button type="button" onClick={this.sendBootNotification} disabled={!this.props.isConnected}>
             Send BootNotification
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendHeartbeatRequest} disabled={!this.props.isConnected}>
+          <button type="button" onClick={this.sendHeartbeat} disabled={!this.props.isConnected}>
             Send Heartbeat
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendStatusNotificationRequest} disabled={!this.props.isConnected}>
+          <button type="button" onClick={this.sendStatusNotification} disabled={!this.props.isConnected}>
             Send StatusNotification
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendAuthorizationRequest_PinCode} disabled={!this.props.isConnected}>
+          <button type="button" onClick={this.sendAuthorization_PinCode} disabled={!this.props.isConnected}>
             Send Authorization (with Pin Code)
           </button>
           &nspb;
-          <button type="button" onClick={this.sendAuthorizationRequest_Rfid} disabled={!this.props.isConnected}>
+          <button type="button" onClick={this.sendAuthorization_Rfid} disabled={!this.props.isConnected}>
             Send Authorization (with RFID)
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendMeterValueRequest} disabled={!this.props.isConnected}>
+          <button type="button" onClick={this.sendMeterValue} disabled={!this.props.isConnected}>
             Send MeterValue
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendNotifyReportRequest} disabled={!this.props.isConnected}>
+          <button type="button" onClick={this.sendNotifyReport} disabled={!this.props.isConnected}>
             Send NotifyReport
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendTransactionEventRequest} disabled={!this.props.isConnected}>
+          <button type="button" onClick={this.sendTransactionEvent} disabled={!this.props.isConnected}>
             Send TransactionEvent
           </button>
         </li>
@@ -86,50 +86,50 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     )
   }
 
-  private async sendBootNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendBootNotification(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
     const payload = new BootNotificationRequestDto(new ChargingStationDto('SimulatorX', 'CSS-UI'), BootReasonEnum.PowerUp)
-    await this.props.cs?.sendBootNotificationRequest(payload)
+    await this.props.cs?.sendBootNotification(payload)
   }
 
-  private async sendHeartbeatRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendHeartbeat(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendHeartbeatRequest(new HeartbeatRequestDto())
+    await this.props.cs?.sendHeartbeat(new HeartbeatRequestDto())
   }
 
-  private async sendAuthorizationRequest_PinCode(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendAuthorization_PinCode(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendAuthorizationRequest(new AuthorizeRequestDto(new IdTokenDto('234', IdTokenEnum.KeyCode)))
+    await this.props.cs?.sendAuthorization(new AuthorizeRequestDto(new IdTokenDto('234', IdTokenEnum.KeyCode)))
   }
 
-  private async sendAuthorizationRequest_Rfid(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendAuthorization_Rfid(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendAuthorizationRequest(new AuthorizeRequestDto(new IdTokenDto('bbb', IdTokenEnum.ISO14443)))
+    await this.props.cs?.sendAuthorization(new AuthorizeRequestDto(new IdTokenDto('bbb', IdTokenEnum.ISO14443)))
   }
 
-  private async sendMeterValueRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendMeterValue(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
     // ToDo
-    //await this.props.cs?.sendMeterValueRequest()
+    //await this.props.cs?.sendMeterValue()
   }
 
-  private async sendStatusNotificationRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendStatusNotification(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendStatusNotificationRequest(
+    await this.props.cs?.sendStatusNotification(
       new StatusNotificationRequestDto(this.props.cs?.currentTime, ConnectorStatusEnum.Available, 1, 1),
     )
-    await this.props.cs?.sendStatusNotificationRequest(
+    await this.props.cs?.sendStatusNotification(
       new StatusNotificationRequestDto(this.props.cs?.currentTime, ConnectorStatusEnum.Available, 2, 1),
     )
   }
 
-  private async sendNotifyReportRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendNotifyReport(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
     const payload = new NotifyReportRequestDto(1, this.props.cs?.currentTime || '', 34)
-    await this.props.cs?.sendNotifyReportRequest(payload)
+    await this.props.cs?.sendNotifyReport(payload)
   }
 
-  private async sendTransactionEventRequest(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendTransactionEvent(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
     const payload = new TransactionEventRequestDto(
       TransactionEventEnum.Started,
@@ -138,7 +138,7 @@ class ChargingStationComp extends React.Component<IProps, IState> {
       1,
       new TransactionDto('x'),
     )
-    await this.props.cs?.sendTransactionEventRequest(payload)
+    await this.props.cs?.sendTransactionEvent(payload)
   }
 }
 
