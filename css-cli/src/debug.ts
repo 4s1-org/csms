@@ -10,12 +10,12 @@ class Simulation extends SimulationBase {
   public async simulate(): Promise<void> {
     await this.connect()
 
-    // await this.cs.sendBootNotificationRequest(
+    // await this.cs.sendBootNotification(
     //   new BootNotificationRequestDto(new ChargingStationDto('Simulator1', 'CSS-CLI'), BootReasonEnum.PowerUp),
     // )
 
     try {
-      await this.cs.sendHeartbeatRequest(new HeartbeatRequestDto())
+      await this.cs.sendHeartbeat(new HeartbeatRequestDto())
     } catch (err) {}
 
     await sleep(200)
