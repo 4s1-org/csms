@@ -237,7 +237,7 @@ class Simulation1 extends React.Component<IProps, IState> {
     e.preventDefault()
 
     const payload = new AuthorizeRequestDto(this.state.idToken)
-    await this.props.cs.sendAuthorization(payload)
+    await this.props.cs.sendAuthorize(payload)
   }
 
   private async sendMsg11(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {

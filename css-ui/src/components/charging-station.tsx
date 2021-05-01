@@ -31,8 +31,8 @@ class ChargingStationComp extends React.Component<IProps, IState> {
 
     this.sendBootNotification = this.sendBootNotification.bind(this)
     this.sendHeartbeat = this.sendHeartbeat.bind(this)
-    this.sendAuthorization_PinCode = this.sendAuthorization_PinCode.bind(this)
-    this.sendAuthorization_Rfid = this.sendAuthorization_Rfid.bind(this)
+    this.sendAuthorize_PinCode = this.sendAuthorize_PinCode.bind(this)
+    this.sendAuthorize_Rfid = this.sendAuthorize_Rfid.bind(this)
     this.sendStatusNotification = this.sendStatusNotification.bind(this)
     this.sendMeterValue = this.sendMeterValue.bind(this)
     this.sendNotifyReport = this.sendNotifyReport.bind(this)
@@ -58,12 +58,12 @@ class ChargingStationComp extends React.Component<IProps, IState> {
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendAuthorization_PinCode} disabled={!this.props.isConnected}>
-            Send Authorization (with Pin Code)
+          <button type="button" onClick={this.sendAuthorize_PinCode} disabled={!this.props.isConnected}>
+            Send Authorize (with Pin Code)
           </button>
           &nspb;
-          <button type="button" onClick={this.sendAuthorization_Rfid} disabled={!this.props.isConnected}>
-            Send Authorization (with RFID)
+          <button type="button" onClick={this.sendAuthorize_Rfid} disabled={!this.props.isConnected}>
+            Send Authorize (with RFID)
           </button>
         </li>
         <li className="list-group-item">
@@ -97,14 +97,14 @@ class ChargingStationComp extends React.Component<IProps, IState> {
     await this.props.cs?.sendHeartbeat(new HeartbeatRequestDto())
   }
 
-  private async sendAuthorization_PinCode(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendAuthorize_PinCode(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendAuthorization(new AuthorizeRequestDto(new IdTokenDto('234', IdTokenEnum.KeyCode)))
+    await this.props.cs?.sendAuthorize(new AuthorizeRequestDto(new IdTokenDto('234', IdTokenEnum.KeyCode)))
   }
 
-  private async sendAuthorization_Rfid(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
+  private async sendAuthorize_Rfid(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs?.sendAuthorization(new AuthorizeRequestDto(new IdTokenDto('bbb', IdTokenEnum.ISO14443)))
+    await this.props.cs?.sendAuthorize(new AuthorizeRequestDto(new IdTokenDto('bbb', IdTokenEnum.ISO14443)))
   }
 
   private async sendMeterValue(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {

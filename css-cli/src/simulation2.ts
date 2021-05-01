@@ -12,7 +12,7 @@ class Simulation extends SimulationBase {
 
     //await this.cs.sendBootNotification()
     await sleep(200)
-    //await this.cs.sendAuthorization()
+    //await this.cs.sendAuthorize()
     await sleep(200)
     //await this.cs.sendMeterValue()
     await sleep(200)

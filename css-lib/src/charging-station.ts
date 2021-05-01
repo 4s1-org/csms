@@ -108,7 +108,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * C02 - Authorization using a start button
    * C04 - Authorization using PIN-code
    */
-  public async sendAuthorization(payload: AuthorizeRequestDto): Promise<AuthorizeResponseDto> {
+  public async sendAuthorize(payload: AuthorizeRequestDto): Promise<AuthorizeResponseDto> {
     const res = await this.sendMessage.send(payload)
 
     if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
@@ -152,17 +152,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   }
 
   /**
-   * B05 - Set Variables
-   */
-  private receiveSetVariables(payload: SetVariablesRequestDto): SetVariablesResponseDto {
-    const result: SetVariableResultDto[] = []
-    for (const x of payload.setVariableData) {
-      result.push(new SetVariableResultDto(SetVariableStatusEnum.Accepted, x.component, x.variable))
-    }
-    return new SetVariablesResponseDto(result)
-  }
-
-  /**
    * G01 - Status Notification
    * Mentioned in:
    * B01 - Cold Boot Charging Station
@@ -187,6 +176,27 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     const res = await this.sendMessage.send(payload)
     // ToDo Handling
     return res
+  }
+
+  /**
+   * G05 - Lock Failure
+   * N07 - Alert Event
+   */
+  public async sendNotifyEvent(payload: NotifyEventRequestDto): Promise<NotifyEventResponseDto> {
+    const res = await this.sendMessage.send(payload)
+    // ToDo Handling
+    return res
+  }
+
+  /**
+   * B05 - Set Variables
+   */
+  private receiveSetVariables(payload: SetVariablesRequestDto): SetVariablesResponseDto {
+    const result: SetVariableResultDto[] = []
+    for (const x of payload.setVariableData) {
+      result.push(new SetVariableResultDto(SetVariableStatusEnum.Accepted, x.component, x.variable))
+    }
+    return new SetVariablesResponseDto(result)
   }
 
   /**
