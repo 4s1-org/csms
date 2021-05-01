@@ -127,7 +127,7 @@ class Simulation extends SimulationBase {
     // Authorisierung
     {
       const payload = new AuthorizeRequestDto(idToken)
-      await this.cs.sendAuthorization(payload)
+      await this.cs.sendAuthorize(payload)
       await sleep(500)
     }
 
