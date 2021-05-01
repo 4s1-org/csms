@@ -151,26 +151,26 @@ class Simulation1 extends React.Component<IProps, IState> {
   private async sendMsg1(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
     const payload = new BootNotificationRequestDto(new ChargingStationDto('SimulatorX', 'CSS-UI'), BootReasonEnum.PowerUp)
-    await this.props.cs?.sendBootNotificationRequest(payload)
+    await this.props.cs?.sendBootNotification(payload)
   }
 
   private async sendMsg2(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs.sendStatusNotificationRequest(
+    await this.props.cs.sendStatusNotification(
       new StatusNotificationRequestDto(this.props.cs.currentTime, ConnectorStatusEnum.Available, 1, 1),
     )
   }
 
   private async sendMsg3(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs.sendStatusNotificationRequest(
+    await this.props.cs.sendStatusNotification(
       new StatusNotificationRequestDto(this.props.cs.currentTime, ConnectorStatusEnum.Available, 2, 1),
     )
   }
 
   private async sendMsg4(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs.sendStatusNotificationRequest(
+    await this.props.cs.sendStatusNotification(
       new StatusNotificationRequestDto(this.props.cs.currentTime, ConnectorStatusEnum.Available, 3, 1),
     )
   }
@@ -181,7 +181,7 @@ class Simulation1 extends React.Component<IProps, IState> {
     const sampleValue = new SampledValueDto(10)
     const meterValue = new MeterValueDto([sampleValue], this.props.cs.currentTime)
     const payload = new MeterValuesRequestDto(1, [meterValue])
-    await this.props.cs.sendMeterValueRequest(payload)
+    await this.props.cs.sendMeterValue(payload)
   }
 
   private async sendMsg6(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
@@ -190,7 +190,7 @@ class Simulation1 extends React.Component<IProps, IState> {
     const sampleValue = new SampledValueDto(this.state.wattHours)
     const meterValue = new MeterValueDto([sampleValue], this.props.cs.currentTime)
     const payload = new MeterValuesRequestDto(2, [meterValue])
-    await this.props.cs.sendMeterValueRequest(payload)
+    await this.props.cs.sendMeterValue(payload)
   }
 
   private async sendMsg7(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
@@ -199,12 +199,12 @@ class Simulation1 extends React.Component<IProps, IState> {
     const sampleValue = new SampledValueDto(20)
     const meterValue = new MeterValueDto([sampleValue], this.props.cs.currentTime)
     const payload = new MeterValuesRequestDto(3, [meterValue])
-    await this.props.cs.sendMeterValueRequest(payload)
+    await this.props.cs.sendMeterValue(payload)
   }
 
   private async sendMsg8(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
-    await this.props.cs.sendStatusNotificationRequest(
+    await this.props.cs.sendStatusNotification(
       new StatusNotificationRequestDto(this.props.cs.currentTime, ConnectorStatusEnum.Occupied, this.state.evseId, this.state.connectorId),
     )
   }
@@ -230,14 +230,14 @@ class Simulation1 extends React.Component<IProps, IState> {
     )
     payload.evse = evse
     payload.meterValue = [new MeterValueDto([new SampledValueDto(this.state.wattHours)], this.props.cs.currentTime)]
-    await this.props.cs.sendTransactionEventRequest(payload)
+    await this.props.cs.sendTransactionEvent(payload)
   }
 
   private async sendMsg10(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
 
     const payload = new AuthorizeRequestDto(this.state.idToken)
-    await this.props.cs.sendAuthorizationRequest(payload)
+    await this.props.cs.sendAuthorization(payload)
   }
 
   private async sendMsg11(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
@@ -282,7 +282,7 @@ class Simulation1 extends React.Component<IProps, IState> {
 
     payload.seqNo = this.state.seqNo
     payload.meterValue = [new MeterValueDto([new SampledValueDto(this.state.wattHours)], this.props.cs.currentTime)]
-    await this.props.cs.sendTransactionEventRequest(payload)
+    await this.props.cs.sendTransactionEvent(payload)
   }
 
   private async sendMsg16(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
@@ -304,13 +304,13 @@ class Simulation1 extends React.Component<IProps, IState> {
     )
     payload.idToken = this.state.idToken
     payload.meterValue = [new MeterValueDto([new SampledValueDto(this.state.wattHours)], this.props.cs.currentTime)]
-    await this.props.cs.sendTransactionEventRequest(payload)
+    await this.props.cs.sendTransactionEvent(payload)
   }
 
   private async sendMsg17(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
 
-    await this.props.cs.sendStatusNotificationRequest(
+    await this.props.cs.sendStatusNotification(
       new StatusNotificationRequestDto(this.props.cs.currentTime, ConnectorStatusEnum.Available, this.state.evseId, this.state.connectorId),
     )
   }
@@ -334,7 +334,7 @@ class Simulation1 extends React.Component<IProps, IState> {
       transaction,
     )
     payload.meterValue = [new MeterValueDto([new SampledValueDto(this.state.wattHours)], this.props.cs.currentTime)]
-    await this.props.cs.sendTransactionEventRequest(payload)
+    await this.props.cs.sendTransactionEvent(payload)
   }
 }
 

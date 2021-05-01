@@ -10,13 +10,13 @@ class Simulation extends SimulationBase {
   public async simulate(): Promise<void> {
     await this.connect()
 
-    //await this.cs.sendBootNotificationRequest()
+    //await this.cs.sendBootNotification()
     await sleep(200)
-    //await this.cs.sendAuthorizationRequest()
+    //await this.cs.sendAuthorization()
     await sleep(200)
-    //await this.cs.sendMeterValueRequest()
+    //await this.cs.sendMeterValue()
     await sleep(200)
-    await this.cs.sendHeartbeatRequest(new HeartbeatRequestDto())
+    await this.cs.sendHeartbeat(new HeartbeatRequestDto())
     await sleep(200)
     this.client.disconnect()
   }
