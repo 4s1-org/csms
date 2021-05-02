@@ -6,18 +6,16 @@ import { WsClient } from '../ws-client'
 import { ProcessEnv } from '../process-env'
 
 interface IState {
-  isConnected: boolean
   cs: ChargingStation | undefined
   client: WsClient | undefined
 }
 
 interface IProps {}
 
-class SimulatorPageComp extends React.Component<IProps, IState> {
+class SimulatorMainComp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
-      isConnected: false,
       cs: undefined,
       client: undefined,
     }
@@ -32,11 +30,11 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
         <LoginPanelComp
           onLoginClick={this.onLoginClick}
           onLogoutClick={this.onLogoutClick}
-          isConnected={this.state.isConnected}
+          isConnected={this.state.cs !== undefined}
         ></LoginPanelComp>
         <br />
         <div className="container-fluid">
-          <ChargingStationComp cs={this.state.cs} isConnected={this.state.isConnected} />
+          <ChargingStationComp cs={this.state.cs} />
         </div>
       </div>
     )
@@ -50,7 +48,6 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
     this.setState({
       cs,
       client,
-      isConnected: true,
     })
   }
 
@@ -60,10 +57,9 @@ class SimulatorPageComp extends React.Component<IProps, IState> {
       this.setState({
         cs: undefined,
         client: undefined,
-        isConnected: false,
       })
     }
   }
 }
 
-export default SimulatorPageComp
+export default SimulatorMainComp
