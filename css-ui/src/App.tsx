@@ -1,7 +1,7 @@
-import SimulatorPageComp from './components/simulator-page'
+import SimulatorMainComp from './components/simulator-main'
 
 function App() {
-  return <SimulatorPageComp />
+  return <SimulatorMainComp />
 }
 
 export default App

@@ -34,7 +34,7 @@ interface IProps {
   cs: ChargingStation
 }
 
-class Simulation1 extends React.Component<IProps, IState> {
+class Scenario1Comp extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
 
@@ -151,7 +151,7 @@ class Simulation1 extends React.Component<IProps, IState> {
   private async sendMsg1(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
     const payload = new BootNotificationRequestDto(new ChargingStationDto('SimulatorX', 'CSS-UI'), BootReasonEnum.PowerUp)
-    await this.props.cs?.sendBootNotification(payload)
+    await this.props.cs.sendBootNotification(payload)
   }
 
   private async sendMsg2(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
@@ -338,4 +338,4 @@ class Simulation1 extends React.Component<IProps, IState> {
   }
 }
 
-export default Simulation1
+export default Scenario1Comp
