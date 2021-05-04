@@ -11,10 +11,10 @@ import {
   CsmsToUiMsg,
   CsmsToUiCmdEnum,
   ChargingStationModel,
-  UserModel,
   UiToCsmsMsg,
   UiToCsmsCmdEnum,
   UiToCsmsUserSubCmdEnum,
+  UserModel,
 } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'

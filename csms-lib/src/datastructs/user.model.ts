@@ -1,11 +1,10 @@
 /**
- *  Model for an User
+ *  Model for an user.
  */
 export class UserModel {
   public id = ''
   public rfid = ''
-  public firstName = ''
-  public lastName = ''
-  public companyName = ''
+  public description = ''
+  public costCenter = ''
   public enabled = false
 }

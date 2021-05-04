@@ -26,10 +26,7 @@ class EvseStateComp extends React.Component<IProps, IState> {
 
     let name = ''
     if (this.props.model.currentUser) {
-      name = [this.props.model.currentUser.lastName, this.props.model.currentUser.firstName].join(', ')
-      if (this.props.model.currentUser.companyName) {
-        name = `${name} (${this.props.model.currentUser.companyName})`
-      }
+      name = this.props.model.currentUser.description || this.props.model.currentUser.rfid
     }
 
     return (
