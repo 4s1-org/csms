@@ -14,9 +14,8 @@ class UserEdit extends React.Component<IProps, IState> {
     this.state = {}
 
     this.onRfidChange = this.onRfidChange.bind(this)
-    this.onLastNameChange = this.onLastNameChange.bind(this)
-    this.onFirstNameChange = this.onFirstNameChange.bind(this)
-    this.onCompanyChange = this.onCompanyChange.bind(this)
+    this.onDescriptionChange = this.onDescriptionChange.bind(this)
+    this.onCostCenterChange = this.onCostCenterChange.bind(this)
   }
 
   public render(): JSX.Element {
@@ -29,21 +28,15 @@ class UserEdit extends React.Component<IProps, IState> {
           </div>
         </div>
         <div className="form-group row">
-          <label className="col-sm-4 col-form-label">Last name</label>
+          <label className="col-sm-4 col-form-label">Description</label>
           <div className="col-sm-8">
-            <input type="text" className="form-control" value={this.props.model.lastName} onChange={this.onLastNameChange} />
+            <input type="text" className="form-control" value={this.props.model.description} onChange={this.onDescriptionChange} />
           </div>
         </div>
         <div className="form-group row">
-          <label className="col-sm-4 col-form-label">First name</label>
+          <label className="col-sm-4 col-form-label">Cost center</label>
           <div className="col-sm-8">
-            <input type="text" className="form-control" value={this.props.model.firstName} onChange={this.onFirstNameChange} />
-          </div>
-        </div>
-        <div className="form-group row">
-          <label className="col-sm-4 col-form-label">Company</label>
-          <div className="col-sm-8">
-            <input type="text" className="form-control" value={this.props.model.companyName} onChange={this.onCompanyChange} />
+            <input type="text" className="form-control" value={this.props.model.costCenter} onChange={this.onCostCenterChange} />
           </div>
         </div>
       </form>
@@ -56,22 +49,16 @@ class UserEdit extends React.Component<IProps, IState> {
     this.props.model.rfid = e.currentTarget.value
   }
 
-  private onLastNameChange(e: React.ChangeEvent<HTMLInputElement>): void {
+  private onDescriptionChange(e: React.ChangeEvent<HTMLInputElement>): void {
     e.preventDefault()
     this.setState({ ...this.state })
-    this.props.model.lastName = e.currentTarget.value
+    this.props.model.description = e.currentTarget.value
   }
 
-  private onFirstNameChange(e: React.ChangeEvent<HTMLInputElement>): void {
+  private onCostCenterChange(e: React.ChangeEvent<HTMLInputElement>): void {
     e.preventDefault()
     this.setState({ ...this.state })
-    this.props.model.firstName = e.currentTarget.value
-  }
-
-  private onCompanyChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    e.preventDefault()
-    this.setState({ ...this.state })
-    this.props.model.companyName = e.currentTarget.value
+    this.props.model.costCenter = e.currentTarget.value
   }
 }
 
