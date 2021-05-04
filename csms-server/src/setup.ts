@@ -50,14 +50,13 @@ async function main(): Promise<void> {
   const userA = new UserModel()
   userA.id = 'aaa'
   userA.rfid = 'aaa'
-  userA.lastName = 'Aarbinger'
-  userA.firstName = 'Anton'
+  userA.description = 'Anton Aarbinger'
   userA.enabled = true
   const userB = new UserModel()
   userB.id = 'bbb'
   userB.rfid = 'bbb'
-  userB.lastName = 'Brotzeitholer'
-  userB.firstName = 'Bernd'
+  userB.description = 'Bernd Brotzeitholer'
+  userB.costCenter = '3454234234'
   userB.enabled = true
 
   dataStorage.set('users', [userA, userB])

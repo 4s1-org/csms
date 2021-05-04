@@ -1,5 +1,5 @@
 import { ColorStateEnum } from './color-state.enum'
-import { ChipcardModel } from './chipcard.model'
+import { UserModel } from './user.model'
 
 /**
  * Model for an EVSE
@@ -7,6 +7,6 @@ import { ChipcardModel } from './chipcard.model'
 export class EvseModel {
   public wattHours = 0
   public state = ColorStateEnum.Unknown
-  public currentUser: ChipcardModel | undefined
+  public currentUser: UserModel | undefined
   public id = 0
 }
