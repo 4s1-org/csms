@@ -1,7 +1,7 @@
 /**
- *  Model for a chipcard
+ *  Model for an user.
  */
-export class ChipcardModel {
+export class UserModel {
   public id = ''
   public rfid = ''
   public description = ''

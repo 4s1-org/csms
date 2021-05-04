@@ -51,9 +51,8 @@ class MainUsers extends React.Component<IProps, IState> {
           <thead>
             <tr>
               <th>RFID</th>
-              <th>Last name</th>
-              <th>First name</th>
-              <th>Company</th>
+              <th>Description</th>
+              <th>Cost center</th>
               <th>Enabled</th>
               <th></th>
             </tr>
@@ -62,9 +61,8 @@ class MainUsers extends React.Component<IProps, IState> {
             {this.props.models.map((model) => (
               <tr key={model.rfid}>
                 <td className="tdtext">{model.rfid}</td>
-                <td className="tdtext">{model.lastName}</td>
-                <td className="tdtext">{model.firstName}</td>
-                <td className="tdtext">{model.companyName}</td>
+                <td className="tdtext">{model.description}</td>
+                <td className="tdtext">{model.costCenter}</td>
                 <td className="tdtext">
                   <div className="btn-group" role="group">
                     <button
