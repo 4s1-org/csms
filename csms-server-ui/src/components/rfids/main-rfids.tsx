@@ -1,9 +1,9 @@
-import { UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg, UserModel } from '@yellowgarbagebag/csms-lib'
+import { UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg, RfidCardModel } from '@yellowgarbagebag/csms-lib'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Dialog from '../dialog'
-import UserEdit from './user-edit'
+import RfidEdit from './rfid-edit'
 import { DialogButtonEnum } from '../dialog-button.enum'
 import { v4 as uuid } from 'uuid'
 
@@ -11,15 +11,15 @@ interface IState {
   showDeleteDialog: boolean
   showAddDialog: boolean
   showEditDialog: boolean
-  selectedModel: UserModel | null
+  selectedModel: RfidCardModel | null
 }
 
 interface IProps {
-  models: UserModel[]
+  models: RfidCardModel[]
   send: (msg: UiToCsmsMsg) => void
 }
 
-class MainUsers extends React.Component<IProps, IState> {
+class MainRfids extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
 
@@ -50,11 +50,10 @@ class MainUsers extends React.Component<IProps, IState> {
         <table className="table">
           <thead>
             <tr>
-              <th>RFID</th>
-              <th>Description</th>
-              <th>Cost center</th>
-              <th>Enabled</th>
-              <th></th>
+              <th style={{ width: '30%' }}>RFID</th>
+              <th style={{ width: '50%' }}>Description</th>
+              <th style={{ width: '10%' }}>Enabled</th>
+              <th style={{ width: '10%' }}></th>
             </tr>
           </thead>
           <tbody>
@@ -62,7 +61,6 @@ class MainUsers extends React.Component<IProps, IState> {
               <tr key={model.rfid}>
                 <td className="tdtext">{model.rfid}</td>
                 <td className="tdtext">{model.description}</td>
-                <td className="tdtext">{model.costCenter}</td>
                 <td className="tdtext">
                   <div className="btn-group" role="group">
                     <button
@@ -105,12 +103,12 @@ class MainUsers extends React.Component<IProps, IState> {
             showBtnSave={true}
             showBtnAbort={true}
           >
-            <UserEdit model={this.state.selectedModel} />
+            <RfidEdit model={this.state.selectedModel} />
           </Dialog>
         )}
         {this.state.showAddDialog && this.state.selectedModel && (
           <Dialog title="Add" dialogCloseCallback={this.onAddDialogClose} showBtnSave={true} showBtnAbort={true}>
-            <UserEdit model={this.state.selectedModel} />
+            <RfidEdit model={this.state.selectedModel} />
           </Dialog>
         )}
       </div>
@@ -120,7 +118,7 @@ class MainUsers extends React.Component<IProps, IState> {
   private async onBtnAddClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
     e.preventDefault()
 
-    const model = new UserModel()
+    const model = new RfidCardModel()
     model.id = uuid()
 
     this.setState({
@@ -130,16 +128,16 @@ class MainUsers extends React.Component<IProps, IState> {
     })
   }
 
-  private onBtnEnableClick(model: UserModel, e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  private onBtnEnableClick(model: RfidCardModel, e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     e.preventDefault()
 
     model.enabled = !model.enabled
-    this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.userCmd, UiToCsmsCsSubCmdEnum.edit, model))
+    this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.rfidCmd, UiToCsmsCsSubCmdEnum.edit, model))
 
     this.setState({ ...this.state })
   }
 
-  private onBtnDeleteClick(model: UserModel, e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  private onBtnDeleteClick(model: RfidCardModel, e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     e.preventDefault()
 
     this.setState({
@@ -149,7 +147,7 @@ class MainUsers extends React.Component<IProps, IState> {
     })
   }
 
-  private onBtnEditClick(model: UserModel, e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  private onBtnEditClick(model: RfidCardModel, e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
     e.preventDefault()
 
     this.setState({
@@ -161,7 +159,7 @@ class MainUsers extends React.Component<IProps, IState> {
 
   private async onEditDialogClose(btn: DialogButtonEnum): Promise<void> {
     if (this.state.selectedModel && btn === DialogButtonEnum.save) {
-      this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.userCmd, UiToCsmsCsSubCmdEnum.edit, this.state.selectedModel))
+      this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.rfidCmd, UiToCsmsCsSubCmdEnum.edit, this.state.selectedModel))
     }
     this.setState({
       ...this.state,
@@ -172,7 +170,7 @@ class MainUsers extends React.Component<IProps, IState> {
 
   private async onAddDialogClose(btn: DialogButtonEnum): Promise<void> {
     if (this.state.selectedModel && btn === DialogButtonEnum.save) {
-      this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.userCmd, UiToCsmsCsSubCmdEnum.add, this.state.selectedModel))
+      this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.rfidCmd, UiToCsmsCsSubCmdEnum.add, this.state.selectedModel))
     }
 
     this.setState({
@@ -184,7 +182,7 @@ class MainUsers extends React.Component<IProps, IState> {
 
   private async onDeleteDialogClose(btn: DialogButtonEnum): Promise<void> {
     if (this.state.selectedModel && btn === DialogButtonEnum.yes) {
-      this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.userCmd, UiToCsmsCsSubCmdEnum.delete, this.state.selectedModel))
+      this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.rfidCmd, UiToCsmsCsSubCmdEnum.delete, this.state.selectedModel))
     }
 
     this.setState({
@@ -195,4 +193,4 @@ class MainUsers extends React.Component<IProps, IState> {
   }
 }
 
-export default MainUsers
+export default MainRfids

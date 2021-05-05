@@ -1,5 +1,5 @@
 import { ColorStateEnum } from './color-state.enum'
-import { UserModel } from './user.model'
+import { RfidCardModel } from './rfid-card.model'
 
 /**
  * Model for an EVSE
@@ -7,6 +7,6 @@ import { UserModel } from './user.model'
 export class EvseModel {
   public wattHours = 0
   public state = ColorStateEnum.Unknown
-  public currentUser: UserModel | undefined
+  public currentUser: RfidCardModel | undefined
   public id = 0
 }

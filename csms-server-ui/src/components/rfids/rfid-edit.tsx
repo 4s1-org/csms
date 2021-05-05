@@ -1,13 +1,13 @@
 import React from 'react'
-import { UserModel } from '@yellowgarbagebag/csms-lib'
+import { RfidCardModel } from '@yellowgarbagebag/csms-lib'
 
 interface IState {}
 
 interface IProps {
-  model: UserModel
+  model: RfidCardModel
 }
 
-class UserEdit extends React.Component<IProps, IState> {
+class RfidEdit extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
 
@@ -15,7 +15,6 @@ class UserEdit extends React.Component<IProps, IState> {
 
     this.onRfidChange = this.onRfidChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
-    this.onCostCenterChange = this.onCostCenterChange.bind(this)
   }
 
   public render(): JSX.Element {
@@ -33,12 +32,6 @@ class UserEdit extends React.Component<IProps, IState> {
             <input type="text" className="form-control" value={this.props.model.description} onChange={this.onDescriptionChange} />
           </div>
         </div>
-        <div className="form-group row">
-          <label className="col-sm-4 col-form-label">Cost center</label>
-          <div className="col-sm-8">
-            <input type="text" className="form-control" value={this.props.model.costCenter} onChange={this.onCostCenterChange} />
-          </div>
-        </div>
       </form>
     )
   }
@@ -54,12 +47,6 @@ class UserEdit extends React.Component<IProps, IState> {
     this.setState({ ...this.state })
     this.props.model.description = e.currentTarget.value
   }
-
-  private onCostCenterChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    e.preventDefault()
-    this.setState({ ...this.state })
-    this.props.model.costCenter = e.currentTarget.value
-  }
 }
 
-export default UserEdit
+export default RfidEdit

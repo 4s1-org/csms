@@ -1,10 +1,9 @@
 /**
- *  Model for an user.
+ *  Model for an rfid card.
  */
-export class UserModel {
+export class RfidCardModel {
   public id = ''
   public rfid = ''
   public description = ''
-  public costCenter = ''
   public enabled = false
 }

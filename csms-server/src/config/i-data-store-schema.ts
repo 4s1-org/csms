@@ -1,4 +1,4 @@
-import { ChargingStationModel, UserModel } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, RfidCardModel } from '@yellowgarbagebag/csms-lib'
 
 export interface IDataStorageSchema {
   port: number
@@ -7,6 +7,6 @@ export interface IDataStorageSchema {
     username: string
     passwordHash: string
   }
-  users: UserModel[]
+  rfids: RfidCardModel[]
   chargingStations: ChargingStationModel[]
 }
