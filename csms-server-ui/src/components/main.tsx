@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStationModel, CsmsToUiCmdEnum, CsmsToUiMsg, UiToCsmsMsg, UserModel } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, CsmsToUiCmdEnum, CsmsToUiMsg, UiToCsmsMsg, RfidCardModel } from '@yellowgarbagebag/csms-lib'
 import './main.css'
 import LoginPanelComp from './login-panel'
 import { toBase64 } from '@yellowgarbagebag/common-lib'
@@ -7,12 +7,12 @@ import MainOverview from './overview/main-overview'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import MainChargingStations from './stations/main-stations'
-import MainUsers from './users/main-users'
+import MainRfids from './rfids/main-rfids'
 
 interface IState {
   csStates: ChargingStationModel[]
   csList: ChargingStationModel[]
-  userList: UserModel[]
+  rfidCardList: RfidCardModel[]
   isConnected: boolean
   ws?: WebSocket
   send: (msg: UiToCsmsMsg) => void
@@ -26,7 +26,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
     this.state = {
       csStates: [],
       csList: [],
-      userList: [],
+      rfidCardList: [],
       isConnected: false,
       ws: undefined,
       send: (msg: UiToCsmsMsg) => {},
@@ -47,7 +47,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
           <TabList>
             <Tab>Overview</Tab>
             <Tab>Charging Stations</Tab>
-            <Tab>Users</Tab>
+            <Tab>RFIDs</Tab>
           </TabList>
 
           <TabPanel>
@@ -57,7 +57,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
             <MainChargingStations models={this.state.csList} send={this.state.send}></MainChargingStations>
           </TabPanel>
           <TabPanel>
-            <MainUsers models={this.state.userList} send={this.state.send}></MainUsers>
+            <MainRfids models={this.state.rfidCardList} send={this.state.send}></MainRfids>
           </TabPanel>
         </Tabs>
       </div>
@@ -86,10 +86,10 @@ class AdminPageComp extends React.Component<IProps, IState> {
             csList: data.payload as ChargingStationModel[],
           })
           break
-        case CsmsToUiCmdEnum.userList:
+        case CsmsToUiCmdEnum.rfidList:
           this.setState({
             ...this.state,
-            userList: data.payload as UserModel[],
+            rfidCardList: data.payload as RfidCardModel[],
           })
           break
         case CsmsToUiCmdEnum.csState:

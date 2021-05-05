@@ -2,7 +2,7 @@
 
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
-import { ChargingStationModel, UserModel } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, RfidCardModel } from '@yellowgarbagebag/csms-lib'
 import prompts, { PromptObject } from 'prompts'
 import { hashPassword } from '@yellowgarbagebag/common-lib'
 
@@ -47,19 +47,18 @@ async function main(): Promise<void> {
   dataStorage.set('https', response.https)
   dataStorage.set('adminCredentials', { username: response.username, passwordHash: hashPassword(response.password) })
 
-  const userA = new UserModel()
-  userA.id = 'aaa'
-  userA.rfid = 'aaa'
-  userA.description = 'Anton Aarbinger'
-  userA.enabled = true
-  const userB = new UserModel()
-  userB.id = 'bbb'
-  userB.rfid = 'bbb'
-  userB.description = 'Bernd Brotzeitholer'
-  userB.costCenter = '3454234234'
-  userB.enabled = true
+  const rfidCard1 = new RfidCardModel()
+  rfidCard1.id = 'aaa'
+  rfidCard1.rfid = 'aaa'
+  rfidCard1.description = 'Anton Aarbinger'
+  rfidCard1.enabled = true
+  const rfidCard2 = new RfidCardModel()
+  rfidCard2.id = 'bbb'
+  rfidCard2.rfid = 'bbb'
+  rfidCard2.description = 'Bernd Brotzeitholer'
+  rfidCard2.enabled = true
 
-  dataStorage.set('users', [userA, userB])
+  dataStorage.set('rfids', [rfidCard1, rfidCard2])
 
   if (!dataStorage.has('chargingStations')) {
     dataStorage.set('chargingStations', [])

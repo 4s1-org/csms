@@ -51,11 +51,11 @@ class MainChargingStations extends React.Component<IProps, IState> {
         <table className="table">
           <thead>
             <tr>
-              <th>Unique identifier</th>
-              <th>Username</th>
-              <th>Has password</th>
-              <th>Enabled</th>
-              <th></th>
+              <th style={{ width: '30%' }}>Unique identifier</th>
+              <th style={{ width: '30%' }}>Username</th>
+              <th style={{ width: '20%' }}>Has password</th>
+              <th style={{ width: '10%' }}>Enabled</th>
+              <th style={{ width: '10%' }}></th>
             </tr>
           </thead>
           <tbody>

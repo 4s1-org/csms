@@ -45,13 +45,13 @@ import {
   TransactionEventEnum,
   ChargingStationBase,
 } from '@yellowgarbagebag/ocpp-lib'
-import { ChargingStationModel, ColorStateEnum, EvseModel, UserModel } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, ColorStateEnum, EvseModel, RfidCardModel } from '@yellowgarbagebag/csms-lib'
 import { ProcessEnv } from './process-env'
 
 export class ChargingStation extends ChargingStationBase implements IReceiveMessage {
-  private transactions: { rfid: string | null; currentUser: UserModel | null; id: string; evseId: number }[] = []
+  private transactions: { rfid: string | null; currentRfid: RfidCardModel | null; id: string; evseId: number }[] = []
 
-  public constructor(public readonly model: ChargingStationModel, sendMessage: ISendMessage, private readonly users: UserModel[] = []) {
+  public constructor(public readonly model: ChargingStationModel, sendMessage: ISendMessage, private readonly rfids: RfidCardModel[] = []) {
     super(model.uniqueIdentifier, sendMessage, ProcessEnv.LOG_LEVEL)
   }
 
@@ -233,16 +233,16 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
         return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
       }
     } else if (payload.idToken.type === IdTokenEnum.ISO14443 || payload.idToken.type === IdTokenEnum.ISO15693) {
-      const user = this.users.find((x) => x.rfid === payload.idToken.idToken && x.enabled)
+      const user = this.rfids.find((x) => x.rfid === payload.idToken.idToken && x.enabled)
       if (user) {
         const transaction = this.transactions.find((x) => !x.rfid)
         if (transaction) {
           transaction.rfid = user.rfid
-          transaction.currentUser = user
+          transaction.currentRfid = user
 
           const evse = this.model.evseList.find((x) => x.id === transaction.evseId)
           if (evse) {
-            evse.currentUser = transaction.currentUser
+            evse.currentUser = transaction.currentRfid
           }
         }
         return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
@@ -357,7 +357,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
       case TransactionEventEnum.Started:
         this.transactions.push({
           rfid: null,
-          currentUser: null,
+          currentRfid: null,
           id: payload.transactionInfo.transactionId,
           evseId: payload.evse.id,
         })

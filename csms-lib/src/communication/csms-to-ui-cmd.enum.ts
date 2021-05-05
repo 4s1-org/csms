@@ -3,6 +3,6 @@
  */
 export enum CsmsToUiCmdEnum {
   csState = 'csState',
-  userList = 'userList',
+  rfidList = 'rfidList',
   csList = 'csList',
 }
