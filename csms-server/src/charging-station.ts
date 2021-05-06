@@ -117,7 +117,16 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendSetVariables(payload: SetVariablesRequestDto): Promise<SetVariablesResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
+    for (const sendVar of payload.setVariableData) {
+      const receiveVar = res.setVariableResult.find(
+        (x) => x.component.name === sendVar.component.name && x.variable.name === sendVar.variable.name,
+      )
+      if (receiveVar) {
+        this.logger.info(`${sendVar.component.name} | ${sendVar.variable.name} | ${receiveVar.attributeStatus}`)
+      } else {
+        this.logger.info(`${sendVar.component.name} | ${sendVar.variable.name} | not received`)
+      }
+    }
     return res
   }
 
