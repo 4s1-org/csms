@@ -3,5 +3,6 @@
  */
 export enum UiToCsmsCmdEnum {
   csCmd = 'csCmd',
+  csAction = 'csAction',
   rfidCmd = 'rfidCmd',
 }

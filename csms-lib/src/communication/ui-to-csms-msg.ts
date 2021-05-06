@@ -11,6 +11,6 @@ export class UiToCsmsMsg {
   constructor(
     public readonly cmd: UiToCsmsCmdEnum,
     public readonly subCmd: UiToCsmsCsSubCmdEnum | UiToCsmsUserSubCmdEnum,
-    public readonly payload: ChargingStationModel | RfidCardModel,
+    public readonly payload: ChargingStationModel | RfidCardModel | string,
   ) {}
 }
