@@ -204,6 +204,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * G04 - Change Availability Charging Station
    */
   private receiveChangeAvailability(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
+    this.logger.info('****************')
     return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
   }
 
