@@ -12,10 +12,14 @@ import {
   AuthorizeRequestDto,
   AuthorizationStatusEnum,
   ChargingStateEnum,
+  MeterValueDto,
+  SampledValueDto,
+  IdTokenDto,
+  IdTokenEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './../simulation-base'
 
-export class TransactionE01S6 extends SimulationBase {
+export class TransactionE04 extends SimulationBase {
   constructor() {
     super()
   }
@@ -31,27 +35,39 @@ export class TransactionE01S6 extends SimulationBase {
     await this.cs.sendStatusNotification(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 1, 1))
     await sleep(100)
 
-    // User provides identification
+    const invalidIdToken = new IdTokenDto('ajdfklja4t', IdTokenEnum.ISO14443)
 
     {
-      const payload = new AuthorizeRequestDto(this.idToken)
-      const res = await this.cs.sendAuthorize(payload)
-      if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
-        throw new Error('')
+      const transaction = new TransactionDto('foobar')
+      transaction.chargingState = ChargingStateEnum.EVConnected
+      const payload = new TransactionEventRequestDto(
+        TransactionEventEnum.Updated,
+        this.cs.currentTime,
+        TriggerReasonEnum.CablePluggedIn,
+        this.seqNo,
+        transaction,
+      )
+      payload.idToken = invalidIdToken
+      const res = await this.cs.sendTransactionEvent(payload)
+      if (!res.idTokenInfo || res.idTokenInfo.status === AuthorizationStatusEnum.Accepted) {
+        throw new Error('Transaction should be blocked')
       }
       await sleep(100)
     }
 
+    await sleep(1000)
+
     {
       const transaction = new TransactionDto('foobar')
-      transaction.chargingState = ChargingStateEnum.Charging
+      transaction.chargingState = ChargingStateEnum.SuspendedEVSE
       const payload = new TransactionEventRequestDto(
-        TransactionEventEnum.Started,
+        TransactionEventEnum.Updated,
         this.cs.currentTime,
-        TriggerReasonEnum.ChargingStateChanged,
+        TriggerReasonEnum.Deauthorized,
         this.seqNo,
         transaction,
       )
+      payload.idToken = invalidIdToken
       await this.cs.sendTransactionEvent(payload)
       await sleep(100)
     }

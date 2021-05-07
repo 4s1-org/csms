@@ -37,7 +37,7 @@ export class TransactionE01S2 extends SimulationBase {
       TransactionEventEnum.Started,
       this.cs.currentTime,
       TriggerReasonEnum.CablePluggedIn,
-      1,
+      this.seqNo,
       transaction,
     )
     await this.cs.sendTransactionEvent(payload)
