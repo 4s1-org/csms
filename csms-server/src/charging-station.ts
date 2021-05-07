@@ -379,7 +379,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
           rfid: null,
           currentRfid: null,
           id: payload.transactionInfo.transactionId,
-          evseId: payload.evse.id,
+          evseId: payload.evse?.id,
         })
         break
       case TransactionEventEnum.Ended:
