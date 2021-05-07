@@ -9,11 +9,11 @@ import {
   TransactionEventEnum,
   TriggerReasonEnum,
   TransactionDto,
-  ChargingStateEnum,
+  ReasonEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './../simulation-base'
 
-export class TransactionE01S2 extends SimulationBase {
+export class TransactionE06S1 extends SimulationBase {
   constructor() {
     super()
   }
@@ -29,21 +29,35 @@ export class TransactionE01S2 extends SimulationBase {
     await this.cs.sendStatusNotification(new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 1, 1))
     await sleep(100)
 
-    // Charging cable plugged in
+    // Parking bay detector triggers
 
-    {
-      const transaction = new TransactionDto('foobar')
-      transaction.chargingState = ChargingStateEnum.EVConnected
-      const payload = new TransactionEventRequestDto(
+    await this.cs.sendTransactionEvent(
+      new TransactionEventRequestDto(
         TransactionEventEnum.Started,
         this.cs.currentTime,
-        TriggerReasonEnum.CablePluggedIn,
+        TriggerReasonEnum.EVDetected,
         this.seqNo,
-        transaction,
-      )
-      await this.cs.sendTransactionEvent(payload)
-      await sleep(100)
-    }
+        new TransactionDto('foobar'),
+      ),
+    )
+    await sleep(100)
+
+    // -----
+
+    // Parking bay detector no longer detectc the EV
+
+    const transaction = new TransactionDto('foobar')
+    transaction.stoppedReason = ReasonEnum.Local
+    const payload = new TransactionEventRequestDto(
+      TransactionEventEnum.Ended,
+      this.cs.currentTime,
+      TriggerReasonEnum.EVDeparted,
+      this.seqNo,
+      transaction,
+    )
+
+    await this.cs.sendTransactionEvent(payload)
+    await sleep(100)
 
     this.client.disconnect()
   }
