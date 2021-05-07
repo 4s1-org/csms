@@ -351,13 +351,15 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * C02 - Authorization using a start button
    */
   private receiveTransactionEvent(payload: TransactionEventRequestDto): TransactionEventResponseDto {
+    const resPayload = new TransactionEventResponseDto()
     // Transaction E05
-    if (payload.eventType === TransactionEventEnum.Started && payload.idToken) {
+    if (payload.idToken) {
       const rfid = this.rfids.find((x) => x.rfid === payload.idToken.idToken && x.enabled)
       if (!rfid) {
-        const resPayload = new TransactionEventResponseDto()
         resPayload.idTokenInfo = new IdTokenInfoDto(AuthorizationStatusEnum.Invalid)
         return resPayload
+      } else {
+        resPayload.idTokenInfo = new IdTokenInfoDto(AuthorizationStatusEnum.Accepted)
       }
     }
 
@@ -400,7 +402,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
         break
     }
 
-    return new TransactionEventResponseDto()
+    return resPayload
   }
 
   private setDefaultValuesForSampledValue(sampledValue: SampledValueDto): void {

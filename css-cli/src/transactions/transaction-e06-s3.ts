@@ -11,13 +11,10 @@ import {
   TransactionDto,
   AuthorizeRequestDto,
   AuthorizationStatusEnum,
-  IdTokenDto,
-  IdTokenEnum,
-  ReasonEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './../simulation-base'
 
-export class TransactionE01S3 extends SimulationBase {
+export class TransactionE06S3 extends SimulationBase {
   constructor() {
     super()
   }
@@ -37,47 +34,21 @@ export class TransactionE01S3 extends SimulationBase {
 
     {
       const payload = new AuthorizeRequestDto(this.idToken)
-      await this.cs.sendAuthorize(payload)
-      await sleep(100)
-    }
-
-    {
-      const transaction = new TransactionDto('foobar')
-      const payload = new TransactionEventRequestDto(
-        TransactionEventEnum.Started,
-        this.cs.currentTime,
-        TriggerReasonEnum.Authorized,
-        this.seqNo,
-        transaction,
-      )
-      await this.cs.sendTransactionEvent(payload)
-      await sleep(100)
-    }
-
-    {
-      const transaction = new TransactionDto('foobar')
-      const payload = new TransactionEventRequestDto(
-        TransactionEventEnum.Started,
-        this.cs.currentTime,
-        TriggerReasonEnum.Authorized,
-        this.seqNo,
-        transaction,
-      )
-      payload.idToken = new IdTokenDto('invalid', IdTokenEnum.ISO14443)
-      const res = await this.cs.sendTransactionEvent(payload)
-      if (res.idTokenInfo.status === AuthorizationStatusEnum.Accepted) {
-        throw new Error('Should not accepted')
+      const res = await this.cs.sendAuthorize(payload)
+      if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
+        throw new Error('')
       }
       await sleep(100)
     }
 
+    // -----
+
     {
       const transaction = new TransactionDto('foobar')
-      transaction.stoppedReason = ReasonEnum.DeAuthorized
       const payload = new TransactionEventRequestDto(
-        TransactionEventEnum.Ended,
+        TransactionEventEnum.Started,
         this.cs.currentTime,
-        TriggerReasonEnum.Deauthorized,
+        TriggerReasonEnum.Authorized,
         this.seqNo,
         transaction,
       )
