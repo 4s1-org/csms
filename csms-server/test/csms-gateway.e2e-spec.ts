@@ -235,7 +235,7 @@ describe('CSMS Gateway', () => {
         }
       })
 
-      it('messageTypeId is not 2', (done: jest.DoneCallback) => {
+      it('messageTypeId of Call is not 2', (done: jest.DoneCallback) => {
         const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
@@ -255,8 +255,7 @@ describe('CSMS Gateway', () => {
 
           expect(data.length).toBe(5)
           expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
-          // ToDo: Sollte eigentlich möglich sein, die messageId zu bekommen
-          //expect(data[1]).toBe(messageId)
+          expect(data[1]).toBe('')
           expect(data[2]).toBe(OcppErrorCodeEnum.RpcFrameworkError)
           expect(data[3]).toBeDefined()
           expect(data[4]).toBeDefined()

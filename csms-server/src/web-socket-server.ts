@@ -161,8 +161,7 @@ export class WebSocketServer {
       cs.disconnect()
       this.csSockets.delete(socket)
       this.csTlsSockets.delete(tlsSocket)
-      // ToDo: Geht das zum Entfernen
-      this.chargingStations.includes(cs)
+      this.chargingStations = this.chargingStations.filter((x) => x.model.uniqueIdentifier !== cs.model.uniqueIdentifier)
       this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
     }
 
@@ -292,29 +291,36 @@ export class WebSocketServer {
             }
 
             switch (data.subCmd) {
-              case UiToCsmsCsSubCmdEnum.sendChangeAvailability:
-                cs.sendChangeAvailability(new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative))
-                break
-              case UiToCsmsCsSubCmdEnum.sendDataTransfer:
-                cs.sendDataTransfer(new DataTransferRequestDto('vendorIdX'))
+              case UiToCsmsCsSubCmdEnum.sendSetVariables:
+                cs.sendSetVariables(
+                  new SetVariablesRequestDto([
+                    new SetVariableDataDto('attributeX1', new ComponentDto('componentX'), new VariableDto('variableX1')),
+                    new SetVariableDataDto('attributeX2', new ComponentDto('componentX'), new VariableDto('variableX2')),
+                    new SetVariableDataDto('attributeX3', new ComponentDto('componentX'), new VariableDto('variableX3')),
+                    new SetVariableDataDto('attributeX4', new ComponentDto('componentX'), new VariableDto('variableX4')),
+                  ]),
+                )
                 break
               case UiToCsmsCsSubCmdEnum.sendGetBaseReport:
                 cs.sendGetBaseReport(new GetBaseReportRequestDto(1, ReportBaseEnum.FullInventory))
                 break
               case UiToCsmsCsSubCmdEnum.sendGetVariables:
                 cs.sendGetVariables(
-                  new GetVariablesRequestDto([new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX'))]),
+                  new GetVariablesRequestDto([
+                    new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX1')),
+                    new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX2')),
+                    new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX3')),
+                  ]),
                 )
+                break
+              case UiToCsmsCsSubCmdEnum.sendChangeAvailability:
+                cs.sendChangeAvailability(new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative))
                 break
               case UiToCsmsCsSubCmdEnum.sendRequestReset:
                 cs.sendRequestReset(new ResetRequestDto(ResetEnum.Immediate))
                 break
-              case UiToCsmsCsSubCmdEnum.sendSetVariables:
-                cs.sendSetVariables(
-                  new SetVariablesRequestDto([
-                    new SetVariableDataDto('attributeX', new ComponentDto('componentX'), new VariableDto('variableX')),
-                  ]),
-                )
+              case UiToCsmsCsSubCmdEnum.sendDataTransfer:
+                cs.sendDataTransfer(new DataTransferRequestDto('vendorIdX'))
                 break
             }
           }
