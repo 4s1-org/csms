@@ -18,6 +18,7 @@ class Simulation extends SimulationBase {
     await sleep(200)
     await this.cs.sendHeartbeat(new HeartbeatRequestDto())
     await sleep(200)
+
     this.client.disconnect()
   }
 }

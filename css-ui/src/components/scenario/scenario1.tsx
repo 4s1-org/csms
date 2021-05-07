@@ -73,73 +73,73 @@ class Scenario1Comp extends React.Component<IProps, IState> {
 
         <ul className="list-group">
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg1}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg1}>
               Verfügbarkeit der Ladesäule signalisieren
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg2}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg2}>
               EVSE 1 anmelden
             </button>
             &nbsp;
-            <button type="button" onClick={this.sendMsg3}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg3}>
               EVSE 2 anmelden
             </button>
             &nbsp;
-            <button type="button" onClick={this.sendMsg4}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg4}>
               EVSE 3 anmelden
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg5}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg5}>
               Zählerstand 1 melden
             </button>
             &nbsp;
-            <button type="button" onClick={this.sendMsg6}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg6}>
               Zählerstand 2 melden
             </button>
             &nbsp;
-            <button type="button" onClick={this.sendMsg7}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg7}>
               Zählerstand 3 melden
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg8}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg8}>
               Kabel wird vom Fahrer gesteckt
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg9}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg9}>
               Transaktion starten
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg10}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg10}>
               Authorisierung
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg11}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg11}>
               Zählerstand melden
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg12}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg12}>
               Tanken x-mal
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg16}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg16}>
               Transaktion beenden
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg17}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg17}>
               Kabel wird vom Fahrer entfernt
             </button>
           </li>
           <li className="list-group-item">
-            <button type="button" onClick={this.sendMsg18}>
+            <button className="btn btn-secondary" type="button" onClick={this.sendMsg18}>
               Ladepunkt ist wieder verfügbar
             </button>
           </li>
