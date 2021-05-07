@@ -28,27 +28,27 @@ class SendActionComp extends React.Component<IProps, IState> {
           {!this.props.model.enabled ? ' (disabled)' : ''}
         </h5>
         <div className="card-body">
-          <button className="btn btn-light" type="button" onClick={this.sendSetVariables}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendSetVariables}>
             Send SetVariables
           </button>
           &nbsp;
-          <button className="btn btn-light" type="button" onClick={this.sendGetBaseReport}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendGetBaseReport}>
             Send GetBaseReport
           </button>
           &nbsp;
-          <button className="btn btn-light" type="button" onClick={this.sendGetVariables}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendGetVariables}>
             Send GetVariables
           </button>
           &nbsp;
-          <button className="btn btn-light" type="button" onClick={this.sendChangeAvailability}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendChangeAvailability}>
             Send ChangeAvailability
           </button>
           &nbsp;
-          <button className="btn btn-light" type="button" onClick={this.sendRequestReset}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendRequestReset}>
             Send RequestReset
           </button>
           &nbsp;
-          <button className="btn btn-light" type="button" onClick={this.sendDataTransfer}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendDataTransfer}>
             Send DataTransfer
           </button>
         </div>
