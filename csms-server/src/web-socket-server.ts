@@ -296,14 +296,14 @@ export class WebSocketServer {
                 cs.sendChangeAvailability(new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative))
                 break
               case UiToCsmsCsSubCmdEnum.sendDataTransfer:
-                cs.sendDataTransfer(new DataTransferRequestDto('foobar'))
+                cs.sendDataTransfer(new DataTransferRequestDto('vendorIdX'))
                 break
               case UiToCsmsCsSubCmdEnum.sendGetBaseReport:
                 cs.sendGetBaseReport(new GetBaseReportRequestDto(1, ReportBaseEnum.FullInventory))
                 break
               case UiToCsmsCsSubCmdEnum.sendGetVariables:
                 cs.sendGetVariables(
-                  new GetVariablesRequestDto([new GetVariableDataDto(new ComponentDto('component'), new VariableDto('variable'))]),
+                  new GetVariablesRequestDto([new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX'))]),
                 )
                 break
               case UiToCsmsCsSubCmdEnum.sendRequestReset:
@@ -312,7 +312,7 @@ export class WebSocketServer {
               case UiToCsmsCsSubCmdEnum.sendSetVariables:
                 cs.sendSetVariables(
                   new SetVariablesRequestDto([
-                    new SetVariableDataDto('attribute', new ComponentDto('component'), new VariableDto('variable')),
+                    new SetVariableDataDto('attributeX', new ComponentDto('componentX'), new VariableDto('variableX')),
                   ]),
                 )
                 break
