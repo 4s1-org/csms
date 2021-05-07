@@ -17,5 +17,6 @@
     },
     "javascript.preferences.importModuleSpecifier": "relative",
     "typescript.preferences.importModuleSpecifier": "relative",
+    "window.title": "Server UI",
   }
 }

@@ -15,12 +15,28 @@ import {
   UiToCsmsCmdEnum,
   UiToCsmsUserSubCmdEnum,
   RfidCardModel,
+  UiToCsmsCsSubCmdEnum,
 } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { ChargingStation } from './charging-station'
 import { WsClient } from './ws-client'
 import { ProcessEnv } from './process-env'
+import {
+  ChangeAvailabilityRequestDto,
+  ComponentDto,
+  DataTransferRequestDto,
+  GetBaseReportRequestDto,
+  GetVariableDataDto,
+  GetVariablesRequestDto,
+  OperationalStatusEnum,
+  ReportBaseEnum,
+  ResetEnum,
+  ResetRequestDto,
+  SetVariableDataDto,
+  SetVariablesRequestDto,
+  VariableDto,
+} from '@yellowgarbagebag/ocpp-lib'
 
 type HeaderType = {
   secWebsocketKey: string
@@ -34,13 +50,14 @@ export class WebSocketServer {
   private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
   private adminSockets: Set<WebSocket> = new Set<WebSocket>()
   private adminTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
-  private chargingStations: ChargingStationModel[]
+  private chargingStationModels: ChargingStationModel[]
+  private chargingStations: ChargingStation[] = []
   private rfids: RfidCardModel[]
 
   constructor(private readonly dataStorage: DataStorage<IDataStorageSchema>) {
     this.logger.info(`Configfile: ${dataStorage.path}`)
 
-    this.chargingStations = dataStorage.get('chargingStations') || []
+    this.chargingStationModels = dataStorage.get('chargingStations') || []
     this.rfids = dataStorage.get('rfids') || []
   }
 
@@ -82,7 +99,7 @@ export class WebSocketServer {
         this.logger.info('upgrade connection for ChargingStation')
         const uniqueIdentifier = myURL.pathname.split('/')[2]
 
-        const model = this.chargingStations.find((x) => x.uniqueIdentifier === uniqueIdentifier && x.enabled)
+        const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier && x.enabled)
         if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
           this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
           return this.send401(tlsSocket)
@@ -135,6 +152,7 @@ export class WebSocketServer {
 
     const client = new WsClient(model.uniqueIdentifier, socket)
     const cs = new ChargingStation(model, client, this.dataStorage.get('rfids'))
+    this.chargingStations.push(cs)
 
     cs.connect()
     this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
@@ -143,6 +161,7 @@ export class WebSocketServer {
       cs.disconnect()
       this.csSockets.delete(socket)
       this.csTlsSockets.delete(tlsSocket)
+      this.chargingStations = this.chargingStations.filter((x) => x.model.uniqueIdentifier !== cs.model.uniqueIdentifier)
       this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
     }
 
@@ -172,10 +191,10 @@ export class WebSocketServer {
     this.adminSockets.add(socket)
     this.adminTlsSockets.add(tlsSocket)
 
-    for (const dto of this.chargingStations) {
+    for (const dto of this.chargingStationModels) {
       this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.csState, dto))
     }
-    this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStations))
+    this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStationModels))
     this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.rfidList, this.rfids))
 
     socket.onclose = (): void => {
@@ -230,7 +249,7 @@ export class WebSocketServer {
             switch (data.subCmd) {
               case UiToCsmsUserSubCmdEnum.edit:
                 {
-                  const cs = this.chargingStations.find((x) => x.id === payload.id)
+                  const cs = this.chargingStationModels.find((x) => x.id === payload.id)
                   if (cs) {
                     cs.uniqueIdentifier = payload.uniqueIdentifier
                     cs.username = payload.username
@@ -244,22 +263,66 @@ export class WebSocketServer {
                 }
                 break
               case UiToCsmsUserSubCmdEnum.delete:
-                this.chargingStations = this.chargingStations.filter((x) => x.id !== payload.id)
+                this.chargingStationModels = this.chargingStationModels.filter((x) => x.id !== payload.id)
                 this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
                 break
               case UiToCsmsUserSubCmdEnum.add:
                 {
-                  const user = this.chargingStations.find((x) => x.id === payload.id)
+                  const user = this.chargingStationModels.find((x) => x.id === payload.id)
                   if (!user) {
-                    this.chargingStations.push(payload)
+                    this.chargingStationModels.push(payload)
                     this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
                   }
                 }
                 break
             }
 
-            this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStations))
-            this.dataStorage.set('chargingStations', this.chargingStations)
+            this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStationModels))
+            this.dataStorage.set('chargingStations', this.chargingStationModels)
+          }
+          break
+        case UiToCsmsCmdEnum.csAction:
+          {
+            const payload = data.payload as string
+            const cs = this.chargingStations.find((x) => (x.model.uniqueIdentifier = payload))
+
+            if (!cs) {
+              return
+            }
+
+            switch (data.subCmd) {
+              case UiToCsmsCsSubCmdEnum.sendSetVariables:
+                cs.sendSetVariables(
+                  new SetVariablesRequestDto([
+                    new SetVariableDataDto('attributeX1', new ComponentDto('componentX'), new VariableDto('variableX1')),
+                    new SetVariableDataDto('attributeX2', new ComponentDto('componentX'), new VariableDto('variableX2')),
+                    new SetVariableDataDto('attributeX3', new ComponentDto('componentX'), new VariableDto('variableX3')),
+                    new SetVariableDataDto('attributeX4', new ComponentDto('componentX'), new VariableDto('variableX4')),
+                  ]),
+                )
+                break
+              case UiToCsmsCsSubCmdEnum.sendGetBaseReport:
+                cs.sendGetBaseReport(new GetBaseReportRequestDto(1, ReportBaseEnum.FullInventory))
+                break
+              case UiToCsmsCsSubCmdEnum.sendGetVariables:
+                cs.sendGetVariables(
+                  new GetVariablesRequestDto([
+                    new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX1')),
+                    new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX2')),
+                    new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX3')),
+                  ]),
+                )
+                break
+              case UiToCsmsCsSubCmdEnum.sendChangeAvailability:
+                cs.sendChangeAvailability(new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative))
+                break
+              case UiToCsmsCsSubCmdEnum.sendRequestReset:
+                cs.sendRequestReset(new ResetRequestDto(ResetEnum.Immediate))
+                break
+              case UiToCsmsCsSubCmdEnum.sendDataTransfer:
+                cs.sendDataTransfer(new DataTransferRequestDto('vendorIdX'))
+                break
+            }
           }
           break
       }
@@ -313,7 +376,7 @@ export class WebSocketServer {
     }
 
     // Save data
-    this.dataStorage.set('chargingStations', this.chargingStations)
+    this.dataStorage.set('chargingStations', this.chargingStationModels)
     this.dataStorage.set('rfids', this.rfids)
 
     this.logger.info(`WebSocketServer stopped`)

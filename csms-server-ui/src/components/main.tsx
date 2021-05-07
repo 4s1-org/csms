@@ -8,6 +8,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import MainChargingStations from './stations/main-stations'
 import MainRfids from './rfids/main-rfids'
+import MainActionsComp from './actions/main-actions'
 
 interface IState {
   csStates: ChargingStationModel[]
@@ -46,12 +47,16 @@ class AdminPageComp extends React.Component<IProps, IState> {
         <Tabs>
           <TabList>
             <Tab>Overview</Tab>
+            <Tab>Send Action</Tab>
             <Tab>Charging Stations</Tab>
             <Tab>RFIDs</Tab>
           </TabList>
 
           <TabPanel>
             <MainOverview models={this.state.csStates}></MainOverview>
+          </TabPanel>
+          <TabPanel>
+            <MainActionsComp models={this.state.csList} send={this.state.send}></MainActionsComp>
           </TabPanel>
           <TabPanel>
             <MainChargingStations models={this.state.csList} send={this.state.send}></MainChargingStations>

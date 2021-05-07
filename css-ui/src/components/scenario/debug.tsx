@@ -61,7 +61,7 @@ class DebugComp extends React.Component<IProps, IState> {
     return (
       <ul className="list-group">
         <li className="list-group-item">
-          <button type="button" onClick={this.sendBootNotification}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendBootNotification}>
             Send BootNotification
           </button>
           &nbsp; Model: &nbsp;
@@ -91,12 +91,12 @@ class DebugComp extends React.Component<IProps, IState> {
           </select>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendHeartbeat}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendHeartbeat}>
             Send Heartbeat
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendStatusNotification}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendStatusNotification}>
             Send StatusNotification
           </button>
           &nbsp; ConnectorStatus: &nbsp;
@@ -122,7 +122,7 @@ class DebugComp extends React.Component<IProps, IState> {
           </select>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendAuthorize}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendAuthorize}>
             Send Authorize (with Pin Code)
           </button>
           &nbsp; IdToken: &nbsp;
@@ -142,22 +142,22 @@ class DebugComp extends React.Component<IProps, IState> {
           </select>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendMeterValue}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendMeterValue}>
             Send MeterValue
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendNotifyReport}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendNotifyReport}>
             Send NotifyReport
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendNotifyEvent}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendNotifyEvent}>
             Send NotifyEvent
           </button>
         </li>
         <li className="list-group-item">
-          <button type="button" onClick={this.sendTransactionEvent}>
+          <button className="btn btn-secondary" type="button" onClick={this.sendTransactionEvent}>
             Send TransactionEvent
           </button>
         </li>

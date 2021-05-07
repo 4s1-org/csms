@@ -48,6 +48,8 @@ import {
   DataTransferRequestDto,
   OcppErrorCodeEnum,
   ChargingStationBase,
+  ReportBaseEnum,
+  OperationalStatusEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { LogLevelEnum } from '@yellowgarbagebag/common-lib'
 
@@ -193,8 +195,11 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   private receiveSetVariables(payload: SetVariablesRequestDto): SetVariablesResponseDto {
     const result: SetVariableResultDto[] = []
-    for (const x of payload.setVariableData) {
-      result.push(new SetVariableResultDto(SetVariableStatusEnum.Accepted, x.component, x.variable))
+    for (const data of payload.setVariableData) {
+      result.push(new SetVariableResultDto(SetVariableStatusEnum.Accepted, data.component, data.variable))
+    }
+    if (result.length > 1) {
+      result[1].attributeStatus = SetVariableStatusEnum.Rejected
     }
     return new SetVariablesResponseDto(result)
   }
@@ -204,14 +209,26 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * G04 - Change Availability Charging Station
    */
   private receiveChangeAvailability(payload: ChangeAvailabilityRequestDto): ChangeAvailabilityResponseDto {
-    return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
+    if (payload.operationalStatus === OperationalStatusEnum.Operative) {
+      return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Accepted)
+    } else {
+      return new ChangeAvailabilityResponseDto(ChangeAvailabilityStatusEnum.Rejected)
+    }
   }
 
   /**
    * B07 - Get Base Report
    */
   private receiveGetBaseReport(payload: GetBaseReportRequestDto): GetBaseReportResponseDto {
-    return new GetBaseReportResponseDto(GenericDeviceModelStatusEnum.Accepted)
+    switch (payload.reportBase) {
+      case ReportBaseEnum.FullInventory:
+        return new GetBaseReportResponseDto(GenericDeviceModelStatusEnum.Accepted)
+      case ReportBaseEnum.ConfigurationInventory:
+      case ReportBaseEnum.SummaryInventory:
+        return new GetBaseReportResponseDto(GenericDeviceModelStatusEnum.Rejected)
+      default:
+        return new GetBaseReportResponseDto(GenericDeviceModelStatusEnum.NotSupported)
+    }
   }
 
   /**
@@ -222,6 +239,9 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     for (const x of payload.getVariableData) {
       result.push(new GetVariableResultDto(GetVariableStatusEnum.Accepted, x.component, x.variable))
     }
+    if (result.length > 1) {
+      result[1].attributeStatus = GetVariableStatusEnum.Rejected
+    }
     return new GetVariablesResponseDto(result)
   }
 
@@ -230,7 +250,11 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B12 - Reset - With Ongoing Transaction
    */
   private receiveRequestReset(payload: ResetRequestDto): ResetResponseDto {
-    return new ResetResponseDto(ResetStatusEnum.Accepted)
+    if (payload.evseId < 3) {
+      return new ResetResponseDto(ResetStatusEnum.Accepted)
+    } else {
+      return new ResetResponseDto(ResetStatusEnum.Rejected)
+    }
   }
 
   /**
@@ -238,6 +262,10 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * P02 - Data Transfer to the CSMS
    */
   private receiveDataTransfer(payload: DataTransferRequestDto): DataTransferResponseDto {
-    return new DataTransferResponseDto(DataTransferStatusEnum.Rejected)
+    if (payload.data) {
+      return new DataTransferResponseDto(DataTransferStatusEnum.Accepted)
+    } else {
+      return new DataTransferResponseDto(DataTransferStatusEnum.Rejected)
+    }
   }
 }
