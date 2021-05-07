@@ -36,6 +36,7 @@ class Simulation extends SimulationBase {
     let wattHours = Math.round((Date.now() - 1619091965663) / 1000)
 
     await this.connect()
+    await sleep(100)
 
     // B01 - Cold Boot Charging Station
     // Verfügbarkeit der Ladesäule signalisieren

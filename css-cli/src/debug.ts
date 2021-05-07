@@ -9,6 +9,7 @@ class Simulation extends SimulationBase {
 
   public async simulate(): Promise<void> {
     await this.connect()
+    await sleep(100)
 
     // await this.cs.sendBootNotification(
     //   new BootNotificationRequestDto(new ChargingStationDto('Simulator1', 'CSS-CLI'), BootReasonEnum.PowerUp),
