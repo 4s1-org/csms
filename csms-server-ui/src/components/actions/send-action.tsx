@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStationModel, ColorStateEnum, UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg } from '@yellowgarbagebag/csms-lib'
 
 interface IState {}
 
