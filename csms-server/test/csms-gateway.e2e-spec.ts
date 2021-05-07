@@ -416,6 +416,4 @@ describe('CSMS Gateway', () => {
       }
     })
   })
-}) -
-  e01 -
-  s1
+})
