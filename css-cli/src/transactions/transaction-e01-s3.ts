@@ -10,8 +10,6 @@ import {
   TriggerReasonEnum,
   TransactionDto,
   AuthorizeRequestDto,
-  IdTokenDto,
-  IdTokenEnum,
   AuthorizationStatusEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './../simulation-base'
@@ -35,8 +33,7 @@ export class TransactionE01S3 extends SimulationBase {
     // User provides identification
 
     {
-      const idToken = new IdTokenDto('aaa', IdTokenEnum.ISO14443)
-      const payload = new AuthorizeRequestDto(idToken)
+      const payload = new AuthorizeRequestDto(this.idToken)
       const res = await this.cs.sendAuthorize(payload)
       if (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted) {
         throw new Error('')
@@ -50,7 +47,7 @@ export class TransactionE01S3 extends SimulationBase {
         TransactionEventEnum.Started,
         this.cs.currentTime,
         TriggerReasonEnum.Authorized,
-        1,
+        this.seqNo,
         transaction,
       )
       await this.cs.sendTransactionEvent(payload)
@@ -58,6 +55,5 @@ export class TransactionE01S3 extends SimulationBase {
     }
 
     this.client.disconnect()
-
   }
 }

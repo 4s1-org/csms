@@ -35,7 +35,7 @@ export class TransactionE01S1 extends SimulationBase {
         TransactionEventEnum.Started,
         this.cs.currentTime,
         TriggerReasonEnum.EVDetected,
-        1,
+        this.seqNo,
         new TransactionDto('foobar'),
       ),
     )
