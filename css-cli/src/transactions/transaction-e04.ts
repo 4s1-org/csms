@@ -41,7 +41,7 @@ export class TransactionE04 extends SimulationBase {
       const transaction = new TransactionDto('foobar')
       transaction.chargingState = ChargingStateEnum.EVConnected
       const payload = new TransactionEventRequestDto(
-        TransactionEventEnum.Updated,
+        TransactionEventEnum.Started,
         this.cs.currentTime,
         TriggerReasonEnum.CablePluggedIn,
         this.seqNo,
