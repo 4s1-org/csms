@@ -1,6 +1,6 @@
 import React from 'react'
 import SendActionComp from './send-action'
-import { ChargingStationModel, ColorStateEnum, UiToCsmsMsg } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, UiToCsmsMsg } from '@yellowgarbagebag/csms-lib'
 
 interface IState {}
 
