@@ -40,31 +40,34 @@ class AdminPageComp extends React.Component<IProps, IState> {
   public componentDidMount(): void {}
 
   public render(): JSX.Element {
+    const tabs = (
+      <Tabs>
+        <TabList>
+          <Tab>Overview</Tab>
+          <Tab>Send Action</Tab>
+          <Tab>Charging Stations</Tab>
+          <Tab>RFIDs</Tab>
+        </TabList>
+
+        <TabPanel>
+          <MainOverview models={this.state.csStates}></MainOverview>
+        </TabPanel>
+        <TabPanel>
+          <MainActionsComp models={this.state.csList} send={this.state.send}></MainActionsComp>
+        </TabPanel>
+        <TabPanel>
+          <MainChargingStations models={this.state.csList} send={this.state.send}></MainChargingStations>
+        </TabPanel>
+        <TabPanel>
+          <MainRfids models={this.state.rfidCardList} send={this.state.send}></MainRfids>
+        </TabPanel>
+      </Tabs>
+    )
+
     return (
       <div>
         <LoginPanelComp onLoginClick={this.login} onLogoutClick={this.logout} isConnected={this.state.isConnected}></LoginPanelComp>
-
-        <Tabs>
-          <TabList>
-            <Tab>Overview</Tab>
-            <Tab>Send Action</Tab>
-            <Tab>Charging Stations</Tab>
-            <Tab>RFIDs</Tab>
-          </TabList>
-
-          <TabPanel>
-            <MainOverview models={this.state.csStates}></MainOverview>
-          </TabPanel>
-          <TabPanel>
-            <MainActionsComp models={this.state.csList} send={this.state.send}></MainActionsComp>
-          </TabPanel>
-          <TabPanel>
-            <MainChargingStations models={this.state.csList} send={this.state.send}></MainChargingStations>
-          </TabPanel>
-          <TabPanel>
-            <MainRfids models={this.state.rfidCardList} send={this.state.send}></MainRfids>
-          </TabPanel>
-        </Tabs>
+        {this.state.isConnected && tabs}
       </div>
     )
   }
