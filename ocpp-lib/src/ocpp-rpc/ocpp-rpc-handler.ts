@@ -90,11 +90,7 @@ export class OcppRpcHandler {
     }
 
     if (typeof errorDescription !== 'string') {
-      throw new OcppRpcValidationError(
-        messageId,
-        OcppErrorCodeEnum.RpcFrameworkError,
-        'Error description is not a string',
-      )
+      throw new OcppRpcValidationError(messageId, OcppErrorCodeEnum.RpcFrameworkError, 'Error description is not a string')
     }
 
     if (errorDescription.length > 255) {

@@ -122,9 +122,9 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
         (x) => x.component.name === sendVar.component.name && x.variable.name === sendVar.variable.name,
       )
       if (receiveVar) {
-        this.logger.info(`${sendVar.component.name} | ${sendVar.variable.name} | ${receiveVar.attributeStatus}`)
+        this.logger.info(`=> ${sendVar.component.name} | ${sendVar.variable.name} | ${receiveVar.attributeStatus}`)
       } else {
-        this.logger.info(`${sendVar.component.name} | ${sendVar.variable.name} | not received`)
+        this.logger.info(`=> ${sendVar.component.name} | ${sendVar.variable.name} | not received`)
       }
     }
     return res
@@ -135,7 +135,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendGetBaseReport(payload: GetBaseReportRequestDto): Promise<GetBaseReportResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
+    this.logger.info(`=> ${res.status}`)
     return res
   }
 
@@ -145,7 +145,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendChangeAvailability(payload: ChangeAvailabilityRequestDto): Promise<ChangeAvailabilityResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
+    this.logger.info(`=> ${res.status}`)
     return res
   }
 
@@ -154,7 +154,16 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendGetVariables(payload: GetVariablesRequestDto): Promise<GetVariablesResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
+    for (const sendVar of payload.getVariableData) {
+      const receiveVar = res.getVariableResult.find(
+        (x) => x.component.name === sendVar.component.name && x.variable.name === sendVar.variable.name,
+      )
+      if (receiveVar) {
+        this.logger.info(`=> ${sendVar.component.name} | ${sendVar.variable.name} | ${receiveVar.attributeStatus}`)
+      } else {
+        this.logger.info(`=> ${sendVar.component.name} | ${sendVar.variable.name} | not received`)
+      }
+    }
     return res
   }
 
@@ -164,7 +173,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendRequestReset(payload: ResetRequestDto): Promise<ResetResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
+    this.logger.info(`=> ${res.status}`)
     return res
   }
 
@@ -174,7 +183,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendDataTransfer(payload: DataTransferRequestDto): Promise<DataTransferResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
+    this.logger.info(`=> ${res.status}`)
     return res
   }
 
@@ -184,7 +193,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B03 - Cold Boot Charging Station - Rejected
    */
   private receiveBootNotification(payload: BootNotificationRequestDto): BootNotificationResponseDto {
-    this.logger.info(`Boot reason: ${payload.reason}`)
+    this.logger.info(`=> Boot reason: ${payload.reason}`)
     this.model.state = ColorStateEnum.Green
     return new BootNotificationResponseDto(this.currentTime, this._heartbeatInterval, RegistrationStatusEnum.Accepted)
   }
@@ -313,6 +322,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * N07 - Alert Event
    */
   private receiveNotifyEvent(payload: NotifyEventRequestDto): NotifyEventResponseDto {
+    this.logger.info(`=> ${payload.generatedAt} | ${payload.seqNo} | ${payload.eventData.length}`)
     return new NotifyEventResponseDto()
   }
 
@@ -321,6 +331,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * B07 - Get Base Report
    */
   private receiveNotifyReport(payload: NotifyReportRequestDto): NotifyReportResponseDto {
+    this.logger.info(`=> ${payload.requestId} | ${payload.generatedAt} | ${payload.seqNo}`)
     return new NotifyReportResponseDto()
   }
 
