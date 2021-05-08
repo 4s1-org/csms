@@ -11,9 +11,9 @@ class Simulation extends SimulationBase {
     await this.connect()
     await sleep(100)
 
-    // await this.cs.sendBootNotification(
-    //   new BootNotificationRequestDto(new ChargingStationDto('Simulator1', 'CSS-CLI'), BootReasonEnum.PowerUp),
-    // )
+    await this.cs.sendBootNotification(
+      new BootNotificationRequestDto(new ChargingStationDto('Simulator1', 'CSS-CLI'), BootReasonEnum.PowerUp),
+    )
     await sleep(200)
 
     await this.cs.sendHeartbeat(new HeartbeatRequestDto())
