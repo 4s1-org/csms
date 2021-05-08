@@ -58,6 +58,7 @@ export class WebSocketServer {
     for (const model of this.chargingStationModels) {
       model.state = ColorStateEnum.Red
       model.evseList = []
+      model.failedLogins = model.failedLogins || 0
     }
     this.rfids = dataStorage.get('rfids') || []
   }
@@ -109,8 +110,8 @@ export class WebSocketServer {
         const uniqueIdentifier = myURL.pathname.split('/')[2]
 
         // Check credentials
-        const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier && x.enabled)
-        if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
+        const model = this.handleChargingStationLogin(uniqueIdentifier, username, password)
+        if (!model) {
           this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
           return ServerUtils.send401(socket)
         }
@@ -285,6 +286,9 @@ export class WebSocketServer {
             cs.uniqueIdentifier = payload.uniqueIdentifier
             cs.username = payload.username
             cs.enabled = payload.enabled
+            if (payload.enabled) {
+              cs.failedLogins = 0
+            }
             // Passwort wird nur aktualisiert, wenn auch von der UI eines gesendet wurde.
             if (payload.passwordHash) {
               cs.passwordHash = payload.passwordHash
@@ -375,5 +379,32 @@ export class WebSocketServer {
         cs.sendDataTransfer(new DataTransferRequestDto('vendorIdX'))
         break
     }
+  }
+
+  private handleChargingStationLogin(uniqueIdentifier: string, username: string, password: string): ChargingStationModel | undefined {
+    // Try to find CS
+    const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier)
+    // if not found, go back
+    if (!model) {
+      return
+    }
+
+    // if CS is disabled or credentials invalid, increase failed login attempts and go back
+    if (!model.enabled || model.username !== username || !verifyPassword(password, model.passwordHash)) {
+      model.failedLogins += 1
+      if (model.failedLogins >= 5) {
+        model.enabled = false
+      }
+      // Save state
+      this.dataStorage.set('chargingStations', this.chargingStationModels)
+      // Update admin UI
+      this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
+      this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStationModels))
+      return
+    }
+
+    // Everything is fine, reset failed login attempts
+    model.failedLogins = 0
+    return model
   }
 }
