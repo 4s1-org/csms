@@ -16,6 +16,7 @@ import {
   UiToCsmsUserSubCmdEnum,
   RfidCardModel,
   UiToCsmsCsSubCmdEnum,
+  ColorStateEnum,
 } from '@yellowgarbagebag/csms-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
@@ -58,6 +59,10 @@ export class WebSocketServer {
     this.logger.info(`Configfile: ${dataStorage.path}`)
 
     this.chargingStationModels = dataStorage.get('chargingStations') || []
+    for (const model of this.chargingStationModels) {
+      model.state = ColorStateEnum.Red
+      model.evseList = []
+    }
     this.rfids = dataStorage.get('rfids') || []
   }
 
