@@ -46,6 +46,10 @@ export class OcppRpcHandler {
       throw new OcppRpcValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'MessageTypeId is not a number')
     }
 
+    if (messageTypeId < 2 || messageTypeId > 4) {
+      throw new OcppRpcValidationError('', OcppErrorCodeEnum.MessageTypeNotSupported, 'Invalid messageTypeId')
+    }
+
     if (messageTypeId === OcppMessageTypeIdEnum.Call && data.length === 4) {
       const [messageTypeId, messageId, action, payload] = data
       this.validateMessageId(messageId)

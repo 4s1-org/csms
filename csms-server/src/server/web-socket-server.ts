@@ -258,10 +258,10 @@ export class WebSocketServer {
   public stopServer(): void {
     if (this.server) {
       for (const socket of this.adminWebSockets) {
-        socket.close()
+        socket.terminate()
       }
       for (const socket of this.csWebSockets) {
-        socket.close()
+        socket.terminate()
       }
       this.server.close()
     }
