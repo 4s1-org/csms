@@ -14,12 +14,10 @@ import {
   ChargingStateEnum,
   MeterValueDto,
   SampledValueDto,
-  ReasonEnum,
-  HeartbeatRequestDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './../simulation-base'
 
-export class TransactionE08 extends SimulationBase {
+export class TransactionE12 extends SimulationBase {
   constructor() {
     super()
   }
@@ -84,57 +82,65 @@ export class TransactionE08 extends SimulationBase {
 
     // -----
 
-    {
-      this.cs.sendHeartbeat(new HeartbeatRequestDto())
-    }
+    // connection loss
 
-    {
-      const transaction = new TransactionDto('foobar')
-      const payload = new TransactionEventRequestDto(
-        TransactionEventEnum.Ended,
-        this.cs.currentTime,
-        TriggerReasonEnum.StopAuthorized, // Der zu setzende Wert steht nicht in der Doku
-        this.seqNo,
-        transaction,
-      )
-      payload.offline = true
-      await this.cs.sendTransactionEvent(payload)
-      await sleep(100)
-    }
+    const transaction = new TransactionDto('foobar')
 
-    // Unplug cable
+    const payload1 = new TransactionEventRequestDto(
+      TransactionEventEnum.Updated,
+      this.cs.currentTime,
+      TriggerReasonEnum.ChargingStateChanged,
+      this.seqNo,
+      transaction,
+    )
+    payload1.meterValue = [new MeterValueDto([new SampledValueDto(500)], this.cs.currentTime)]
 
-    {
-      const payload = new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 1, 1)
-      await this.cs.sendStatusNotification(payload)
-      await sleep(100)
-    }
+    const payload2 = new TransactionEventRequestDto(
+      TransactionEventEnum.Updated,
+      this.cs.currentTime,
+      TriggerReasonEnum.ChargingStateChanged,
+      this.seqNo,
+      transaction,
+    )
+    payload2.meterValue = [new MeterValueDto([new SampledValueDto(1000)], this.cs.currentTime)]
 
-    {
-      const transaction = new TransactionDto('foobar')
-      transaction.chargingState = ChargingStateEnum.Idle
-      transaction.stoppedReason = ReasonEnum.EVDisconnected
-      const payload = new TransactionEventRequestDto(
-        TransactionEventEnum.Ended,
-        this.cs.currentTime,
-        TriggerReasonEnum.EVCommunicationLost,
-        this.seqNo,
-        transaction,
-      )
-      payload.meterValue = [new MeterValueDto([new SampledValueDto(1500)], this.cs.currentTime)]
-      payload.idToken = this.idToken
-      const res = await this.cs.sendTransactionEvent(payload)
-      if (
-        !res.idTokenInfo ||
-        (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted &&
-          res.idTokenInfo.status !== AuthorizationStatusEnum.Blocked &&
-          res.idTokenInfo.status !== AuthorizationStatusEnum.Invalid &&
-          res.idTokenInfo.status !== AuthorizationStatusEnum.Expired)
-      ) {
-        throw new Error('Should be other case')
-      }
-      await sleep(100)
-    }
+    const payload3 = new TransactionEventRequestDto(
+      TransactionEventEnum.Updated,
+      this.cs.currentTime,
+      TriggerReasonEnum.ChargingStateChanged,
+      this.seqNo,
+      transaction,
+    )
+    payload3.meterValue = [new MeterValueDto([new SampledValueDto(1500)], this.cs.currentTime)]
+
+    // connection restored
+
+    // send cached messages
+
+    payload1.offline = true
+    await this.cs.sendTransactionEvent(payload1)
+    await sleep(100)
+
+    payload2.offline = true
+    await this.cs.sendTransactionEvent(payload2)
+    await sleep(100)
+
+    payload3.offline = true
+    await this.cs.sendTransactionEvent(payload3)
+    await sleep(100)
+
+    // send normal messages
+
+    const payload4 = new TransactionEventRequestDto(
+      TransactionEventEnum.Updated,
+      this.cs.currentTime,
+      TriggerReasonEnum.ChargingStateChanged,
+      this.seqNo,
+      transaction,
+    )
+    payload4.meterValue = [new MeterValueDto([new SampledValueDto(1500)], this.cs.currentTime)]
+    await this.cs.sendTransactionEvent(payload4)
+    await sleep(100)
 
     this.client.disconnect()
   }
