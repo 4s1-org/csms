@@ -415,5 +415,36 @@ describe('CSMS Gateway', () => {
         socket.close()
       }
     })
+
+    it('Call with messageTypeId 1', (done: jest.DoneCallback) => {
+      const socket = connectToSocket(done)
+      const messageId = Math.random().toString()
+
+      socket.onopen = (): void => {
+        const payload = new UnpublishFirmwareRequestDto('abcdefg')
+        delete payload['_baseClassName']
+        delete payload['_className']
+        socket.send(
+          JSON.stringify([
+            1,
+            messageId,
+            OcppActionEnum.UnpublishFirmware, // Noch nicht implementiert
+            payload,
+          ]),
+        )
+      }
+
+      socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+        const data = JSON.parse(msg.data as string)
+
+        expect(data.length).toBe(5)
+        expect(data[0]).toBe(OcppMessageTypeIdEnum.Error)
+        expect(data[1]).toBe('')
+        expect(data[2]).toBe(OcppErrorCodeEnum.MessageTypeNotSupported)
+        expect(data[3]).toBeDefined()
+        expect(data[4]).toBeDefined()
+        socket.close()
+      }
+    })
   })
 })
