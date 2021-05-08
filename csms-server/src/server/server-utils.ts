@@ -1,7 +1,8 @@
+import { Socket } from 'net'
 import { TLSSocket } from 'tls'
 import { IncomingHttpHeaders } from 'http'
 import { IncomingMessage } from 'http'
-import { fromBase64, Logger, verifyPassword } from '@yellowgarbagebag/common-lib'
+import { fromBase64 } from '@yellowgarbagebag/common-lib'
 
 export type HeaderType = {
   secWebsocketKey: string
@@ -53,8 +54,8 @@ export abstract class ServerUtils {
     return { username: '', password: '' }
   }
 
-  public static send401(tlsSocket: TLSSocket): void {
-    tlsSocket.write('HTTP/1.1 401 Unauthorized\r\n\r\n')
-    tlsSocket.destroy()
+  public static send401(socket: Socket | TLSSocket): void {
+    socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n')
+    socket.destroy()
   }
 }

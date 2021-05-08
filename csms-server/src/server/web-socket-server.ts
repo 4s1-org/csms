@@ -5,6 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import { URL } from 'url'
 import { IncomingMessage } from 'http'
+import { Socket } from 'net'
 import { TLSSocket } from 'tls'
 import { Logger, verifyPassword } from '@yellowgarbagebag/common-lib'
 import {
@@ -43,10 +44,10 @@ import { ServerUtils } from './server-utils'
 export class WebSocketServer {
   protected logger: Logger = new Logger('Server', ProcessEnv.LOG_LEVEL)
   private server: https.Server | http.Server | undefined
-  private csSockets: Set<WebSocket> = new Set<WebSocket>()
-  private csTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
-  private adminSockets: Set<WebSocket> = new Set<WebSocket>()
-  private adminTlsSockets: Set<TLSSocket> = new Set<TLSSocket>()
+  private csWebSockets: Set<WebSocket> = new Set<WebSocket>()
+  private csSockets: Set<Socket | TLSSocket> = new Set<Socket | TLSSocket>()
+  private adminWebSockets: Set<WebSocket> = new Set<WebSocket>()
+  private adminSockets: Set<Socket | TLSSocket> = new Set<Socket | TLSSocket>()
   private chargingStationModels: ChargingStationModel[]
   private chargingStations: ChargingStation[] = []
   private rfids: RfidCardModel[]
@@ -70,17 +71,17 @@ export class WebSocketServer {
     // Create a WebSocket server for charging station connections.
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
-    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void => {
+    }).on('connection', (webSocket: WebSocket, socket: TLSSocket, model: ChargingStationModel): void => {
       this.logger.info('ChargingStation-Socket-Connection established')
-      this.onChargingStationConnection(socket, tlsSocket, model)
+      this.onChargingStationConnection(webSocket, socket, model)
     })
 
     // Create a WebSocket server for admin connections.
     const wssAdmin = new WebSocket.Server({
       noServer: true,
-    }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => {
+    }).on('connection', (webSocket: WebSocket, socket: Socket | TLSSocket): void => {
       this.logger.info('Admin-Socket-Connection established')
-      this.onAdminConnection(socket, tlsSocket)
+      this.onAdminConnection(webSocket, socket)
     })
 
     // Choose HTTP or HTTPS base on config
@@ -90,19 +91,19 @@ export class WebSocketServer {
     } else {
       this.logger.info('Use https')
       this.server = https.createServer({
-        cert: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.crt')),
-        key: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.key')),
+        cert: fs.readFileSync(path.join(__dirname, '..', '..', '..', 'data', 'certificate.crt')),
+        key: fs.readFileSync(path.join(__dirname, '..', '..', '..', 'data', 'certificate.key')),
       })
     }
 
     // Handle WebSocket upgrade
-    this.server.on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
+    this.server.on('upgrade', (request: IncomingMessage, socket: Socket | TLSSocket, head: Buffer): void => {
       this.logger.info('upgrade connection')
       const header = ServerUtils.parseHeaders(request.headers)
       this.logger.info(`Client connected: ${header.secWebsocketKey} [${header.secWebsocketProtocol}]`)
 
       const { username, password } = ServerUtils.getCredentials(request, header)
-      const myURL = new URL(request.url || '', 'http://localhosts') // no matter which domain
+      const myURL = new URL(request.url || '', 'http://localhost') // no matter which domain
 
       if (myURL.pathname.startsWith('/ocpp/')) {
         // Charging Station
@@ -113,12 +114,12 @@ export class WebSocketServer {
         const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier && x.enabled)
         if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
           this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
-          return ServerUtils.send401(tlsSocket)
+          return ServerUtils.send401(socket)
         }
 
         // Do the upgrade to ChargingStation WebSocket server
-        wssChargingStations.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
-          wssChargingStations.emit('connection', socket, tlsSocket, model)
+        wssChargingStations.handleUpgrade(request, socket, head, (webSocket: WebSocket): void => {
+          wssChargingStations.emit('connection', webSocket, socket, model)
         })
       } else if (myURL.pathname.startsWith('/admin')) {
         // Admin
@@ -127,15 +128,15 @@ export class WebSocketServer {
         // Check credentials
         const adminCredentials = this.dataStorage.get('adminCredentials')
         if (username !== adminCredentials.username || !verifyPassword(password, adminCredentials.passwordHash)) {
-          return ServerUtils.send401(tlsSocket)
+          return ServerUtils.send401(socket)
         }
 
         // Do the upgrade to Admin WebSocket server
-        wssAdmin.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
-          wssAdmin.emit('connection', socket, tlsSocket)
+        wssAdmin.handleUpgrade(request, socket, head, (webSocket: WebSocket): void => {
+          wssAdmin.emit('connection', webSocket, socket)
         })
       } else {
-        return ServerUtils.send401(tlsSocket)
+        return ServerUtils.send401(socket)
       }
     })
 
@@ -148,30 +149,30 @@ export class WebSocketServer {
   /**
    * A new charging station connection appears.
    */
-  private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void {
+  private onChargingStationConnection(webSocket: WebSocket, socket: Socket | TLSSocket, model: ChargingStationModel): void {
+    this.csWebSockets.add(webSocket)
     this.csSockets.add(socket)
-    this.csTlsSockets.add(tlsSocket)
 
-    const client = new WsClient(model.uniqueIdentifier, socket)
+    const client = new WsClient(model.uniqueIdentifier, webSocket)
     const cs = new ChargingStation(model, client, this.dataStorage.get('rfids'))
     this.chargingStations.push(cs)
 
     cs.connect()
     this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
 
-    socket.onclose = (): void => {
+    webSocket.onclose = (): void => {
       cs.disconnect()
+      this.csWebSockets.delete(webSocket)
       this.csSockets.delete(socket)
-      this.csTlsSockets.delete(tlsSocket)
       this.chargingStations = this.chargingStations.filter((x) => x.model.uniqueIdentifier !== cs.model.uniqueIdentifier)
       this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
     }
 
-    socket.onerror = (err: any): void => {
+    webSocket.onerror = (err: any): void => {
       this.logger.error('Error' + err)
     }
 
-    socket.onmessage = (data: WebSocket.MessageEvent): void => {
+    webSocket.onmessage = (data: WebSocket.MessageEvent): void => {
       client.onMessage(data.data, cs)
       this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
     }
@@ -181,7 +182,7 @@ export class WebSocketServer {
    * Send a message to all admin connections.
    */
   private sendToUiAll(msg: CsmsToUiMsg): void {
-    for (const socket of this.adminSockets) {
+    for (const socket of this.adminWebSockets) {
       this.sendToUiSingle(socket, msg)
     }
   }
@@ -198,26 +199,26 @@ export class WebSocketServer {
   /**
    * A new admin connection appears.
    */
-  private onAdminConnection(socket: WebSocket, tlsSocket: TLSSocket): void {
+  private onAdminConnection(webSocket: WebSocket, socket: Socket | TLSSocket): void {
+    this.adminWebSockets.add(webSocket)
     this.adminSockets.add(socket)
-    this.adminTlsSockets.add(tlsSocket)
 
     for (const dto of this.chargingStationModels) {
-      this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.csState, dto))
+      this.sendToUiSingle(webSocket, new CsmsToUiMsg(CsmsToUiCmdEnum.csState, dto))
     }
-    this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStationModels))
-    this.sendToUiSingle(socket, new CsmsToUiMsg(CsmsToUiCmdEnum.rfidList, this.rfids))
+    this.sendToUiSingle(webSocket, new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStationModels))
+    this.sendToUiSingle(webSocket, new CsmsToUiMsg(CsmsToUiCmdEnum.rfidList, this.rfids))
 
-    socket.onclose = (): void => {
+    webSocket.onclose = (): void => {
+      this.adminWebSockets.delete(webSocket)
       this.adminSockets.delete(socket)
-      this.adminTlsSockets.delete(tlsSocket)
     }
 
-    socket.onerror = (err: any): void => {
+    webSocket.onerror = (err: any): void => {
       this.logger.error('Error' + err)
     }
 
-    socket.onmessage = (msg: WebSocket.MessageEvent): void => {
+    webSocket.onmessage = (msg: WebSocket.MessageEvent): void => {
       const data: UiToCsmsMsg = JSON.parse(msg.data.toString())
       this.logger.info(`Admin UI | ${data.cmd} | ${data.subCmd}`)
       this.adminOnMessage(data)
@@ -262,10 +263,10 @@ export class WebSocketServer {
    */
   public stopServer(): void {
     if (this.server) {
-      for (const socket of this.csTlsSockets) {
+      for (const socket of this.csSockets) {
         socket.destroy()
       }
-      for (const socket of this.csSockets) {
+      for (const socket of this.csWebSockets) {
         socket.close()
       }
       this.server.close()
