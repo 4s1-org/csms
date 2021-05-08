@@ -4,9 +4,9 @@ import http from 'http'
 import fs from 'fs'
 import path from 'path'
 import { URL } from 'url'
-import { IncomingHttpHeaders, IncomingMessage } from 'http'
+import { IncomingMessage } from 'http'
 import { TLSSocket } from 'tls'
-import { fromBase64, Logger, verifyPassword } from '@yellowgarbagebag/common-lib'
+import { Logger, verifyPassword } from '@yellowgarbagebag/common-lib'
 import {
   CsmsToUiMsg,
   CsmsToUiCmdEnum,
@@ -38,11 +38,7 @@ import {
   SetVariablesRequestDto,
   VariableDto,
 } from '@yellowgarbagebag/ocpp-lib'
-
-type HeaderType = {
-  secWebsocketKey: string
-  secWebsocketProtocol: string[]
-}
+import { ServerUtils } from './server-utils'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Server', ProcessEnv.LOG_LEVEL)
@@ -59,6 +55,7 @@ export class WebSocketServer {
     this.logger.info(`Configfile: ${dataStorage.path}`)
 
     this.chargingStationModels = dataStorage.get('chargingStations') || []
+    // Reset states
     for (const model of this.chargingStationModels) {
       model.state = ColorStateEnum.Red
       model.evseList = []
@@ -66,7 +63,11 @@ export class WebSocketServer {
     this.rfids = dataStorage.get('rfids') || []
   }
 
+  /**
+   * Start the whole server
+   */
   public startServer(): void {
+    // Create a WebSocket server for charging station connections.
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
     }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void => {
@@ -74,6 +75,7 @@ export class WebSocketServer {
       this.onChargingStationConnection(socket, tlsSocket, model)
     })
 
+    // Create a WebSocket server for admin connections.
     const wssAdmin = new WebSocket.Server({
       noServer: true,
     }).on('connection', (socket: WebSocket, tlsSocket: TLSSocket): void => {
@@ -81,6 +83,7 @@ export class WebSocketServer {
       this.onAdminConnection(socket, tlsSocket)
     })
 
+    // Choose HTTP or HTTPS base on config
     if (this.dataStorage.get('https') === false) {
       this.logger.info('Use http')
       this.server = http.createServer()
@@ -91,66 +94,60 @@ export class WebSocketServer {
         key: fs.readFileSync(path.join(__dirname, '..', '..', 'data', 'certificate.key')),
       })
     }
+
+    // Handle WebSocket upgrade
     this.server.on('upgrade', (request: IncomingMessage, tlsSocket: TLSSocket, head: Buffer): void => {
       this.logger.info('upgrade connection')
-      const header = this.parseHeaders(request.headers)
+      const header = ServerUtils.parseHeaders(request.headers)
       this.logger.info(`Client connected: ${header.secWebsocketKey} [${header.secWebsocketProtocol}]`)
 
-      const { username, password } = this.getCredentials(request, header)
-      const myURL = new URL(request.url || '', 'http://localhosts') // Domain ist egal
+      const { username, password } = ServerUtils.getCredentials(request, header)
+      const myURL = new URL(request.url || '', 'http://localhosts') // no matter which domain
 
       if (myURL.pathname.startsWith('/ocpp/')) {
         // Charging Station
         this.logger.info('upgrade connection for ChargingStation')
         const uniqueIdentifier = myURL.pathname.split('/')[2]
 
+        // Check credentials
         const model = this.chargingStationModels.find((x) => x.uniqueIdentifier === uniqueIdentifier && x.enabled)
         if (!model || model.username !== username || !verifyPassword(password, model.passwordHash)) {
           this.logger.warn(`Invalid login from ${uniqueIdentifier}`)
-          return this.send401(tlsSocket)
+          return ServerUtils.send401(tlsSocket)
         }
 
+        // Do the upgrade to ChargingStation WebSocket server
         wssChargingStations.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
           wssChargingStations.emit('connection', socket, tlsSocket, model)
         })
       } else if (myURL.pathname.startsWith('/admin')) {
         // Admin
         this.logger.info('upgrade connection for Admin')
+
+        // Check credentials
         const adminCredentials = this.dataStorage.get('adminCredentials')
         if (username !== adminCredentials.username || !verifyPassword(password, adminCredentials.passwordHash)) {
-          return this.send401(tlsSocket)
+          return ServerUtils.send401(tlsSocket)
         }
 
+        // Do the upgrade to Admin WebSocket server
         wssAdmin.handleUpgrade(request, tlsSocket, head, (socket: WebSocket): void => {
           wssAdmin.emit('connection', socket, tlsSocket)
         })
       } else {
-        return this.send401(tlsSocket)
+        return ServerUtils.send401(tlsSocket)
       }
     })
 
+    // Start the HTTP/HTTPS server
     const port = this.dataStorage.get('port')
     this.server.listen(port)
     this.logger.info(`WebSocketServer is running on port ${port}`)
   }
 
-  private parseHeaders(headers: IncomingHttpHeaders): HeaderType {
-    const res: HeaderType = {
-      secWebsocketKey: '',
-      secWebsocketProtocol: [],
-    }
-
-    if (headers['sec-websocket-key']) {
-      res.secWebsocketKey = headers['sec-websocket-key']
-    }
-    if (headers['sec-websocket-protocol']) {
-      const parts = headers['sec-websocket-protocol'].split(', ')
-      res.secWebsocketProtocol = parts
-    }
-
-    return res
-  }
-
+  /**
+   * A new charging station connection appears.
+   */
   private onChargingStationConnection(socket: WebSocket, tlsSocket: TLSSocket, model: ChargingStationModel): void {
     this.csSockets.add(socket)
     this.csTlsSockets.add(tlsSocket)
@@ -180,18 +177,27 @@ export class WebSocketServer {
     }
   }
 
+  /**
+   * Send a message to all admin connections.
+   */
   private sendToUiAll(msg: CsmsToUiMsg): void {
     for (const socket of this.adminSockets) {
       this.sendToUiSingle(socket, msg)
     }
   }
 
+  /**
+   * Send a message to a single admin connection.
+   */
   private sendToUiSingle(socket: WebSocket, msg: CsmsToUiMsg): void {
     if (socket.OPEN) {
       socket.send(JSON.stringify(msg))
     }
   }
 
+  /**
+   * A new admin connection appears.
+   */
   private onAdminConnection(socket: WebSocket, tlsSocket: TLSSocket): void {
     this.adminSockets.add(socket)
     this.adminTlsSockets.add(tlsSocket)
@@ -213,162 +219,47 @@ export class WebSocketServer {
 
     socket.onmessage = (msg: WebSocket.MessageEvent): void => {
       const data: UiToCsmsMsg = JSON.parse(msg.data.toString())
-
       this.logger.info(`Admin UI | ${data.cmd} | ${data.subCmd}`)
-
-      switch (data.cmd) {
-        case UiToCsmsCmdEnum.rfidCmd:
-          {
-            const payload = data.payload as RfidCardModel
-
-            switch (data.subCmd) {
-              case UiToCsmsUserSubCmdEnum.edit:
-                {
-                  const user = this.rfids.find((x) => x.id === payload.id)
-                  if (user) {
-                    Object.assign(user, payload)
-                  }
-                }
-                break
-              case UiToCsmsUserSubCmdEnum.delete:
-                this.rfids = this.rfids.filter((x) => x.id !== payload.id)
-                break
-              case UiToCsmsUserSubCmdEnum.add:
-                {
-                  const user = this.rfids.find((x) => x.id === payload.id)
-                  if (!user) {
-                    this.rfids.push(payload)
-                  }
-                }
-                break
-            }
-
-            this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.rfidList, this.rfids))
-            this.dataStorage.set('rfids', this.rfids)
-          }
-          break
-        case UiToCsmsCmdEnum.csCmd:
-          {
-            const payload = data.payload as ChargingStationModel
-
-            switch (data.subCmd) {
-              case UiToCsmsUserSubCmdEnum.edit:
-                {
-                  const cs = this.chargingStationModels.find((x) => x.id === payload.id)
-                  if (cs) {
-                    cs.uniqueIdentifier = payload.uniqueIdentifier
-                    cs.username = payload.username
-                    cs.enabled = payload.enabled
-                    // Passwort wird nur aktualisiert, wenn auch von der UI eines gesendet wurde.
-                    if (payload.passwordHash) {
-                      cs.passwordHash = payload.passwordHash
-                    }
-                    this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
-                  }
-                }
-                break
-              case UiToCsmsUserSubCmdEnum.delete:
-                this.chargingStationModels = this.chargingStationModels.filter((x) => x.id !== payload.id)
-                this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
-                break
-              case UiToCsmsUserSubCmdEnum.add:
-                {
-                  const user = this.chargingStationModels.find((x) => x.id === payload.id)
-                  if (!user) {
-                    this.chargingStationModels.push(payload)
-                    this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
-                  }
-                }
-                break
-            }
-
-            this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStationModels))
-            this.dataStorage.set('chargingStations', this.chargingStationModels)
-          }
-          break
-        case UiToCsmsCmdEnum.csAction:
-          {
-            const payload = data.payload as string
-            const cs = this.chargingStations.find((x) => (x.model.uniqueIdentifier = payload))
-
-            if (!cs) {
-              return
-            }
-
-            switch (data.subCmd) {
-              case UiToCsmsCsSubCmdEnum.sendSetVariables:
-                cs.sendSetVariables(
-                  new SetVariablesRequestDto([
-                    new SetVariableDataDto('attributeX1', new ComponentDto('componentX'), new VariableDto('variableX1')),
-                    new SetVariableDataDto('attributeX2', new ComponentDto('componentX'), new VariableDto('variableX2')),
-                    new SetVariableDataDto('attributeX3', new ComponentDto('componentX'), new VariableDto('variableX3')),
-                    new SetVariableDataDto('attributeX4', new ComponentDto('componentX'), new VariableDto('variableX4')),
-                  ]),
-                )
-                break
-              case UiToCsmsCsSubCmdEnum.sendGetBaseReport:
-                cs.sendGetBaseReport(new GetBaseReportRequestDto(1, ReportBaseEnum.FullInventory))
-                break
-              case UiToCsmsCsSubCmdEnum.sendGetVariables:
-                cs.sendGetVariables(
-                  new GetVariablesRequestDto([
-                    new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX1')),
-                    new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX2')),
-                    new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX3')),
-                  ]),
-                )
-                break
-              case UiToCsmsCsSubCmdEnum.sendChangeAvailability:
-                cs.sendChangeAvailability(new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative))
-                break
-              case UiToCsmsCsSubCmdEnum.sendRequestReset:
-                cs.sendRequestReset(new ResetRequestDto(ResetEnum.Immediate))
-                break
-              case UiToCsmsCsSubCmdEnum.sendDataTransfer:
-                cs.sendDataTransfer(new DataTransferRequestDto('vendorIdX'))
-                break
-            }
-          }
-          break
-      }
+      this.adminOnMessage(data)
     }
   }
 
-  private getCredentials(request: IncomingMessage, header: HeaderType): { username: string; password: string } {
-    if (request.headers.authorization && request.headers.authorization.startsWith('Basic ')) {
-      const b64auth = request.headers.authorization.substring(6)
-      const parts = Buffer.from(b64auth, 'base64').toString().split(':') // cut "Basic "
-      if (parts.length === 2) {
-        return {
-          username: parts[0],
-          password: parts[1],
+  /**
+   * Incoming Message on admin socket
+   */
+  private adminOnMessage(data: UiToCsmsMsg): void {
+    switch (data.cmd) {
+      case UiToCsmsCmdEnum.rfidCmd:
+        {
+          const payload = data.payload as RfidCardModel
+          this.handleAdminRfidCmd(data.subCmd as UiToCsmsUserSubCmdEnum, payload)
+          this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.rfidList, this.rfids))
+          this.dataStorage.set('rfids', this.rfids)
         }
-      }
-    } else if (header.secWebsocketProtocol.length > 0) {
-      for (const protocol of header.secWebsocketProtocol) {
-        if (protocol.startsWith('Auth.')) {
-          const b64auth = protocol.substring(5) // cut "Auth."
-          const parts = fromBase64(b64auth).split(':')
-          if (parts.length === 2) {
-            return {
-              username: parts[0],
-              password: parts[1],
-            }
+        break
+      case UiToCsmsCmdEnum.csCmd:
+        {
+          const payload = data.payload as ChargingStationModel
+          this.handleAdminCsCmd(data.subCmd as UiToCsmsUserSubCmdEnum, payload)
+          this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStationModels))
+          this.dataStorage.set('chargingStations', this.chargingStationModels)
+        }
+        break
+      case UiToCsmsCmdEnum.csAction:
+        {
+          const payload = data.payload as string
+          const cs = this.chargingStations.find((x) => (x.model.uniqueIdentifier = payload))
+          if (cs) {
+            this.handleAdminCsAction(data.subCmd as UiToCsmsCsSubCmdEnum, cs)
           }
         }
-      }
+        break
     }
-
-    this.logger.warn('No credentials found or invalid')
-    return { username: '', password: '' }
   }
 
-  private send401(tlsSocket: TLSSocket): void {
-    this.logger.error(`Client not accepted`)
-    tlsSocket.write('HTTP/1.1 401 Unauthorized\r\n\r\n')
-    tlsSocket.destroy()
-  }
-
+  /**
+   * Stop the server. Closes all socket connections and save config.
+   */
   public stopServer(): void {
     if (this.server) {
       for (const socket of this.csTlsSockets) {
@@ -385,5 +276,109 @@ export class WebSocketServer {
     this.dataStorage.set('rfids', this.rfids)
 
     this.logger.info(`WebSocketServer stopped`)
+  }
+
+  /**
+   * Handler for an admin charging station command.
+   */
+  private handleAdminCsCmd(subCmd: UiToCsmsUserSubCmdEnum, payload: ChargingStationModel): void {
+    switch (subCmd) {
+      case UiToCsmsUserSubCmdEnum.edit:
+        {
+          const cs = this.chargingStationModels.find((x) => x.id === payload.id)
+          if (cs) {
+            cs.uniqueIdentifier = payload.uniqueIdentifier
+            cs.username = payload.username
+            cs.enabled = payload.enabled
+            // Passwort wird nur aktualisiert, wenn auch von der UI eines gesendet wurde.
+            if (payload.passwordHash) {
+              cs.passwordHash = payload.passwordHash
+            }
+            this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
+          }
+        }
+        break
+      case UiToCsmsUserSubCmdEnum.delete:
+        this.chargingStationModels = this.chargingStationModels.filter((x) => x.id !== payload.id)
+        this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
+        break
+      case UiToCsmsUserSubCmdEnum.add:
+        {
+          const user = this.chargingStationModels.find((x) => x.id === payload.id)
+          if (!user) {
+            this.chargingStationModels.push(payload)
+            this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, payload))
+          }
+        }
+        break
+    }
+  }
+
+  /**
+   * Handler for an admin rfid management command.
+   */
+  private handleAdminRfidCmd(subCmd: UiToCsmsUserSubCmdEnum, payload: RfidCardModel): void {
+    {
+      switch (subCmd) {
+        case UiToCsmsUserSubCmdEnum.edit:
+          {
+            const user = this.rfids.find((x) => x.id === payload.id)
+            if (user) {
+              Object.assign(user, payload)
+            }
+          }
+          break
+        case UiToCsmsUserSubCmdEnum.delete:
+          this.rfids = this.rfids.filter((x) => x.id !== payload.id)
+          break
+        case UiToCsmsUserSubCmdEnum.add:
+          {
+            const user = this.rfids.find((x) => x.id === payload.id)
+            if (!user) {
+              this.rfids.push(payload)
+            }
+          }
+          break
+      }
+    }
+  }
+
+  /**
+   * Handler for an admin charging station action.
+   */
+  private handleAdminCsAction(subCmd: UiToCsmsCsSubCmdEnum, cs: ChargingStation): void {
+    switch (subCmd) {
+      case UiToCsmsCsSubCmdEnum.sendSetVariables:
+        cs.sendSetVariables(
+          new SetVariablesRequestDto([
+            new SetVariableDataDto('attributeX1', new ComponentDto('componentX'), new VariableDto('variableX1')),
+            new SetVariableDataDto('attributeX2', new ComponentDto('componentX'), new VariableDto('variableX2')),
+            new SetVariableDataDto('attributeX3', new ComponentDto('componentX'), new VariableDto('variableX3')),
+            new SetVariableDataDto('attributeX4', new ComponentDto('componentX'), new VariableDto('variableX4')),
+          ]),
+        )
+        break
+      case UiToCsmsCsSubCmdEnum.sendGetBaseReport:
+        cs.sendGetBaseReport(new GetBaseReportRequestDto(1, ReportBaseEnum.FullInventory))
+        break
+      case UiToCsmsCsSubCmdEnum.sendGetVariables:
+        cs.sendGetVariables(
+          new GetVariablesRequestDto([
+            new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX1')),
+            new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX2')),
+            new GetVariableDataDto(new ComponentDto('componentX'), new VariableDto('variableX3')),
+          ]),
+        )
+        break
+      case UiToCsmsCsSubCmdEnum.sendChangeAvailability:
+        cs.sendChangeAvailability(new ChangeAvailabilityRequestDto(OperationalStatusEnum.Operative))
+        break
+      case UiToCsmsCsSubCmdEnum.sendRequestReset:
+        cs.sendRequestReset(new ResetRequestDto(ResetEnum.Immediate))
+        break
+      case UiToCsmsCsSubCmdEnum.sendDataTransfer:
+        cs.sendDataTransfer(new DataTransferRequestDto('vendorIdX'))
+        break
+    }
   }
 }
