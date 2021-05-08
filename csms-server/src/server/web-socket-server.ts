@@ -18,11 +18,11 @@ import {
   UiToCsmsCsSubCmdEnum,
   ColorStateEnum,
 } from '@yellowgarbagebag/csms-lib'
-import { DataStorage } from './config/data-storage'
-import { IDataStorageSchema } from './config/i-data-store-schema'
-import { ChargingStation } from './charging-station'
-import { WsClient } from './ws-client'
-import { ProcessEnv } from './process-env'
+import { DataStorage } from '../config/data-storage'
+import { IDataStorageSchema } from '../config/i-data-store-schema'
+import { ChargingStation } from '../charging-station'
+import { WsClient } from '../ws-client'
+import { ProcessEnv } from '../process-env'
 import {
   ChangeAvailabilityRequestDto,
   ComponentDto,
