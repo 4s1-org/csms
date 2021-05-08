@@ -14,12 +14,10 @@ import {
   ChargingStateEnum,
   MeterValueDto,
   SampledValueDto,
-  ReasonEnum,
-  HeartbeatRequestDto,
 } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './../simulation-base'
 
-export class TransactionE08 extends SimulationBase {
+export class TransactionE10 extends SimulationBase {
   constructor() {
     super()
   }
@@ -84,55 +82,39 @@ export class TransactionE08 extends SimulationBase {
 
     // -----
 
-    {
-      this.cs.sendHeartbeat(new HeartbeatRequestDto())
-    }
+    // unplug cable at car side
+
+    // suspend energy offer
 
     {
       const transaction = new TransactionDto('foobar')
+      transaction.chargingState = ChargingStateEnum.SuspendedEV
       const payload = new TransactionEventRequestDto(
-        TransactionEventEnum.Ended,
-        this.cs.currentTime,
-        TriggerReasonEnum.StopAuthorized, // Der zu setzende Wert steht nicht in der Doku
-        this.seqNo,
-        transaction,
-      )
-      payload.offline = true
-      await this.cs.sendTransactionEvent(payload)
-      await sleep(100)
-    }
-
-    // Unplug cable
-
-    {
-      const payload = new StatusNotificationRequestDto(this.cs.currentTime, ConnectorStatusEnum.Available, 1, 1)
-      await this.cs.sendStatusNotification(payload)
-      await sleep(100)
-    }
-
-    {
-      const transaction = new TransactionDto('foobar')
-      transaction.chargingState = ChargingStateEnum.Idle
-      transaction.stoppedReason = ReasonEnum.EVDisconnected
-      const payload = new TransactionEventRequestDto(
-        TransactionEventEnum.Ended,
+        TransactionEventEnum.Updated,
         this.cs.currentTime,
         TriggerReasonEnum.EVCommunicationLost,
         this.seqNo,
         transaction,
       )
-      payload.meterValue = [new MeterValueDto([new SampledValueDto(1500)], this.cs.currentTime)]
-      payload.idToken = this.idToken
-      const res = await this.cs.sendTransactionEvent(payload)
-      if (
-        !res.idTokenInfo ||
-        (res.idTokenInfo.status !== AuthorizationStatusEnum.Accepted &&
-          res.idTokenInfo.status !== AuthorizationStatusEnum.Blocked &&
-          res.idTokenInfo.status !== AuthorizationStatusEnum.Invalid &&
-          res.idTokenInfo.status !== AuthorizationStatusEnum.Expired)
-      ) {
-        throw new Error('Should be other case')
-      }
+      await this.cs.sendTransactionEvent(payload)
+      await sleep(100)
+    }
+
+    // Plugin cable
+
+    // resume energy offer
+
+    {
+      const transaction = new TransactionDto('foobar')
+      transaction.chargingState = ChargingStateEnum.Charging
+      const payload = new TransactionEventRequestDto(
+        TransactionEventEnum.Updated,
+        this.cs.currentTime,
+        TriggerReasonEnum.CablePluggedIn,
+        this.seqNo,
+        transaction,
+      )
+      await this.cs.sendTransactionEvent(payload)
       await sleep(100)
     }
 

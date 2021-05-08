@@ -15,6 +15,10 @@ import { TransactionE06S5 } from './transaction-e06-s5'
 import { TransactionE06S6 } from './transaction-e06-s6'
 import { TransactionE07 } from './transaction-e07'
 import { TransactionE08 } from './transaction-e08'
+import { TransactionE09 } from './transaction-e09'
+import { TransactionE10 } from './transaction-e10'
+import { TransactionE11 } from './transaction-e11'
+import { TransactionE12 } from './transaction-e12'
 
 async function main(): Promise<void> {
   await new TransactionE01S1().simulate()
@@ -50,6 +54,14 @@ async function main(): Promise<void> {
   await new TransactionE07().simulate()
   await sleep(200)
   await new TransactionE08().simulate()
+  await sleep(200)
+  await new TransactionE09().simulate()
+  await sleep(200)
+  await new TransactionE10().simulate()
+  await sleep(200)
+  await new TransactionE11().simulate()
+  await sleep(200)
+  await new TransactionE12().simulate()
 }
 
 main().catch(console.error)
