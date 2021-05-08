@@ -45,9 +45,7 @@ export class WebSocketServer {
   protected logger: Logger = new Logger('Server', ProcessEnv.LOG_LEVEL)
   private server: https.Server | http.Server | undefined
   private csWebSockets: Set<WebSocket> = new Set<WebSocket>()
-  private csSockets: Set<Socket | TLSSocket> = new Set<Socket | TLSSocket>()
   private adminWebSockets: Set<WebSocket> = new Set<WebSocket>()
-  private adminSockets: Set<Socket | TLSSocket> = new Set<Socket | TLSSocket>()
   private chargingStationModels: ChargingStationModel[]
   private chargingStations: ChargingStation[] = []
   private rfids: RfidCardModel[]
@@ -71,17 +69,17 @@ export class WebSocketServer {
     // Create a WebSocket server for charging station connections.
     const wssChargingStations = new WebSocket.Server({
       noServer: true,
-    }).on('connection', (webSocket: WebSocket, socket: TLSSocket, model: ChargingStationModel): void => {
+    }).on('connection', (webSocket: WebSocket, model: ChargingStationModel): void => {
       this.logger.info('ChargingStation-Socket-Connection established')
-      this.onChargingStationConnection(webSocket, socket, model)
+      this.onChargingStationConnection(webSocket, model)
     })
 
     // Create a WebSocket server for admin connections.
     const wssAdmin = new WebSocket.Server({
       noServer: true,
-    }).on('connection', (webSocket: WebSocket, socket: Socket | TLSSocket): void => {
+    }).on('connection', (webSocket: WebSocket): void => {
       this.logger.info('Admin-Socket-Connection established')
-      this.onAdminConnection(webSocket, socket)
+      this.onAdminConnection(webSocket)
     })
 
     // Choose HTTP or HTTPS base on config
@@ -119,7 +117,7 @@ export class WebSocketServer {
 
         // Do the upgrade to ChargingStation WebSocket server
         wssChargingStations.handleUpgrade(request, socket, head, (webSocket: WebSocket): void => {
-          wssChargingStations.emit('connection', webSocket, socket, model)
+          wssChargingStations.emit('connection', webSocket, model)
         })
       } else if (myURL.pathname.startsWith('/admin')) {
         // Admin
@@ -133,7 +131,7 @@ export class WebSocketServer {
 
         // Do the upgrade to Admin WebSocket server
         wssAdmin.handleUpgrade(request, socket, head, (webSocket: WebSocket): void => {
-          wssAdmin.emit('connection', webSocket, socket)
+          wssAdmin.emit('connection', webSocket)
         })
       } else {
         return ServerUtils.send401(socket)
@@ -149,9 +147,8 @@ export class WebSocketServer {
   /**
    * A new charging station connection appears.
    */
-  private onChargingStationConnection(webSocket: WebSocket, socket: Socket | TLSSocket, model: ChargingStationModel): void {
+  private onChargingStationConnection(webSocket: WebSocket, model: ChargingStationModel): void {
     this.csWebSockets.add(webSocket)
-    this.csSockets.add(socket)
 
     const client = new WsClient(model.uniqueIdentifier, webSocket)
     const cs = new ChargingStation(model, client, this.dataStorage.get('rfids'))
@@ -163,7 +160,6 @@ export class WebSocketServer {
     webSocket.onclose = (): void => {
       cs.disconnect()
       this.csWebSockets.delete(webSocket)
-      this.csSockets.delete(socket)
       this.chargingStations = this.chargingStations.filter((x) => x.model.uniqueIdentifier !== cs.model.uniqueIdentifier)
       this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.csState, model))
     }
@@ -199,9 +195,8 @@ export class WebSocketServer {
   /**
    * A new admin connection appears.
    */
-  private onAdminConnection(webSocket: WebSocket, socket: Socket | TLSSocket): void {
+  private onAdminConnection(webSocket: WebSocket): void {
     this.adminWebSockets.add(webSocket)
-    this.adminSockets.add(socket)
 
     for (const dto of this.chargingStationModels) {
       this.sendToUiSingle(webSocket, new CsmsToUiMsg(CsmsToUiCmdEnum.csState, dto))
@@ -211,7 +206,6 @@ export class WebSocketServer {
 
     webSocket.onclose = (): void => {
       this.adminWebSockets.delete(webSocket)
-      this.adminSockets.delete(socket)
     }
 
     webSocket.onerror = (err: any): void => {
@@ -263,8 +257,8 @@ export class WebSocketServer {
    */
   public stopServer(): void {
     if (this.server) {
-      for (const socket of this.csSockets) {
-        socket.destroy()
+      for (const socket of this.adminWebSockets) {
+        socket.close()
       }
       for (const socket of this.csWebSockets) {
         socket.close()
