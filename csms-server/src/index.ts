@@ -1,7 +1,7 @@
 import { Logger } from '@yellowgarbagebag/common-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
-import { WebSocketServer } from './web-socket-server'
+import { WebSocketServer } from './server/web-socket-server'
 import { ProcessEnv } from './process-env'
 
 const logger = new Logger('Core', ProcessEnv.LOG_LEVEL)
