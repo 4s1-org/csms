@@ -251,12 +251,12 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
         return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
       }
     } else if (payload.idToken.type === IdTokenEnum.ISO14443 || payload.idToken.type === IdTokenEnum.ISO15693) {
-      const user = this.rfids.find((x) => x.rfid === payload.idToken.idToken && x.enabled)
-      if (user) {
+      const rfid = this.rfids.find((x) => x.rfid === payload.idToken.idToken && x.enabled)
+      if (rfid) {
         const transaction = this.transactions.find((x) => !x.rfid)
         if (transaction) {
-          transaction.rfid = user.rfid
-          transaction.currentRfid = user
+          transaction.rfid = rfid.rfid
+          transaction.currentRfid = rfid
 
           const evse = this.model.evseList.find((x) => x.id === transaction.evseId)
           if (evse) {
@@ -351,6 +351,18 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * C02 - Authorization using a start button
    */
   private receiveTransactionEvent(payload: TransactionEventRequestDto): TransactionEventResponseDto {
+    const resPayload = new TransactionEventResponseDto()
+    // Transaction E05
+    if (payload.idToken) {
+      const rfid = this.rfids.find((x) => x.rfid === payload.idToken.idToken && x.enabled)
+      if (!rfid) {
+        resPayload.idTokenInfo = new IdTokenInfoDto(AuthorizationStatusEnum.Invalid)
+        return resPayload
+      } else {
+        resPayload.idTokenInfo = new IdTokenInfoDto(AuthorizationStatusEnum.Accepted)
+      }
+    }
+
     if (payload.meterValue) {
       for (const meterValue of payload.meterValue) {
         if (meterValue.sampledValue) {
@@ -379,7 +391,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
           rfid: null,
           currentRfid: null,
           id: payload.transactionInfo.transactionId,
-          evseId: payload.evse.id,
+          evseId: payload.evse?.id,
         })
         break
       case TransactionEventEnum.Ended:
@@ -390,7 +402,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
         break
     }
 
-    return new TransactionEventResponseDto()
+    return resPayload
   }
 
   private setDefaultValuesForSampledValue(sampledValue: SampledValueDto): void {
