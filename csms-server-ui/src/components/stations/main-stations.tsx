@@ -53,7 +53,8 @@ class MainChargingStations extends React.Component<IProps, IState> {
             <tr>
               <th style={{ width: '30%' }}>Unique identifier</th>
               <th style={{ width: '30%' }}>Username</th>
-              <th style={{ width: '20%' }}>Has password</th>
+              <th style={{ width: '10%' }}>Has password</th>
+              <th style={{ width: '10%' }}>Invalid logins</th>
               <th style={{ width: '10%' }}>Enabled</th>
               <th style={{ width: '10%' }}></th>
             </tr>
@@ -66,6 +67,7 @@ class MainChargingStations extends React.Component<IProps, IState> {
                 <td className="tdtext">
                   {model.passwordHash ? <FontAwesomeIcon icon={faThumbsUp} /> : <FontAwesomeIcon icon={faThumbsDown} />}
                 </td>
+                <td className="tdtext">{model.failedLogins}</td>
                 <td className="tdtext">
                   <div className="btn-group" role="group">
                     <button

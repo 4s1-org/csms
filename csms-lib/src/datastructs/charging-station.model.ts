@@ -14,4 +14,5 @@ export class ChargingStationModel {
   public username = ''
   public passwordHash = ''
   public enabled = false
+  public failedLogins = 0
 }
