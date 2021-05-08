@@ -44,6 +44,7 @@ import {
   MeasurandEnum,
   TransactionEventEnum,
   ChargingStationBase,
+  DataTransferStatusEnum,
 } from '@yellowgarbagebag/ocpp-lib'
 import { ChargingStationModel, ColorStateEnum, EvseModel, RfidCardModel } from '@yellowgarbagebag/csms-lib'
 import { ProcessEnv } from './process-env'
@@ -93,6 +94,9 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     }
     if (payload instanceof TransactionEventRequestDto) {
       return this.receiveTransactionEvent(payload)
+    }
+    if (payload instanceof DataTransferRequestDto) {
+      return this.receiveDataTransfer(payload)
     }
 
     throw new CsmsError(OcppErrorCodeEnum.NotSupported)
@@ -179,7 +183,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
 
   /**
    * P01 - Data Transfer to the Charging Station
-   * P02 - Data Transfer to the CSMS
    */
   public async sendDataTransfer(payload: DataTransferRequestDto): Promise<DataTransferResponseDto> {
     const res = await this.sendMessage.send(payload)
@@ -403,6 +406,17 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     }
 
     return resPayload
+  }
+
+  /**
+   * P02 - Data Transfer to the CSMS
+   */
+  private receiveDataTransfer(payload: DataTransferRequestDto): DataTransferResponseDto {
+    if (payload.data) {
+      return new DataTransferResponseDto(DataTransferStatusEnum.Accepted)
+    } else {
+      return new DataTransferResponseDto(DataTransferStatusEnum.Rejected)
+    }
   }
 
   private setDefaultValuesForSampledValue(sampledValue: SampledValueDto): void {
