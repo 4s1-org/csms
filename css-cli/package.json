@@ -29,6 +29,7 @@
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint \"{src,scripts}/**/*.ts\"",
     "lint:fix": "pnpm run lint -- --fix",
+    "start:transactions": "pnpm run build && node ./dist/transactions/transactions.js | pino-pretty",
     "start:simulation1": "pnpm run build && node ./dist/simulation1.js | pino-pretty",
     "start:simulation2": "pnpm run build && concurrently \"node ./dist/simulation2a.js | pino-pretty\" \"node ./dist/simulation2b.js | pino-pretty\" \"node ./dist/simulation2c.js | pino-pretty\"",
     "test": "jest --passWithNoTests",

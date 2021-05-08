@@ -43,7 +43,8 @@ export abstract class WsClientBase implements ISendMessage {
     let msg: OcppRpcBaseDto | undefined
 
     try {
-      this.logger.debug('Incoming data', data)
+      this.logger.trace(`Incoming data`)
+      this.logger.trace(`${data}`)
 
       // Typ der eingehenden Daten bestimmen.
       try {
@@ -104,9 +105,11 @@ export abstract class WsClientBase implements ISendMessage {
       }
 
       const msg = new OcppCallDto(uuid(), mapping.action, payload)
+      const msgStr = msg.toMessageString()
       this.logger.info(`Outgoing Call | ${msg.action} | ${msg.messageId}`)
+      this.logger.debug(msgStr)
       this.requestList.push(new PendingPromises(msg, resolve, reject))
-      if (!this.sendInternal(msg.toMessageString())) {
+      if (!this.sendInternal(msgStr)) {
         reject('Socket not open')
       }
     })
@@ -122,6 +125,7 @@ export abstract class WsClientBase implements ISendMessage {
    */
   private handleCall(msg: OcppCallDto, receiveMessage: IReceiveMessage): void {
     this.logger.info(`Incoming Call | ${msg.action} | ${msg.messageId}`)
+    this.logger.debug(msg.toMessageString())
     // Payload validieren und konvertieren
     try {
       PayloadValidator.instance.validateRequestPayload(msg)
@@ -141,7 +145,7 @@ export abstract class WsClientBase implements ISendMessage {
       responsePayload = receiveMessage.receive(msg.payload)
     } catch (err) {
       if (err instanceof CsmsError) {
-        this.logger.warn(`CS doesn't like the message`)
+        this.logger.warn(`Receive function doesn't like the message`)
         this.sendError(new OcppCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
         return
       }
@@ -161,8 +165,10 @@ export abstract class WsClientBase implements ISendMessage {
       }
     }
 
+    const resMsg = responseCall.toMessageString()
     this.logger.info(`Outgoing Callresult | ${msg.action} | ${msg.messageId}`)
-    this.sendInternal(responseCall.toMessageString())
+    this.logger.debug(resMsg)
+    this.sendInternal(resMsg)
   }
 
   /**
@@ -178,6 +184,7 @@ export abstract class WsClientBase implements ISendMessage {
       const idx = this.requestList.indexOf(pendingPromise)
       this.requestList.splice(idx, 1)
       this.logger.info(`Incoming Callresult | ${pendingPromise.msg.action} | ${msg.messageId}`)
+      this.logger.debug(msg.toMessageString())
       try {
         PayloadValidator.instance.validateResponsePayload(msg, pendingPromise.msg.action)
         PayloadConverter.instance.convertResponsePayload(msg, pendingPromise.msg.action)
@@ -200,6 +207,7 @@ export abstract class WsClientBase implements ISendMessage {
         this.logger.warn(
           `Incoming Callerror | ${pendingPromise.msg.action} | ${msg.messageId} | ${msg.errorCode} | ${msg.errorDescription}`,
         )
+        this.logger.debug(msg.toMessageString())
         pendingPromise.reject(new Error(`${msg.errorCode} | ${msg.errorDescription || '---'}`))
       }
       pendingPromise.reject()
@@ -208,6 +216,8 @@ export abstract class WsClientBase implements ISendMessage {
 
   private sendError(msg: OcppCallerrorDto): void {
     this.logger.info(`Outgoing Callerror | ${msg.messageId} | ${msg.errorCode} | ${msg.errorDescription}`)
-    this.sendInternal(msg.toMessageString())
+    const msgStr = msg.toMessageString()
+    this.logger.debug(msgStr)
+    this.sendInternal(msgStr)
   }
 }
