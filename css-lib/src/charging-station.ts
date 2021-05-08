@@ -191,6 +191,15 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
   }
 
   /**
+   * P02 - Data Transfer to the CSMS
+   */
+  public async sendDataTransfer(payload: DataTransferRequestDto): Promise<DataTransferResponseDto> {
+    const res = await this.sendMessage.send(payload)
+    this.logger.info(`=> ${res.status}`)
+    return res
+  }
+
+  /**
    * B05 - Set Variables
    */
   private receiveSetVariables(payload: SetVariablesRequestDto): SetVariablesResponseDto {
@@ -259,7 +268,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
 
   /**
    * P01 - Data Transfer to the Charging Station
-   * P02 - Data Transfer to the CSMS
    */
   private receiveDataTransfer(payload: DataTransferRequestDto): DataTransferResponseDto {
     if (payload.data) {
