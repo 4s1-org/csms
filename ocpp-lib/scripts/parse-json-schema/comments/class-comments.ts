@@ -37,10 +37,7 @@ export function getCommentByClass(className: string): classCommentType | undefin
   return comments.find((x) => x.name === className || x.name === className + 'Type')
 }
 
-export function getCommentByClassField(
-  classComment: classCommentType | undefined,
-  fieldName: string,
-): classCommentFieldType | undefined {
+export function getCommentByClassField(classComment: classCommentType | undefined, fieldName: string): classCommentFieldType | undefined {
   if (!classComment) {
     return undefined
   }
