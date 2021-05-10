@@ -21,12 +21,6 @@ export class OcppCallerrorDto extends OcppRpcBaseDto {
   public errorDetails: unknown
 
   public toMessageString(): string {
-    return JSON.stringify([
-      this.messageTypeId,
-      this.messageId,
-      this.errorCode,
-      this.errorDescription,
-      classToPlain(this.errorDetails),
-    ])
+    return JSON.stringify([this.messageTypeId, this.messageId, this.errorCode, this.errorDescription, classToPlain(this.errorDetails)])
   }
 }
