@@ -8,8 +8,7 @@ export const StatusInfoType: classCommentType = {
       fieldName: 'reasonCode',
       fieldType: 'string[0..20]',
       cardinality: '1..1',
-      description:
-        'A predefined code for the reason why the status is returned in this response. The string is caseinsensitive.',
+      description: 'A predefined code for the reason why the status is returned in this response. The string is caseinsensitive.',
       isRequired: true,
     },
     {
