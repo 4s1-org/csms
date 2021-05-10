@@ -31,7 +31,7 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 
 describe('Charging Station', () => {
-  const sendMessageStub = (null as unknown) as ISendMessage
+  const sendMessageStub = null as unknown as ISendMessage
   const dtNow = new Date().toISOString()
 
   describe('receive(...)', () => {
