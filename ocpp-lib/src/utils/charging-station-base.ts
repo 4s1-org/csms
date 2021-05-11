@@ -15,13 +15,23 @@ export abstract class ChargingStationBase implements IReceiveMessage {
     this.logger = new Logger(uniqueIdentifier, logLevel)
   }
 
+  /**
+   * Get the current heartbeat interval.
+   * Nice to know for the CSMS, required for the CS.
+   */
   public get heartbeatInterval(): number {
     return this._heartbeatInterval
   }
 
+  /**
+   * Get the current time in an OCPP ready format.
+   */
   public get currentTime(): string {
     return new Date().toISOString()
   }
 
+  /**
+   * Receive function for an incoming ocpp call/callresult/callerror.
+   */
   public abstract receive(payload: RequestBaseDto): ResponseBaseDto
 }
