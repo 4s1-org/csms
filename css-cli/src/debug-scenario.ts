@@ -2,7 +2,10 @@ import { sleep } from '@yellowgarbagebag/common-lib'
 import { BootNotificationRequestDto, BootReasonEnum, ChargingStationDto, HeartbeatRequestDto } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './simulation-base'
 
-class Simulation extends SimulationBase {
+/**
+ * Simulation for debug purpose.
+ */
+class DebugScenario extends SimulationBase {
   constructor() {
     super()
   }
@@ -23,4 +26,4 @@ class Simulation extends SimulationBase {
   }
 }
 
-new Simulation().simulate()
+new DebugScenario().simulate()

@@ -49,6 +49,9 @@ import {
 import { ChargingStationModel, ColorStateEnum, EvseModel, RfidCardModel } from '@yellowgarbagebag/csms-lib'
 import { ProcessEnv } from './process-env'
 
+/**
+ * This class is the counterpart of a real charging station.
+ */
 export class ChargingStation extends ChargingStationBase implements IReceiveMessage {
   private transactions: { rfid: string | null; currentRfid: RfidCardModel | null; id: string; evseId: number }[] = []
 
@@ -56,6 +59,9 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     super(model.uniqueIdentifier, sendMessage, ProcessEnv.LOG_LEVEL)
   }
 
+  /**
+   * Receive function for an incoming ocpp call/callresult/callerror.
+   */
   public receive(payload: RequestBaseDto): ResponseBaseDto {
     this.model.lastContact = Date.now()
     this.model.lastAction = payload.constructor.name.replace('Dto', '')

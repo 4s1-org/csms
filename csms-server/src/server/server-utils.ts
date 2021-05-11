@@ -9,7 +9,13 @@ export type HeaderType = {
   secWebsocketProtocol: string[]
 }
 
+/**
+ * Class with a bunch of util functions for the server part.
+ */
 export abstract class ServerUtils {
+  /**
+   * Parses the header of an incoming HTTP message.
+   */
   public static parseHeaders(headers: IncomingHttpHeaders): HeaderType {
     const res: HeaderType = {
       secWebsocketKey: '',
@@ -27,6 +33,9 @@ export abstract class ServerUtils {
     return res
   }
 
+  /**
+   * Tries to find credentials in the incoming message or as websocket protocol (hacky login proceed).
+   */
   public static getCredentials(request: IncomingMessage, header: HeaderType): { username: string; password: string } {
     if (request.headers.authorization && request.headers.authorization.startsWith('Basic ')) {
       const b64auth = request.headers.authorization.substring(6)
@@ -54,6 +63,9 @@ export abstract class ServerUtils {
     return { username: '', password: '' }
   }
 
+  /**
+   * Sends a HTTP 401 via the socket connection and close the connection immediately.
+   */
   public static send401(socket: Socket | TLSSocket): void {
     socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n')
     socket.destroy()

@@ -48,11 +48,17 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { LogLevelEnum } from '@yellowgarbagebag/common-lib'
 
+/**
+ * This class simulates a real charging station.
+ */
 export class ChargingStation extends ChargingStationBase implements IReceiveMessage {
   public constructor(uniqueIdentifier: string, sendMessage: ISendMessage, logLevel: LogLevelEnum) {
     super(uniqueIdentifier, sendMessage, logLevel)
   }
 
+  /**
+   * Receive function for an incoming ocpp call/callresult/callerror.
+   */
   public receive(payload: RequestBaseDto): ResponseBaseDto {
     if (payload instanceof SetVariablesRequestDto) {
       return this.receiveSetVariables(payload)
