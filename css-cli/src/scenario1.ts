@@ -22,7 +22,10 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './simulation-base'
 
-class Simulation extends SimulationBase {
+/**
+ *
+ */
+class Simulation1 extends SimulationBase {
   constructor() {
     super()
   }
@@ -288,4 +291,4 @@ class Simulation extends SimulationBase {
   }
 }
 
-new Simulation().simulate()
+new Simulation1().simulate()

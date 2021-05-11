@@ -2,7 +2,7 @@ import { sleep } from '@yellowgarbagebag/common-lib'
 import { HeartbeatRequestDto } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './simulation-base'
 
-class Simulation extends SimulationBase {
+class Simulation2 extends SimulationBase {
   constructor() {
     super()
   }
@@ -24,4 +24,4 @@ class Simulation extends SimulationBase {
   }
 }
 
-new Simulation().simulate()
+new Simulation2().simulate()

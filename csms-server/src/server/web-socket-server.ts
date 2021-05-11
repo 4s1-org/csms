@@ -43,9 +43,12 @@ import { ServerUtils } from './server-utils'
 
 export class WebSocketServer {
   protected logger: Logger = new Logger('Server', ProcessEnv.LOG_LEVEL)
+  // Underlying HTTP/HTTPS server instance
   private server: https.Server | http.Server | undefined
+  // List of websocket connections
   private csWebSockets: Set<WebSocket> = new Set<WebSocket>()
   private adminWebSockets: Set<WebSocket> = new Set<WebSocket>()
+  // List of items from the config file
   private chargingStationModels: ChargingStationModel[]
   private chargingStations: ChargingStation[] = []
   private rfids: RfidCardModel[]
