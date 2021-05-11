@@ -22,11 +22,10 @@ import {
 } from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './simulation-base'
 
-class Simulation extends SimulationBase {
-  constructor() {
-    super()
-  }
-
+/**
+ *
+ */
+export class NormalLoadingScenario extends SimulationBase {
   public async simulate(): Promise<void> {
     let seqNo = 0
     const transactionId = `x${Date.now()}`
@@ -288,4 +287,4 @@ class Simulation extends SimulationBase {
   }
 }
 
-new Simulation().simulate()
+new NormalLoadingScenario().simulate()
