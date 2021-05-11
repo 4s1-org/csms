@@ -25,11 +25,7 @@ import { SimulationBase } from './simulation-base'
 /**
  *
  */
-class Simulation1 extends SimulationBase {
-  constructor() {
-    super()
-  }
-
+export class NormalLoadingScenario extends SimulationBase {
   public async simulate(): Promise<void> {
     let seqNo = 0
     const transactionId = `x${Date.now()}`
@@ -291,4 +287,4 @@ class Simulation1 extends SimulationBase {
   }
 }
 
-new Simulation1().simulate()
+new NormalLoadingScenario().simulate()
