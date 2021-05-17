@@ -1,4 +1,4 @@
-import { OcppErrorCodeEnum } from './ocpp-error-code.enum'
+import { OcppErrorCodeEnum } from './rpc-error-code.enum'
 import { CsmsError } from '../utils/csms-error'
 
 export class OcppRpcValidationError extends CsmsError {

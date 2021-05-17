@@ -1,4 +1,4 @@
-import { OcppErrorCodeEnum } from '../ocpp-rpc/ocpp-error-code.enum'
+import { OcppErrorCodeEnum } from '../ocpp-rpc/rpc-error-code.enum'
 
 /**
  * Common Error in the CSMS.
