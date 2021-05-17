@@ -1,12 +1,12 @@
 import { plainToClass } from 'class-transformer'
 import { OcppActionEnum } from '../generated/ocpp-action.enum'
-import { OcppRpcBaseDto } from './ocpp-rpc-base.dto'
-import { OcppCallerrorDto } from './ocpp-callerror.dto'
-import { OcppCallresultDto } from './ocpp-callresult.dto'
-import { OcppRpcValidationError } from './ocpp-rpc-validation-error'
-import { OcppCallDto } from './ocpp-call.dto'
-import { OcppErrorCodeEnum } from './ocpp-error-code.enum'
-import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
+import { OcppRpcBaseDto } from './calls/rpc-base.dto'
+import { OcppCallerrorDto } from './calls/rpc-callerror.dto'
+import { OcppCallresultDto } from './calls/rpc-callresult.dto'
+import { OcppRpcValidationError } from './rpc-validation-error'
+import { OcppCallDto } from './calls/rpc-call.dto'
+import { OcppErrorCodeEnum } from './rpc-error-code.enum'
+import { OcppMessageTypeIdEnum } from './rpc-message-type-id.enum'
 
 export class OcppRpcHandler {
   private static _instance: OcppRpcHandler

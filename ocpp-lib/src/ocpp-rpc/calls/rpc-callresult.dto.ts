@@ -1,7 +1,7 @@
 import { classToPlain } from 'class-transformer'
-import { ResponseBaseDto } from '../generated/response-base.dto'
-import { OcppRpcBaseDto } from './ocpp-rpc-base.dto'
-import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
+import { ResponseBaseDto } from '../../generated/response-base.dto'
+import { OcppRpcBaseDto } from './rpc-base.dto'
+import { OcppMessageTypeIdEnum } from '../rpc-message-type-id.enum'
 
 export class OcppCallresultDto extends OcppRpcBaseDto {
   constructor(messageId: string, payload: ResponseBaseDto) {

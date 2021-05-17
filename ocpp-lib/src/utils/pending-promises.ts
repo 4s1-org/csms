@@ -1,4 +1,4 @@
-import { OcppCallDto } from '../ocpp-rpc/ocpp-call.dto'
+import { OcppCallDto } from '../ocpp-rpc/calls/rpc-call.dto'
 
 /**
  * Helperclass for promise, which are pending.
