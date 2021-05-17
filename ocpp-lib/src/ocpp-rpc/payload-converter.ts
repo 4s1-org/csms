@@ -1,5 +1,5 @@
 import { plainToClass } from 'class-transformer'
-import { OcppErrorCodeEnum } from './rpc-error-code.enum'
+import { RpcErrorCodeEnum } from './rpc-error-code.enum'
 import { RpcCallDto } from './calls/rpc-call.dto'
 import { RpcCallresultDto } from './calls/rpc-callresult.dto'
 import { actionDtoMapping } from '../generated/action-dto-mapping'
@@ -23,7 +23,7 @@ export class PayloadConverter {
   public convertRequestPayload(msg: RpcCallDto): void {
     const mapping = actionDtoMapping.find((x) => x.action === msg.action)
     if (!mapping) {
-      throw new CsmsError(OcppErrorCodeEnum.NotSupported, msg.action)
+      throw new CsmsError(RpcErrorCodeEnum.NotSupported, msg.action)
     }
     msg.payload = plainToClass(mapping.requestDto, msg.payload)
   }
@@ -31,7 +31,7 @@ export class PayloadConverter {
   public convertResponsePayload(msg: RpcCallresultDto, action: RpcActionEnum): void {
     const mapping = actionDtoMapping.find((x) => x.action === action)
     if (!mapping) {
-      throw new CsmsError(OcppErrorCodeEnum.NotSupported, action)
+      throw new CsmsError(RpcErrorCodeEnum.NotSupported, action)
     }
     msg.payload = plainToClass(mapping.responseDto, msg.payload)
   }

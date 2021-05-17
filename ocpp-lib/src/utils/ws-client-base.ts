@@ -4,7 +4,7 @@ import { IReceiveMessage } from './i-receive-message'
 import { PendingPromise } from './pending-promises'
 import { ISendMessage } from './i-send-message'
 import { RpcCallDto } from '../ocpp-rpc/calls/rpc-call.dto'
-import { OcppRpcHandler } from '../ocpp-rpc/rpc-handler'
+import { RpcHandler } from '../ocpp-rpc/rpc-handler'
 import { PayloadValidator } from '../ocpp-rpc/payload-validator'
 import { PayloadConverter } from '../ocpp-rpc/payload-converter'
 import { ResponseBaseDto } from '../generated/response-base.dto'
@@ -13,9 +13,9 @@ import { RpcCallerrorDto } from '../ocpp-rpc/calls/rpc-callerror.dto'
 import { RequestToResponseType } from '../generated/request-to-response.type'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { actionDtoMapping } from '../generated/action-dto-mapping'
-import { OcppRpcValidationError } from '../ocpp-rpc/rpc-validation-error'
+import { RpcValidationError } from '../ocpp-rpc/rpc-validation-error'
 import { CsmsError } from '../utils/csms-error'
-import { OcppErrorCodeEnum } from '../ocpp-rpc/rpc-error-code.enum'
+import { RpcErrorCodeEnum } from '../ocpp-rpc/rpc-error-code.enum'
 import { RpcBaseDto } from '../ocpp-rpc/calls/rpc-base.dto'
 import { HeartbeatRequestDto, HeartbeatResponseDto } from '../messages'
 import { RpcActionEnum } from '../generated/rpc-action.enum'
@@ -49,9 +49,9 @@ export abstract class WsClientBase implements ISendMessage {
 
       // Validate and convert the incoming message to a ocpp call/callresult/callerror.
       try {
-        msg = OcppRpcHandler.instance.validateAndConvert(data)
+        msg = RpcHandler.instance.validateAndConvert(data)
       } catch (err) {
-        if (err instanceof OcppRpcValidationError) {
+        if (err instanceof RpcValidationError) {
           this.logger.warn(`OcppRpcValidationError in received data`)
           this.sendError(new RpcCallerrorDto(err.messageId, err.errorCode, err.errorDescription))
           return
@@ -85,7 +85,7 @@ export abstract class WsClientBase implements ISendMessage {
       // Sometimes a message id is available, but in case of an early error it isn't.
       const messageId: string = msg?.messageId || ''
       // Create error and send it back.
-      const errMsg = new RpcCallerrorDto(messageId, OcppErrorCodeEnum.InternalError)
+      const errMsg = new RpcCallerrorDto(messageId, RpcErrorCodeEnum.InternalError)
       this.sendInternal(errMsg.toMessageString())
     }
   }
