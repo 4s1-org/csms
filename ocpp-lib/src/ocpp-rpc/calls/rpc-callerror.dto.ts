@@ -1,18 +1,18 @@
 import { classToPlain } from 'class-transformer'
 import { RpcBaseDto } from './rpc-base.dto'
-import { OcppMessageTypeIdEnum } from '../rpc-message-type-id.enum'
-import { OcppErrorCodeEnum } from '../rpc-error-code.enum'
+import { RpcMessageTypeIdEnum } from '../rpc-message-type-id.enum'
+import { RpcErrorCodeEnum } from '../rpc-error-code.enum'
 
 export class RpcCallerrorDto extends RpcBaseDto {
-  constructor(messageId: string, errorCode: OcppErrorCodeEnum, errorDescription?: string, errorDetails?: unknown) {
-    super(OcppMessageTypeIdEnum.Error, messageId)
+  constructor(messageId: string, errorCode: RpcErrorCodeEnum, errorDescription?: string, errorDetails?: unknown) {
+    super(RpcMessageTypeIdEnum.Error, messageId)
     this.errorCode = errorCode
     this.errorDescription = errorDescription || ''
     this.errorDetails = errorDetails || {}
   }
 
   /** This field must contain a string from the RPC Framework Error Codes table. */
-  public errorCode: OcppErrorCodeEnum
+  public errorCode: RpcErrorCodeEnum
 
   /** Should be filled in if possible, otherwise a clear empty string "" */
   public errorDescription: string

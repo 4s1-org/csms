@@ -7,7 +7,7 @@ import v6 from 'ajv/lib/refs/json-schema-draft-06.json'
 import { classToPlain } from 'class-transformer'
 import { RpcCallDto } from './calls/rpc-call.dto'
 import { RpcCallresultDto } from './calls/rpc-callresult.dto'
-import { OcppErrorCodeEnum } from './rpc-error-code.enum'
+import { RpcErrorCodeEnum } from './rpc-error-code.enum'
 export class PayloadValidator {
   private static _instance: PayloadValidator
   private _ajv: Ajv
@@ -43,7 +43,7 @@ export class PayloadValidator {
 
     if (!valid) {
       const errMessage = validate.errors?.map((x) => x.toString()).join('\n')
-      throw new CsmsError(OcppErrorCodeEnum.FormatViolation, errMessage)
+      throw new CsmsError(RpcErrorCodeEnum.FormatViolation, errMessage)
     }
   }
 }
