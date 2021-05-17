@@ -1,10 +1,10 @@
 import { plainToClass } from 'class-transformer'
-import { OcppActionEnum } from '../generated/ocpp-action.enum'
-import { OcppRpcBaseDto } from './calls/rpc-base.dto'
-import { OcppCallerrorDto } from './calls/rpc-callerror.dto'
-import { OcppCallresultDto } from './calls/rpc-callresult.dto'
+import { RpcActionEnum } from '../generated/rpc-action.enum'
+import { RpcBaseDto } from './calls/rpc-base.dto'
+import { RpcCallerrorDto } from './calls/rpc-callerror.dto'
+import { RpcCallresultDto } from './calls/rpc-callresult.dto'
 import { OcppRpcValidationError } from './rpc-validation-error'
-import { OcppCallDto } from './calls/rpc-call.dto'
+import { RpcCallDto } from './calls/rpc-call.dto'
 import { OcppErrorCodeEnum } from './rpc-error-code.enum'
 import { OcppMessageTypeIdEnum } from './rpc-message-type-id.enum'
 
@@ -22,7 +22,7 @@ export class OcppRpcHandler {
     return this._instance
   }
 
-  public validateAndConvert(data: unknown): OcppRpcBaseDto {
+  public validateAndConvert(data: unknown): RpcBaseDto {
     if (!data) {
       throw new OcppRpcValidationError('', OcppErrorCodeEnum.RpcFrameworkError, 'Invalid data format received')
     }
@@ -56,13 +56,13 @@ export class OcppRpcHandler {
       this.validateAction(messageId, action)
       this.validatePayload(messageId, payload)
 
-      return plainToClass(OcppCallDto, { messageTypeId, messageId, action, payload })
+      return plainToClass(RpcCallDto, { messageTypeId, messageId, action, payload })
     } else if (messageTypeId === OcppMessageTypeIdEnum.Result && data.length === 3) {
       const [messageTypeId, messageId, payload] = data
       this.validateMessageId(messageId)
       this.validatePayload(messageId, payload)
 
-      return plainToClass(OcppCallresultDto, { messageTypeId, messageId, payload })
+      return plainToClass(RpcCallresultDto, { messageTypeId, messageId, payload })
     } else if (messageTypeId === OcppMessageTypeIdEnum.Error && data.length === 5) {
       const [messageTypeId, messageId, errorCode, errorDescription, errorDetails] = data
       this.validateMessageId(messageId)
@@ -70,7 +70,7 @@ export class OcppRpcHandler {
       this.validateErrorDescription(messageId, errorDescription)
       this.validateErrorDetails(messageId, errorDetails)
 
-      return plainToClass(OcppCallerrorDto, {
+      return plainToClass(RpcCallerrorDto, {
         messageTypeId,
         messageId,
         errorCode,
@@ -133,7 +133,7 @@ export class OcppRpcHandler {
       throw new OcppRpcValidationError(messageId, OcppErrorCodeEnum.RpcFrameworkError, 'Action is not a string')
     }
 
-    if (!Object.values(OcppActionEnum).includes(action as OcppActionEnum)) {
+    if (!Object.values(RpcActionEnum).includes(action as RpcActionEnum)) {
       throw new OcppRpcValidationError(messageId, OcppErrorCodeEnum.NotImplemented, action)
     }
   }

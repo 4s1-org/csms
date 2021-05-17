@@ -1,9 +1,9 @@
 import { classToPlain } from 'class-transformer'
-import { OcppRpcBaseDto } from './rpc-base.dto'
+import { RpcBaseDto } from './rpc-base.dto'
 import { OcppMessageTypeIdEnum } from '../rpc-message-type-id.enum'
 import { OcppErrorCodeEnum } from '../rpc-error-code.enum'
 
-export class OcppCallerrorDto extends OcppRpcBaseDto {
+export class RpcCallerrorDto extends RpcBaseDto {
   constructor(messageId: string, errorCode: OcppErrorCodeEnum, errorDescription?: string, errorDetails?: unknown) {
     super(OcppMessageTypeIdEnum.Error, messageId)
     this.errorCode = errorCode

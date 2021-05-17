@@ -1,6 +1,6 @@
 import { OcppMessageTypeIdEnum } from '../rpc-message-type-id.enum'
 
-export abstract class OcppRpcBaseDto {
+export abstract class RpcBaseDto {
   constructor(messageTypeId: OcppMessageTypeIdEnum, messageId: string) {
     this.messageTypeId = messageTypeId
     this.messageId = messageId

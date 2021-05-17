@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-export enum OcppActionEnum {
+export enum RpcActionEnum {
   Authorize = 'Authorize',
   BootNotification = 'BootNotification',
   CancelReservation = 'CancelReservation',

@@ -3,22 +3,22 @@ import { Logger } from '@yellowgarbagebag/common-lib'
 import { IReceiveMessage } from './i-receive-message'
 import { PendingPromise } from './pending-promises'
 import { ISendMessage } from './i-send-message'
-import { OcppCallDto } from '../ocpp-rpc/calls/rpc-call.dto'
+import { RpcCallDto } from '../ocpp-rpc/calls/rpc-call.dto'
 import { OcppRpcHandler } from '../ocpp-rpc/rpc-handler'
 import { PayloadValidator } from '../ocpp-rpc/payload-validator'
 import { PayloadConverter } from '../ocpp-rpc/payload-converter'
 import { ResponseBaseDto } from '../generated/response-base.dto'
-import { OcppCallresultDto } from '../ocpp-rpc/calls/rpc-callresult.dto'
-import { OcppCallerrorDto } from '../ocpp-rpc/calls/rpc-callerror.dto'
+import { RpcCallresultDto } from '../ocpp-rpc/calls/rpc-callresult.dto'
+import { RpcCallerrorDto } from '../ocpp-rpc/calls/rpc-callerror.dto'
 import { RequestToResponseType } from '../generated/request-to-response.type'
 import { RequestBaseDto } from '../generated/request-base.dto'
 import { actionDtoMapping } from '../generated/action-dto-mapping'
 import { OcppRpcValidationError } from '../ocpp-rpc/rpc-validation-error'
 import { CsmsError } from '../utils/csms-error'
 import { OcppErrorCodeEnum } from '../ocpp-rpc/rpc-error-code.enum'
-import { OcppRpcBaseDto } from '../ocpp-rpc/calls/rpc-base.dto'
+import { RpcBaseDto } from '../ocpp-rpc/calls/rpc-base.dto'
 import { HeartbeatRequestDto, HeartbeatResponseDto } from '../messages'
-import { OcppActionEnum } from '../generated/ocpp-action.enum'
+import { RpcActionEnum } from '../generated/rpc-action.enum'
 
 /**
  * Baseclass for a websocket client.
@@ -41,7 +41,7 @@ export abstract class WsClientBase implements ISendMessage {
    */
   public onMessage(data: any, receiveMessage: IReceiveMessage): void {
     // Für den Fehlerfall
-    let msg: OcppRpcBaseDto | undefined
+    let msg: RpcBaseDto | undefined
 
     try {
       this.logger.trace(`Incoming data`)
@@ -53,20 +53,20 @@ export abstract class WsClientBase implements ISendMessage {
       } catch (err) {
         if (err instanceof OcppRpcValidationError) {
           this.logger.warn(`OcppRpcValidationError in received data`)
-          this.sendError(new OcppCallerrorDto(err.messageId, err.errorCode, err.errorDescription))
+          this.sendError(new RpcCallerrorDto(err.messageId, err.errorCode, err.errorDescription))
           return
         }
         throw err
       }
 
       // Start handling base on the type of the message.
-      if (msg instanceof OcppCallDto) {
+      if (msg instanceof RpcCallDto) {
         // OCPP Call
         this.handleCall(msg, receiveMessage)
-      } else if (msg instanceof OcppCallresultDto) {
+      } else if (msg instanceof RpcCallresultDto) {
         // OCPP Callresult
         this.handleCallresult(msg)
-      } else if (msg instanceof OcppCallerrorDto) {
+      } else if (msg instanceof RpcCallerrorDto) {
         // OCPP Callerror
         this.handleCallerror(msg)
       } else {
@@ -78,14 +78,14 @@ export abstract class WsClientBase implements ISendMessage {
       this.logger.fatal(err)
 
       // Never reply to an error with an error due to prevent ping pong between CSMS <=> CS.
-      if (msg instanceof OcppCallerrorDto) {
+      if (msg instanceof RpcCallerrorDto) {
         return
       }
 
       // Sometimes a message id is available, but in case of an early error it isn't.
       const messageId: string = msg?.messageId || ''
       // Create error and send it back.
-      const errMsg = new OcppCallerrorDto(messageId, OcppErrorCodeEnum.InternalError)
+      const errMsg = new RpcCallerrorDto(messageId, OcppErrorCodeEnum.InternalError)
       this.sendInternal(errMsg.toMessageString())
     }
   }
@@ -100,7 +100,7 @@ export abstract class WsClientBase implements ISendMessage {
       this.logger.info(`Fake Heartbeat response due to pending request`)
       this.logger.info(this.requestList[0].msg.toMessageString())
       return new Promise((resolve, reject) => {
-        const msg = new OcppCallDto(uuid(), OcppActionEnum.Heartbeat, payload)
+        const msg = new RpcCallDto(uuid(), RpcActionEnum.Heartbeat, payload)
         const foo = new PendingPromise(msg, resolve, reject)
         foo.resolve(new HeartbeatResponseDto(new Date().toISOString()))
       })
@@ -115,7 +115,7 @@ export abstract class WsClientBase implements ISendMessage {
       }
 
       // Create OCPP call
-      const msg = new OcppCallDto(uuid(), mapping.action, payload)
+      const msg = new RpcCallDto(uuid(), mapping.action, payload)
       const msgStr = msg.toMessageString()
       this.logger.info(`Outgoing Call | ${msg.action} | ${msg.messageId}`)
       this.logger.debug(msgStr)
@@ -137,7 +137,7 @@ export abstract class WsClientBase implements ISendMessage {
   /**
    * Behandelt eine eingehende Anfrage.
    */
-  private handleCall(msg: OcppCallDto, receiveMessage: IReceiveMessage): void {
+  private handleCall(msg: RpcCallDto, receiveMessage: IReceiveMessage): void {
     this.logger.info(`Incoming Call | ${msg.action} | ${msg.messageId}`)
     this.logger.debug(msg.toMessageString())
     // Payload validieren und konvertieren
@@ -147,7 +147,7 @@ export abstract class WsClientBase implements ISendMessage {
     } catch (err) {
       if (err instanceof CsmsError) {
         this.logger.warn(`Payload is invalid`)
-        this.sendError(new OcppCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
+        this.sendError(new RpcCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
         return
       }
       throw err
@@ -160,14 +160,14 @@ export abstract class WsClientBase implements ISendMessage {
     } catch (err) {
       if (err instanceof CsmsError) {
         this.logger.warn(`Receive function doesn't like the message`)
-        this.sendError(new OcppCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
+        this.sendError(new RpcCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
         return
       }
       throw err
     }
 
     // Antwortobjekt erstellen
-    const responseCall = new OcppCallresultDto(msg.messageId, responsePayload)
+    const responseCall = new RpcCallresultDto(msg.messageId, responsePayload)
 
     // Anwortdaten validieren (nice to have)
     try {
@@ -188,7 +188,7 @@ export abstract class WsClientBase implements ISendMessage {
   /**
    * Behandelt eine eingehende Anwort auf eine Anfrage.
    */
-  private handleCallresult(msg: OcppCallresultDto): void {
+  private handleCallresult(msg: RpcCallresultDto): void {
     // Try to find the waiting request promise.
     const pendingPromise = this.tryToFindWaitingRequestPromise(msg.messageId)
     if (pendingPromise) {
@@ -203,7 +203,7 @@ export abstract class WsClientBase implements ISendMessage {
       } catch (err) {
         if (err instanceof CsmsError) {
           this.logger.warn(`Payload is invalid`)
-          this.sendError(new OcppCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
+          this.sendError(new RpcCallerrorDto(msg.messageId, err.errorCode, err.errorDescription))
         }
         pendingPromise.resolve(null)
         throw err
@@ -214,7 +214,7 @@ export abstract class WsClientBase implements ISendMessage {
   /**
    * Behandelt eine eingehende Fehlermeldung auf eine Anfrage.
    */
-  private handleCallerror(msg: OcppCallerrorDto): void {
+  private handleCallerror(msg: RpcCallerrorDto): void {
     // Try to find the waiting request promise.
     const pendingPromise = this.tryToFindWaitingRequestPromise(msg.messageId)
     if (pendingPromise) {
@@ -249,7 +249,7 @@ export abstract class WsClientBase implements ISendMessage {
   /**
    * Sends a OCPP callerror back.
    */
-  private sendError(msg: OcppCallerrorDto): void {
+  private sendError(msg: RpcCallerrorDto): void {
     this.logger.info(`Outgoing Callerror | ${msg.messageId} | ${msg.errorCode} | ${msg.errorDescription}`)
     const msgStr = msg.toMessageString()
     this.logger.debug(msgStr)
