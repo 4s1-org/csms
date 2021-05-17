@@ -182,11 +182,11 @@ export class WebSocketServer {
    * Send a message to all admin connections.
    */
   private sendToUiAll(msg: CsmsToUiMsg): void {
-    if (!this.wssChargingStations) {
+    if (!this.wssAdmin) {
       return
     }
 
-    for (const socket of this.wssChargingStations?.clients) {
+    for (const socket of this.wssAdmin?.clients) {
       this.sendToUiSingle(socket, msg)
     }
   }
