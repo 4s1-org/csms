@@ -1,13 +1,13 @@
-import { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
+import { RpcMessageTypeIdEnum } from '../rpc-message-type-id.enum'
 
-export abstract class OcppRpcBaseDto {
-  constructor(messageTypeId: OcppMessageTypeIdEnum, messageId: string) {
+export abstract class RpcBaseDto {
+  constructor(messageTypeId: RpcMessageTypeIdEnum, messageId: string) {
     this.messageTypeId = messageTypeId
     this.messageId = messageId
   }
 
   /** This is a Message Type Number which is used to identify the type of the message. */
-  public readonly messageTypeId: OcppMessageTypeIdEnum
+  public readonly messageTypeId: RpcMessageTypeIdEnum
 
   /** This is a unique identifier that will be used to match request and result */
   public readonly messageId: string

@@ -6,8 +6,8 @@ import {
   ChargingStationDto,
   IdTokenDto,
   IdTokenEnum,
-  OcppActionEnum,
-  OcppCallDto,
+  RpcActionEnum,
+  RpcCallDto,
   OcppErrorCodeEnum,
   OcppMessageTypeIdEnum,
   UnpublishFirmwareRequestDto,
@@ -63,7 +63,7 @@ describe('CSMS Gateway', () => {
 
   describe('RPC Framework tests', () => {
     describe('Valid calls', () => {
-      it('Without OcppCallDto instance (just selfmade)', (done: jest.DoneCallback) => {
+      it('Without RpcCallDto instance (just selfmade)', (done: jest.DoneCallback) => {
         const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
@@ -73,7 +73,7 @@ describe('CSMS Gateway', () => {
           delete payload['_className']
           delete payload.chargingStation['_baseClassName']
           delete payload.chargingStation['_className']
-          const data = JSON.stringify([OcppMessageTypeIdEnum.Call, messageId, OcppActionEnum.BootNotification, payload])
+          const data = JSON.stringify([OcppMessageTypeIdEnum.Call, messageId, RpcActionEnum.BootNotification, payload])
           socket.send(data)
         }
 
@@ -88,15 +88,15 @@ describe('CSMS Gateway', () => {
         }
       })
 
-      it('With OcppCallDto', (done: jest.DoneCallback) => {
+      it('With RpcCallDto', (done: jest.DoneCallback) => {
         const socket = connectToSocket(done)
         const messageId = Math.random().toString()
 
         socket.onopen = (): void => {
           socket.send(
-            new OcppCallDto(
+            new RpcCallDto(
               messageId,
-              OcppActionEnum.BootNotification,
+              RpcActionEnum.BootNotification,
               new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
             ).toMessageString(),
           )
@@ -244,7 +244,7 @@ describe('CSMS Gateway', () => {
             JSON.stringify([
               OcppMessageTypeIdEnum.Result, // Es müsste ein Call sein
               messageId,
-              OcppActionEnum.BootNotification,
+              RpcActionEnum.BootNotification,
               new BootNotificationRequestDto(new ChargingStationDto('SingleSocketCharger', 'VendorX'), BootReasonEnum.PowerUp),
             ]),
           )
@@ -278,7 +278,7 @@ describe('CSMS Gateway', () => {
           JSON.stringify([
             OcppMessageTypeIdEnum.Call,
             messageId,
-            OcppActionEnum.UnpublishFirmware, // Noch nicht implementiert
+            RpcActionEnum.UnpublishFirmware, // Noch nicht implementiert
             payload,
           ]),
         )
@@ -324,9 +324,9 @@ describe('CSMS Gateway', () => {
 
       socket.onopen = (): void => {
         socket.send(
-          new OcppCallDto(
+          new RpcCallDto(
             messageId,
-            OcppActionEnum.BootNotification,
+            RpcActionEnum.BootNotification,
             // Payload passt nicht zur Message
             new AuthorizeRequestDto(new IdTokenDto('xxx', IdTokenEnum.eMAID)),
           ).toMessageString(),
@@ -355,7 +355,7 @@ describe('CSMS Gateway', () => {
           JSON.stringify([
             OcppMessageTypeIdEnum.Call,
             messageId,
-            OcppActionEnum.BootNotification,
+            RpcActionEnum.BootNotification,
             {
               chargingStation: {
                 model: 'SingleSocketCharger',
@@ -390,7 +390,7 @@ describe('CSMS Gateway', () => {
           JSON.stringify([
             OcppMessageTypeIdEnum.Call,
             messageId,
-            OcppActionEnum.BootNotification,
+            RpcActionEnum.BootNotification,
             {
               chargingStation: {
                 model: 'SingleSocketCharger',
@@ -428,7 +428,7 @@ describe('CSMS Gateway', () => {
           JSON.stringify([
             1,
             messageId,
-            OcppActionEnum.UnpublishFirmware, // Noch nicht implementiert
+            RpcActionEnum.UnpublishFirmware, // Noch nicht implementiert
             payload,
           ]),
         )
