@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 
-import { OcppCallerrorDto } from './ocpp-callerror.dto'
-import { OcppCallDto } from './ocpp-call.dto'
-import { OcppCallresultDto } from './ocpp-callresult.dto'
-import { OcppRpcHandler } from './ocpp-rpc-handler'
+import { OcppCallerrorDto } from './calls/rpc-callerror.dto'
+import { OcppCallDto } from './calls/rpc-call.dto'
+import { OcppCallresultDto } from './calls/rpc-callresult.dto'
+import { OcppRpcHandler } from './rpc-handler'
 
 describe('Ocpp Call Handler', () => {
   describe('arrayToMessage', () => {
