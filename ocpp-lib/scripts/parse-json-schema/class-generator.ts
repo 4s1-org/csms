@@ -138,7 +138,7 @@ export class ClassGenerator {
     // Make unique
     messages = [...new Set(messages)]
 
-    const className = `OcppActionEnum`
+    const className = `RpcActionEnum`
 
     const data: string[] = []
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
@@ -150,7 +150,7 @@ export class ClassGenerator {
     data.push(`}`)
     data.push(``)
 
-    const fileNameWithoutExt = `ocpp-action.enum`
+    const fileNameWithoutExt = `rpc-action.enum`
     const fileName = path.join(...folders, `${fileNameWithoutExt}.ts`)
     fs.writeFileSync(fileName, data.join('\n'), { encoding: 'utf-8' })
 
@@ -164,7 +164,7 @@ export class ClassGenerator {
 
     data.push(`// THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!`)
     data.push(``)
-    data.push(`import { OcppActionEnum } from './ocpp-action.enum'`)
+    data.push(`import { RpcActionEnum } from './rpc-action.enum'`)
     for (const skeleton of skeletons) {
       data.push(`import { ${skeleton.name}${skeleton.nameSuffix} } from '../messages/${skeleton.fileNameWithoutExt}'`)
     }
@@ -173,14 +173,14 @@ export class ClassGenerator {
 
     data.push(``)
     data.push(`export const ${className}: {`)
-    data.push(`  action: OcppActionEnum`)
+    data.push(`  action: RpcActionEnum`)
     data.push(`  requestDto: { new (...args: any[]): RequestBaseDto }`)
     data.push(`  responseDto: { new (...args: any[]): ResponseBaseDto }`)
     data.push(`}[] = [`)
     for (const skeleton of skeletons.filter((x) => x.isRequest)) {
       const name = skeleton.nameWithoutReqOrRes
       data.push(`  {`)
-      data.push(`    action: OcppActionEnum.${name},`)
+      data.push(`    action: RpcActionEnum.${name},`)
       data.push(`    requestDto: ${name}RequestDto,`)
       data.push(`    responseDto: ${name}ResponseDto,`)
       data.push(`  },`)

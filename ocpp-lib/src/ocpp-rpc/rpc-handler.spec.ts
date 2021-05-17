@@ -1,8 +1,8 @@
 import 'reflect-metadata'
 
-import { OcppCallerrorDto } from './calls/rpc-callerror.dto'
-import { OcppCallDto } from './calls/rpc-call.dto'
-import { OcppCallresultDto } from './calls/rpc-callresult.dto'
+import { RpcCallerrorDto } from './calls/rpc-callerror.dto'
+import { RpcCallDto } from './calls/rpc-call.dto'
+import { RpcCallresultDto } from './calls/rpc-callresult.dto'
 import { OcppRpcHandler } from './rpc-handler'
 
 describe('Ocpp Call Handler', () => {
@@ -14,7 +14,7 @@ describe('Ocpp Call Handler', () => {
       // Act
       const message = OcppRpcHandler.instance.validateAndConvert(data)
       // Assert
-      expect(message).toBeInstanceOf(OcppCallDto)
+      expect(message).toBeInstanceOf(RpcCallDto)
     })
 
     it('Callresult', () => {
@@ -23,7 +23,7 @@ describe('Ocpp Call Handler', () => {
       // Act
       const message = OcppRpcHandler.instance.validateAndConvert(data)
       // Assert
-      expect(message).toBeInstanceOf(OcppCallresultDto)
+      expect(message).toBeInstanceOf(RpcCallresultDto)
     })
 
     it('Callerror', () => {
@@ -32,7 +32,7 @@ describe('Ocpp Call Handler', () => {
       // Act
       const message = OcppRpcHandler.instance.validateAndConvert(data)
       // Assert
-      expect(message).toBeInstanceOf(OcppCallerrorDto)
+      expect(message).toBeInstanceOf(RpcCallerrorDto)
     })
   })
 })

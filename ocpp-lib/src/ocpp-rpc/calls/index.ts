@@ -1,3 +1,3 @@
-export { OcppCallDto } from './rpc-call.dto'
-export { OcppCallerrorDto } from './rpc-callerror.dto'
-export { OcppCallresultDto } from './rpc-callresult.dto'
+export { RpcCallDto } from './rpc-call.dto'
+export { RpcCallerrorDto } from './rpc-callerror.dto'
+export { RpcCallresultDto } from './rpc-callresult.dto'
