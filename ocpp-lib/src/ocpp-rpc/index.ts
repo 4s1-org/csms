@@ -1,5 +1,3 @@
-export { OcppMessageTypeIdEnum } from './ocpp-message-type-id.enum'
-export { OcppCallDto } from './ocpp-call.dto'
-export { OcppCallerrorDto } from './ocpp-callerror.dto'
-export { OcppCallresultDto } from './ocpp-callresult.dto'
-export { OcppErrorCodeEnum } from './ocpp-error-code.enum'
+export * from './calls'
+export { RpcMessageTypeIdEnum as OcppMessageTypeIdEnum } from './rpc-message-type-id.enum'
+export { RpcErrorCodeEnum as OcppErrorCodeEnum } from './rpc-error-code.enum'

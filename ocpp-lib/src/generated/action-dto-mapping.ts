@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO-GENERATED. DO NOT CHANGE IT!
 
-import { OcppActionEnum } from './ocpp-action.enum'
+import { RpcActionEnum } from './rpc-action.enum'
 import { AuthorizeRequestDto } from '../messages/authorize-request.dto'
 import { AuthorizeResponseDto } from '../messages/authorize-response.dto'
 import { BootNotificationRequestDto } from '../messages/boot-notification-request.dto'
@@ -133,327 +133,327 @@ import { RequestBaseDto } from './request-base.dto'
 import { ResponseBaseDto } from './response-base.dto'
 
 export const actionDtoMapping: {
-  action: OcppActionEnum
+  action: RpcActionEnum
   requestDto: { new (...args: any[]): RequestBaseDto }
   responseDto: { new (...args: any[]): ResponseBaseDto }
 }[] = [
   {
-    action: OcppActionEnum.Authorize,
+    action: RpcActionEnum.Authorize,
     requestDto: AuthorizeRequestDto,
     responseDto: AuthorizeResponseDto,
   },
   {
-    action: OcppActionEnum.BootNotification,
+    action: RpcActionEnum.BootNotification,
     requestDto: BootNotificationRequestDto,
     responseDto: BootNotificationResponseDto,
   },
   {
-    action: OcppActionEnum.CancelReservation,
+    action: RpcActionEnum.CancelReservation,
     requestDto: CancelReservationRequestDto,
     responseDto: CancelReservationResponseDto,
   },
   {
-    action: OcppActionEnum.CertificateSigned,
+    action: RpcActionEnum.CertificateSigned,
     requestDto: CertificateSignedRequestDto,
     responseDto: CertificateSignedResponseDto,
   },
   {
-    action: OcppActionEnum.ChangeAvailability,
+    action: RpcActionEnum.ChangeAvailability,
     requestDto: ChangeAvailabilityRequestDto,
     responseDto: ChangeAvailabilityResponseDto,
   },
   {
-    action: OcppActionEnum.ClearCache,
+    action: RpcActionEnum.ClearCache,
     requestDto: ClearCacheRequestDto,
     responseDto: ClearCacheResponseDto,
   },
   {
-    action: OcppActionEnum.ClearChargingProfile,
+    action: RpcActionEnum.ClearChargingProfile,
     requestDto: ClearChargingProfileRequestDto,
     responseDto: ClearChargingProfileResponseDto,
   },
   {
-    action: OcppActionEnum.ClearDisplayMessage,
+    action: RpcActionEnum.ClearDisplayMessage,
     requestDto: ClearDisplayMessageRequestDto,
     responseDto: ClearDisplayMessageResponseDto,
   },
   {
-    action: OcppActionEnum.ClearVariableMonitoring,
+    action: RpcActionEnum.ClearVariableMonitoring,
     requestDto: ClearVariableMonitoringRequestDto,
     responseDto: ClearVariableMonitoringResponseDto,
   },
   {
-    action: OcppActionEnum.ClearedChargingLimit,
+    action: RpcActionEnum.ClearedChargingLimit,
     requestDto: ClearedChargingLimitRequestDto,
     responseDto: ClearedChargingLimitResponseDto,
   },
   {
-    action: OcppActionEnum.CostUpdated,
+    action: RpcActionEnum.CostUpdated,
     requestDto: CostUpdatedRequestDto,
     responseDto: CostUpdatedResponseDto,
   },
   {
-    action: OcppActionEnum.CustomerInformation,
+    action: RpcActionEnum.CustomerInformation,
     requestDto: CustomerInformationRequestDto,
     responseDto: CustomerInformationResponseDto,
   },
   {
-    action: OcppActionEnum.DataTransfer,
+    action: RpcActionEnum.DataTransfer,
     requestDto: DataTransferRequestDto,
     responseDto: DataTransferResponseDto,
   },
   {
-    action: OcppActionEnum.DeleteCertificate,
+    action: RpcActionEnum.DeleteCertificate,
     requestDto: DeleteCertificateRequestDto,
     responseDto: DeleteCertificateResponseDto,
   },
   {
-    action: OcppActionEnum.FirmwareStatusNotification,
+    action: RpcActionEnum.FirmwareStatusNotification,
     requestDto: FirmwareStatusNotificationRequestDto,
     responseDto: FirmwareStatusNotificationResponseDto,
   },
   {
-    action: OcppActionEnum.Get15118EvCertificate,
+    action: RpcActionEnum.Get15118EvCertificate,
     requestDto: Get15118EvCertificateRequestDto,
     responseDto: Get15118EvCertificateResponseDto,
   },
   {
-    action: OcppActionEnum.GetBaseReport,
+    action: RpcActionEnum.GetBaseReport,
     requestDto: GetBaseReportRequestDto,
     responseDto: GetBaseReportResponseDto,
   },
   {
-    action: OcppActionEnum.GetCertificateStatus,
+    action: RpcActionEnum.GetCertificateStatus,
     requestDto: GetCertificateStatusRequestDto,
     responseDto: GetCertificateStatusResponseDto,
   },
   {
-    action: OcppActionEnum.GetChargingProfiles,
+    action: RpcActionEnum.GetChargingProfiles,
     requestDto: GetChargingProfilesRequestDto,
     responseDto: GetChargingProfilesResponseDto,
   },
   {
-    action: OcppActionEnum.GetCompositeSchedule,
+    action: RpcActionEnum.GetCompositeSchedule,
     requestDto: GetCompositeScheduleRequestDto,
     responseDto: GetCompositeScheduleResponseDto,
   },
   {
-    action: OcppActionEnum.GetDisplayMessages,
+    action: RpcActionEnum.GetDisplayMessages,
     requestDto: GetDisplayMessagesRequestDto,
     responseDto: GetDisplayMessagesResponseDto,
   },
   {
-    action: OcppActionEnum.GetInstalledCertificateIds,
+    action: RpcActionEnum.GetInstalledCertificateIds,
     requestDto: GetInstalledCertificateIdsRequestDto,
     responseDto: GetInstalledCertificateIdsResponseDto,
   },
   {
-    action: OcppActionEnum.GetLocalListVersion,
+    action: RpcActionEnum.GetLocalListVersion,
     requestDto: GetLocalListVersionRequestDto,
     responseDto: GetLocalListVersionResponseDto,
   },
   {
-    action: OcppActionEnum.GetLog,
+    action: RpcActionEnum.GetLog,
     requestDto: GetLogRequestDto,
     responseDto: GetLogResponseDto,
   },
   {
-    action: OcppActionEnum.GetMonitoringReport,
+    action: RpcActionEnum.GetMonitoringReport,
     requestDto: GetMonitoringReportRequestDto,
     responseDto: GetMonitoringReportResponseDto,
   },
   {
-    action: OcppActionEnum.GetReport,
+    action: RpcActionEnum.GetReport,
     requestDto: GetReportRequestDto,
     responseDto: GetReportResponseDto,
   },
   {
-    action: OcppActionEnum.GetTransactionStatus,
+    action: RpcActionEnum.GetTransactionStatus,
     requestDto: GetTransactionStatusRequestDto,
     responseDto: GetTransactionStatusResponseDto,
   },
   {
-    action: OcppActionEnum.GetVariables,
+    action: RpcActionEnum.GetVariables,
     requestDto: GetVariablesRequestDto,
     responseDto: GetVariablesResponseDto,
   },
   {
-    action: OcppActionEnum.Heartbeat,
+    action: RpcActionEnum.Heartbeat,
     requestDto: HeartbeatRequestDto,
     responseDto: HeartbeatResponseDto,
   },
   {
-    action: OcppActionEnum.InstallCertificate,
+    action: RpcActionEnum.InstallCertificate,
     requestDto: InstallCertificateRequestDto,
     responseDto: InstallCertificateResponseDto,
   },
   {
-    action: OcppActionEnum.LogStatusNotification,
+    action: RpcActionEnum.LogStatusNotification,
     requestDto: LogStatusNotificationRequestDto,
     responseDto: LogStatusNotificationResponseDto,
   },
   {
-    action: OcppActionEnum.MeterValues,
+    action: RpcActionEnum.MeterValues,
     requestDto: MeterValuesRequestDto,
     responseDto: MeterValuesResponseDto,
   },
   {
-    action: OcppActionEnum.NotifyChargingLimit,
+    action: RpcActionEnum.NotifyChargingLimit,
     requestDto: NotifyChargingLimitRequestDto,
     responseDto: NotifyChargingLimitResponseDto,
   },
   {
-    action: OcppActionEnum.NotifyCustomerInformation,
+    action: RpcActionEnum.NotifyCustomerInformation,
     requestDto: NotifyCustomerInformationRequestDto,
     responseDto: NotifyCustomerInformationResponseDto,
   },
   {
-    action: OcppActionEnum.NotifyDisplayMessages,
+    action: RpcActionEnum.NotifyDisplayMessages,
     requestDto: NotifyDisplayMessagesRequestDto,
     responseDto: NotifyDisplayMessagesResponseDto,
   },
   {
-    action: OcppActionEnum.NotifyEvChargingNeeds,
+    action: RpcActionEnum.NotifyEvChargingNeeds,
     requestDto: NotifyEvChargingNeedsRequestDto,
     responseDto: NotifyEvChargingNeedsResponseDto,
   },
   {
-    action: OcppActionEnum.NotifyEvChargingSchedule,
+    action: RpcActionEnum.NotifyEvChargingSchedule,
     requestDto: NotifyEvChargingScheduleRequestDto,
     responseDto: NotifyEvChargingScheduleResponseDto,
   },
   {
-    action: OcppActionEnum.NotifyEvent,
+    action: RpcActionEnum.NotifyEvent,
     requestDto: NotifyEventRequestDto,
     responseDto: NotifyEventResponseDto,
   },
   {
-    action: OcppActionEnum.NotifyMonitoringReport,
+    action: RpcActionEnum.NotifyMonitoringReport,
     requestDto: NotifyMonitoringReportRequestDto,
     responseDto: NotifyMonitoringReportResponseDto,
   },
   {
-    action: OcppActionEnum.NotifyReport,
+    action: RpcActionEnum.NotifyReport,
     requestDto: NotifyReportRequestDto,
     responseDto: NotifyReportResponseDto,
   },
   {
-    action: OcppActionEnum.PublishFirmware,
+    action: RpcActionEnum.PublishFirmware,
     requestDto: PublishFirmwareRequestDto,
     responseDto: PublishFirmwareResponseDto,
   },
   {
-    action: OcppActionEnum.PublishFirmwareStatusNotification,
+    action: RpcActionEnum.PublishFirmwareStatusNotification,
     requestDto: PublishFirmwareStatusNotificationRequestDto,
     responseDto: PublishFirmwareStatusNotificationResponseDto,
   },
   {
-    action: OcppActionEnum.ReportChargingProfiles,
+    action: RpcActionEnum.ReportChargingProfiles,
     requestDto: ReportChargingProfilesRequestDto,
     responseDto: ReportChargingProfilesResponseDto,
   },
   {
-    action: OcppActionEnum.RequestStartTransaction,
+    action: RpcActionEnum.RequestStartTransaction,
     requestDto: RequestStartTransactionRequestDto,
     responseDto: RequestStartTransactionResponseDto,
   },
   {
-    action: OcppActionEnum.RequestStopTransaction,
+    action: RpcActionEnum.RequestStopTransaction,
     requestDto: RequestStopTransactionRequestDto,
     responseDto: RequestStopTransactionResponseDto,
   },
   {
-    action: OcppActionEnum.ReservationStatusUpdate,
+    action: RpcActionEnum.ReservationStatusUpdate,
     requestDto: ReservationStatusUpdateRequestDto,
     responseDto: ReservationStatusUpdateResponseDto,
   },
   {
-    action: OcppActionEnum.ReserveNow,
+    action: RpcActionEnum.ReserveNow,
     requestDto: ReserveNowRequestDto,
     responseDto: ReserveNowResponseDto,
   },
   {
-    action: OcppActionEnum.Reset,
+    action: RpcActionEnum.Reset,
     requestDto: ResetRequestDto,
     responseDto: ResetResponseDto,
   },
   {
-    action: OcppActionEnum.SecurityEventNotification,
+    action: RpcActionEnum.SecurityEventNotification,
     requestDto: SecurityEventNotificationRequestDto,
     responseDto: SecurityEventNotificationResponseDto,
   },
   {
-    action: OcppActionEnum.SendLocalList,
+    action: RpcActionEnum.SendLocalList,
     requestDto: SendLocalListRequestDto,
     responseDto: SendLocalListResponseDto,
   },
   {
-    action: OcppActionEnum.SetChargingProfile,
+    action: RpcActionEnum.SetChargingProfile,
     requestDto: SetChargingProfileRequestDto,
     responseDto: SetChargingProfileResponseDto,
   },
   {
-    action: OcppActionEnum.SetDisplayMessage,
+    action: RpcActionEnum.SetDisplayMessage,
     requestDto: SetDisplayMessageRequestDto,
     responseDto: SetDisplayMessageResponseDto,
   },
   {
-    action: OcppActionEnum.SetMonitoringBase,
+    action: RpcActionEnum.SetMonitoringBase,
     requestDto: SetMonitoringBaseRequestDto,
     responseDto: SetMonitoringBaseResponseDto,
   },
   {
-    action: OcppActionEnum.SetMonitoringLevel,
+    action: RpcActionEnum.SetMonitoringLevel,
     requestDto: SetMonitoringLevelRequestDto,
     responseDto: SetMonitoringLevelResponseDto,
   },
   {
-    action: OcppActionEnum.SetNetworkProfile,
+    action: RpcActionEnum.SetNetworkProfile,
     requestDto: SetNetworkProfileRequestDto,
     responseDto: SetNetworkProfileResponseDto,
   },
   {
-    action: OcppActionEnum.SetVariableMonitoring,
+    action: RpcActionEnum.SetVariableMonitoring,
     requestDto: SetVariableMonitoringRequestDto,
     responseDto: SetVariableMonitoringResponseDto,
   },
   {
-    action: OcppActionEnum.SetVariables,
+    action: RpcActionEnum.SetVariables,
     requestDto: SetVariablesRequestDto,
     responseDto: SetVariablesResponseDto,
   },
   {
-    action: OcppActionEnum.SignCertificate,
+    action: RpcActionEnum.SignCertificate,
     requestDto: SignCertificateRequestDto,
     responseDto: SignCertificateResponseDto,
   },
   {
-    action: OcppActionEnum.StatusNotification,
+    action: RpcActionEnum.StatusNotification,
     requestDto: StatusNotificationRequestDto,
     responseDto: StatusNotificationResponseDto,
   },
   {
-    action: OcppActionEnum.TransactionEvent,
+    action: RpcActionEnum.TransactionEvent,
     requestDto: TransactionEventRequestDto,
     responseDto: TransactionEventResponseDto,
   },
   {
-    action: OcppActionEnum.TriggerMessage,
+    action: RpcActionEnum.TriggerMessage,
     requestDto: TriggerMessageRequestDto,
     responseDto: TriggerMessageResponseDto,
   },
   {
-    action: OcppActionEnum.UnlockConnector,
+    action: RpcActionEnum.UnlockConnector,
     requestDto: UnlockConnectorRequestDto,
     responseDto: UnlockConnectorResponseDto,
   },
   {
-    action: OcppActionEnum.UnpublishFirmware,
+    action: RpcActionEnum.UnpublishFirmware,
     requestDto: UnpublishFirmwareRequestDto,
     responseDto: UnpublishFirmwareResponseDto,
   },
   {
-    action: OcppActionEnum.UpdateFirmware,
+    action: RpcActionEnum.UpdateFirmware,
     requestDto: UpdateFirmwareRequestDto,
     responseDto: UpdateFirmwareResponseDto,
   },
