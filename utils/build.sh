@@ -6,12 +6,12 @@ pnpm install
 # Libs
 pnpm run build --prefix common-lib
 pnpm run build --prefix ocpp-lib
-# Server
+# CSMS
 pnpm run build --prefix csms-lib
-pnpm run build --prefix csms-server
+pnpm run build --prefix csms
 # CSS
 pnpm run build --prefix css-lib
 pnpm run build --prefix css-cli
 # UIs
-pnpm run build --prefix csms-server-ui
+pnpm run build --prefix csms-ui
 pnpm run build --prefix css-ui

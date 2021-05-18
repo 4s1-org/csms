@@ -3,5 +3,5 @@
 /tsconfig.build.tsbuildinfo
 /coverage/
 /data/
-/csms-server.json
-/csms-server-test-e2e.json
+/csms-config.json
+/csms-config-test-e2e.json
