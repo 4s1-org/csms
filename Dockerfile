@@ -33,8 +33,8 @@ COPY --from=builder /app/common-lib/dist/          ./common-lib/dist/
 COPY --from=builder /app/csms-lib/package.json     ./csms-lib/
 COPY --from=builder /app/csms-lib/dist/            ./csms-lib/dist/
 
-COPY --from=builder /app/csms-server/package.json  ./csms-server/
-COPY --from=builder /app/csms-server/dist/         ./csms-server/dist/
+COPY --from=builder /app/csms/package.json         ./csms/
+COPY --from=builder /app/csms/dist/                ./csms/dist/
 
 COPY --from=builder /app/css-cli/package.json      ./css-cli/
 COPY --from=builder /app/css-cli/dist/             ./css-cli/dist/
@@ -45,7 +45,7 @@ COPY --from=builder /app/css-lib/dist/             ./css-lib/dist/
 COPY --from=builder /app/ocpp-lib/package.json     ./ocpp-lib/
 COPY --from=builder /app/ocpp-lib/dist/            ./ocpp-lib/dist/
 
-COPY --from=builder /app/csms-server-ui/build/     ./csms-server-ui/build/
+COPY --from=builder /app/csms-ui/build/            ./csms-ui/build/
 
 COPY --from=builder /app/css-ui/build/             ./css-ui/build/
 

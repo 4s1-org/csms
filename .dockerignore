@@ -15,7 +15,6 @@
 **/test/
 **/tsconfig.eslint.json
 **/vscode.code-workspace
-csms-server/data/
 Dockerfile
 **/*.tgz
 *.tar.gz

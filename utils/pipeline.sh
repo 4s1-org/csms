@@ -24,14 +24,14 @@ pnpm run build
 pnpm run test
 cd ..
 
-cd csms-server
+cd csms
 pnpm run lint
 pnpm run build
 pnpm run test
 pnpm run test:e2e
 cd ..
 
-cd csms-server-ui
+cd csms-ui
 pnpm run lint
 pnpm run build
 pnpm run test

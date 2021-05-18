@@ -7,7 +7,7 @@ import { ProcessEnv } from './process-env'
 const logger = new Logger('Core', ProcessEnv.LOG_LEVEL)
 
 // Config
-const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
+const dataStorage = new DataStorage<IDataStorageSchema>('csms-config')
 if (process.env.port) {
   dataStorage.set('port', ProcessEnv.port)
 }
