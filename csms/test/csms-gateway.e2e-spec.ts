@@ -47,7 +47,7 @@ describe('CSMS Gateway', () => {
     model.username = csInfo
     model.passwordHash = hashPassword(csInfo)
 
-    const storage = new DataStorage<IDataStorageSchema>('csms-server-test-e2e')
+    const storage = new DataStorage<IDataStorageSchema>('csms-config-test-e2e')
     storage.set('chargingStations', [model])
     storage.set('port', port)
 
