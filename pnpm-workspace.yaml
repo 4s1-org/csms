@@ -5,5 +5,5 @@ packages:
   - "common-lib/"
   - "ocpp-lib/"
   - "csms-lib/"
-  - "csms-server/"
-  - "csms-server-ui/"
+  - "csms/"
+  - "csms-ui/"

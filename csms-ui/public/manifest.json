@@ -1,6 +1,6 @@
 {
-  "short_name": "CSMS Server UI",
-  "name": "CSMS Server UI",
+  "short_name": "CSMS UI",
+  "name": "CSMS UI",
   "icons": [
     {
       "src": "favicon.ico",
