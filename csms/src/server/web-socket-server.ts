@@ -201,7 +201,7 @@ export class WebSocketServer {
    * Send a message to a single admin connection.
    */
   private sendToUiSingle(socket: WebSocket, msg: CsmsToUiMsg): void {
-    if (socket.OPEN) {
+    if (socket.readyState === WebSocket.OPEN) {
       socket.send(JSON.stringify(msg))
     }
   }
