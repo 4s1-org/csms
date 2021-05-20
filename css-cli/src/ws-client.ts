@@ -1,7 +1,7 @@
 import WebSocket from 'ws'
 import { IReceiveMessage, WsClientBase } from '@yellowgarbagebag/ocpp-lib'
 import { ProcessEnv } from './process-env'
-import { Logger } from '@yellowgarbagebag/common-lib'
+import { Const, Logger } from '@yellowgarbagebag/common-lib'
 
 export class WsClient extends WsClientBase {
   private socket: WebSocket | undefined
@@ -13,7 +13,7 @@ export class WsClient extends WsClientBase {
   public connect(receiveMessage: IReceiveMessage, https: boolean, server: string, username: string, password: string): Promise<void> {
     return new Promise((resolve, reject) => {
       const prot = https ? 'wss' : 'ws'
-      this.socket = new WebSocket(`${prot}://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1'], {
+      this.socket = new WebSocket(`${prot}://${server}/ocpp/${this.uniqueIdentifier}`, [Const.ocppProtocolName], {
         headers: {
           authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
         },
