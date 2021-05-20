@@ -108,8 +108,14 @@ export class WebSocketServer {
 
       if (this.wssChargingStations && myURL.pathname.startsWith('/ocpp/')) {
         // Charging Station
-        this.logger.info('upgrade connection for ChargingStation')
+        this.logger.info('Connection from charging station detected')
         const uniqueIdentifier = myURL.pathname.split('/')[2]
+
+        // Check protocol
+        if (!header.secWebsocketProtocol.includes('ocpp2.0.1')) {
+          this.logger.warn(`Missing OCPP 2.0.1 protocol from ${uniqueIdentifier}`)
+          return ServerUtils.send401(socket)
+        }
 
         // Check credentials
         const model = this.handleChargingStationLogin(uniqueIdentifier, username, password)
@@ -126,7 +132,7 @@ export class WebSocketServer {
         })
       } else if (this.wssAdmin && myURL.pathname.startsWith('/admin')) {
         // Admin
-        this.logger.info('upgrade connection for Admin')
+        this.logger.info('Connection from admin detected')
 
         // Check credentials
         const adminCredentials = this.dataStorage.get('adminCredentials')
