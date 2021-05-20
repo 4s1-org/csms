@@ -4,7 +4,6 @@ dotenv.config()
 
 /*
 LOG_LEVEL=info
-PORT=3000
 */
 
 export abstract class ProcessEnv {
@@ -14,13 +13,5 @@ export abstract class ProcessEnv {
 
   public static get LOG_LEVEL(): LogLevelEnum {
     return (process.env.LOG_LEVEL as LogLevelEnum) || LogLevelEnum.info
-  }
-
-  public static get port(): number {
-    if (process.env.PORT) {
-      return +process.env.PORT
-    } else {
-      return 3000
-    }
   }
 }
