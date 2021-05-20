@@ -7,7 +7,7 @@ import { URL } from 'url'
 import { IncomingMessage } from 'http'
 import { Socket } from 'net'
 import { TLSSocket } from 'tls'
-import { Logger, verifyPassword } from '@yellowgarbagebag/common-lib'
+import { Logger, verifyPassword, Const } from '@yellowgarbagebag/common-lib'
 import {
   CsmsToUiMsg,
   CsmsToUiCmdEnum,
@@ -112,7 +112,7 @@ export class WebSocketServer {
         const uniqueIdentifier = myURL.pathname.split('/')[2]
 
         // Check protocol
-        if (!header.secWebsocketProtocol.includes('ocpp2.0.1')) {
+        if (!header.secWebsocketProtocol.includes(Const.ocppProtocolName)) {
           this.logger.warn(`Missing OCPP 2.0.1 protocol from ${uniqueIdentifier}`)
           return ServerUtils.send401(socket)
         }
