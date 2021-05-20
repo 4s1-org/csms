@@ -7,7 +7,7 @@ import { URL } from 'url'
 import { IncomingMessage } from 'http'
 import { Socket } from 'net'
 import { TLSSocket } from 'tls'
-import { Logger, verifyPassword } from '@yellowgarbagebag/common-lib'
+import { Logger, verifyPassword, Const } from '@yellowgarbagebag/common-lib'
 import {
   CsmsToUiMsg,
   CsmsToUiCmdEnum,
@@ -72,6 +72,16 @@ export class WebSocketServer {
     // Create a WebSocket server for charging station connections.
     this.wssChargingStations = new WebSocket.Server({
       noServer: true,
+      handleProtocols: (protocols: string[], request: http.IncomingMessage): string | boolean => {
+        // Check ocpp 2.0.1 protocol
+        if (!protocols.includes(Const.ocppProtocolName)) {
+          this.logger.warn(`Missing OCPP 2.0.1 protocol from ${request.url}`)
+          request.destroy()
+          return false
+        }
+        // Send back the protocol, which should be used.
+        return Const.ocppProtocolName
+      },
     }).on('connection', (webSocket: WebSocket, model: ChargingStationModel): void => {
       this.logger.info('ChargingStation-Socket-Connection established')
       this.onChargingStationConnection(webSocket, model)
@@ -108,7 +118,7 @@ export class WebSocketServer {
 
       if (this.wssChargingStations && myURL.pathname.startsWith('/ocpp/')) {
         // Charging Station
-        this.logger.info('upgrade connection for ChargingStation')
+        this.logger.info('Connection from charging station detected')
         const uniqueIdentifier = myURL.pathname.split('/')[2]
 
         // Check credentials
@@ -126,7 +136,7 @@ export class WebSocketServer {
         })
       } else if (this.wssAdmin && myURL.pathname.startsWith('/admin')) {
         // Admin
-        this.logger.info('upgrade connection for Admin')
+        this.logger.info('Connection from admin detected')
 
         // Check credentials
         const adminCredentials = this.dataStorage.get('adminCredentials')
@@ -195,7 +205,7 @@ export class WebSocketServer {
    * Send a message to a single admin connection.
    */
   private sendToUiSingle(socket: WebSocket, msg: CsmsToUiMsg): void {
-    if (socket.OPEN) {
+    if (socket.readyState === WebSocket.OPEN) {
       socket.send(JSON.stringify(msg))
     }
   }

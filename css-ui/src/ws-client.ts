@@ -1,5 +1,5 @@
 import { WsClientBase, IReceiveMessage } from '@yellowgarbagebag/ocpp-lib'
-import { Logger, toBase64 } from '@yellowgarbagebag/common-lib'
+import { Const, Logger, toBase64 } from '@yellowgarbagebag/common-lib'
 import { ProcessEnv } from './process-env'
 
 export class WsClient extends WsClientBase {
@@ -13,7 +13,7 @@ export class WsClient extends WsClientBase {
     return new Promise((resolve, reject) => {
       const authToken = toBase64([username, password].join(':'))
       const prot = https ? 'wss' : 'ws'
-      this.socket = new WebSocket(`${prot}://${server}/ocpp/${this.uniqueIdentifier}`, ['ocpp2.0.1', `Auth.${authToken}`])
+      this.socket = new WebSocket(`${prot}://${server}/ocpp/${this.uniqueIdentifier}`, [Const.ocppProtocolName, `Auth.${authToken}`])
 
       this.socket.onopen = (): void => {
         resolve()
