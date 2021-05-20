@@ -72,6 +72,16 @@ export class WebSocketServer {
     // Create a WebSocket server for charging station connections.
     this.wssChargingStations = new WebSocket.Server({
       noServer: true,
+      handleProtocols: (protocols: string[], request: http.IncomingMessage): string | boolean => {
+        // Check ocpp 2.0.1 protocol
+        if (!protocols.includes(Const.ocppProtocolName)) {
+          this.logger.warn(`Missing OCPP 2.0.1 protocol from ${request.url}`)
+          request.destroy()
+          return false
+        }
+        // Send back the protocol, which should be used.
+        return Const.ocppProtocolName
+      },
     }).on('connection', (webSocket: WebSocket, model: ChargingStationModel): void => {
       this.logger.info('ChargingStation-Socket-Connection established')
       this.onChargingStationConnection(webSocket, model)
@@ -110,12 +120,6 @@ export class WebSocketServer {
         // Charging Station
         this.logger.info('Connection from charging station detected')
         const uniqueIdentifier = myURL.pathname.split('/')[2]
-
-        // Check protocol
-        if (!header.secWebsocketProtocol.includes(Const.ocppProtocolName)) {
-          this.logger.warn(`Missing OCPP 2.0.1 protocol from ${uniqueIdentifier}`)
-          return ServerUtils.send401(socket)
-        }
 
         // Check credentials
         const model = this.handleChargingStationLogin(uniqueIdentifier, username, password)
