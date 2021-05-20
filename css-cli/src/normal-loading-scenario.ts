@@ -42,7 +42,7 @@ export class NormalLoadingScenario extends SimulationBase {
     await this.cs.sendBootNotification(
       new BootNotificationRequestDto(new ChargingStationDto('Simulator1', 'CSS-CLI'), BootReasonEnum.PowerUp),
     )
-    await sleep(1000)
+    await sleep(100)
 
     // G01 - Status Notification
     // n-Connectoren anmelden
@@ -82,8 +82,8 @@ export class NormalLoadingScenario extends SimulationBase {
     // Heartbeat regelmässig senden
     const immediateObj = setInterval(async () => {
       await this.cs.sendHeartbeat(new HeartbeatRequestDto())
-    }, this.cs.heartbeatInterval * 1000)
-    await sleep(3000)
+    }, this.cs.heartbeatInterval * 2000)
+    await sleep(300)
 
     // -- Kabel wird vom Fahrer gesteckt --
     // E02 - Start Transaction - Cable Plugin First
@@ -120,7 +120,7 @@ export class NormalLoadingScenario extends SimulationBase {
       payload.evse = evse
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
       await this.cs.sendTransactionEvent(payload)
-      await sleep(5000)
+      await sleep(1000)
     }
 
     // C01 - EV Driver Authorization using RFID
@@ -153,7 +153,7 @@ export class NormalLoadingScenario extends SimulationBase {
       )
       payload.idToken = idToken
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
-      await sleep(2000)
+      await sleep(500)
     }
 
     // -- Kabel wird gesperrt (lock) --
@@ -186,31 +186,31 @@ export class NormalLoadingScenario extends SimulationBase {
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
       await this.cs.sendTransactionEvent(payload)
-      await sleep(2000)
+      await sleep(200)
 
       wattHours += 1574
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
       await this.cs.sendTransactionEvent(payload)
-      await sleep(2000)
+      await sleep(200)
 
       wattHours += 3132
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
       await this.cs.sendTransactionEvent(payload)
-      await sleep(2000)
+      await sleep(200)
 
       wattHours += 3215
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
       await this.cs.sendTransactionEvent(payload)
-      await sleep(2000)
+      await sleep(200)
 
       wattHours += 1672
       payload.seqNo = ++seqNo
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
       await this.cs.sendTransactionEvent(payload)
-      await sleep(2000)
+      await sleep(200)
 
       wattHours += 963
     }
@@ -278,7 +278,7 @@ export class NormalLoadingScenario extends SimulationBase {
       )
       payload.meterValue = [new MeterValueDto([new SampledValueDto(wattHours)], this.cs.currentTime)]
       await this.cs.sendTransactionEvent(payload)
-      await sleep(2000)
+      await sleep(200)
     }
 
     await sleep(10000)
