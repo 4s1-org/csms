@@ -16,7 +16,7 @@ import { WebSocketServer } from '../src/server/web-socket-server'
 import { DataStorage } from '../src/config/data-storage'
 import { IDataStorageSchema } from '../src/config/i-data-store-schema'
 import { ChargingStationModel } from '@yellowgarbagebag/csms-lib'
-import { hashPassword } from '@yellowgarbagebag/common-lib'
+import { Const, hashPassword } from '@yellowgarbagebag/common-lib'
 
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined
@@ -25,7 +25,7 @@ describe('CSMS Gateway', () => {
   const port = 3009
 
   const connectToSocket = (done: jest.DoneCallback): WebSocket => {
-    socket = new WebSocket(`wss://localhost:${port}/ocpp/${csInfo}`, ['ocpp2.0.1'], {
+    socket = new WebSocket(`wss://localhost:${port}/ocpp/${csInfo}`, [Const.ocppProtocolName], {
       headers: {
         authorization: `Basic ${Buffer.from(`${csInfo}:${csInfo}`).toString('base64')}`,
       },

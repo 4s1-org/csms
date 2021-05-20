@@ -17,6 +17,6 @@
     },
     "javascript.preferences.importModuleSpecifier": "relative",
     "typescript.preferences.importModuleSpecifier": "relative",
-    "window.title": "Sim CLI",
+    "window.title": "CSS CLI",
   }
 }
