@@ -42,7 +42,7 @@ async function main(): Promise<void> {
 
   const response = await prompts(questions)
 
-  const dataStorage = new DataStorage<IDataStorageSchema>('csms-config')
+  const dataStorage = new DataStorage<IDataStorageSchema>('csms-server')
   dataStorage.set('port', response.port)
   dataStorage.set('https', response.https)
   dataStorage.set('adminCredentials', { username: response.username, passwordHash: hashPassword(response.password) })
