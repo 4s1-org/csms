@@ -51,4 +51,6 @@ COPY --from=builder /app/css-ui/build/             ./css-ui/build/
 
 RUN pnpm install
 
+EXPOSE 3000 3001 3002
+VOLUME ["/app/data"]
 CMD ["supervisord", "-c", "/app/supervisord.conf"]
