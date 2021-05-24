@@ -59,8 +59,9 @@ class MainRfids extends React.Component<IProps, IState> {
             <tr>
               <th style={{ width: '25%' }}>RFID</th>
               <th style={{ width: '35%' }}>Description</th>
-              <th style={{ width: '15%' }}>Usage</th>
-              <th style={{ width: '5%' }}></th>
+              <th style={{ width: '20%' }} colSpan={2}>
+                Usage
+              </th>
               <th style={{ width: '10%' }}>Enabled</th>
               <th style={{ width: '10%' }}></th>
             </tr>
@@ -70,7 +71,7 @@ class MainRfids extends React.Component<IProps, IState> {
               <tr key={model.rfid}>
                 <td className="tdtext">{model.rfid}</td>
                 <td className="tdtext">{model.description}</td>
-                <td className="tdtext">{this.sumUsage(model.chargingItems)} kWh</td>
+                <td className="tdtext text-right">{this.sumUsage(model.chargingItems)} kWh</td>
                 <td className="tdtext">
                   <button type="button" className={'btn btn-info'} onClick={this.onBtnShowUsageDetailsClick.bind(this, model)}>
                     <FontAwesomeIcon icon={faInfo} />
