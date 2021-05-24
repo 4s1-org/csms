@@ -1,5 +1,11 @@
 import { sleep } from '@yellowgarbagebag/common-lib'
-import { BootNotificationRequestDto, BootReasonEnum, ChargingStationDto, HeartbeatRequestDto } from '@yellowgarbagebag/ocpp-lib'
+import {
+  AuthorizeRequestDto,
+  BootNotificationRequestDto,
+  BootReasonEnum,
+  ChargingStationDto,
+  HeartbeatRequestDto,
+} from '@yellowgarbagebag/ocpp-lib'
 import { SimulationBase } from './simulation-base'
 
 /**
@@ -21,6 +27,10 @@ class DebugScenario extends SimulationBase {
 
     await this.cs.sendHeartbeat(new HeartbeatRequestDto())
     await sleep(200)
+
+    const payload = new AuthorizeRequestDto(this.idToken)
+    await this.cs.sendAuthorize(payload)
+    await sleep(100)
 
     this.client.disconnect()
   }

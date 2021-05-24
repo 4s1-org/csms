@@ -6,4 +6,11 @@ export class RfidCardModel {
   public rfid = ''
   public description = ''
   public enabled = false
+  public chargingItems: ChargingItem[] = []
+}
+
+export class ChargingItem {
+  public start = ''
+  public end = ''
+  public wattHours = 0
 }
