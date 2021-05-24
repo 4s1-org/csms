@@ -11,6 +11,7 @@ interface IProps {
   showBtnSave?: boolean
   showBtnOk?: boolean
   showBtnAbort?: boolean
+  large?: boolean
 }
 
 class Dialog extends React.Component<IProps, IState> {
@@ -25,6 +26,12 @@ class Dialog extends React.Component<IProps, IState> {
   }
 
   public render(): JSX.Element {
+    let modalClassName = 'modal-dialog'
+    if (this.props.large || true) {
+      modalClassName += ' modal-lg'
+    }
+    modalClassName += ' modal-dialog-centered'
+
     return (
       <div
         className="modal fade show"
@@ -35,7 +42,7 @@ class Dialog extends React.Component<IProps, IState> {
         tabIndex={-1}
         role="dialog"
       >
-        <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className={modalClassName} role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">{this.props.title}</h5>

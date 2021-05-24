@@ -127,7 +127,7 @@ class MainRfids extends React.Component<IProps, IState> {
           </Dialog>
         )}
         {this.state.showUsageDetailsDialog && this.state.selectedModel && (
-          <Dialog title="Usage" dialogCloseCallback={this.onShowUsageDetailsDialogClose} showBtnOk={true}>
+          <Dialog title="Usage" dialogCloseCallback={this.onShowUsageDetailsDialogClose} showBtnOk={true} large={true}>
             <UsageDetailsComp model={this.state.selectedModel} />
           </Dialog>
         )}
