@@ -53,9 +53,20 @@ import { ProcessEnv } from './process-env'
  * This class is the counterpart of a real charging station.
  */
 export class ChargingStation extends ChargingStationBase implements IReceiveMessage {
-  private transactions: { rfid: string | null; currentRfid: RfidCardModel | null; id: string; evseId: number }[] = []
+  private transactions: {
+    rfidCard: RfidCardModel | null
+    id: string
+    evseId: number
+    startMeterValue: number
+    startDateTime: string
+  }[] = []
+  private openAuthRfIdCard: RfidCardModel | null = null
 
-  public constructor(public readonly model: ChargingStationModel, sendMessage: ISendMessage, private readonly rfids: RfidCardModel[] = []) {
+  public constructor(
+    public readonly model: ChargingStationModel,
+    sendMessage: ISendMessage,
+    private readonly rfidCards: RfidCardModel[] = [],
+  ) {
     super(model.uniqueIdentifier, sendMessage, ProcessEnv.LOG_LEVEL)
   }
 
@@ -251,32 +262,32 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    * C04 - Authorization using PIN-code
    */
   private receiveAuthorize(payload: AuthorizeRequestDto): AuthorizeResponseDto {
-    if (payload.idToken.type === IdTokenEnum.KeyCode) {
-      if (payload.idToken.idToken === '1234') {
-        // C04.FR.02 - alles richtig
-        return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
-      } else {
-        // C04.FR.01 - PIN falsch
-        return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
-      }
-    } else if (payload.idToken.type === IdTokenEnum.ISO14443 || payload.idToken.type === IdTokenEnum.ISO15693) {
-      const rfid = this.rfids.find((x) => x.rfid === payload.idToken.idToken && x.enabled)
-      if (rfid) {
-        const transaction = this.transactions.find((x) => !x.rfid)
-        if (transaction) {
-          transaction.rfid = rfid.rfid
-          transaction.currentRfid = rfid
-
-          const evse = this.model.evseList.find((x) => x.id === transaction.evseId)
-          if (evse) {
-            evse.currentUser = transaction.currentRfid
-          }
-        }
-        return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
-      }
+    // Invalid or not supported idToken type
+    if (payload.idToken.type !== IdTokenEnum.ISO14443 && payload.idToken.type !== IdTokenEnum.ISO15693) {
+      return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
     }
 
-    return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
+    const rfidCard = this.rfidCards.find((rfidCard) => rfidCard.rfid === payload.idToken.idToken && rfidCard.enabled)
+    // No rfid card found
+    if (!rfidCard) {
+      return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Invalid))
+    }
+
+    const transaction = this.transactions.find((transaction) => transaction.rfidCard === null)
+    // No open transaction found
+    if (!transaction) {
+      this.openAuthRfIdCard = rfidCard
+      return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
+    }
+
+    transaction.rfidCard = rfidCard
+
+    const evse = this.model.evseList.find((evse) => evse.id === transaction.evseId)
+    if (evse) {
+      evse.currentUser = transaction.rfidCard
+    }
+
+    return new AuthorizeResponseDto(new IdTokenInfoDto(AuthorizationStatusEnum.Accepted))
   }
 
   /**
@@ -363,8 +374,8 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
     const resPayload = new TransactionEventResponseDto()
     // Transaction E05
     if (payload.idToken) {
-      const rfid = this.rfids.find((x) => x.rfid === payload.idToken.idToken && x.enabled)
-      if (!rfid) {
+      const rfidCard = this.rfidCards.find((rfidCard) => rfidCard.rfid === payload.idToken.idToken && rfidCard.enabled)
+      if (!rfidCard) {
         resPayload.idTokenInfo = new IdTokenInfoDto(AuthorizationStatusEnum.Invalid)
         return resPayload
       } else {
@@ -383,7 +394,7 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
             ) {
               const transaction = this.transactions.find((x) => (x.id = payload.transactionInfo.transactionId))
               if (transaction && transaction.evseId) {
-                const evse = this.model.evseList.find((x) => x.id === transaction.evseId)
+                const evse = this.model.evseList.find((evse) => evse.id === transaction.evseId)
                 if (evse) {
                   evse.wattHours = sampledValue.value
                 }
@@ -396,15 +407,59 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
 
     switch (payload.eventType) {
       case TransactionEventEnum.Started:
-        this.transactions.push({
-          rfid: null,
-          currentRfid: null,
-          id: payload.transactionInfo.transactionId,
-          evseId: payload.evse?.id,
-        })
+        {
+          if (!payload.evse) {
+            this.logger.warn('Start transaction without EVSE information')
+            return resPayload
+          }
+          const evse = this.model.evseList.find((evse) => evse.id === payload.evse.id)
+          if (!evse) {
+            this.logger.warn('No EVSE found')
+            return resPayload
+          }
+
+          this.transactions.push({
+            rfidCard: this.openAuthRfIdCard,
+            id: payload.transactionInfo.transactionId,
+            evseId: payload.evse.id,
+            startMeterValue: evse.wattHours,
+            startDateTime: this.currentTime,
+          })
+          this.openAuthRfIdCard = null
+        }
         break
       case TransactionEventEnum.Ended:
-        this.transactions = this.transactions.filter((x) => x.id !== payload.transactionInfo.transactionId)
+        {
+          // Find transaction
+          const transaction = this.transactions.find((transaction) => transaction.id === payload.transactionInfo.transactionId)
+          if (!transaction) {
+            this.logger.warn('No transaction found')
+            return resPayload
+          }
+          if (!transaction.rfidCard) {
+            this.logger.warn('No rfid card found')
+            return resPayload
+          }
+
+          const evse = this.model.evseList.find((evse) => evse.id === transaction.evseId)
+          if (!evse) {
+            this.logger.warn('No EVSE found')
+            return resPayload
+          }
+
+          if (!transaction.rfidCard.chargingItems) {
+            transaction.rfidCard.chargingItems = []
+          }
+
+          transaction.rfidCard.chargingItems.push({
+            start: transaction.startDateTime,
+            end: this.currentTime,
+            wattHours: evse.wattHours - transaction.startMeterValue,
+          })
+
+          // Remove transaction
+          this.transactions = this.transactions.filter((transaction) => transaction.id !== payload.transactionInfo.transactionId)
+        }
         break
       case TransactionEventEnum.Updated:
       default:
