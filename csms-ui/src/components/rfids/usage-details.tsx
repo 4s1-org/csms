@@ -19,13 +19,13 @@ class UsageDetailsComp extends React.Component<IProps, IState> {
       <table className="table">
         <thead>
           <tr>
-            <th style={{ width: '30%' }}>Start</th>
-            <th style={{ width: '30%' }}>End</th>
-            <th style={{ width: '40%' }}>Usage</th>
+            <th style={{ width: '35%' }}>Start</th>
+            <th style={{ width: '35%' }}>End</th>
+            <th style={{ width: '30%' }}>Usage</th>
           </tr>
         </thead>
         <tbody>
-          {this.props.model.chargingItems.map((item) => (
+          {(this.props.model.chargingItems || []).map((item) => (
             <tr key={item.start}>
               <td>{item.start}</td>
               <td>{item.end}</td>
