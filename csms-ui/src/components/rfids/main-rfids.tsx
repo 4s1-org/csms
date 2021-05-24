@@ -1,16 +1,18 @@
 import { UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg, RfidCardModel, ChargingItem } from '@yellowgarbagebag/csms-lib'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faInfo, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Dialog from '../dialog'
 import RfidEdit from './rfid-edit'
 import { DialogButtonEnum } from '../dialog-button.enum'
 import { v4 as uuid } from 'uuid'
+import UsageDetailsComp from './usage-details'
 
 interface IState {
   showDeleteDialog: boolean
   showAddDialog: boolean
   showEditDialog: boolean
+  showUsageDetailsDialog: boolean
   selectedModel: RfidCardModel | null
 }
 
@@ -27,15 +29,18 @@ class MainRfids extends React.Component<IProps, IState> {
       selectedModel: null,
       showDeleteDialog: false,
       showAddDialog: false,
+      showUsageDetailsDialog: false,
       showEditDialog: false,
     }
 
     this.onDeleteDialogClose = this.onDeleteDialogClose.bind(this)
     this.onEditDialogClose = this.onEditDialogClose.bind(this)
     this.onAddDialogClose = this.onAddDialogClose.bind(this)
+    this.onShowUsageDetailsDialogClose = this.onShowUsageDetailsDialogClose.bind(this)
 
     this.onBtnAddClick = this.onBtnAddClick.bind(this)
     this.onBtnEnableClick = this.onBtnEnableClick.bind(this)
+    this.onBtnShowUsageDetailsClick = this.onBtnShowUsageDetailsClick.bind(this)
 
     this.sumUsage = this.sumUsage.bind(this)
   }
@@ -53,8 +58,9 @@ class MainRfids extends React.Component<IProps, IState> {
           <thead>
             <tr>
               <th style={{ width: '25%' }}>RFID</th>
-              <th style={{ width: '40%' }}>Description</th>
+              <th style={{ width: '35%' }}>Description</th>
               <th style={{ width: '15%' }}>Usage</th>
+              <th style={{ width: '5%' }}></th>
               <th style={{ width: '10%' }}>Enabled</th>
               <th style={{ width: '10%' }}></th>
             </tr>
@@ -65,6 +71,11 @@ class MainRfids extends React.Component<IProps, IState> {
                 <td className="tdtext">{model.rfid}</td>
                 <td className="tdtext">{model.description}</td>
                 <td className="tdtext">{this.sumUsage(model.chargingItems)} kWh</td>
+                <td className="tdtext">
+                  <button type="button" className={'btn btn-info'} onClick={this.onBtnShowUsageDetailsClick.bind(this, model)}>
+                    <FontAwesomeIcon icon={faInfo} />
+                  </button>
+                </td>
                 <td className="tdtext">
                   <div className="btn-group" role="group">
                     <button
@@ -115,6 +126,11 @@ class MainRfids extends React.Component<IProps, IState> {
             <RfidEdit model={this.state.selectedModel} />
           </Dialog>
         )}
+        {this.state.showUsageDetailsDialog && this.state.selectedModel && (
+          <Dialog title="Usage" dialogCloseCallback={this.onShowUsageDetailsDialogClose} showBtnOk={true}>
+            <UsageDetailsComp model={this.state.selectedModel} />
+          </Dialog>
+        )}
       </div>
     )
   }
@@ -152,6 +168,16 @@ class MainRfids extends React.Component<IProps, IState> {
     this.props.send(new UiToCsmsMsg(UiToCsmsCmdEnum.rfidCmd, UiToCsmsCsSubCmdEnum.edit, model))
 
     this.setState({ ...this.state })
+  }
+
+  private onBtnShowUsageDetailsClick(model: RfidCardModel, e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    e.preventDefault()
+
+    this.setState({
+      ...this.state,
+      selectedModel: model,
+      showUsageDetailsDialog: true,
+    })
   }
 
   private onBtnDeleteClick(model: RfidCardModel, e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
@@ -194,6 +220,14 @@ class MainRfids extends React.Component<IProps, IState> {
       ...this.state,
       selectedModel: null,
       showAddDialog: false,
+    })
+  }
+
+  private async onShowUsageDetailsDialogClose(btn: DialogButtonEnum): Promise<void> {
+    this.setState({
+      ...this.state,
+      selectedModel: null,
+      showUsageDetailsDialog: false,
     })
   }
 
