@@ -1,4 +1,4 @@
-import { UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg, RfidCardModel } from '@yellowgarbagebag/csms-lib'
+import { UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg, RfidCardModel, ChargingItem } from '@yellowgarbagebag/csms-lib'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -36,6 +36,8 @@ class MainRfids extends React.Component<IProps, IState> {
 
     this.onBtnAddClick = this.onBtnAddClick.bind(this)
     this.onBtnEnableClick = this.onBtnEnableClick.bind(this)
+
+    this.sumUsage = this.sumUsage.bind(this)
   }
 
   public render(): JSX.Element {
@@ -50,8 +52,9 @@ class MainRfids extends React.Component<IProps, IState> {
         <table className="table">
           <thead>
             <tr>
-              <th style={{ width: '30%' }}>RFID</th>
-              <th style={{ width: '50%' }}>Description</th>
+              <th style={{ width: '25%' }}>RFID</th>
+              <th style={{ width: '40%' }}>Description</th>
+              <th style={{ width: '15%' }}>Usage</th>
               <th style={{ width: '10%' }}>Enabled</th>
               <th style={{ width: '10%' }}></th>
             </tr>
@@ -61,6 +64,7 @@ class MainRfids extends React.Component<IProps, IState> {
               <tr key={model.rfid}>
                 <td className="tdtext">{model.rfid}</td>
                 <td className="tdtext">{model.description}</td>
+                <td className="tdtext">{this.sumUsage(model.chargingItems)} kWh</td>
                 <td className="tdtext">
                   <div className="btn-group" role="group">
                     <button
@@ -113,6 +117,19 @@ class MainRfids extends React.Component<IProps, IState> {
         )}
       </div>
     )
+  }
+
+  private sumUsage(chargingItems: ChargingItem[]): number {
+    let result = 0
+    if (!chargingItems) {
+      return result
+    }
+
+    for (const chargingItem of chargingItems) {
+      result += chargingItem.wattHours
+    }
+
+    return result
   }
 
   private async onBtnAddClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> {
