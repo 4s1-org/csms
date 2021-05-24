@@ -50,7 +50,7 @@ export class WebSocketServer {
   // List of items from the config file
   private chargingStationModels: ChargingStationModel[]
   private chargingStations: ChargingStation[] = []
-  private rfids: RfidCardModel[]
+  private rfidCards: RfidCardModel[]
 
   constructor(private readonly dataStorage: DataStorage<IDataStorageSchema>) {
     this.logger.info(`Configfile: ${dataStorage.path}`)
@@ -62,7 +62,7 @@ export class WebSocketServer {
       model.evseList = []
       model.failedLogins = model.failedLogins || 0
     }
-    this.rfids = dataStorage.get('rfids') || []
+    this.rfidCards = dataStorage.get('rfids') || []
   }
 
   /**
@@ -166,7 +166,7 @@ export class WebSocketServer {
    */
   private onChargingStationConnection(webSocket: WebSocket, model: ChargingStationModel): void {
     const client = new WsClient(model.uniqueIdentifier, webSocket)
-    const cs = new ChargingStation(model, client, this.dataStorage.get('rfids'))
+    const cs = new ChargingStation(model, client, this.rfidCards)
     this.chargingStations.push(cs)
 
     cs.connect()
@@ -218,7 +218,7 @@ export class WebSocketServer {
       this.sendToUiSingle(webSocket, new CsmsToUiMsg(CsmsToUiCmdEnum.csState, dto))
     }
     this.sendToUiSingle(webSocket, new CsmsToUiMsg(CsmsToUiCmdEnum.csList, this.chargingStationModels))
-    this.sendToUiSingle(webSocket, new CsmsToUiMsg(CsmsToUiCmdEnum.rfidList, this.rfids))
+    this.sendToUiSingle(webSocket, new CsmsToUiMsg(CsmsToUiCmdEnum.rfidList, this.rfidCards))
 
     webSocket.onclose = (): void => {
       // nothing to do
@@ -244,8 +244,8 @@ export class WebSocketServer {
         {
           const payload = data.payload as RfidCardModel
           this.handleAdminRfidCmd(data.subCmd as UiToCsmsUserSubCmdEnum, payload)
-          this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.rfidList, this.rfids))
-          this.dataStorage.set('rfids', this.rfids)
+          this.sendToUiAll(new CsmsToUiMsg(CsmsToUiCmdEnum.rfidList, this.rfidCards))
+          this.dataStorage.set('rfids', this.rfidCards)
         }
         break
       case UiToCsmsCmdEnum.csCmd:
@@ -284,7 +284,8 @@ export class WebSocketServer {
 
     // Save data
     this.dataStorage.set('chargingStations', this.chargingStationModels)
-    this.dataStorage.set('rfids', this.rfids)
+    console.log(this.rfidCards)
+    this.dataStorage.set('rfids', this.rfidCards)
 
     this.logger.info(`WebSocketServer stopped`)
   }
@@ -336,20 +337,20 @@ export class WebSocketServer {
       switch (subCmd) {
         case UiToCsmsUserSubCmdEnum.edit:
           {
-            const user = this.rfids.find((x) => x.id === payload.id)
+            const user = this.rfidCards.find((x) => x.id === payload.id)
             if (user) {
               Object.assign(user, payload)
             }
           }
           break
         case UiToCsmsUserSubCmdEnum.delete:
-          this.rfids = this.rfids.filter((x) => x.id !== payload.id)
+          this.rfidCards = this.rfidCards.filter((x) => x.id !== payload.id)
           break
         case UiToCsmsUserSubCmdEnum.add:
           {
-            const user = this.rfids.find((x) => x.id === payload.id)
+            const user = this.rfidCards.find((x) => x.id === payload.id)
             if (!user) {
-              this.rfids.push(payload)
+              this.rfidCards.push(payload)
             }
           }
           break
