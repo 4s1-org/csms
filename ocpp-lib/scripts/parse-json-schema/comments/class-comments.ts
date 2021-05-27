@@ -8,16 +8,16 @@ import { NotifyReport } from './messages/NotifyReport'
 import { SetVariables } from './messages/SetVariables'
 import { StatusNotification } from './messages/StatusNotification'
 import { TransactionEvent } from './messages/TransactionEvent'
-import { ChargingStationType } from './types/ChargingStationType'
-import { ComponentType } from './types/ComponentType'
-import { EVSEType } from './types/EVSEType'
-import { MeterValueType } from './types/MeterValueType'
-import { ModemType } from './types/ModemType'
-import { SampledValueType } from './types/SampledValueType'
-import { SetVariableDataType } from './types/SetVariableDataType'
-import { SetVariableResultType } from './types/SetVariableResultType'
-import { StatusInfoType } from './types/StatusInfoType'
-import { VariableType } from './types/VariableType'
+import { ChargingStationType } from './datatypes/ChargingStationType'
+import { ComponentType } from './datatypes/ComponentType'
+import { EVSEType } from './datatypes/EVSEType'
+import { MeterValueType } from './datatypes/MeterValueType'
+import { ModemType } from './datatypes/ModemType'
+import { SampledValueType } from './datatypes/SampledValueType'
+import { SetVariableDataType } from './datatypes/SetVariableDataType'
+import { SetVariableResultType } from './datatypes/SetVariableResultType'
+import { StatusInfoType } from './datatypes/StatusInfoType'
+import { VariableType } from './datatypes/VariableType'
 
 export type classCommentFieldType = {
   fieldName: string
@@ -56,7 +56,7 @@ const comments: classCommentType[] = [
   ...SetVariables,
   ...StatusNotification,
   ...TransactionEvent,
-  // Types
+  // Datatypes
   ChargingStationType,
   ComponentType,
   EVSEType,
