@@ -12,7 +12,7 @@ interface Foo {
   items?: IKeyValue
   format?: string
   maxItems?: number
-  default?: string
+  default?: boolean
   minimum?: number
   maximum?: number
 }
@@ -120,7 +120,7 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     if (this.data.default) {
-      this.skeleton.setDefaultValue(this.data.default)
+      this.skeleton.setDefaultValue(this.data.default ? 'true' : 'false')
     }
 
     // Sonderprüfung: Weil Format und Type unterschiedlichste Kombination haben könnten.
@@ -154,6 +154,10 @@ export class SchemaDefinitionProperty extends Validatable<Foo> {
     }
 
     if (this.data.type === 'boolean') {
+      // Hier muss unbedingt explizit auf "undefined" geprüft werden, weil es ein boolscher Wert ist.
+      if (this.data.default !== undefined && this.data.default !== false) {
+        throw new Error(`${this.key}: I though a default boolean value is always false`)
+      }
       this.skeleton.setBooleanType()
       return
     }
