@@ -1,6 +1,7 @@
 import { AuthorizationStatusEnumType } from './enumerations/AuthorizationStatusEnumType'
 import { BootReasonEnumType } from './enumerations/BootReasonEnumType'
 import { ChangeAvailabilityStatusEnumType } from './enumerations/ChangeAvailabilityStatusEnumType'
+import { ChargingStateEnumType } from './enumerations/ChargingStateEnumType'
 import { ConnectorStatusEnumType } from './enumerations/ConnectorStatusEnumType'
 import { IdTokenEnumType } from './enumerations/IdTokenEnumType'
 import { MeasurandEnumType } from './enumerations/MeasurandEnumType'
@@ -36,6 +37,7 @@ const comments: enumCommentType[] = [
   AuthorizationStatusEnumType,
   BootReasonEnumType,
   ChangeAvailabilityStatusEnumType,
+  ChargingStateEnumType,
   ConnectorStatusEnumType,
   IdTokenEnumType,
   MeasurandEnumType,
