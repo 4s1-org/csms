@@ -10,6 +10,7 @@ import { ResetEnumType } from './enumerations/ResetEnumType'
 import { ResetStatusEnumType } from './enumerations/ResetStatusEnumType'
 import { SetVariableStatusEnumType } from './enumerations/SetVariableStatusEnumType'
 import { TriggerReasonEnumType } from './enumerations/TriggerReasonEnumType'
+import { UnlockStatusEnumType } from './enumerations/UnlockStatusEnumType'
 
 export type enumCommentValueType = {
   value: string
@@ -46,4 +47,5 @@ const comments: enumCommentType[] = [
   ResetStatusEnumType,
   SetVariableStatusEnumType,
   TriggerReasonEnumType,
+  UnlockStatusEnumType,
 ]
