@@ -102,7 +102,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendHeartbeat(payload: HeartbeatRequestDto): Promise<HeartbeatResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
     return res
   }
 
@@ -126,7 +125,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendMeterValue(payload: MeterValuesRequestDto): Promise<MeterValuesResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
     return res
   }
 
@@ -150,7 +148,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendTransactionEvent(payload: TransactionEventRequestDto): Promise<TransactionEventResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
     return res
   }
 
@@ -177,7 +174,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendNotifyReport(payload: NotifyReportRequestDto): Promise<NotifyReportResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
     return res
   }
 
@@ -187,7 +183,6 @@ export class ChargingStation extends ChargingStationBase implements IReceiveMess
    */
   public async sendNotifyEvent(payload: NotifyEventRequestDto): Promise<NotifyEventResponseDto> {
     const res = await this.sendMessage.send(payload)
-    // ToDo Handling
     return res
   }
 
