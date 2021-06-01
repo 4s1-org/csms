@@ -1,5 +1,6 @@
 import React from 'react'
 import { RfidCardModel } from '@yellowgarbagebag/csms-lib'
+import dayjs from 'dayjs'
 
 interface IState {}
 
@@ -27,8 +28,8 @@ class UsageDetailsComp extends React.Component<IProps, IState> {
         <tbody>
           {(this.props.model.chargingItems || []).map((item) => (
             <tr key={item.start}>
-              <td>{item.start}</td>
-              <td>{item.end}</td>
+              <td>{dayjs(item.start).format('DD.MM.YYYY HH:mm:ss')}</td>
+              <td>{dayjs(item.end).format('DD.MM.YYYY HH:mm:ss')}</td>
               <td>{item.wattHours} kWh</td>
             </tr>
           ))}
