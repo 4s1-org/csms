@@ -1,25 +1,24 @@
 import { ClassGenerator } from '../class-generator'
-import { IKeyValue } from './i-key-value'
 import { ClassSkeleton } from '../skeletons/class-skeleton'
 import { Validatable } from './validatable'
 import { SchemaDefinition } from './schema-definition'
 import { SchemaDefinitionProperty } from './schema-definition-property'
 
-interface Foo {
+interface IData {
   $schema: string
   $id: string
   comment: string
-  definitions: IKeyValue
+  definitions: Record<string, any>
   type: string
   additionalProperties: boolean
-  properties: IKeyValue
+  properties: Record<string, any>
 
   required?: string[]
   description?: string
 }
 
-export class SchemaRoot extends Validatable<Foo> {
-  public constructor(key: string, data: Foo) {
+export class SchemaRoot extends Validatable<IData> {
+  public constructor(key: string, data: IData) {
     super(key, data)
   }
 
