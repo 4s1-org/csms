@@ -1,15 +1,14 @@
-import { IKeyValue } from './i-key-value'
 import { PropertySkeleton } from '../skeletons/property-skeleton'
 import { Validatable } from './validatable'
 
-interface Foo {
+interface IData {
   $ref?: string
   description?: string
   type?: string
   maxLength?: number
   additionalItems?: boolean
   minItems?: number
-  items?: IKeyValue
+  items?: Record<string, any>
   format?: string
   maxItems?: number
   default?: boolean
@@ -17,8 +16,8 @@ interface Foo {
   maximum?: number
 }
 
-export class SchemaDefinitionProperty extends Validatable<Foo> {
-  public constructor(key: string, data: Foo, private readonly skeleton: PropertySkeleton) {
+export class SchemaDefinitionProperty extends Validatable<IData> {
+  public constructor(key: string, data: IData, private readonly skeleton: PropertySkeleton) {
     super(key, data)
   }
 

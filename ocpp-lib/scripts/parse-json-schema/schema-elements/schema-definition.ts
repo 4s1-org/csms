@@ -1,24 +1,23 @@
 import { ClassGenerator } from '../class-generator'
-import { IKeyValue } from './i-key-value'
 import { ClassSkeleton } from '../skeletons/class-skeleton'
 import { EnumSkeleton } from '../skeletons/enum-skeleton'
 import { Validatable } from './validatable'
 import { SchemaDefinitionProperty } from './schema-definition-property'
 
-interface Foo {
+interface IData {
   javaType: string
   type: string
 
   description?: string
-  properties?: IKeyValue
+  properties?: Record<string, any>
   required?: string[]
   additionalProperties?: boolean
   enum?: string[]
   default?: string
 }
 
-export class SchemaDefinition extends Validatable<Foo> {
-  public constructor(key: string, data: Foo) {
+export class SchemaDefinition extends Validatable<IData> {
+  public constructor(key: string, data: IData) {
     super(key, data)
   }
 

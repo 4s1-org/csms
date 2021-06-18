@@ -129,7 +129,7 @@ import UnpublishFirmwareResponse from './../third-party/ocpp/2.0.1/UnpublishFirm
 import UpdateFirmwareRequest from './../third-party/ocpp/2.0.1/UpdateFirmwareRequest.json'
 import UpdateFirmwareResponse from './../third-party/ocpp/2.0.1/UpdateFirmwareResponse.json'
 
-export const jsonSchemas:{ [key: string]: any } = {
+export const jsonSchemas: Record<string, any> = {
   AuthorizeRequest,
   AuthorizeResponse,
   BootNotificationRequest,
