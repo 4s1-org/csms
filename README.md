@@ -1,10 +1,10 @@
 # Charging Station Management System
 
-Fuhrparkverwaltung füur Elektrofahrzeuge -\
-Anforderungen an die technische Infrastruktur
+Managementsystem für Ladesäulen -\
+Grundlagen und Implementierung
 
-Electric Carpool Management -\
-A technical requirements analysis
+Charging Station Management System -\
+Fundamentals and Implementation
 
 ## Setup
 
