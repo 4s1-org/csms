@@ -11,8 +11,8 @@
     "type": "git",
     "url": "git@gitlab.com:yellow-garbage-group/csms.git"
   },
-  "license": "UNLICENSED",
-  "author": "Steffen",
+  "license": "MIT",
+  "author": "Steffen <YellowGarbageBag@4s1.de>",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

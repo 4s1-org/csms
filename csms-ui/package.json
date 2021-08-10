@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git@gitlab.com:yellow-garbage-group/csms.git"
   },
-  "license": "UNLICENSED",
-  "author": "Steffen",
+  "license": "MIT",
+  "author": "Steffen <YellowGarbageBag@4s1.de>",
   "scripts": {
     "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
