@@ -4,8 +4,6 @@ stages:
 validate-all:
   stage: validation
   image: node:14-alpine
-  tags:
-    - Yellow
   script:
     - npm i pnpm -g
     - pnpm install -r
