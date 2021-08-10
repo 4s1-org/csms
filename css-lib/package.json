@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "Charging Station Simulator Library",
-  "homepage": "https://gitlab.com/yellow-garbage-group/csms",
+  "homepage": "https://gitlab.com/YellowGarbageGroup/csms",
   "bugs": {
-    "url": "https://gitlab.com/yellow-garbage-group/csms/issues"
+    "url": "https://gitlab.com/YellowGarbageGroup/csms/issues"
   },
   "repository": {
     "type": "git",

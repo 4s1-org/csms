@@ -4,7 +4,7 @@
   "private": true,
   "description": "Charging Station Simulator UI",
   "bugs": {
-    "url": "https://gitlab.com/yellow-garbage-group/csms/issues"
+    "url": "https://gitlab.com/YellowGarbageGroup/csms/issues"
   },
   "repository": {
     "type": "git",
