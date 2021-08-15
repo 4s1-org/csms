@@ -4,7 +4,7 @@ importers:
 
   common-lib:
     specifiers:
-      '@hest-lab/eslint-config': ^1.6.1
+      '@yellowgarbagegroup/eslint-config': ^1.6.1
       '@types/jest': ^26.0.23
       '@types/node': ^14.17.0
       '@types/pino': ^6.3.8
@@ -20,7 +20,7 @@ importers:
       base64url: 3.0.1
       pino: 6.11.3
     devDependencies:
-      '@hest-lab/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
+      '@yellowgarbagegroup/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
       '@types/jest': 26.0.23
       '@types/node': 14.17.0
       '@types/pino': 6.3.8
@@ -33,7 +33,7 @@ importers:
 
   csms:
     specifiers:
-      '@hest-lab/eslint-config': ^1.6.1
+      '@yellowgarbagegroup/eslint-config': ^1.6.1
       '@types/configstore': ^5.0.0
       '@types/jest': ^26.0.23
       '@types/node': ^14.17.0
@@ -62,7 +62,7 @@ importers:
       prompts: 2.4.1
       ws: 7.4.5
     devDependencies:
-      '@hest-lab/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
+      '@yellowgarbagegroup/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
       '@types/configstore': 5.0.0
       '@types/jest': 26.0.23
       '@types/node': 14.17.0
@@ -80,7 +80,7 @@ importers:
 
   csms-lib:
     specifiers:
-      '@hest-lab/eslint-config': ^1.6.1
+      '@yellowgarbagegroup/eslint-config': ^1.6.1
       '@types/jest': ^26.0.23
       '@types/node': ^14.17.0
       '@yellowgarbagebag/common-lib': workspace:*
@@ -93,7 +93,7 @@ importers:
     dependencies:
       '@yellowgarbagebag/common-lib': link:../common-lib
     devDependencies:
-      '@hest-lab/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
+      '@yellowgarbagegroup/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
       '@types/jest': 26.0.23
       '@types/node': 14.17.0
       eslint: 7.26.0
@@ -108,7 +108,7 @@ importers:
       '@fortawesome/fontawesome-svg-core': ^1.2.35
       '@fortawesome/free-solid-svg-icons': ^5.15.3
       '@fortawesome/react-fontawesome': ^0.1.14
-      '@hest-lab/eslint-config': ^1.6.1
+      '@yellowgarbagegroup/eslint-config': ^1.6.1
       '@testing-library/dom': ^7.31.0
       '@testing-library/react': ^11.2.7
       '@testing-library/user-event': ^13.1.9
@@ -151,7 +151,7 @@ importers:
       uuid: 8.3.2
       web-vitals: 1.1.2
     devDependencies:
-      '@hest-lab/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
+      '@yellowgarbagegroup/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
       '@types/node': 14.17.0
       '@types/react-tabs': 2.3.2
       '@types/uuid': 8.3.0
@@ -160,7 +160,7 @@ importers:
 
   css-cli:
     specifiers:
-      '@hest-lab/eslint-config': ^1.6.1
+      '@yellowgarbagegroup/eslint-config': ^1.6.1
       '@types/jest': ^26.0.23
       '@types/node': ^14.17.0
       '@types/ws': ^7.4.4
@@ -184,7 +184,7 @@ importers:
       pino-pretty: 4.8.0
       ws: 7.4.5
     devDependencies:
-      '@hest-lab/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
+      '@yellowgarbagegroup/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
       '@types/jest': 26.0.23
       '@types/node': 14.17.0
       '@types/ws': 7.4.4
@@ -199,7 +199,7 @@ importers:
 
   css-lib:
     specifiers:
-      '@hest-lab/eslint-config': ^1.6.1
+      '@yellowgarbagegroup/eslint-config': ^1.6.1
       '@types/jest': ^26.0.23
       '@types/node': ^14.17.0
       '@yellowgarbagebag/common-lib': workspace:*
@@ -216,7 +216,7 @@ importers:
       '@yellowgarbagebag/common-lib': link:../common-lib
       '@yellowgarbagebag/ocpp-lib': link:../ocpp-lib
     devDependencies:
-      '@hest-lab/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
+      '@yellowgarbagegroup/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
       '@types/jest': 26.0.23
       '@types/node': 14.17.0
       eslint: 7.26.0
@@ -230,7 +230,7 @@ importers:
 
   css-ui:
     specifiers:
-      '@hest-lab/eslint-config': ^1.6.1
+      '@yellowgarbagegroup/eslint-config': ^1.6.1
       '@testing-library/dom': ^7.31.0
       '@testing-library/react': ^11.2.7
       '@testing-library/user-event': ^13.1.9
@@ -264,14 +264,14 @@ importers:
       typescript: 4.2.4
       web-vitals: 1.1.2
     devDependencies:
-      '@hest-lab/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
+      '@yellowgarbagegroup/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
       '@types/node': 14.17.0
       eslint: 7.26.0
       prettier: 2.3.0
 
   ocpp-lib:
     specifiers:
-      '@hest-lab/eslint-config': ^1.6.1
+      '@yellowgarbagegroup/eslint-config': ^1.6.1
       '@types/jest': ^26.0.23
       '@types/node': ^14.17.0
       '@types/uuid': ^8.3.0
@@ -295,7 +295,7 @@ importers:
       reflect-metadata: 0.1.13
       uuid: 8.3.2
     devDependencies:
-      '@hest-lab/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
+      '@yellowgarbagegroup/eslint-config': 1.6.1_0a1b1d8e265aa89265291489ea713fec
       '@types/jest': 26.0.23
       '@types/node': 14.17.0
       '@types/uuid': 8.3.0
@@ -1913,7 +1913,7 @@ packages:
       '@hapi/hoek': 8.5.1
     dev: false
 
-  /@hest-lab/eslint-config/1.6.1_0a1b1d8e265aa89265291489ea713fec:
+  /@yellowgarbagegroup/eslint-config/1.6.1_0a1b1d8e265aa89265291489ea713fec:
     resolution: {integrity: sha512-mhOCGD4/bpMiuhBKKmQ783Rp6/PsvFCnugta6JhiMPLlizs7c2E1qmoImGBDk0ppPkBKz/13a70Mj2pMkDZSHw==}
     peerDependencies:
       eslint: '>=7.24.0'
