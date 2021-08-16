@@ -69,19 +69,19 @@ class DebugComp extends React.Component<IProps, IState> {
             type="text"
             placeholder="model"
             value={this.state.bootNotification_model}
-            onChange={(e) => this.setState({ bootNotification_model: e.target.value })}
+            onChange={(e): void => this.setState({ bootNotification_model: e.target.value })}
           ></input>
           &nbsp; VendorName: &nbsp;
           <input
             type="text"
             placeholder="model"
             value={this.state.bootNotification_vendorName}
-            onChange={(e) => this.setState({ bootNotification_vendorName: e.target.value })}
+            onChange={(e): void => this.setState({ bootNotification_vendorName: e.target.value })}
           ></input>
           &nbsp; Reason: &nbsp;
           <select
             value={this.state.bootNotification_reason}
-            onChange={(e) => this.setState({ bootNotification_reason: e.target.value as BootReasonEnum })}
+            onChange={(e): void => this.setState({ bootNotification_reason: e.target.value as BootReasonEnum })}
           >
             {Object.keys(BootReasonEnum).map((key) => (
               <option key={key} value={(BootReasonEnum as { [index: string]: string })[key]}>
@@ -102,7 +102,7 @@ class DebugComp extends React.Component<IProps, IState> {
           &nbsp; ConnectorStatus: &nbsp;
           <select
             value={this.state.statusNotification_connectorStatus}
-            onChange={(e) => this.setState({ statusNotification_connectorStatus: e.target.value as ConnectorStatusEnum })}
+            onChange={(e): void => this.setState({ statusNotification_connectorStatus: e.target.value as ConnectorStatusEnum })}
           >
             {Object.keys(ConnectorStatusEnum).map((key) => (
               <option key={key} value={(ConnectorStatusEnum as { [index: string]: string })[key]}>
@@ -113,7 +113,7 @@ class DebugComp extends React.Component<IProps, IState> {
           &nbsp; EvseId: &nbsp;
           <select
             value={this.state.statusNotification_evseId}
-            onChange={(e) => this.setState({ statusNotification_evseId: +e.target.value })}
+            onChange={(e): void => this.setState({ statusNotification_evseId: +e.target.value })}
           >
             <option value="1">1</option>
             <option value="2">2</option>
@@ -130,10 +130,13 @@ class DebugComp extends React.Component<IProps, IState> {
             type="text"
             placeholder="model"
             value={this.state.authorize_idToken}
-            onChange={(e) => this.setState({ authorize_idToken: e.target.value })}
+            onChange={(e): void => this.setState({ authorize_idToken: e.target.value })}
           ></input>
           &nbsp; Type: &nbsp;
-          <select value={this.state.authorize_type} onChange={(e) => this.setState({ authorize_type: e.target.value as IdTokenEnum })}>
+          <select
+            value={this.state.authorize_type}
+            onChange={(e): void => this.setState({ authorize_type: e.target.value as IdTokenEnum })}
+          >
             {Object.keys(IdTokenEnum).map((key) => (
               <option key={key} value={(IdTokenEnum as { [index: string]: string })[key]}>
                 {(IdTokenEnum as { [index: string]: string })[key]}
