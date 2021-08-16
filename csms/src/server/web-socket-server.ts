@@ -72,9 +72,9 @@ export class WebSocketServer {
     // Create a WebSocket server for charging station connections.
     this.wssChargingStations = new WebSocket.Server({
       noServer: true,
-      handleProtocols: (protocols: string[], request: http.IncomingMessage): string | boolean => {
+      handleProtocols: (protocols: Set<string>, request: http.IncomingMessage): string | boolean => {
         // Check ocpp 2.0.1 protocol
-        if (!protocols.includes(Const.ocppProtocolName)) {
+        if (!protocols.has(Const.ocppProtocolName)) {
           this.logger.warn(`Missing OCPP 2.0.1 protocol from ${request.url}`)
           request.destroy()
           return false
@@ -274,9 +274,11 @@ export class WebSocketServer {
   public stopServer(): void {
     if (this.server) {
       if (this.wssChargingStations) {
+        this.wssChargingStations.close()
         this.wssChargingStations.clients.forEach((x) => x.terminate())
       }
       if (this.wssAdmin) {
+        this.wssAdmin.close()
         this.wssAdmin.clients.forEach((x) => x.terminate())
       }
       this.server.close()
