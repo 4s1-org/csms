@@ -1,17 +1,14 @@
-FROM node:14-alpine AS builder
+FROM registry.gitlab.com/yellowgarbagegroup/docker-images/node-with-pnpm:14-alpine AS builder
 
 RUN mkdir -p /app
 WORKDIR /app
-
-RUN npm i pnpm -g
-RUN pnpm config set store-dir /app/.pnpm-store
 
 COPY . .
 RUN pnpm install
 RUN pnpm -r exec -- pnpm run build
 
 # -----------------------------
-FROM node:14-alpine
+FROM registry.gitlab.com/yellowgarbagegroup/docker-images/node-with-pnpm:14-alpine
 
 RUN mkdir -p /app
 WORKDIR /app
@@ -19,8 +16,7 @@ WORKDIR /app
 RUN mkdir -p /app/data
 
 RUN apk add --no-cache bash supervisor
-RUN npm i pnpm http-server -g
-RUN pnpm config set store-dir /app/.pnpm-store
+RUN npm i http-server -g
 
 COPY --from=builder /app/.pnpm-store/        ./.pnpm-store/
 COPY --from=builder /app/pnpm-lock.yaml      .
