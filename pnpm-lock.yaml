@@ -4,25 +4,25 @@ importers:
 
   common-lib:
     specifiers:
-      '@types/jest': ^26.0.23
-      '@types/node': ^14.17.0
-      '@types/pino': ^6.3.8
+      '@types/jest': ^26.0.24
+      '@types/node': ^14.17.9
+      '@types/pino': ^6.3.11
       '@yellowgarbagegroup/eslint-config': ^2.0.1
       base64url: ^3.0.1
       eslint: ^7.32.0
       jest: ^26.6.3
-      pino: ^6.11.3
+      pino: ^6.13.0
       prettier: ^2.3.2
       ts-jest: ^26.5.6
       ts-node: ^9.1.1
       typescript: ^4.3.5
     dependencies:
       base64url: 3.0.1
-      pino: 6.11.3
+      pino: 6.13.0
     devDependencies:
-      '@types/jest': 26.0.23
-      '@types/node': 14.17.0
-      '@types/pino': 6.3.8
+      '@types/jest': 26.0.24
+      '@types/node': 14.17.9
+      '@types/pino': 6.3.11
       '@yellowgarbagegroup/eslint-config': 2.0.1_aff669e8eb0d21fc4e2068e6112ef4d0
       eslint: 7.32.0
       jest: 26.6.3_ts-node@9.1.1
@@ -2595,22 +2595,22 @@ packages:
   /@types/pino-pretty/4.7.0:
     resolution: {integrity: sha512-fIZ+VXf9gJoJR4tiiM7G+j/bZkPoZEfFGzA4d8tAWCTpTVyvVaBwnmdLs3wEXYpMjw8eXulrOzNCjmGHT3FgHw==}
     dependencies:
-      '@types/pino': 6.3.8
+      '@types/pino': 6.3.11
     dev: true
 
   /@types/pino-std-serializers/2.4.1:
     resolution: {integrity: sha512-17XcksO47M24IVTVKPeAByWUd3Oez7EbIjXpSbzMPhXVzgjGtrOa49gKBwxH9hb8dKv58OelsWQ+A1G1l9S3wQ==}
     dependencies:
-      '@types/node': 14.17.0
+      '@types/node': 14.17.9
     dev: true
 
-  /@types/pino/6.3.8:
-    resolution: {integrity: sha512-E47CmRy1FNMaCN8r0d8ECQOjXen9O0p6GGsUjLfmawlxRKosZ82WP1oWVKj+ikTkMDHxWzN5BuKmplo44ynrIg==}
+  /@types/pino/6.3.11:
+    resolution: {integrity: sha512-S7+fLONqSpHeW9d7TApUqO6VN47KYgOXhCNKwGBVLHObq8HhaAYlVqUNdfnvoXjCMiwE5xcPm/5R2ZUh8bgaXQ==}
     dependencies:
-      '@types/node': 14.17.0
+      '@types/node': 14.17.9
       '@types/pino-pretty': 4.7.0
       '@types/pino-std-serializers': 2.4.1
-      '@types/sonic-boom': 0.7.0
+      sonic-boom: 2.1.0
     dev: true
 
   /@types/prettier/2.2.3:
@@ -2670,12 +2670,6 @@ packages:
 
   /@types/scheduler/0.16.1:
     resolution: {integrity: sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==}
-
-  /@types/sonic-boom/0.7.0:
-    resolution: {integrity: sha512-AfqR0fZMoUXUNwusgXKxcE9DPlHNDHQp6nKYUd4PSRpLobF5CCevSpyTEBcVZreqaWKCnGBr9KI1fHMTttoB7A==}
-    dependencies:
-      '@types/node': 14.17.0
-    dev: true
 
   /@types/source-list-map/0.1.2:
     resolution: {integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==}
@@ -3506,7 +3500,6 @@ packages:
   /atomic-sleep/1.0.0:
     resolution: {integrity: sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==}
     engines: {node: '>=8.0.0'}
-    dev: false
 
   /autoprefixer/9.8.6:
     resolution: {integrity: sha512-XrvP4VVHdRBCdX1S3WXVD8+RyG9qeb1D5Sn1DeLiG2xfSpzellk5k54xbUERJ3M5DggQxes39UGOTP8CFrEGbg==}
@@ -6054,6 +6047,10 @@ packages:
 
   /fast-safe-stringify/2.0.7:
     resolution: {integrity: sha512-Utm6CdzT+6xsDk2m8S6uL8VHxNwI6Jub+e9NYTcAms28T84pTa25GJQV9j0CY0N1rM8hK4x6grpF2BQf+2qwVA==}
+
+  /fast-safe-stringify/2.0.8:
+    resolution: {integrity: sha512-lXatBjf3WPjmWD6DpIZxkeSsCOwqI0maYMpgDlx8g4U2qi4lbjA9oH/HD2a87G+KfsUmo5WbJFmqBZlPxtptag==}
+    dev: false
 
   /fastq/1.11.0:
     resolution: {integrity: sha512-7Eczs8gIPDrVzT+EksYBcupqMyxSHXXrHOLRRxU2/DicV8789MRBRR8+Hc2uWzUupOs4YS4JzBmBxjjCVBxD/g==}
@@ -9351,12 +9348,12 @@ packages:
     resolution: {integrity: sha512-EqX4pwDPrt3MuOAAUBMU0Tk5kR/YcCM5fNPEzgCO2zJ5HfX0vbiH9HbJglnyeQsN96Kznae6MWD47pZB5avTrg==}
     dev: false
 
-  /pino/6.11.3:
-    resolution: {integrity: sha512-drPtqkkSf0ufx2gaea3TryFiBHdNIdXKf5LN0hTM82SXI4xVIve2wLwNg92e1MT6m3jASLu6VO7eGY6+mmGeyw==}
+  /pino/6.13.0:
+    resolution: {integrity: sha512-mRXSTfa34tbfrWqCIp1sUpZLqBhcoaGapoyxfEwaWwJGMpLijlRdDKIQUyvq4M3DUfFH5vEglwSw8POZYwbThA==}
     hasBin: true
     dependencies:
       fast-redact: 3.0.0
-      fast-safe-stringify: 2.0.7
+      fast-safe-stringify: 2.0.8
       flatstr: 1.0.12
       pino-std-serializers: 3.2.0
       quick-format-unescaped: 4.0.3
@@ -11310,6 +11307,12 @@ packages:
       atomic-sleep: 1.0.0
       flatstr: 1.0.12
     dev: false
+
+  /sonic-boom/2.1.0:
+    resolution: {integrity: sha512-x2j9LXx27EDlyZEC32gBM+scNVMdPutU7FIKV2BOTKCnPrp7bY5BsplCMQ4shYYR3IhDSIrEXoqb6GlS+z7KyQ==}
+    dependencies:
+      atomic-sleep: 1.0.0
+    dev: true
 
   /sort-keys/1.1.2:
     resolution: {integrity: sha1-RBttTTRnmPG05J6JIK37oOVD+a0=}
