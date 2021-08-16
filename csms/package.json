@@ -38,7 +38,7 @@
     "@yellowgarbagebag/common-lib": "workspace:*",
     "@yellowgarbagebag/csms-lib": "workspace:*",
     "@yellowgarbagebag/ocpp-lib": "workspace:*",
-    "configstore": "5.0.1",
+    "configstore": "6.0.0",
     "prompts": "2.4.1",
     "ws": "7.5.3"
   },
