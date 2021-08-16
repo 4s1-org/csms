@@ -10,7 +10,7 @@ importers:
       '@yellowgarbagegroup/eslint-config': ^2.0.1
       base64url: 3.0.1
       eslint: 7.32.0
-      jest: ^26.6.3
+      jest: 26.6.3
       pino: 6.13.0
       prettier: 2.3.2
       ts-jest: 26.5.6
@@ -45,7 +45,7 @@ importers:
       configstore: 5.0.1
       dotenv: 8.6.0
       eslint: 7.32.0
-      jest: ^26.6.3
+      jest: 26.6.3
       nodemon: 2.0.12
       pino-pretty: 4.8.0
       prettier: 2.3.2
@@ -85,7 +85,7 @@ importers:
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagegroup/eslint-config': ^2.0.1
       eslint: 7.32.0
-      jest: ^26.6.3
+      jest: 26.6.3
       prettier: 2.3.2
       ts-jest: 26.5.6
       ts-node: 9.1.1
@@ -169,7 +169,7 @@ importers:
       '@yellowgarbagegroup/eslint-config': ^2.0.1
       dotenv: 8.6.0
       eslint: 7.32.0
-      jest: ^26.6.3
+      jest: 26.6.3
       nodemon: 2.0.12
       pino-pretty: 4.8.0
       prettier: 2.3.2
@@ -205,7 +205,7 @@ importers:
       '@yellowgarbagebag/ocpp-lib': workspace:*
       '@yellowgarbagegroup/eslint-config': ^2.0.1
       eslint: 7.32.0
-      jest: ^26.6.3
+      jest: 26.6.3
       nodemon: 2.0.12
       pino-pretty: 4.8.0
       prettier: 2.3.2
@@ -280,7 +280,7 @@ importers:
       ajv-formats: 2.1.1
       class-transformer: 0.4.0
       eslint: 7.32.0
-      jest: ^26.6.3
+      jest: 26.6.3
       prettier: 2.3.2
       reflect-metadata: 0.1.13
       ts-jest: 26.5.6
@@ -1807,7 +1807,7 @@ packages:
   /@babel/types/7.13.17:
     resolution: {integrity: sha512-RawydLgxbOPDlTLJNtoIypwdmAy//uQIzlKt2+iBiJaRlVuI6QLUxVAyWGNfOzp8Yu4L4lLIacoCyTNtpb4wiA==}
     dependencies:
-      '@babel/helper-validator-identifier': 7.12.11
+      '@babel/helper-validator-identifier': 7.14.0
       to-fast-properties: 2.0.0
 
   /@bcoe/v8-coverage/0.2.3:
@@ -2072,7 +2072,7 @@ packages:
       chalk: 4.1.1
       collect-v8-coverage: 1.0.1
       exit: 0.1.2
-      glob: 7.1.6
+      glob: 7.1.7
       graceful-fs: 4.2.6
       istanbul-lib-coverage: 3.0.0
       istanbul-lib-instrument: 4.0.3
@@ -6331,6 +6331,7 @@ packages:
       minimatch: 3.0.4
       once: 1.4.0
       path-is-absolute: 1.0.1
+    dev: false
 
   /glob/7.1.7:
     resolution: {integrity: sha512-OvD9ENzPLbegENnYP5UUfJIirTg4+XwMWGaQfQTY0JenxNvvIKP3U3/tAQSPIu/lHxXYSZmpXlUHeqAIdKzBLQ==}
@@ -7362,7 +7363,7 @@ packages:
       babel-jest: 26.6.3_@babel+core@7.13.16
       chalk: 4.1.1
       deepmerge: 4.2.2
-      glob: 7.1.6
+      glob: 7.1.7
       graceful-fs: 4.2.6
       jest-environment-jsdom: 26.6.2
       jest-environment-node: 26.6.2
@@ -7396,7 +7397,7 @@ packages:
       babel-jest: 26.6.3_@babel+core@7.13.16
       chalk: 4.1.1
       deepmerge: 4.2.2
-      glob: 7.1.6
+      glob: 7.1.7
       graceful-fs: 4.2.6
       jest-environment-jsdom: 26.6.2
       jest-environment-node: 26.6.2
@@ -7733,7 +7734,7 @@ packages:
       cjs-module-lexer: 0.6.0
       collect-v8-coverage: 1.0.1
       exit: 0.1.2
-      glob: 7.1.6
+      glob: 7.1.7
       graceful-fs: 4.2.6
       jest-config: 26.6.3
       jest-haste-map: 26.6.2
@@ -7773,7 +7774,7 @@ packages:
       cjs-module-lexer: 0.6.0
       collect-v8-coverage: 1.0.1
       exit: 0.1.2
-      glob: 7.1.6
+      glob: 7.1.7
       graceful-fs: 4.2.6
       jest-config: 26.6.3_ts-node@9.1.1
       jest-haste-map: 26.6.2
@@ -10916,6 +10917,7 @@ packages:
   /sane/4.1.0:
     resolution: {integrity: sha512-hhbzAgTIX8O7SHfp2c8/kREfEn4qO/9q8C9beyY6+tvZ87EpoZ3i1RIEvp27YBswnNbY9mWd6paKVmKbAgLfZA==}
     engines: {node: 6.* || 8.* || >= 10.*}
+    deprecated: some dependency vulnerabilities fixed, support for node < 10 dropped, and newer ECMAScript syntax/features added
     hasBin: true
     dependencies:
       '@cnakazawa/watch': 1.0.4
@@ -11753,7 +11755,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       '@istanbuljs/schema': 0.1.3
-      glob: 7.1.6
+      glob: 7.1.7
       minimatch: 3.0.4
 
   /text-table/0.2.0:
@@ -12239,6 +12241,7 @@ packages:
 
   /uuid/3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
+    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
     hasBin: true
 
   /uuid/8.3.2:
