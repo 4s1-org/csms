@@ -5,7 +5,7 @@ importers:
   common-lib:
     specifiers:
       '@types/jest': 26.0.24
-      '@types/node': ^14.17.9
+      '@types/node': 14.17.9
       '@types/pino': 6.3.11
       '@yellowgarbagegroup/eslint-config': ^2.0.1
       base64url: 3.0.1
@@ -35,7 +35,7 @@ importers:
     specifiers:
       '@types/configstore': 5.0.1
       '@types/jest': 26.0.24
-      '@types/node': ^14.17.9
+      '@types/node': 14.17.9
       '@types/prompts': 2.0.14
       '@types/ws': 7.4.7
       '@yellowgarbagebag/common-lib': workspace:*
@@ -81,7 +81,7 @@ importers:
   csms-lib:
     specifiers:
       '@types/jest': 26.0.24
-      '@types/node': ^14.17.9
+      '@types/node': 14.17.9
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagegroup/eslint-config': ^2.0.1
       eslint: 7.32.0
@@ -111,7 +111,7 @@ importers:
       '@testing-library/dom': 7.31.2
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
-      '@types/node': ^14.17.9
+      '@types/node': 14.17.9
       '@types/react': 17.0.18
       '@types/react-dom': 17.0.9
       '@types/react-tabs': 2.3.3
@@ -161,7 +161,7 @@ importers:
   css-cli:
     specifiers:
       '@types/jest': 26.0.24
-      '@types/node': ^14.17.9
+      '@types/node': 14.17.9
       '@types/ws': 7.4.7
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/css-lib': workspace:*
@@ -200,7 +200,7 @@ importers:
   css-lib:
     specifiers:
       '@types/jest': 26.0.24
-      '@types/node': ^14.17.9
+      '@types/node': 14.17.9
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/ocpp-lib': workspace:*
       '@yellowgarbagegroup/eslint-config': ^2.0.1
@@ -233,7 +233,7 @@ importers:
       '@testing-library/dom': 7.31.2
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
-      '@types/node': ^14.17.9
+      '@types/node': 14.17.9
       '@types/react': 17.0.18
       '@types/react-dom': 17.0.9
       '@yellowgarbagebag/common-lib': workspace:*
@@ -272,7 +272,7 @@ importers:
   ocpp-lib:
     specifiers:
       '@types/jest': 26.0.24
-      '@types/node': ^14.17.9
+      '@types/node': 14.17.9
       '@types/uuid': 8.3.1
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagegroup/eslint-config': ^2.0.1
