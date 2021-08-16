@@ -4,8 +4,19 @@ RUN mkdir -p /app
 WORKDIR /app
 
 COPY . .
-RUN pnpm install
-RUN pnpm -r exec -- pnpm run build
+RUN pnpm -r install
+# Libs
+RUN pnpm run build --prefix common-lib
+RUN pnpm run build --prefix ocpp-lib
+# CSMS
+RUN pnpm run build --prefix csms-lib
+RUN pnpm run build --prefix csms
+# CSS
+RUN pnpm run build --prefix css-lib
+RUN pnpm run build --prefix css-cli
+# UIs
+RUN pnpm run build --prefix csms-ui
+RUN pnpm run build --prefix css-ui
 
 # -----------------------------
 FROM registry.gitlab.com/yellowgarbagegroup/docker-images/node-with-pnpm:14-alpine
