@@ -33,7 +33,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"
   },
-  "prettier": "@hest-lab/eslint-config",
+  "prettier": "@yellowgarbagegroup/eslint-config",
   "dependencies": {
     "base64url": "^3.0.1",
     "pino": "^6.11.3"

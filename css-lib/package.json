@@ -36,7 +36,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"
   },
-  "prettier": "@hest-lab/eslint-config",
+  "prettier": "@yellowgarbagegroup/eslint-config",
   "dependencies": {
     "@yellowgarbagebag/common-lib": "workspace:*",
     "@yellowgarbagebag/ocpp-lib": "workspace:*"
