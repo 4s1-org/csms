@@ -33,7 +33,7 @@
     "test:e2e": "jest --config jest.e2e.config.js",
     "test:watch": "jest --watch"
   },
-  "prettier": "@hest-lab/eslint-config",
+  "prettier": "@yellowgarbagegroup/eslint-config",
   "dependencies": {
     "@yellowgarbagebag/common-lib": "workspace:*",
     "@yellowgarbagebag/csms-lib": "workspace:*",
