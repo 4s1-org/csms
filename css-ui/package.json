@@ -17,7 +17,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "preinstall": "npx only-allow pnpm",
     "lbt": "npm run lint && npm run build && npm run test",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint": "eslint --ext .ts --ext tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "start": "PORT=3002 SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "test": "echo No tests"
@@ -34,12 +34,7 @@
       "last 1 safari version"
     ]
   },
-  "prettier": "@hest-lab/eslint-config",
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
+  "prettier": "@yellowgarbagegroup/eslint-config",
   "dependencies": {
     "@testing-library/dom": "^7.31.0",
     "@testing-library/react": "^11.2.7",
@@ -53,14 +48,14 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "typescript": "^4.2.4",
+    "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
-    "@hest-lab/eslint-config": "^1.6.1",
     "@types/node": "^14.17.0",
-    "eslint": "^7.26.0",
-    "prettier": "^2.3.0"
+    "@yellowgarbagegroup/eslint-config": "^2.0.1",
+    "eslint": "^7.32.0",
+    "prettier": "^2.3.2"
   },
   "engines": {
     "node": ">=14"

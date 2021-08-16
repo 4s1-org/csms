@@ -1,6 +1,6 @@
 import SimulatorMainComp from './components/simulator-main'
 
-function App() {
+function App(): JSX.Element {
   return <SimulatorMainComp />
 }
 
