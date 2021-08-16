@@ -35,11 +35,6 @@
     ]
   },
   "prettier": "@yellowgarbagegroup/eslint-config",
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
   "dependencies": {
     "@testing-library/dom": "^7.31.0",
     "@testing-library/react": "^11.2.7",

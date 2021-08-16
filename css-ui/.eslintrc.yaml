@@ -1,0 +1,3 @@
+root: true
+extends:
+  - "@yellowgarbagegroup/eslint-config/.eslintrc.yaml"
