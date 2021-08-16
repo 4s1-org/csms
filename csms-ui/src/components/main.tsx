@@ -30,7 +30,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
       rfidCardList: [],
       isConnected: false,
       ws: undefined,
-      send: (msg: UiToCsmsMsg): void => {
+      send: (): void => {
         /* */
       },
     }

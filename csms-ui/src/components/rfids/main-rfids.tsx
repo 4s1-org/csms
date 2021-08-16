@@ -224,7 +224,7 @@ class MainRfids extends React.Component<IProps, IState> {
     })
   }
 
-  private async onShowUsageDetailsDialogClose(btn: DialogButtonEnum): Promise<void> {
+  private async onShowUsageDetailsDialogClose(): Promise<void> {
     this.setState({
       ...this.state,
       selectedModel: null,
