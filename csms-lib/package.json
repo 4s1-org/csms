@@ -26,7 +26,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "preinstall": "npx only-allow pnpm",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
-    "lint": "eslint \"{src,scripts}/**/*.ts\"",
+    "lint": "eslint --ext .ts src/",
     "lint:fix": "pnpm run lint -- --fix",
     "test": "jest --passWithNoTests",
     "test:cov": "jest --coverage",
