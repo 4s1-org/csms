@@ -1,6 +1,6 @@
 import MainComp from './components/main'
 
-function App() {
+function App(): JSX.Element {
   return (
     <div>
       <MainComp />

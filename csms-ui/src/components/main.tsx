@@ -30,14 +30,14 @@ class AdminPageComp extends React.Component<IProps, IState> {
       rfidCardList: [],
       isConnected: false,
       ws: undefined,
-      send: (msg: UiToCsmsMsg) => {},
+      send: (): void => {
+        /* */
+      },
     }
 
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
   }
-
-  public componentDidMount(): void {}
 
   public render(): JSX.Element {
     const tabs = (
@@ -77,7 +77,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
     const prot = https ? 'wss' : 'ws'
     const ws = new WebSocket(`${prot}://${server}/admin`, ['none', `Auth.${authToken}`])
 
-    ws.onopen = () => {
+    ws.onopen = (): void => {
       this.setState({
         ws,
         isConnected: true,
@@ -118,7 +118,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
   }
 
   private updateChargingStationModel(model: ChargingStationModel): void {
-    var idx = this.state.csStates.findIndex((x) => x.uniqueIdentifier === model.uniqueIdentifier)
+    const idx = this.state.csStates.findIndex((x) => x.uniqueIdentifier === model.uniqueIdentifier)
     if (idx === -1) {
       this.state.csStates.push(model)
       this.setState({
