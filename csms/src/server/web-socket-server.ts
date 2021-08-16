@@ -274,9 +274,11 @@ export class WebSocketServer {
   public stopServer(): void {
     if (this.server) {
       if (this.wssChargingStations) {
+        this.wssChargingStations.close()
         this.wssChargingStations.clients.forEach((x) => x.terminate())
       }
       if (this.wssAdmin) {
+        this.wssAdmin.close()
         this.wssAdmin.clients.forEach((x) => x.terminate())
       }
       this.server.close()
