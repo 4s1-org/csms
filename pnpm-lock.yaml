@@ -43,7 +43,7 @@ importers:
       '@yellowgarbagebag/ocpp-lib': workspace:*
       '@yellowgarbagegroup/eslint-config': ^2.0.1
       configstore: 5.0.1
-      dotenv: 8.6.0
+      dotenv: 10.0.0
       eslint: 7.32.0
       jest: 26.6.3
       nodemon: 2.0.12
@@ -68,7 +68,7 @@ importers:
       '@types/prompts': 2.0.14
       '@types/ws': 7.4.7
       '@yellowgarbagegroup/eslint-config': 2.0.1_aff669e8eb0d21fc4e2068e6112ef4d0
-      dotenv: 8.6.0
+      dotenv: 10.0.0
       eslint: 7.32.0
       jest: 26.6.3_ts-node@10.2.0
       nodemon: 2.0.12
@@ -167,7 +167,7 @@ importers:
       '@yellowgarbagebag/css-lib': workspace:*
       '@yellowgarbagebag/ocpp-lib': workspace:*
       '@yellowgarbagegroup/eslint-config': ^2.0.1
-      dotenv: 8.6.0
+      dotenv: 10.0.0
       eslint: 7.32.0
       jest: 26.6.3
       nodemon: 2.0.12
@@ -188,7 +188,7 @@ importers:
       '@types/node': 14.17.9
       '@types/ws': 7.4.7
       '@yellowgarbagegroup/eslint-config': 2.0.1_aff669e8eb0d21fc4e2068e6112ef4d0
-      dotenv: 8.6.0
+      dotenv: 10.0.0
       eslint: 7.32.0
       jest: 26.6.3_ts-node@10.2.0
       nodemon: 2.0.12
@@ -5253,15 +5253,15 @@ packages:
     resolution: {integrity: sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==}
     dev: false
 
+  /dotenv/10.0.0:
+    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
+    engines: {node: '>=10'}
+    dev: true
+
   /dotenv/8.2.0:
     resolution: {integrity: sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==}
     engines: {node: '>=8'}
     dev: false
-
-  /dotenv/8.6.0:
-    resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
-    engines: {node: '>=10'}
-    dev: true
 
   /duplexer/0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
