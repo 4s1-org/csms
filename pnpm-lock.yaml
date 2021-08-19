@@ -119,7 +119,7 @@ importers:
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/csms-lib': workspace:*
       '@yellowgarbagegroup/eslint-config': ^2.0.1
-      bootstrap: 4.6.0
+      bootstrap: 5.1.0
       dayjs: 1.10.6
       eslint: 7.32.0
       prettier: 2.3.2
@@ -141,7 +141,7 @@ importers:
       '@types/react-dom': 17.0.9
       '@yellowgarbagebag/common-lib': link:../common-lib
       '@yellowgarbagebag/csms-lib': link:../csms-lib
-      bootstrap: 4.6.0
+      bootstrap: 5.1.0
       dayjs: 1.10.6
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -240,7 +240,7 @@ importers:
       '@yellowgarbagebag/css-lib': workspace:*
       '@yellowgarbagebag/ocpp-lib': workspace:*
       '@yellowgarbagegroup/eslint-config': ^2.0.1
-      bootstrap: 4.6.0
+      bootstrap: 5.1.0
       eslint: 7.32.0
       prettier: 2.3.2
       react: 17.0.2
@@ -257,7 +257,7 @@ importers:
       '@yellowgarbagebag/common-lib': link:../common-lib
       '@yellowgarbagebag/css-lib': link:../css-lib
       '@yellowgarbagebag/ocpp-lib': link:../ocpp-lib
-      bootstrap: 4.6.0
+      bootstrap: 5.1.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-scripts: 4.0.3_react@17.0.2+typescript@4.3.5
@@ -4142,11 +4142,10 @@ packages:
     resolution: {integrity: sha1-aN/1++YMUes3cl6p4+0xDcwed24=}
     dev: false
 
-  /bootstrap/4.6.0:
-    resolution: {integrity: sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw==}
+  /bootstrap/5.1.0:
+    resolution: {integrity: sha512-bs74WNI9BgBo3cEovmdMHikSKoXnDgA6VQjJ7TyTotU6L7d41ZyCEEelPwkYEzsG/Zjv3ie9IE3EMAje0W9Xew==}
     peerDependencies:
-      jquery: 1.9.1 - 3
-      popper.js: ^1.16.1
+      '@popperjs/core': ^2.9.3
     dev: false
 
   /boxen/4.2.0:

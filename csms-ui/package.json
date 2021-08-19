@@ -46,7 +46,7 @@
     "@types/react-dom": "17.0.9",
     "@yellowgarbagebag/common-lib": "workspace:*",
     "@yellowgarbagebag/csms-lib": "workspace:*",
-    "bootstrap": "4.6.0",
+    "bootstrap": "5.1.0",
     "dayjs": "1.10.6",
     "react": "17.0.2",
     "react-dom": "17.0.2",
