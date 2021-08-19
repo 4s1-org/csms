@@ -42,7 +42,7 @@
     "@yellowgarbagebag/ocpp-lib": "workspace:*"
   },
   "devDependencies": {
-    "@types/jest": "26.0.24",
+    "@types/jest": "27.0.1",
     "@types/node": "14.17.10",
     "@yellowgarbagegroup/eslint-config": "^2.0.1",
     "eslint": "7.32.0",
