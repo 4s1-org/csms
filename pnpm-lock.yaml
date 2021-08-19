@@ -112,7 +112,7 @@ importers:
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
       '@types/node': 14.17.9
-      '@types/react': 17.0.18
+      '@types/react': 17.0.19
       '@types/react-dom': 17.0.9
       '@types/react-tabs': 2.3.3
       '@types/uuid': 8.3.1
@@ -137,7 +137,7 @@ importers:
       '@testing-library/dom': 7.31.2
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
       '@testing-library/user-event': 13.2.1_@testing-library+dom@7.31.2
-      '@types/react': 17.0.18
+      '@types/react': 17.0.19
       '@types/react-dom': 17.0.9
       '@yellowgarbagebag/common-lib': link:../common-lib
       '@yellowgarbagebag/csms-lib': link:../csms-lib
@@ -234,7 +234,7 @@ importers:
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
       '@types/node': 14.17.9
-      '@types/react': 17.0.18
+      '@types/react': 17.0.19
       '@types/react-dom': 17.0.9
       '@yellowgarbagebag/common-lib': workspace:*
       '@yellowgarbagebag/css-lib': workspace:*
@@ -252,7 +252,7 @@ importers:
       '@testing-library/dom': 7.31.2
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
       '@testing-library/user-event': 13.2.1_@testing-library+dom@7.31.2
-      '@types/react': 17.0.18
+      '@types/react': 17.0.19
       '@types/react-dom': 17.0.9
       '@yellowgarbagebag/common-lib': link:../common-lib
       '@yellowgarbagebag/css-lib': link:../css-lib
@@ -2641,6 +2641,14 @@ packages:
       '@types/prop-types': 15.7.3
       '@types/scheduler': 0.16.1
       csstype: 3.0.7
+
+  /@types/react/17.0.19:
+    resolution: {integrity: sha512-sX1HisdB1/ZESixMTGnMxH9TDe8Sk709734fEQZzCV/4lSu9kJCPbo2PbTRoZM+53Pp0P10hYVyReUueGwUi4A==}
+    dependencies:
+      '@types/prop-types': 15.7.3
+      '@types/scheduler': 0.16.1
+      csstype: 3.0.7
+    dev: false
 
   /@types/resolve/0.0.8:
     resolution: {integrity: sha512-auApPaJf3NPfe18hSoJkp8EbZzer2ISk7o8mCC3M9he/a04+gbMF97NkpD2S8riMGvm4BMRI59/SZQSaLTKpsQ==}
