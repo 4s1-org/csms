@@ -43,7 +43,7 @@
     "@yellowgarbagebag/common-lib": "workspace:*",
     "@yellowgarbagebag/css-lib": "workspace:*",
     "@yellowgarbagebag/ocpp-lib": "workspace:*",
-    "pino-pretty": "5.1.3",
+    "pino-pretty": "6.0.0",
     "ws": "8.2.0"
   },
   "devDependencies": {
