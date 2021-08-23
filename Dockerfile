@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/yellowgarbagegroup/docker-images/node-with-pnpm:14-alpine AS builder
+FROM registry.gitlab.com/yellowgarbagegroup/docker-images/node:14-alpine AS builder
 
 RUN mkdir -p /app
 WORKDIR /app
@@ -19,7 +19,7 @@ RUN pnpm run build --prefix csms-ui
 RUN pnpm run build --prefix css-ui
 
 # -----------------------------
-FROM registry.gitlab.com/yellowgarbagegroup/docker-images/node-with-pnpm:14-alpine
+FROM registry.gitlab.com/yellowgarbagegroup/docker-images/node:14-alpine
 
 RUN mkdir -p /app
 WORKDIR /app
