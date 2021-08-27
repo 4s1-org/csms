@@ -108,7 +108,7 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.15
-      '@testing-library/dom': 8.1.0
+      '@testing-library/dom': 8.2.0
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
       '@types/node': 14.17.12
@@ -134,9 +134,9 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.15_f515edce028694561ceb456e3dba224c
-      '@testing-library/dom': 8.1.0
+      '@testing-library/dom': 8.2.0
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.1.0
+      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.2.0
       '@types/react': 17.0.19
       '@types/react-dom': 17.0.9
       '@yellowgarbagebag/common-lib': link:../common-lib
@@ -230,7 +230,7 @@ importers:
 
   css-ui:
     specifiers:
-      '@testing-library/dom': 8.1.0
+      '@testing-library/dom': 8.2.0
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
       '@types/node': 14.17.12
@@ -249,9 +249,9 @@ importers:
       typescript: 4.3.5
       web-vitals: 2.1.0
     dependencies:
-      '@testing-library/dom': 8.1.0
+      '@testing-library/dom': 8.2.0
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.1.0
+      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.2.0
       '@types/react': 17.0.19
       '@types/react-dom': 17.0.9
       '@yellowgarbagebag/common-lib': link:../common-lib
@@ -2610,8 +2610,8 @@ packages:
       pretty-format: 26.6.2
     dev: false
 
-  /@testing-library/dom/8.1.0:
-    resolution: {integrity: sha512-kmW9alndr19qd6DABzQ978zKQ+J65gU2Rzkl8hriIetPnwpesRaK4//jEQyYh8fEALmGhomD/LBQqt+o+DL95Q==}
+  /@testing-library/dom/8.2.0:
+    resolution: {integrity: sha512-U8cTWENQPHO3QHvxBdfltJ+wC78ytMdg69ASvIdkGdQ/XRg4M9H2vvM3mHddxl+w/fM6NNqzGMwpQoh82v9VIA==}
     engines: {node: '>=12'}
     dependencies:
       '@babel/code-frame': 7.12.13
@@ -2637,14 +2637,14 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /@testing-library/user-event/13.2.1_@testing-library+dom@8.1.0:
+  /@testing-library/user-event/13.2.1_@testing-library+dom@8.2.0:
     resolution: {integrity: sha512-cczlgVl+krjOb3j1625usarNEibI0IFRJrSWX9UsJ1HKYFgCQv9Nb7QAipUDXl3Xdz8NDTsiS78eAkPSxlzTlw==}
     engines: {node: '>=10', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
       '@babel/runtime': 7.13.10
-      '@testing-library/dom': 8.1.0
+      '@testing-library/dom': 8.2.0
     dev: false
 
   /@tootallnate/once/1.1.2:
