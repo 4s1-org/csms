@@ -1,0 +1,3 @@
+{
+  "extends": "@yellowgarbagegroup/semantic-release-config"
+}
