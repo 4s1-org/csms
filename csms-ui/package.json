@@ -42,7 +42,7 @@
     "@testing-library/dom": "8.2.0",
     "@testing-library/react": "11.2.7",
     "@testing-library/user-event": "13.2.1",
-    "@types/react": "17.0.19",
+    "@types/react": "17.0.20",
     "@types/react-dom": "17.0.9",
     "@yellowgarbagebag/common-lib": "workspace:*",
     "@yellowgarbagebag/csms-lib": "workspace:*",
