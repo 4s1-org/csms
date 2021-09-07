@@ -1,17 +1,17 @@
 {
-  "name": "@yellowgarbagebag/csms-ui",
+  "name": "@4s1/csms-ui",
   "version": "1.0.0",
   "private": true,
   "description": "Charging Station Management System UI",
   "bugs": {
-    "url": "https://gitlab.com/YellowGarbageGroup/csms/issues"
+    "url": "https://gitlab.com/4s1/csms/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:yellow-garbage-group/csms.git"
+    "url": "git+ssh://git@gitlab.com/4s1/csms.git"
   },
   "license": "MIT",
-  "author": "Steffen <YellowGarbageBag@4s1.de>",
+  "author": "Steffen <steffen@4s1.de>",
   "scripts": {
     "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -34,7 +34,7 @@
       "last 1 safari version"
     ]
   },
-  "prettier": "@yellowgarbagegroup/eslint-config",
+  "prettier": "@4s1/eslint-config",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.36",
     "@fortawesome/free-solid-svg-icons": "5.15.4",
@@ -44,8 +44,8 @@
     "@testing-library/user-event": "13.2.1",
     "@types/react": "17.0.20",
     "@types/react-dom": "17.0.9",
-    "@yellowgarbagebag/common-lib": "workspace:*",
-    "@yellowgarbagebag/csms-lib": "workspace:*",
+    "@4s1/common-lib": "workspace:*",
+    "@4s1/csms-lib": "workspace:*",
     "bootstrap": "4.6.0",
     "dayjs": "1.10.6",
     "react": "17.0.2",
@@ -60,7 +60,7 @@
     "@types/node": "14.17.14",
     "@types/react-tabs": "2.3.3",
     "@types/uuid": "8.3.1",
-    "@yellowgarbagegroup/eslint-config": "^2.0.1",
+    "@4s1/eslint-config": "^3.0.0",
     "eslint": "7.32.0",
     "prettier": "2.3.2"
   },

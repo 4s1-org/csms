@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStation } from '@yellowgarbagebag/css-lib'
+import { ChargingStation } from '@4s1/css-lib'
 import {
   AuthorizeRequestDto,
   BootNotificationRequestDto,
@@ -19,7 +19,7 @@ import {
   TransactionEventEnum,
   TransactionEventRequestDto,
   TriggerReasonEnum,
-} from '@yellowgarbagebag/ocpp-lib'
+} from '@4s1/ocpp-lib'
 
 interface IState {
   seqNo: number

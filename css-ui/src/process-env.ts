@@ -8,7 +8,7 @@ REACT_APP_USERNAME=CS1
 REACT_APP_PASSWORD=test
 */
 
-import { LogLevelEnum } from '@yellowgarbagebag/common-lib'
+import { LogLevelEnum } from '@4s1/common-lib'
 
 export abstract class ProcessEnv {
   public static get NODE_ENV(): string {

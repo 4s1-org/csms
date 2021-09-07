@@ -1,4 +1,4 @@
-import { UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg, RfidCardModel, ChargingItem } from '@yellowgarbagebag/csms-lib'
+import { UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg, RfidCardModel, ChargingItem } from '@4s1/csms-lib'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faInfo, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons'

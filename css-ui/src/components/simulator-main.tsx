@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStation } from '@yellowgarbagebag/css-lib'
+import { ChargingStation } from '@4s1/css-lib'
 import LoginPanelComp from './login-panel'
 import ChargingStationComp from './charging-station'
 import { WsClient } from '../ws-client'

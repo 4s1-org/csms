@@ -1,7 +1,7 @@
 import WebSocket from 'ws'
-import { IReceiveMessage, WsClientBase } from '@yellowgarbagebag/ocpp-lib'
+import { IReceiveMessage, WsClientBase } from '@4s1/ocpp-lib'
 import { ProcessEnv } from './process-env'
-import { Const, Logger } from '@yellowgarbagebag/common-lib'
+import { Const, Logger } from '@4s1/common-lib'
 
 export class WsClient extends WsClientBase {
   private socket: WebSocket | undefined

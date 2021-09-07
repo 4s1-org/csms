@@ -1,18 +1,18 @@
 {
-  "name": "@yellowgarbagebag/css-cli",
+  "name": "@4s1/css-cli",
   "version": "1.0.0",
   "private": true,
   "description": "Charging Station Simulator CLI",
-  "homepage": "https://gitlab.com/YellowGarbageGroup/csms",
+  "homepage": "https://gitlab.com/4s1/csms",
   "bugs": {
-    "url": "https://gitlab.com/YellowGarbageGroup/csms/issues"
+    "url": "https://gitlab.com/4s1/csms/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:yellow-garbage-group/csms.git"
+    "url": "git+ssh://git@gitlab.com/4s1/csms.git"
   },
   "license": "MIT",
-  "author": "Steffen <YellowGarbageBag@4s1.de>",
+  "author": "Steffen <steffen@4s1.de>",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -38,11 +38,11 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"
   },
-  "prettier": "@yellowgarbagegroup/eslint-config",
+  "prettier": "@4s1/eslint-config",
   "dependencies": {
-    "@yellowgarbagebag/common-lib": "workspace:*",
-    "@yellowgarbagebag/css-lib": "workspace:*",
-    "@yellowgarbagebag/ocpp-lib": "workspace:*",
+    "@4s1/common-lib": "workspace:*",
+    "@4s1/css-lib": "workspace:*",
+    "@4s1/ocpp-lib": "workspace:*",
     "pino-pretty": "6.0.0",
     "ws": "8.2.1"
   },
@@ -50,7 +50,7 @@
     "@types/jest": "27.0.1",
     "@types/node": "14.17.14",
     "@types/ws": "7.4.7",
-    "@yellowgarbagegroup/eslint-config": "^2.0.1",
+    "@4s1/eslint-config": "^3.0.0",
     "dotenv": "8.6.0",
     "eslint": "7.32.0",
     "jest": "27.1.0",

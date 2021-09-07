@@ -1,4 +1,4 @@
-import { sleep } from '@yellowgarbagebag/common-lib'
+import { sleep } from '@4s1/common-lib'
 import { TransactionE01S1 } from './transaction-e01-s1'
 import { TransactionE01S2 } from './transaction-e01-s2'
 import { TransactionE01S3 } from './transaction-e01-s3'

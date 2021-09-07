@@ -1,4 +1,4 @@
-import { Logger } from '@yellowgarbagebag/common-lib'
+import { Logger } from '@4s1/common-lib'
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
 import { WebSocketServer } from './server/web-socket-server'

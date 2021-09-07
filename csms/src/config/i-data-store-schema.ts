@@ -1,4 +1,4 @@
-import { ChargingStationModel, RfidCardModel } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, RfidCardModel } from '@4s1/csms-lib'
 
 /**
  * Interface, which describes the structure of the config file.

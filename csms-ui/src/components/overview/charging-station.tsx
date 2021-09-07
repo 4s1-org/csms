@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStationModel, ColorStateEnum } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, ColorStateEnum } from '@4s1/csms-lib'
 import './charging-station.css'
 import dayjs from 'dayjs'
 import EvseStateComp from './evse-state'

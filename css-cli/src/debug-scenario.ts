@@ -1,11 +1,5 @@
-import { sleep } from '@yellowgarbagebag/common-lib'
-import {
-  AuthorizeRequestDto,
-  BootNotificationRequestDto,
-  BootReasonEnum,
-  ChargingStationDto,
-  HeartbeatRequestDto,
-} from '@yellowgarbagebag/ocpp-lib'
+import { sleep } from '@4s1/common-lib'
+import { AuthorizeRequestDto, BootNotificationRequestDto, BootReasonEnum, ChargingStationDto, HeartbeatRequestDto } from '@4s1/ocpp-lib'
 import { SimulationBase } from './simulation-base'
 
 /**

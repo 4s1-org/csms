@@ -1,4 +1,4 @@
-import { sleep } from '@yellowgarbagebag/common-lib'
+import { sleep } from '@4s1/common-lib'
 import {
   ConnectorStatusEnum,
   BootNotificationRequestDto,
@@ -12,7 +12,7 @@ import {
   AuthorizeRequestDto,
   AuthorizationStatusEnum,
   ChargingStateEnum,
-} from '@yellowgarbagebag/ocpp-lib'
+} from '@4s1/ocpp-lib'
 import { SimulationBase } from './../simulation-base'
 
 export class TransactionE01S6 extends SimulationBase {

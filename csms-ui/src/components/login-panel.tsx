@@ -1,4 +1,4 @@
-import { Logger } from '@yellowgarbagebag/common-lib'
+import { Logger } from '@4s1/common-lib'
 import React from 'react'
 import { ProcessEnv } from '../process-env'
 

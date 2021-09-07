@@ -1,4 +1,4 @@
-import { ChargingStationModel } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel } from '@4s1/csms-lib'
 import React from 'react'
 import ChargingStationComp from './charging-station'
 

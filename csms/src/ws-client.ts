@@ -1,6 +1,6 @@
 import WebSocket from 'ws'
-import { Logger } from '@yellowgarbagebag/common-lib'
-import { WsClientBase } from '@yellowgarbagebag/ocpp-lib'
+import { Logger } from '@4s1/common-lib'
+import { WsClientBase } from '@4s1/ocpp-lib'
 import { ProcessEnv } from './process-env'
 
 export class WsClient extends WsClientBase {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { RfidCardModel } from '@yellowgarbagebag/csms-lib'
+import { RfidCardModel } from '@4s1/csms-lib'
 import dayjs from 'dayjs'
 
 interface IState {}

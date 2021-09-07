@@ -1,4 +1,4 @@
-import { Logger, LogLevelEnum } from '@yellowgarbagebag/common-lib'
+import { Logger, LogLevelEnum } from '@4s1/common-lib'
 import { IReceiveMessage } from './i-receive-message'
 import { ISendMessage } from './i-send-message'
 import { RequestBaseDto } from '../generated/request-base.dto'

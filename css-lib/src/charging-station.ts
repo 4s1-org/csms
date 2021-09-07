@@ -45,8 +45,8 @@ import {
   ChargingStationBase,
   ReportBaseEnum,
   OperationalStatusEnum,
-} from '@yellowgarbagebag/ocpp-lib'
-import { LogLevelEnum } from '@yellowgarbagebag/common-lib'
+} from '@4s1/ocpp-lib'
+import { LogLevelEnum } from '@4s1/common-lib'
 
 /**
  * This class simulates a real charging station.

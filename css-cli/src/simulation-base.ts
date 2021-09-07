@@ -1,5 +1,5 @@
-import { ChargingStation } from '@yellowgarbagebag/css-lib'
-import { IdTokenDto, IdTokenEnum } from '@yellowgarbagebag/ocpp-lib'
+import { ChargingStation } from '@4s1/css-lib'
+import { IdTokenDto, IdTokenEnum } from '@4s1/ocpp-lib'
 import { ProcessEnv } from './process-env'
 import { WsClient } from './ws-client'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStationModel } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel } from '@4s1/csms-lib'
 
 interface IState {}
 

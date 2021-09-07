@@ -3,7 +3,7 @@ stages:
 
 validate-job:
   stage: validate
-  image: registry.gitlab.com/yellowgarbagegroup/docker-images/node:14-alpine-dev
+  image: registry.gitlab.com/4s1/docker/node:14-alpine-dev
   script:
     - pnpm install -r
 

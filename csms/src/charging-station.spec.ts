@@ -1,5 +1,5 @@
 import { ChargingStation } from './charging-station'
-import { ChargingStationModel } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel } from '@4s1/csms-lib'
 import {
   AuthorizeRequestDto,
   AuthorizeResponseDto,
@@ -28,7 +28,7 @@ import {
   TransactionEventResponseDto,
   TriggerReasonEnum,
   UpdateFirmwareRequestDto,
-} from '@yellowgarbagebag/ocpp-lib'
+} from '@4s1/ocpp-lib'
 
 describe('Charging Station', () => {
   const sendMessageStub = null as unknown as ISendMessage

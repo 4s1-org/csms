@@ -1,5 +1,5 @@
-import { WsClientBase, IReceiveMessage } from '@yellowgarbagebag/ocpp-lib'
-import { Const, Logger, toBase64 } from '@yellowgarbagebag/common-lib'
+import { WsClientBase, IReceiveMessage } from '@4s1/ocpp-lib'
+import { Const, Logger, toBase64 } from '@4s1/common-lib'
 import { ProcessEnv } from './process-env'
 
 export class WsClient extends WsClientBase {

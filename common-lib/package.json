@@ -1,18 +1,18 @@
 {
-  "name": "@yellowgarbagebag/common-lib",
+  "name": "@4s1/common-lib",
   "version": "1.0.0",
   "private": true,
   "description": "Common Library",
-  "homepage": "https://gitlab.com/YellowGarbageGroup/csms",
+  "homepage": "https://gitlab.com/4s1/csms",
   "bugs": {
-    "url": "https://gitlab.com/YellowGarbageGroup/csms/issues"
+    "url": "https://gitlab.com/4s1/csms/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:yellow-garbage-group/csms.git"
+    "url": "git+ssh://git@gitlab.com/4s1/csms.git"
   },
   "license": "MIT",
-  "author": "Steffen <YellowGarbageBag@4s1.de>",
+  "author": "Steffen <steffen@4s1.de>",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -33,7 +33,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"
   },
-  "prettier": "@yellowgarbagegroup/eslint-config",
+  "prettier": "@4s1/eslint-config",
   "dependencies": {
     "base64url": "3.0.1",
     "pino": "6.13.2"
@@ -42,7 +42,7 @@
     "@types/jest": "27.0.1",
     "@types/node": "14.17.14",
     "@types/pino": "6.3.11",
-    "@yellowgarbagegroup/eslint-config": "^2.0.1",
+    "@4s1/eslint-config": "^3.0.0",
     "eslint": "7.32.0",
     "jest": "27.1.0",
     "prettier": "2.3.2",

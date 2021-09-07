@@ -1,4 +1,4 @@
-import { LogLevelEnum } from '@yellowgarbagebag/common-lib'
+import { LogLevelEnum } from '@4s1/common-lib'
 import dotenv from 'dotenv'
 dotenv.config()
 

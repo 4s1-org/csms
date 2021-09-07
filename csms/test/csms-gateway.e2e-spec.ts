@@ -11,12 +11,12 @@ import {
   OcppErrorCodeEnum,
   OcppMessageTypeIdEnum,
   UnpublishFirmwareRequestDto,
-} from '@yellowgarbagebag/ocpp-lib'
+} from '@4s1/ocpp-lib'
 import { WebSocketServer } from '../src/server/web-socket-server'
 import { DataStorage } from '../src/config/data-storage'
 import { IDataStorageSchema } from '../src/config/i-data-store-schema'
-import { ChargingStationModel } from '@yellowgarbagebag/csms-lib'
-import { Const, hashPassword } from '@yellowgarbagebag/common-lib'
+import { ChargingStationModel } from '@4s1/csms-lib'
+import { Const, hashPassword } from '@4s1/common-lib'
 
 describe('CSMS Gateway', () => {
   let server: WebSocketServer | undefined

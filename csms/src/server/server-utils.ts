@@ -2,7 +2,7 @@ import { Socket } from 'net'
 import { TLSSocket } from 'tls'
 import { IncomingHttpHeaders } from 'http'
 import { IncomingMessage } from 'http'
-import { fromBase64 } from '@yellowgarbagebag/common-lib'
+import { fromBase64 } from '@4s1/common-lib'
 
 export type HeaderType = {
   secWebsocketKey: string

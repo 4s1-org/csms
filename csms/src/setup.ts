@@ -2,9 +2,9 @@
 
 import { DataStorage } from './config/data-storage'
 import { IDataStorageSchema } from './config/i-data-store-schema'
-import { ChargingStationModel, RfidCardModel } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, RfidCardModel } from '@4s1/csms-lib'
 import prompts, { PromptObject } from 'prompts'
-import { hashPassword } from '@yellowgarbagebag/common-lib'
+import { hashPassword } from '@4s1/common-lib'
 
 async function main(): Promise<void> {
   const questions: PromptObject[] = [

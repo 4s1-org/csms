@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import { Logger } from '@yellowgarbagebag/common-lib'
+import { Logger } from '@4s1/common-lib'
 import { IReceiveMessage } from './i-receive-message'
 import { PendingPromise } from './pending-promises'
 import { ISendMessage } from './i-send-message'

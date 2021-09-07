@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColorStateEnum, EvseModel } from '@yellowgarbagebag/csms-lib'
+import { ColorStateEnum, EvseModel } from '@4s1/csms-lib'
 
 interface IState {}
 

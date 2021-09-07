@@ -1,11 +1,11 @@
-import { ChargingStationModel, UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg } from '@yellowgarbagebag/csms-lib'
+import { ChargingStationModel, UiToCsmsCmdEnum, UiToCsmsCsSubCmdEnum, UiToCsmsMsg } from '@4s1/csms-lib'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faPlus, faThumbsDown, faThumbsUp, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Dialog from '../dialog'
 import ChargingStationEdit from './charging-station-edit'
 import { DialogButtonEnum } from '../dialog-button.enum'
-import { hashPassword } from '@yellowgarbagebag/common-lib'
+import { hashPassword } from '@4s1/common-lib'
 import { v4 as uuid } from 'uuid'
 
 interface IState {

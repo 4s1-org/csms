@@ -45,8 +45,8 @@ import {
   TransactionEventEnum,
   ChargingStationBase,
   DataTransferStatusEnum,
-} from '@yellowgarbagebag/ocpp-lib'
-import { ChargingStationModel, ColorStateEnum, EvseModel, RfidCardModel } from '@yellowgarbagebag/csms-lib'
+} from '@4s1/ocpp-lib'
+import { ChargingStationModel, ColorStateEnum, EvseModel, RfidCardModel } from '@4s1/csms-lib'
 import { ProcessEnv } from './process-env'
 
 /**

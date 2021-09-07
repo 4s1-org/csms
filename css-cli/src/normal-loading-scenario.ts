@@ -1,4 +1,4 @@
-import { sleep } from '@yellowgarbagebag/common-lib'
+import { sleep } from '@4s1/common-lib'
 import {
   AuthorizeRequestDto,
   BootNotificationRequestDto,
@@ -19,7 +19,7 @@ import {
   TransactionEventEnum,
   TransactionEventRequestDto,
   TriggerReasonEnum,
-} from '@yellowgarbagebag/ocpp-lib'
+} from '@4s1/ocpp-lib'
 import { SimulationBase } from './simulation-base'
 
 /**

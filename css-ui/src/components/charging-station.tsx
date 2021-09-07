@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChargingStation } from '@yellowgarbagebag/css-lib'
+import { ChargingStation } from '@4s1/css-lib'
 import Scenario1Comp from './scenario/scenario1'
 import DebugComp from './scenario/debug'
 

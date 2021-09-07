@@ -7,7 +7,7 @@ import { URL } from 'url'
 import { IncomingMessage } from 'http'
 import { Socket } from 'net'
 import { TLSSocket } from 'tls'
-import { Logger, verifyPassword, Const } from '@yellowgarbagebag/common-lib'
+import { Logger, verifyPassword, Const } from '@4s1/common-lib'
 import {
   CsmsToUiMsg,
   CsmsToUiCmdEnum,
@@ -18,7 +18,7 @@ import {
   RfidCardModel,
   UiToCsmsCsSubCmdEnum,
   ColorStateEnum,
-} from '@yellowgarbagebag/csms-lib'
+} from '@4s1/csms-lib'
 import { DataStorage } from '../config/data-storage'
 import { IDataStorageSchema } from '../config/i-data-store-schema'
 import { ChargingStation } from '../charging-station'
@@ -38,7 +38,7 @@ import {
   SetVariableDataDto,
   SetVariablesRequestDto,
   VariableDto,
-} from '@yellowgarbagebag/ocpp-lib'
+} from '@4s1/ocpp-lib'
 import { ServerUtils } from './server-utils'
 
 export class WebSocketServer {
