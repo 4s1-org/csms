@@ -47,7 +47,7 @@ importers:
       eslint: 7.32.0
       jest: 27.1.1
       nodemon: 2.0.12
-      pino-pretty: 6.0.0
+      pino-pretty: 7.0.0
       prettier: 2.3.2
       prompts: 2.4.1
       ts-jest: 27.0.5
@@ -72,7 +72,7 @@ importers:
       eslint: 7.32.0
       jest: 27.1.1_ts-node@10.2.1
       nodemon: 2.0.12
-      pino-pretty: 6.0.0
+      pino-pretty: 7.0.0
       prettier: 2.3.2
       ts-jest: 27.0.5_4a2868d8b6fd06f464380a834e6bd59e
       ts-node: 10.2.1_b04324131e2fb5ba13b634647cdac0ef
@@ -171,7 +171,7 @@ importers:
       eslint: 7.32.0
       jest: 27.1.1
       nodemon: 2.0.12
-      pino-pretty: 6.0.0
+      pino-pretty: 7.0.0
       prettier: 2.3.2
       ts-jest: 27.0.5
       ts-node: 10.2.1
@@ -181,7 +181,7 @@ importers:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
-      pino-pretty: 6.0.0
+      pino-pretty: 7.0.0
       ws: 8.2.1
     devDependencies:
       '@4s1/eslint-config': 3.0.0_aff669e8eb0d21fc4e2068e6112ef4d0
@@ -207,7 +207,7 @@ importers:
       eslint: 7.32.0
       jest: 27.1.1
       nodemon: 2.0.12
-      pino-pretty: 6.0.0
+      pino-pretty: 7.0.0
       prettier: 2.3.2
       ts-jest: 27.0.5
       ts-node: 10.2.1
@@ -222,7 +222,7 @@ importers:
       eslint: 7.32.0
       jest: 27.1.1_ts-node@10.2.1
       nodemon: 2.0.12
-      pino-pretty: 6.0.0
+      pino-pretty: 7.0.0
       prettier: 2.3.2
       ts-jest: 27.0.5_4a2868d8b6fd06f464380a834e6bd59e
       ts-node: 10.2.1_b04324131e2fb5ba13b634647cdac0ef
@@ -2031,9 +2031,6 @@ packages:
     resolution: {integrity: sha512-1dVNHT76Uu5N3eJNTYcvxee+jzX4Z9lfciqRRHCU27ihbUcYi+iSc2iml5Ke1LXe1SyJCLA0+14Jh4tXJgOppA==}
     deprecated: This version has been deprecated and is no longer supported or maintained
     dev: false
-
-  /@hapi/bourne/2.0.0:
-    resolution: {integrity: sha512-WEezM1FWztfbzqIUbsDzFRVMxSoLy3HugVcux6KDDtTqzPsLE8NDRHfXvev66aH1i2oOKKar3/XDjbvh/OUBdg==}
 
   /@hapi/hoek/8.5.1:
     resolution: {integrity: sha512-yN7kbciD87WzLGc5539Tn0sApjyiGHAJgKvG9W8C7O+6c7qmoQMfVs0W4bX17eqz6C78QJqqFrtgdK5EWf6Qow==}
@@ -8653,10 +8650,6 @@ packages:
       - utf-8-validate
     dev: true
 
-  /jmespath/0.15.0:
-    resolution: {integrity: sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc=}
-    engines: {node: '>= 0.6.0'}
-
   /joycon/3.0.1:
     resolution: {integrity: sha512-SJcJNBg32dGgxhPtM0wQqxqV0ax9k/9TaUskGDSJkSFSQOEWWvQ3zzWdGQRIUry2j1zA5+ReH13t0Mf3StuVZA==}
     engines: {node: '>=10'}
@@ -9971,21 +9964,26 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /pino-pretty/6.0.0:
-    resolution: {integrity: sha512-jyeR2fXXWc68st1DTTM5NhkHlx8p+1fKZMfm84Jwq+jSw08IwAjNaZBZR6ts69hhPOfOjg/NiE1HYW7vBRPL3A==}
+  /pino-abstract-transport/0.2.0:
+    resolution: {integrity: sha512-40sX7xrzDXsrUYr65brL0+bLm6rpZ+wCujDeeBmmZ/y5RVcPdVQsmz0bBe8NtTpELgmzmKwRRPVj1lvKjgFVHw==}
+    dependencies:
+      split2: 3.2.2
+
+  /pino-pretty/7.0.0:
+    resolution: {integrity: sha512-lU5RpkfssYJxRI/veMGsUu7RqTUD/NDb2r+U4VIx7Dyo5vA3MbbbGMUOhAM4e02IAYXuTAa/PH56s8shstP9BA==}
     hasBin: true
     dependencies:
-      '@hapi/bourne': 2.0.0
       args: 5.0.1
       colorette: 1.3.0
       dateformat: 4.5.1
       fast-safe-stringify: 2.1.0
-      jmespath: 0.15.0
       joycon: 3.0.1
+      pino-abstract-transport: 0.2.0
       pump: 3.0.0
       readable-stream: 3.6.0
       rfdc: 1.3.0
-      split2: 3.2.2
+      secure-json-parse: 2.4.0
+      sonic-boom: 2.2.3
       strip-json-comments: 3.1.1
 
   /pino-std-serializers/3.2.0:
@@ -11665,6 +11663,9 @@ packages:
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: false
 
+  /secure-json-parse/2.4.0:
+    resolution: {integrity: sha512-Q5Z/97nbON5t/L/sH6mY2EacfjVGwrCcSi5D3btRO2GZ8pf1K1UN7Z9H5J57hjVU2Qzxr1xO+FmBhOvEkzCMmg==}
+
   /select-hose/2.0.0:
     resolution: {integrity: sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=}
     dev: false
@@ -11918,7 +11919,6 @@ packages:
     resolution: {integrity: sha512-dm32bzlBchhXoJZe0yLY/kdYsHtXhZphidIcCzJib1aEjfciZyvHJ3NjA1zh6jJCO/OBLfdjc5iw6jLS/Go2fg==}
     dependencies:
       atomic-sleep: 1.0.0
-    dev: true
 
   /sort-keys/1.1.2:
     resolution: {integrity: sha1-RBttTTRnmPG05J6JIK37oOVD+a0=}
