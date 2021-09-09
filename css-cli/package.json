@@ -44,7 +44,7 @@
     "@4s1/css-lib": "workspace:*",
     "@4s1/ocpp-lib": "workspace:*",
     "pino-pretty": "7.0.0",
-    "ws": "8.2.1"
+    "ws": "8.2.2"
   },
   "devDependencies": {
     "@types/jest": "27.0.1",
