@@ -74,8 +74,7 @@ export abstract class WsClientBase implements ISendMessage {
         throw new Error('Invalid RPC message type')
       }
     } catch (err) {
-      this.logger.fatal('Internal Server Error')
-      this.logger.fatal(err)
+      this.logger.fatal('Internal Server Error', err)
 
       // Never reply to an error with an error due to prevent ping pong between CSMS <=> CS.
       if (msg instanceof RpcCallerrorDto) {
