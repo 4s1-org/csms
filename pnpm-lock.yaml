@@ -120,7 +120,7 @@ importers:
       '@types/react-tabs': 2.3.3
       '@types/uuid': 8.3.1
       bootstrap: 4.6.0
-      dayjs: 1.10.6
+      dayjs: 1.10.7
       eslint: 7.32.0
       prettier: 2.4.0
       react: 17.0.2
@@ -142,7 +142,7 @@ importers:
       '@types/react': 17.0.20
       '@types/react-dom': 17.0.9
       bootstrap: 4.6.0
-      dayjs: 1.10.6
+      dayjs: 1.10.7
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-scripts: 4.0.3_react@17.0.2+typescript@4.4.2
@@ -5278,8 +5278,8 @@ packages:
   /dateformat/4.5.1:
     resolution: {integrity: sha512-OD0TZ+B7yP7ZgpJf5K2DIbj3FZvFvxgFUuaqA/V5zTjAtAAXZ1E8bktHxmAGs4x5b7PflqA9LeQ84Og7wYtF7Q==}
 
-  /dayjs/1.10.6:
-    resolution: {integrity: sha512-AztC/IOW4L1Q41A86phW5Thhcrco3xuAA+YX/BLpLWWjRcTj5TOt/QImBLmCKlrF7u7k47arTnOyL6GnbG8Hvw==}
+  /dayjs/1.10.7:
+    resolution: {integrity: sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==}
     dev: false
 
   /debug/2.6.9:
