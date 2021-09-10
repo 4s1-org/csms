@@ -48,7 +48,7 @@
     "@4s1/common-lib": "workspace:*",
     "@4s1/csms-lib": "workspace:*",
     "bootstrap": "4.6.0",
-    "dayjs": "1.10.6",
+    "dayjs": "1.10.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-scripts": "4.0.3",
