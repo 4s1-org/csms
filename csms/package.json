@@ -6,7 +6,11 @@
   "bugs": {
     "url": "https://gitlab.com/4s1/csms/issues"
   },
-  "repository": "gitlab:4s1/csms",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/4s1/csms.git",
+    "directory": "csms"
+  },
   "license": "MIT",
   "author": "Steffen <steffen@4s1.de>",
   "main": "dist/index.js",
