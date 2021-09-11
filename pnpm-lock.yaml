@@ -111,7 +111,7 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.15
-      '@testing-library/dom': 8.3.0
+      '@testing-library/dom': 8.5.0
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
       '@types/node': 14.17.15
@@ -136,9 +136,9 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.15_f515edce028694561ceb456e3dba224c
-      '@testing-library/dom': 8.3.0
+      '@testing-library/dom': 8.5.0
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.3.0
+      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.5.0
       '@types/react': 17.0.20
       '@types/react-dom': 17.0.9
       bootstrap: 4.6.0
@@ -234,7 +234,7 @@ importers:
       '@4s1/css-lib': workspace:*
       '@4s1/eslint-config': ^3.0.0
       '@4s1/ocpp-lib': workspace:*
-      '@testing-library/dom': 8.3.0
+      '@testing-library/dom': 8.5.0
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
       '@types/node': 14.17.15
@@ -252,9 +252,9 @@ importers:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
-      '@testing-library/dom': 8.3.0
+      '@testing-library/dom': 8.5.0
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.3.0
+      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.5.0
       '@types/react': 17.0.20
       '@types/react-dom': 17.0.9
       bootstrap: 4.6.0
@@ -2457,6 +2457,7 @@ packages:
       '@types/node': 14.17.15
       '@types/yargs': 16.0.4
       chalk: 4.1.2
+    dev: true
 
   /@jest/types/27.1.1:
     resolution: {integrity: sha512-yqJPDDseb0mXgKqmNqypCsb85C22K1aY5+LUxh7syIM9n/b0AsaltxNy+o6tt29VcfGDpYEve175bm3uOhcehA==}
@@ -2467,7 +2468,6 @@ packages:
       '@types/node': 14.17.15
       '@types/yargs': 16.0.4
       chalk: 4.1.2
-    dev: true
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2734,8 +2734,8 @@ packages:
       pretty-format: 26.6.2
     dev: false
 
-  /@testing-library/dom/8.3.0:
-    resolution: {integrity: sha512-4Eu+ExT7UhesxcRjumD7kAXv/8xhl5j2wgp2FROReXDg+Y+ArzPpU+GEN0+0m0SYlOu9hBtvNuBrzTKqyEB1Sw==}
+  /@testing-library/dom/8.5.0:
+    resolution: {integrity: sha512-O0fmHFaPlqaYCpa/cBL0cvroMridb9vZsMLacgIqrlxj+fd+bGF8UfAgwsLCHRF84KLBafWlm9CuOvxeNTlodw==}
     engines: {node: '>=12'}
     dependencies:
       '@babel/code-frame': 7.14.5
@@ -2745,7 +2745,7 @@ packages:
       chalk: 4.1.2
       dom-accessibility-api: 0.5.7
       lz-string: 1.4.4
-      pretty-format: 27.1.0
+      pretty-format: 27.1.1
     dev: false
 
   /@testing-library/react/11.2.7_react-dom@17.0.2+react@17.0.2:
@@ -2761,14 +2761,14 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /@testing-library/user-event/13.2.1_@testing-library+dom@8.3.0:
+  /@testing-library/user-event/13.2.1_@testing-library+dom@8.5.0:
     resolution: {integrity: sha512-cczlgVl+krjOb3j1625usarNEibI0IFRJrSWX9UsJ1HKYFgCQv9Nb7QAipUDXl3Xdz8NDTsiS78eAkPSxlzTlw==}
     engines: {node: '>=10', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
       '@babel/runtime': 7.15.4
-      '@testing-library/dom': 8.3.0
+      '@testing-library/dom': 8.5.0
     dev: false
 
   /@tootallnate/once/1.1.2:
@@ -10767,6 +10767,7 @@ packages:
       ansi-regex: 5.0.0
       ansi-styles: 5.2.0
       react-is: 17.0.2
+    dev: true
 
   /pretty-format/27.1.1:
     resolution: {integrity: sha512-zdBi/xlstKJL42UH7goQti5Hip/B415w1Mfj+WWWYMBylAYtKESnXGUtVVcMVid9ReVjypCotUV6CEevYPHv2g==}
@@ -10776,7 +10777,6 @@ packages:
       ansi-regex: 5.0.0
       ansi-styles: 5.2.0
       react-is: 17.0.2
-    dev: true
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
