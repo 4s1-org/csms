@@ -38,7 +38,7 @@
     "@4s1/common-lib": "workspace:*",
     "@4s1/csms-lib": "workspace:*",
     "@4s1/ocpp-lib": "workspace:*",
-    "configstore": "5.0.1",
+    "configstore": "6.0.0",
     "prompts": "2.4.1",
     "ws": "8.2.2"
   },
