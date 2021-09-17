@@ -1,11 +1,10 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-    "editor.defaultFormatter": "vscode.configuration-editing",
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -17,6 +16,6 @@
     },
     "javascript.preferences.importModuleSpecifier": "relative",
     "typescript.preferences.importModuleSpecifier": "relative",
-    "window.title": "OCPP Library",
+    "window.title": "OCPP Library"
   }
 }
