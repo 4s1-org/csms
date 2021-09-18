@@ -1,7 +1,7 @@
 import { CsmsError } from '../utils/csms-error'
 import { RpcActionEnum } from '../generated/rpc-action.enum'
 import { jsonSchemas } from '../generated/json-schema-imports'
-import Ajv from 'ajv'
+import { Ajv } from 'ajv'
 import addFormats from 'ajv-formats'
 import v6 from 'ajv/lib/refs/json-schema-draft-06.json'
 import { classToPlain } from 'class-transformer'
