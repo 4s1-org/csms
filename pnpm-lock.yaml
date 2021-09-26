@@ -41,7 +41,7 @@ importers:
       '@types/jest': 27.0.2
       '@types/node': 14.17.19
       '@types/prompts': 2.0.14
-      '@types/ws': 7.4.7
+      '@types/ws': 8.2.0
       configstore: 5.0.1
       dotenv: 8.6.0
       eslint: 7.32.0
@@ -67,7 +67,7 @@ importers:
       '@types/jest': 27.0.2
       '@types/node': 14.17.19
       '@types/prompts': 2.0.14
-      '@types/ws': 7.4.7
+      '@types/ws': 8.2.0
       dotenv: 8.6.0
       eslint: 7.32.0
       jest: 27.2.2_ts-node@10.2.1
@@ -166,7 +166,7 @@ importers:
       '@4s1/ocpp-lib': workspace:*
       '@types/jest': 27.0.2
       '@types/node': 14.17.19
-      '@types/ws': 7.4.7
+      '@types/ws': 8.2.0
       dotenv: 8.6.0
       eslint: 7.32.0
       jest: 27.2.2
@@ -187,7 +187,7 @@ importers:
       '@4s1/eslint-config': 3.1.2_13388322ed5f5557f11897bd277b61cc
       '@types/jest': 27.0.2
       '@types/node': 14.17.19
-      '@types/ws': 7.4.7
+      '@types/ws': 8.2.0
       dotenv: 8.6.0
       eslint: 7.32.0
       jest: 27.2.2_ts-node@10.2.1
@@ -3016,10 +3016,10 @@ packages:
       source-map: 0.6.1
     dev: false
 
-  /@types/ws/7.4.7:
-    resolution: {integrity: sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==}
+  /@types/ws/8.2.0:
+    resolution: {integrity: sha512-cyeefcUCgJlEk+hk2h3N+MqKKsPViQgF5boi9TTHSK+PoR9KWBb/C5ccPcDyAqgsbAYHTwulch725DV84+pSpg==}
     dependencies:
-      '@types/node': 14.17.14
+      '@types/node': 14.17.19
     dev: true
 
   /@types/yargs-parser/20.2.1:
