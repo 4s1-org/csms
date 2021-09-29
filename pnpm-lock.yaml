@@ -2755,7 +2755,7 @@ packages:
       chalk: 4.1.2
       dom-accessibility-api: 0.5.7
       lz-string: 1.4.4
-      pretty-format: 27.2.3
+      pretty-format: 27.2.4
     dev: false
 
   /@testing-library/react/11.2.7_react-dom@17.0.2+react@17.0.2:
