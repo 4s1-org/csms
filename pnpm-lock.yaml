@@ -111,7 +111,7 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.15
-      '@testing-library/dom': 8.7.1
+      '@testing-library/dom': 8.7.2
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
       '@types/node': 14.17.20
@@ -136,9 +136,9 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.15_f515edce028694561ceb456e3dba224c
-      '@testing-library/dom': 8.7.1
+      '@testing-library/dom': 8.7.2
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.7.1
+      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.7.2
       '@types/react': 17.0.27
       '@types/react-dom': 17.0.9
       bootstrap: 4.6.0
@@ -234,7 +234,7 @@ importers:
       '@4s1/css-lib': workspace:*
       '@4s1/eslint-config': ^3.1.2
       '@4s1/ocpp-lib': workspace:*
-      '@testing-library/dom': 8.7.1
+      '@testing-library/dom': 8.7.2
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.2.1
       '@types/node': 14.17.20
@@ -252,9 +252,9 @@ importers:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
-      '@testing-library/dom': 8.7.1
+      '@testing-library/dom': 8.7.2
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.7.1
+      '@testing-library/user-event': 13.2.1_@testing-library+dom@8.7.2
       '@types/react': 17.0.27
       '@types/react-dom': 17.0.9
       bootstrap: 4.6.0
@@ -2733,8 +2733,8 @@ packages:
       pretty-format: 26.6.2
     dev: false
 
-  /@testing-library/dom/8.7.1:
-    resolution: {integrity: sha512-nMqxP8qPHgYAiIPMVb6zko5DInPJ/LdILgrkWB5HBJhBCIU5avso8pU9IafnXVGLRq+LDtbvo0LuVbjEo27BgQ==}
+  /@testing-library/dom/8.7.2:
+    resolution: {integrity: sha512-2zN0Zv9dMnaMAd4c/1E1ZChu4QrICyvWtkUvHFQBPhS1oG3VYGcM7SLGLYdda7187ILRXzIUOvOsbXQm4EASjA==}
     engines: {node: '>=12'}
     dependencies:
       '@babel/code-frame': 7.14.5
@@ -2760,14 +2760,14 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /@testing-library/user-event/13.2.1_@testing-library+dom@8.7.1:
+  /@testing-library/user-event/13.2.1_@testing-library+dom@8.7.2:
     resolution: {integrity: sha512-cczlgVl+krjOb3j1625usarNEibI0IFRJrSWX9UsJ1HKYFgCQv9Nb7QAipUDXl3Xdz8NDTsiS78eAkPSxlzTlw==}
     engines: {node: '>=10', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
       '@babel/runtime': 7.15.4
-      '@testing-library/dom': 8.7.1
+      '@testing-library/dom': 8.7.2
     dev: false
 
   /@tootallnate/once/1.1.2:
