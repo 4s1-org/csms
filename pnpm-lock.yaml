@@ -111,7 +111,7 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.15
-      '@testing-library/dom': 8.7.2
+      '@testing-library/dom': 8.9.0
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.3.0
       '@types/node': 14.17.22
@@ -136,9 +136,9 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.15_f515edce028694561ceb456e3dba224c
-      '@testing-library/dom': 8.7.2
+      '@testing-library/dom': 8.9.0
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.3.0_@testing-library+dom@8.7.2
+      '@testing-library/user-event': 13.3.0_@testing-library+dom@8.9.0
       '@types/react': 17.0.29
       '@types/react-dom': 17.0.9
       bootstrap: 4.6.0
@@ -234,7 +234,7 @@ importers:
       '@4s1/css-lib': workspace:*
       '@4s1/eslint-config': ^3.1.2
       '@4s1/ocpp-lib': workspace:*
-      '@testing-library/dom': 8.7.2
+      '@testing-library/dom': 8.9.0
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.3.0
       '@types/node': 14.17.22
@@ -252,9 +252,9 @@ importers:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
-      '@testing-library/dom': 8.7.2
+      '@testing-library/dom': 8.9.0
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.3.0_@testing-library+dom@8.7.2
+      '@testing-library/user-event': 13.3.0_@testing-library+dom@8.9.0
       '@types/react': 17.0.29
       '@types/react-dom': 17.0.9
       bootstrap: 4.6.0
@@ -2468,6 +2468,7 @@ packages:
       '@types/node': 14.17.19
       '@types/yargs': 16.0.4
       chalk: 4.1.2
+    dev: true
 
   /@jest/types/27.2.5:
     resolution: {integrity: sha512-nmuM4VuDtCZcY+eTpw+0nvstwReMsjPoj7ZR80/BbixulhLaiX+fbv8oeLW8WZlJMcsGQsTmMKT/iTZu1Uy/lQ==}
@@ -2478,7 +2479,6 @@ packages:
       '@types/node': 14.17.21
       '@types/yargs': 16.0.4
       chalk: 4.1.2
-    dev: true
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2745,8 +2745,8 @@ packages:
       pretty-format: 26.6.2
     dev: false
 
-  /@testing-library/dom/8.7.2:
-    resolution: {integrity: sha512-2zN0Zv9dMnaMAd4c/1E1ZChu4QrICyvWtkUvHFQBPhS1oG3VYGcM7SLGLYdda7187ILRXzIUOvOsbXQm4EASjA==}
+  /@testing-library/dom/8.9.0:
+    resolution: {integrity: sha512-fhmAYtGpFqzKdPq5aLNn/T396qfhYkttHT/5RytdDNSCzg9K/0F/WXF5iDsNBK1M3ZIQbPy7Y0qm4Kup5bqT/w==}
     engines: {node: '>=12'}
     dependencies:
       '@babel/code-frame': 7.14.5
@@ -2756,7 +2756,7 @@ packages:
       chalk: 4.1.2
       dom-accessibility-api: 0.5.7
       lz-string: 1.4.4
-      pretty-format: 27.2.4
+      pretty-format: 27.2.5
     dev: false
 
   /@testing-library/react/11.2.7_react-dom@17.0.2+react@17.0.2:
@@ -2772,14 +2772,14 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /@testing-library/user-event/13.3.0_@testing-library+dom@8.7.2:
+  /@testing-library/user-event/13.3.0_@testing-library+dom@8.9.0:
     resolution: {integrity: sha512-f8AJ8ybUna88Lmx3l5fuPMhzyyrcopQk/vgVDHVKOnOf2kkjfVSb0Px77iduHmh6uFUcXsD/z6qp4G13rObVrw==}
     engines: {node: '>=10', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
       '@babel/runtime': 7.15.4
-      '@testing-library/dom': 8.7.2
+      '@testing-library/dom': 8.9.0
     dev: false
 
   /@tootallnate/once/1.1.2:
@@ -2901,6 +2901,7 @@ packages:
 
   /@types/node/14.17.19:
     resolution: {integrity: sha512-jjYI6NkyfXykucU6ELEoT64QyKOdvaA6enOqKtP4xUsGY0X0ZUZz29fUmrTRo+7v7c6TgDu82q3GHHaCEkqZwA==}
+    dev: true
 
   /@types/node/14.17.20:
     resolution: {integrity: sha512-gI5Sl30tmhXsqkNvopFydP7ASc4c2cLfGNQrVKN3X90ADFWFsPEsotm/8JHSUJQKTHbwowAHtcJPeyVhtKv0TQ==}
@@ -10697,16 +10698,6 @@ packages:
       react-is: 17.0.2
     dev: true
 
-  /pretty-format/27.2.4:
-    resolution: {integrity: sha512-NUjw22WJHldzxyps2YjLZkUj6q1HvjqFezkB9Y2cklN8NtVZN/kZEXGZdFw4uny3oENzV5EEMESrkI0YDUH8vg==}
-    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
-    dependencies:
-      '@jest/types': 27.2.4
-      ansi-regex: 5.0.1
-      ansi-styles: 5.2.0
-      react-is: 17.0.2
-    dev: false
-
   /pretty-format/27.2.5:
     resolution: {integrity: sha512-+nYn2z9GgicO9JiqmY25Xtq8SYfZ/5VCpEU3pppHHNAhd1y+ZXxmNPd1evmNcAd6Hz4iBV2kf0UpGth5A/VJ7g==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
@@ -10715,7 +10706,6 @@ packages:
       ansi-regex: 5.0.1
       ansi-styles: 5.2.0
       react-is: 17.0.2
-    dev: true
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
