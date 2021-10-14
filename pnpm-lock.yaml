@@ -47,7 +47,7 @@ importers:
       eslint: 7.32.0
       jest: 27.2.5
       nodemon: 2.0.13
-      pino-pretty: 7.0.1
+      pino-pretty: 7.1.0
       prettier: 2.4.1
       prompts: 2.4.2
       ts-jest: 27.0.5
@@ -72,7 +72,7 @@ importers:
       eslint: 7.32.0
       jest: 27.2.5_ts-node@10.3.0
       nodemon: 2.0.13
-      pino-pretty: 7.0.1
+      pino-pretty: 7.1.0
       prettier: 2.4.1
       ts-jest: 27.0.5_fe15ac987db2e7d4ad38346689ae2fc5
       ts-node: 10.3.0_38f4ad6f7f4bca19ff9b6b25a53bce77
@@ -171,7 +171,7 @@ importers:
       eslint: 7.32.0
       jest: 27.2.5
       nodemon: 2.0.13
-      pino-pretty: 7.0.1
+      pino-pretty: 7.1.0
       prettier: 2.4.1
       ts-jest: 27.0.5
       ts-node: 10.3.0
@@ -181,7 +181,7 @@ importers:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
-      pino-pretty: 7.0.1
+      pino-pretty: 7.1.0
       ws: 8.2.3
     devDependencies:
       '@4s1/eslint-config': 3.1.2_5dc17954397827e5be42442a8923306d
@@ -207,7 +207,7 @@ importers:
       eslint: 7.32.0
       jest: 27.2.5
       nodemon: 2.0.13
-      pino-pretty: 7.0.1
+      pino-pretty: 7.1.0
       prettier: 2.4.1
       ts-jest: 27.0.5
       ts-node: 10.3.0
@@ -222,7 +222,7 @@ importers:
       eslint: 7.32.0
       jest: 27.2.5_ts-node@10.3.0
       nodemon: 2.0.13
-      pino-pretty: 7.0.1
+      pino-pretty: 7.1.0
       prettier: 2.4.1
       ts-jest: 27.0.5_fe15ac987db2e7d4ad38346689ae2fc5
       ts-node: 10.3.0_38f4ad6f7f4bca19ff9b6b25a53bce77
@@ -4664,8 +4664,8 @@ packages:
   /colorette/1.3.0:
     resolution: {integrity: sha512-ecORCqbSFP7Wm8Y6lyqMJjexBQqXSF7SSeaTyGGphogUjBlFP9m9o08wy86HL2uB7fMTxtOUzLMk7ogKcxMg1w==}
 
-  /colorette/2.0.0:
-    resolution: {integrity: sha512-d9bi+jjWiz/9YkdIJjnoubyYXgWZ7Z0kA/KoFPBNSiQFnKtiqFZSwg7L6c+U+ju8yuy/M1AMkIIkdHcQnqWe6A==}
+  /colorette/2.0.16:
+    resolution: {integrity: sha512-hUewv7oMjCp+wkBv5Rm0v87eJhq4woh5rSR+42YSQJKecCqgIqNkZ6lAlQms/BwHPJA5NKMRlpxPRv0n8HQW6g==}
 
   /combined-stream/1.0.8:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
@@ -5198,8 +5198,8 @@ packages:
       whatwg-mimetype: 2.3.0
       whatwg-url: 8.7.0
 
-  /dateformat/4.5.1:
-    resolution: {integrity: sha512-OD0TZ+B7yP7ZgpJf5K2DIbj3FZvFvxgFUuaqA/V5zTjAtAAXZ1E8bktHxmAGs4x5b7PflqA9LeQ84Og7wYtF7Q==}
+  /dateformat/4.6.3:
+    resolution: {integrity: sha512-2P0p0pFGzHS5EMnhdxQi7aJN+iMheud0UhG4dlE1DLAlvL8JHjJJTX/CSm4JXwV0Ka5nGk3zC5mcb5bUQUxxMA==}
 
   /dayjs/1.10.7:
     resolution: {integrity: sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==}
@@ -5542,6 +5542,14 @@ packages:
       readable-stream: 2.3.7
       stream-shift: 1.0.1
     dev: false
+
+  /duplexify/4.1.2:
+    resolution: {integrity: sha512-fz3OjcNCHmRP12MJoZMPglx8m4rrFP8rovnk4vT8Fs+aonZoCwGg10dSsQsfP/E62eZcPTMSMP6686fu9Qlqtw==}
+    dependencies:
+      end-of-stream: 1.4.4
+      inherits: 2.0.4
+      readable-stream: 3.6.0
+      stream-shift: 1.0.1
 
   /ee-first/1.1.1:
     resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=}
@@ -9893,21 +9901,22 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /pino-abstract-transport/0.3.0:
-    resolution: {integrity: sha512-jsd59/ruahIoIU4xAdFtvk3lS9rwsDNJ7Vi0K34ATh1PEOD796SPqvydMaRk296CeTROyBG0SNCwsshN6QhxVg==}
+  /pino-abstract-transport/0.4.0:
+    resolution: {integrity: sha512-Znl3f1ntZnDG+NpCyJyJDS+lkrlRSbgQBkV3eqNAvet/QHql6rhKLc4DuYRlwfc3fvV611O9NXPm5pbT9AJ50g==}
     dependencies:
+      duplexify: 4.1.2
       split2: 3.2.2
 
-  /pino-pretty/7.0.1:
-    resolution: {integrity: sha512-GMcNSmkZkwZseMOkaQWgmkGBPPhSuVwDZMf85i3sbkD/rZldoYyLSyU22YcXvYoLc3usX25GLA1VN6zvzQx7MQ==}
+  /pino-pretty/7.1.0:
+    resolution: {integrity: sha512-khuvWuuf2ABRp388AlPOv3sOzj+zEgnj9EeFOXw1VUqmSuPK1JqKfdvITk6prhxddVgnjQtbi5x63QeIcWencw==}
     hasBin: true
     dependencies:
       args: 5.0.1
-      colorette: 2.0.0
-      dateformat: 4.5.1
+      colorette: 2.0.16
+      dateformat: 4.6.3
       fast-safe-stringify: 2.1.0
       joycon: 3.0.1
-      pino-abstract-transport: 0.3.0
+      pino-abstract-transport: 0.4.0
       pump: 3.0.0
       readable-stream: 3.6.0
       rfdc: 1.3.0
@@ -12026,7 +12035,6 @@ packages:
 
   /stream-shift/1.0.1:
     resolution: {integrity: sha512-AiisoFqQ0vbGcZgQPY1cdP2I76glaVA/RauYR4G4thNFgkTqr90yXTo4LYX60Jl+sIlPNHHdGSwo01AvbKUSVQ==}
-    dev: false
 
   /strict-uri-encode/1.1.0:
     resolution: {integrity: sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM=}
