@@ -110,7 +110,7 @@ importers:
       '@4s1/eslint-config': ^3.1.2
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
-      '@fortawesome/react-fontawesome': 0.1.15
+      '@fortawesome/react-fontawesome': 0.1.16
       '@testing-library/dom': 8.9.1
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.4.1
@@ -135,7 +135,7 @@ importers:
       '@4s1/csms-lib': link:../csms-lib
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
-      '@fortawesome/react-fontawesome': 0.1.15_f515edce028694561ceb456e3dba224c
+      '@fortawesome/react-fontawesome': 0.1.16_f515edce028694561ceb456e3dba224c
       '@testing-library/dom': 8.9.1
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
       '@testing-library/user-event': 13.4.1_@testing-library+dom@8.9.1
@@ -2007,10 +2007,10 @@ packages:
       '@fortawesome/fontawesome-common-types': 0.2.36
     dev: false
 
-  /@fortawesome/react-fontawesome/0.1.15_f515edce028694561ceb456e3dba224c:
-    resolution: {integrity: sha512-/HFHdcoLESxxMkqZAcZ6RXDJ69pVApwdwRos/B2kiMWxDSAX2dFK8Er2/+rG+RsrzWB/dsAyjefLmemgmfE18g==}
+  /@fortawesome/react-fontawesome/0.1.16_f515edce028694561ceb456e3dba224c:
+    resolution: {integrity: sha512-aLmzDwC9rEOAJv2UJdMns89VZR5Ry4IHu5dQQh24Z/lWKEm44lfQr1UNalZlkUaQN8d155tNh+CS7ntntj1VMA==}
     peerDependencies:
-      '@fortawesome/fontawesome-svg-core': ^1.2.32
+      '@fortawesome/fontawesome-svg-core': ~1 || >=1.3.0-beta1
       react: '>=16.x'
     dependencies:
       '@fortawesome/fontawesome-svg-core': 1.2.36
