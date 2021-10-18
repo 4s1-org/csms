@@ -113,7 +113,7 @@ importers:
       '@fortawesome/react-fontawesome': 0.1.16
       '@testing-library/dom': 8.9.1
       '@testing-library/react': 11.2.7
-      '@testing-library/user-event': 13.4.1
+      '@testing-library/user-event': 13.4.2
       '@types/node': 14.17.27
       '@types/react': 17.0.30
       '@types/react-dom': 17.0.9
@@ -138,7 +138,7 @@ importers:
       '@fortawesome/react-fontawesome': 0.1.16_f515edce028694561ceb456e3dba224c
       '@testing-library/dom': 8.9.1
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.4.1_@testing-library+dom@8.9.1
+      '@testing-library/user-event': 13.4.2_@testing-library+dom@8.9.1
       '@types/react': 17.0.30
       '@types/react-dom': 17.0.9
       bootstrap: 4.6.0
@@ -236,7 +236,7 @@ importers:
       '@4s1/ocpp-lib': workspace:*
       '@testing-library/dom': 8.9.1
       '@testing-library/react': 11.2.7
-      '@testing-library/user-event': 13.4.1
+      '@testing-library/user-event': 13.4.2
       '@types/node': 14.17.27
       '@types/react': 17.0.30
       '@types/react-dom': 17.0.9
@@ -254,7 +254,7 @@ importers:
       '@4s1/ocpp-lib': link:../ocpp-lib
       '@testing-library/dom': 8.9.1
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.4.1_@testing-library+dom@8.9.1
+      '@testing-library/user-event': 13.4.2_@testing-library+dom@8.9.1
       '@types/react': 17.0.30
       '@types/react-dom': 17.0.9
       bootstrap: 4.6.0
@@ -2761,8 +2761,8 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /@testing-library/user-event/13.4.1_@testing-library+dom@8.9.1:
-    resolution: {integrity: sha512-WcnVwi96MmFsHLMNvBz03aPMVDU3UOgucXcn85fNXKKdtd7CHi2NAgE3hASt157yTB9krym0ikFVKbqYghKRCg==}
+  /@testing-library/user-event/13.4.2_@testing-library+dom@8.9.1:
+    resolution: {integrity: sha512-IMrlaJVr2TjHggpyBmIsXBgbnphr+G6tESrWzWc6Sy2EsVy4wLskKGMKgZAozlWQa6p5FiqgSr0RpqISsTlNqQ==}
     engines: {node: '>=10', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
