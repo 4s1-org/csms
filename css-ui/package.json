@@ -40,7 +40,7 @@
     "@4s1/common-lib": "workspace:*",
     "@4s1/css-lib": "workspace:*",
     "@4s1/ocpp-lib": "workspace:*",
-    "@testing-library/dom": "8.9.1",
+    "@testing-library/dom": "8.10.1",
     "@testing-library/react": "11.2.7",
     "@testing-library/user-event": "13.5.0",
     "@types/react": "17.0.30",
