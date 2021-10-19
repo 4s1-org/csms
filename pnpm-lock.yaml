@@ -7,7 +7,7 @@ importers:
       '@4s1/eslint-config': ^3.2.0
       '@types/jest': 27.0.2
       '@types/node': 14.17.27
-      '@types/pino': 6.3.11
+      '@types/pino': 6.3.12
       base64url: 3.0.1
       eslint: 8.0.1
       jest: 27.3.1
@@ -23,7 +23,7 @@ importers:
       '@4s1/eslint-config': 3.2.0_fa8816e733f635ed05aee18bb82c3c19
       '@types/jest': 27.0.2
       '@types/node': 14.17.27
-      '@types/pino': 6.3.11
+      '@types/pino': 6.3.12
       eslint: 8.0.1
       jest: 27.3.1_ts-node@10.3.0
       prettier: 2.4.1
@@ -2933,22 +2933,22 @@ packages:
   /@types/pino-pretty/4.7.1:
     resolution: {integrity: sha512-l1ntNXdpVWsnPYUk5HyO5Lxfr38zLCgxVfEn/9Zhhm+nGF04/BiIou/m8XPwvoVZLV+livUo79VdHXMJPfUYxA==}
     dependencies:
-      '@types/pino': 6.3.11
+      '@types/pino': 6.3.12
     dev: true
 
   /@types/pino-std-serializers/2.4.1:
     resolution: {integrity: sha512-17XcksO47M24IVTVKPeAByWUd3Oez7EbIjXpSbzMPhXVzgjGtrOa49gKBwxH9hb8dKv58OelsWQ+A1G1l9S3wQ==}
     dependencies:
-      '@types/node': 14.17.14
+      '@types/node': 14.17.27
     dev: true
 
-  /@types/pino/6.3.11:
-    resolution: {integrity: sha512-S7+fLONqSpHeW9d7TApUqO6VN47KYgOXhCNKwGBVLHObq8HhaAYlVqUNdfnvoXjCMiwE5xcPm/5R2ZUh8bgaXQ==}
+  /@types/pino/6.3.12:
+    resolution: {integrity: sha512-dsLRTq8/4UtVSpJgl9aeqHvbh6pzdmjYD3C092SYgLD2TyoCqHpTJk6vp8DvCTGGc7iowZ2MoiYiVUUCcu7muw==}
     dependencies:
-      '@types/node': 14.17.14
+      '@types/node': 14.17.27
       '@types/pino-pretty': 4.7.1
       '@types/pino-std-serializers': 2.4.1
-      sonic-boom: 2.2.3
+      sonic-boom: 2.3.0
     dev: true
 
   /@types/prettier/2.3.2:
@@ -12248,7 +12248,6 @@ packages:
     resolution: {integrity: sha512-lEPaw654/4/rCJHz/TNzV4GIthqCq4inO+O3aFhbdOvR1bE+2//sVkcS+xlqPdb8gdjQCEE0hE9BuvnVixbnWQ==}
     dependencies:
       atomic-sleep: 1.0.0
-    dev: false
 
   /sort-keys/1.1.2:
     resolution: {integrity: sha1-RBttTTRnmPG05J6JIK37oOVD+a0=}
