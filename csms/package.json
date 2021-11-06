@@ -49,7 +49,7 @@
     "@types/prompts": "2.0.14",
     "@types/ws": "8.2.0",
     "dotenv": "8.6.0",
-    "eslint": "8.1.0",
+    "eslint": "8.2.0",
     "jest": "27.3.1",
     "nodemon": "2.0.14",
     "pino-pretty": "7.1.0",
