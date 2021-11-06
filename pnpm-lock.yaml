@@ -11,14 +11,14 @@ importers:
       base64url: 3.0.1
       eslint: 8.2.0
       jest: 27.3.1
-      pino: 7.0.5
+      pino: 7.1.0
       prettier: 2.4.1
       ts-jest: 27.0.7
       ts-node: 10.4.0
       typescript: 4.4.4
     dependencies:
       base64url: 3.0.1
-      pino: 7.0.5
+      pino: 7.1.0
     devDependencies:
       '@4s1/eslint-config': 3.2.0_5517f941fa4f067c95d3db61670563f0
       '@types/jest': 27.0.2
@@ -9011,10 +9011,6 @@ packages:
   /json-stable-stringify-without-jsonify/1.0.1:
     resolution: {integrity: sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=}
 
-  /json-stringify-safe/5.0.1:
-    resolution: {integrity: sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=}
-    dev: false
-
   /json3/3.3.3:
     resolution: {integrity: sha512-c7/8mbUsKigAbLkD5B010BK4D9LZm7A1pNItkEwiUZRpIN66exu/e7YQWysGun+TRKaJp8MhemM+VkfWv42aCA==}
     dev: false
@@ -10273,6 +10269,13 @@ packages:
       duplexify: 4.1.2
       split2: 3.2.2
 
+  /pino-abstract-transport/0.5.0:
+    resolution: {integrity: sha512-+KAgmVeqXYbTtU2FScx1XS3kNyfZ5TrXY07V96QnUSFqo2gAqlvmaxH67Lj7SWazqsMabf+58ctdTcBgnOLUOQ==}
+    dependencies:
+      duplexify: 4.1.2
+      split2: 4.1.0
+    dev: false
+
   /pino-pretty/7.1.0:
     resolution: {integrity: sha512-khuvWuuf2ABRp388AlPOv3sOzj+zEgnj9EeFOXw1VUqmSuPK1JqKfdvITk6prhxddVgnjQtbi5x63QeIcWencw==}
     hasBin: true
@@ -10294,20 +10297,20 @@ packages:
     resolution: {integrity: sha512-cK0pekc1Kjy5w9V2/n+8MkZwusa6EyyxfeQCB799CQRhRt/CqYKiWs5adeu8Shve2ZNffvfC/7J64A2PJo1W/Q==}
     dev: false
 
-  /pino/7.0.5:
-    resolution: {integrity: sha512-ePain4FiooTqiqg0eLQ/KBfRepKPZBggmF1caUrLX+Ku1erPAiIZL3p2lycM3UhorVYbFt4CuDFAHP/d80hCzg==}
+  /pino/7.1.0:
+    resolution: {integrity: sha512-EdNpwNxlNK2gt48V4P8uvGmfTH7yW+in4MAMGgU69ovtNQqBj+kA3xGjgPQHMXo5vr4rq+vWuBgNiz/LmfK++A==}
     hasBin: true
     dependencies:
       fast-redact: 3.0.2
       fastify-warning: 0.2.0
       get-caller-file: 2.0.5
-      json-stringify-safe: 5.0.1
       on-exit-leak-free: 0.2.0
-      pino-abstract-transport: 0.4.0
+      pino-abstract-transport: 0.5.0
       pino-std-serializers: 4.0.0
       quick-format-unescaped: 4.0.4
+      safe-stable-stringify: 2.2.0
       sonic-boom: 2.3.0
-      thread-stream: 0.11.1
+      thread-stream: 0.12.1
     dev: false
 
   /pirates/4.0.1:
@@ -11887,6 +11890,11 @@ packages:
       ret: 0.1.15
     dev: false
 
+  /safe-stable-stringify/2.2.0:
+    resolution: {integrity: sha512-C6AuMdYPuPV/P1leplHNu0lgc2LAElq/g3TdoksDCIVtBhr78o/CH03bt/9SKqugFbKU9CUjsNlCu0fjtQzQUw==}
+    engines: {node: '>=10'}
+    dev: false
+
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
@@ -12347,6 +12355,11 @@ packages:
     dependencies:
       readable-stream: 3.6.0
 
+  /split2/4.1.0:
+    resolution: {integrity: sha512-VBiJxFkxiXRlUIeyMQi8s4hgvKCSjtknJv/LVYbrgALPwf5zSKmEwV9Lst25AkvMDnvxODugjdl6KZgwKM1WYQ==}
+    engines: {node: '>= 10.x'}
+    dev: false
+
   /sprintf-js/1.0.3:
     resolution: {integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=}
 
@@ -12750,8 +12763,8 @@ packages:
   /text-table/0.2.0:
     resolution: {integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=}
 
-  /thread-stream/0.11.1:
-    resolution: {integrity: sha512-YbZEIo+JcScRekY1bl7O717RZGA/1eT7t4n9uyKf5Fu7TYpZKuml185bQdV3l2pgoq0wCobkQySWxdNEORkghg==}
+  /thread-stream/0.12.1:
+    resolution: {integrity: sha512-eFgcefesjNohVbqtNG/rh54HekZeId2xbuVXZpP5PBXTe5S+WIBfAFTbh2KRa4o/4pocgWTOTfnS0MaGOEiFTA==}
     dev: false
 
   /throat/5.0.0:
