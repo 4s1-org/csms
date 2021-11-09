@@ -46,7 +46,7 @@ importers:
       dotenv: 8.6.0
       eslint: 8.2.0
       jest: 27.3.1
-      nodemon: 2.0.14
+      nodemon: 2.0.15
       pino-pretty: 7.2.0
       prettier: 2.4.1
       prompts: 2.4.2
@@ -71,7 +71,7 @@ importers:
       dotenv: 8.6.0
       eslint: 8.2.0
       jest: 27.3.1_ts-node@10.4.0
-      nodemon: 2.0.14
+      nodemon: 2.0.15
       pino-pretty: 7.2.0
       prettier: 2.4.1
       ts-jest: 27.0.7_2c4ca6574207836d1023f54689cc81ac
@@ -170,7 +170,7 @@ importers:
       dotenv: 8.6.0
       eslint: 8.2.0
       jest: 27.3.1
-      nodemon: 2.0.14
+      nodemon: 2.0.15
       pino-pretty: 7.2.0
       prettier: 2.4.1
       ts-jest: 27.0.7
@@ -191,7 +191,7 @@ importers:
       dotenv: 8.6.0
       eslint: 8.2.0
       jest: 27.3.1_ts-node@10.4.0
-      nodemon: 2.0.14
+      nodemon: 2.0.15
       prettier: 2.4.1
       ts-jest: 27.0.7_2c4ca6574207836d1023f54689cc81ac
       ts-node: 10.4.0_6a91c474ad69125424415cd74f2719cf
@@ -206,7 +206,7 @@ importers:
       '@types/node': 14.17.33
       eslint: 8.2.0
       jest: 27.3.1
-      nodemon: 2.0.14
+      nodemon: 2.0.15
       pino-pretty: 7.2.0
       prettier: 2.4.1
       ts-jest: 27.0.7
@@ -221,7 +221,7 @@ importers:
       '@types/node': 14.17.33
       eslint: 8.2.0
       jest: 27.3.1_ts-node@10.4.0
-      nodemon: 2.0.14
+      nodemon: 2.0.15
       pino-pretty: 7.2.0
       prettier: 2.4.1
       ts-jest: 27.0.7_2c4ca6574207836d1023f54689cc81ac
@@ -9724,8 +9724,8 @@ packages:
   /node-releases/1.1.75:
     resolution: {integrity: sha512-Qe5OUajvqrqDSy6wrWFmMwfJ0jVgwiw4T3KqmbTcZ62qW0gQkheXYhcFM1+lOVcGUoRxcEcfyvFMAnDgaF1VWw==}
 
-  /nodemon/2.0.14:
-    resolution: {integrity: sha512-frcpDx+PviKEQRSYzwhckuO2zoHcBYLHI754RE9z5h1RGtrngerc04mLpQQCPWBkH/2ObrX7We9YiwVSYZpFJQ==}
+  /nodemon/2.0.15:
+    resolution: {integrity: sha512-gdHMNx47Gw7b3kWxJV64NI+Q5nfl0y5DgDbiVtShiwa7Z0IZ07Ll4RLFo6AjrhzMtoEZn5PDE3/c2AbVsiCkpA==}
     engines: {node: '>=8.10.0'}
     hasBin: true
     requiresBuild: true
@@ -9738,7 +9738,7 @@ packages:
       semver: 5.7.1
       supports-color: 5.5.0
       touch: 3.1.0
-      undefsafe: 2.0.3
+      undefsafe: 2.0.5
       update-notifier: 5.1.0
     dev: true
 
@@ -13043,10 +13043,8 @@ packages:
       has-symbols: 1.0.2
       which-boxed-primitive: 1.0.2
 
-  /undefsafe/2.0.3:
-    resolution: {integrity: sha512-nrXZwwXrD/T/JXeygJqdCO6NZZ1L66HrxM/Z7mIq2oPanoN0F1nLx3lwJMu6AwJY69hdixaFQOuoYsMjE5/C2A==}
-    dependencies:
-      debug: 2.6.9
+  /undefsafe/2.0.5:
+    resolution: {integrity: sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA==}
     dev: true
 
   /unicode-canonical-property-names-ecmascript/1.0.4:
@@ -13744,7 +13742,7 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       string-width: 4.2.2
-      strip-ansi: 6.0.0
+      strip-ansi: 6.0.1
     dev: true
 
   /wrappy/1.0.2:
