@@ -111,7 +111,7 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.16
-      '@testing-library/dom': 8.11.0
+      '@testing-library/dom': 8.11.1
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.5.0
       '@types/node': 14.17.33
@@ -136,9 +136,9 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.16_f515edce028694561ceb456e3dba224c
-      '@testing-library/dom': 8.11.0
+      '@testing-library/dom': 8.11.1
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.0
+      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.1
       '@types/react': 17.0.34
       '@types/react-dom': 17.0.11
       bootstrap: 4.6.1
@@ -234,7 +234,7 @@ importers:
       '@4s1/css-lib': workspace:*
       '@4s1/eslint-config': ^3.2.0
       '@4s1/ocpp-lib': workspace:*
-      '@testing-library/dom': 8.11.0
+      '@testing-library/dom': 8.11.1
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.5.0
       '@types/node': 14.17.33
@@ -252,9 +252,9 @@ importers:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
-      '@testing-library/dom': 8.11.0
+      '@testing-library/dom': 8.11.1
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.0
+      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.1
       '@types/react': 17.0.34
       '@types/react-dom': 17.0.11
       bootstrap: 4.6.1
@@ -2765,8 +2765,8 @@ packages:
       pretty-format: 26.6.2
     dev: false
 
-  /@testing-library/dom/8.11.0:
-    resolution: {integrity: sha512-8Ay4UDiMlB5YWy+ZvCeRyFFofs53ebxrWnOFvCoM1HpMAX4cHyuSrCuIM9l2lVuUWUt+Gr3loz/nCwdrnG6ShQ==}
+  /@testing-library/dom/8.11.1:
+    resolution: {integrity: sha512-3KQDyx9r0RKYailW2MiYrSSKEfH0GTkI51UGEvJenvcoDoeRYs0PZpi2SXqtnMClQvCqdtTTpOfFETDTVADpAg==}
     engines: {node: '>=12'}
     dependencies:
       '@babel/code-frame': 7.14.5
@@ -2792,14 +2792,14 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /@testing-library/user-event/13.5.0_@testing-library+dom@8.11.0:
+  /@testing-library/user-event/13.5.0_@testing-library+dom@8.11.1:
     resolution: {integrity: sha512-5Kwtbo3Y/NowpkbRuSepbyMFkZmHgD+vPzYB/RJ4oxt5Gj/avFFBYjhw27cqSVPVw/3a67NK1PbiIr9k4Gwmdg==}
     engines: {node: '>=10', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
       '@babel/runtime': 7.15.4
-      '@testing-library/dom': 8.11.0
+      '@testing-library/dom': 8.11.1
     dev: false
 
   /@tootallnate/once/1.1.2:
@@ -3634,6 +3634,7 @@ packages:
   /ansi-regex/5.0.0:
     resolution: {integrity: sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg==}
     engines: {node: '>=8'}
+    dev: false
 
   /ansi-regex/5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -12521,7 +12522,7 @@ packages:
     resolution: {integrity: sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==}
     engines: {node: '>=8'}
     dependencies:
-      ansi-regex: 5.0.0
+      ansi-regex: 5.0.1
 
   /strip-ansi/6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
