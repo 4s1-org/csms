@@ -19,7 +19,6 @@
     "build": "rm -rf dist && tsc",
     "build:watch": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "preinstall": "npx only-allow pnpm",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test && pnpm run test:e2e",
     "lint": "eslint --ext .ts src/ test/",
     "lint:fix": "pnpm run lint -- --fix",

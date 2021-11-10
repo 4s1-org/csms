@@ -22,7 +22,6 @@
     "build": "rm -rf dist && tsc",
     "build:watch": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "preinstall": "npx only-allow pnpm",
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",

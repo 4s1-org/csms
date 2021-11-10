@@ -23,7 +23,6 @@
     "build:watch": "tsc --watch",
     "debug": "pnpm run build && node dist/debug-scenario.js | pino-pretty",
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
-    "preinstall": "npx only-allow pnpm",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint --ext .ts src/",
     "lint:fix": "pnpm run lint -- --fix",
