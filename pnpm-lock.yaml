@@ -276,7 +276,7 @@ importers:
       '@types/jest': 27.0.2
       '@types/node': 14.17.33
       '@types/uuid': 8.3.1
-      ajv: 8.7.1
+      ajv: 8.8.1
       ajv-formats: 2.1.1
       class-transformer: 0.4.0
       eslint: 8.2.0
@@ -289,7 +289,7 @@ importers:
       uuid: 8.3.2
     dependencies:
       '@4s1/common-lib': link:../common-lib
-      ajv: 8.7.1
+      ajv: 8.8.1
       ajv-formats: 2.1.1
       class-transformer: 0.4.0
       reflect-metadata: 0.1.13
@@ -3539,7 +3539,7 @@ packages:
       ajv:
         optional: true
     dependencies:
-      ajv: 8.7.1
+      ajv: 8.8.1
     dev: false
 
   /ajv-keywords/3.5.2_ajv@6.12.6:
@@ -3567,8 +3567,8 @@ packages:
       uri-js: 4.4.1
     dev: false
 
-  /ajv/8.7.1:
-    resolution: {integrity: sha512-gPpOObTO1QjbnN1sVMjJcp1TF9nggMfO4MBR5uQl6ZVTOaEPq5i4oq/6R9q2alMMPB3eg53wFv1RuJBLuxf3Hw==}
+  /ajv/8.8.1:
+    resolution: {integrity: sha512-6CiMNDrzv0ZR916u2T+iRunnD60uWmNn8SkdB44/6stVORUg0aAkWO7PkOhpCmjmW8f2I/G/xnowD66fxGyQJg==}
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
