@@ -11,14 +11,14 @@ importers:
       base64url: 3.0.1
       eslint: 8.2.0
       jest: 27.3.1
-      pino: 7.2.0
+      pino: 7.3.0
       prettier: 2.4.1
       ts-jest: 27.0.7
       ts-node: 10.4.0
       typescript: 4.4.4
     dependencies:
       base64url: 3.0.1
-      pino: 7.2.0
+      pino: 7.3.0
     devDependencies:
       '@4s1/eslint-config': 3.2.0_5517f941fa4f067c95d3db61670563f0
       '@types/jest': 27.0.3
@@ -2919,7 +2919,7 @@ packages:
   /@types/pino/7.0.4:
     resolution: {integrity: sha512-yKw1UbZOTe7vP1xMQT+oz3FexwgIpBTrM+AC62vWgAkNRULgLTJWfYX+H5/sKPm8VXFbIcXkC3VZPyuaNioZFg==}
     dependencies:
-      pino: 7.2.0
+      pino: 7.3.0
     dev: true
 
   /@types/prettier/2.3.2:
@@ -10255,8 +10255,8 @@ packages:
   /pino-std-serializers/4.0.0:
     resolution: {integrity: sha512-cK0pekc1Kjy5w9V2/n+8MkZwusa6EyyxfeQCB799CQRhRt/CqYKiWs5adeu8Shve2ZNffvfC/7J64A2PJo1W/Q==}
 
-  /pino/7.2.0:
-    resolution: {integrity: sha512-85EiMfTy2E7S+QSHgaN7oCfnfgxv/8PxG6Yf+CRXUZbRL+Rb9qHQAEATLubjJMSl3RvfrTKNkAP3D2hNNx41Aw==}
+  /pino/7.3.0:
+    resolution: {integrity: sha512-RHnBlpOc6qxGvwH5PO5THuQLOaq/CT7xWsdmMkd4tG3u6Z0Mp+DENz9eoLh85dBGzwXYoaSTjOYQ0S4aTn5THg==}
     hasBin: true
     dependencies:
       fast-redact: 3.0.2
