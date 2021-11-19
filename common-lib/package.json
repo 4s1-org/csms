@@ -33,7 +33,7 @@
   "prettier": "@4s1/eslint-config",
   "dependencies": {
     "base64url": "3.0.1",
-    "pino": "7.2.0"
+    "pino": "7.3.0"
   },
   "devDependencies": {
     "@4s1/eslint-config": "^3.2.0",
