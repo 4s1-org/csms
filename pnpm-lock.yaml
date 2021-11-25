@@ -278,7 +278,7 @@ importers:
       '@types/uuid': 8.3.3
       ajv: 8.8.2
       ajv-formats: 2.1.1
-      class-transformer: 0.4.0
+      class-transformer: 0.5.1
       eslint: 8.3.0
       jest: 27.3.1
       prettier: 2.5.0
@@ -291,7 +291,7 @@ importers:
       '@4s1/common-lib': link:../common-lib
       ajv: 8.8.2
       ajv-formats: 2.1.1
-      class-transformer: 0.4.0
+      class-transformer: 0.5.1
       reflect-metadata: 0.1.13
       uuid: 8.3.2
     devDependencies:
@@ -4682,8 +4682,8 @@ packages:
     resolution: {integrity: sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==}
     dev: true
 
-  /class-transformer/0.4.0:
-    resolution: {integrity: sha512-ETWD/H2TbWbKEi7m9N4Km5+cw1hNcqJSxlSYhsLsNjQzWWiZIYA1zafxpK9PwVfaZ6AqR5rrjPVUBGESm5tQUA==}
+  /class-transformer/0.5.1:
+    resolution: {integrity: sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==}
     dev: false
 
   /class-utils/0.3.6:
