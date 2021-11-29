@@ -46,7 +46,7 @@
     "@types/node": "14.17.34",
     "@types/uuid": "8.3.3",
     "eslint": "8.3.0",
-    "jest": "27.3.1",
+    "jest": "27.4.0",
     "prettier": "2.5.0",
     "ts-jest": "27.0.7",
     "ts-node": "10.4.0",
