@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@4s1/eslint-config": "^3.2.0",
-    "@types/node": "14.17.34",
+    "@types/node": "14.18.0",
     "eslint": "8.3.0",
     "prettier": "2.5.0"
   },
