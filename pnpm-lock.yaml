@@ -13,7 +13,7 @@ importers:
       jest: 27.4.5
       pino: 7.5.1
       prettier: 2.5.1
-      ts-jest: 27.1.1
+      ts-jest: 27.1.2
       ts-node: 10.4.0
       typescript: 4.5.4
     dependencies:
@@ -27,7 +27,7 @@ importers:
       eslint: 8.4.1
       jest: 27.4.5_ts-node@10.4.0
       prettier: 2.5.1
-      ts-jest: 27.1.1_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
       ts-node: 10.4.0_5e1c36c94f66737157eca08a9d862170
       typescript: 4.5.4
 
@@ -50,7 +50,7 @@ importers:
       pino-pretty: 7.3.0
       prettier: 2.5.1
       prompts: 2.4.2
-      ts-jest: 27.1.1
+      ts-jest: 27.1.2
       ts-node: 10.4.0
       typescript: 4.5.4
       ws: 8.3.0
@@ -74,7 +74,7 @@ importers:
       nodemon: 2.0.15
       pino-pretty: 7.3.0
       prettier: 2.5.1
-      ts-jest: 27.1.1_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
       ts-node: 10.4.0_5e1c36c94f66737157eca08a9d862170
       typescript: 4.5.4
 
@@ -87,7 +87,7 @@ importers:
       eslint: 8.4.1
       jest: 27.4.5
       prettier: 2.5.1
-      ts-jest: 27.1.1
+      ts-jest: 27.1.2
       ts-node: 10.4.0
       typescript: 4.5.4
     dependencies:
@@ -99,7 +99,7 @@ importers:
       eslint: 8.4.1
       jest: 27.4.5_ts-node@10.4.0
       prettier: 2.5.1
-      ts-jest: 27.1.1_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
       ts-node: 10.4.0_5e1c36c94f66737157eca08a9d862170
       typescript: 4.5.4
 
@@ -173,7 +173,7 @@ importers:
       nodemon: 2.0.15
       pino-pretty: 7.3.0
       prettier: 2.5.1
-      ts-jest: 27.1.1
+      ts-jest: 27.1.2
       ts-node: 10.4.0
       typescript: 4.5.4
       ws: 8.3.0
@@ -193,7 +193,7 @@ importers:
       jest: 27.4.5_ts-node@10.4.0
       nodemon: 2.0.15
       prettier: 2.5.1
-      ts-jest: 27.1.1_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
       ts-node: 10.4.0_5e1c36c94f66737157eca08a9d862170
       typescript: 4.5.4
 
@@ -209,7 +209,7 @@ importers:
       nodemon: 2.0.15
       pino-pretty: 7.3.0
       prettier: 2.5.1
-      ts-jest: 27.1.1
+      ts-jest: 27.1.2
       ts-node: 10.4.0
       typescript: 4.5.4
     dependencies:
@@ -224,7 +224,7 @@ importers:
       nodemon: 2.0.15
       pino-pretty: 7.3.0
       prettier: 2.5.1
-      ts-jest: 27.1.1_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
       ts-node: 10.4.0_5e1c36c94f66737157eca08a9d862170
       typescript: 4.5.4
 
@@ -283,7 +283,7 @@ importers:
       jest: 27.4.5
       prettier: 2.5.1
       reflect-metadata: 0.1.13
-      ts-jest: 27.1.1
+      ts-jest: 27.1.2
       ts-node: 10.4.0
       typescript: 4.5.4
       uuid: 8.3.2
@@ -302,7 +302,7 @@ importers:
       eslint: 8.4.1
       jest: 27.4.5_ts-node@10.4.0
       prettier: 2.5.1
-      ts-jest: 27.1.1_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
       ts-node: 10.4.0_5e1c36c94f66737157eca08a9d862170
       typescript: 4.5.4
 
@@ -12838,8 +12838,8 @@ packages:
     resolution: {integrity: sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==}
     dev: false
 
-  /ts-jest/27.1.1_b65cae1b46840061996b6cc0ea16ca56:
-    resolution: {integrity: sha512-Ds0VkB+cB+8g2JUmP/GKWndeZcCKrbe6jzolGrVWdqVUFByY/2KDHqxJ7yBSon7hDB1TA4PXxjfZ+JjzJisvgA==}
+  /ts-jest/27.1.2_b65cae1b46840061996b6cc0ea16ca56:
+    resolution: {integrity: sha512-eSOiJOWq6Hhs6Khzk5wKC5sgWIXgXqOCiIl1+3lfnearu58Hj4QpE5tUhQcA3xtZrELbcvAGCsd6HB8OsaVaTA==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
     peerDependencies:
