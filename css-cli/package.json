@@ -41,7 +41,7 @@
     "@4s1/css-lib": "workspace:*",
     "@4s1/ocpp-lib": "workspace:*",
     "pino-pretty": "7.3.0",
-    "ws": "8.3.0"
+    "ws": "8.4.0"
   },
   "devDependencies": {
     "@4s1/eslint-config": "3.5.0",

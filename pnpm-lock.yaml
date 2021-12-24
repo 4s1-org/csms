@@ -53,14 +53,14 @@ importers:
       ts-jest: 27.1.2
       ts-node: 10.4.0
       typescript: 4.5.4
-      ws: 8.3.0
+      ws: 8.4.0
     dependencies:
       '@4s1/common-lib': link:../common-lib
       '@4s1/csms-lib': link:../csms-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
       configstore: 5.0.1
       prompts: 2.4.2
-      ws: 8.3.0
+      ws: 8.4.0
     devDependencies:
       '@4s1/eslint-config': 3.5.0_ba774bd13ac984de53bb542ab42931b7
       '@types/configstore': 5.0.1
@@ -176,13 +176,13 @@ importers:
       ts-jest: 27.1.2
       ts-node: 10.4.0
       typescript: 4.5.4
-      ws: 8.3.0
+      ws: 8.4.0
     dependencies:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
       pino-pretty: 7.3.0
-      ws: 8.3.0
+      ws: 8.4.0
     devDependencies:
       '@4s1/eslint-config': 3.5.0_ba774bd13ac984de53bb542ab42931b7
       '@types/jest': 27.0.3
@@ -13749,8 +13749,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  /ws/8.3.0:
-    resolution: {integrity: sha512-Gs5EZtpqZzLvmIM59w4igITU57lrtYVFneaa434VROv4thzJyV6UjIL3D42lslWlI+D4KzLYnxSwtfuiO79sNw==}
+  /ws/8.4.0:
+    resolution: {integrity: sha512-IHVsKe2pjajSUIl4KYMQOdlyliovpEPquKkqbwswulszzI7r0SfQrxnXdWAEqOlDCLrVSJzo+O1hAwdog2sKSQ==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
