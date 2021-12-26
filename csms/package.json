@@ -21,7 +21,6 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test && pnpm run test:e2e",
     "lint": "eslint --ext .ts src/ test/",
-    "lint:fix": "pnpm run lint -- --fix",
     "setup": "node -r ts-node/register src/setup.ts",
     "start": "node -r ts-node/register src/index.ts | pino-pretty",
     "start:watch": "nodemon --watch src/ -e ts --exec \"pnpm run build && node dist/index.js | pino-pretty\"",

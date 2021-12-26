@@ -18,7 +18,6 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lbt": "npm run lint && npm run build && npm run test",
     "lint": "eslint --ext .ts --ext tsx src/",
-    "lint:fix": "npm run lint -- --fix",
     "start": "PORT=3001 SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "test": "echo No tests"
   },
