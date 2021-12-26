@@ -24,7 +24,6 @@
     "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
     "lbt": "pnpm run lint && pnpm run build && pnpm run test",
     "lint": "eslint --ext .ts src/ scripts/",
-    "lint:fix": "pnpm run lint -- --fix",
     "pjs": "node -r ts-node/register scripts/parse-json-schema/index.ts",
     "test": "jest --passWithNoTests",
     "test:cov": "jest --coverage",
