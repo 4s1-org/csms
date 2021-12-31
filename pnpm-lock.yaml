@@ -5,7 +5,7 @@ importers:
   common-lib:
     specifiers:
       '@4s1/eslint-config': 3.5.0
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       '@types/pino': 7.0.4
       base64url: 3.0.1
@@ -21,13 +21,13 @@ importers:
       pino: 7.6.2
     devDependencies:
       '@4s1/eslint-config': 3.5.0_ba774bd13ac984de53bb542ab42931b7
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       '@types/pino': 7.0.4
       eslint: 8.5.0
       jest: 27.4.5_ts-node@10.4.0
       prettier: 2.5.1
-      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_334772dd386c536d54092d15fe05a291
       ts-node: 10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0
       typescript: 4.5.4
 
@@ -38,7 +38,7 @@ importers:
       '@4s1/eslint-config': 3.5.0
       '@4s1/ocpp-lib': workspace:*
       '@types/configstore': 5.0.1
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       '@types/prompts': 2.0.14
       '@types/ws': 8.2.2
@@ -64,7 +64,7 @@ importers:
     devDependencies:
       '@4s1/eslint-config': 3.5.0_ba774bd13ac984de53bb542ab42931b7
       '@types/configstore': 5.0.1
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       '@types/prompts': 2.0.14
       '@types/ws': 8.2.2
@@ -74,7 +74,7 @@ importers:
       nodemon: 2.0.15
       pino-pretty: 7.3.0
       prettier: 2.5.1
-      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_334772dd386c536d54092d15fe05a291
       ts-node: 10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0
       typescript: 4.5.4
 
@@ -82,7 +82,7 @@ importers:
     specifiers:
       '@4s1/common-lib': workspace:*
       '@4s1/eslint-config': 3.5.0
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       eslint: 8.5.0
       jest: 27.4.5
@@ -94,12 +94,12 @@ importers:
       '@4s1/common-lib': link:../common-lib
     devDependencies:
       '@4s1/eslint-config': 3.5.0_ba774bd13ac984de53bb542ab42931b7
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       eslint: 8.5.0
       jest: 27.4.5_ts-node@10.4.0
       prettier: 2.5.1
-      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_334772dd386c536d54092d15fe05a291
       ts-node: 10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0
       typescript: 4.5.4
 
@@ -164,7 +164,7 @@ importers:
       '@4s1/css-lib': workspace:*
       '@4s1/eslint-config': 3.5.0
       '@4s1/ocpp-lib': workspace:*
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       '@types/ws': 8.2.2
       dotenv: 8.6.0
@@ -185,7 +185,7 @@ importers:
       ws: 8.4.0
     devDependencies:
       '@4s1/eslint-config': 3.5.0_ba774bd13ac984de53bb542ab42931b7
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       '@types/ws': 8.2.2
       dotenv: 8.6.0
@@ -193,7 +193,7 @@ importers:
       jest: 27.4.5_ts-node@10.4.0
       nodemon: 2.0.15
       prettier: 2.5.1
-      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_334772dd386c536d54092d15fe05a291
       ts-node: 10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0
       typescript: 4.5.4
 
@@ -202,7 +202,7 @@ importers:
       '@4s1/common-lib': workspace:*
       '@4s1/eslint-config': 3.5.0
       '@4s1/ocpp-lib': workspace:*
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       eslint: 8.5.0
       jest: 27.4.5
@@ -217,14 +217,14 @@ importers:
       '@4s1/ocpp-lib': link:../ocpp-lib
     devDependencies:
       '@4s1/eslint-config': 3.5.0_ba774bd13ac984de53bb542ab42931b7
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       eslint: 8.5.0
       jest: 27.4.5_ts-node@10.4.0
       nodemon: 2.0.15
       pino-pretty: 7.3.0
       prettier: 2.5.1
-      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_334772dd386c536d54092d15fe05a291
       ts-node: 10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0
       typescript: 4.5.4
 
@@ -273,7 +273,7 @@ importers:
     specifiers:
       '@4s1/common-lib': workspace:*
       '@4s1/eslint-config': 3.5.0
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       '@types/uuid': 8.3.3
       ajv: 8.8.2
@@ -296,13 +296,13 @@ importers:
       uuid: 8.3.2
     devDependencies:
       '@4s1/eslint-config': 3.5.0_ba774bd13ac984de53bb542ab42931b7
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       '@types/node': 14.18.3
       '@types/uuid': 8.3.3
       eslint: 8.5.0
       jest: 27.4.5_ts-node@10.4.0
       prettier: 2.5.1
-      ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
+      ts-jest: 27.1.2_334772dd386c536d54092d15fe05a291
       ts-node: 10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0
       typescript: 4.5.4
 
@@ -2893,11 +2893,11 @@ packages:
     dependencies:
       '@types/istanbul-lib-report': 3.0.0
 
-  /@types/jest/27.0.3:
-    resolution: {integrity: sha512-cmmwv9t7gBYt7hNKH5Spu7Kuu/DotGa+Ff+JGRKZ4db5eh8PnKS4LuebJ3YLUoyOyIHraTGyULn23YtEAm0VSg==}
+  /@types/jest/27.4.0:
+    resolution: {integrity: sha512-gHl8XuC1RZ8H2j5sHv/JqsaxXkDDM9iDOgu0Wp8sjs4u/snb2PVehyWXJPr+ORA0RPpgw231mnutWI1+0hgjIQ==}
     dependencies:
-      jest-diff: 27.3.1
-      pretty-format: 27.3.1
+      jest-diff: 27.4.2
+      pretty-format: 27.4.2
     dev: true
 
   /@types/json-schema/7.0.9:
@@ -5523,11 +5523,6 @@ packages:
     engines: {node: '>= 10.14.2'}
     dev: false
 
-  /diff-sequences/27.0.6:
-    resolution: {integrity: sha512-ag6wfpBFyNXZ0p8pcuIDS//D8H062ZQJ3fzYxjpmeKjnz8W4pekL3AI8VohmyZmsWW2PWaHgjsmqR6L13101VQ==}
-    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
-    dev: true
-
   /diff-sequences/27.4.0:
     resolution: {integrity: sha512-YqiQzkrsmHMH5uuh8OdQFU9/ZpADnwzml8z0O5HvRNda+5UZsaX/xN+AAxfR2hWq1Y7HZnAzO9J5lJXOuDz2Ww==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
@@ -8112,16 +8107,6 @@ packages:
       pretty-format: 26.6.2
     dev: false
 
-  /jest-diff/27.3.1:
-    resolution: {integrity: sha512-PCeuAH4AWUo2O5+ksW4pL9v5xJAcIKPUPfIhZBcG1RKv/0+dvaWTQK1Nrau8d67dp65fOqbeMdoil+6PedyEPQ==}
-    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
-    dependencies:
-      chalk: 4.1.2
-      diff-sequences: 27.0.6
-      jest-get-type: 27.3.1
-      pretty-format: 27.3.1
-    dev: true
-
   /jest-diff/27.4.2:
     resolution: {integrity: sha512-ujc9ToyUZDh9KcqvQDkk/gkbf6zSaeEg9AiBxtttXW59H/AcqEYp1ciXAtJp+jXWva5nAf/ePtSsgWwE5mqp4Q==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
@@ -8232,11 +8217,6 @@ packages:
     resolution: {integrity: sha512-TpfaviN1R2pQWkIihlfEanwOXK0zcxrKEE4MlU6Tn7keoXdN6/3gK/xl0yEh8DOunn5pOVGKf8hB4R9gVh04ig==}
     engines: {node: '>= 10.14.2'}
     dev: false
-
-  /jest-get-type/27.3.1:
-    resolution: {integrity: sha512-+Ilqi8hgHSAdhlQ3s12CAVNd8H96ZkQBfYoXmArzZnOfAtVAJEiPDBirjByEblvG/4LPJmkL+nBqPO3A1YJAEg==}
-    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
-    dev: true
 
   /jest-get-type/27.4.0:
     resolution: {integrity: sha512-tk9o+ld5TWq41DkK14L4wox4s2D9MtTpKaAVzXfr5CUKm5ZK2ExcaFE0qls2W71zE/6R2TxxrK9w2r6svAFDBQ==}
@@ -11045,6 +11025,7 @@ packages:
       ansi-regex: 5.0.1
       ansi-styles: 5.2.0
       react-is: 17.0.2
+    dev: false
 
   /pretty-format/27.4.2:
     resolution: {integrity: sha512-p0wNtJ9oLuvgOQDEIZ9zQjZffK7KtyR6Si0jnXULIDwrlNF8Cuir3AZP0hHv0jmKuNN/edOnbMjnzd4uTcmWiw==}
@@ -12837,7 +12818,7 @@ packages:
     resolution: {integrity: sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==}
     dev: false
 
-  /ts-jest/27.1.2_b65cae1b46840061996b6cc0ea16ca56:
+  /ts-jest/27.1.2_334772dd386c536d54092d15fe05a291:
     resolution: {integrity: sha512-eSOiJOWq6Hhs6Khzk5wKC5sgWIXgXqOCiIl1+3lfnearu58Hj4QpE5tUhQcA3xtZrELbcvAGCsd6HB8OsaVaTA==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
@@ -12858,7 +12839,7 @@ packages:
       esbuild:
         optional: true
     dependencies:
-      '@types/jest': 27.0.3
+      '@types/jest': 27.4.0
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       jest: 27.4.5_ts-node@10.4.0
