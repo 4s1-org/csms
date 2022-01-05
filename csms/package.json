@@ -48,7 +48,7 @@
     "@types/ws": "8.2.2",
     "dotenv": "8.6.0",
     "eslint": "8.6.0",
-    "jest": "27.4.5",
+    "jest": "27.4.6",
     "nodemon": "2.0.15",
     "pino-pretty": "7.3.0",
     "prettier": "2.5.1",
