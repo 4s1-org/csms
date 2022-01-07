@@ -129,7 +129,7 @@ importers:
       react-tabs: 3.2.3
       typescript: 4.5.4
       uuid: 8.3.2
-      web-vitals: 2.1.2
+      web-vitals: 2.1.3
     dependencies:
       '@4s1/common-lib': link:../common-lib
       '@4s1/csms-lib': link:../csms-lib
@@ -149,7 +149,7 @@ importers:
       react-tabs: 3.2.3_react@17.0.2
       typescript: 4.5.4
       uuid: 8.3.2
-      web-vitals: 2.1.2
+      web-vitals: 2.1.3
     devDependencies:
       '@4s1/eslint-config': 3.6.0_766453c47335cbed2174775e7834db5c
       '@types/node': 14.18.5
@@ -247,7 +247,7 @@ importers:
       react-dom: 17.0.2
       react-scripts: 4.0.3
       typescript: 4.5.4
-      web-vitals: 2.1.2
+      web-vitals: 2.1.3
     dependencies:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
@@ -262,7 +262,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       react-scripts: 4.0.3_react@17.0.2+typescript@4.5.4
       typescript: 4.5.4
-      web-vitals: 2.1.2
+      web-vitals: 2.1.3
     devDependencies:
       '@4s1/eslint-config': 3.6.0_766453c47335cbed2174775e7834db5c
       '@types/node': 14.18.5
@@ -13394,8 +13394,8 @@ packages:
       minimalistic-assert: 1.0.1
     dev: false
 
-  /web-vitals/2.1.2:
-    resolution: {integrity: sha512-nZnEH8dj+vJFqCRYdvYv0a59iLXsb8jJkt+xvXfwgnkyPdsSLtKNlYmtTDiHmTNGXeSXtpjTTUcNvFtrAk6VMQ==}
+  /web-vitals/2.1.3:
+    resolution: {integrity: sha512-+ijpniAzcnQicXaXIN0/eHQAiV/jMt1oHGHTmz7VdAJPPkzzDhmoYPSpLgJTuFtUh+jCjxCoeTZPg7Ic+g8o7w==}
     dev: false
 
   /webidl-conversions/5.0.0:
