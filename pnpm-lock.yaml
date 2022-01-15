@@ -111,7 +111,7 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.16
-      '@testing-library/dom': 8.11.1
+      '@testing-library/dom': 8.11.2
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.5.0
       '@types/node': 14.18.5
@@ -136,9 +136,9 @@ importers:
       '@fortawesome/fontawesome-svg-core': 1.2.36
       '@fortawesome/free-solid-svg-icons': 5.15.4
       '@fortawesome/react-fontawesome': 0.1.16_f515edce028694561ceb456e3dba224c
-      '@testing-library/dom': 8.11.1
+      '@testing-library/dom': 8.11.2
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.1
+      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.2
       '@types/react': 17.0.38
       '@types/react-dom': 17.0.11
       bootstrap: 4.6.1
@@ -234,7 +234,7 @@ importers:
       '@4s1/css-lib': workspace:*
       '@4s1/eslint-config': 3.6.0
       '@4s1/ocpp-lib': workspace:*
-      '@testing-library/dom': 8.11.1
+      '@testing-library/dom': 8.11.2
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.5.0
       '@types/node': 14.18.5
@@ -252,9 +252,9 @@ importers:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
-      '@testing-library/dom': 8.11.1
+      '@testing-library/dom': 8.11.2
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.1
+      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.2
       '@types/react': 17.0.38
       '@types/react-dom': 17.0.11
       bootstrap: 4.6.1
@@ -2493,6 +2493,7 @@ packages:
       '@types/node': 14.18.5
       '@types/yargs': 16.0.4
       chalk: 4.1.2
+    dev: true
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2759,8 +2760,8 @@ packages:
       pretty-format: 26.6.2
     dev: false
 
-  /@testing-library/dom/8.11.1:
-    resolution: {integrity: sha512-3KQDyx9r0RKYailW2MiYrSSKEfH0GTkI51UGEvJenvcoDoeRYs0PZpi2SXqtnMClQvCqdtTTpOfFETDTVADpAg==}
+  /@testing-library/dom/8.11.2:
+    resolution: {integrity: sha512-idsS/cqbYudXcVWngc1PuWNmXs416oBy2g/7Q8QAUREt5Z3MUkAL2XJD7xazLJ6esDfqRDi/ZBxk+OPPXitHRw==}
     engines: {node: '>=12'}
     dependencies:
       '@babel/code-frame': 7.14.5
@@ -2770,7 +2771,7 @@ packages:
       chalk: 4.1.2
       dom-accessibility-api: 0.5.9
       lz-string: 1.4.4
-      pretty-format: 27.3.1
+      pretty-format: 27.4.6
     dev: false
 
   /@testing-library/react/11.2.7_react-dom@17.0.2+react@17.0.2:
@@ -2786,14 +2787,14 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /@testing-library/user-event/13.5.0_@testing-library+dom@8.11.1:
+  /@testing-library/user-event/13.5.0_@testing-library+dom@8.11.2:
     resolution: {integrity: sha512-5Kwtbo3Y/NowpkbRuSepbyMFkZmHgD+vPzYB/RJ4oxt5Gj/avFFBYjhw27cqSVPVw/3a67NK1PbiIr9k4Gwmdg==}
     engines: {node: '>=10', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
       '@babel/runtime': 7.15.4
-      '@testing-library/dom': 8.11.1
+      '@testing-library/dom': 8.11.2
     dev: false
 
   /@tootallnate/once/1.1.2:
@@ -3030,6 +3031,7 @@ packages:
     resolution: {integrity: sha512-T8Yc9wt/5LbJyCaLiHPReJa0kApcIgJ7Bn735GjItUfh08Z1pJvu8QZqb9s+mMvKV6WUQRV7K2R46YbjMXTTJw==}
     dependencies:
       '@types/yargs-parser': 20.2.1
+    dev: true
 
   /@typescript-eslint/eslint-plugin/4.31.0_176b47c41b3c6ad9897e1484c1926ba8:
     resolution: {integrity: sha512-iPKZTZNavAlOhfF4gymiSuUkgLne/nh5Oz2/mdiUmuZVD42m9PapnCnzjxuDsnpnbH3wT5s2D8bw6S39TC6GNw==}
@@ -11087,16 +11089,6 @@ packages:
       react-is: 17.0.2
     dev: false
 
-  /pretty-format/27.3.1:
-    resolution: {integrity: sha512-DR/c+pvFc52nLimLROYjnXPtolawm+uWDxr4FjuLDLUn+ktWnSN851KoHwHzzqq6rfCOjkzN8FLgDrSub6UDuA==}
-    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
-    dependencies:
-      '@jest/types': 27.4.2
-      ansi-regex: 5.0.1
-      ansi-styles: 5.2.0
-      react-is: 17.0.2
-    dev: false
-
   /pretty-format/27.4.2:
     resolution: {integrity: sha512-p0wNtJ9oLuvgOQDEIZ9zQjZffK7KtyR6Si0jnXULIDwrlNF8Cuir3AZP0hHv0jmKuNN/edOnbMjnzd4uTcmWiw==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
@@ -11114,7 +11106,6 @@ packages:
       ansi-regex: 5.0.1
       ansi-styles: 5.2.0
       react-is: 17.0.2
-    dev: true
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
