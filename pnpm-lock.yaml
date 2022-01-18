@@ -43,7 +43,7 @@ importers:
       '@types/prompts': 2.0.14
       '@types/ws': 8.2.2
       configstore: 5.0.1
-      dotenv: 12.0.4
+      dotenv: 14.2.0
       eslint: 8.7.0
       jest: 27.4.7
       nodemon: 2.0.15
@@ -68,7 +68,7 @@ importers:
       '@types/node': 14.18.7
       '@types/prompts': 2.0.14
       '@types/ws': 8.2.2
-      dotenv: 12.0.4
+      dotenv: 14.2.0
       eslint: 8.7.0
       jest: 27.4.7_ts-node@10.4.0
       nodemon: 2.0.15
@@ -167,7 +167,7 @@ importers:
       '@types/jest': 27.4.0
       '@types/node': 14.18.7
       '@types/ws': 8.2.2
-      dotenv: 12.0.4
+      dotenv: 14.2.0
       eslint: 8.7.0
       jest: 27.4.7
       nodemon: 2.0.15
@@ -188,7 +188,7 @@ importers:
       '@types/jest': 27.4.0
       '@types/node': 14.18.7
       '@types/ws': 8.2.2
-      dotenv: 12.0.4
+      dotenv: 14.2.0
       eslint: 8.7.0
       jest: 27.4.7_ts-node@10.4.0
       nodemon: 2.0.15
@@ -5696,8 +5696,8 @@ packages:
     resolution: {integrity: sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==}
     dev: false
 
-  /dotenv/12.0.4:
-    resolution: {integrity: sha512-oWdqbSywffzH1l4WXKPHWA0TWYpqp7IyLfqjipT4upoIFS0HPMqtNotykQpD4iIg0BqtNmdgPCh2WMvMt7yTiw==}
+  /dotenv/14.2.0:
+    resolution: {integrity: sha512-05POuPJyPpO6jqzTNweQFfAyMSD4qa4lvsMOWyTRTdpHKy6nnnN+IYWaXF+lHivhBH/ufDKlR4IWCAN3oPnHuw==}
     engines: {node: '>=12'}
     dev: true
 
