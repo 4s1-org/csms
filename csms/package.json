@@ -46,7 +46,7 @@
     "@types/node": "14.18.9",
     "@types/prompts": "2.0.14",
     "@types/ws": "8.2.2",
-    "dotenv": "14.3.0",
+    "dotenv": "14.3.2",
     "eslint": "8.7.0",
     "jest": "27.4.7",
     "nodemon": "2.0.15",
