@@ -37,7 +37,7 @@
     "@4s1/ocpp-lib": "workspace:*",
     "configstore": "5.0.1",
     "prompts": "2.4.2",
-    "ws": "8.4.2"
+    "ws": "8.5.0"
   },
   "devDependencies": {
     "@4s1/eslint-config": "3.7.0",
