@@ -126,7 +126,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2
       react-scripts: 4.0.3
-      react-tabs: 3.2.3
+      react-tabs: 4.0.1
       typescript: 4.6.2
       uuid: 8.3.2
       web-vitals: 2.1.4
@@ -146,7 +146,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-scripts: 4.0.3_react@17.0.2+typescript@4.6.2
-      react-tabs: 3.2.3_react@17.0.2
+      react-tabs: 4.0.1_react@17.0.2
       typescript: 4.6.2
       uuid: 8.3.2
       web-vitals: 2.1.4
@@ -11177,14 +11177,6 @@ packages:
       kleur: 3.0.3
       sisteransi: 1.0.5
 
-  /prop-types/15.7.2:
-    resolution: {integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==}
-    dependencies:
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
-      react-is: 16.13.1
-    dev: false
-
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
     dependencies:
@@ -11512,13 +11504,13 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /react-tabs/3.2.3_react@17.0.2:
-    resolution: {integrity: sha512-jx325RhRVnS9DdFbeF511z0T0WEqEoMl1uCE3LoZ6VaZZm7ytatxbum0B8bCTmaiV0KsU+4TtLGTGevCic7SWg==}
+  /react-tabs/4.0.1_react@17.0.2:
+    resolution: {integrity: sha512-Xldj56RHhaRd37iftOwnnjsFEemHY2R07EQ9x5EqOApGauxhdLi7fc/sEKJrtFANHnasNXzSnCWdJ0ulEamMoQ==}
     peerDependencies:
-      react: ^16.3.0 || ^17.0.0-0
+      react: ^16.8.0 || ^17.0.0-0
     dependencies:
       clsx: 1.1.1
-      prop-types: 15.7.2
+      prop-types: 15.8.1
       react: 17.0.2
     dev: false
 
