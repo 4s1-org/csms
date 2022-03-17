@@ -39,7 +39,7 @@
     "@4s1/common-lib": "workspace:*",
     "@4s1/css-lib": "workspace:*",
     "@4s1/ocpp-lib": "workspace:*",
-    "pino-pretty": "7.5.3",
+    "pino-pretty": "7.5.4",
     "ws": "8.5.0"
   },
   "devDependencies": {
