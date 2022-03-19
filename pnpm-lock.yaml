@@ -115,7 +115,7 @@ importers:
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.5.0
       '@types/node': 14.18.12
-      '@types/react': 17.0.40
+      '@types/react': 17.0.41
       '@types/react-dom': 17.0.13
       '@types/react-tabs': 2.3.4
       '@types/uuid': 8.3.4
@@ -139,7 +139,7 @@ importers:
       '@testing-library/dom': 8.11.3
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
       '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.3
-      '@types/react': 17.0.40
+      '@types/react': 17.0.41
       '@types/react-dom': 17.0.13
       bootstrap: 4.6.1
       dayjs: 1.11.0
@@ -238,7 +238,7 @@ importers:
       '@testing-library/react': 11.2.7
       '@testing-library/user-event': 13.5.0
       '@types/node': 14.18.12
-      '@types/react': 17.0.40
+      '@types/react': 17.0.41
       '@types/react-dom': 17.0.13
       bootstrap: 4.6.1
       eslint: 8.11.0
@@ -255,7 +255,7 @@ importers:
       '@testing-library/dom': 8.11.3
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
       '@testing-library/user-event': 13.5.0_@testing-library+dom@8.11.3
-      '@types/react': 17.0.40
+      '@types/react': 17.0.41
       '@types/react-dom': 17.0.13
       bootstrap: 4.6.1
       react: 17.0.2
@@ -2958,17 +2958,17 @@ packages:
   /@types/react-dom/17.0.13:
     resolution: {integrity: sha512-wEP+B8hzvy6ORDv1QBhcQia4j6ea4SFIBttHYpXKPFZRviBvknq0FRh3VrIxeXUmsPkwuXVZrVGG7KUVONmXCQ==}
     dependencies:
-      '@types/react': 17.0.40
+      '@types/react': 17.0.41
     dev: false
 
   /@types/react-tabs/2.3.4:
     resolution: {integrity: sha512-HQzhKW+RF/7h14APw/2cu4Nnt+GmsTvfBKbFdn/NbYpb8Q+iB65wIkPHz4VRKDxWtOpNFpOUtzt5r0LRmQMfOA==}
     dependencies:
-      '@types/react': 17.0.40
+      '@types/react': 17.0.41
     dev: true
 
-  /@types/react/17.0.40:
-    resolution: {integrity: sha512-UrXhD/JyLH+W70nNSufXqMZNuUD2cXHu6UjCllC6pmOQgBX4SGXOH8fjRka0O0Ee0HrFxapDD8Bwn81Kmiz6jQ==}
+  /@types/react/17.0.41:
+    resolution: {integrity: sha512-chYZ9ogWUodyC7VUTRBfblysKLjnohhFY9bGLwvnUFFy48+vB9DikmB3lW0qTFmBcKSzmdglcvkHK71IioOlDA==}
     dependencies:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
