@@ -37,8 +37,8 @@
   "dependencies": {
     "@4s1/common-lib": "workspace:*",
     "@4s1/csms-lib": "workspace:*",
-    "@fortawesome/fontawesome-svg-core": "6.1.0",
-    "@fortawesome/free-solid-svg-icons": "6.1.0",
+    "@fortawesome/fontawesome-svg-core": "6.1.1",
+    "@fortawesome/free-solid-svg-icons": "6.1.1",
     "@fortawesome/react-fontawesome": "0.1.18",
     "@testing-library/dom": "8.11.3",
     "@testing-library/react": "11.2.7",
