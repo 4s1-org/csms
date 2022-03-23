@@ -33,7 +33,7 @@
   "prettier": "@4s1/eslint-config",
   "dependencies": {
     "@4s1/common-lib": "workspace:*",
-    "ajv": "8.10.0",
+    "ajv": "8.11.0",
     "ajv-formats": "2.1.1",
     "class-transformer": "0.5.1",
     "reflect-metadata": "0.1.13",
