@@ -12,7 +12,7 @@ importers:
       eslint: 8.11.0
       jest: 27.5.1
       pino: 7.9.2
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3
       ts-node: 10.7.0
       typescript: 4.6.2
@@ -20,13 +20,13 @@ importers:
       base64url: 3.0.1
       pino: 7.9.2
     devDependencies:
-      '@4s1/eslint-config': 3.10.0_83bc012e22a441999bc7e52466863909
+      '@4s1/eslint-config': 3.10.0_81053bcb01f39dc89c82f7942b0e0fb6
       '@types/jest': 27.4.1
       '@types/node': 14.18.12
       '@types/pino': 7.0.4
       eslint: 8.11.0
       jest: 27.5.1_ts-node@10.7.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3_60149d457e34ffba7d4e845dde6a1263
       ts-node: 10.7.0_ef4f5b62551ca68fc45e5a6c3dd7806a
       typescript: 4.6.2
@@ -48,7 +48,7 @@ importers:
       jest: 27.5.1
       nodemon: 2.0.15
       pino-pretty: 7.6.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       prompts: 2.4.2
       ts-jest: 27.1.3
       ts-node: 10.7.0
@@ -62,7 +62,7 @@ importers:
       prompts: 2.4.2
       ws: 8.5.0
     devDependencies:
-      '@4s1/eslint-config': 3.10.0_83bc012e22a441999bc7e52466863909
+      '@4s1/eslint-config': 3.10.0_81053bcb01f39dc89c82f7942b0e0fb6
       '@types/configstore': 5.0.1
       '@types/jest': 27.4.1
       '@types/node': 14.18.12
@@ -73,7 +73,7 @@ importers:
       jest: 27.5.1_ts-node@10.7.0
       nodemon: 2.0.15
       pino-pretty: 7.6.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3_60149d457e34ffba7d4e845dde6a1263
       ts-node: 10.7.0_ef4f5b62551ca68fc45e5a6c3dd7806a
       typescript: 4.6.2
@@ -86,19 +86,19 @@ importers:
       '@types/node': 14.18.12
       eslint: 8.11.0
       jest: 27.5.1
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3
       ts-node: 10.7.0
       typescript: 4.6.2
     dependencies:
       '@4s1/common-lib': link:../common-lib
     devDependencies:
-      '@4s1/eslint-config': 3.10.0_83bc012e22a441999bc7e52466863909
+      '@4s1/eslint-config': 3.10.0_81053bcb01f39dc89c82f7942b0e0fb6
       '@types/jest': 27.4.1
       '@types/node': 14.18.12
       eslint: 8.11.0
       jest: 27.5.1_ts-node@10.7.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3_60149d457e34ffba7d4e845dde6a1263
       ts-node: 10.7.0_ef4f5b62551ca68fc45e5a6c3dd7806a
       typescript: 4.6.2
@@ -122,7 +122,7 @@ importers:
       bootstrap: 4.6.1
       dayjs: 1.11.0
       eslint: 8.11.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       react: 17.0.2
       react-dom: 17.0.2
       react-scripts: 4.0.3
@@ -151,12 +151,12 @@ importers:
       uuid: 8.3.2
       web-vitals: 2.1.4
     devDependencies:
-      '@4s1/eslint-config': 3.10.0_83bc012e22a441999bc7e52466863909
+      '@4s1/eslint-config': 3.10.0_81053bcb01f39dc89c82f7942b0e0fb6
       '@types/node': 14.18.12
       '@types/react-tabs': 2.3.4
       '@types/uuid': 8.3.4
       eslint: 8.11.0
-      prettier: 2.6.0
+      prettier: 2.6.1
 
   css-cli:
     specifiers:
@@ -172,7 +172,7 @@ importers:
       jest: 27.5.1
       nodemon: 2.0.15
       pino-pretty: 7.6.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3
       ts-node: 10.7.0
       typescript: 4.6.2
@@ -184,7 +184,7 @@ importers:
       pino-pretty: 7.6.0
       ws: 8.5.0
     devDependencies:
-      '@4s1/eslint-config': 3.10.0_83bc012e22a441999bc7e52466863909
+      '@4s1/eslint-config': 3.10.0_81053bcb01f39dc89c82f7942b0e0fb6
       '@types/jest': 27.4.1
       '@types/node': 14.18.12
       '@types/ws': 8.5.3
@@ -192,7 +192,7 @@ importers:
       eslint: 8.11.0
       jest: 27.5.1_ts-node@10.7.0
       nodemon: 2.0.15
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3_60149d457e34ffba7d4e845dde6a1263
       ts-node: 10.7.0_ef4f5b62551ca68fc45e5a6c3dd7806a
       typescript: 4.6.2
@@ -208,7 +208,7 @@ importers:
       jest: 27.5.1
       nodemon: 2.0.15
       pino-pretty: 7.6.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3
       ts-node: 10.7.0
       typescript: 4.6.2
@@ -216,14 +216,14 @@ importers:
       '@4s1/common-lib': link:../common-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
     devDependencies:
-      '@4s1/eslint-config': 3.10.0_83bc012e22a441999bc7e52466863909
+      '@4s1/eslint-config': 3.10.0_81053bcb01f39dc89c82f7942b0e0fb6
       '@types/jest': 27.4.1
       '@types/node': 14.18.12
       eslint: 8.11.0
       jest: 27.5.1_ts-node@10.7.0
       nodemon: 2.0.15
       pino-pretty: 7.6.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3_60149d457e34ffba7d4e845dde6a1263
       ts-node: 10.7.0_ef4f5b62551ca68fc45e5a6c3dd7806a
       typescript: 4.6.2
@@ -242,7 +242,7 @@ importers:
       '@types/react-dom': 17.0.14
       bootstrap: 4.6.1
       eslint: 8.11.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       react: 17.0.2
       react-dom: 17.0.2
       react-scripts: 4.0.3
@@ -264,10 +264,10 @@ importers:
       typescript: 4.6.2
       web-vitals: 2.1.4
     devDependencies:
-      '@4s1/eslint-config': 3.10.0_83bc012e22a441999bc7e52466863909
+      '@4s1/eslint-config': 3.10.0_81053bcb01f39dc89c82f7942b0e0fb6
       '@types/node': 14.18.12
       eslint: 8.11.0
-      prettier: 2.6.0
+      prettier: 2.6.1
 
   ocpp-lib:
     specifiers:
@@ -281,7 +281,7 @@ importers:
       class-transformer: 0.5.1
       eslint: 8.11.0
       jest: 27.5.1
-      prettier: 2.6.0
+      prettier: 2.6.1
       reflect-metadata: 0.1.13
       ts-jest: 27.1.3
       ts-node: 10.7.0
@@ -295,20 +295,20 @@ importers:
       reflect-metadata: 0.1.13
       uuid: 8.3.2
     devDependencies:
-      '@4s1/eslint-config': 3.10.0_83bc012e22a441999bc7e52466863909
+      '@4s1/eslint-config': 3.10.0_81053bcb01f39dc89c82f7942b0e0fb6
       '@types/jest': 27.4.1
       '@types/node': 14.18.12
       '@types/uuid': 8.3.4
       eslint: 8.11.0
       jest: 27.5.1_ts-node@10.7.0
-      prettier: 2.6.0
+      prettier: 2.6.1
       ts-jest: 27.1.3_60149d457e34ffba7d4e845dde6a1263
       ts-node: 10.7.0_ef4f5b62551ca68fc45e5a6c3dd7806a
       typescript: 4.6.2
 
 packages:
 
-  /@4s1/eslint-config/3.10.0_83bc012e22a441999bc7e52466863909:
+  /@4s1/eslint-config/3.10.0_81053bcb01f39dc89c82f7942b0e0fb6:
     resolution: {integrity: sha512-ImdUlu7lCZNL8S8QJ64ll+IHV0Ein57uVJwTAdvf7xhCcP6lMxGiDbJJuP/FnVTGWvh8nQgrUQLF20eN+8QYMA==}
     peerDependencies:
       eslint: '>=7.32.0'
@@ -319,7 +319,7 @@ packages:
       eslint: 8.11.0
       eslint-config-prettier: 8.5.0_eslint@8.11.0
       eslint-plugin-import: 2.25.4_eslint@8.11.0
-      prettier: 2.6.0
+      prettier: 2.6.1
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -11091,8 +11091,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /prettier/2.6.0:
-    resolution: {integrity: sha512-m2FgJibYrBGGgQXNzfd0PuDGShJgRavjUoRCw1mZERIWVSXF0iLzLm+aOqTAbLnC3n6JzUhAA8uZnFVghHJ86A==}
+  /prettier/2.6.1:
+    resolution: {integrity: sha512-8UVbTBYGwN37Bs9LERmxCPjdvPxlEowx2urIL6urHzdb3SDq4B/Z6xLFCblrSnE4iKWcS6ziJ3aOYrc1kz/E2A==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
