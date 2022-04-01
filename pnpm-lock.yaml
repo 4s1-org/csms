@@ -126,7 +126,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2
       react-scripts: 4.0.3
-      react-tabs: 4.0.1
+      react-tabs: 4.2.0
       typescript: 4.6.3
       uuid: 8.3.2
       web-vitals: 2.1.4
@@ -146,7 +146,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-scripts: 4.0.3_react@17.0.2+typescript@4.6.3
-      react-tabs: 4.0.1_react@17.0.2
+      react-tabs: 4.2.0_react@17.0.2
       typescript: 4.6.3
       uuid: 8.3.2
       web-vitals: 2.1.4
@@ -11473,10 +11473,10 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /react-tabs/4.0.1_react@17.0.2:
-    resolution: {integrity: sha512-Xldj56RHhaRd37iftOwnnjsFEemHY2R07EQ9x5EqOApGauxhdLi7fc/sEKJrtFANHnasNXzSnCWdJ0ulEamMoQ==}
+  /react-tabs/4.2.0_react@17.0.2:
+    resolution: {integrity: sha512-3DifAM5Xbi4EzdzPsmJTxdiW0/QRqvtOZ+ubWQrlruG/e3WVQo+hVcqGB/GdwL8WNz7yGFPk6jiN9Qrxw26WIw==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0-0
+      react: ^16.8.0 || ^17.0.0-0 || ^18.0.0
     dependencies:
       clsx: 1.1.1
       prop-types: 15.8.1
