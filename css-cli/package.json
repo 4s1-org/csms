@@ -43,7 +43,7 @@
     "ws": "8.5.0"
   },
   "devDependencies": {
-    "@4s1/eslint-config": "3.10.0",
+    "@4s1/eslint-config": "3.11.0",
     "@types/jest": "27.4.1",
     "@types/node": "14.18.12",
     "@types/ws": "8.5.3",
