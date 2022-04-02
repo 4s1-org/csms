@@ -16,6 +16,6 @@
     },
     "javascript.preferences.importModuleSpecifier": "relative",
     "typescript.preferences.importModuleSpecifier": "relative",
-    "window.title": "CSMS Projekt"
+    "window.title": "CSMS"
   }
 }

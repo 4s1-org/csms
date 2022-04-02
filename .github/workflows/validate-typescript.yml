@@ -1,0 +1,84 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-typescript:
+    name: lint, build and test TypeScript code
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+      - run: pnpm install -r
+      - name: common-lib
+        run: |
+          cd common-lib
+          pnpm run lint
+          pnpm run build
+          pnpm run test
+          cd ..
+      - name: ocpp-lib
+        run: |
+          cd ocpp-lib
+          pnpm run lint
+          pnpm run build
+          pnpm run test
+          cd ..
+      - name: csms-lib
+        run: |
+          cd csms-lib
+          pnpm run lint
+          pnpm run build
+          pnpm run test
+          cd ..
+      - name: csms
+        run: |
+          cd csms
+          pnpm run lint
+          pnpm run build
+          pnpm run test
+          mkdir -p ../data && cp ../utils/certs/certificate.* ../data/
+          pnpm run test:e2e
+          cd ..
+      - name: csms-ui
+        run: |
+          cd csms-ui
+          pnpm run lint
+          pnpm run build
+          pnpm run test
+          cd ..
+      - name: css-lib
+        run: |
+          cd css-lib
+          pnpm run lint
+          pnpm run build
+          pnpm run test
+          cd ..
+      - name: css-ui
+        run: |
+          cd css-ui
+          pnpm run lint
+          pnpm run build
+          pnpm run test
+          cd ..
+      - name: css-cli
+        run: |
+          cd css-cli
+          pnpm run lint
+          pnpm run build
+          pnpm run test
+          cd ..

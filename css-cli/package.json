@@ -4,11 +4,11 @@
   "private": true,
   "description": "Charging Station Simulator CLI",
   "bugs": {
-    "url": "https://gitlab.com/4s1/csms/issues"
+    "url": "https://github.com/4s1-org/csms/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/4s1/csms.git",
+    "url": "https://github.com/4s1-org/csms.git",
     "directory": "css-cli"
   },
   "license": "MIT",
