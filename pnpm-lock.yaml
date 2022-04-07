@@ -47,7 +47,7 @@ importers:
       eslint: 8.12.0
       jest: 27.5.1
       nodemon: 2.0.15
-      pino-pretty: 7.6.0
+      pino-pretty: 7.6.1
       prettier: 2.6.2
       prompts: 2.4.2
       ts-jest: 27.1.4
@@ -72,7 +72,7 @@ importers:
       eslint: 8.12.0
       jest: 27.5.1_ts-node@10.7.0
       nodemon: 2.0.15
-      pino-pretty: 7.6.0
+      pino-pretty: 7.6.1
       prettier: 2.6.2
       ts-jest: 27.1.4_9985e1834e803358b7be1e6ce5ca0eea
       ts-node: 10.7.0_b34c2d00f7bffffd3f771e5188a8c9e6
@@ -171,7 +171,7 @@ importers:
       eslint: 8.12.0
       jest: 27.5.1
       nodemon: 2.0.15
-      pino-pretty: 7.6.0
+      pino-pretty: 7.6.1
       prettier: 2.6.2
       ts-jest: 27.1.4
       ts-node: 10.7.0
@@ -181,7 +181,7 @@ importers:
       '@4s1/common-lib': link:../common-lib
       '@4s1/css-lib': link:../css-lib
       '@4s1/ocpp-lib': link:../ocpp-lib
-      pino-pretty: 7.6.0
+      pino-pretty: 7.6.1
       ws: 8.5.0
     devDependencies:
       '@4s1/eslint-config': 3.12.0_1c11022da6bee94acd53a18a58163cda
@@ -207,7 +207,7 @@ importers:
       eslint: 8.12.0
       jest: 27.5.1
       nodemon: 2.0.15
-      pino-pretty: 7.6.0
+      pino-pretty: 7.6.1
       prettier: 2.6.2
       ts-jest: 27.1.4
       ts-node: 10.7.0
@@ -222,7 +222,7 @@ importers:
       eslint: 8.12.0
       jest: 27.5.1_ts-node@10.7.0
       nodemon: 2.0.15
-      pino-pretty: 7.6.0
+      pino-pretty: 7.6.1
       prettier: 2.6.2
       ts-jest: 27.1.4_9985e1834e803358b7be1e6ce5ca0eea
       ts-node: 10.7.0_b34c2d00f7bffffd3f771e5188a8c9e6
@@ -10291,8 +10291,8 @@ packages:
       duplexify: 4.1.2
       split2: 4.1.0
 
-  /pino-pretty/7.6.0:
-    resolution: {integrity: sha512-sCthHDn8umVSlxEsOFakXZTNoCiTKYEuPwPXMDGq29QDt/38HEmVIKLxmgFLLg1RkLl4Dfxzp9Spz9pAtSBq0Q==}
+  /pino-pretty/7.6.1:
+    resolution: {integrity: sha512-H7N6ZYkiyrfwBGW9CSjx0uyO9Q2Lyt73881+OTYk8v3TiTdgN92QHrWlEq/LeWw5XtDP64jeSk3mnc6T+xX9/w==}
     hasBin: true
     dependencies:
       args: 5.0.1
