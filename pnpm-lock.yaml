@@ -113,7 +113,7 @@ importers:
       '@fortawesome/react-fontawesome': 0.1.18
       '@testing-library/dom': 8.13.0
       '@testing-library/react': 11.2.7
-      '@testing-library/user-event': 13.5.0
+      '@testing-library/user-event': 14.0.4
       '@types/node': 14.18.12
       '@types/react': 17.0.44
       '@types/react-dom': 17.0.14
@@ -138,7 +138,7 @@ importers:
       '@fortawesome/react-fontawesome': 0.1.18_6909f5698ccb6b468185370814560628
       '@testing-library/dom': 8.13.0
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.13.0
+      '@testing-library/user-event': 14.0.4_@testing-library+dom@8.13.0
       '@types/react': 17.0.44
       '@types/react-dom': 17.0.14
       bootstrap: 4.6.1
@@ -236,7 +236,7 @@ importers:
       '@4s1/ocpp-lib': workspace:*
       '@testing-library/dom': 8.13.0
       '@testing-library/react': 11.2.7
-      '@testing-library/user-event': 13.5.0
+      '@testing-library/user-event': 14.0.4
       '@types/node': 14.18.12
       '@types/react': 17.0.44
       '@types/react-dom': 17.0.14
@@ -254,7 +254,7 @@ importers:
       '@4s1/ocpp-lib': link:../ocpp-lib
       '@testing-library/dom': 8.13.0
       '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
-      '@testing-library/user-event': 13.5.0_@testing-library+dom@8.13.0
+      '@testing-library/user-event': 14.0.4_@testing-library+dom@8.13.0
       '@types/react': 17.0.44
       '@types/react-dom': 17.0.14
       bootstrap: 4.6.1
@@ -2787,13 +2787,12 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /@testing-library/user-event/13.5.0_@testing-library+dom@8.13.0:
-    resolution: {integrity: sha512-5Kwtbo3Y/NowpkbRuSepbyMFkZmHgD+vPzYB/RJ4oxt5Gj/avFFBYjhw27cqSVPVw/3a67NK1PbiIr9k4Gwmdg==}
-    engines: {node: '>=10', npm: '>=6'}
+  /@testing-library/user-event/14.0.4_@testing-library+dom@8.13.0:
+    resolution: {integrity: sha512-VBZe5lcUsmrQyOwIFvqOxLBoaTw1/Qy4Ek+VgmFYs719bs2SxUp42vbsb7ATlQDkHdj4OIQlucfpwxe5WoG1jA==}
+    engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
-      '@babel/runtime': 7.15.4
       '@testing-library/dom': 8.13.0
     dev: false
 
