@@ -43,7 +43,7 @@
     "@testing-library/dom": "8.13.0",
     "@testing-library/react": "11.2.7",
     "@testing-library/user-event": "13.5.0",
-    "@types/react": "17.0.44",
+    "@types/react": "18.0.0",
     "@types/react-dom": "17.0.14",
     "bootstrap": "4.6.1",
     "dayjs": "1.11.0",
