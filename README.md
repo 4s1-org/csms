@@ -61,3 +61,7 @@ docker run -it \
 # Show into running container
 docker exec -it csms sh
 ```
+
+## Bekannte Fehler
+
+Das Charging Station Simulator UI funktioniert derzeit nicht, weil die Anmeldung über WebSockets aufgrund von Browser Restriktionen nicht möglich ist.
