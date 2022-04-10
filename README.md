@@ -36,10 +36,10 @@ node csms/dist/setup.js
 ```bash
 # CSMS
 cd csms && pnpm run start
-# CSMS UI
+# CSMS Admin UI
 cd csms-ui && pnpm run start
-# CSS UI
-cd csms-ui && pnpm run start
+# Charging Station Simulator UI
+cd css-ui && pnpm run start
 ```
 
 ## Docker
