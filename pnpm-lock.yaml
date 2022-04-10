@@ -11,14 +11,14 @@ importers:
       base64url: 3.0.1
       eslint: 8.13.0
       jest: 27.5.1
-      pino: 7.9.2
+      pino: 7.10.0
       prettier: 2.6.2
       ts-jest: 27.1.4
       ts-node: 10.7.0
       typescript: 4.6.3
     dependencies:
       base64url: 3.0.1
-      pino: 7.9.2
+      pino: 7.10.0
     devDependencies:
       '@4s1/eslint-config': 3.12.0_f11458f3b5a9aac7eb7b6e83671a32b3
       '@types/jest': 27.4.1
@@ -10327,23 +10327,6 @@ packages:
       safe-stable-stringify: 2.2.0
       sonic-boom: 2.3.0
       thread-stream: 0.15.1
-    dev: true
-
-  /pino/7.9.2:
-    resolution: {integrity: sha512-c8wmB2PuhdJurYPRl/eo3+PosHe7Ep6GZvBJFIrp9oV1YRZQ3qm3MujaEolaKUfwX8cDL96WKCWWMedB2drXqw==}
-    hasBin: true
-    dependencies:
-      fast-redact: 3.0.2
-      on-exit-leak-free: 0.2.0
-      pino-abstract-transport: 0.5.0
-      pino-std-serializers: 4.0.0
-      process-warning: 1.0.0
-      quick-format-unescaped: 4.0.4
-      real-require: 0.1.0
-      safe-stable-stringify: 2.2.0
-      sonic-boom: 2.3.0
-      thread-stream: 0.15.1
-    dev: false
 
   /pirates/4.0.1:
     resolution: {integrity: sha512-WuNqLTbMI3tmfef2TKxlQmAiLHKtFhlsCZnPIpuv2Ow0RDVO8lfy1Opf4NUzlMXLjPl+Men7AuVdX6TA+s+uGA==}
