@@ -1,11 +1,14 @@
-import crypto from 'crypto'
+import CryptoJS from 'crypto-js'
 
 function createHash(password: string, salt: string): string {
-  return crypto.pbkdf2Sync(password, salt, 2048, 32, 'sha512').toString('hex')
+  return CryptoJS.PBKDF2(password, salt, {
+    iterations: 32,
+    keySize: 2048,
+  }).toString(CryptoJS.enc.Hex)
 }
 
 export function hashPassword(password: string): string {
-  const salt = crypto.randomBytes(16).toString('hex')
+  const salt = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Hex)
   const hash = createHash(password, salt)
   return [salt, hash].join('$')
 }

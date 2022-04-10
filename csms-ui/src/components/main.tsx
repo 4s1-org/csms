@@ -2,7 +2,6 @@ import React from 'react'
 import { ChargingStationModel, CsmsToUiCmdEnum, CsmsToUiMsg, UiToCsmsMsg, RfidCardModel } from '@4s1/csms-lib'
 import './main.css'
 import LoginPanelComp from './login-panel'
-import { toBase64 } from '@4s1/common-lib'
 import MainOverview from './overview/main-overview'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
@@ -73,7 +72,7 @@ class AdminPageComp extends React.Component<IProps, IState> {
   }
 
   private login(https: boolean, server: string, username: string, password: string): void {
-    const authToken = toBase64([username, password].join(':'))
+    const authToken = btoa([username, password].join(':'))
     const prot = https ? 'wss' : 'ws'
     const ws = new WebSocket(`${prot}://${server}/admin`, ['none', `Auth.${authToken}`])
 

@@ -1,5 +1,5 @@
 import { WsClientBase, IReceiveMessage } from '@4s1/ocpp-lib'
-import { Const, Logger, toBase64 } from '@4s1/common-lib'
+import { Const, Logger } from '@4s1/common-lib'
 import { ProcessEnv } from './process-env'
 
 export class WsClient extends WsClientBase {
@@ -11,8 +11,9 @@ export class WsClient extends WsClientBase {
 
   public connect(receiveMessage: IReceiveMessage, username: string, password: string, https: boolean, server: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      const authToken = toBase64([username, password].join(':'))
+      const authToken = btoa([username, password].join(':'))
       const prot = https ? 'wss' : 'ws'
+      // ToDo: Auth is not supported
       this.socket = new WebSocket(`${prot}://${server}/ocpp/${this.uniqueIdentifier}`, [Const.ocppProtocolName, `Auth.${authToken}`])
 
       this.socket.onopen = (): void => {
