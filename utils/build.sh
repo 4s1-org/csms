@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ..
-
 pnpm install
 # Libs
 pnpm run build --prefix common-lib
