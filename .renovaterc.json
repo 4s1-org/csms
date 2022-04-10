@@ -1,4 +1,26 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["local>4s1-org/renovate-config"]
+  "extends": ["local>4s1-org/renovate-config"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["@types/react", "@types/react-dom", "react", "react-dom"],
+      "allowedVersions": "<=17"
+    },
+    {
+      "matchPackagePatterns": ["@testing-library/react"],
+      "allowedVersions": "<=12"
+    },
+    {
+      "matchPackagePatterns": ["react-scripts"],
+      "allowedVersions": "<=4"
+    },
+    {
+      "matchPackagePatterns": ["@testing-library/user-event"],
+      "allowedVersions": "<=13"
+    },
+    {
+      "matchPackagePatterns": ["bootstrap"],
+      "allowedVersions": "<=4"
+    }
+  ]
 }
