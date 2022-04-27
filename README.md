@@ -1,3 +1,7 @@
+**The project is not actively maintained.**
+
+---
+
 # Charging Station Management System
 
 Managementsystem für Ladesäulen -\
